@@ -114,3 +114,42 @@ assets/audio/dear-ang-theme.mp3
 ```
 
 手機瀏覽器仍然需要先點「進入我們的回憶」，才會播放音樂。
+
+
+## 主視覺照片設定
+
+目前主視覺照片優先順序：
+
+```txt
+IMG_4130.jpg
+IMG_2818.JPG
+```
+
+請把這兩張照片放在：
+
+```txt
+01_我們的留影
+```
+
+網頁載入時會優先把 `IMG_4130.jpg` 作為首頁右側主視覺，`IMG_2818.JPG` 會排在照片輪播前段。若找不到指定照片，會自動使用其他照片。
+
+
+## 已填入 GAS Web App 網址
+
+```txt
+https://script.google.com/macros/s/AKfycbzrduB_eXPk6OpqnGPXjNBNQCeUyarzAfki4IL-X_JIVQr7RS9sN5ayyvA2OEaXDXzv/exec
+```
+
+`index.html` 已經把 `GAS_API_URL` 改成上面這個 `/exec` 網址。
+
+
+## 手機跳動與音樂中斷修正
+
+這版修正：
+
+```txt
+1. 照片輪播高度改用 svh，減少手機網址列收合造成頁面跳動
+2. 音樂播放後不再重新指定 src，避免幾秒後被切換音源而停止
+3. 影片區改成「點播放影片才載入 Google Drive iframe」
+4. 頁面初次載入不再一次塞入所有影片 iframe，減少手機卡頓與音樂被中斷
+```

@@ -126,7 +126,7 @@ button.soft{
   color:#563a29;
 }
 .hero{
-  min-height:80vh;
+  min-height:80svh;
   display:grid;
   grid-template-columns:1.1fr .9fr;
   gap:24px;
@@ -222,7 +222,8 @@ button.soft{
   border-radius:28px;
   overflow:hidden;
   background:#dbc5aa;
-  min-height:62vh;
+  height:min(680px,62svh);
+  min-height:420px;
   border:1px solid var(--line);
 }
 .slideshow img{
@@ -286,6 +287,36 @@ button.soft{
   border:0;
   border-radius:16px;
   background:#1b1411;
+}
+.video-cover{
+  position:relative;
+  width:100%;
+  aspect-ratio:16/9;
+  border-radius:16px;
+  overflow:hidden;
+  background:#1b1411;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.video-cover img{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  opacity:.78;
+}
+.video-cover:after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(180deg,rgba(0,0,0,.08),rgba(0,0,0,.38));
+}
+.video-cover button{
+  position:relative;
+  z-index:2;
+  box-shadow:0 10px 26px rgba(0,0,0,.25);
 }
 .vcard h3{
   font-size:16px;
@@ -399,7 +430,7 @@ footer{
     position:relative;
     display:grid;
   }
-  .slideshow{min-height:56vh}
+  .slideshow{height:56svh;min-height:360px}
   .comments{grid-template-columns:1fr}
   .section{
     padding:16px;
@@ -459,7 +490,6 @@ footer{
       <small id="songSub">作詞：Enden & OpenAI｜作曲：Enden & Suno AI</small>
     </div>
     <audio id="themeAudio" controls preload="metadata"></audio>
-    <small id="musicHelpText">若手機沒有自動播放，請按播放鍵一次。</small>
   </div>
 
   <section class="section" id="photos">
@@ -579,7 +609,6 @@ const CONFIG = {
 };
 
 let DATA = {photos:[], memories:[], songs:[], comments:[], theme:null};
-let wantsMusicPlay = false;
 let slideIndex = 0;
 let slideTimer = null;
 
@@ -642,46 +671,44 @@ function renderTheme(){
 
   const githubAudio = CONFIG.GITHUB_THEME_AUDIO || '';
   const driveAudio = DATA.theme && DATA.theme.streamUrl ? DATA.theme.streamUrl : '';
+  const firstSource = githubAudio || driveAudio;
 
-  function playWhenReady(){
-    if(!wantsMusicPlay && !document.body.classList.contains('entered')) return;
-    const p = audio.play();
-    if(p && typeof p.catch === 'function'){
-      p.catch(()=>toast('手機可能需要再按一次播放鍵'));
-    }
-  }
-
-  audio.oncanplay = function(){
-    playWhenReady();
-  };
-
-  audio.onerror = function(){
-    if(driveAudio && audio.src.indexOf(driveAudio) === -1){
-      audio.src = driveAudio;
-      sub.textContent='作詞：Enden & OpenAI｜作曲：Enden & Suno AI｜GitHub 音樂讀取失敗，已切換 Drive 備用';
-      audio.load();
-      setTimeout(playWhenReady, 350);
-    }else{
-      sub.textContent='音樂讀取失敗。請確認 assets/audio/dear-ang-theme.mp3 是否已上傳，或 Drive 的 00_主題曲是否有檔案';
-    }
-  };
-
-  if(githubAudio){
-    audio.src = githubAudio;
-    sub.textContent='作詞：Enden & OpenAI｜作曲：Enden & Suno AI｜GitHub MP3 優先播放';
-    audio.load();
-    setTimeout(playWhenReady, 250);
+  if(!firstSource){
+    sub.textContent='沒有在 00_主題曲 找到 00_給安格，也尚未設定 GitHub MP3';
     return;
   }
 
-  if(driveAudio){
-    sub.textContent='作詞：Enden & OpenAI｜作曲：Enden & Suno AI｜Drive 備用檔案：' + (DATA.theme.name || '');
-    audio.src=driveAudio;
+  // 音樂一旦開始播放，就不要再重設 src；避免幾秒後跳一下、音樂被停掉。
+  if(audio.dataset.locked === '1') return;
+
+  if(audio.getAttribute('src') !== firstSource){
+    audio.src = firstSource;
     audio.load();
-    setTimeout(playWhenReady, 250);
-  }else{
-    sub.textContent='沒有在 00_主題曲 找到 00_給安格，也尚未設定 GitHub MP3';
   }
+
+  if(githubAudio){
+    sub.textContent='作詞：Enden & OpenAI｜作曲：Enden & Suno AI｜GitHub MP3 優先播放';
+  }else{
+    sub.textContent='作詞：Enden & OpenAI｜作曲：Enden & Suno AI｜Drive 備用檔案：' + (DATA.theme.name || '');
+  }
+
+  audio.onerror = function(){
+    // 只在還沒播放成功時才切換備用音源；避免播放中途被換 src 停掉。
+    if(audio.dataset.locked === '1') return;
+
+    if(githubAudio && driveAudio && !audio.dataset.triedDrive){
+      audio.dataset.triedDrive = '1';
+      audio.src = driveAudio;
+      audio.load();
+      sub.textContent='作詞：Enden & OpenAI｜作曲：Enden & Suno AI｜已切換 Drive 備用音源';
+      if(wantsMusicPlay) setTimeout(startThemeMusic, 350);
+      return;
+    }
+
+    sub.textContent='音樂讀取失敗。請確認 assets/audio/dear-ang-theme.mp3 是否已上傳，或 Drive 的 00_主題曲是否有檔案';
+  };
+
+  if(wantsMusicPlay) setTimeout(startThemeMusic, 250);
 }
 
 function renderPhotos(){
@@ -769,10 +796,28 @@ function renderVideos(id, list, label){
   list.forEach(v=>{
     const card=document.createElement('article');
     card.className='vcard';
-    const media = v.kind==='audio'
-      ? '<audio controls preload="metadata" style="width:100%;margin-top:8px" src="'+escAttr(v.streamUrl)+'"></audio>'
-      : '<iframe src="'+escAttr(v.previewUrl)+'" allow="autoplay; fullscreen" allowfullscreen></iframe>';
-    card.innerHTML=media+'<h3>'+esc(v.name||label)+'</h3><p class="name">'+esc(v.mimeType||'')+'</p>';
+
+    if(v.kind === 'audio'){
+      card.innerHTML =
+        '<audio controls preload="metadata" style="width:100%;margin-top:8px" src="'+escAttr(v.streamUrl)+'"></audio>' +
+        '<h3>'+esc(v.name||label)+'</h3><p class="name">'+esc(v.mimeType||'')+'</p>';
+      grid.appendChild(card);
+      return;
+    }
+
+    card.innerHTML =
+      '<div class="video-cover">' +
+        '<img loading="lazy" src="'+escAttr(v.thumbnailUrl || '')+'" alt="">' +
+        '<button type="button">播放影片</button>' +
+      '</div>' +
+      '<h3>'+esc(v.name||label)+'</h3><p class="name">'+esc(v.mimeType||'')+'</p>';
+
+    const btn = card.querySelector('button');
+    btn.onclick = function(){
+      const cover = card.querySelector('.video-cover');
+      cover.outerHTML = '<iframe loading="lazy" src="'+escAttr(v.previewUrl)+'" allow="fullscreen" allowfullscreen></iframe>';
+    };
+
     grid.appendChild(card);
   });
 }
@@ -795,18 +840,27 @@ function renderComments(list){
 function enterMemorial(){
   wantsMusicPlay = true;
   document.body.classList.add('entered');
+  startThemeMusic();
+}
 
+function startThemeMusic(){
   const audio=document.getElementById('themeAudio');
 
-  if(audio && audio.src){
-    const p = audio.play();
-    if(p && typeof p.catch === 'function'){
-      p.catch(()=>{
-        toast('手機瀏覽器擋了自動播放，請按下方播放鍵');
-      });
-    }
-  }else{
+  if(!audio || !audio.src){
     toast('音樂還在載入，稍等一下會自動嘗試播放');
+    return;
+  }
+
+  const p = audio.play();
+
+  if(p && typeof p.then === 'function'){
+    p.then(()=>{
+      audio.dataset.locked = '1';
+    }).catch(()=>{
+      toast('手機瀏覽器擋了自動播放，請按下方播放鍵');
+    });
+  }else{
+    audio.dataset.locked = '1';
   }
 }
 
