@@ -439,6 +439,37 @@ footer{
   .section-title{display:block}
   .actions-row{display:grid;gap:8px}
 }
+
+/* ===== 影片區：改用原生 video，避免 Google Drive iframe 預覽遮罩 ===== */
+.native-video{
+  width:100%;
+  aspect-ratio:16/9;
+  border:0;
+  border-radius:16px;
+  background:#15100d;
+  display:block;
+  object-fit:contain;
+}
+.video-actions{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  margin:10px 4px 2px;
+}
+.video-actions a{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  text-decoration:none;
+  border-radius:999px;
+  padding:9px 12px;
+  font-size:13px;
+  font-weight:900;
+  color:#5b3f2f;
+  background:rgba(255,255,255,.64);
+  border:1px solid var(--line);
+}
+
 </style>
 </head>
 <body>
@@ -489,7 +520,7 @@ footer{
       <b id="songTitle">網頁主題曲：〈給安格〉</b>
       <small id="songSub">作詞：Enden & OpenAI｜作曲：Enden & Suno AI</small>
     </div>
-    <audio id="themeAudio" controls preload="metadata"></audio>
+    <audio id="themeAudio" controls preload="metadata" loop></audio>
   </div>
 
   <section class="section" id="photos">
@@ -664,6 +695,7 @@ function renderAll(){
 
 function renderTheme(){
   const audio=document.getElementById('themeAudio');
+  if(audio) audio.loop = true;
   const title=document.getElementById('songTitle');
   const sub=document.getElementById('songSub');
 
@@ -805,18 +837,32 @@ function renderVideos(id, list, label){
       return;
     }
 
+    // 不再使用 Google Drive iframe preview，避免被 Drive / 瀏覽器預覽層遮住。
+    // 改用原生 video controls，poster 用 Drive 縮圖；若讀不到，可用下方按鈕另開 Drive。
     card.innerHTML =
-      '<div class="video-cover">' +
-        '<img loading="lazy" src="'+escAttr(v.thumbnailUrl || '')+'" alt="">' +
-        '<button type="button">播放影片</button>' +
-      '</div>' +
-      '<h3>'+esc(v.name||label)+'</h3><p class="name">'+esc(v.mimeType||'')+'</p>';
+      '<video class="native-video" controls playsinline preload="none" poster="'+escAttr(v.thumbnailUrl || '')+'">' +
+        '<source src="'+escAttr(v.streamUrl || '')+'" type="'+escAttr(v.mimeType || 'video/mp4')+'">' +
+      '</video>' +
+      '<h3>'+esc(v.name||label)+'</h3>' +
+      '<p class="name">'+esc(v.mimeType||'')+'</p>' +
+      '<div class="video-actions">' +
+        '<a href="'+escAttr(v.webViewUrl || v.previewUrl || v.streamUrl || '#')+'" target="_blank" rel="noopener">另開 Drive 觀看</a>' +
+        '<a href="'+escAttr(v.streamUrl || '#')+'" target="_blank" rel="noopener">直接開影片檔</a>' +
+      '</div>';
 
-    const btn = card.querySelector('button');
-    btn.onclick = function(){
-      const cover = card.querySelector('.video-cover');
-      cover.outerHTML = '<iframe loading="lazy" src="'+escAttr(v.previewUrl)+'" allow="fullscreen" allowfullscreen></iframe>';
-    };
+    const video = card.querySelector('video');
+    video.addEventListener('play', function(){
+      // 播影片時暫停主題曲，避免兩個聲音疊在一起。
+      const bgm = document.getElementById('themeAudio');
+      if(bgm && !bgm.paused) bgm.pause();
+    });
+
+    video.addEventListener('error', function(){
+      const note = card.querySelector('.name');
+      if(note){
+        note.textContent = (v.mimeType || '') + '｜若網頁內無法播放，請用「另開 Drive 觀看」。';
+      }
+    });
 
     grid.appendChild(card);
   });
@@ -845,6 +891,7 @@ function enterMemorial(){
 
 function startThemeMusic(){
   const audio=document.getElementById('themeAudio');
+  if(audio) audio.loop = true;
 
   if(!audio || !audio.src){
     toast('音樂還在載入，稍等一下會自動嘗試播放');
