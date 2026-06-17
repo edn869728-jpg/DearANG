@@ -1,35 +1,25 @@
-# Dear ANG｜親愛的安格｜確認修正版
+# Dear ANG｜不卡住修正版
 
-這版修正重點：
+這版修正「卡在進入畫面、按了進不去」的問題。
 
-```txt
-1. LRC 彈幕歌詞已匯入 index.html
-2. 已補上 setupLyricDanmaku() 啟動呼叫
-3. 主題曲 loop 循環播放
-4. 照片分頁 / 分區 / 點圖放大
-5. 影片列表縮小
-6. 投稿通知寄到 chihhao128@gmail.com 與 edn869728@gmail.com
-7. 投稿資料夾：04_好友們的回憶
-```
-
-## 很重要
-
-請上傳這包裡的：
+## 修正內容
 
 ```txt
-index.html → GitHub Pages
-Code.gs → Google Apps Script
+1. 修掉 index.html 裡壞掉的 JavaScript escape 函式
+2. 加上入口 fallback，按「進入我們的回憶」就算音樂或資料還沒讀好，也會先進頁面
+3. APP_VERSION 更新，避免瀏覽器吃舊快取
+4. ZIP 內附新版 Code.gs，GAS 仍然請整份覆蓋
 ```
 
-如果只換 index.html、不換 Code.gs，照片子資料夾分區可能不會正常顯示。
-如果只換 Code.gs、不換 index.html，彈幕歌詞不會出現。
+## 檢查結果
 
-## 歌詞
-
-彈幕歌詞在 `index.html` 裡：
-
-```js
-const LYRIC_LINES = [...]
+```txt
+index.html 主 script 語法檢查：通過
 ```
 
-已匯入完整歌詞。
+## 上傳方式
+
+```txt
+index.html → 覆蓋 GitHub Pages 的 index.html
+Code.gs → GAS 整份覆蓋，不要加在舊程式下面
+```
