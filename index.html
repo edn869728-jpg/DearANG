@@ -459,6 +459,7 @@ footer{
       <small id="songSub">作詞：Enden & OpenAI｜作曲：Enden & Suno AI</small>
     </div>
     <audio id="themeAudio" controls preload="metadata"></audio>
+    <small id="musicHelpText">若手機沒有自動播放，請按播放鍵一次。</small>
   </div>
 
   <section class="section" id="photos">
@@ -578,6 +579,7 @@ const CONFIG = {
 };
 
 let DATA = {photos:[], memories:[], songs:[], comments:[], theme:null};
+let wantsMusicPlay = false;
 let slideIndex = 0;
 let slideTimer = null;
 
@@ -641,25 +643,42 @@ function renderTheme(){
   const githubAudio = CONFIG.GITHUB_THEME_AUDIO || '';
   const driveAudio = DATA.theme && DATA.theme.streamUrl ? DATA.theme.streamUrl : '';
 
+  function playWhenReady(){
+    if(!wantsMusicPlay && !document.body.classList.contains('entered')) return;
+    const p = audio.play();
+    if(p && typeof p.catch === 'function'){
+      p.catch(()=>toast('手機可能需要再按一次播放鍵'));
+    }
+  }
+
+  audio.oncanplay = function(){
+    playWhenReady();
+  };
+
+  audio.onerror = function(){
+    if(driveAudio && audio.src.indexOf(driveAudio) === -1){
+      audio.src = driveAudio;
+      sub.textContent='作詞：Enden & OpenAI｜作曲：Enden & Suno AI｜GitHub 音樂讀取失敗，已切換 Drive 備用';
+      audio.load();
+      setTimeout(playWhenReady, 350);
+    }else{
+      sub.textContent='音樂讀取失敗。請確認 assets/audio/dear-ang-theme.mp3 是否已上傳，或 Drive 的 00_主題曲是否有檔案';
+    }
+  };
+
   if(githubAudio){
     audio.src = githubAudio;
     sub.textContent='作詞：Enden & OpenAI｜作曲：Enden & Suno AI｜GitHub MP3 優先播放';
-
-    audio.onerror = function(){
-      if(driveAudio && audio.src.indexOf(driveAudio) === -1){
-        audio.src = driveAudio;
-        sub.textContent='作詞：Enden & OpenAI｜作曲：Enden & Suno AI｜GitHub 音樂讀取失敗，已切換 Drive 備用';
-        audio.load();
-      }else{
-        sub.textContent='音樂讀取失敗，請確認 assets/audio/dear-ang-theme.mp3 是否已上傳';
-      }
-    };
+    audio.load();
+    setTimeout(playWhenReady, 250);
     return;
   }
 
   if(driveAudio){
     sub.textContent='作詞：Enden & OpenAI｜作曲：Enden & Suno AI｜Drive 備用檔案：' + (DATA.theme.name || '');
     audio.src=driveAudio;
+    audio.load();
+    setTimeout(playWhenReady, 250);
   }else{
     sub.textContent='沒有在 00_主題曲 找到 00_給安格，也尚未設定 GitHub MP3';
   }
@@ -774,10 +793,20 @@ function renderComments(list){
 }
 
 function enterMemorial(){
+  wantsMusicPlay = true;
   document.body.classList.add('entered');
+
   const audio=document.getElementById('themeAudio');
+
   if(audio && audio.src){
-    audio.play().catch(()=>toast('手機可能需要再按一次播放鍵'));
+    const p = audio.play();
+    if(p && typeof p.catch === 'function'){
+      p.catch(()=>{
+        toast('手機瀏覽器擋了自動播放，請按下方播放鍵');
+      });
+    }
+  }else{
+    toast('音樂還在載入，稍等一下會自動嘗試播放');
   }
 }
 
