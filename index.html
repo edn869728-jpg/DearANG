@@ -573,6 +573,7 @@ footer{
 const CONFIG = {
   GAS_API_URL: 'https://script.google.com/macros/s/AKfycbzrduB_eXPk6OpqnGPXjNBNQCeUyarzAfki4IL-X_JIVQr7RS9sN5ayyvA2OEaXDXzv/exec',
   GITHUB_THEME_AUDIO: 'assets/audio/dear-ang-theme.mp3',
+  MAIN_VISUAL_IMAGE_NAMES: ['IMG_4130.jpg', 'IMG_2818.JPG'],
   PHOTO_INTERVAL: 5200
 };
 
@@ -665,7 +666,7 @@ function renderTheme(){
 }
 
 function renderPhotos(){
-  const photos=DATA.photos||[];
+  const rawPhotos=DATA.photos||[];
   const ss=document.getElementById('slideshow');
   const strip=document.getElementById('photoStrip');
   const hero=document.getElementById('heroPhoto');
@@ -673,29 +674,51 @@ function renderPhotos(){
   ss.querySelectorAll('img').forEach(x=>x.remove());
   strip.innerHTML='';
 
-  if(!photos.length){
+  if(!rawPhotos.length){
     ss.innerHTML='<div class="empty">尚未放入照片。請放到 01_我們的留影。</div>';
     hero.innerHTML='';
     return;
   }
 
-  hero.innerHTML='<img src="'+escAttr(photos[0].thumbnailUrl)+'" alt="">';
+  const preferredNames = Array.isArray(CONFIG.MAIN_VISUAL_IMAGE_NAMES)
+    ? CONFIG.MAIN_VISUAL_IMAGE_NAMES.map(x => String(x || '').toLowerCase())
+    : [String(CONFIG.MAIN_VISUAL_IMAGE_NAME || '').toLowerCase()].filter(Boolean);
+
+  const picked = [];
+  const used = new Set();
+
+  preferredNames.forEach(name => {
+    if(!name) return;
+    let idx = rawPhotos.findIndex((p,i) => !used.has(i) && String(p.name || '').toLowerCase() === name);
+    if(idx < 0){
+      const key = name.replace(/\.[^.]+$/, '');
+      idx = rawPhotos.findIndex((p,i) => !used.has(i) && String(p.name || '').toLowerCase().includes(key));
+    }
+    if(idx >= 0){
+      picked.push(rawPhotos[idx]);
+      used.add(idx);
+    }
+  });
+
+  const photos = picked.concat(rawPhotos.filter((_,i)=>!used.has(i)));
+
+  const mainPhoto = photos[0];
+  hero.innerHTML='<img src="'+escAttr(mainPhoto.thumbnailUrl)+'" alt="'+escAttr(mainPhoto.name || '')+'">';
 
   photos.forEach((p,i)=>{
     const img=document.createElement('img');
     img.src=p.thumbnailUrl;
     img.alt=p.name||'';
-    if(i===0) img.classList.add('active');
     ss.insertBefore(img, document.getElementById('slideCaption'));
 
     const t=document.createElement('img');
     t.src=p.thumbnailUrl;
     t.alt=p.name||'';
-    if(i===0) t.classList.add('active');
     t.onclick=()=>showSlide(i, true);
     strip.appendChild(t);
   });
 
+  DATA.photos = photos;
   showSlide(0, false);
   if(slideTimer) clearInterval(slideTimer);
   slideTimer=setInterval(()=>showSlide((slideIndex+1)%photos.length, false), CONFIG.PHOTO_INTERVAL);
