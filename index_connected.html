@@ -1085,13 +1085,25 @@
 
   <script>
     const ANG_DATA_URLS = {
-      entry: 'https://edn869728-jpg.github.io/ANG-99-HR-System/index.html',
-      gasApiUrl: 'https://script.google.com/macros/s/AKfycbzNycUTGQG0gqgb8B6F7tndEhRXU7GAiKFFWZr0e8sDwL2kXU5tBGLlJR_iBdX7SCnH/exec',
-      googleClientId: '660707205594-74rvsq9s1h87v1s5pi9nvtms1e4qipat.apps.googleusercontent.com',
-      lineChannelId: '2010402308',
-      supportEmail: 'ang0603.system@gmail.com'
+      entry: 'https://edn869728-jpg.github.io/ANG-99-HR-System/',
+      adminLogin: 'https://edn869728-jpg.github.io/ANG-99-HR-System/login.html',
+      companyRegister: 'https://edn869728-jpg.github.io/ANG-99-HR-System/login.html',
+      employeeHome: 'https://edn869728-jpg.github.io/ang-hr-basic/employee_home.htm',
+      employeeQr: 'https://edn869728-jpg.github.io/ang-hr-basic/employee_home.htm',
+      supportEmail: 'endenmi@ang-system.com',
+      planHome: {
+        basic: 'https://edn869728-jpg.github.io/ang-hr-basic/employee_home.htm',
+        plus: 'https://edn869728-jpg.github.io/ang-hr-plus/employee_home.htm',
+        premium: 'https://edn869728-jpg.github.io/ang-hr-premium/employee_home.htm'
+      },
+      planRegister: {
+        basic: 'https://edn869728-jpg.github.io/ANG-99-HR-System/login.html',
+        plus: 'https://edn869728-jpg.github.io/ANG-99-HR-System/login.html',
+        premium: 'https://edn869728-jpg.github.io/ANG-99-HR-System/login.html'
+      }
     };
-    const APP_STATE = { baseUrl:'', token:'', id:'', name:'', company:'', deviceId:'' };
+
+    const APP_STATE = { baseUrl:'', token:'', id:'', name:'', company:'', deviceId:'', routes:null, params:{} };
     const phone = document.getElementById('phone');
     const carousel = document.getElementById('sheetCarousel');
     const sheets = Array.from(document.querySelectorAll('.plan-sheet'));
@@ -1193,6 +1205,9 @@
       preloadEntryBackgrounds();
       APP_STATE.baseUrl = getBaseUrl();
       const params = getParams();
+      APP_STATE.params = params;
+      saveRouteOverrides(params);
+      APP_STATE.routes = getRouteConfig(params);
       APP_STATE.token = params.token || params.key || '';
       APP_STATE.id = String(params.id || '').trim().toUpperCase();
       APP_STATE.name = String(params.name || '').trim();
@@ -1252,6 +1267,114 @@
     function clearCode(){ const input = document.getElementById('activationCode'); if (input) { input.value = ''; input.focus(); } setStatus('codeStatus','',''); }
     function normalizeCode(value){ return String(value || '').trim().replace(/\s+/g,'').replace(/-/g,'').toUpperCase(); }
 
+    function getFirstParam(params,names){
+      for (let i = 0; i < names.length; i++) {
+        const key = names[i];
+        if (params && params[key]) return String(params[key]).trim();
+      }
+      return '';
+    }
+
+    function getStoredUrl(key){
+      try { return String(localStorage.getItem(key) || '').trim(); }
+      catch (err) { return ''; }
+    }
+
+    function normalizeUrl(url){
+      const value = String(url || '').trim();
+      if (!value) return '';
+      try { return new URL(value, window.location.href).toString(); }
+      catch (err) { return value; }
+    }
+
+    function getRouteConfig(params){
+      const route = {
+        entry: normalizeUrl(getFirstParam(params,['entry_url','entryUrl']) || getStoredUrl('ang_entry_url') || ANG_DATA_URLS.entry),
+        employeeHome: normalizeUrl(getFirstParam(params,['employee_url','employeeUrl','employee_home_url','employeeHomeUrl','frontend_url','frontendUrl']) || getStoredUrl('ang_employee_home_url') || ANG_DATA_URLS.employeeHome),
+        employeeQr: normalizeUrl(getFirstParam(params,['employee_qr_url','employeeQrUrl','qr_url','qrUrl']) || getStoredUrl('ang_employee_qr_url') || ANG_DATA_URLS.employeeQr),
+        adminLogin: normalizeUrl(getFirstParam(params,['admin_url','adminUrl','admin_login_url','adminLoginUrl','login_url','loginUrl']) || getStoredUrl('ang_admin_login_url') || ANG_DATA_URLS.adminLogin),
+        companyRegister: normalizeUrl(getFirstParam(params,['register_url','registerUrl','company_register_url','companyRegisterUrl','signup_url','signupUrl']) || getStoredUrl('ang_company_register_url') || ANG_DATA_URLS.companyRegister),
+        supportEmail: getFirstParam(params,['support_email','supportEmail','hr_email','hrEmail']) || getStoredUrl('ang_support_email') || ANG_DATA_URLS.supportEmail,
+        planHome: {
+          basic: normalizeUrl(getFirstParam(params,['basic_url','basicUrl','basic_home_url','basicHomeUrl']) || getStoredUrl('ang_basic_home_url') || ANG_DATA_URLS.planHome.basic),
+          plus: normalizeUrl(getFirstParam(params,['plus_url','plusUrl','plus_home_url','plusHomeUrl']) || getStoredUrl('ang_plus_home_url') || ANG_DATA_URLS.planHome.plus),
+          premium: normalizeUrl(getFirstParam(params,['premium_url','premiumUrl','premium_home_url','premiumHomeUrl']) || getStoredUrl('ang_premium_home_url') || ANG_DATA_URLS.planHome.premium)
+        },
+        planRegister: {
+          basic: normalizeUrl(getFirstParam(params,['basic_register_url','basicRegisterUrl']) || getStoredUrl('ang_basic_register_url') || ANG_DATA_URLS.planRegister.basic),
+          plus: normalizeUrl(getFirstParam(params,['plus_register_url','plusRegisterUrl']) || getStoredUrl('ang_plus_register_url') || ANG_DATA_URLS.planRegister.plus),
+          premium: normalizeUrl(getFirstParam(params,['premium_register_url','premiumRegisterUrl']) || getStoredUrl('ang_premium_register_url') || ANG_DATA_URLS.planRegister.premium)
+        }
+      };
+      return route;
+    }
+
+    function saveRouteOverrides(params){
+      const map = [
+        [['entry_url','entryUrl'],'ang_entry_url'],
+        [['employee_url','employeeUrl','employee_home_url','employeeHomeUrl','frontend_url','frontendUrl'],'ang_employee_home_url'],
+        [['employee_qr_url','employeeQrUrl','qr_url','qrUrl'],'ang_employee_qr_url'],
+        [['admin_url','adminUrl','admin_login_url','adminLoginUrl','login_url','loginUrl'],'ang_admin_login_url'],
+        [['register_url','registerUrl','company_register_url','companyRegisterUrl','signup_url','signupUrl'],'ang_company_register_url'],
+        [['support_email','supportEmail','hr_email','hrEmail'],'ang_support_email'],
+        [['basic_url','basicUrl','basic_home_url','basicHomeUrl'],'ang_basic_home_url'],
+        [['plus_url','plusUrl','plus_home_url','plusHomeUrl'],'ang_plus_home_url'],
+        [['premium_url','premiumUrl','premium_home_url','premiumHomeUrl'],'ang_premium_home_url'],
+        [['basic_register_url','basicRegisterUrl'],'ang_basic_register_url'],
+        [['plus_register_url','plusRegisterUrl'],'ang_plus_register_url'],
+        [['premium_register_url','premiumRegisterUrl'],'ang_premium_register_url']
+      ];
+      map.forEach(function(item){
+        const value = getFirstParam(params,item[0]);
+        if (!value) return;
+        try { localStorage.setItem(item[1],value); } catch (err) {}
+      });
+    }
+
+    function normalizePlan(plan){
+      const value = String(plan || '').trim().toLowerCase();
+      if (value === 'basic' || value === 'plus' || value === 'premium') return value;
+      return '';
+    }
+
+    function currentPlan(){
+      return normalizePlan(APP_STATE.params.plan || APP_STATE.params.edition || APP_STATE.params.package || '');
+    }
+
+    function appendUrlParams(base,params){
+      const url = new URL(normalizeUrl(base) || APP_STATE.baseUrl, window.location.href);
+      Object.keys(params || {}).forEach(function(key){
+        const value = params[key];
+        if (value === undefined || value === null || value === '') return;
+        url.searchParams.set(key,String(value));
+      });
+      return url.toString();
+    }
+
+    function commonCarryParams(extra){
+      const params = Object.assign({}, extra || {});
+      if (APP_STATE.company && !params.company && !params.company_id) params.company_id = APP_STATE.company;
+      if (APP_STATE.deviceId && !params.device_id && !params.deviceId) params.device_id = APP_STATE.deviceId;
+      if (document.body && document.body.dataset && document.body.dataset.theme) params.theme = document.body.dataset.theme;
+      return params;
+    }
+
+    function routeUrl(name,plan,extra){
+      const routes = APP_STATE.routes || ANG_DATA_URLS;
+      const safePlan = normalizePlan(plan) || currentPlan();
+      let target = '';
+      if (name === 'employee') target = (safePlan && routes.planHome && routes.planHome[safePlan]) || routes.employeeHome;
+      else if (name === 'employeeQr') target = routes.employeeQr || routes.employeeHome;
+      else if (name === 'adminLogin') target = routes.adminLogin;
+      else if (name === 'companyRegister') target = (safePlan && routes.planRegister && routes.planRegister[safePlan]) || routes.companyRegister;
+      else target = routes.entry || APP_STATE.baseUrl;
+      return appendUrlParams(target,commonCarryParams(extra));
+    }
+
+    function gotoUrl(url){
+      window.location.href = normalizeUrl(url);
+    }
+
     function submitActivationCode(){
       const input = document.getElementById('activationCode');
       const code = normalizeCode(input ? input.value : '');
@@ -1288,11 +1411,27 @@
       if (name) localStorage.setItem('emp_name',name);
       if (loginToken) localStorage.setItem('emp_login_token',loginToken);
       localStorage.setItem('isLoggedIn','1');
+      if (res.nextUrl || res.employeeUrl || res.frontendUrl) {
+        window.location.href = appendUrlParams(res.nextUrl || res.employeeUrl || res.frontendUrl,{ id:id, token:loginToken, source:'entry_bind' });
+        return;
+      }
       window.location.href = buildPageUrl('employee',id,loginToken);
     }
-    function buildPageUrl(page,id,token){ let url = APP_STATE.baseUrl + '?page=' + encodeURIComponent(page || 'employee'); if (id) url += '&id=' + encodeURIComponent(id); if (token) url += '&token=' + encodeURIComponent(token); return url; }
-    function scanQrCode(){ setStatus('codeStatus','info','請使用 APP 掃描 QR'); }
-    function contactHr(){ const subject = encodeURIComponent('ANG HR 開通碼'); const body = encodeURIComponent('您好，我需要重新取得 ANG HR 開通碼。'); window.location.href = 'mailto:endenmi@ang-system.com?subject=' + subject + '&body=' + body; }
+    function buildPageUrl(page,id,token){
+      return routeUrl(page || 'employee',currentPlan(),{
+        page:page || 'employee',
+        id:id || '',
+        token:token || '',
+        source:'entry_bind'
+      });
+    }
+    function scanQrCode(){
+      setStatus('codeStatus','info','正在開啟 QR 掃描入口...');
+      setTimeout(function(){
+        gotoUrl(routeUrl('employeeQr',currentPlan(),{ action:'scan_qr', source:'entry_qr' }));
+      },260);
+    }
+    function contactHr(){ const subject = encodeURIComponent('ANG HR 開通碼'); const body = encodeURIComponent('您好，我需要重新取得 ANG HR 開通碼。'); window.location.href = 'mailto:' + encodeURIComponent((APP_STATE.routes && APP_STATE.routes.supportEmail) || ANG_DATA_URLS.supportEmail) + '?subject=' + subject + '&body=' + body; }
     function isInteractiveTarget(target){ return !!(target && target.closest && target.closest('button,input,textarea,select,a,[data-action-key],.sheet-action,.inline-form,.input-wrap')); }
 
     function initManagerCarousel(){
@@ -1375,7 +1514,7 @@
 
     function isValidEmail(email){ return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(email || '').trim()); }
     function normalizeCompanyCode(value){ return String(value || '').trim().replace(/\s+/g,'').toUpperCase(); }
-    function contactService(){ const subject = encodeURIComponent('ANG HR 企業客服'); const body = encodeURIComponent('您好，我想詢問 ANG HR SYSTEMS 企業管理登入或方案註冊。'); window.location.href = 'mailto:endenmi@ang-system.com?subject=' + subject + '&body=' + body; }
+    function contactService(){ const subject = encodeURIComponent('ANG HR 企業客服'); const body = encodeURIComponent('您好，我想詢問 ANG HR SYSTEMS 企業管理登入或方案註冊。'); window.location.href = 'mailto:' + encodeURIComponent((APP_STATE.routes && APP_STATE.routes.supportEmail) || ANG_DATA_URLS.supportEmail) + '?subject=' + subject + '&body=' + body; }
     function getCapacitorBrowser(){ const cap = window.Capacitor; return cap && cap.Plugins && cap.Plugins.Browser && typeof cap.Plugins.Browser.open === 'function' ? cap.Plugins.Browser : null; }
     function isLikelyWebView(){ const ua = navigator.userAgent || ''; const isAndroidWebView = /\bwv\b/i.test(ua) || /Version\/[\d.]+.*Chrome\/[\d.]+ Mobile Safari/i.test(ua); const isIos = /iPhone|iPad|iPod/i.test(ua); const isIosWebView = isIos && /AppleWebKit/i.test(ua) && !/Safari/i.test(ua); return !!window.Capacitor || isAndroidWebView || isIosWebView; }
     function openGoogleAuthUrl(url,statusId){ const authUrl = String(url || '').trim(); const browser = getCapacitorBrowser(); if (!authUrl) { setStatus(statusId,'error','Google 驗證網址無效'); return; } if (browser) { setStatus(statusId,'info','正在開啟安全驗證視窗...'); browser.open({ url:authUrl, windowName:'_blank' }).catch(function(err){ setStatus(statusId,'error',err && err.message ? err.message : '無法開啟驗證視窗，請改用 Email 驗證'); }); return; } if (isLikelyWebView()) { setStatus(statusId,'error','App 內不支援 Google 驗證，請改用上方的「Email 驗證」'); return; } window.location.href = authUrl; }
@@ -1768,7 +1907,7 @@
         google.script.run.withSuccessHandler(function(res){ if (!res || !res.ok) { setStatus('adminLoginStatus','error',(res && (res.message || res.msg)) || '驗證送出失敗'); return; } setStatus('adminLoginStatus','success',(res.message || res.msg) || '已送出驗證，請查看 Email'); if (res.nextUrl) { setTimeout(function(){ window.location.href = res.nextUrl; },650); } }).withFailureHandler(function(err){ setStatus('adminLoginStatus','error',err && err.message ? err.message : '連線失敗'); }).requestAdminLoginEmailVerification({ companyCode:companyCode, adminEmail:adminEmail, deviceId:APP_STATE.deviceId });
         return;
       }
-      window.location.href = APP_STATE.baseUrl + '?page=login&role=admin&verify=email&company=' + encodeURIComponent(companyCode) + '&email=' + encodeURIComponent(adminEmail);
+      window.location.href = routeUrl('adminLogin','',{ page:'login', role:'admin', verify:'email', company:companyCode, email:adminEmail, source:'entry_admin_email' });
     }
 
     function requestAdminGoogleLogin(){
@@ -1780,7 +1919,7 @@
         google.script.run.withSuccessHandler(function(res){ if (!res || !res.ok) { setStatus('adminLoginStatus','error',(res && (res.message || res.msg)) || 'Google 驗證啟動失敗'); return; } if (res.authUrl || res.nextUrl) { openGoogleAuthUrl(res.authUrl || res.nextUrl,'adminLoginStatus'); return; } setStatus('adminLoginStatus','success','Google 驗證已啟動'); }).withFailureHandler(function(err){ setStatus('adminLoginStatus','error',err && err.message ? err.message : '連線失敗'); }).requestAdminGoogleVerification({ companyCode:companyCode, deviceId:APP_STATE.deviceId });
         return;
       }
-      openGoogleAuthUrl(APP_STATE.baseUrl + '?page=login&role=admin&verify=google&company=' + encodeURIComponent(companyCode),'adminLoginStatus');
+      openGoogleAuthUrl(routeUrl('adminLogin','',{ page:'login', role:'admin', verify:'google', company:companyCode, source:'entry_admin_google' }),'adminLoginStatus');
     }
 
     function requestPlanEmailVerification(plan){
@@ -1795,7 +1934,7 @@
         google.script.run.withSuccessHandler(function(res){ if (!res || !res.ok) { setStatus(statusId,'error',(res && (res.message || res.msg)) || '驗證送出失敗'); return; } setStatus(statusId,'success',(res.message || res.msg) || '已送出驗證，請查看 Email'); if (res.nextUrl) { setTimeout(function(){ window.location.href = res.nextUrl; },650); } }).withFailureHandler(function(err){ setStatus(statusId,'error',err && err.message ? err.message : '連線失敗'); }).requestCompanySignupEmailVerification({ plan:safePlan, email:email, deviceId:APP_STATE.deviceId });
         return;
       }
-      window.location.href = APP_STATE.baseUrl + '?page=register&verify=email&plan=' + encodeURIComponent(safePlan) + '&email=' + encodeURIComponent(email);
+      window.location.href = routeUrl('companyRegister',safePlan,{ page:'register', verify:'email', plan:safePlan, email:email, source:'entry_plan_email' });
     }
 
     function requestPlanGoogleVerification(plan){
@@ -1808,7 +1947,7 @@
         google.script.run.withSuccessHandler(function(res){ if (!res || !res.ok) { setStatus(statusId,'error',(res && (res.message || res.msg)) || 'Google 驗證啟動失敗'); return; } if (res.authUrl || res.nextUrl) { openGoogleAuthUrl(res.authUrl || res.nextUrl,statusId); return; } setStatus(statusId,'success','Google 驗證已啟動'); }).withFailureHandler(function(err){ setStatus(statusId,'error',err && err.message ? err.message : '連線失敗'); }).requestCompanySignupGoogleVerification({ plan:safePlan, deviceId:APP_STATE.deviceId });
         return;
       }
-      openGoogleAuthUrl(APP_STATE.baseUrl + '?page=register&verify=google&plan=' + encodeURIComponent(safePlan),statusId);
+      openGoogleAuthUrl(routeUrl('companyRegister',safePlan,{ page:'register', verify:'google', plan:safePlan, source:'entry_plan_google' }),statusId);
     }
 
 
