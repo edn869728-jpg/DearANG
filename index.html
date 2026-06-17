@@ -1,990 +1,205 @@
-<!DOCTYPE html>
-<html lang="zh-Hant">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Dear ANG｜親愛的安格</title>
-<style>
-:root{
-  --bg:#15100d;
-  --paper:#fff8ef;
-  --ink:#3f2f28;
-  --muted:#8b7568;
-  --gold:#d6a85d;
-  --rose:#d98282;
-  --line:rgba(90,61,45,.16);
-  --card:rgba(255,248,239,.86);
-  --shadow:0 18px 50px rgba(46,27,16,.2);
-}
-*{box-sizing:border-box;min-width:0}
-html,body{
-  margin:0;
-  width:100%;
-  max-width:100%;
-  overflow-x:hidden;
-  scroll-behavior:smooth;
-}
-body{
-  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Serif TC","Noto Sans TC",serif;
-  color:var(--ink);
-  background:
-    radial-gradient(circle at 10% 0%,rgba(214,168,93,.25),transparent 35%),
-    radial-gradient(circle at 100% 10%,rgba(217,130,130,.22),transparent 35%),
-    linear-gradient(180deg,#fff3df 0%,#f7e4cd 42%,#ead2b5 100%);
-}
-body.entered .gate{
-  opacity:0;
-  pointer-events:none;
-  transform:translateY(-8px);
-}
-button,input,textarea,select{font:inherit}
-button{
-  border:0;
-  border-radius:999px;
-  padding:12px 18px;
-  font-weight:900;
-  cursor:pointer;
-  background:linear-gradient(135deg,var(--gold),#b98034);
-  color:white;
-  box-shadow:0 12px 28px rgba(160,106,48,.25);
-}
-button.soft{
-  background:rgba(255,255,255,.64);
-  border:1px solid var(--line);
-  color:var(--ink);
-  box-shadow:none;
-}
-.wrap{
-  max-width:1120px;
-  margin:auto;
-  padding:22px 14px 88px;
-}
-.gate{
+<!DOCTYPE html><html lang="zh-Hant"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate, max-age=0"><title>Dear ANG｜親愛的安格</title><style>
+:root{--ink:#3f2f28;--muted:#8b7568;--gold:#d6a85d;--line:rgba(90,61,45,.16);--card:rgba(255,248,239,.86);--shadow:0 18px 50px rgba(46,27,16,.18)}*{box-sizing:border-box;min-width:0}html,body{margin:0;overflow-x:hidden;scroll-behavior:smooth}body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Serif TC","Noto Sans TC",serif;color:var(--ink);background:radial-gradient(circle at 10% 0%,rgba(214,168,93,.25),transparent 35%),linear-gradient(180deg,#fff3df,#ead2b5)}button,input,textarea,select{font:inherit}button{border:0;border-radius:999px;padding:10px 15px;font-weight:900;cursor:pointer;background:linear-gradient(135deg,var(--gold),#b98034);color:#fff;box-shadow:0 10px 24px rgba(160,106,48,.2)}button.soft{background:rgba(255,255,255,.68);border:1px solid var(--line);color:var(--ink);box-shadow:none}.wrap{max-width:1120px;margin:auto;padding:12px 10px 70px}.gate{position:fixed;inset:0;z-index:80;display:flex;align-items:center;justify-content:center;text-align:center;padding:22px;background:linear-gradient(180deg,rgba(255,246,232,.97),rgba(239,213,183,.97));transition:.55s}body.entered .gate{opacity:0;pointer-events:none;transform:translateY(-8px)}.gate-card,.card,.section,.player{border:1px solid var(--line);background:var(--card);backdrop-filter:blur(14px);border-radius:26px;box-shadow:var(--shadow)}.gate-card{max-width:780px;padding:30px 20px}h1{font-size:42px;line-height:1.15;margin:10px 0}.kicker{letter-spacing:.22em;color:var(--gold);font-weight:900;font-size:13px}.date-pill{display:inline-flex;border:1px solid var(--line);background:rgba(255,255,255,.5);border-radius:999px;padding:8px 14px;color:#7d5d46;font-weight:900;margin:8px 0 16px}.lead,.copy p{color:var(--muted);line-height:1.85}.hero{min-height:72svh;display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:center;padding:18px 0}.hero-photo{border-radius:20px;overflow:hidden;aspect-ratio:4/5;background:#d8c1a5}.hero-photo img{width:100%;height:100%;object-fit:cover;display:block}.actions{display:flex;gap:8px;flex-wrap:wrap}.nav{position:sticky;top:0;z-index:40;margin:0 -10px 12px;padding:9px 10px;background:rgba(245,225,198,.82);backdrop-filter:blur(14px);border-bottom:1px solid var(--line);overflow-x:auto;display:flex;gap:7px}.nav button{white-space:nowrap;padding:8px 12px;font-size:14px;background:rgba(255,255,255,.65);border:1px solid var(--line);box-shadow:none;color:#654735}.nav button.active{background:linear-gradient(135deg,var(--gold),#b98034);color:white}.page{display:none}.page.active{display:block}.player{display:flex;justify-content:space-between;gap:12px;padding:12px;margin:8px 0 16px}.player small{display:block;color:var(--muted);font-weight:800;line-height:1.5}.player audio{width:min(420px,100%)}.section{padding:18px;margin:16px 0}.section h2{font-size:28px;margin:0 0 6px}.section p{color:var(--muted);line-height:1.7}.tabs{display:flex;gap:8px;overflow-x:auto;margin:8px 0 14px}.tabs button{padding:8px 12px;font-size:13px;background:rgba(255,255,255,.62);color:#604536;border:1px solid var(--line);box-shadow:none}.tabs button.active{background:#604536;color:#fff}.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:8px}.ig,.nine{grid-template-columns:repeat(3,1fr);max-width:760px;margin:auto}.nine{gap:5px}.photo{position:relative;border-radius:14px;overflow:hidden;border:1px solid rgba(90,61,45,.12);background:#dbc5aa;cursor:pointer}.ig .photo{border-radius:4px}.nine .photo{border-radius:6px}.photo img{width:100%;aspect-ratio:1;object-fit:cover;display:block}.photo .cap{position:absolute;left:0;right:0;bottom:0;font-size:11px;color:#fff;background:linear-gradient(180deg,transparent,rgba(0,0,0,.55));padding:18px 7px 6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.slideshow{position:relative;border-radius:22px;overflow:hidden;background:#dbc5aa;height:min(620px,58svh);min-height:340px;border:1px solid var(--line);margin-bottom:12px}.slideshow img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 1.2s ease,transform 8s ease;transform:scale(1.04)}.slideshow img.active{opacity:1;transform:scale(1)}.slide-caption{position:absolute;left:14px;right:14px;bottom:14px;padding:10px 13px;border-radius:16px;background:rgba(51,31,22,.5);color:#fff;font-weight:900}.video-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,220px),1fr));gap:12px}.vcard{border:1px solid var(--line);background:rgba(255,255,255,.52);border-radius:18px;padding:9px}.vcard video{width:100%;aspect-ratio:16/9;border-radius:13px;background:#111;object-fit:contain}.vcard h3{font-size:14px;margin:8px 2px 2px;line-height:1.35}.vcard .name{font-size:12px;color:var(--muted);word-break:break-word}.vcard a{display:inline-flex;margin:6px 5px 0 0;text-decoration:none;border-radius:999px;padding:7px 9px;font-size:12px;font-weight:900;color:#5b3f2f;background:rgba(255,255,255,.64);border:1px solid var(--line)}.comments{display:grid;grid-template-columns:1fr 1fr;gap:14px}.field{display:grid;gap:6px;margin:10px 0}.field input,.field textarea,.field select{width:100%;border:1px solid var(--line);background:rgba(255,255,255,.72);border-radius:15px;padding:11px;color:var(--ink)}.field textarea{min-height:105px}.comment{border:1px solid var(--line);background:rgba(255,255,255,.55);border-radius:18px;padding:13px;margin-bottom:9px}.comment p{margin:0;white-space:pre-wrap}.empty{padding:22px;border:1px dashed var(--line);border-radius:18px;color:var(--muted);text-align:center}.lightbox{position:fixed;inset:0;z-index:100;display:none;align-items:center;justify-content:center;background:rgba(24,14,9,.86);padding:14px}.lightbox.show{display:flex}.lightbox img{max-width:100%;max-height:82svh;object-fit:contain;border-radius:18px;box-shadow:0 18px 60px rgba(0,0,0,.35)}.lbcap{color:white;text-align:center;font-weight:900;line-height:1.6}.lb button{position:absolute;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.25);box-shadow:none}.x{right:16px;top:16px}.prev{left:16px;top:50%}.next{right:16px;top:50%}.toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%) translateY(16px);opacity:0;z-index:120;background:#5b3f2f;color:#fff;border-radius:999px;padding:12px 18px;font-weight:900;transition:.2s}.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}footer{text-align:center;color:var(--muted);padding:30px 0;line-height:1.8}@media(max-width:760px){h1{font-size:34px}.hero{grid-template-columns:1fr;min-height:auto}.player{display:grid}.player audio{width:100%}.comments{grid-template-columns:1fr}.grid{grid-template-columns:repeat(3,1fr);gap:6px}.video-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.vcard{padding:7px}.vcard h3{font-size:12px}}
+
+/* ===== 彈幕歌詞 ===== */
+.lyric-danmaku-layer{
   position:fixed;
   inset:0;
-  z-index:50;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-  padding:24px;
-  background:linear-gradient(180deg,rgba(255,246,232,.97),rgba(239,213,183,.97));
-  transition:.7s;
+  z-index:75;
+  pointer-events:none;
+  overflow:hidden;
 }
-.gate-card{
-  max-width:780px;
-  width:100%;
-  border:1px solid rgba(160,106,48,.22);
-  background:rgba(255,252,245,.75);
-  backdrop-filter:blur(18px);
-  border-radius:32px;
-  padding:34px 22px;
-  box-shadow:var(--shadow);
-}
-.kicker{
-  letter-spacing:.22em;
-  color:var(--gold);
-  font-weight:900;
-  font-size:13px;
-}
-.gate h1{
-  font-size:48px;
-  margin:12px 0 8px;
-}
-.gate p{
-  color:var(--muted);
-  line-height:1.9;
-  margin:0 auto 20px;
-  max-width:660px;
-}
-.date-pill{
-  display:inline-flex;
-  gap:8px;
-  align-items:center;
-  border:1px solid var(--line);
-  background:rgba(255,255,255,.5);
-  border-radius:999px;
+.lyric-danmaku{
+  position:absolute;
+  right:-90vw;
+  max-width:86vw;
+  white-space:nowrap;
   padding:8px 14px;
-  color:#7d5d46;
-  font-weight:900;
-  margin-bottom:18px;
-}
-.song-credit{
-  display:grid;
-  gap:5px;
-  max-width:420px;
-  margin:0 auto 22px;
-  padding:12px 14px;
-  border:1px solid var(--line);
-  border-radius:20px;
-  background:rgba(255,255,255,.45);
-  color:#6d4d39;
-  line-height:1.7;
-  font-weight:800;
-}
-.song-credit b{
-  color:#563a29;
-}
-.hero{
-  min-height:80svh;
-  display:grid;
-  grid-template-columns:1.1fr .9fr;
-  gap:24px;
-  align-items:center;
-  padding:40px 0;
-}
-.hero h1{
-  font-size:54px;
-  line-height:1.1;
-  margin:12px 0;
-}
-.hero p{
-  color:var(--muted);
-  line-height:1.9;
-  font-size:17px;
-}
-.memorial-copy{
-  display:grid;
-  gap:12px;
-  margin:18px 0 22px;
-}
-.memorial-copy p{
-  margin:0;
-}
-.hero-card,.section,.player,.form-card{
-  border:1px solid var(--line);
-  background:var(--card);
-  backdrop-filter:blur(14px);
-  border-radius:28px;
-  box-shadow:var(--shadow);
-}
-.hero-card{padding:16px}
-.hero-photo{
-  position:relative;
-  border-radius:22px;
-  overflow:hidden;
-  aspect-ratio:4/5;
-  background:#d8c1a5;
-}
-.hero-photo img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  display:block;
-}
-.hero-photo:after{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:linear-gradient(180deg,transparent 55%,rgba(35,20,12,.45));
-}
-.player{
-  position:sticky;
-  top:10px;
-  z-index:20;
-  display:flex;
-  gap:12px;
-  align-items:center;
-  justify-content:space-between;
-  padding:12px 14px;
-  margin:6px 0 24px;
-}
-.player small{
-  display:block;
-  color:var(--muted);
-  font-weight:800;
-}
-.player audio{
-  width:min(420px,100%);
-}
-.section{
-  padding:24px;
-  margin:24px 0;
-}
-.section-title{
-  display:flex;
-  align-items:end;
-  justify-content:space-between;
-  gap:12px;
-  margin-bottom:16px;
-}
-.section-title h2{
-  font-size:28px;
-  margin:0;
-}
-.section-title p{
-  margin:6px 0 0;
-  color:var(--muted);
-  line-height:1.7;
-}
-.slideshow{
-  position:relative;
-  border-radius:28px;
-  overflow:hidden;
-  background:#dbc5aa;
-  height:min(680px,62svh);
-  min-height:420px;
-  border:1px solid var(--line);
-}
-.slideshow img{
-  position:absolute;
-  inset:0;
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  opacity:0;
-  transition:opacity 1.4s ease,transform 8s ease;
-  transform:scale(1.04);
-}
-.slideshow img.active{
-  opacity:1;
-  transform:scale(1);
-}
-.slide-caption{
-  position:absolute;
-  left:18px;
-  right:18px;
-  bottom:16px;
-  padding:12px 14px;
-  border-radius:18px;
-  background:rgba(51,31,22,.5);
-  color:#fff;
+  border-radius:999px;
+  color:#fff7e8;
+  background:rgba(68,42,28,.42);
+  border:1px solid rgba(255,255,255,.18);
+  box-shadow:0 12px 28px rgba(45,25,12,.22);
   backdrop-filter:blur(8px);
   font-weight:900;
+  text-shadow:0 2px 8px rgba(0,0,0,.28);
+  animation:lyricFly var(--flyDur, 10s) linear forwards;
 }
-.photo-strip{
-  display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(min(100%,150px),1fr));
-  gap:10px;
-  margin-top:12px;
+.lyric-danmaku.soft{
+  color:#5a3d2f;
+  background:rgba(255,248,239,.76);
+  border-color:rgba(90,61,45,.14);
+  text-shadow:none;
 }
-.photo-strip img{
-  width:100%;
-  aspect-ratio:1;
-  border-radius:18px;
-  object-fit:cover;
-  cursor:pointer;
-  border:2px solid transparent;
+@keyframes lyricFly{
+  from{transform:translateX(0);opacity:0}
+  8%{opacity:1}
+  92%{opacity:1}
+  to{transform:translateX(calc(-100vw - 120%));opacity:0}
 }
-.photo-strip img.active{
-  border-color:var(--gold);
-}
-.video-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(min(100%,320px),1fr));
-  gap:14px;
-}
-.vcard{
-  border:1px solid var(--line);
-  background:rgba(255,255,255,.52);
-  border-radius:22px;
-  padding:12px;
-  overflow:hidden;
-}
-.vcard iframe,.vcard video{
-  width:100%;
-  aspect-ratio:16/9;
-  border:0;
-  border-radius:16px;
-  background:#1b1411;
-}
-.video-cover{
-  position:relative;
-  width:100%;
-  aspect-ratio:16/9;
-  border-radius:16px;
-  overflow:hidden;
-  background:#1b1411;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
-.video-cover img{
-  position:absolute;
-  inset:0;
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  opacity:.78;
-}
-.video-cover:after{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:linear-gradient(180deg,rgba(0,0,0,.08),rgba(0,0,0,.38));
-}
-.video-cover button{
-  position:relative;
-  z-index:2;
-  box-shadow:0 10px 26px rgba(0,0,0,.25);
-}
-.vcard h3{
-  font-size:16px;
-  margin:10px 4px 2px;
-  line-height:1.4;
-}
-.vcard .name{
-  color:var(--muted);
-  font-size:13px;
-  margin:0 4px 4px;
-  word-break:break-word;
-}
-.comments{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:16px;
-}
-.comment-list{
-  display:grid;
-  gap:10px;
-}
-.comment{
-  border:1px solid var(--line);
-  background:rgba(255,255,255,.55);
-  border-radius:20px;
-  padding:14px;
-}
-.comment b{
-  display:block;
-  margin-bottom:6px;
-}
-.comment p{
-  margin:0;
-  color:#594439;
-  line-height:1.7;
-  white-space:pre-wrap;
-}
-.form-card{
-  padding:18px;
-  box-shadow:none;
-}
-.field{
-  display:grid;
-  gap:6px;
-  margin:10px 0;
-}
-.field label{
-  font-weight:900;
-  color:#6b4f3e;
-  font-size:13px;
-}
-.field input,.field textarea,.field select{
-  width:100%;
-  border:1px solid var(--line);
-  background:rgba(255,255,255,.72);
-  border-radius:16px;
-  padding:12px;
-  color:var(--ink);
-  outline:none;
-}
-.field textarea{
-  min-height:110px;
-  resize:vertical;
-}
-.hint{
-  color:var(--muted);
-  font-size:13px;
-  line-height:1.7;
-}
-.empty{
-  padding:24px;
-  border:1px dashed var(--line);
-  border-radius:22px;
-  color:var(--muted);
-  text-align:center;
-}
-.toast{
-  position:fixed;
-  left:50%;
-  bottom:22px;
-  transform:translateX(-50%) translateY(16px);
-  opacity:0;
-  z-index:60;
-  background:#5b3f2f;
-  color:#fff;
-  border-radius:999px;
-  padding:12px 18px;
-  font-weight:900;
-  transition:.2s;
-  box-shadow:var(--shadow);
-}
-.toast.show{
-  opacity:1;
-  transform:translateX(-50%) translateY(0);
-}
-footer{
-  text-align:center;
-  color:var(--muted);
-  padding:34px 0;
-  line-height:1.8;
-}
-@media(max-width:760px){
-  .wrap{padding:14px 10px 72px}
-  .gate h1,.hero h1{font-size:38px}
-  .hero{
-    grid-template-columns:1fr;
-    min-height:auto;
-    padding:18px 0;
-  }
-  .player{
-    position:relative;
-    display:grid;
-  }
-  .slideshow{height:56svh;min-height:360px}
-  .comments{grid-template-columns:1fr}
-  .section{
-    padding:16px;
-    border-radius:22px;
-  }
-  .section-title{display:block}
-  .actions-row{display:grid;gap:8px}
-}
-
-/* ===== 影片區：改用原生 video，避免 Google Drive iframe 預覽遮罩 ===== */
-.native-video{
-  width:100%;
-  aspect-ratio:16/9;
-  border:0;
-  border-radius:16px;
-  background:#15100d;
-  display:block;
-  object-fit:contain;
-}
-.video-actions{
+.lyric-controls{
   display:flex;
   gap:8px;
   flex-wrap:wrap;
-  margin:10px 4px 2px;
+  margin-top:8px;
 }
-.video-actions a{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  text-decoration:none;
-  border-radius:999px;
-  padding:9px 12px;
-  font-size:13px;
-  font-weight:900;
-  color:#5b3f2f;
-  background:rgba(255,255,255,.64);
-  border:1px solid var(--line);
+.lyric-controls button{
+  padding:7px 11px;
+  font-size:12px;
+  box-shadow:none;
 }
-
-</style>
-</head>
-<body>
-<div class="gate" id="gate">
-  <div class="gate-card">
-    <div class="kicker">IN LOVING MEMORY</div>
-    <h1>Dear ANG｜親愛的安格</h1>
-    <div class="date-pill">🕯️ 1989.06.03 — 2026.03.09</div>
-    <p>Dear ANG（親愛的安格），是一個為了紀念我們最摯愛的朋友安格 ANG 所建立的回憶網頁。</p>
-    <div class="song-credit">
-      <b>網頁主題曲：〈給安格〉</b>
-      <span>作詞：Enden &amp; OpenAI</span>
-      <span>作曲：Enden &amp; Suno AI</span>
-    </div>
-    <button onclick="enterMemorial()">進入我們的回憶</button>
-  </div>
-</div>
-
-<div class="wrap">
-  <section class="hero">
-    <div>
-      <div class="kicker">DEAR ANG</div>
-      <h1>親愛的安格</h1>
-      <div class="date-pill">1989.06.03 — 2026.03.09</div>
-
-      <div class="memorial-copy">
-        <p>Dear ANG（親愛的安格），是一個為了紀念我們最摯愛的朋友安格 ANG 所建立的回憶網頁。</p>
-        <p>1989.06.03，他來到這個世界；2026.03.09，他離開了我們。但他留下的笑容、歌聲、陪伴與回憶，會一直被我們好好收藏。</p>
-        <p><b>網頁主題曲：〈給安格〉</b><br>作詞：Enden &amp; OpenAI<br>作曲：Enden &amp; Suno AI</p>
-        <p>這裡保存著我們一起留下的照片、影片、歌聲與想念。照片會慢慢輪播，像回憶一頁一頁翻過；他唱過的歌、我們一起出去玩的片段、日常的笑聲，都會被好好留在這裡。</p>
-        <p>這個網頁也提供匿名留言板與投稿區，讓朋友們可以留下想說的話，或投稿照片、影片與回憶故事。每一份投稿都會先通知管理者，再整理成專屬回憶區。</p>
-        <p>願 2026 年 3 月 9 日之後，我們仍能在這裡再次遇見你。</p>
-      </div>
-
-      <div class="actions-row">
-        <button onclick="enterMemorial()">播放主題曲</button>
-        <button class="soft" onclick="scrollToId('comments')">留下想說的話</button>
-        <button class="soft" onclick="scrollToId('submit')">投稿照片 / 影片</button>
-      </div>
-    </div>
-    <div class="hero-card">
-      <div class="hero-photo" id="heroPhoto"></div>
-    </div>
-  </section>
-
-  <div class="player" id="player">
-    <div>
-      <b id="songTitle">網頁主題曲：〈給安格〉</b>
-      <small id="songSub">作詞：Enden & OpenAI｜作曲：Enden & Suno AI</small>
-    </div>
-    <audio id="themeAudio" controls preload="metadata" loop></audio>
-  </div>
-
-  <section class="section" id="photos">
-    <div class="section-title">
-      <div>
-        <h2>我們的留影</h2>
-        <p>照片會自己輪流播放，像回憶慢慢翻頁。</p>
-      </div>
-    </div>
-    <div class="slideshow" id="slideshow">
-      <div class="slide-caption" id="slideCaption">載入照片中…</div>
-    </div>
-    <div class="photo-strip" id="photoStrip"></div>
-  </section>
-
-  <section class="section" id="songs">
-    <div class="section-title">
-      <div>
-        <h2>我們的歌</h2>
-        <p>有寫歌名的，多半是他唱過的歌。這裡把那些聲音好好留下。</p>
-      </div>
-    </div>
-    <div class="video-grid" id="songGrid"></div>
-  </section>
-
-  <section class="section" id="memories">
-    <div class="section-title">
-      <div>
-        <h2>我們的動態回憶</h2>
-        <p>日常、出去玩、生活片段，都放在這裡。</p>
-      </div>
-    </div>
-    <div class="video-grid" id="memoryGrid"></div>
-  </section>
-
-  <section class="section" id="comments">
-    <div class="section-title">
-      <div>
-        <h2>匿名留言板</h2>
-        <p>可以匿名，留下想對他說的話。</p>
-      </div>
-    </div>
-    <div class="comments">
-      <div class="form-card">
-        <div class="field">
-          <label>暱稱</label>
-          <input id="commentName" placeholder="匿名">
-        </div>
-        <div class="field">
-          <label>想說的話</label>
-          <textarea id="commentText" placeholder="把想念留在這裡…"></textarea>
-        </div>
-        <button onclick="sendComment()">送出留言</button>
-      </div>
-      <div class="comment-list" id="commentList"></div>
-    </div>
-  </section>
-
-  <section class="section" id="submit">
-    <div class="section-title">
-      <div>
-        <h2>投稿區</h2>
-        <p>照片、影片、音檔都可以。投稿後會寄信通知管理者，並留下你的資訊，之後整理成專區。</p>
-      </div>
-    </div>
-    <div class="form-card">
-      <div class="hint">提醒：投稿不會直接公開，會先送到「04_好友們的回憶」，也會 Email 通知管理者。請留下聯絡方式，方便之後整理到專區。</div>
-      <div class="field">
-        <label>你的暱稱 / 姓名</label>
-        <input id="subName" placeholder="可以填匿名">
-      </div>
-      <div class="field">
-        <label>聯絡方式</label>
-        <input id="subContact" placeholder="LINE、Email、電話，方便整理專區時聯絡">
-      </div>
-      <div class="field">
-        <label>你和安格的關係</label>
-        <input id="subRelation" placeholder="朋友、同事、家人、一起唱歌的朋友…">
-      </div>
-      <div class="field">
-        <label>投稿分類</label>
-        <select id="subCategory">
-          <option>照片</option>
-          <option>影片</option>
-          <option>他唱過的歌</option>
-          <option>日常回憶</option>
-          <option>其他</option>
-        </select>
-      </div>
-      <div class="field">
-        <label>投稿說明 / 故事</label>
-        <textarea id="subCaption" placeholder="這張照片、這段影片背後的故事…"></textarea>
-      </div>
-      <div class="field">
-        <label>選擇檔案</label>
-        <input id="subFile" type="file" accept="image/*,video/*,audio/*">
-      </div>
-      <button onclick="submitContribution()">送出投稿</button>
-      <div class="hint" id="uploadHint">建議單檔小於 35MB。影片太大可以先壓縮或分段，或直接寄到：chihhao128@gmail.com、edn869728@gmail.com。</div>
-    </div>
-  </section>
-
-  <footer>
-    願 2026 年 3 月 9 日之後，我們仍能在這裡再次遇見你。<br>
-    Dear ANG｜親愛的安格
-  </footer>
-</div>
-
-<div class="toast" id="toast">完成</div>
-
-<script>
-const CONFIG = {
-  GAS_API_URL: 'https://script.google.com/macros/s/AKfycbzrduB_eXPk6OpqnGPXjNBNQCeUyarzAfki4IL-X_JIVQr7RS9sN5ayyvA2OEaXDXzv/exec',
-  GITHUB_THEME_AUDIO: 'assets/audio/dear-ang-theme.mp3',
-  MAIN_VISUAL_IMAGE_NAMES: ['IMG_4130.jpg', 'IMG_2818.JPG'],
-  PHOTO_INTERVAL: 5200
-};
-
-let DATA = {photos:[], memories:[], songs:[], comments:[], theme:null};
-let slideIndex = 0;
-let slideTimer = null;
-
-window.addEventListener('load', loadData);
-
-function api(params){
-  if(!CONFIG.GAS_API_URL || CONFIG.GAS_API_URL.includes('PASTE_')){
-    return Promise.reject(new Error('尚未設定 GAS_API_URL'));
-  }
-  return jsonp(params);
+.lyric-status{
+  color:var(--muted);
+  font-size:12px;
+  line-height:1.5;
+}
+@media(max-width:760px){
+  .lyric-danmaku{font-size:14px;padding:7px 12px}
 }
 
-function jsonp(params){
-  return new Promise((resolve,reject)=>{
-    const cb='__memorial_'+Date.now()+'_'+Math.floor(Math.random()*99999);
-    const u=new URL(CONFIG.GAS_API_URL);
-    Object.keys(params||{}).forEach(k=>u.searchParams.set(k,String(params[k])));
-    u.searchParams.set('callback',cb);
-    u.searchParams.set('_ts',Date.now());
-    const s=document.createElement('script');
-    const timer=setTimeout(()=>clean(reject,new Error('讀取逾時')),16000);
-    window[cb]=payload=>clean(resolve,payload);
-    function clean(fn,val){
-      clearTimeout(timer);
-      delete window[cb];
-      if(s.parentNode)s.parentNode.removeChild(s);
-      fn(val);
+</style></head><body>
+<div class="lyric-danmaku-layer" id="lyricDanmakuLayer" aria-hidden="true"></div><div class="gate"><div class="gate-card"><div class="kicker">IN LOVING MEMORY</div><h1>Dear ANG｜親愛的安格</h1><div class="date-pill">🕯️ 1989.06.03 — 2026.03.09</div><p class="lead">照片、IG、Facebook、九宮格與影片都分區保存。點照片會放大，不會重新整理頁面。</p><p><b>網頁主題曲：〈給安格〉</b><br>作詞：Enden & OpenAI｜作曲：Enden & Suno AI</p><button onclick="enterMemorial()">進入我們的回憶</button></div></div><div class="wrap"><div class="nav" id="nav"></div><section class="hero page active" id="page-home"><div><div class="kicker">DEAR ANG</div><h1>親愛的安格</h1><div class="date-pill">1989.06.03 — 2026.03.09</div><div class="copy"><p>Dear ANG（親愛的安格），是一個為了紀念我們最摯愛的朋友安格 ANG 所建立的回憶網頁。</p><p>照片會依照 Drive 子資料夾分區；IG、Facebook、九宮格會有不同版面。</p></div><div class="actions"><button onclick="enterMemorial()">播放主題曲</button><button class="soft" onclick="showPage('photos')">看照片</button><button class="soft" onclick="showPage('songs')">我們的歌</button><button class="soft" onclick="fresh()">重新整理資料</button></div></div><div class="card"><div class="hero-photo" id="heroPhoto"></div></div></section><div class="player"><div><b id="songTitle">網頁主題曲：〈給安格〉</b><small id="songSub">作詞：Enden & OpenAI｜作曲：Enden & Suno AI</small>
+      <div class="lyric-controls">
+        <button class="soft" onclick="toggleLyrics()">彈幕歌詞：開</button>
+        <button class="soft" onclick="testLyricDanmaku()">測試歌詞</button>
+        <span class="lyric-status" id="lyricStatus">已載入完整歌詞：61 句。</span>
+      </div><small>主題曲循環播放。若沒有資料請按「重新整理資料」。</small></div><audio id="themeAudio" controls preload="metadata" loop></audio></div><section class="page" id="page-photos"><div class="section"><h2>照片分區</h2><p>圖片縮小排列。點圖可放大，不重新整理。</p><div class="tabs" id="photoTabs"></div><div id="photoWrap"></div></div></section><section class="page" id="page-slide"><div class="section"><h2>照片輪播</h2><div class="slideshow" id="slideshow"><div class="slide-caption" id="slideCaption">載入照片中…</div></div><div class="grid" id="photoStrip"></div></div></section><section class="page" id="page-songs"><div class="section"><h2>我們的歌</h2><p>有寫歌名的，多半是他唱過的歌。影片列表已縮小。</p><div class="video-grid" id="songGrid"></div></div></section><section class="page" id="page-memories"><div class="section"><h2>動態回憶</h2><div class="video-grid" id="memoryGrid"></div></div></section><section class="page" id="page-message"><div class="section"><h2>匿名留言板</h2><div class="comments"><div><div class="field"><label>暱稱</label><input id="commentName" placeholder="匿名"></div><div class="field"><label>想說的話</label><textarea id="commentText"></textarea></div><button onclick="sendComment()">送出留言</button></div><div id="commentList"></div></div></div><div class="section"><h2>投稿區</h2><p>投稿會放到「04_好友們的回憶」，並寄信通知管理者。</p><div class="field"><label>你的暱稱 / 姓名</label><input id="subName"></div><div class="field"><label>聯絡方式</label><input id="subContact"></div><div class="field"><label>你和安格的關係</label><input id="subRelation"></div><div class="field"><label>分類</label><select id="subCategory"><option>照片</option><option>影片</option><option>他唱過的歌</option><option>日常回憶</option><option>其他</option></select></div><div class="field"><label>投稿說明</label><textarea id="subCaption"></textarea></div><div class="field"><label>選擇檔案</label><input id="subFile" type="file" accept="image/*,video/*,audio/*"></div><button onclick="submitFile()">送出投稿</button><p id="uploadHint">建議單檔小於 35MB。影片太大可以先壓縮或分段，或直接寄到：chihhao128@gmail.com、edn869728@gmail.com。</p></div></section><footer>Dear ANG｜親愛的安格</footer></div><div class="lightbox" id="lightbox" onclick="if(event.target.id==='lightbox')closeLb()"><div class="lb"><button class="x" onclick="closeLb()">關閉</button><button class="prev" onclick="moveLb(-1)">‹</button><img id="lbImg"><button class="next" onclick="moveLb(1)">›</button><div class="lbcap" id="lbCap"></div></div></div><div class="toast" id="toast">完成</div><script>
+
+let lyricsEnabled = true;
+let lastLyricIndex = -1;
+let lastAudioTime = 0;
+const LYRIC_LINES = [
+  { time: 6.33, end: 17.62, text: "主題曲:給安格 Dear ANG" },
+  { time: 17.72, end: 27.47, text: "作詞:Enden 作曲:Enden" },
+  { time: 27.57, end: 30.46, text: "這個世界最殘酷的事情" },
+  { time: 30.56, end: 34.82, text: "總在無意之中" },
+  { time: 34.92, end: 37.21, text: "悄悄把身邊的人" },
+  { time: 37.31, end: 41.38, text: "一個一個帶走" },
+  { time: 41.48, end: 43.94, text: "我們總以為" },
+  { time: 44.04, end: 48.49, text: "還有很多時間" },
+  { time: 48.59, end: 50.8, text: "說好以後再見" },
+  { time: 50.9, end: 54.66, text: "說好下次再去" },
+  { time: 54.76, end: 57.7, text: "可當我回頭" },
+  { time: 57.8, end: 61.13, text: "時間早已沉默" },
+  { time: 61.23, end: 64.11, text: "那些沒說出口的話" },
+  { time: 64.21, end: 68.62, text: "停在昨天以後" },
+  { time: 68.72, end: 71.24, text: "原來這個世界沒有如果" },
+  { time: 71.34, end: 75.18, text: "發生了就是結果" },
+  { time: 75.28, end: 78.19, text: "那些來不及說的再見" },
+  { time: 78.29, end: 82.46, text: "變成一生的沉默" },
+  { time: 82.56, end: 85.68, text: "我不知道你聽不聽得到" },
+  { time: 85.78, end: 89.06, text: "我真的很想你" },
+  { time: 89.16, end: 91.71, text: "我永遠是你弟弟" },
+  { time: 91.81, end: 97.42, text: "你永遠是我哥" },
+  { time: 97.52, end: 100.33, text: "一年多以前的那個夜晚" },
+  { time: 100.43, end: 104.34, text: "高速公路燈閃過" },
+  { time: 104.44, end: 107.39, text: "我們笑著說如果誰先走" },
+  { time: 107.49, end: 110.44, text: "一定要打給對方" },
+  { time: 110.54, end: 112.38, text: "就算要下葬之前" },
+  { time: 112.48, end: 117.13, text: "也要從棺材爬出來說" },
+  { time: 117.23, end: 119.43, text: "兄弟我要走了" },
+  { time: 119.53, end: 124.15, text: "別讓我最後一個人走" },
+  { time: 124.25, end: 125.43, text: "可最後卻是" },
+  { time: 125.53, end: 127.47, text: "別人告訴我" },
+  { time: 127.57, end: 130.21, text: "為什麼我連最後一面" },
+  { time: 130.31, end: 134.72, text: "都來不及見你" },
+  { time: 134.82, end: 137.4, text: "原來這個世界沒有如果" },
+  { time: 137.5, end: 141.63, text: "發生了就是結果" },
+  { time: 141.73, end: 144.28, text: "那些還沒說完的故事" },
+  { time: 144.38, end: 148.42, text: "停在那一刻" },
+  { time: 148.52, end: 151.62, text: "我不知道你聽不聽得到" },
+  { time: 151.72, end: 154.85, text: "我真的很想你" },
+  { time: 154.95, end: 158.08, text: "就算沒有血緣" },
+  { time: 158.18, end: 162.36, text: "你永遠是我哥" },
+  { time: 162.46, end: 164.62, text: "你可不可以" },
+  { time: 164.72, end: 169.15, text: "到我夢裡說說話" },
+  { time: 169.25, end: 171.64, text: "告訴我到底怎麼了" },
+  { time: 171.74, end: 176.67, text: "告訴我你還好嗎" },
+  { time: 176.77, end: 179.95, text: "如果真的有人害你" },
+  { time: 180.05, end: 183.19, text: "如果你還沒說完" },
+  { time: 183.29, end: 185.71, text: "至少讓我知道" },
+  { time: 185.81, end: 193.56, text: "你不是一個人走" },
+  { time: 193.66, end: 196.51, text: "原來這個世界沒有如果" },
+  { time: 196.61, end: 200.75, text: "只剩回憶陪著我" },
+  { time: 200.85, end: 203.43, text: "那些一起走過的日子" },
+  { time: 203.53, end: 207.74, text: "一輩子不會走" },
+  { time: 207.84, end: 211.05, text: "如果你真的聽得到" },
+  { time: 211.15, end: 214.15, text: "就來我夢裡吧" },
+  { time: 214.25, end: 218.07, text: "再叫我一聲弟弟" },
+  { time: 218.17, end: 221.59, text: "再說一次" },
+  { time: 221.69, end: 223.47, text: "兄弟" },
+  { time: 223.57, end: 257.35, text: "我走了" },
+  { time: 257.45, end: 263.45, text: "兄弟.." }
+];
+
+const CONFIG={APP_VERSION:'20260618_sections',GAS_API_URL:'https://script.google.com/macros/s/AKfycbzrduB_eXPk6OpqnGPXjNBNQCeUyarzAfki4IL-X_JIVQr7RS9sN5ayyvA2OEaXDXzv/exec',GITHUB_THEME_AUDIO:'assets/audio/dear-ang-theme.mp3',MAIN:['IMG_4130.jpg','IMG_2818.JPG'],PHOTO_INTERVAL:5200};let DATA={photos:[],photoGroups:[],songs:[],memories:[],comments:[],theme:null},want=false,slide=0,timer=null,lb=0,lbList=[];window.onload=()=>{nav();loadData()};function nav(){let a=[['home','首頁'],['photos','照片分區'],['slide','照片輪播'],['songs','我們的歌'],['memories','動態回憶'],['message','留言 / 投稿']];document.getElementById('nav').innerHTML=a.map(x=>`<button id="n-${x[0]}" onclick="showPage('${x[0]}')">${x[1]}</button>`).join('');showPage('home',1)}function showPage(id,s){document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));document.querySelectorAll('.nav button').forEach(x=>x.classList.remove('active'));document.getElementById('page-'+id)?.classList.add('active');document.getElementById('n-'+id)?.classList.add('active');if(!s)scrollTo(0,0)}function api(p){return new Promise((res,rej)=>{let cb='cb'+Date.now()+Math.floor(Math.random()*9e4),u=new URL(CONFIG.GAS_API_URL);Object.keys(p).forEach(k=>u.searchParams.set(k,p[k]));u.searchParams.set('callback',cb);u.searchParams.set('_ts',Date.now());u.searchParams.set('v',CONFIG.APP_VERSION);let sc=document.createElement('script'),tm=setTimeout(()=>done(rej,new Error('讀取逾時')),16000);window[cb]=x=>done(res,x);function done(f,v){clearTimeout(tm);delete window[cb];sc.remove();f(v)}sc.onerror=()=>done(rej,new Error('讀取失敗'));sc.src=u;document.head.appendChild(sc)})}function loadData(){api({action:'getMemorialData'}).then(r=>{if(!r.ok)throw Error(r.error);DATA=r;DATA.photos=order(DATA.photos||flat(DATA.photoGroups||[]));render()}).catch(e=>toast(e.message,1))}function flat(g){let o=[];(g||[]).forEach(x=>(x.items||[]).forEach(i=>{i.groupName=x.name;o.push(i)}));return o}function order(p){let used=new Set(),out=[];(CONFIG.MAIN||[]).map(x=>x.toLowerCase()).forEach(n=>{let i=p.findIndex((x,j)=>!used.has(j)&&String(x.name).toLowerCase()==n);if(i<0)i=p.findIndex((x,j)=>!used.has(j)&&String(x.name).toLowerCase().includes(n.replace(/\.[^.]+$/,'')));if(i>=0){out.push(p[i]);used.add(i)}});return out.concat(p.filter((_,i)=>!used.has(i)))}function render(){theme();hero();photoGroups();slides();videos('songGrid',DATA.songs||[]);videos('memoryGrid',DATA.memories||[]);comments(DATA.comments||[])}function hero(){let p=DATA.photos[0];document.getElementById('heroPhoto').innerHTML=p?`<img src="${e(p.thumbnailUrl)}">`:''}function theme(){let a=document.getElementById('themeAudio'),g=ver(CONFIG.GITHUB_THEME_AUDIO),d=DATA.theme&&DATA.theme.streamUrl;if(!a.src)a.src=g||d||'';a.onerror=()=>{if(d&&!a.dataset.d){a.dataset.d=1;a.src=d;if(want)startMusic()}};if(want)startMusic()}function photoGroups(){let groups=DATA.photoGroups||[];let all=DATA.photos||flat(groups);let tabs=[{id:'all',name:'全部照片',items:all}].concat(groups);document.getElementById('photoTabs').innerHTML=tabs.map(t=>`<button id="pt-${t.id}" onclick="showGroup('${js(t.id)}')">${t.name} ${(t.items||[]).length}</button>`).join('');document.getElementById('photoWrap').innerHTML=tabs.map(t=>`<div class="pg" id="pg-${e(t.id)}" style="display:none"><h2>${t.name}</h2><p>${hint(t.name)}</p>${grid(order(t.items||[]),t.name)}</div>`).join('');showGroup('all')}function mode(n){n=String(n).toLowerCase();if(n.includes('ig'))return'ig';if(n.includes('九宮'))return'nine';return''}function hint(n){let m=mode(n);return m=='ig'?'IG 風格小方格。':m=='nine'?'九宮格以 3 欄排列。':'點照片可放大，不重新整理。'}function grid(items,n){if(!items.length)return'<div class="empty">這區還沒有照片</div>';let cls='grid '+mode(n);return `<div class="${cls}">`+items.map(p=>{let i=(DATA.photos||[]).findIndex(x=>x.id==p.id);if(i<0)i=0;return `<div class="photo" onclick="openLb(${i})"><img loading="lazy" src="${e(p.thumbnailUrl)}"><div class="cap">${esc(p.name)}</div></div>`}).join('')+'</div>'}function showGroup(id){document.querySelectorAll('.pg').forEach(x=>x.style.display='none');document.querySelectorAll('.tabs button').forEach(x=>x.classList.remove('active'));document.getElementById('pg-'+id).style.display='block';document.getElementById('pt-'+id).classList.add('active')}function slides(){let p=DATA.photos||[],ss=document.getElementById('slideshow'),st=document.getElementById('photoStrip');ss.querySelectorAll('img').forEach(x=>x.remove());if(!p.length)return;st.innerHTML=p.slice(0,60).map((x,i)=>`<div class="photo" onclick="showSlide(${i},1)"><img src="${e(x.thumbnailUrl)}"><div class="cap">${esc(x.name)}</div></div>`).join('');p.forEach(x=>{let im=document.createElement('img');im.src=x.thumbnailUrl;ss.insertBefore(im,document.getElementById('slideCaption'))});showSlide(0);clearInterval(timer);timer=setInterval(()=>showSlide((slide+1)%p.length),CONFIG.PHOTO_INTERVAL)}function showSlide(i){let p=DATA.photos||[];slide=i;document.querySelectorAll('#slideshow img').forEach((x,j)=>x.classList.toggle('active',j==i));document.getElementById('slideCaption').textContent=p[i]?.name||''}function videos(id,list){let g=document.getElementById(id);if(!list.length){g.innerHTML='<div class="empty">還沒有資料</div>';return}g.innerHTML=list.map(v=>v.kind=='audio'?`<div class="vcard"><audio controls src="${e(v.streamUrl)}"></audio><h3>${esc(v.name)}</h3></div>`:`<div class="vcard"><video controls playsinline preload="none" poster="${e(v.thumbnailUrl)}"><source src="${e(v.streamUrl)}" type="${e(v.mimeType)}"></video><h3>${esc(v.name)}</h3><div class="name">${esc(v.mimeType)}</div><a target="_blank" href="${e(v.webViewUrl)}">另開 Drive</a><a target="_blank" href="${e(v.streamUrl)}">直接開檔</a></div>`).join('');g.querySelectorAll('video').forEach(v=>v.onplay=()=>document.getElementById('themeAudio').pause())}function comments(list){document.getElementById('commentList').innerHTML=list.length?list.map(c=>`<div class="comment"><b>${esc(c.name||'匿名')}</b><p>${esc(c.message||'')}</p></div>`).join(''):'<div class="empty">還沒有留言</div>'}function enterMemorial(){want=true;document.body.classList.add('entered');startMusic()}function startMusic(){let a=document.getElementById('themeAudio');a.loop=true;if(a.src)a.play().catch(()=>toast('請按播放鍵一次'))}function openLb(i){lbList=DATA.photos||[];lb=i;updLb();document.getElementById('lightbox').classList.add('show')}function updLb(){let p=lbList[lb];document.getElementById('lbImg').src=p.thumbnailUrl;document.getElementById('lbCap').textContent=(lb+1)+' / '+lbList.length+' '+(p.groupName?'['+p.groupName+'] ':'')+(p.name||'')}function moveLb(d){lb=(lb+d+lbList.length)%lbList.length;updLb()}function closeLb(){document.getElementById('lightbox').classList.remove('show')}
+function setupLyricDanmaku(){
+  const audio = document.getElementById('themeAudio');
+  if(!audio || audio.dataset.lyricReady === '1') return;
+  audio.dataset.lyricReady = '1';
+
+  audio.addEventListener('timeupdate', function(){
+    if(!lyricsEnabled || !LYRIC_LINES.length) return;
+
+    const now = audio.currentTime || 0;
+
+    // loop 後 currentTime 會變小，重設歌詞索引
+    if(now + 0.35 < lastAudioTime){
+      lastLyricIndex = -1;
     }
-    s.onerror=()=>clean(reject,new Error('讀取失敗'));
-    s.src=u.toString();
-    document.head.appendChild(s);
-  });
-}
+    lastAudioTime = now;
 
-function loadData(){
-  api({action:'getMemorialData'}).then(res=>{
-    if(!res.ok) throw new Error(res.error||'載入失敗');
-    DATA=res;
-    renderAll();
-  }).catch(e=>{
-    toast(e.message || '載入失敗', true);
-    document.getElementById('slideCaption').textContent='請先在 index.html 設定 GAS_API_URL';
-  });
-}
-
-function renderAll(){
-  renderTheme();
-  renderPhotos();
-  renderVideos('songGrid', DATA.songs || [], '歌');
-  renderVideos('memoryGrid', DATA.memories || [], '回憶');
-  renderComments(DATA.comments || []);
-}
-
-function renderTheme(){
-  const audio=document.getElementById('themeAudio');
-  if(audio) audio.loop = true;
-  const title=document.getElementById('songTitle');
-  const sub=document.getElementById('songSub');
-
-  title.textContent='網頁主題曲：〈給安格〉';
-
-  const githubAudio = CONFIG.GITHUB_THEME_AUDIO || '';
-  const driveAudio = DATA.theme && DATA.theme.streamUrl ? DATA.theme.streamUrl : '';
-  const firstSource = githubAudio || driveAudio;
-
-  if(!firstSource){
-    sub.textContent='沒有在 00_主題曲 找到 00_給安格，也尚未設定 GitHub MP3';
-    return;
-  }
-
-  // 音樂一旦開始播放，就不要再重設 src；避免幾秒後跳一下、音樂被停掉。
-  if(audio.dataset.locked === '1') return;
-
-  if(audio.getAttribute('src') !== firstSource){
-    audio.src = firstSource;
-    audio.load();
-  }
-
-  if(githubAudio){
-    sub.textContent='作詞：Enden & OpenAI｜作曲：Enden & Suno AI｜GitHub MP3 優先播放';
-  }else{
-    sub.textContent='作詞：Enden & OpenAI｜作曲：Enden & Suno AI｜Drive 備用檔案：' + (DATA.theme.name || '');
-  }
-
-  audio.onerror = function(){
-    // 只在還沒播放成功時才切換備用音源；避免播放中途被換 src 停掉。
-    if(audio.dataset.locked === '1') return;
-
-    if(githubAudio && driveAudio && !audio.dataset.triedDrive){
-      audio.dataset.triedDrive = '1';
-      audio.src = driveAudio;
-      audio.load();
-      sub.textContent='作詞：Enden & OpenAI｜作曲：Enden & Suno AI｜已切換 Drive 備用音源';
-      if(wantsMusicPlay) setTimeout(startThemeMusic, 350);
-      return;
-    }
-
-    sub.textContent='音樂讀取失敗。請確認 assets/audio/dear-ang-theme.mp3 是否已上傳，或 Drive 的 00_主題曲是否有檔案';
-  };
-
-  if(wantsMusicPlay) setTimeout(startThemeMusic, 250);
-}
-
-function renderPhotos(){
-  const rawPhotos=DATA.photos||[];
-  const ss=document.getElementById('slideshow');
-  const strip=document.getElementById('photoStrip');
-  const hero=document.getElementById('heroPhoto');
-
-  ss.querySelectorAll('img').forEach(x=>x.remove());
-  strip.innerHTML='';
-
-  if(!rawPhotos.length){
-    ss.innerHTML='<div class="empty">尚未放入照片。請放到 01_我們的留影。</div>';
-    hero.innerHTML='';
-    return;
-  }
-
-  const preferredNames = Array.isArray(CONFIG.MAIN_VISUAL_IMAGE_NAMES)
-    ? CONFIG.MAIN_VISUAL_IMAGE_NAMES.map(x => String(x || '').toLowerCase())
-    : [String(CONFIG.MAIN_VISUAL_IMAGE_NAME || '').toLowerCase()].filter(Boolean);
-
-  const picked = [];
-  const used = new Set();
-
-  preferredNames.forEach(name => {
-    if(!name) return;
-    let idx = rawPhotos.findIndex((p,i) => !used.has(i) && String(p.name || '').toLowerCase() === name);
-    if(idx < 0){
-      const key = name.replace(/\.[^.]+$/, '');
-      idx = rawPhotos.findIndex((p,i) => !used.has(i) && String(p.name || '').toLowerCase().includes(key));
-    }
-    if(idx >= 0){
-      picked.push(rawPhotos[idx]);
-      used.add(idx);
-    }
-  });
-
-  const photos = picked.concat(rawPhotos.filter((_,i)=>!used.has(i)));
-
-  const mainPhoto = photos[0];
-  hero.innerHTML='<img src="'+escAttr(mainPhoto.thumbnailUrl)+'" alt="'+escAttr(mainPhoto.name || '')+'">';
-
-  photos.forEach((p,i)=>{
-    const img=document.createElement('img');
-    img.src=p.thumbnailUrl;
-    img.alt=p.name||'';
-    ss.insertBefore(img, document.getElementById('slideCaption'));
-
-    const t=document.createElement('img');
-    t.src=p.thumbnailUrl;
-    t.alt=p.name||'';
-    t.onclick=()=>showSlide(i, true);
-    strip.appendChild(t);
-  });
-
-  DATA.photos = photos;
-  showSlide(0, false);
-  if(slideTimer) clearInterval(slideTimer);
-  slideTimer=setInterval(()=>showSlide((slideIndex+1)%photos.length, false), CONFIG.PHOTO_INTERVAL);
-}
-
-function showSlide(i, manual){
-  const photos=DATA.photos||[];
-  if(!photos.length) return;
-  slideIndex=i;
-  const imgs=document.querySelectorAll('#slideshow img');
-  const thumbs=document.querySelectorAll('#photoStrip img');
-  imgs.forEach((x,idx)=>x.classList.toggle('active',idx===i));
-  thumbs.forEach((x,idx)=>x.classList.toggle('active',idx===i));
-  document.getElementById('slideCaption').textContent=photos[i].name||'我們的留影';
-  if(manual && slideTimer){
-    clearInterval(slideTimer);
-    slideTimer=setInterval(()=>showSlide((slideIndex+1)%photos.length, false), CONFIG.PHOTO_INTERVAL);
-  }
-}
-
-function renderVideos(id, list, label){
-  const grid=document.getElementById(id);
-  grid.innerHTML='';
-  if(!list || !list.length){
-    grid.innerHTML='<div class="empty">尚未放入'+label+'資料。</div>';
-    return;
-  }
-
-  list.forEach(v=>{
-    const card=document.createElement('article');
-    card.className='vcard';
-
-    if(v.kind === 'audio'){
-      card.innerHTML =
-        '<audio controls preload="metadata" style="width:100%;margin-top:8px" src="'+escAttr(v.streamUrl)+'"></audio>' +
-        '<h3>'+esc(v.name||label)+'</h3><p class="name">'+esc(v.mimeType||'')+'</p>';
-      grid.appendChild(card);
-      return;
-    }
-
-    // 不再使用 Google Drive iframe preview，避免被 Drive / 瀏覽器預覽層遮住。
-    // 改用原生 video controls，poster 用 Drive 縮圖；若讀不到，可用下方按鈕另開 Drive。
-    card.innerHTML =
-      '<video class="native-video" controls playsinline preload="none" poster="'+escAttr(v.thumbnailUrl || '')+'">' +
-        '<source src="'+escAttr(v.streamUrl || '')+'" type="'+escAttr(v.mimeType || 'video/mp4')+'">' +
-      '</video>' +
-      '<h3>'+esc(v.name||label)+'</h3>' +
-      '<p class="name">'+esc(v.mimeType||'')+'</p>' +
-      '<div class="video-actions">' +
-        '<a href="'+escAttr(v.webViewUrl || v.previewUrl || v.streamUrl || '#')+'" target="_blank" rel="noopener">另開 Drive 觀看</a>' +
-        '<a href="'+escAttr(v.streamUrl || '#')+'" target="_blank" rel="noopener">直接開影片檔</a>' +
-      '</div>';
-
-    const video = card.querySelector('video');
-    video.addEventListener('play', function(){
-      // 播影片時暫停主題曲，避免兩個聲音疊在一起。
-      const bgm = document.getElementById('themeAudio');
-      if(bgm && !bgm.paused) bgm.pause();
-    });
-
-    video.addEventListener('error', function(){
-      const note = card.querySelector('.name');
-      if(note){
-        note.textContent = (v.mimeType || '') + '｜若網頁內無法播放，請用「另開 Drive 觀看」。';
+    for(let i = lastLyricIndex + 1; i < LYRIC_LINES.length; i++){
+      const line = LYRIC_LINES[i];
+      if(now >= line.time){
+        spawnLyricDanmaku(line.text);
+        lastLyricIndex = i;
+      }else{
+        break;
       }
-    });
+    }
+  });
 
-    grid.appendChild(card);
+  audio.addEventListener('ended', function(){
+    lastLyricIndex = -1;
+    lastAudioTime = 0;
   });
 }
 
-function renderComments(list){
-  const box=document.getElementById('commentList');
-  box.innerHTML='';
-  if(!list || !list.length){
-    box.innerHTML='<div class="empty">還沒有留言。你可以留下第一句想念。</div>';
-    return;
-  }
-  list.forEach(c=>{
-    const div=document.createElement('div');
-    div.className='comment';
-    div.innerHTML='<b>'+esc(c.name||'匿名')+'</b><p>'+esc(c.message||'')+'</p>';
-    box.appendChild(div);
-  });
+function spawnLyricDanmaku(text){
+  const layer = document.getElementById('lyricDanmakuLayer');
+  if(!layer || !text) return;
+
+  const el = document.createElement('div');
+  el.className = 'lyric-danmaku' + (Math.random() > .55 ? ' soft' : '');
+  el.textContent = text;
+
+  const topMin = 8;
+  const topMax = 70;
+  const top = topMin + Math.random() * (topMax - topMin);
+
+  el.style.top = top + 'svh';
+  el.style.setProperty('--flyDur', (9 + Math.random() * 4).toFixed(1) + 's');
+
+  layer.appendChild(el);
+  setTimeout(function(){
+    if(el.parentNode) el.parentNode.removeChild(el);
+  }, 14000);
 }
 
-function enterMemorial(){
-  wantsMusicPlay = true;
-  document.body.classList.add('entered');
-  startThemeMusic();
+function toggleLyrics(){
+  lyricsEnabled = !lyricsEnabled;
+  const btn = event && event.target ? event.target : null;
+  if(btn) btn.textContent = '彈幕歌詞：' + (lyricsEnabled ? '開' : '關');
+  const status = document.getElementById('lyricStatus');
+  if(status) status.textContent = lyricsEnabled ? '彈幕歌詞已開啟。' : '彈幕歌詞已關閉。';
 }
 
-function startThemeMusic(){
-  const audio=document.getElementById('themeAudio');
-  if(audio) audio.loop = true;
-
-  if(!audio || !audio.src){
-    toast('音樂還在載入，稍等一下會自動嘗試播放');
-    return;
-  }
-
-  const p = audio.play();
-
-  if(p && typeof p.then === 'function'){
-    p.then(()=>{
-      audio.dataset.locked = '1';
-    }).catch(()=>{
-      toast('手機瀏覽器擋了自動播放，請按下方播放鍵');
-    });
-  }else{
-    audio.dataset.locked = '1';
-  }
+function testLyricDanmaku(){
+  spawnLyricDanmaku('主題曲：給安格 Dear ANG');
+  setTimeout(function(){ spawnLyricDanmaku('原來這個世界沒有如果'); }, 650);
+  setTimeout(function(){ spawnLyricDanmaku('我永遠是你弟弟，你永遠是我哥'); }, 1300);
 }
 
-function scrollToId(id){
-  document.getElementById(id)?.scrollIntoView({behavior:'smooth',block:'start'});
-}
-
-function sendComment(){
-  const name=document.getElementById('commentName').value.trim() || '匿名';
-  const message=document.getElementById('commentText').value.trim();
-  if(!message) return toast('請先輸入留言', true);
-  api({action:'addComment',name,message}).then(res=>{
-    if(!res.ok) throw new Error(res.error||'留言失敗');
-    document.getElementById('commentText').value='';
-    renderComments(res.comments||[]);
-    toast('留言已留下');
-  }).catch(e=>toast(e.message||'留言失敗',true));
-}
-
-function submitContribution(){
-  const file=document.getElementById('subFile').files[0];
-  if(!file) return toast('請先選擇檔案', true);
-
-  if(file.size > 35*1024*1024){
-    return toast('檔案請小於 35MB', true);
-  }
-
-  const reader=new FileReader();
-  document.getElementById('uploadHint').textContent='正在準備投稿，請不要關閉頁面…';
-
-  reader.onload=()=>{
-    const base64=String(reader.result).split(',')[1]||'';
-    const body=new URLSearchParams();
-    body.set('action','submitContribution');
-    body.set('name',document.getElementById('subName').value.trim()||'匿名');
-    body.set('contact',document.getElementById('subContact').value.trim());
-    body.set('relation',document.getElementById('subRelation').value.trim());
-    body.set('category',document.getElementById('subCategory').value);
-    body.set('caption',document.getElementById('subCaption').value.trim());
-    body.set('filename',file.name);
-    body.set('mimeType',file.type||'application/octet-stream');
-    body.set('base64',base64);
-
-    fetch(CONFIG.GAS_API_URL,{
-      method:'POST',
-      mode:'no-cors',
-      headers:{'Content-Type':'application/x-www-form-urlencoded'},
-      body:body
-    }).then(()=>{
-      document.getElementById('uploadHint').textContent='投稿已送出。系統會寄信通知管理者，之後會整理成專區。';
-      document.getElementById('subFile').value='';
-      toast('投稿已送出');
-    }).catch(()=>{
-      document.getElementById('uploadHint').textContent='投稿可能已送出；如果不確定，請稍後再確認。';
-      toast('投稿送出中，請稍後確認');
-    });
-  };
-
-  reader.onerror=()=>toast('讀取檔案失敗',true);
-  reader.readAsDataURL(file);
-}
-
-function toast(msg,bad){
-  const t=document.getElementById('toast');
-  t.textContent=msg;
-  t.style.background=bad?'#9b2f2f':'#5b3f2f';
-  t.classList.add('show');
-  clearTimeout(window.__toast);
-  window.__toast=setTimeout(()=>t.classList.remove('show'),2600);
-}
-
-function esc(s){
-  return String(s||'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
-}
-function escAttr(s){
-  return esc(s).replace(/`/g,'&#096;');
-}
-</script>
-</body>
-</html>
+function sendComment(){let name=document.getElementById('commentName').value||'匿名',message=document.getElementById('commentText').value;if(!message)return toast('請輸入留言',1);api({action:'addComment',name,message}).then(r=>{comments(r.comments||[]);document.getElementById('commentText').value='';toast('留言已留下')}).catch(e=>toast(e.message,1))}function submitFile(){let f=document.getElementById('subFile').files[0];if(!f)return toast('請選擇檔案',1);if(f.size>35*1024*1024)return toast('檔案請小於 35MB',1);let r=new FileReader();document.getElementById('uploadHint').textContent='投稿上傳中…';r.onload=()=>{let b=new URLSearchParams();b.set('action','submitContribution');['subName','subContact','subRelation','subCategory','subCaption'].forEach(id=>b.set(id.replace('sub','').toLowerCase(),document.getElementById(id).value));b.set('name',document.getElementById('subName').value||'匿名');b.set('contact',document.getElementById('subContact').value);b.set('relation',document.getElementById('subRelation').value);b.set('category',document.getElementById('subCategory').value);b.set('caption',document.getElementById('subCaption').value);b.set('filename',f.name);b.set('mimeType',f.type||'application/octet-stream');b.set('base64',String(r.result).split(',')[1]||'');fetch(CONFIG.GAS_API_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:b}).then(()=>{toast('投稿已送出');document.getElementById('uploadHint').textContent='投稿已送出，系統會寄信通知管理者。'})};r.readAsDataURL(f)}function fresh(){let u=new URL(location.href);u.searchParams.set('v',Date.now());location.replace(u)}function ver(u){return u+(u.includes('?')?'&':'?')+'v='+CONFIG.APP_VERSION}function toast(m,b){let t=document.getElementById('toast');t.textContent=m;t.style.background=b?'#9b2f2f':'#5b3f2f';t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2600)}function esc(s){return String(s||'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}function e(s){return esc(s).replace(/`/g,'&#096;')}function js(s){return String(s||'').replace(/\/g,'\\').replace(/'/g,"\'")}
+</script></body></html>
