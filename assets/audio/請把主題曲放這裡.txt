@@ -1,0 +1,5 @@
+請把 MP3 主題曲放在這個資料夾，檔名固定：dear-ang-theme.mp3
+
+路徑應該是：assets/audio/dear-ang-theme.mp3
+
+網頁會優先播放這個 GitHub MP3；如果沒有或讀不到，才會改用 Google Drive 的 00_主題曲備用檔。
