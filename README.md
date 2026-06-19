@@ -1,21 +1,25 @@
-# Dear ANG｜Memory Navigation 修正版
+# 有你的時光｜Memory World 完整版
 
-本版保留原檔並修正：
+這包是完整可上線版，不是只有入口。
 
-1. 九宮格上下左右相反：已反向排列 09 → 01。
-2. 長眠地天氣同步：下雨網頁跟著下雨，陰天跟著陰天，暴雨/暴風雨/天冷/天熱/天黑/天晴依即時天氣切換。
-3. 歌詞再快 2 秒：LYRIC_OFFSET_SECONDS 從 -5 改成 -7。
+## 內容
+- `index.html`：完整網站主檔
+- `assets/images/memory-world.png`：主街景世界圖，已放進包內，不會破圖
+- `assets/images/*.jpeg`：各回憶地點照片，已放進包內，不會破圖
 
-## 覆蓋檔案
+## 已移除
+- 影片開場已移除
+- 沒有 placeholder 圖片網址
+- 沒有 `/mnt/data/...` 本機路徑
 
-直接把整包上傳 GitHub Pages 覆蓋：
+## 已接功能
+- 華光相館：有你的時光 / 照片
+- 新時代影音館：影片
+- 富宜路86號：他家 / 主記憶
+- 金嗓卡拉OK：他唱的歌
+- 美而美早餐店：一起吃過的東西
+- 公路局：地圖、街景、導航到第六棵樹、長眠地天氣
 
-- index.html
-- Code.gs
-- README.md
-- assets/media/memory-route.mp4
-- assets/images/weather-scenes.png
+## 上線方式
+整包解壓後，把裡面的 `index.html` 和 `assets` 資料夾一起丟到 GitHub Pages 根目錄。
 
-## 注意
-
-Code.gs 保留你上傳的原檔內容。若要讓照片留言功能可用，GAS 需要部署到最新版。
