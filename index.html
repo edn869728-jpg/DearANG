@@ -333,12 +333,13 @@ function toggleLyrics(){
   if(!lyricsEnabled){clearLyricLayer();toast('歌詞彈幕已關閉');}
   else{lastLyricIndex=-1;toast('歌詞彈幕已開啟');}
 }
-function testLyricDanmaku(){spawnLyric('想見你. 想見你.. 想見你… 了….');}
+function testLyricDanmaku(){spawnLyric('想見你.    想見你..    想見你… 了….');}
 
 const CONFIG={LOCAL_THEME:'assets/audio/dear-ang-theme.mp3',
   APP_VERSION:'20260619_memory_world_drive_fixed_v6_nested_lyrics7',
   GAS_API_URL:'https://script.google.com/macros/s/AKfycbzrduB_eXPk6OpqnGPXjNBNQCeUyarzAfki4IL-X_JIVQr7RS9sN5ayyvA2OEaXDXzv/exec',
   GITHUB_THEME_AUDIO:''
+              
 };
 const PLACE_POINTS=[
   {id:1,title:'等你出來的小門',lat:24.1670447,lng:120.6550652},
