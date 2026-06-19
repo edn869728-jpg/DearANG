@@ -145,7 +145,7 @@ a{color:inherit}
 <div class="toast" id="toast">完成</div>
 
 <script>
-const CONFIG={
+const CONFIG={LOCAL_THEME:'assets/audio/dear-ang-theme.mp3',
   APP_VERSION:'20260619_memory_world_drive_fixed_v2',
   GAS_API_URL:'https://script.google.com/macros/s/AKfycbzrduB_eXPk6OpqnGPXjNBNQCeUyarzAfki4IL-X_JIVQr7RS9sN5ayyvA2OEaXDXzv/exec',
   GITHUB_THEME_AUDIO:''
@@ -203,12 +203,15 @@ function startTheme(){
   if(!a.src){
     if(DATA.theme&&DATA.theme.streamUrl){
       a.src=DATA.theme.streamUrl;
+    }else if(CONFIG.LOCAL_THEME){
+      a.src=CONFIG.LOCAL_THEME;
     }else if(CONFIG.GITHUB_THEME_AUDIO){
       a.src=CONFIG.GITHUB_THEME_AUDIO+'?v='+CONFIG.APP_VERSION;
     }
   }
   if(musicWanted){
-    if(!a.src){toast('主題曲請放在 Google Drive，並讓 GAS 回傳 theme');return;}
+    if(!a.src){a.src=CONFIG.LOCAL_THEME;}
+    if(!a.src){toast('主題曲路徑不存在');return;}
     a.play().catch(()=>toast('手機瀏覽器擋住音樂，請再按一次 ♫'));
   }
 }
