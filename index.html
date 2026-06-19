@@ -289,7 +289,7 @@ let LYRIC_LINES = [
   { time: 223.57, end: 257.35, text: "我走了" },
   { time: 257.45, end: 263.45, text: "兄弟.." }
 ];
-const LYRIC_OFFSET_SECONDS = -7; // 歌詞固定提前 7 秒
+const LYRIC_OFFSET_SECONDS = -13; // 歌詞固定提前 13 秒
 function setupLyricDanmaku(){
   const audio=document.getElementById('themeAudio');
   if(!audio || audio.dataset.lyricBound==='1')return;
@@ -336,7 +336,7 @@ function toggleLyrics(){
 function testLyricDanmaku(){spawnLyric('想見你. 想見你.. 想見你… 了….');}
 
 const CONFIG={LOCAL_THEME:'assets/audio/dear-ang-theme.mp3',
-  APP_VERSION:'20260619_memory_world_drive_fixed_v6_nested_lyrics7',
+  APP_VERSION:'20260619_memory_world_v9_github_theme',
   GAS_API_URL:'https://script.google.com/macros/s/AKfycbzrduB_eXPk6OpqnGPXjNBNQCeUyarzAfki4IL-X_JIVQr7RS9sN5ayyvA2OEaXDXzv/exec',
   GITHUB_THEME_AUDIO:''
 };
@@ -494,17 +494,19 @@ function closeLightbox(){document.getElementById('lightbox').classList.remove('s
 function startTheme(){
   const a=document.getElementById('themeAudio');
   setupLyricDanmaku();
+  // 主題曲固定優先使用 GitHub Pages 本機檔：assets/audio/dear-ang-theme.mp3
+  // Google Drive 的 00_主題曲只當備份，不再優先蓋掉 GitHub 音樂。
   if(!a.src){
-    if(DATA.theme&&DATA.theme.streamUrl){
-      a.src=DATA.theme.streamUrl;
-    }else if(CONFIG.LOCAL_THEME){
-      a.src=CONFIG.LOCAL_THEME;
+    if(CONFIG.LOCAL_THEME){
+      a.src=CONFIG.LOCAL_THEME+'?v='+CONFIG.APP_VERSION;
     }else if(CONFIG.GITHUB_THEME_AUDIO){
       a.src=CONFIG.GITHUB_THEME_AUDIO+'?v='+CONFIG.APP_VERSION;
+    }else if(DATA.theme&&DATA.theme.streamUrl){
+      a.src=DATA.theme.streamUrl;
     }
   }
   if(musicWanted){
-    if(!a.src){a.src=CONFIG.LOCAL_THEME;}
+    if(!a.src && CONFIG.LOCAL_THEME){a.src=CONFIG.LOCAL_THEME+'?v='+CONFIG.APP_VERSION;}
     if(!a.src){toast('主題曲路徑不存在');return;}
     a.play().catch(()=>toast('手機瀏覽器擋住音樂，請再按一次 ♫'));
   }
