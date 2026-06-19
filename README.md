@@ -1,26 +1,29 @@
-# Dear ANG v6｜下一層資料夾 + 歌詞提前 7 秒
+# Dear ANG v8：已寫入 Drive 主資料夾 ID
 
-這版修正兩件事：
+這版修正：
 
-1. Google Drive 的 `00`～`07` 主資料夾底下，可以再分子資料夾。
-   網站會遞迴讀取下一層與更深層，並在頁面中依子資料夾分區顯示。
+- Google Drive 主資料夾 ID 已寫死：`1n-QRIullfAUIYCyJVwf0--KvjGG-8kQJ`
+- 01～07 底下的子資料夾會遞迴讀取
+- 子資料夾名稱不用固定 ABC，照你在 Drive 裡取的名稱顯示
+- 歌詞仍讀根目錄：`./給安格.lrc`、`./給安格.srt`、`./lyrics_embedded.js.txt`
+- 歌詞彈幕固定提前 7 秒：`LYRIC_OFFSET_SECONDS = -7`
 
-2. 歌詞彈幕固定提前 7 秒：
+## 上傳/更新方式
 
-```js
-const LYRIC_OFFSET_SECONDS = -7;
+1. GitHub Pages：上傳 `index.html`。
+2. Apps Script：打開 `Code_gs_子資料夾遞迴_已寫入DriveID.gs`，整段貼到 Code.gs 最底部。
+3. Apps Script 按儲存。
+4. 重新部署 Web App：部署 → 管理部署作業 → 編輯 → 新版本 → 部署。
+
+不要改 Drive 資料夾名稱也沒關係，但最外層建議保持：
+
+```text
+00_主題曲
+01_有你的時光
+02_影音館
+03_他的家
+04_金嗓卡拉OK
+05_美而美早餐店
+06_通往他的路
+07_好友投稿
 ```
-
-歌詞檔仍照你原本 GitHub 根目錄，不改名、不搬家：
-
-- `./給安格.lrc`
-- `./給安格.srt`
-- `./lyrics_embedded.js.txt`
-
-主題曲備用路徑維持：
-
-- `assets/audio/dear-ang-theme.mp3`
-
-照片、影片、他唱的歌、好友投稿仍全部走 Google Drive / GAS，不需要搬到 GitHub。
-
-注意：如果 GAS 後端目前只回傳第一層資料夾，前端已支援遞迴，但 GAS 也要回傳子資料夾資料才會顯示更深層內容。
