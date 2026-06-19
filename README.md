@@ -1,25 +1,30 @@
-# 有你的時光｜Memory World 完整版
+# Dear ANG｜街景入口 Drive 修正版
 
-這包是完整可上線版，不是只有入口。
+這版重點：
+- GitHub Pages 只放入口 UI、街景主圖、CSS/JS。
+- 照片、影片、歌曲、食物照片都從 Google Drive + GAS 讀取，不要搬到 GitHub。
+- 已加入 `<base href="/DearANG/">`，避免 `https://edn869728-jpg.github.io/DearANG` 少斜線時資源路徑跑掉。
+- 已移除我之前亂補的故事文字，只保留分類入口與資料夾提示。
 
-## 內容
-- `index.html`：完整網站主檔
-- `assets/images/memory-world.png`：主街景世界圖，已放進包內，不會破圖
-- `assets/images/*.jpeg`：各回憶地點照片，已放進包內，不會破圖
+## GitHub Pages 上傳
+把本 ZIP 解壓後，將這些放到 DearANG repo 根目錄：
 
-## 已移除
-- 影片開場已移除
-- 沒有 placeholder 圖片網址
-- 沒有 `/mnt/data/...` 本機路徑
+- index.html
+- assets/images/memory-world.png
+- assets/images/sixth_tree.jpeg
+- 其他 assets/images 內圖片
 
-## 已接功能
-- 華光相館：有你的時光 / 照片
-- 新時代影音館：影片
-- 富宜路86號：他家 / 主記憶
-- 金嗓卡拉OK：他唱的歌
-- 美而美早餐店：一起吃過的東西
-- 公路局：地圖、街景、導航到第六棵樹、長眠地天氣
+不要只上傳 index.html，assets 資料夾也要一起上傳。
 
-## 上線方式
-整包解壓後，把裡面的 `index.html` 和 `assets` 資料夾一起丟到 GitHub Pages 根目錄。
+## Google Drive 資料夾對應
 
+- 01_有你的時光 → 華光相館／一般照片
+- 02_影音館 → 新時代影音館／影片
+- 03_他的家 → 中間公寓／他個人的照片
+- 04_金嗓卡拉OK → 他唱的歌、音檔、唱歌影片
+- 05_美而美早餐店 → 一起吃過的、他喜歡吃的、他推薦吃的
+- 06_通往他的路 → 公路局／導航、街景、第六棵樹相關照片
+
+## 注意
+若畫面破圖，通常是 GitHub 上沒有一起上傳 assets/images/。
+若照片沒有出現，通常是 Google Drive 資料夾名稱沒有對到，或 GAS getMemorialData 沒有回傳 photoGroups / memories / songs。
