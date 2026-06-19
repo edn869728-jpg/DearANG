@@ -1,20 +1,28 @@
-# Dear ANG v16｜KTV 舞台強制顯示版
+# Dear ANG v17｜照片區手機滿版輪轉卡片
 
-這版修正「上傳後看起來沒有變」：
+這版修正照片區太窄的問題。
 
-- `assets/images/ktv-stage.png` 已換成你剛給的電視＋麥克風＋音響櫃圖。
-- `index.html` 已改成金嗓卡拉OK上方一定顯示這張舞台圖。
-- 圖片 URL 加上 `?v=20260620-v16-stage`，避免 GitHub Pages / 瀏覽器吃舊快取。
+## 已修正
 
-## 上傳 GitHub 時一定要覆蓋
+- 主頁街景維持橫滑。
+- 其他內頁維持直向滑動。
+- 照片區不再被舊的三欄 grid 壓窄。
+- 華光相館「01_有你的時光」會用滿版輪轉相簿卡片。
+- 中間公寓「03_他的家」也會用滿版輪轉相簿卡片。
+- 每個 Google Drive 子資料夾是一張相簿卡片。
+- 左右滑卡片；往上滑 / 按打開相簿展開照片。
+- 點照片放大；放大後可左右換張。
+- KTV 舞台圖與遙控器保留。
+- 歌詞維持提前 20 秒。
 
-- `index.html`
-- `assets/images/ktv-stage.png`
+## GitHub 要覆蓋
 
-其他：
-- `assets/images/ktv-remote.png` 保留。
-- `assets/images/memory-world.png` 保留。
-- `assets/images/sixth_tree.jpeg` 保留。
+- index.html
+- assets/images/ktv-stage.png
+- assets/images/ktv-remote.png
+- assets/images/memory-world.png
+- assets/images/sixth_tree.jpeg
 
-如果上傳後還看到舊畫面，請用無痕模式開：
-`https://edn869728-jpg.github.io/DearANG/?v=16`
+上傳後建議用：
+
+https://edn869728-jpg.github.io/DearANG/?v=17
