@@ -43,6 +43,9 @@ a{color:inherit}
 /* ===== Modal pages ===== */
 .page{position:fixed;inset:0;z-index:20;display:none;background:linear-gradient(180deg,#15110f,#050506);overflow:auto;-webkit-overflow-scrolling:touch;color:var(--ink)}.page.show{display:block}.page-head{position:sticky;top:0;z-index:5;padding:calc(10px + env(safe-area-inset-top)) 14px 10px;background:linear-gradient(180deg,rgba(0,0,0,.86),rgba(0,0,0,.46));backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,.08);display:flex;align-items:center;justify-content:space-between;gap:10px}.back{background:rgba(255,255,255,.11);border:1px solid var(--line);box-shadow:none}.page-body{max-width:980px;margin:auto;padding:14px 14px 70px}.hero-card{position:relative;border-radius:28px;overflow:hidden;min-height:310px;background:#171717;border:1px solid rgba(255,255,255,.12);box-shadow:var(--shadow);margin-bottom:14px}.hero-card img{width:100%;height:100%;min-height:310px;object-fit:cover;display:block}.hero-card:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.05),rgba(0,0,0,.70))}.hero-text{position:absolute;left:18px;right:18px;bottom:18px;z-index:2;text-shadow:0 3px 20px rgba(0,0,0,.55)}.hero-text h1{font-size:clamp(30px,8vw,56px);margin:0 0 8px;line-height:1.15}.hero-text p{margin:0;color:rgba(255,255,255,.82);font-weight:900;line-height:1.7}.section{border:1px solid rgba(255,255,255,.12);background:rgba(255,248,239,.07);border-radius:24px;padding:16px;margin:14px 0;backdrop-filter:blur(12px)}.section h2{margin:0 0 8px;font-size:23px}.story{white-space:pre-line;color:rgba(255,255,255,.84);line-height:2;font-size:15px}.toolbar{display:flex;gap:9px;flex-wrap:wrap;margin-top:12px}.pill{display:inline-flex;align-items:center;gap:7px;border-radius:999px;padding:9px 12px;text-decoration:none;font-weight:1000;background:linear-gradient(135deg,var(--gold),#b98034);color:#fff}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}.photo{border-radius:12px;overflow:hidden;background:#222;position:relative;border:1px solid rgba(255,255,255,.09);cursor:pointer}.photo img{width:100%;aspect-ratio:1;object-fit:cover;display:block}.photo b{position:absolute;left:0;right:0;bottom:0;padding:18px 7px 6px;background:linear-gradient(180deg,transparent,rgba(0,0,0,.66));font-size:11px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.video-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,220px),1fr));gap:10px}.vcard{border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.07);border-radius:18px;padding:9px}.vcard video{width:100%;aspect-ratio:16/9;object-fit:contain;background:#000;border-radius:12px}.vcard audio{width:100%}.vcard h3{font-size:14px;line-height:1.45;margin:8px 3px 3px}.vcard a{display:inline-flex;margin:6px 5px 0 0;text-decoration:none;border-radius:999px;padding:7px 9px;font-size:12px;font-weight:900;color:#fff;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.12)}.empty{padding:20px;border:1px dashed rgba(255,255,255,.2);border-radius:18px;color:rgba(255,255,255,.6);text-align:center;line-height:1.7}.food-list{display:grid;gap:10px}.food-item{border:1px solid rgba(255,255,255,.12);border-radius:18px;background:rgba(255,255,255,.07);padding:13px}.food-item b{display:block;margin-bottom:4px;color:#ffd89a}.map-list{display:grid;gap:10px}.map-row{border:1px solid rgba(255,255,255,.12);border-radius:18px;background:rgba(255,255,255,.07);padding:13px;display:grid;gap:8px}.map-row b{color:#ffd89a}.weather-box{display:grid;grid-template-columns:1fr;gap:10px}.weather-card{border:1px solid rgba(255,255,255,.12);border-radius:20px;background:rgba(0,0,0,.30);padding:14px;font-weight:1000;line-height:1.7}.rain-layer{position:absolute;inset:0;pointer-events:none;opacity:0}.page[data-weather*="雨"] .rain-layer{opacity:.75;background:repeating-linear-gradient(110deg,rgba(255,255,255,0) 0 8px,rgba(255,255,255,.28) 9px 10px,rgba(255,255,255,0) 11px 18px);animation:rain .42s linear infinite}@keyframes rain{from{background-position:0 0}to{background-position:-80px 160px}}
 
+
+.folder-block{border:1px solid rgba(255,255,255,.10);background:rgba(255,255,255,.045);border-radius:20px;padding:12px;margin:12px 0}.folder-block h3{margin:0 0 10px;font-size:17px;line-height:1.45;color:#ffd89a;display:flex;align-items:center;justify-content:space-between;gap:10px}.folder-block h3 small{font-size:12px;color:rgba(255,255,255,.58);font-weight:900}.folder-path{font-size:12px;color:rgba(255,255,255,.55);line-height:1.6;margin:-4px 0 10px;word-break:break-all}.subfolder-note{font-size:13px;color:rgba(255,255,255,.64);line-height:1.8;margin-top:8px}
+
 /* Lightbox */
 .lightbox{position:fixed;inset:0;z-index:60;background:rgba(0,0,0,.90);display:none;align-items:center;justify-content:center;padding:14px}.lightbox.show{display:flex}.lightbox img{max-width:100%;max-height:84svh;object-fit:contain;border-radius:18px}.lb-close{position:absolute;top:calc(14px + env(safe-area-inset-top));right:14px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.2);box-shadow:none}
 .toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom));z-index:70;transform:translateX(-50%) translateY(16px);opacity:0;background:#5b3f2f;color:white;border-radius:999px;padding:11px 16px;font-weight:1000;transition:.2s}.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
@@ -97,7 +100,7 @@ a{color:inherit}
   <div class="page-head"><button class="back" onclick="closePage()">← 回到街上</button><b>華光相館｜有你的時光</b></div>
   <div class="page-body">
     <div class="hero-card"><img src="assets/images/memory-world.png" alt="華光相館"><div class="hero-text"><h1>有你的時光</h1><p>資料從 Google Drive 讀取。請把一般照片放在「01_有你的時光」。</p></div></div>
-    <div class="section folder-hint"><h2>Google Drive 資料夾</h2><div class="story">01_有你的時光</div></div>
+    <div class="section folder-hint"><h2>Google Drive 資料夾</h2><div class="story">01_有你的時光<br>底下可以再分子資料夾，網站會讀下一層與更深層。</div></div>
     <div class="section"><h2>照片</h2><div id="photoGrid" class="grid"><div class="empty">照片載入中…</div></div></div>
   </div>
 </section>
@@ -106,7 +109,7 @@ a{color:inherit}
   <div class="page-head"><button class="back" onclick="closePage()">← 回到街上</button><b>新時代影音館｜影片</b></div>
   <div class="page-body">
     <div class="hero-card"><img src="assets/images/memory-world.png" alt="新時代影音館"><div class="hero-text"><h1>影音館</h1><p>資料從 Google Drive 讀取。請把影片放在「02_影音館」。</p></div></div>
-    <div class="section folder-hint"><h2>Google Drive 資料夾</h2><div class="story">02_影音館</div></div>
+    <div class="section folder-hint"><h2>Google Drive 資料夾</h2><div class="story">02_影音館<br>底下可以再分子資料夾，網站會讀下一層與更深層。</div></div>
     <div class="section"><h2>影片</h2><div class="video-grid" id="videoGrid"><div class="empty">影片載入中…</div></div></div>
   </div>
 </section>
@@ -115,7 +118,7 @@ a{color:inherit}
   <div class="page-head"><button class="back" onclick="closePage()">← 回到街上</button><b>中間公寓｜他家</b></div>
   <div class="page-body">
     <div class="hero-card"><img src="assets/images/memory-world.png" alt="中間公寓"><div class="hero-text"><h1>他家</h1><p>這裡只放他個人的照片。內容由你自己分類，不自動補故事。</p></div></div>
-    <div class="section folder-hint"><h2>Google Drive 資料夾</h2><div class="story">03_他的家</div></div>
+    <div class="section folder-hint"><h2>Google Drive 資料夾</h2><div class="story">03_他的家<br>底下可以再分子資料夾，網站會讀下一層與更深層。</div></div>
     <div class="section"><h2>他個人的照片</h2><div id="homePhotoGrid" class="grid"><div class="empty">載入中…</div></div></div>
   </div>
 </section>
@@ -124,7 +127,7 @@ a{color:inherit}
   <div class="page-head"><button class="back" onclick="closePage()">← 回到街上</button><b>金嗓卡拉OK｜他唱的歌</b></div>
   <div class="page-body">
     <div class="hero-card"><img src="assets/images/memory-world.png" alt="金嗓卡拉OK"><div class="hero-text"><h1>他唱的歌</h1><p>資料從 Google Drive 讀取。請把音檔或唱歌影片放在「04_金嗓卡拉OK」。</p></div></div>
-    <div class="section folder-hint"><h2>Google Drive 資料夾</h2><div class="story">04_金嗓卡拉OK</div></div>
+    <div class="section folder-hint"><h2>Google Drive 資料夾</h2><div class="story">04_金嗓卡拉OK<br>底下可以再分子資料夾，網站會讀下一層與更深層。</div></div>
     <div class="section"><h2>歌曲</h2><div class="video-grid" id="songGrid"><div class="empty">歌曲載入中…</div></div></div>
   </div>
 </section>
@@ -133,7 +136,7 @@ a{color:inherit}
   <div class="page-head"><button class="back" onclick="closePage()">← 回到街上</button><b>美而美早餐店｜食物記憶</b></div>
   <div class="page-body">
     <div class="hero-card"><img src="assets/images/memory-world.png" alt="美而美早餐店"><div class="hero-text"><h1>食物記憶</h1><p>一起吃過的、他喜歡吃的、他推薦你吃的，都由 Google Drive 分類讀取。</p></div></div>
-    <div class="section folder-hint"><h2>Google Drive 資料夾</h2><div class="story">05_美而美早餐店</div></div>
+    <div class="section folder-hint"><h2>Google Drive 資料夾</h2><div class="story">05_美而美早餐店<br>底下可以再分子資料夾，網站會讀下一層與更深層。</div></div>
     <div class="section"><h2>照片</h2><div id="foodPhotoGrid" class="grid"><div class="empty">食物照片載入中…</div></div></div>
   </div>
 </section>
@@ -144,7 +147,7 @@ a{color:inherit}
     <div class="hero-card"><img src="assets/images/sixth_tree.jpeg" alt="第六棵樹"><div class="rain-layer"></div><div class="hero-text"><h1>通往他的路</h1><p>Google Maps 導航、街景、第六棵樹天氣。</p></div></div>
     <div class="section weather-box"><h2>第六棵樹天氣</h2><div class="weather-card" id="weatherLabel">讀取長眠地天氣中…</div></div>
     <div class="section"><h2>導航</h2><div class="map-list" id="mapList"></div></div>
-    <div class="section folder-hint"><h2>Google Drive 資料夾</h2><div class="story">06_通往他的路</div></div>
+    <div class="section folder-hint"><h2>Google Drive 資料夾</h2><div class="story">06_通往他的路<br>底下可以再分子資料夾，網站會讀下一層與更深層。</div></div>
     <div class="section"><h2>通往他的路</h2><div id="roadPhotoGrid" class="grid"><div class="empty">導航相關照片載入中…</div></div></div>
   </div>
 </section>
@@ -156,7 +159,74 @@ a{color:inherit}
 let lyricsEnabled=true;
 let lastLyricIndex=-1;
 let lastAudioTime=0;
-const LYRIC_LINES = [
+const ROOT_LYRIC_FILES={
+  lrc:'./給安格.lrc',
+  srt:'./給安格.srt',
+  embedded:'./lyrics_embedded.js.txt'
+};
+function parseTimeToSeconds(s){
+  if(!s)return 0;
+  s=String(s).trim();
+  const p=s.split(':').map(x=>x.replace(',','.'));
+  if(p.length===2)return Number(p[0])*60+Number(p[1]);
+  if(p.length===3)return Number(p[0])*3600+Number(p[1])*60+Number(p[2]);
+  return Number(s)||0;
+}
+function parseLrc(text){
+  const rows=[];
+  String(text||'').split(/\r?\n/).forEach(line=>{
+    const tags=[...line.matchAll(/\[(\d{1,2}:\d{2}(?:[\.:]\d{1,3})?)\]/g)].map(m=>m[1]);
+    const words=line.replace(/\[[^\]]+\]/g,'').trim();
+    if(!tags.length||!words)return;
+    tags.forEach(t=>rows.push({time:parseTimeToSeconds(t),text:words}));
+  });
+  rows.sort((a,b)=>a.time-b.time);
+  return rows.map((r,i)=>({time:r.time,end:rows[i+1]?Math.max(rows[i+1].time-.05,r.time+1):r.time+6,text:r.text}));
+}
+function parseSrt(text){
+  const rows=[];
+  const blocks=String(text||'').replace(/\r/g,'').split(/\n\s*\n/);
+  blocks.forEach(block=>{
+    const lines=block.split('\n').filter(Boolean);
+    const timeLine=lines.find(x=>x.includes('-->'));
+    if(!timeLine)return;
+    const parts=timeLine.split('-->').map(x=>x.trim());
+    const textLines=lines.slice(lines.indexOf(timeLine)+1).map(x=>x.trim()).filter(Boolean);
+    const words=textLines.join(' / ').trim();
+    if(!words)return;
+    rows.push({time:parseTimeToSeconds(parts[0]),end:parseTimeToSeconds(parts[1]),text:words});
+  });
+  return rows;
+}
+async function fetchTextFile(url){
+  const r=await fetch(url+(url.includes('?')?'&':'?')+'_=' + Date.now(),{cache:'no-store'});
+  if(!r.ok)throw new Error(url+' 讀取失敗');
+  return await r.text();
+}
+async function loadLyricsFromRootFiles(){
+  // 你的歌詞檔就在 DearANG 根目錄，不搬家、不改名：給安格.lrc / 給安格.srt / lyrics_embedded.js.txt
+  try{
+    const lrc=await fetchTextFile(ROOT_LYRIC_FILES.lrc);
+    const parsed=parseLrc(lrc);
+    if(parsed.length){LYRIC_LINES=parsed;return '給安格.lrc';}
+  }catch(e){}
+  try{
+    const srt=await fetchTextFile(ROOT_LYRIC_FILES.srt);
+    const parsed=parseSrt(srt);
+    if(parsed.length){LYRIC_LINES=parsed;return '給安格.srt';}
+  }catch(e){}
+  try{
+    const txt=await fetchTextFile(ROOT_LYRIC_FILES.embedded);
+    const m=txt.match(/LYRIC_LINES\s*=\s*(\[[\s\S]*?\]);/);
+    if(m){
+      const parsed=Function('return '+m[1])();
+      if(Array.isArray(parsed)&&parsed.length){LYRIC_LINES=parsed;return 'lyrics_embedded.js.txt';}
+    }
+  }catch(e){}
+  return 'index.html 內建備援歌詞';
+}
+
+let LYRIC_LINES = [
   { time: 6.33, end: 17.62, text: "主題曲:給安格 Dear ANG" },
   { time: 17.72, end: 27.47, text: "作詞:Enden 作曲:Enden" },
   { time: 27.57, end: 30.46, text: "這個世界最殘酷的事情" },
@@ -219,7 +289,7 @@ const LYRIC_LINES = [
   { time: 223.57, end: 257.35, text: "我走了" },
   { time: 257.45, end: 263.45, text: "兄弟.." }
 ];
-const LYRIC_OFFSET_SECONDS = -7;
+const LYRIC_OFFSET_SECONDS = -7; // 歌詞固定提前 7 秒
 function setupLyricDanmaku(){
   const audio=document.getElementById('themeAudio');
   if(!audio || audio.dataset.lyricBound==='1')return;
@@ -266,7 +336,7 @@ function toggleLyrics(){
 function testLyricDanmaku(){spawnLyric('想見你. 想見你.. 想見你… 了….');}
 
 const CONFIG={LOCAL_THEME:'assets/audio/dear-ang-theme.mp3',
-  APP_VERSION:'20260619_memory_world_drive_fixed_v4_lyrics',
+  APP_VERSION:'20260619_memory_world_drive_fixed_v6_nested_lyrics7',
   GAS_API_URL:'https://script.google.com/macros/s/AKfycbzrduB_eXPk6OpqnGPXjNBNQCeUyarzAfki4IL-X_JIVQr7RS9sN5ayyvA2OEaXDXzv/exec',
   GITHUB_THEME_AUDIO:''
 };
@@ -280,7 +350,7 @@ const PLACE_POINTS=[
 ];
 let DATA={photos:[],photoGroups:[],songs:[],memories:[],comments:[],theme:null};
 let musicWanted=false;
-window.addEventListener('load',()=>{centerWorld();setupLyricDanmaku();loadData();setupWeather();renderFood();renderMaps();});
+window.addEventListener('load',()=>{centerWorld();loadLyricsFromRootFiles().finally(()=>setupLyricDanmaku());loadData();setupWeather();renderFood();renderMaps();});
 function enterWorld(){document.getElementById('gate').classList.add('out');musicWanted=true;startTheme();setTimeout(()=>document.getElementById('gate').classList.add('hidden'),560)}
 function centerWorld(){const sc=document.getElementById('scroller');setTimeout(()=>{sc.scrollLeft=(sc.scrollWidth-sc.clientWidth)/2;},60)}
 function openPage(id){document.getElementById('page-'+id).classList.add('show');document.body.style.overflow='hidden'}
@@ -288,34 +358,137 @@ function closePage(){document.querySelectorAll('.page').forEach(p=>p.classList.r
 function toast(msg,bad){const t=document.getElementById('toast');t.textContent=msg;t.style.background=bad?'#963232':'#5b3f2f';t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2300)}
 function api(p){return new Promise((res,rej)=>{let cb='cb'+Date.now()+Math.floor(Math.random()*9e4),u=new URL(CONFIG.GAS_API_URL);Object.keys(p).forEach(k=>u.searchParams.set(k,p[k]));u.searchParams.set('callback',cb);u.searchParams.set('_ts',Date.now());u.searchParams.set('v',CONFIG.APP_VERSION);let sc=document.createElement('script'),tm=setTimeout(()=>done(rej,new Error('讀取逾時')),16000);window[cb]=x=>done(res,x);function done(f,v){clearTimeout(tm);delete window[cb];sc.remove();f(v)}sc.onerror=()=>done(rej,new Error('讀取失敗'));sc.src=u;document.head.appendChild(sc)})}
 function loadData(){api({action:'getMemorialData'}).then(r=>{if(!r.ok)throw Error(r.error||'讀取失敗');DATA=r;DATA.photos=orderPhotos(DATA.photos||flatGroups(DATA.photoGroups||[]));renderDynamic();startTheme();}).catch(e=>{renderDynamic();toast('雲端資料讀取失敗，先顯示本機內容',1)})}
-function flatGroups(groups){let out=[];(groups||[]).forEach(g=>(g.items||[]).forEach(i=>{i.groupName=g.name;out.push(i)}));return out}
+function detectAreaKey(text){
+  text=String(text||'');
+  const areas={
+    photo:['01_有你的時光','有你的時光','華光','相館'],
+    video:['02_影音館','影音館','影片','新時代'],
+    home:['03_他的家','他的家','他家','個人','中間公寓'],
+    music:['04_金嗓卡拉OK','金嗓','卡拉OK','他唱的歌'],
+    food:['05_美而美早餐店','美而美','早餐','食物','飲食','吃過','喜歡吃','推薦'],
+    road:['06_通往他的路','通往他的路','公路局','第六棵樹','長眠地','導航'],
+    friend:['07_好友投稿','好友投稿','投稿']
+  };
+  for(const key of Object.keys(areas)){
+    if(areas[key].some(k=>text.includes(k)))return key;
+  }
+  return '';
+}
+function getRawChildFolders(g){
+  const out=[];
+  ['children','folders','subfolders','subFolders','childFolders','folderGroups'].forEach(k=>{
+    const v=g&&g[k];
+    if(Array.isArray(v))out.push(...v);
+  });
+  return out;
+}
+function getRawItems(g){
+  const out=[];
+  ['items','files','photos','videos','audios','childrenFiles'].forEach(k=>{
+    const v=g&&g[k];
+    if(Array.isArray(v))out.push(...v);
+  });
+  return out;
+}
+function normalizeDriveGroups(groups){
+  const out=[];
+  function walk(g,parentPath='',parentRoot=''){
+    if(!g)return;
+    const name=String(g.name||g.title||g.folderName||g.displayName||'未命名資料夾');
+    const rawPath=String(g.path||g.folderPath||g.fullPath||g.relativePath||'');
+    const path=rawPath || (parentPath?parentPath+'/'+name:name);
+    const root=parentRoot || detectAreaKey(path) || detectAreaKey(name);
+    const items=getRawItems(g).map(it=>Object.assign({},it,{_folderName:name,_folderPath:path,_rootKey:root}));
+    out.push({name,path,rootKey:root,items,parentPath});
+    getRawChildFolders(g).forEach(ch=>walk(ch,path,root));
+  }
+  (groups||[]).forEach(g=>walk(g));
+  return out;
+}
+function flatGroups(groups){
+  let out=[];
+  normalizeDriveGroups(groups).forEach(g=>(g.items||[]).forEach(i=>out.push(i)));
+  return out;
+}
 function orderPhotos(p){const mains=['IMG_4130.jpg','IMG_2818.JPG'].map(x=>x.toLowerCase());let used=new Set(),out=[];mains.forEach(n=>{let i=p.findIndex((x,j)=>!used.has(j)&&String(x.name).toLowerCase()==n);if(i>=0){out.push(p[i]);used.add(i)}});return out.concat(p.filter((_,i)=>!used.has(i)))}
 function esc(s){return String(s||'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
-function groupItemsByKeywords(keywords, fallbackAll){
-  const groups=DATA.photoGroups||[];
-  const hit=[];
-  groups.forEach(g=>{
-    const name=String(g.name||'');
-    if(keywords.some(k=>name.includes(k))){
-      (g.items||[]).forEach(i=>{i.groupName=g.name;hit.push(i)});
-    }
+function mediaKindOf(it){
+  const mt=String(it.mimeType||it.type||'').toLowerCase();
+  const kind=String(it.kind||'').toLowerCase();
+  const name=String(it.name||it.filename||'').toLowerCase();
+  if(mt.startsWith('image/')||kind==='image'||/\.(jpg|jpeg|png|gif|webp|avif|heic)$/i.test(name))return 'image';
+  if(mt.startsWith('audio/')||kind==='audio'||/\.(mp3|wav|m4a|aac|ogg|flac)$/i.test(name))return 'audio';
+  if(mt.startsWith('video/')||kind==='video'||/\.(mp4|mov|m4v|webm)$/i.test(name))return 'video';
+  if(it.thumbnailUrl && !it.streamUrl)return 'image';
+  if(it.streamUrl)return 'video';
+  return 'file';
+}
+function matchMediaKind(it,kind){
+  const k=mediaKindOf(it);
+  if(kind==='image')return k==='image';
+  if(kind==='video')return k==='video';
+  if(kind==='audio')return k==='audio';
+  if(kind==='audioVideo')return k==='audio'||k==='video';
+  return true;
+}
+function cleanFolderLabel(path,area){
+  let p=String(path||'').replace(/^\/+|\/+$/g,'');
+  const rootMap={photo:'01_有你的時光',video:'02_影音館',home:'03_他的家',music:'04_金嗓卡拉OK',food:'05_美而美早餐店',road:'06_通往他的路',friend:'07_好友投稿'};
+  const root=rootMap[area]||'';
+  if(p===root)return '主資料夾';
+  if(root && p.startsWith(root+'/'))p=p.slice(root.length+1);
+  return p||'主資料夾';
+}
+function collectAreaFolders(area,kind,fallbackItems){
+  const normalized=normalizeDriveGroups(DATA.photoGroups||[]);
+  const buckets=new Map();
+  normalized.forEach(g=>{
+    let root=g.rootKey || detectAreaKey(g.path) || detectAreaKey(g.name);
+    if(root!==area)return;
+    const items=(g.items||[]).filter(it=>matchMediaKind(it,kind));
+    if(!items.length)return;
+    const label=cleanFolderLabel(g.path,area);
+    const key=g.path||label;
+    if(!buckets.has(key))buckets.set(key,{label,path:g.path,items:[]});
+    buckets.get(key).items.push(...items);
   });
-  if(!hit.length && fallbackAll)return DATA.photos||[];
-  return hit;
+  let arr=[...buckets.values()].filter(x=>x.items.length);
+  if(!arr.length && Array.isArray(fallbackItems) && fallbackItems.length){
+    arr=[{label:'主資料夾',path:'',items:fallbackItems.filter(it=>matchMediaKind(it,kind))}].filter(x=>x.items.length);
+  }
+  return arr;
+}
+function photoGridHtml(items){
+  return `<div class="grid">`+items.slice(0,180).map((p,i)=>`<div class="photo" onclick="openLightbox('${esc(p.thumbnailUrl||p.url||p.streamUrl||'')}')"><img loading="lazy" src="${esc(p.thumbnailUrl||p.url||p.streamUrl||'')}" onerror="this.closest('.photo').style.display='none'"><b>${esc(p.name||'')}</b></div>`).join('')+'</div>';
+}
+function mediaListHtml(list){
+  return `<div class="video-grid">`+list.map(v=>{
+    const k=mediaKindOf(v);
+    if(k==='audio')return `<div class="vcard"><audio controls preload="none" src="${esc(v.streamUrl||v.url||'')}"></audio><h3>${esc(v.name||'')}</h3>${v.webViewUrl?`<a href="${esc(v.webViewUrl)}" target="_blank" rel="noopener">另開</a>`:''}</div>`;
+    return `<div class="vcard"><video controls playsinline preload="none" poster="${esc(v.thumbnailUrl||'')}"><source src="${esc(v.streamUrl||v.url||'')}" type="${esc(v.mimeType||'video/mp4')}"></video><h3>${esc(v.name||'')}</h3>${v.webViewUrl?`<a href="${esc(v.webViewUrl)}" target="_blank" rel="noopener">另開</a>`:''}</div>`;
+  }).join('')+'</div>';
+}
+function renderFolderedMedia(id,area,kind,emptyMsg,fallbackItems){
+  const box=document.getElementById(id);
+  if(!box)return;
+  const folders=collectAreaFolders(area,kind,fallbackItems);
+  if(!folders.length){box.innerHTML='<div class="empty">'+(emptyMsg||'目前沒有資料。請確認 Google Drive 分類資料夾。')+'</div>';return;}
+  box.innerHTML=folders.map(f=>{
+    const body=kind==='image'?photoGridHtml(f.items):mediaListHtml(f.items);
+    const path=f.path?`<div class="folder-path">${esc(f.path)}</div>`:'';
+    return `<div class="folder-block"><h3><span>${esc(f.label)}</span><small>${f.items.length} 個檔案</small></h3>${path}${body}</div>`;
+  }).join('');
 }
 function renderDynamic(){
-  renderPhotos('photoGrid',groupItemsByKeywords(['01_有你的時光','有你的時光','華光','相館'],true),'請在 Google Drive 建立「01_有你的時光」。');
-  renderPhotos('homePhotoGrid',groupItemsByKeywords(['03_他的家','他的家','他家','個人','中間公寓'],false),'這裡只讀「03_他的家」或名稱含「他家 / 個人」的資料夾。');
-  renderPhotos('foodPhotoGrid',groupItemsByKeywords(['05_美而美早餐店','美而美','早餐','食物','飲食','吃','推薦'],false),'請在 Google Drive 建立「05_美而美早餐店」。');
-  renderPhotos('roadPhotoGrid',groupItemsByKeywords(['06_通往他的路','通往他的路','公路局','第六棵樹','長眠地','導航'],false),'請在 Google Drive 建立「06_通往他的路」。');
-  renderVideos('videoGrid',DATA.memories||[],'請把影片放在 Google Drive「02_影音館」。');
-  renderVideos('songGrid',DATA.songs||[],'請把他唱的歌放在 Google Drive「04_金嗓卡拉OK」。');
+  renderFolderedMedia('photoGrid','photo','image','請在 Google Drive 建立「01_有你的時光」，底下可再分子資料夾。',DATA.photos||[]);
+  renderFolderedMedia('homePhotoGrid','home','image','這裡只讀「03_他的家」及其子資料夾。');
+  renderFolderedMedia('foodPhotoGrid','food','image','請在 Google Drive 建立「05_美而美早餐店」，底下可再分子資料夾。');
+  renderFolderedMedia('roadPhotoGrid','road','image','請在 Google Drive 建立「06_通往他的路」，底下可再分子資料夾。');
+  renderFolderedMedia('videoGrid','video','video','請把影片放在 Google Drive「02_影音館」及其子資料夾。',DATA.memories||[]);
+  renderFolderedMedia('songGrid','music','audioVideo','請把他唱的歌放在 Google Drive「04_金嗓卡拉OK」及其子資料夾。',DATA.songs||[]);
 }
-function renderPhotos(id,items,emptyMsg){let box=document.getElementById(id);items=items||[];if(!box)return;if(!items.length){box.innerHTML='<div class="empty">'+(emptyMsg||'目前沒有資料。請確認 Google Drive 分類資料夾。')+'</div>';return}box.innerHTML=items.slice(0,120).map((p,i)=>`<div class="photo" onclick="openLightbox('${esc(p.thumbnailUrl||p.url||'')}')"><img loading="lazy" src="${esc(p.thumbnailUrl||p.url||'')}" onerror="this.closest('.photo').style.display='none'"><b>${esc(p.name||'')}</b></div>`).join('')}
-function renderVideos(id,list,empty){let box=document.getElementById(id);if(!box)return;list=list||[];if(!list.length){box.innerHTML='<div class="empty">'+empty+'</div>';return}box.innerHTML=list.map(v=>{
-  if(v.kind==='audio'||String(v.mimeType||'').startsWith('audio'))return `<div class="vcard"><audio controls preload="none" src="${esc(v.streamUrl||'')}"></audio><h3>${esc(v.name||'')}</h3></div>`;
-  return `<div class="vcard"><video controls playsinline preload="none" poster="${esc(v.thumbnailUrl||'')}"><source src="${esc(v.streamUrl||'')}" type="${esc(v.mimeType||'video/mp4')}"></video><h3>${esc(v.name||'')}</h3>${v.webViewUrl?`<a href="${esc(v.webViewUrl)}" target="_blank" rel="noopener">另開</a>`:''}</div>`;
-}).join('')}
+function renderPhotos(id,items,emptyMsg){let box=document.getElementById(id);items=items||[];if(!box)return;if(!items.length){box.innerHTML='<div class="empty">'+(emptyMsg||'目前沒有資料。請確認 Google Drive 分類資料夾。')+'</div>';return}box.innerHTML=photoGridHtml(items)}
+function renderVideos(id,list,empty){let box=document.getElementById(id);if(!box)return;list=list||[];if(!list.length){box.innerHTML='<div class="empty">'+empty+'</div>';return}box.innerHTML=mediaListHtml(list)}
 function openLightbox(src){if(!src)return;document.getElementById('lbImg').src=src;document.getElementById('lightbox').classList.add('show')}
 function closeLightbox(){document.getElementById('lightbox').classList.remove('show');document.getElementById('lbImg').src=''}
 function startTheme(){

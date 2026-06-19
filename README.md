@@ -1,17 +1,26 @@
-# Dear ANG Memory World v3
+# Dear ANG v6｜下一層資料夾 + 歌詞提前 7 秒
 
-## 這版修正
-- GitHub Pages 主圖固定讀取 `assets/images/memory-world.png`。
-- 第六棵樹圖固定讀取 `assets/images/sixth_tree.jpeg`。
-- 主題曲優先讀 Google Drive / GAS；如果 GAS 沒回傳，會自動 fallback 到 `assets/audio/dear-ang-theme.mp3`。
-- Google Drive 內容資料夾：00_主題曲、01_有你的時光、02_影音館、03_他的家、04_金嗓卡拉OK、05_美而美早餐店、06_通往他的路、07_好友投稿。
+這版修正兩件事：
 
-## GitHub 正確檔案位置
-```
-index.html
-assets/images/memory-world.png
-assets/images/sixth_tree.jpeg
-assets/audio/dear-ang-theme.mp3   # 可選；如果 GAS 沒抓到主題曲就用這個
+1. Google Drive 的 `00`～`07` 主資料夾底下，可以再分子資料夾。
+   網站會遞迴讀取下一層與更深層，並在頁面中依子資料夾分區顯示。
+
+2. 歌詞彈幕固定提前 7 秒：
+
+```js
+const LYRIC_OFFSET_SECONDS = -7;
 ```
 
-根目錄那些 `daya_*.jpeg`, `road_*.jpeg`, `memory-route.mp4` 如果目前版本沒有引用，可以先不用管；不要讓 index 寫 `assets/images/...` 但檔案放根目錄。
+歌詞檔仍照你原本 GitHub 根目錄，不改名、不搬家：
+
+- `./給安格.lrc`
+- `./給安格.srt`
+- `./lyrics_embedded.js.txt`
+
+主題曲備用路徑維持：
+
+- `assets/audio/dear-ang-theme.mp3`
+
+照片、影片、他唱的歌、好友投稿仍全部走 Google Drive / GAS，不需要搬到 GitHub。
+
+注意：如果 GAS 後端目前只回傳第一層資料夾，前端已支援遞迴，但 GAS 也要回傳子資料夾資料才會顯示更深層內容。
