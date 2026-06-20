@@ -28,13 +28,31 @@ button.soft,.pill.soft{background:rgba(255,255,255,.10);border:1px solid var(--l
 a{color:inherit}
 .hidden{display:none!important}
 
-/* ===== Gate ===== */
-.gate{position:fixed;inset:0;z-index:50;display:flex;align-items:center;justify-content:center;text-align:center;padding:24px;background:radial-gradient(circle at 50% 28%,rgba(214,168,93,.22),transparent 26%),linear-gradient(180deg,#14100d,#050506);transition:.55s ease}
-.gate.out{opacity:0;pointer-events:none;transform:scale(1.02)}
-.gate-card{width:min(680px,100%);border:1px solid var(--line);background:rgba(255,248,239,.08);border-radius:30px;padding:34px 22px;backdrop-filter:blur(18px);box-shadow:var(--shadow)}
-.kicker{letter-spacing:.24em;color:#ffd89a;font-weight:900;font-size:12px;margin-bottom:10px}.gate-title{font-size:clamp(32px,8vw,62px);line-height:1.35;font-weight:1000;margin:12px 0;text-shadow:0 4px 24px rgba(0,0,0,.55)}
-.gate-title span{display:block}.gate-title .i1{padding-left:.9em}.gate-title .i2{padding-left:1.8em}.gate-lead{color:var(--muted);line-height:1.9;margin:16px auto 22px;max-width:520px}.tiny{font-size:12px;color:rgba(247,240,230,.54);line-height:1.6}
+.gate-title {
+  /* 原有設定 */
+  font-size: clamp(32px, 8vw, 62px);
+  line-height: 1.35;
+  font-weight: 1000;
+  text-shadow: 0 4px 24px rgba(0, 0, 0, .55);
+  
+  /* 關鍵修改：讓文字群組整體置中，但內部靠左對齊基準線 */
+  width: fit-content;
+  margin: 12px auto;
+  text-align: left;
+}
 
+.gate-title span {
+  display: block;
+}
+
+/* 使用 margin-left 設定完美等距（1倍、2倍） */
+.gate-title .i1 {
+  margin-left: 1em;
+}
+
+.gate-title .i2 {
+  margin-left: 2em;
+}
 /* ===== World ===== */
 .world{height:100svh;display:flex;flex-direction:column;background:linear-gradient(180deg,#100f0f,#050506)}
 .topbar{height:58px;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 14px calc(10px + env(safe-area-inset-top));z-index:3;background:linear-gradient(180deg,rgba(0,0,0,.64),rgba(0,0,0,.12));position:fixed;top:0;left:0;right:0;pointer-events:none}.topbar>*{pointer-events:auto}.brand{font-size:17px;font-weight:1000;letter-spacing:.08em}.brand small{display:block;font-size:10px;font-weight:900;color:#ffd89a;letter-spacing:.22em}.top-actions{display:flex;gap:7px}.icon-btn{width:40px;height:40px;padding:0;display:grid;place-items:center;background:rgba(0,0,0,.38);border:1px solid var(--line);box-shadow:none;backdrop-filter:blur(12px)}
