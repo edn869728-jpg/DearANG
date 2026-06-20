@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate, max-age=0">
 <!-- DearANG v16 KTV stage forced 20260620 -->
-<!-- DearANG v20 opening 11 personal photos countdown 20260620 -->
+<!-- DearANG v21 opening countdown video 20260620 -->
 <title>有你的時光｜Dear ANG</title>
 <style>
 :root{
@@ -696,6 +696,69 @@ a{color:inherit}
   .opening-number{width:82px;height:82px;font-size:38px;margin:13px auto}
 }
 
+
+/* ===== v21 開場倒數影片：影片本身已有秒數，不再疊加數字 ===== */
+.opening-countdown{
+  padding:0!important;
+  background:#000!important;
+}
+.opening-countdown-card{
+  width:100%!important;
+  height:100svh!important;
+  max-height:none!important;
+  border:0!important;
+  border-radius:0!important;
+  padding:0!important;
+  background:#000!important;
+  box-shadow:none!important;
+  display:grid!important;
+  place-items:center!important;
+  overflow:hidden!important;
+}
+.opening-countdown-video{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  background:#000;
+  z-index:1;
+}
+.opening-countdown-card>.credit-kicker,
+.opening-countdown-title,
+.opening-countdown-sub,
+.opening-number,
+.opening-photo-draw,
+.opening-start-note{
+  display:none!important;
+}
+.opening-video-skip{
+  position:absolute;
+  right:14px;
+  bottom:calc(16px + env(safe-area-inset-bottom));
+  z-index:4;
+  background:rgba(0,0,0,.42)!important;
+  border:1px solid rgba(255,255,255,.18)!important;
+  backdrop-filter:blur(12px);
+  box-shadow:none!important;
+  font-size:13px;
+  padding:10px 13px;
+}
+.opening-video-caption{
+  position:absolute;
+  left:14px;
+  right:14px;
+  top:calc(14px + env(safe-area-inset-top));
+  z-index:3;
+  text-align:center;
+  color:rgba(255,248,239,.72);
+  font-size:12px;
+  font-weight:900;
+  letter-spacing:.08em;
+  text-shadow:0 2px 10px rgba(0,0,0,.7);
+  pointer-events:none;
+}
+
 </style>
 </head>
 <body>
@@ -719,12 +782,15 @@ a{color:inherit}
 <div class="asset-preload-status" id="assetPreloadStatus">正在準備回憶…</div>
 <div class="opening-countdown" id="openingCountdown" aria-live="polite">
   <div class="opening-countdown-card">
-    <div class="credit-kicker">OPENING MEMORY DRAW</div>
-    <div class="opening-countdown-title">抽出 11 張個人照</div>
-    <div class="opening-countdown-sub">倒數 10 秒。0 秒時，主題曲開始播放，進入有你的時光。</div>
+    <video class="opening-countdown-video" id="openingCountdownVideo" src="assets/videos/opening-countdown.mp4?v=20260620-v21" playsinline preload="auto"></video>
+    <div class="opening-video-caption">倒數結束，0 秒開始播放主題曲</div>
+    <div class="credit-kicker">OPENING COUNTDOWN</div>
+    <div class="opening-countdown-title">倒數</div>
+    <div class="opening-countdown-sub">影片裡已有秒數。播放完後主題曲開始。</div>
     <div class="opening-number" id="openingNumber">10</div>
     <div class="opening-photo-draw" id="openingPhotoDraw"></div>
     <div class="opening-start-note" id="openingStartNote">0 秒開始播放</div>
+    <button class="opening-video-skip" type="button" onclick="finishOpeningMemoryCountdown()">跳過倒數</button>
   </div>
 </div>
 
@@ -1062,7 +1128,7 @@ function toggleLyrics(){
 function testLyricDanmaku(){spawnLyric('想見你. 想見你.. 想見你… 了….');}
 
 const CONFIG={LOCAL_THEME:'assets/audio/dear-ang-theme.mp3',
-  APP_VERSION:'20260620_memory_world_v20_opening_11photos_lyrics20',
+  APP_VERSION:'20260620_memory_world_v21_opening_countdown_video_lyrics20',
   GAS_API_URL:'https://script.google.com/macros/s/AKfycbzrduB_eXPk6OpqnGPXjNBNQCeUyarzAfki4IL-X_JIVQr7RS9sN5ayyvA2OEaXDXzv/exec',
   GITHUB_THEME_AUDIO:''
 };
@@ -1162,33 +1228,38 @@ function primeThemeBeforeCountdown(){
 function startOpeningMemoryCountdown(){
   if(openingCountdownActive)return;
   openingCountdownActive=true;
-  openingCountdownSeconds=10;
   playUiSound('open');
   primeThemeBeforeCountdown();
-  renderOpeningPhotoDraw();
 
   const gate=document.getElementById('gate');
   const overlay=document.getElementById('openingCountdown');
-  const num=document.getElementById('openingNumber');
+  const video=document.getElementById('openingCountdownVideo');
   if(gate)gate.classList.add('out');
   if(overlay){overlay.classList.remove('done');overlay.classList.add('show');}
-  if(num){num.textContent='10';num.classList.remove('zero');}
 
   clearInterval(openingCountdownTimer);
-  openingCountdownTimer=setInterval(()=>{
-    openingCountdownSeconds--;
-    if(num){
-      num.textContent=String(Math.max(0,openingCountdownSeconds));
-      if(openingCountdownSeconds===0)num.classList.add('zero');
+  if(video){
+    try{
+      video.currentTime=0;
+      video.muted=false;
+      video.volume=1;
+    }catch(e){}
+    video.onended=()=>finishOpeningMemoryCountdown();
+    const p=video.play();
+    if(p&&p.catch){
+      p.catch(()=>{
+        // 若手機擋住影片音訊，改靜音播放倒數；主題曲仍會在結束後播放
+        try{video.muted=true;video.play().catch(()=>{});}catch(e){}
+      });
     }
-    if(openingCountdownSeconds<=0){
-      clearInterval(openingCountdownTimer);
-      finishOpeningMemoryCountdown();
-    }
-  },1000);
+  }else{
+    openingCountdownTimer=setTimeout(()=>finishOpeningMemoryCountdown(),10000);
+  }
 }
 function finishOpeningMemoryCountdown(){
   const overlay=document.getElementById('openingCountdown');
+  const video=document.getElementById('openingCountdownVideo');
+  if(video){try{video.pause();video.currentTime=0;}catch(e){}}
   const gate=document.getElementById('gate');
   musicWanted=true;
   const a=document.getElementById('themeAudio');
