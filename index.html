@@ -1376,7 +1376,7 @@ a{color:inherit}
             <button class="ktv-img-hotspot round" style="left:79.6%;top:30.2%" onclick="ktvPress('9')" aria-label="9"></button>
             <button class="ktv-img-hotspot round" style="left:40.6%;top:40.5%" onclick="ktvClear()" aria-label="取消"></button>
             <button class="ktv-img-hotspot round" style="left:60.9%;top:40.5%" onclick="ktvPress('0')" aria-label="0"></button>
-            <button class="ktv-img-hotspot round" style="left:79.7%;top:40.5%" onclick="ktvEnter()" aria-label="插入"></button>
+            <button class="ktv-img-hotspot round" style="left:79.7%;top:40.5%" onclick="ktvEnter()" aria-label="輸入"></button>
             <button class="ktv-img-hotspot square" style="left:17.0%;top:52.2%" onclick="ktvRemoteHint('伴唱功能暫不使用')" aria-label="伴唱"></button>
             <button class="ktv-img-hotspot square" style="left:40.7%;top:52.2%" onclick="ktvRemoteHint('男調功能暫不使用')" aria-label="男調"></button>
             <button class="ktv-img-hotspot square" style="left:60.4%;top:52.2%" onclick="ktvRemoteHint('插歌功能暫不使用')" aria-label="插歌"></button>
@@ -1394,7 +1394,7 @@ a{color:inherit}
             <button class="ktv-img-hotspot round" style="left:60.4%;top:86.1%" onclick="ktvVolume(0.1)" aria-label="音量加"></button>
             <button class="ktv-img-hotspot round" style="left:79.8%;top:86.1%" onclick="ktvVolume(-0.1)" aria-label="音量減"></button>
           </div>
-          <div class="ktv-remote-caption">照這支遙控操作：輸入歌號 → 按「插入」→ 按「▶Ⅱ」播放。</div>
+          <div class="ktv-remote-caption">照這支遙控操作：輸入歌號 → 按「插入」→ 按「開始」播放。</div>
         </div>
       </div>
     </div>
@@ -1564,7 +1564,7 @@ let LYRIC_LINES = [
   { time: 223.57, end: 257.35, text: "我走了" },
   { time: 257.45, end: 263.45, text: "兄弟.." }
 ];
-const LYRIC_OFFSET_SECONDS = 20; // 歌詞固定提前 20 秒
+const LYRIC_OFFSET_SECONDS = 7; // 歌詞固定提前 20 秒
 function setupLyricDanmaku(){
   const audio=document.getElementById('themeAudio');
   if(!audio || audio.dataset.lyricBound==='1')return;
