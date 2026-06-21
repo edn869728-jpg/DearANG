@@ -5,8 +5,8 @@
 <base href="/DearANG/">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate, max-age=0">
-<!-- DearANG v16 KTV stage forced 20260620 -->
-<!-- DearANG v21 opening countdown video 20260620 -->
+<!-- DearANG v28 gate title even indent 20260621 -->
+<!-- DearANG v22 KTV Drive preview playback fix 20260620 -->
 <title>有你的時光｜Dear ANG</title>
 <style>
 :root{
@@ -28,18 +28,12 @@ button.soft,.pill.soft{background:rgba(255,255,255,.10);border:1px solid var(--l
 a{color:inherit}
 .hidden{display:none!important}
 
-.gate {
-  position: fixed; /* 必須是 fixed 才能蓋住底層頁面 */
-  inset: 0;
-  z-index: 50;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 24px;
-  background: radial-gradient(circle at 50% 28%, rgba(214,168,93,.22), transparent 26%), linear-gradient(180deg, #14100d, #050506);
-  transition: .55s ease;
-}
+/* ===== Gate ===== */
+.gate{position:fixed;inset:0;z-index:50;display:flex;align-items:center;justify-content:center;text-align:center;padding:24px;background:radial-gradient(circle at 50% 28%,rgba(214,168,93,.22),transparent 26%),linear-gradient(180deg,#14100d,#050506);transition:.55s ease}
+.gate.out{opacity:0;pointer-events:none;transform:scale(1.02)}
+.gate-card{width:min(680px,100%);border:1px solid var(--line);background:rgba(255,248,239,.08);border-radius:30px;padding:34px 22px;backdrop-filter:blur(18px);box-shadow:var(--shadow)}
+.kicker{letter-spacing:.24em;color:#ffd89a;font-weight:900;font-size:12px;margin-bottom:10px}.gate-title{font-size:clamp(32px,8vw,62px);line-height:1.35;font-weight:1000;margin:12px 0;text-shadow:0 4px 24px rgba(0,0,0,.55)}
+.gate-title span{display:block}.gate-title .i1{padding-left:1.8em}.gate-title .i2{padding-left:3.6em}.gate-lead{color:var(--muted);line-height:1.9;margin:16px auto 22px;max-width:520px}.tiny{font-size:12px;color:rgba(247,240,230,.54);line-height:1.6}
 
 /* ===== World ===== */
 .world{height:100svh;display:flex;flex-direction:column;background:linear-gradient(180deg,#100f0f,#050506)}
@@ -765,6 +759,487 @@ a{color:inherit}
   pointer-events:none;
 }
 
+
+/* ===== v22 KTV 修復：Google Drive 影片用 preview iframe，不再只靠 video 直連 ===== */
+.ktv-screen iframe{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  border:0;
+  background:#000;
+  display:none;
+  z-index:2;
+}
+.ktv-stage-wrap .ktv-screen iframe{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  border:0;
+  background:#000;
+  display:none;
+  z-index:2;
+}
+.ktv-drive-open{
+  position:absolute;
+  left:10px;
+  bottom:10px;
+  z-index:7;
+  display:none;
+  text-decoration:none;
+  border-radius:999px;
+  padding:7px 10px;
+  color:#fff;
+  background:rgba(0,0,0,.52);
+  border:1px solid rgba(255,255,255,.18);
+  backdrop-filter:blur(10px);
+  font-size:11px;
+  font-weight:1000;
+}
+.ktv-drive-open.show{display:inline-flex}
+
+
+/* ===== v23 相館浮動相簿卡片 + 卡片預覽幻燈片 + 影片膠卷 ===== */
+#page-photo .page-body,
+#page-home .page-body{
+  position:relative;
+  overflow-x:hidden!important;
+}
+
+#page-photo .section:has(#photoGrid),
+#page-home .section:has(#homePhotoGrid){
+  background:transparent!important;
+  border:0!important;
+  box-shadow:none!important;
+  backdrop-filter:none!important;
+  padding-left:0!important;
+  padding-right:0!important;
+}
+
+#page-photo .section:has(#photoGrid)>h2,
+#page-home .section:has(#homePhotoGrid)>h2{
+  margin-left:16px;
+  margin-right:16px;
+}
+
+.album-carousel-shell{
+  position:relative!important;
+  overflow:visible!important;
+  margin:8px 0 18px!important;
+  padding:6px 0 22px!important;
+}
+
+.album-carousel-hint{
+  justify-content:flex-start!important;
+  padding:0 18px!important;
+  color:rgba(255,216,154,.92)!important;
+  text-shadow:0 2px 12px rgba(0,0,0,.45);
+}
+
+.album-carousel{
+  overflow-x:auto!important;
+  overflow-y:visible!important;
+  scroll-snap-type:x mandatory!important;
+  padding:12px 16px 26px!important;
+  gap:16px!important;
+  scrollbar-width:none!important;
+  -webkit-overflow-scrolling:touch!important;
+  touch-action:pan-x pan-y!important;
+}
+
+.album-carousel::-webkit-scrollbar{display:none!important;}
+
+.album-card{
+  position:relative!important;
+  flex:0 0 min(90vw,520px)!important;
+  width:min(90vw,520px)!important;
+  max-width:none!important;
+  scroll-snap-align:center!important;
+  border-radius:34px!important;
+  background:linear-gradient(180deg,rgba(255,248,239,.16),rgba(255,248,239,.07))!important;
+  border:1px solid rgba(255,255,255,.18)!important;
+  box-shadow:0 26px 80px rgba(0,0,0,.44), 0 0 0 1px rgba(255,216,154,.06) inset!important;
+  backdrop-filter:blur(18px)!important;
+  overflow:hidden!important;
+  transform:translateZ(0)!important;
+}
+
+.album-card:before{
+  content:"";
+  position:absolute;
+  inset:10px;
+  border-radius:26px;
+  border:1px solid rgba(255,255,255,.08);
+  pointer-events:none;
+  z-index:4;
+}
+
+.album-cover{
+  height:min(58vh,540px)!important;
+  min-height:360px!important;
+  background:#0b0b0d!important;
+  isolation:isolate;
+}
+
+.album-cover img{
+  position:absolute!important;
+  inset:0!important;
+  width:100%!important;
+  height:100%!important;
+  object-fit:cover!important;
+  transition:opacity 1.15s ease, transform 7s ease!important;
+  opacity:1;
+  transform:scale(1.03);
+}
+
+.album-cover img.album-cover-fade{
+  opacity:.0!important;
+  transform:scale(1.09);
+}
+
+.album-cover:after{
+  z-index:2!important;
+  background:linear-gradient(180deg,rgba(0,0,0,.02),rgba(0,0,0,.18) 48%,rgba(0,0,0,.76))!important;
+}
+
+.album-cover-text{
+  z-index:3!important;
+}
+
+.album-summary{
+  position:relative;
+  z-index:5;
+  background:linear-gradient(180deg,rgba(0,0,0,.18),rgba(0,0,0,.06));
+}
+
+.album-card.expanded{
+  flex-basis:min(96vw,680px)!important;
+  width:min(96vw,680px)!important;
+}
+
+.album-card.expanded .album-cover{
+  height:240px!important;
+  min-height:220px!important;
+}
+
+.album-detail{
+  background:rgba(0,0,0,.13);
+}
+
+.album-card.expanded .album-detail{
+  max-height:1100px!important;
+}
+
+.album-slide{
+  border-radius:26px!important;
+  background:#050506!important;
+  box-shadow:inset 0 0 30px rgba(0,0,0,.48);
+}
+
+.album-slide img{
+  width:100%!important;
+  height:min(64vh,620px)!important;
+  aspect-ratio:auto!important;
+  object-fit:contain!important;
+  background:#050506!important;
+}
+
+.album-thumbs{
+  display:flex!important;
+  gap:8px!important;
+  overflow-x:auto!important;
+  padding-top:10px!important;
+  scrollbar-width:none!important;
+  -webkit-overflow-scrolling:touch!important;
+}
+
+.album-thumbs::-webkit-scrollbar{display:none!important;}
+
+.album-thumb{
+  flex:0 0 62px!important;
+  width:62px!important;
+  height:62px!important;
+  border-radius:15px!important;
+}
+
+/* 影片區：相機膠卷，每一格一個影片 */
+.filmstrip-wrap{
+  position:relative;
+  margin:12px 0 24px;
+  padding:18px 0;
+  overflow-x:auto;
+  overflow-y:visible;
+  -webkit-overflow-scrolling:touch;
+  scrollbar-width:none;
+  scroll-snap-type:x mandatory;
+}
+.filmstrip-wrap::-webkit-scrollbar{display:none}
+.filmstrip{
+  display:flex;
+  gap:14px;
+  padding:0 16px;
+}
+.film-frame{
+  position:relative;
+  flex:0 0 min(82vw,360px);
+  scroll-snap-align:center;
+  border-radius:18px;
+  background:#0b0b0d;
+  border:1px solid rgba(255,255,255,.18);
+  padding:28px 10px 34px;
+  box-shadow:0 22px 55px rgba(0,0,0,.36);
+  overflow:hidden;
+}
+.film-frame:before,
+.film-frame:after{
+  content:"";
+  position:absolute;
+  left:0;
+  right:0;
+  height:18px;
+  background:
+    repeating-linear-gradient(90deg,
+      rgba(255,255,255,.22) 0 9px,
+      transparent 9px 18px,
+      transparent 18px 26px);
+  opacity:.55;
+}
+.film-frame:before{top:5px}
+.film-frame:after{bottom:5px}
+.film-frame video,
+.film-frame iframe{
+  width:100%;
+  aspect-ratio:16/9;
+  border:0;
+  border-radius:12px;
+  background:#000;
+  display:block;
+}
+.film-frame iframe{
+  min-height:190px;
+}
+.film-frame h3{
+  margin:10px 3px 3px;
+  font-size:14px;
+  line-height:1.45;
+  color:#fff7e8;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+.film-frame a{
+  display:inline-flex;
+  margin:8px 3px 0 0;
+  text-decoration:none;
+  border-radius:999px;
+  padding:7px 10px;
+  font-size:12px;
+  font-weight:1000;
+  color:#fff;
+  background:rgba(255,255,255,.12);
+  border:1px solid rgba(255,255,255,.13);
+}
+.film-folder-title{
+  margin:8px 16px 10px;
+  color:#ffd89a;
+  font-weight:1000;
+  letter-spacing:.08em;
+  font-size:14px;
+}
+@media(max-width:560px){
+  .album-card{flex-basis:calc(100vw - 28px)!important;width:calc(100vw - 28px)!important}
+  .album-card.expanded{flex-basis:calc(100vw - 18px)!important;width:calc(100vw - 18px)!important}
+  .album-cover{height:58vh!important;min-height:380px!important}
+  .film-frame{flex-basis:calc(100vw - 42px)}
+}
+
+
+/* ===== v24 全站影片修復：所有影片都優先用 Drive preview，不再卡黑畫面 ===== */
+.drive-video-frame{
+  position:relative;
+  width:100%;
+  aspect-ratio:16/9;
+  border-radius:12px;
+  overflow:hidden;
+  background:#000;
+  border:1px solid rgba(255,255,255,.10);
+}
+.drive-video-frame iframe,
+.drive-video-frame video{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  border:0;
+  background:#000;
+  display:block;
+}
+.drive-video-frame iframe{
+  display:none;
+}
+.drive-video-cover{
+  position:absolute;
+  inset:0;
+  z-index:3;
+  display:grid;
+  place-items:center;
+  text-align:center;
+  padding:18px;
+  color:#fff7e8;
+  background:
+    radial-gradient(circle at 50% 35%,rgba(214,168,93,.18),transparent 42%),
+    linear-gradient(180deg,rgba(0,0,0,.18),rgba(0,0,0,.72));
+}
+.drive-video-cover button{
+  min-width:118px;
+  min-height:46px;
+}
+.drive-video-cover small{
+  display:block;
+  margin-top:8px;
+  color:rgba(255,255,255,.68);
+  font-weight:900;
+  line-height:1.5;
+}
+.drive-video-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:7px;
+  align-items:center;
+  margin:8px 3px 0;
+}
+.drive-video-actions a,
+.drive-video-actions button{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:34px;
+  border-radius:999px;
+  padding:7px 10px;
+  font-size:12px;
+  font-weight:1000;
+  text-decoration:none;
+  color:#fff;
+  background:rgba(255,255,255,.12);
+  border:1px solid rgba(255,255,255,.14);
+  box-shadow:none;
+}
+.film-frame .drive-video-actions a,
+.film-frame .drive-video-actions button{
+  margin:0;
+}
+.video-grid .drive-video-frame{
+  aspect-ratio:16/9;
+}
+.video-grid .vcard{
+  overflow:hidden;
+}
+
+
+/* ===== v25 開場標題第三行縮排調整 ===== */
+@media(max-width:560px){
+  .gate-title .i2{
+    padding-left:2.2em!important;
+  }
+}
+@media(max-width:390px){
+  .gate-title .i1{
+    padding-left:.55em!important;
+  }
+  .gate-title .i2{
+    padding-left:1.35em!important;
+  }
+}
+
+
+/* ===== v26 開場文字靠左 ===== */
+.gate{
+  text-align:left!important;
+}
+.gate-card{
+  text-align:left!important;
+}
+.gate-title{
+  text-align:left!important;
+}
+.gate-lead{
+  margin-left:0!important;
+  margin-right:0!important;
+  text-align:left!important;
+}
+.gate-song-credit{
+  margin-left:0!important;
+  margin-right:0!important;
+  text-align:left!important;
+}
+.gate-card button{
+  margin-left:0!important;
+}
+.gate-card .tiny{
+  text-align:left!important;
+}
+
+
+/* ===== v27 只有「想見你」三行靠左，其餘開場內容置中 ===== */
+.gate{
+  text-align:center!important;
+}
+.gate-card{
+  text-align:center!important;
+}
+.gate-title{
+  text-align:left!important;
+}
+.gate-lead{
+  margin-left:auto!important;
+  margin-right:auto!important;
+  text-align:center!important;
+}
+.gate-song-credit{
+  margin-left:auto!important;
+  margin-right:auto!important;
+  text-align:center!important;
+}
+.gate-song-credit .credit-row{
+  justify-content:center!important;
+}
+.gate-song-credit .credit-row span:first-child{
+  flex:0 0 auto!important;
+}
+.gate-card button{
+  margin-left:auto!important;
+  margin-right:auto!important;
+}
+.gate-card .tiny{
+  text-align:center!important;
+}
+
+
+/* ===== v28 開場標題三行左間距統一等距 ===== */
+.gate-title .i1{
+  padding-left:1.8em!important;
+}
+.gate-title .i2{
+  padding-left:3.6em!important;
+}
+@media(max-width:560px){
+  .gate-title .i1{
+    padding-left:1.1em!important;
+  }
+  .gate-title .i2{
+    padding-left:2.2em!important;
+  }
+}
+@media(max-width:390px){
+  .gate-title .i1{
+    padding-left:.675em!important;
+  }
+  .gate-title .i2{
+    padding-left:1.35em!important;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -862,11 +1337,13 @@ a{color:inherit}
           <img src="assets/images/ktv-stage.png?v=20260620-v16-stage" alt="卡拉OK電視、麥克風與音響">
           <div class="ktv-screen" id="ktvScreen">
             <video id="ktvVideo" controls playsinline preload="none"></video>
+            <iframe id="ktvFrame" allow="autoplay; fullscreen; encrypted-media" allowfullscreen referrerpolicy="no-referrer-when-downgrade"></iframe>
             <div class="ktv-audio-visual" id="ktvAudioVisual">
               <div class="ktv-note">♫</div>
               <b id="ktvAudioTitle">請從歌本點編號，或用遙控輸入歌號</b>
             </div>
             <audio id="ktvAudio" controls preload="none"></audio>
+            <a id="ktvDriveOpen" class="ktv-drive-open" href="#" target="_blank" rel="noopener">另開 Drive 播放</a>
             <div class="ktv-osd" id="ktvOsd">請用遙控輸入歌號 → 按「輸入」→ 再按「開始」</div>
           </div>
         </div>
@@ -1134,7 +1611,7 @@ function toggleLyrics(){
 function testLyricDanmaku(){spawnLyric('想見你. 想見你.. 想見你… 了….');}
 
 const CONFIG={LOCAL_THEME:'assets/audio/dear-ang-theme.mp3',
-  APP_VERSION:'20260620_memory_world_v21_opening_countdown_video_lyrics20',
+  APP_VERSION:'20260621_memory_world_v28_gate_title_even_indent_lyrics20',
   GAS_API_URL:'https://script.google.com/macros/s/AKfycbzrduB_eXPk6OpqnGPXjNBNQCeUyarzAfki4IL-X_JIVQr7RS9sN5ayyvA2OEaXDXzv/exec',
   GITHUB_THEME_AUDIO:''
 };
@@ -1557,19 +2034,23 @@ function nextImageSource(img){
   const wrap=img.closest('.album-slide,.album-cover,.photo,.album-thumb');
   if(wrap){wrap.innerHTML='<div class="img-fail">這張預覽讀不到，點開或換下一張試試</div>';}
 }
+
 function albumCarouselHtml(folders,area){
   const clean=(folders||[]).filter(f=>(f.items||[]).length);
   if(!clean.length)return '<div class="empty">目前沒有照片。</div>';
-  return `<div class="album-carousel-shell"><div class="album-carousel-hint">← 左右滑卡片｜往上滑展開照片 →</div><div class="album-carousel">`+
+  return `<div class="album-carousel-shell"><div class="album-carousel-hint">← 只有卡片橫滑｜預覽圖會慢慢變換｜往上拉展開相簿 →</div><div class="album-carousel">`+
     clean.map((f,i)=>{
       const albumId='album_'+area+'_'+i+'_'+String(f.path||f.label||'').replace(/[^a-zA-Z0-9_\u4e00-\u9fa5]/g,'_').slice(0,24);
       const items=(f.items||[]).slice(0,240);
-      ALBUM_STORE[albumId]={label:f.label||'相簿',path:f.path||'',items:items,index:0};
+      ALBUM_STORE[albumId]={label:f.label||'相簿',path:f.path||'',items:items,index:0,coverIndex:0};
       const cover=items[0]||{};
-      const thumbs=items.slice(0,18).map((p,ti)=>`<button class="album-thumb ${ti===0?'active':''}" id="thumb-${albumId}-${ti}" onclick="setAlbumPhoto('${albumId}',${ti});event.stopPropagation()"><img ${imgAttrs(p)}></button>`).join('');
+      const thumbs=items.slice(0,24).map((p,ti)=>`<button class="album-thumb ${ti===0?'active':''}" id="thumb-${albumId}-${ti}" onclick="setAlbumPhoto('${albumId}',${ti});event.stopPropagation()"><img ${imgAttrs(p)}></button>`).join('');
       return `<article class="album-card" data-album-id="${esc(albumId)}" ontouchstart="albumTouchStart(event)" ontouchend="albumTouchEnd(event)">
-        <div class="album-cover" onclick="expandAlbum('${albumId}')"><img ${imgAttrs(cover)}><div class="album-cover-text"><b>${esc(f.label||'相簿')}</b><small>${items.length} 張照片｜往上滑展開</small></div></div>
-        <div class="album-summary"><div class="album-path">${esc(f.path||'主資料夾')}</div><button class="album-open" onclick="expandAlbum('${albumId}')">打開這本相簿</button></div>
+        <div class="album-cover" onclick="expandAlbum('${albumId}')">
+          <img id="album-cover-img-${albumId}" ${imgAttrs(cover)}>
+          <div class="album-cover-text"><b>${esc(f.label||'相簿')}</b><small>${items.length} 張照片｜往上拉展開</small></div>
+        </div>
+        <div class="album-summary"><div class="album-path">${esc(f.path||'主資料夾')}</div><button class="album-open" onclick="expandAlbum('${albumId}')">打開整本相簿</button></div>
         <div class="album-detail">
           <div class="album-slide">
             <button class="album-slide-btn prev" onclick="nextAlbumPhoto('${albumId}',-1);event.stopPropagation()">‹</button>
@@ -1618,12 +2099,135 @@ function renderAlbumSlide(albumId){
 }
 function openCurrentAlbumPhoto(albumId){const album=ALBUM_STORE[albumId];if(!album)return;openAlbumLightbox(albumId,album.index||0);}
 function openAlbumLightbox(albumId,index){const album=ALBUM_STORE[albumId];if(!album)return;LIGHTBOX_ITEMS=album.items||[];LIGHTBOX_INDEX=index||0;updateLightbox();document.getElementById('lightbox').classList.add('show');}
+
+function startAlbumCoverSlides(){
+  clearInterval(startAlbumCoverSlides._timer);
+  startAlbumCoverSlides._timer=setInterval(()=>{
+    Object.keys(ALBUM_STORE||{}).forEach(albumId=>{
+      const album=ALBUM_STORE[albumId];
+      if(!album||!album.items||album.items.length<2)return;
+      const card=document.querySelector(`[data-album-id="${albumId}"]`);
+      if(!card||card.classList.contains('expanded'))return;
+      album.coverIndex=((album.coverIndex||0)+1)%album.items.length;
+      const img=document.getElementById('album-cover-img-'+albumId);
+      if(!img)return;
+      img.classList.add('album-cover-fade');
+      setTimeout(()=>{
+        setImgToItem(img,album.items[album.coverIndex]);
+        img.classList.remove('album-cover-fade');
+      },520);
+    });
+  },4300);
+}
+
+
+function anyDriveFileId(v){
+  v=v||{};
+  const texts=[v.id,v.fileId,v.driveFileId,v.webViewUrl,v.webContentLink,v.url,v.streamUrl,v.downloadUrl,v.thumbnailUrl].map(x=>String(x||''));
+  for(const s of texts){
+    let m=s.match(/\/file\/d\/([^/?#]+)/); if(m)return m[1];
+    m=s.match(/\/d\/([^/?#]+)/); if(m)return m[1];
+    m=s.match(/[?&]id=([^&#]+)/); if(m)return m[1];
+    m=s.match(/open\?id=([^&#]+)/); if(m)return m[1];
+    m=s.match(/thumbnail\?id=([^&#]+)/); if(m)return m[1];
+  }
+  return '';
+}
+function drivePreviewUrlOf(v){
+  const id=anyDriveFileId(v);
+  if(id)return 'https://drive.google.com/file/d/'+encodeURIComponent(id)+'/preview';
+  const u=String((v&&v.webViewUrl)||'');
+  if(u.includes('drive.google.com')&&u.includes('/preview'))return u;
+  return '';
+}
+function driveOpenUrlOf(v){
+  v=v||{};
+  const id=anyDriveFileId(v);
+  return v.webViewUrl || (id?'https://drive.google.com/file/d/'+encodeURIComponent(id)+'/view':'') || v.url || v.streamUrl || '';
+}
+function directVideoUrlOf(v){
+  v=v||{};
+  return v.streamUrl || v.url || v.webContentLink || v.downloadUrl || '';
+}
+function playDriveVideo(btn){
+  const frame=btn&&btn.closest('.drive-video-frame');
+  if(!frame)return;
+  const iframe=frame.querySelector('iframe');
+  const video=frame.querySelector('video');
+  const cover=frame.querySelector('.drive-video-cover');
+  const preview=frame.dataset.preview||'';
+  const direct=frame.dataset.direct||'';
+  if(preview&&iframe){
+    iframe.src=preview+(preview.includes('?')?'&':'?')+'autoplay=1';
+    iframe.style.display='block';
+    if(video)video.style.display='none';
+    if(cover)cover.style.display='none';
+    return;
+  }
+  if(video&&direct){
+    video.src=direct;
+    video.style.display='block';
+    if(cover)cover.style.display='none';
+    video.play().catch(()=>{
+      if(cover){
+        cover.style.display='grid';
+        const sm=cover.querySelector('small');
+        if(sm)sm.textContent='瀏覽器擋住直連，請按下方另開 Drive 播放';
+      }
+    });
+  }
+}
+function driveVideoEmbedHtml(v,index){
+  v=v||{};
+  const preview=drivePreviewUrlOf(v);
+  const direct=directVideoUrlOf(v);
+  const open=driveOpenUrlOf(v);
+  const poster=v.thumbnailUrl||'';
+  const title=esc(v.name||('影片 '+(index||'')));
+  let inner='';
+  if(preview){
+    inner=`<iframe title="${title}" loading="lazy" allow="autoplay; fullscreen; encrypted-media; picture-in-picture" allowfullscreen referrerpolicy="no-referrer-when-downgrade"></iframe>`;
+  }else if(direct){
+    inner=`<video controls playsinline preload="metadata" poster="${esc(poster)}"><source src="${esc(direct)}" type="${esc(v.mimeType||'video/mp4')}"></video>`;
+  }else{
+    inner=`<div class="opening-photo-placeholder">這支影片沒有可播放網址</div>`;
+  }
+  return `<div class="drive-video-frame" data-preview="${esc(preview)}" data-direct="${esc(direct)}">
+    ${inner}
+    <div class="drive-video-cover"><div><button type="button" onclick="playDriveVideo(this)">播放</button><small>${preview?'使用 Drive 預覽播放':'直連播放，失敗請另開 Drive'}</small></div></div>
+  </div>
+  <div class="drive-video-actions">
+    ${open?`<a href="${esc(open)}" target="_blank" rel="noopener">另開 Drive 播放</a>`:''}
+    ${preview?`<a href="${esc(preview)}" target="_blank" rel="noopener">新視窗預覽</a>`:''}
+  </div>`;
+}
+
+
+function filmstripHtml(list,label){
+  list=(list||[]).filter(v=>mediaKindOf(v)==='video');
+  if(!list.length)return '';
+  return `<div class="film-folder-title">${esc(label||'影片膠卷')}</div><div class="filmstrip-wrap"><div class="filmstrip">`+
+    list.map((v,i)=>{
+      return `<article class="film-frame">${driveVideoEmbedHtml(v,i+1)}<h3>${String(i+1).padStart(2,'0')}｜${esc(v.name||'影片')}</h3></article>`;
+    }).join('')+
+  `</div></div>`;
+}
+
+
+
+
 function mediaListHtml(list){
-  return `<div class="video-grid">`+list.map(v=>{
-    const k=mediaKindOf(v);
-    if(k==='audio')return `<div class="vcard"><audio controls preload="none" src="${esc(v.streamUrl||v.url||'')}"></audio><h3>${esc(v.name||'')}</h3>${v.webViewUrl?`<a href="${esc(v.webViewUrl)}" target="_blank" rel="noopener">另開</a>`:''}</div>`;
-    return `<div class="vcard"><video controls playsinline preload="none" poster="${esc(v.thumbnailUrl||'')}"><source src="${esc(v.streamUrl||v.url||'')}" type="${esc(v.mimeType||'video/mp4')}"></video><h3>${esc(v.name||'')}</h3>${v.webViewUrl?`<a href="${esc(v.webViewUrl)}" target="_blank" rel="noopener">另開</a>`:''}</div>`;
-  }).join('')+'</div>';
+  const videos=(list||[]).filter(v=>mediaKindOf(v)==='video');
+  const audios=(list||[]).filter(v=>mediaKindOf(v)==='audio');
+  let out='';
+  if(videos.length)out+=filmstripHtml(videos,'相機膠卷');
+  if(audios.length){
+    out+=`<div class="video-grid">`+audios.map(v=>{
+      const open=driveOpenUrlOf(v);
+      return `<div class="vcard"><audio controls preload="none" src="${esc(v.streamUrl||v.url||'')}"></audio><h3>${esc(v.name||'')}</h3>${open?`<a href="${esc(open)}" target="_blank" rel="noopener">另開</a>`:''}</div>`;
+    }).join('')+'</div>';
+  }
+  return out||'<div class="empty">目前沒有可播放媒體。</div>';
 }
 function renderFolderedMedia(id,area,kind,emptyMsg,fallbackItems){
   const box=document.getElementById(id);
@@ -1711,28 +2315,112 @@ function ktvEnter(){
   const row=document.getElementById('ktv-row-'+idx);if(row)row.scrollIntoView({behavior:'smooth',block:'nearest'});
   ktvSetOsd('已選擇 '+no+'｜請按「開始播放」');
 }
+
+function driveFileIdFromText(s){
+  s=String(s||'');
+  let m=s.match(/\/d\/([^/]+)/); if(m)return m[1];
+  m=s.match(/[?&]id=([^&]+)/); if(m)return m[1];
+  m=s.match(/open\?id=([^&]+)/); if(m)return m[1];
+  return '';
+}
+function ktvDriveId(item){
+  item=item||{};
+  return item.id || driveFileIdFromText(item.webViewUrl) || driveFileIdFromText(item.url) || driveFileIdFromText(item.streamUrl) || '';
+}
+function ktvDrivePreviewUrl(item){
+  const id=ktvDriveId(item);
+  if(id)return 'https://drive.google.com/file/d/'+encodeURIComponent(id)+'/preview';
+  const u=String((item&&item.webViewUrl)||'');
+  if(u.includes('drive.google.com')&&u.includes('/preview'))return u;
+  return '';
+}
+function ktvDirectUrl(item){
+  item=item||{};
+  return item.streamUrl || item.url || item.webContentLink || item.downloadUrl || '';
+}
+function ktvPublicOpenUrl(item){
+  item=item||{};
+  const id=ktvDriveId(item);
+  return item.webViewUrl || (id?'https://drive.google.com/file/d/'+encodeURIComponent(id)+'/view':'') || item.url || item.streamUrl || '';
+}
+function ktvResetPlayers(){
+  const video=document.getElementById('ktvVideo');
+  const frame=document.getElementById('ktvFrame');
+  const audio=document.getElementById('ktvAudio');
+  const visual=document.getElementById('ktvAudioVisual');
+  const link=document.getElementById('ktvDriveOpen');
+  if(video){video.pause();video.onerror=null;video.removeAttribute('src');video.style.display='none';try{video.load();}catch(e){}}
+  if(frame){frame.src='about:blank';frame.style.display='none';}
+  if(audio){audio.pause();audio.onerror=null;audio.removeAttribute('src');audio.style.display='none';try{audio.load();}catch(e){}}
+  if(link){link.classList.remove('show');link.href='#';}
+  if(visual)visual.style.display='grid';
+}
+function ktvShowDriveLink(item,text){
+  const link=document.getElementById('ktvDriveOpen');
+  const href=ktvPublicOpenUrl(item);
+  if(link&&href){link.href=href;link.textContent=text||'另開 Drive 播放';link.classList.add('show');}
+}
 function ktvStart(){
   if(ktvSelectedIndex<0)ktvEnter();
   if(ktvSelectedIndex<0||!KTV_SONGS[ktvSelectedIndex])return;
   const item=KTV_SONGS[ktvSelectedIndex];
-  const src=item.streamUrl||item.url||'';
-  if(!src){ktvSetOsd('這首沒有可播放網址');return;}
+  const direct=ktvDirectUrl(item);
+  const preview=ktvDrivePreviewUrl(item);
+  const openUrl=ktvPublicOpenUrl(item);
+  if(!direct&&!preview&&!openUrl){ktvSetOsd('這首沒有可播放網址');return;}
+
   const theme=document.getElementById('themeAudio');if(theme)theme.pause();
   const video=document.getElementById('ktvVideo');
+  const frame=document.getElementById('ktvFrame');
   const audio=document.getElementById('ktvAudio');
   const visual=document.getElementById('ktvAudioVisual');
   const title=document.getElementById('ktvAudioTitle');
-  if(video){video.pause();video.removeAttribute('src');video.style.display='none';video.load();}
-  if(audio){audio.pause();audio.removeAttribute('src');audio.style.display='none';audio.load();}
+
+  ktvResetPlayers();
   if(title)title.textContent=item.name||'他唱的歌';
   const kind=mediaKindOf(item);
   ktvSetOsd('正在播放 '+item.ktvNo+'｜'+(item.name||''));
+
   if(kind==='video'){
     if(visual)visual.style.display='none';
-    if(video){video.src=src;video.style.display='block';video.play().catch(()=>ktvSetOsd('請再按一次螢幕播放'));}
+    ktvShowDriveLink(item,'另開 Drive 播放');
+
+    // Google Drive 影片直連常被 video 標籤擋住，所以優先用 Drive preview iframe。
+    if(preview&&frame){
+      frame.src=preview+(preview.includes('?')?'&':'?')+'autoplay=1';
+      frame.style.display='block';
+      ktvSetOsd('使用 Drive 預覽播放 '+item.ktvNo+'｜'+(item.name||''));
+      return;
+    }
+
+    if(video&&direct){
+      video.src=direct;
+      video.style.display='block';
+      video.onerror=()=>{
+        if(preview&&frame){
+          video.style.display='none';
+          frame.src=preview+(preview.includes('?')?'&':'?')+'autoplay=1';
+          frame.style.display='block';
+          ktvSetOsd('直連失敗，已改用 Drive 預覽播放');
+        }else{
+          ktvSetOsd('影片無法直接播放，請按「另開 Drive 播放」');
+        }
+      };
+      video.play().catch(()=>ktvSetOsd('請點電視畫面播放；若仍失敗，按「另開 Drive 播放」'));
+    }else{
+      ktvSetOsd('影片無法直接播放，請按「另開 Drive 播放」');
+    }
   }else{
     if(visual)visual.style.display='grid';
-    if(audio){audio.src=src;audio.style.display='block';audio.play().catch(()=>ktvSetOsd('請再按一次開始或音訊播放鍵'));}
+    ktvShowDriveLink(item,'另開檔案');
+    if(audio&&direct){
+      audio.src=direct;
+      audio.style.display='block';
+      audio.onerror=()=>ktvSetOsd('音訊直連失敗，請按「另開檔案」');
+      audio.play().catch(()=>ktvSetOsd('請再按一次開始或音訊播放鍵'));
+    }else{
+      ktvSetOsd('這首音訊沒有直連，請按「另開檔案」');
+    }
   }
 }
 
@@ -1744,12 +2432,32 @@ function ktvCurrentPlayer(){
   if(audio&&audio.style.display==='block')return audio;
   return null;
 }
-function ktvStop(){const p=ktvCurrentPlayer();if(p){p.pause();try{p.currentTime=0;}catch(e){}}ktvSetOsd('已停止');}
-function ktvTogglePlayPause(){const p=ktvCurrentPlayer();if(p&&p.src){if(p.paused){p.play().catch(()=>ktvSetOsd('請再按一次播放'));ktvSetOsd('繼續播放');}else{p.pause();ktvSetOsd('已暫停');}return;}ktvStart();}
-function ktvReplay(){const p=ktvCurrentPlayer();if(p){try{p.currentTime=0;}catch(e){}p.play().catch(()=>ktvSetOsd('請再按一次重播'));ktvSetOsd('重新播放');}else ktvStart();}
+function ktvStop(){
+  const p=ktvCurrentPlayer();
+  const frame=document.getElementById('ktvFrame');
+  if(p){p.pause();try{p.currentTime=0;}catch(e){}}
+  if(frame&&frame.style.display==='block'){frame.src='about:blank';frame.style.display='none';}
+  ktvSetOsd('已停止');
+}
+function ktvTogglePlayPause(){
+  const frame=document.getElementById('ktvFrame');
+  if(frame&&frame.style.display==='block'){ktvSetOsd('Drive 預覽播放中，暫停請點電視內播放器');return;}
+  const p=ktvCurrentPlayer();
+  if(p&&p.src){if(p.paused){p.play().catch(()=>ktvSetOsd('請再按一次播放'));ktvSetOsd('繼續播放');}else{p.pause();ktvSetOsd('已暫停');}return;}
+  ktvStart();
+}
+function ktvReplay(){
+  const frame=document.getElementById('ktvFrame');
+  if(frame&&frame.style.display==='block'&&ktvSelectedIndex>=0){
+    const item=KTV_SONGS[ktvSelectedIndex];
+    const preview=ktvDrivePreviewUrl(item);
+    if(preview){frame.src='about:blank';setTimeout(()=>{frame.src=preview+(preview.includes('?')?'&':'?')+'autoplay=1';},80);ktvSetOsd('重新播放');return;}
+  }
+  const p=ktvCurrentPlayer();if(p){try{p.currentTime=0;}catch(e){}p.play().catch(()=>ktvSetOsd('請再按一次重播'));ktvSetOsd('重新播放');}else ktvStart();
+}
 function ktvPrev(){if(!KTV_SONGS.length)return;ktvSelectedIndex=ktvSelectedIndex>0?ktvSelectedIndex-1:KTV_SONGS.length-1;ktvInput=KTV_SONGS[ktvSelectedIndex].ktvNo;ktvUpdateDisplay();ktvStart();}
 function ktvNext(){if(!KTV_SONGS.length)return;ktvSelectedIndex=ktvSelectedIndex>=0?(ktvSelectedIndex+1)%KTV_SONGS.length:0;ktvInput=KTV_SONGS[ktvSelectedIndex].ktvNo;ktvUpdateDisplay();ktvStart();}
-function ktvVolume(delta){const p=ktvCurrentPlayer();if(!p){ktvSetOsd('尚未播放，無法調整音量');return;}p.volume=Math.max(0,Math.min(1,(p.volume||1)+delta));ktvSetOsd('音量 '+Math.round(p.volume*100)+'%');}
+function ktvVolume(delta){const p=ktvCurrentPlayer();if(!p){ktvSetOsd('Drive 預覽請用電視內音量，音訊檔才可用遙控音量');return;}p.volume=Math.max(0,Math.min(1,(p.volume||1)+delta));ktvSetOsd('音量 '+Math.round(p.volume*100)+'%');}
 
 function renderDynamic(){
   renderFolderedMedia('photoGrid','photo','image','請在 Google Drive 建立「01_有你的時光」，底下可再分子資料夾。',DATA.photos||[]);
@@ -1758,19 +2466,10 @@ function renderDynamic(){
   renderFolderedMedia('roadPhotoGrid','road','image','請在 Google Drive 建立「06_通往他的路」，底下可再分子資料夾。');
   renderFolderedMedia('videoGrid','video','video','請把影片放在 Google Drive「02_影音館」及其子資料夾。',DATA.memories||[]);
   renderKtvSongs();
+  startAlbumCoverSlides();
 }
 function renderPhotos(id,items,emptyMsg){let box=document.getElementById(id);items=items||[];if(!box)return;if(!items.length){box.innerHTML='<div class="empty">'+(emptyMsg||'目前沒有資料。請確認 Google Drive 分類資料夾。')+'</div>';return}box.innerHTML=photoGridHtml(items)}
 function renderVideos(id,list,empty){let box=document.getElementById(id);if(!box)return;list=list||[];if(!list.length){box.innerHTML='<div class="empty">'+empty+'</div>';return}box.innerHTML=mediaListHtml(list)}
-let LIGHTBOX_ITEMS=[];
-let LIGHTBOX_INDEX=0;
-let lbStartX=0;
-function openLightbox(src){
-  if(!src)return;
-  LIGHTBOX_ITEMS=[{name:'',thumbnailUrl:src,url:src,streamUrl:src}];
-  LIGHTBOX_INDEX=0;
-  updateLightbox();
-  document.getElementById('lightbox').classList.add('show');
-}
 function updateLightbox(){
   const p=LIGHTBOX_ITEMS[LIGHTBOX_INDEX];
   if(!p)return;
