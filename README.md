@@ -1,41 +1,34 @@
-# Dear ANG v21｜開場倒數影片版
+# Dear ANG v29｜小世界中轉＋天氣同步版
 
-這版使用你上傳的 `想見你.mp4` 當開場倒數。
+## 這版完成
 
-## 新流程
+- 原本開場頁不動。
+- 原本 opening-countdown.mp4 開場影片不動。
+- 開場影片結束後，不直接進主街道，先進「木框小世界」。
+- 點「點進這個世界」後，畫面放大淡出，才進入原本富宜路街道主頁。
+- 小世界與主街道共用同一組天氣狀態。
+- 右上角天氣按鈕可循環切換天氣。
+- 小世界下方可直接點天氣：晴天、炎熱、多雲、陰天、雨天、暴雨、霧、霾、夜晚、夜雨。
 
-按「進入有你的時光」後：
+## 覆蓋 GitHub Pages
 
-1. 顯示倒數影片。
-2. 影片裡本身已有秒數，所以網頁不再額外疊數字。
-3. 影片播完後視為 0 秒。
-4. 0 秒正式播放主題曲。
-5. 進入主街景世界。
+把本 ZIP 內容解壓後，覆蓋 DearANG 專案根目錄：
 
-## 檔案
+```
+index.html
+assets/
+```
 
-新增：
+建議網址加版本避免快取：
 
-`assets/videos/opening-countdown.mp4`
+```
+https://edn869728-jpg.github.io/DearANG/?v=29
+```
 
-## GitHub 要覆蓋 / 上傳
+## 重要檔案
 
-- index.html
-- assets/videos/opening-countdown.mp4
-- assets/images/memory-world.png
-- assets/images/ktv-stage.png
-- assets/images/ktv-remote.png
-- assets/images/sixth_tree.jpeg
-
-## 保留
-
-- 開場歌曲資訊
-- 照片滿版輪轉卡片
-- KTV 舞台與圖片遙控器
-- 時光膠囊
-- 歌詞提前 20 秒
-- Google Drive 子資料夾遞迴
-
-上傳後開：
-
-https://edn869728-jpg.github.io/DearANG/?v=21
+- `assets/images/mini-world.png`：開場影片後的小世界畫面。
+- `assets/images/memory-world.png`：原本主街道晴天版。
+- `assets/images/weather/`：主街道天氣底圖。
+- `assets/videos/opening-countdown.mp4`：原開場倒數影片。
+- `assets/audio/dear-ang-theme.mp3`：主題曲。
