@@ -1010,12 +1010,12 @@ a{color:inherit}
 
 <div class="mini-world hidden" id="miniWorld" aria-label="CRT電視小世界">
   <div class="mini-crt-scene">
-    <video class="mini-crt-frame mini-crt-frame-video" id="miniFrameVideo" autoplay muted loop playsinline preload="auto" poster="assets/images/mini-frame.jpg?v=20260623-v33-frame" aria-label="兩個人趴在木框上看小世界">
-      <source src="assets/videos/video13.mp4?v=20260624-v36" type="video/mp4">
-      <source src="video13.mp4?v=20260624-v36" type="video/mp4">
+    <video class="mini-crt-frame mini-crt-frame-video" id="miniFrameVideo" autoplay muted loop playsinline preload="auto" poster="assets/videos/mini-world-frame.mp4" aria-label="兩個人趴在木框上看小世界">
+      <source src="assets/videos/mini-world-frame.mp4" type="video/mp4">
+      <source src="assets/videos/mini-world-frame.mp4" type="video/mp4">
     </video>
     <button class="mini-crt-screen" type="button" onclick="enterMainWorld()" aria-label="點擊木框中間的小世界進入富宜路街道">
-      <img src="assets/images/weather/day-sunny.png?v=20260623-v35" class="mini-world-bg" id="miniWorldBg" alt="木框裡的Q版小世界">
+      <img src="assets/images/weather/day-sunny.png" class="mini-world-bg" id="miniWorldBg" alt="木框裡的Q版小世界">
       <div class="mini-world-weather" id="miniWorldWeather"></div>
       <div class="mini-screen-shine"></div>
       <div class="mini-screen-hint">找尋回憶的入口</div>
@@ -1148,7 +1148,7 @@ a{color:inherit}
             <button class="ktv-img-hotspot round" style="left:60.4%;top:86.1%" onclick="ktvVolume(0.1)" aria-label="音量加"></button>
             <button class="ktv-img-hotspot round" style="left:79.8%;top:86.1%" onclick="ktvVolume(-0.1)" aria-label="音量減"></button>
           </div>
-          <div class="ktv-remote-caption">照這支遙控操作：輸入歌號 → 按「插入」→ 按「▶Ⅱ」播放。</div>
+          <div class="ktv-remote-caption">照這支遙控操作：輸入歌號 → 按「插入」→ 按「開始」播放。</div>
         </div>
       </div>
     </div>
@@ -1318,7 +1318,7 @@ let LYRIC_LINES = [
   { time: 223.57, end: 257.35, text: "我走了" },
   { time: 257.45, end: 263.45, text: "兄弟.." }
 ];
-const LYRIC_OFFSET_SECONDS = 8; // 歌詞固定提前 20 秒
+const LYRIC_OFFSET_SECONDS = 8; // 歌詞固定提前 8 秒
 function setupLyricDanmaku(){
   const audio=document.getElementById('themeAudio');
   if(!audio || audio.dataset.lyricBound==='1')return;
