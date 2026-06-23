@@ -453,16 +453,16 @@ function submitMemoryCapsule(id){
 
 const MEMORY_WEATHERS=[
   {key:'sunny',label:'☀️ 晴天',chip:'☀️',bg:'assets/images/weather/day-sunny.png',fx:''},
-  {key:'hot',label:'☀️ 炎熱',chip:'☀️',bg:'assets/images/weather/day-sunny.png',fx:'heat'},
+  {key:'hot',label:'☀️ 炎熱',chip:'☀️',bg:'assets/images/weather/day-hot.png',fx:'heat'},
   {key:'cloudy',label:'⛅ 多雲',chip:'⛅',bg:'assets/images/weather/day-cloudy.png',fx:''},
-  {key:'overcast',label:'☁️ 陰天',chip:'☁️',bg:'assets/images/weather/day-cloudy.png',fx:'haze'},
+  {key:'overcast',label:'☁️ 陰天',chip:'☁️',bg:'assets/images/weather/day-overcast.png',fx:''},
   {key:'rain',label:'🌧️ 雨天',chip:'🌧️',bg:'assets/images/weather/day-rain.png',fx:'rain'},
   {key:'storm',label:'⛈️ 暴雨',chip:'⛈️',bg:'assets/images/weather/day-storm.png',fx:'storm'},
-  {key:'fog',label:'🌫️ 霧',chip:'🌫️',bg:'assets/images/weather/day-storm.png',fx:'fog'},
-  {key:'haze',label:'😷 霾',chip:'😷',bg:'assets/images/weather/day-storm.png',fx:'haze'},
+  {key:'fog',label:'🌫️ 霧',chip:'🌫️',bg:'assets/images/weather/day-fog.png',fx:'fog'},
+  {key:'haze',label:'😷 霾',chip:'😷',bg:'assets/images/weather/day-haze.png',fx:'haze'},
   {key:'night',label:'🌙 夜晚',chip:'🌙',bg:'assets/images/weather/night-clear.png',fx:'night'},
-  {key:'nightRain',label:'🌧️ 夜雨',chip:'🌧️',bg:'assets/images/weather/night-cloudy.png',fx:'rain night'},
-  {key:'snow',label:'❄️ 下雪',chip:'❄️',bg:'assets/images/weather/night-cloudy.png',fx:'snow haze'}
+  {key:'nightRain',label:'🌧️ 夜雨',chip:'🌧️',bg:'assets/images/weather/night-rain.png',fx:'rain night'},
+  {key:'snow',label:'❄️ 下雪',chip:'❄️',bg:'assets/images/weather/night-storm.png',fx:'snow haze'}
 ];
 let memoryWeatherKey=localStorage.getItem('dearAngMemoryWeather')||'sunny';
 function memoryWeatherByKey(key){return MEMORY_WEATHERS.find(w=>w.key===key)||MEMORY_WEATHERS[0];}
