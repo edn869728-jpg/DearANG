@@ -493,13 +493,20 @@ function cycleMemoryWeather(){
   setupWeather(true);
 }
 function showMiniWorld(){
-  // 小世界一出現就先用台灣時間判斷底圖，不等 API；API 回來後再自動覆蓋。
-  if(autoWeatherSource!=='auto')applyTimeWeatherFallback();
   renderMiniWeatherButtons();
-  setMemoryWeather(memoryWeatherKey,null,autoWeatherSource||'time');
-  refreshAutoWeather(false);
+  setMemoryWeather(memoryWeatherKey);
+
   const mini=document.getElementById('miniWorld');
   if(mini){mini.classList.remove('hidden','zooming');}
+
+  const frameVideo=document.getElementById('miniFrameVideo');
+  if(frameVideo){
+    try{
+      frameVideo.muted=true;
+      frameVideo.loop=true;
+      frameVideo.play().catch(()=>{});
+    }catch(e){}
+  }
 }
 function enterMainWorld(){
   const mini=document.getElementById('miniWorld');
