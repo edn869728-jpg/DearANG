@@ -7,8 +7,13 @@
 <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate, max-age=0">
 <!-- DearANG v16 KTV stage forced 20260620 -->
 <!-- DearANG v21 opening countdown video 20260620 -->
+<<<<<<< HEAD
 <!-- DearANG v29 mini world weather bridge 20260622 -->
 <title>有你的時光｜Dear ANG v29</title>
+=======
+<!-- DearANG v33 Real Frame Weather World Crop 20260623 -->
+<title>你和我們的時光｜Dear ANG v29</title>
+>>>>>>> 786473be995e5f2fb7a99e4ea5d91f004b17fadc
 <style>
 :root{
   --bg:#0b0b0d;
@@ -762,7 +767,11 @@ a{color:inherit}
 
 
 
+<<<<<<< HEAD
 /* ===== v29 小世界中轉＋天氣同步：開場影片後先到木框世界，再點進主街 ===== */
+=======
+/* ===== v33 真正木框小世界＋天氣圖同步：開場影片後先到木框，再點中間世界進主街 ===== */
+>>>>>>> 786473be995e5f2fb7a99e4ea5d91f004b17fadc
 .mini-world{
   position:fixed;
   inset:0;
@@ -770,13 +779,20 @@ a{color:inherit}
   display:grid;
   place-items:center;
   overflow:hidden;
+<<<<<<< HEAD
   background:#050506;
+=======
+  background:
+    radial-gradient(circle at 50% 18%,rgba(214,168,93,.20),transparent 28%),
+    linear-gradient(180deg,#1a120d,#050506 58%,#020203);
+>>>>>>> 786473be995e5f2fb7a99e4ea5d91f004b17fadc
   color:#fff7e8;
   opacity:1;
   transform:scale(1);
   transition:opacity .45s ease, transform .8s cubic-bezier(.22,1,.36,1), filter .45s ease;
 }
 .mini-world.hidden{display:none!important;}
+<<<<<<< HEAD
 .mini-world.zooming{transform:scale(1.16);opacity:0;filter:brightness(1.45) blur(6px);pointer-events:none;}
 .mini-world-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:saturate(1.02) contrast(1.04);}
 .mini-world-weather{
@@ -811,6 +827,65 @@ a{color:inherit}
   text-align:center;
   pointer-events:none;
 }
+=======
+.mini-world.zooming{opacity:0;filter:brightness(1.45) blur(5px);pointer-events:none;}
+.mini-world.zooming .mini-crt-scene{transform:scale(2.38) translateY(-10%);}
+.mini-crt-scene{
+  position:relative;
+  width:min(92vw,560px);
+  max-height:92svh;
+  aspect-ratio:1080/1920;
+  filter:drop-shadow(0 30px 70px rgba(0,0,0,.62));
+  transform:scale(1);
+  transition:transform .8s cubic-bezier(.22,1,.36,1);
+  z-index:1;
+}
+.mini-crt-frame{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;user-select:none;-webkit-user-drag:none;pointer-events:none;}
+.mini-crt-screen{
+  position:absolute;
+  left:4.1%;top:34.55%;width:91.8%;height:28.65%;
+  border:0;padding:0;margin:0;border-radius:0.8%;overflow:hidden;
+  background:#000;box-shadow:inset 0 0 32px rgba(0,0,0,.75),0 0 0 2px rgba(255,255,255,.08);
+  cursor:pointer;z-index:2;display:block;color:inherit;
+}
+.mini-crt-screen:active{filter:brightness(1.12)}
+.mini-world-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:saturate(1.02) contrast(1.04);}
+.mini-world-weather{
+  position:absolute;inset:0;pointer-events:none;z-index:2;opacity:.0;mix-blend-mode:screen;
+}
+.mini-screen-shine{position:absolute;inset:0;z-index:3;pointer-events:none;background:linear-gradient(115deg,rgba(255,255,255,.14),transparent 33%,rgba(255,255,255,.05) 54%,transparent 70%);mix-blend-mode:screen;}
+.mini-screen-hint{position:absolute;left:50%;bottom:8px;transform:translateX(-50%);z-index:4;white-space:nowrap;padding:6px 10px;border-radius:999px;background:rgba(0,0,0,.58);border:1px solid rgba(255,255,255,.16);color:#ffd89a;font-size:12px;font-weight:1000;backdrop-filter:blur(8px);}
+.mini-crt-label{position:absolute;left:50%;bottom:9%;transform:translateX(-50%);z-index:3;white-space:nowrap;padding:8px 13px;border-radius:999px;background:rgba(0,0,0,.42);border:1px solid rgba(255,216,154,.20);color:#ffd89a;font-weight:1000;font-size:13px;letter-spacing:.08em;backdrop-filter:blur(10px);}
+.mini-world-weather.rain,
+.world-weather.rain{opacity:.78;background:repeating-linear-gradient(112deg,rgba(255,255,255,0) 0 10px,rgba(255,255,255,.28) 11px 12px,rgba(255,255,255,0) 13px 22px);animation:v29Rain .42s linear infinite;}
+.mini-world-weather.fog,
+.world-weather.fog{opacity:.7;background:radial-gradient(circle at 30% 50%,rgba(240,244,240,.55),transparent 38%),linear-gradient(180deg,rgba(220,224,218,.38),rgba(218,218,208,.22));backdrop-filter:blur(2px);mix-blend-mode:normal;}
+.mini-world-weather.haze,
+.world-weather.haze{opacity:.62;background:linear-gradient(180deg,rgba(190,170,120,.36),rgba(122,115,96,.28));backdrop-filter:blur(1.5px);mix-blend-mode:normal;}
+.mini-world-weather.night,
+.world-weather.night{opacity:.55;background:linear-gradient(180deg,rgba(0,18,60,.58),rgba(0,0,0,.28));mix-blend-mode:multiply;}
+.mini-world-weather.heat,
+.world-weather.heat{opacity:.32;background:linear-gradient(180deg,rgba(255,219,85,.42),rgba(255,124,20,.20));animation:v29Heat 2.3s ease-in-out infinite alternate;}
+.mini-world-weather.storm,
+.world-weather.storm{opacity:.9;background:repeating-linear-gradient(112deg,rgba(255,255,255,0) 0 7px,rgba(255,255,255,.34) 8px 9px,rgba(255,255,255,0) 10px 16px),linear-gradient(180deg,rgba(0,20,48,.35),rgba(0,0,0,.25));animation:v29Rain .26s linear infinite;mix-blend-mode:normal;}
+.mini-world-weather.storm:after,.world-weather.storm:after{content:"";position:absolute;inset:0;background:rgba(255,255,255,.0);animation:v29Lightning 5.8s infinite;}
+@keyframes v29Rain{from{background-position:0 0}to{background-position:-90px 180px}}
+@keyframes v29Heat{from{filter:blur(0)}to{filter:blur(1.4px)}}
+@keyframes v29Lightning{0%,92%,100%{background:rgba(255,255,255,0)}93%{background:rgba(255,255,255,.72)}94%{background:rgba(255,255,255,0)}95%{background:rgba(255,255,255,.35)}96%{background:rgba(255,255,255,0)}}
+.mini-world-panel{
+  position:absolute;
+  left:50%;
+  bottom:calc(16px + env(safe-area-inset-bottom));
+  transform:translateX(-50%);
+  z-index:4;
+  width:min(92vw,720px);
+  display:grid;
+  gap:10px;
+  justify-items:center;
+  text-align:center;
+  pointer-events:none;
+}
+>>>>>>> 786473be995e5f2fb7a99e4ea5d91f004b17fadc
 .mini-world-tip{
   pointer-events:auto;
   display:inline-flex;
@@ -844,6 +919,10 @@ a{color:inherit}
   backdrop-filter:blur(10px);
 }
 .mini-weather-buttons button.active{background:linear-gradient(135deg,var(--gold),#b98034);}
+<<<<<<< HEAD
+=======
+.mini-weather-status{pointer-events:none;color:rgba(255,248,239,.76);font-size:12px;font-weight:900;line-height:1.5;text-shadow:0 2px 12px rgba(0,0,0,.55);background:rgba(0,0,0,.28);border:1px solid rgba(255,255,255,.10);border-radius:999px;padding:6px 10px;backdrop-filter:blur(10px);}
+>>>>>>> 786473be995e5f2fb7a99e4ea5d91f004b17fadc
 .stage{background-image:var(--memory-world-bg, url("assets/images/memory-world.png"))!important;}
 .world-weather{position:absolute;inset:0;z-index:1;pointer-events:none;opacity:0;border-radius:inherit;overflow:hidden;}
 .stage .hotspot{z-index:3;}
@@ -869,16 +948,16 @@ a{color:inherit}
     <div class="gate-song-credit" aria-label="主題曲資訊">
       <div class="credit-kicker">THEME SONG</div>
       <div class="credit-title">〈給安格 Dear ANG〉</div>
-      <div class="credit-row"><span>作詞</span><b>Enden &amp; OpenAI</b></div>
-      <div class="credit-row"><span>作曲</span><b>Enden &amp; Suno AI</b></div>
+      <div class="credit-row"><span>作詞</span><b>Enden</b></div>
+      <div class="credit-row"><span>作曲</span><b>Enden</b></div>
     </div>
-    <p class="gate-lead">這裡不是照片分區。是有你的時光。點一棟房子，就走進一段曾經。</p>
-    <button onclick="enterWorld()">進入有你的時光</button>
-    <div class="tiny" style="margin-top:14px">第一次點擊後才會播放音樂，避免手機瀏覽器擋住。</div>
+    <p class="gate-lead">這裡是你和我們的時光。一棟房子，一段曾經。</p>
+    <button onclick="enterWorld()">踏上想你的旅程</button>
+    <div class="tiny" style="margin-top:14px">!!!!! 提醒 : 情緒較為敏感者，請先準備好衛生紙。 !!!!!</div>
   </div>
 </div>
 
-<div class="asset-preload-status" id="assetPreloadStatus">正在準備回憶…</div>
+<div class="asset-preload-status" id="assetPreloadStatus">準備通往回憶…</div>
 <div class="opening-countdown" id="openingCountdown" aria-live="polite">
   <div class="opening-countdown-card">
     <video class="opening-countdown-video" id="openingCountdownVideo" src="assets/videos/opening-countdown.mp4?v=20260620-v21" playsinline preload="auto"></video>
@@ -893,9 +972,23 @@ a{color:inherit}
   </div>
 </div>
 
+<<<<<<< HEAD
 <div class="mini-world hidden" id="miniWorld" aria-label="木框小世界">
   <img src="assets/images/mini-world.png?v=20260622-v29" class="mini-world-bg" id="miniWorldBg" alt="木框裡的小世界">
   <div class="mini-world-weather" id="miniWorldWeather"></div>
+=======
+<div class="mini-world hidden" id="miniWorld" aria-label="CRT電視小世界">
+  <div class="mini-crt-scene">
+    <video class="mini-crt-frame" src="assets/videos/mini-frame.mp4?v=20260623-v33-frame" playsinline preload="auto"></video>
+    <button class="mini-crt-screen" type="button" onclick="enterMainWorld()" aria-label="點擊木框中間的小世界進入富宜路街道">
+      <img src="assets/images/memory-world.png" class="mini-world-bg" id="miniWorldBg" alt="木框裡的Q版小世界">
+      <div class="mini-world-weather" id="miniWorldWeather"></div>
+      <div class="mini-screen-shine"></div>
+      <div class="mini-screen-hint">點中間世界進入</div>
+    </button>
+    <div class="mini-crt-label">木框裡的小世界</div>
+  </div>
+>>>>>>> 786473be995e5f2fb7a99e4ea5d91f004b17fadc
   <div class="mini-world-panel">
     <div class="mini-world-tip" onclick="enterMainWorld()">點進這個世界｜進入富宜路街道</div>
     <div class="mini-weather-buttons" id="miniWeatherButtons" aria-label="天氣切換"></div>
@@ -903,9 +996,13 @@ a{color:inherit}
 </div>
 
 
+<<<<<<< HEAD
 <div class="world" id="world" aria-label="有你的時光世界">
+=======
+<div class="world" id="world" aria-label="你和我們的時光世界">
+>>>>>>> 786473be995e5f2fb7a99e4ea5d91f004b17fadc
   <div class="topbar">
-    <div class="brand"><small>DEAR ANG</small>有你的時光</div>
+    <div class="brand"><small>DEAR ANG</small>你和我們的時光</div>
     <div class="top-actions">
       <button class="icon-btn" onclick="toggleMusic()" id="musicBtn">♫</button>
       <button class="icon-btn lyric-toggle on" onclick="toggleLyrics()" id="lyricBtn">詞</button>
@@ -916,25 +1013,29 @@ a{color:inherit}
   <div class="scroller" id="scroller">
     <div class="stage" id="stage">
       <div class="world-weather" id="worldWeather"></div>
+<<<<<<< HEAD
       <div class="hotspot h-photo" data-label="華光相館｜有你的時光" onclick="openPage('photo')"></div>
+=======
+      <div class="hotspot h-photo" data-label="華光相館｜你和我們的時光" onclick="openPage('photo')"></div>
+>>>>>>> 786473be995e5f2fb7a99e4ea5d91f004b17fadc
       <div class="hotspot h-video" data-label="新時代影音館｜影片" onclick="openPage('video')"></div>
-      <div class="hotspot h-home" data-label="富宜路86號｜他家" onclick="openPage('home')"></div>
-      <div class="hotspot h-music" data-label="金嗓卡拉OK｜他唱的歌" onclick="openPage('music')"></div>
+      <div class="hotspot h-home" data-label="富宜路86號｜你家" onclick="openPage('home')"></div>
+      <div class="hotspot h-music" data-label="金嗓卡拉OK｜你唱的歌" onclick="openPage('music')"></div>
       <div class="hotspot h-food" data-label="美而美早餐店｜一起吃過的東西" onclick="openPage('food')"></div>
-      <div class="hotspot h-nav" data-label="公路局｜通往他的路" onclick="openPage('nav')"></div>
+      <div class="hotspot h-nav" data-label="公路局｜想你的時候" onclick="openPage('nav')"></div>
     </div>
   </div>
-  <div class="hint"><div class="hint-inner"><span>← →</span><div>左右滑這條街<small>點招牌或建築，進入每一段有他的時光。</small></div></div></div>
+  <div class="hint"><div class="hint-inner"><span>← →</span><div>左右滑這條街<small>點招牌或建築，進入對應的時光。</small></div></div></div>
 </div>
 
 <audio id="themeAudio" preload="metadata" loop></audio>
 
 <!-- 華光相館｜照片 -->
 <section class="page" id="page-photo">
-  <div class="page-head"><button class="back" onclick="closePage()">← 回到街上</button><b>華光相館｜有你的時光</b></div>
+  <div class="page-head"><button class="back" onclick="closePage()">← 回到街上</button><b>華光相館｜你和我們的時光</b></div>
   <div class="page-body">
-    <div class="hero-card"><img src="assets/images/memory-world.png?v=20260620-v16-bg" alt="華光相館"><div class="hero-text"><h1>有你的時光</h1><p>資料從 Google Drive 讀取。請把一般照片放在「01_有你的時光」。</p></div></div>
-    <div class="section folder-hint"><h2>Google Drive 資料夾</h2><div class="story">01_有你的時光<br>底下可以再分子資料夾，網站會讀下一層與更深層。</div></div>
+    <div class="hero-card"><img src="assets/images/memory-world.png?v=20260620-v16-bg" alt="華光相館"><div class="hero-text"><h1>你和我們的時光</h1><p></p></div></div>
+    <div class="section folder-hint"><h2></h2><div class="story">01_你和我們的時光<br></div></div>
     <div class="section"><h2>照片</h2><div id="photoGrid" class="album-mount"><div class="empty">照片載入中…</div></div></div>
   </div>
 </section>
@@ -942,17 +1043,17 @@ a{color:inherit}
 <section class="page" id="page-video">
   <div class="page-head"><button class="back" onclick="closePage()">← 回到街上</button><b>新時代影音館｜影片</b></div>
   <div class="page-body">
-    <div class="hero-card"><img src="assets/images/memory-world.png?v=20260620-v16-bg" alt="新時代影音館"><div class="hero-text"><h1>影音館</h1><p>資料從 Google Drive 讀取。請把影片放在「02_影音館」。</p></div></div>
-    <div class="section folder-hint"><h2>Google Drive 資料夾</h2><div class="story">02_影音館<br>底下可以再分子資料夾，網站會讀下一層與更深層。</div></div>
+    <div class="hero-card"><img src="assets/images/memory-world.png" alt="新時代影音館"><div class="hero-text"><h1>影音館</h1><p></p></div></div>
+    <div class="section folder-hint"><h2></h2><div class="story">02_影音館<br></div></div>
     <div class="section"><h2>影片</h2><div class="video-grid" id="videoGrid"><div class="empty">影片載入中…</div></div></div>
   </div>
 </section>
-<!-- 中間公寓｜他家 -->
+<!-- 中間公寓｜你家 -->
 <section class="page" id="page-home">
-  <div class="page-head"><button class="back" onclick="closePage()">← 回到街上</button><b>中間公寓｜他家</b></div>
+  <div class="page-head"><button class="back" onclick="closePage()">← 回到街上</button><b>中間公寓｜你家</b></div>
   <div class="page-body">
-    <div class="hero-card"><img src="assets/images/memory-world.png?v=20260620-v16-bg" alt="中間公寓"><div class="hero-text"><h1>他家</h1><p>這裡只放他個人的照片。內容由你自己分類，不自動補故事。</p></div></div>
-    <div class="section folder-hint"><h2>Google Drive 資料夾</h2><div class="story">03_他的家<br>底下可以再分子資料夾，網站會讀下一層與更深層。</div></div>
+    <div class="hero-card"><img src="assets/images/memory-world.png" alt="中間公寓"><div class="hero-text"><h1>你家</h1><p>想起你，你的樣貌，你的形態， 你英俊臉龐。</p></div></div>
+    <div class="section folder-hint"><h2></h2><div class="story">03_你的家<br>底下可以再分子資料夾，網站會讀下一層與更深層。</div></div>
     <div class="section"><h2>他個人的照片</h2><div id="homePhotoGrid" class="album-mount"><div class="empty">載入中…</div></div></div>
   </div>
 </section>
@@ -981,7 +1082,7 @@ a{color:inherit}
         <div class="section ktv-songbook">
           <h2>歌本</h2>
           <div id="ktvSongbook"><div class="empty">歌曲載入中…</div></div>
-          <div class="ktv-folder-note">讀取 Google Drive「04_金嗓卡拉OK」及底下所有子資料夾。</div>
+          <div class="ktv-folder-note"></div>
         </div>
 
         <div class="section ktv-remote">
@@ -1033,7 +1134,7 @@ a{color:inherit}
   <div class="page-head"><button class="back" onclick="closePage()">← 回到街上</button><b>美而美早餐店｜食物記憶</b></div>
   <div class="page-body">
     <div class="hero-card"><img src="assets/images/memory-world.png?v=20260620-v16-bg" alt="美而美早餐店"><div class="hero-text"><h1>食物記憶</h1><p>一起吃過的、他喜歡吃的、他推薦你吃的，都由 Google Drive 分類讀取。</p></div></div>
-    <div class="section folder-hint"><h2>Google Drive 資料夾</h2><div class="story">05_美而美早餐店<br>底下可以再分子資料夾，網站會讀下一層與更深層。</div></div>
+    <div class="section folder-hint"><h2></h2><div class="story">05_美而美早餐店<br>底下可以再分子資料夾，網站會讀下一層與更深層。</div></div>
     <div class="section"><h2>照片</h2><div id="foodPhotoGrid" class="grid"><div class="empty">食物照片載入中…</div></div></div>
   </div>
 </section>
@@ -1044,7 +1145,7 @@ a{color:inherit}
     <div class="hero-card"><img src="assets/images/sixth_tree.jpeg?v=20260620-v16-tree" alt="第六棵樹"><div class="rain-layer"></div><div class="hero-text"><h1>通往他的路</h1><p>Google Maps 導航、街景、第六棵樹天氣。</p></div></div>
     <div class="section weather-box"><h2>第六棵樹天氣</h2><div class="weather-card" id="weatherLabel">讀取長眠地天氣中…</div></div>
     <div class="section"><h2>導航</h2><div class="map-list" id="mapList"></div></div>
-    <div class="section folder-hint"><h2>Google Drive 資料夾</h2><div class="story">06_通往他的路<br>底下可以再分子資料夾，網站會讀下一層與更深層。</div></div>
+    <div class="section folder-hint"><h2></h2><div class="story">06_通往他的路<br>底下可以再分子資料夾，網站會讀下一層與更深層。</div></div>
     <div class="section"><h2>通往他的路</h2><div id="roadPhotoGrid" class="grid"><div class="empty">導航相關照片載入中…</div></div></div>
   </div>
 </section>
@@ -1388,7 +1489,7 @@ function finishOpeningMemoryCountdown(){
 let uiAudioCtx=null;
 let hintHidden=false;
 const CAPSULE_AREAS={
-  photo:'華光相館｜有你的時光',
+  photo:'華光相館｜你和我們的時光',
   video:'新時代影音館｜影片',
   home:'中間公寓｜他家',
   music:'金嗓卡拉OK｜他唱的歌',
@@ -1511,6 +1612,7 @@ function submitMemoryCapsule(id){
 
 
 const MEMORY_WEATHERS=[
+<<<<<<< HEAD
   {key:'sunny',label:'☀️ 晴天',chip:'☀️',bg:'assets/images/memory-world.png',fx:''},
   {key:'hot',label:'☀️ 炎熱',chip:'☀️',bg:'assets/images/memory-world.png',fx:'heat'},
   {key:'cloudy',label:'⛅ 多雲',chip:'⛅',bg:'assets/images/weather/day-cloudy.png',fx:''},
@@ -1536,6 +1638,67 @@ function setMemoryWeather(key,ev){
   try{localStorage.setItem('dearAngMemoryWeather',w.key);}catch(e){}
   const stage=document.getElementById('stage');
   if(stage)stage.style.setProperty('--memory-world-bg',`url("${w.bg}?v=20260622-v29")`);
+=======
+  {key:'sunny',label:'☀️ 晴天',chip:'☀️',bg:'assets/images/weather/day-sunny.png',fx:''},
+  {key:'hot',label:'☀️ 炎熱',chip:'☀️',bg:'assets/images/weather/day-hot.png',fx:'heat'},
+  {key:'cloudy',label:'⛅ 多雲',chip:'⛅',bg:'assets/images/weather/day-cloudy.png',fx:''},
+  {key:'overcast',label:'☁️ 陰天',chip:'☁️',bg:'assets/images/weather/day-overcast.png',fx:''},
+  {key:'rain',label:'🌧️ 雨天',chip:'🌧️',bg:'assets/images/weather/day-rain.png',fx:'rain'},
+  {key:'storm',label:'⛈️ 暴雨',chip:'⛈️',bg:'assets/images/weather/day-storm.png',fx:'storm'},
+  {key:'fog',label:'🌫️ 霧',chip:'🌫️',bg:'assets/images/weather/day-fog.png',fx:'fog'},
+  {key:'haze',label:'😷 霾',chip:'😷',bg:'assets/images/weather/day-haze.png',fx:'haze'},
+  {key:'night',label:'🌙 夜晚',chip:'🌙',bg:'assets/images/weather/night-clear.png',fx:'night'},
+  {key:'nightRain',label:'🌧️ 夜雨',chip:'🌧️',bg:'assets/images/weather/night-rain.png',fx:'rain night'},
+  {key:'snow',label:'❄️ 下雪',chip:'❄️',bg:'assets/images/weather/night-storm.png',fx:'snow haze'}
+];
+const AUTO_WEATHER_POINT={lat:24.113978,lng:120.782379};
+let memoryWeatherKey=timeBasedWeatherKey();
+let autoWeatherSource='time';
+let autoWeatherTimer=null;
+function memoryWeatherByKey(key){return MEMORY_WEATHERS.find(w=>w.key===key)||MEMORY_WEATHERS[0];}
+function taipeiNow(){
+  try{return new Date(new Date().toLocaleString('en-US',{timeZone:'Asia/Taipei'}));}
+  catch(e){return new Date();}
+}
+function timeBasedWeatherKey(){
+  const h=taipeiNow().getHours();
+  if(h>=5 && h<11)return 'sunny';       // 早上
+  if(h>=11 && h<16)return 'hot';        // 中午下午偏熱
+  if(h>=16 && h<18)return 'cloudy';     // 傍晚先用多雲
+  if(h>=18 && h<23)return 'night';      // 晚上
+  return 'night';                       // 半夜
+}
+function timeBasedWeatherText(){
+  const h=taipeiNow().getHours();
+  if(h>=5 && h<11)return '即時天氣讀取中，先用台灣時間判斷：早上晴天版';
+  if(h>=11 && h<16)return '即時天氣讀取中，先用台灣時間判斷：白天炎熱版';
+  if(h>=16 && h<18)return '即時天氣讀取中，先用台灣時間判斷：傍晚多雲版';
+  if(h>=18 && h<23)return '即時天氣讀取中，先用台灣時間判斷：晚上版';
+  return '即時天氣讀取中，先用台灣時間判斷：半夜版';
+}
+function renderMiniWeatherButtons(){
+  const box=document.getElementById('miniWeatherButtons');
+  if(!box)return;
+  box.innerHTML=MEMORY_WEATHERS.map(w=>`<button type="button" data-weather="${w.key}" onclick="setMemoryWeather('${w.key}',event,'manual')">${w.label}</button>`).join('');
+}
+function setMiniWeatherStatus(text){
+  const el=document.getElementById('miniWeatherStatus');
+  if(el)el.textContent=text||'';
+}
+function setMemoryWeather(key,ev,source){
+  if(ev){ev.stopPropagation();}
+  const w=memoryWeatherByKey(key);
+  memoryWeatherKey=w.key;
+  autoWeatherSource=source||autoWeatherSource||'manual';
+  const version='20260623-v34';
+  const stage=document.getElementById('stage');
+  if(stage)stage.style.setProperty('--memory-world-bg',`url("${w.bg}?v=${version}")`);
+  const miniBg=document.getElementById('miniWorldBg');
+  if(miniBg){
+    miniBg.src=w.bg+'?v='+version;
+    miniBg.alt='木框裡的Q版小世界｜'+w.label;
+  }
+>>>>>>> 786473be995e5f2fb7a99e4ea5d91f004b17fadc
   const chip=document.getElementById('weatherChip');
   if(chip)chip.textContent=w.chip;
   const miniFx=document.getElementById('miniWorldWeather');
@@ -1544,10 +1707,74 @@ function setMemoryWeather(key,ev){
   if(worldFx)worldFx.className='world-weather '+(w.fx||'');
   document.querySelectorAll('#miniWeatherButtons button').forEach(b=>b.classList.toggle('active',b.dataset.weather===w.key));
 }
+<<<<<<< HEAD
 function cycleMemoryWeather(){
   const idx=Math.max(0,MEMORY_WEATHERS.findIndex(w=>w.key===memoryWeatherKey));
   setMemoryWeather(MEMORY_WEATHERS[(idx+1)%MEMORY_WEATHERS.length].key);
 }
+=======
+function setAutoMemoryWeather(key,msg){
+  setMemoryWeather(key,null,'auto');
+  setMiniWeatherStatus(msg||('已依即時天氣套用：'+memoryWeatherByKey(key).label));
+}
+function applyTimeWeatherFallback(){
+  const key=timeBasedWeatherKey();
+  setMemoryWeather(key,null,'time');
+  setMiniWeatherStatus(timeBasedWeatherText());
+}
+function weatherKeyFromOpenMeteo(c){
+  const code=Number(c.weather_code||0);
+  const isDay=Number(c.is_day)===1;
+  const temp=Number(c.temperature_2m);
+  const wind=Number(c.wind_speed_10m);
+  const rain=(Number(c.rain)||0)+(Number(c.showers)||0)+(Number(c.precipitation)||0);
+  if(code>=95 || wind>=55)return 'storm';
+  if(code>=71 && code<=77)return 'snow';
+  if(code===45 || code===48)return 'fog';
+  if(rain>0 || (code>=51&&code<=67) || (code>=80&&code<=82))return isDay?'rain':'nightRain';
+  if(code===3)return 'overcast';
+  if(code===2)return isDay?'cloudy':'night';
+  if(!isDay)return 'night';
+  if(isFinite(temp) && temp>=32)return 'hot';
+  return 'sunny';
+}
+function weatherTextFromKey(key,c){
+  const w=memoryWeatherByKey(key);
+  const temp=Number(c.temperature_2m);
+  const wind=Number(c.wind_speed_10m);
+  const code=Number(c.weather_code||0);
+  return `已依 24.113978, 120.782379 即時天氣套用：${w.label}｜${isFinite(temp)?temp.toFixed(1):'--'}°C｜風速 ${isFinite(wind)?wind.toFixed(0):'--'} km/h｜代碼 ${code}`;
+}
+function refreshAutoWeather(showToast){
+  const label=document.getElementById('weatherLabel');
+  const page=document.getElementById('page-nav');
+  if(showToast)toast('正在重新讀取天氣…');
+  setMiniWeatherStatus('正在讀取 24.113978, 120.782379 即時天氣…');
+  const ctrl=new AbortController();
+  const timeout=setTimeout(()=>ctrl.abort(),6500);
+  const {lat,lng}=AUTO_WEATHER_POINT;
+  return fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lng}&current=temperature_2m,weather_code,is_day,wind_speed_10m,precipitation,rain,showers&timezone=Asia%2FTaipei`,{cache:'no-store',signal:ctrl.signal})
+    .then(r=>{if(!r.ok)throw new Error('weather fetch failed');return r.json();})
+    .then(d=>{
+      clearTimeout(timeout);
+      const c=d.current||{};
+      const key=weatherKeyFromOpenMeteo(c);
+      const msg=weatherTextFromKey(key,c);
+      setAutoMemoryWeather(key,msg);
+      if(label)label.textContent=msg.replace('已依 24.113978, 120.782379 即時天氣套用：','長眠地現在：');
+      if(page)page.dataset.weather=memoryWeatherByKey(key).label;
+      if(showToast)toast('天氣已更新');
+    })
+    .catch(()=>{
+      clearTimeout(timeout);
+      const msg='即時天氣暫時讀取不到，先保留時間判斷畫面。';
+      setMiniWeatherStatus(msg+' '+timeBasedWeatherText());
+      if(label)label.textContent=msg;
+      if(showToast)toast('天氣讀取不到，先用時間判斷',1);
+    });
+}
+function cycleMemoryWeather(){refreshAutoWeather(true);}
+>>>>>>> 786473be995e5f2fb7a99e4ea5d91f004b17fadc
 function showMiniWorld(){
   renderMiniWeatherButtons();
   setMemoryWeather(memoryWeatherKey);
@@ -1591,7 +1818,7 @@ function loadData(){api({action:'getMemorialData'}).then(r=>{if(!r.ok)throw Erro
 function detectAreaKey(text){
   text=String(text||'');
   const areas={
-    photo:['01_有你的時光','有你的時光','華光','相館'],
+    photo:['01_你和我們的時光','你和我們的時光','華光','相館'],
     video:['02_影音館','影音館','影片','新時代'],
     home:['03_他的家','他的家','他家','個人','中間公寓'],
     music:['04_金嗓卡拉OK','金嗓','卡拉OK','他唱的歌'],
@@ -1663,7 +1890,7 @@ function matchMediaKind(it,kind){
 }
 function cleanFolderLabel(path,area){
   let p=String(path||'').replace(/^\/+|\/+$/g,'');
-  const rootMap={photo:'01_有你的時光',video:'02_影音館',home:'03_他的家',music:'04_金嗓卡拉OK',food:'05_美而美早餐店',road:'06_通往他的路',friend:'07_好友投稿'};
+  const rootMap={photo:'01_你和我們的時光',video:'02_影音館',home:'03_他的家',music:'04_金嗓卡拉OK',food:'05_美而美早餐店',road:'06_通往他的路',friend:'07_好友投稿'};
   const root=rootMap[area]||'';
   if(p===root)return '主資料夾';
   if(root && p.startsWith(root+'/'))p=p.slice(root.length+1);
@@ -1913,7 +2140,7 @@ function ktvNext(){if(!KTV_SONGS.length)return;ktvSelectedIndex=ktvSelectedIndex
 function ktvVolume(delta){const p=ktvCurrentPlayer();if(!p){ktvSetOsd('尚未播放，無法調整音量');return;}p.volume=Math.max(0,Math.min(1,(p.volume||1)+delta));ktvSetOsd('音量 '+Math.round(p.volume*100)+'%');}
 
 function renderDynamic(){
-  renderFolderedMedia('photoGrid','photo','image','請在 Google Drive 建立「01_有你的時光」，底下可再分子資料夾。',DATA.photos||[]);
+  renderFolderedMedia('photoGrid','photo','image','請在 Google Drive 建立「01_你和我們的時光」，底下可再分子資料夾。',DATA.photos||[]);
   renderFolderedMedia('homePhotoGrid','home','image','這裡只讀「03_他的家」及其子資料夾。');
   renderFolderedMedia('foodPhotoGrid','food','image','請在 Google Drive 建立「05_美而美早餐店」，底下可再分子資料夾。');
   renderFolderedMedia('roadPhotoGrid','road','image','請在 Google Drive 建立「06_通往他的路」，底下可再分子資料夾。');
@@ -1983,7 +2210,16 @@ function renderMaps(){
     return `<div class="map-row"><b>${p.id}｜${p.title}</b><span>${q}</span><div class="toolbar"><a class="pill soft" href="https://www.google.com/maps?q=${q}" target="_blank" rel="noopener">打開地圖</a><a class="pill soft" href="https://www.google.com/maps?q=${q}&layer=c" target="_blank" rel="noopener">開街景</a></div></div>`;
   }).join('')+`<div class="map-row"><b>導航到第六棵樹</b><span>從你現在的位置出發</span><div class="toolbar"><a class="pill" href="https://www.google.com/maps/dir/?api=1&destination=24.11397,120.7823878&travelmode=driving" target="_blank" rel="noopener">開始導航</a></div></div>`;
 }
+<<<<<<< HEAD
 function setupWeather(){const label=document.getElementById('weatherLabel');const page=document.getElementById('page-nav');const lat=24.11397,lng=120.7823878;fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lng}&current=temperature_2m,weather_code,is_day,wind_speed_10m,precipitation,rain,showers&timezone=auto`).then(r=>r.json()).then(d=>{const c=d.current||{},code=+c.weather_code||0,temp=+c.temperature_2m,wind=+c.wind_speed_10m,rain=(+c.rain||0)+(+c.showers||0)+(+c.precipitation||0);let scene='天晴';if(code>=95)scene='暴風雨';else if(code>=80||(code>=51&&code<=67)||rain>0)scene=rain>=8?'暴雨':'下雨';else if(code===45||code===48)scene='霧';else if(code>=2&&code<=3)scene='陰天';else scene=(+c.is_day===1?'天晴':'天黑');label.textContent=`長眠地現在：${scene}｜${isFinite(temp)?temp.toFixed(1):'--'}°C｜風速 ${isFinite(wind)?wind.toFixed(0):'--'} km/h`;page.dataset.weather=scene;if(scene==='天黑')setMemoryWeather('night');else if(scene==='下雨')setMemoryWeather('rain');else if(scene==='暴雨'||scene==='暴風雨')setMemoryWeather('storm');else if(scene==='霧')setMemoryWeather('fog');else if(scene==='陰天')setMemoryWeather('overcast');}).catch(()=>{label.textContent='長眠地天氣暫時讀取不到，晚點再看看。'})}
+=======
+function setupWeather(){
+  applyTimeWeatherFallback();
+  refreshAutoWeather(false);
+  if(autoWeatherTimer)clearInterval(autoWeatherTimer);
+  autoWeatherTimer=setInterval(()=>refreshAutoWeather(false),10*60*1000);
+}
+>>>>>>> 786473be995e5f2fb7a99e4ea5d91f004b17fadc
 </script>
 </body>
 </html>
