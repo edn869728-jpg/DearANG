@@ -791,7 +791,19 @@ a{color:inherit}
   transition:transform .8s cubic-bezier(.22,1,.36,1);
   z-index:1;
 }
-.mini-crt-frame{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;user-select:none;-webkit-user-drag:none;pointer-events:none;}
+  
+.mini-crt-frame{   position:absolute;.mini-crt-frame{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  user-select:none;
+  -webkit-user-drag:none;
+  pointer-events:none;
+  background:#000;
+}
+                
 .mini-crt-screen{
   position:absolute;
   left:4.1%;top:34.55%;width:91.8%;height:28.65%;
@@ -921,7 +933,17 @@ a{color:inherit}
 
 <div class="mini-world hidden" id="miniWorld" aria-label="CRT電視小世界">
   <div class="mini-crt-scene">
-    <img src="assets/images/mini-frame.jpg?v=20260623-v33-frame" class="mini-crt-frame" alt="兩個人趴在木框上看小世界">
+    <video
+  class="mini-crt-frame"
+  id="miniFrameVideo"
+  src="assets/videos/mini-world-frame.mp4?v=20260623-v35"
+  autoplay
+  muted
+  loop
+  playsinline
+  preload="auto"
+  aria-label="兩個人趴在木框上看小世界">
+</video>
     <button class="mini-crt-screen" type="button" onclick="enterMainWorld()" aria-label="點擊木框中間的小世界進入富宜路街道">
       <img src="assets/images/weather/day-sunny.png?v=20260623-v35" class="mini-world-bg" id="miniWorldBg" alt="木框裡的Q版小世界">
       <div class="mini-world-weather" id="miniWorldWeather"></div>
