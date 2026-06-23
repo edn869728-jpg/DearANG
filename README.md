@@ -1,28 +1,29 @@
-# Dear ANG v31｜真正木框小世界＋自動天氣版
+# Dear ANG v33｜真正木框小世界 + 天氣圖同步版
 
-## 新增
+流程：
 
-- 使用你提供的 `mini-world-frame.mp4` 作為真正的小世界外框。
-- 開場頁不動。
-- 開場倒數影片不動。
-- 倒數影片結束後進入「木框小世界」。
-- 點中間小世界後放大淡出，進入原本富宜路主街。
-- 天氣改為自動讀取座標：`24.113978, 120.782379`。
-- 小世界畫面與主街畫面同步天氣。
-- 每 10 分鐘自動更新一次天氣；右上角天氣按鈕可手動重新讀取。
+1. 原本開場頁不動。
+2. 原本開場倒數影片不動。
+3. 倒數影片結束後，先進入「兩個人趴在木框上的小世界」。
+4. 木框中間的小世界會直接使用 `assets/images/weather/` 裡面的天氣底圖。
+5. 點中間小世界後，放大淡出並進入原本富宜路主街。
+6. 進入後的主街也使用同一張天氣底圖，而且是取中間橫幅比例裁切，不再用舊的 memory-world 當晴天底圖。
+7. 天氣仍以 `24.113978, 120.782379` 即時天氣自動判斷；讀取慢時先用台灣時間判斷早上 / 白天 / 晚上 / 半夜。
 
-## 使用的天氣來源
+## 主要修改
 
-Open-Meteo Forecast API，免 API Key。需要網頁能連線網路。
+- `assets/images/mini-frame.jpg`：真正的小世界外框。
+- `assets/images/weather/day-sunny.png`：晴天 / 炎熱。
+- `assets/images/weather/day-cloudy.png`：多雲 / 陰天。
+- `assets/images/weather/day-rain.png`：雨天。
+- `assets/images/weather/day-storm.png`：暴雨 / 霧 / 霾。
+- `assets/images/weather/night-clear.png`：夜晚。
+- `assets/images/weather/night-cloudy.png`：夜雨 / 下雪。
 
-## 覆蓋上傳
+## 覆蓋方式
 
-直接把 ZIP 內容覆蓋 GitHub Pages 專案根目錄。
+整包上傳到 GitHub Pages 專案根目錄覆蓋即可。
 
-主要檔案：
+建議測試網址加版本參數：
 
-- index.html
-- assets/videos/mini-world-frame.mp4
-- assets/videos/opening-countdown.mp4
-- assets/audio/dear-ang-theme.mp3
-- assets/images/*
+`https://edn869728-jpg.github.io/DearANG/?v=33`
