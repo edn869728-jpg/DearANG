@@ -8,7 +8,7 @@
 <!-- DearANG v16 KTV stage forced 20260620 -->
 <!-- DearANG v21 opening countdown video 20260620 -->
 <!-- DearANG v33 Real Frame Weather World Crop 20260623 -->
-<title>有你的時光｜Dear ANG v29</title>
+<title>你和我們的時光｜Dear ANG v29</title>
 <style>
 :root{
   --bg:#0b0b0d;
@@ -895,16 +895,16 @@ a{color:inherit}
     <div class="gate-song-credit" aria-label="主題曲資訊">
       <div class="credit-kicker">THEME SONG</div>
       <div class="credit-title">〈給安格 Dear ANG〉</div>
-      <div class="credit-row"><span>作詞</span><b>Enden &amp; OpenAI</b></div>
-      <div class="credit-row"><span>作曲</span><b>Enden &amp; Suno AI</b></div>
+      <div class="credit-row"><span>作詞</span><b>Enden</b></div>
+      <div class="credit-row"><span>作曲</span><b>Enden</b></div>
     </div>
-    <p class="gate-lead">這裡不是照片分區。是有你的時光。點一棟房子，就走進一段曾經。</p>
-    <button onclick="enterWorld()">進入有你的時光</button>
-    <div class="tiny" style="margin-top:14px">第一次點擊後才會播放音樂，避免手機瀏覽器擋住。</div>
+    <p class="gate-lead">這裡是你和我們的時光。一棟房子，一段曾經。</p>
+    <button onclick="enterWorld()">踏上想你的旅程</button>
+    <div class="tiny" style="margin-top:14px">!!!!! 提醒 : 情緒較為敏感者，請先準備好衛生紙。 !!!!!</div>
   </div>
 </div>
 
-<div class="asset-preload-status" id="assetPreloadStatus">正在準備回憶…</div>
+<div class="asset-preload-status" id="assetPreloadStatus">準備通往回憶…</div>
 <div class="opening-countdown" id="openingCountdown" aria-live="polite">
   <div class="opening-countdown-card">
     <video class="opening-countdown-video" id="openingCountdownVideo" src="assets/videos/opening-countdown.mp4?v=20260620-v21" playsinline preload="auto"></video>
@@ -921,9 +921,9 @@ a{color:inherit}
 
 <div class="mini-world hidden" id="miniWorld" aria-label="CRT電視小世界">
   <div class="mini-crt-scene">
-    <img src="assets/images/mini-frame.jpg?v=20260623-v33-frame" class="mini-crt-frame" alt="兩個人趴在木框上看小世界">
+    <video class="mini-crt-frame" src="assets/videos/mini-frame.mp4?v=20260623-v33-frame" playsinline preload="auto"></video>
     <button class="mini-crt-screen" type="button" onclick="enterMainWorld()" aria-label="點擊木框中間的小世界進入富宜路街道">
-      <img src="assets/images/memory-world.png?v=20260622-v30" class="mini-world-bg" id="miniWorldBg" alt="木框裡的Q版小世界">
+      <img src="assets/images/memory-world.png" class="mini-world-bg" id="miniWorldBg" alt="木框裡的Q版小世界">
       <div class="mini-world-weather" id="miniWorldWeather"></div>
       <div class="mini-screen-shine"></div>
       <div class="mini-screen-hint">點中間世界進入</div>
@@ -937,9 +937,9 @@ a{color:inherit}
 </div>
 
 
-<div class="world" id="world" aria-label="有你的時光世界">
+<div class="world" id="world" aria-label="你和我們的時光世界">
   <div class="topbar">
-    <div class="brand"><small>DEAR ANG</small>有你的時光</div>
+    <div class="brand"><small>DEAR ANG</small>你和我們的時光</div>
     <div class="top-actions">
       <button class="icon-btn" onclick="toggleMusic()" id="musicBtn">♫</button>
       <button class="icon-btn lyric-toggle on" onclick="toggleLyrics()" id="lyricBtn">詞</button>
@@ -950,25 +950,25 @@ a{color:inherit}
   <div class="scroller" id="scroller">
     <div class="stage" id="stage">
       <div class="world-weather" id="worldWeather"></div>
-      <div class="hotspot h-photo" data-label="華光相館｜有你的時光" onclick="openPage('photo')"></div>
+      <div class="hotspot h-photo" data-label="華光相館｜你和我們的時光" onclick="openPage('photo')"></div>
       <div class="hotspot h-video" data-label="新時代影音館｜影片" onclick="openPage('video')"></div>
-      <div class="hotspot h-home" data-label="富宜路86號｜他家" onclick="openPage('home')"></div>
-      <div class="hotspot h-music" data-label="金嗓卡拉OK｜他唱的歌" onclick="openPage('music')"></div>
+      <div class="hotspot h-home" data-label="富宜路86號｜你家" onclick="openPage('home')"></div>
+      <div class="hotspot h-music" data-label="金嗓卡拉OK｜你唱的歌" onclick="openPage('music')"></div>
       <div class="hotspot h-food" data-label="美而美早餐店｜一起吃過的東西" onclick="openPage('food')"></div>
-      <div class="hotspot h-nav" data-label="公路局｜通往他的路" onclick="openPage('nav')"></div>
+      <div class="hotspot h-nav" data-label="公路局｜想你的時候" onclick="openPage('nav')"></div>
     </div>
   </div>
-  <div class="hint"><div class="hint-inner"><span>← →</span><div>左右滑這條街<small>點招牌或建築，進入每一段有他的時光。</small></div></div></div>
+  <div class="hint"><div class="hint-inner"><span>← →</span><div>左右滑這條街<small>點招牌或建築，進入對應的時光。</small></div></div></div>
 </div>
 
 <audio id="themeAudio" preload="metadata" loop></audio>
 
 <!-- 華光相館｜照片 -->
 <section class="page" id="page-photo">
-  <div class="page-head"><button class="back" onclick="closePage()">← 回到街上</button><b>華光相館｜有你的時光</b></div>
+  <div class="page-head"><button class="back" onclick="closePage()">← 回到街上</button><b>華光相館｜你和我們的時光</b></div>
   <div class="page-body">
-    <div class="hero-card"><img src="assets/images/memory-world.png?v=20260620-v16-bg" alt="華光相館"><div class="hero-text"><h1>有你的時光</h1><p>資料從 Google Drive 讀取。請把一般照片放在「01_有你的時光」。</p></div></div>
-    <div class="section folder-hint"><h2>Google Drive 資料夾</h2><div class="story">01_有你的時光<br>底下可以再分子資料夾，網站會讀下一層與更深層。</div></div>
+    <div class="hero-card"><img src="assets/images/memory-world.png?v=20260620-v16-bg" alt="華光相館"><div class="hero-text"><h1>你和我們的時光</h1><p></p></div></div>
+    <div class="section folder-hint"><h2></h2><div class="story">01_你和我們的時光<br></div></div>
     <div class="section"><h2>照片</h2><div id="photoGrid" class="album-mount"><div class="empty">照片載入中…</div></div></div>
   </div>
 </section>
@@ -976,17 +976,17 @@ a{color:inherit}
 <section class="page" id="page-video">
   <div class="page-head"><button class="back" onclick="closePage()">← 回到街上</button><b>新時代影音館｜影片</b></div>
   <div class="page-body">
-    <div class="hero-card"><img src="assets/images/memory-world.png?v=20260620-v16-bg" alt="新時代影音館"><div class="hero-text"><h1>影音館</h1><p>資料從 Google Drive 讀取。請把影片放在「02_影音館」。</p></div></div>
-    <div class="section folder-hint"><h2>Google Drive 資料夾</h2><div class="story">02_影音館<br>底下可以再分子資料夾，網站會讀下一層與更深層。</div></div>
+    <div class="hero-card"><img src="assets/images/memory-world.png" alt="新時代影音館"><div class="hero-text"><h1>影音館</h1><p></p></div></div>
+    <div class="section folder-hint"><h2></h2><div class="story">02_影音館<br></div></div>
     <div class="section"><h2>影片</h2><div class="video-grid" id="videoGrid"><div class="empty">影片載入中…</div></div></div>
   </div>
 </section>
-<!-- 中間公寓｜他家 -->
+<!-- 中間公寓｜你家 -->
 <section class="page" id="page-home">
-  <div class="page-head"><button class="back" onclick="closePage()">← 回到街上</button><b>中間公寓｜他家</b></div>
+  <div class="page-head"><button class="back" onclick="closePage()">← 回到街上</button><b>中間公寓｜你家</b></div>
   <div class="page-body">
-    <div class="hero-card"><img src="assets/images/memory-world.png?v=20260620-v16-bg" alt="中間公寓"><div class="hero-text"><h1>他家</h1><p>這裡只放他個人的照片。內容由你自己分類，不自動補故事。</p></div></div>
-    <div class="section folder-hint"><h2>Google Drive 資料夾</h2><div class="story">03_他的家<br>底下可以再分子資料夾，網站會讀下一層與更深層。</div></div>
+    <div class="hero-card"><img src="assets/images/memory-world.png" alt="中間公寓"><div class="hero-text"><h1>你家</h1><p>想起你，你的樣貌，你的形態， 你英俊臉龐。</p></div></div>
+    <div class="section folder-hint"><h2></h2><div class="story">03_你的家<br>底下可以再分子資料夾，網站會讀下一層與更深層。</div></div>
     <div class="section"><h2>他個人的照片</h2><div id="homePhotoGrid" class="album-mount"><div class="empty">載入中…</div></div></div>
   </div>
 </section>
@@ -1015,7 +1015,7 @@ a{color:inherit}
         <div class="section ktv-songbook">
           <h2>歌本</h2>
           <div id="ktvSongbook"><div class="empty">歌曲載入中…</div></div>
-          <div class="ktv-folder-note">讀取 Google Drive「04_金嗓卡拉OK」及底下所有子資料夾。</div>
+          <div class="ktv-folder-note"></div>
         </div>
 
         <div class="section ktv-remote">
@@ -1067,7 +1067,7 @@ a{color:inherit}
   <div class="page-head"><button class="back" onclick="closePage()">← 回到街上</button><b>美而美早餐店｜食物記憶</b></div>
   <div class="page-body">
     <div class="hero-card"><img src="assets/images/memory-world.png?v=20260620-v16-bg" alt="美而美早餐店"><div class="hero-text"><h1>食物記憶</h1><p>一起吃過的、他喜歡吃的、他推薦你吃的，都由 Google Drive 分類讀取。</p></div></div>
-    <div class="section folder-hint"><h2>Google Drive 資料夾</h2><div class="story">05_美而美早餐店<br>底下可以再分子資料夾，網站會讀下一層與更深層。</div></div>
+    <div class="section folder-hint"><h2></h2><div class="story">05_美而美早餐店<br>底下可以再分子資料夾，網站會讀下一層與更深層。</div></div>
     <div class="section"><h2>照片</h2><div id="foodPhotoGrid" class="grid"><div class="empty">食物照片載入中…</div></div></div>
   </div>
 </section>
@@ -1078,7 +1078,7 @@ a{color:inherit}
     <div class="hero-card"><img src="assets/images/sixth_tree.jpeg?v=20260620-v16-tree" alt="第六棵樹"><div class="rain-layer"></div><div class="hero-text"><h1>通往他的路</h1><p>Google Maps 導航、街景、第六棵樹天氣。</p></div></div>
     <div class="section weather-box"><h2>第六棵樹天氣</h2><div class="weather-card" id="weatherLabel">讀取長眠地天氣中…</div></div>
     <div class="section"><h2>導航</h2><div class="map-list" id="mapList"></div></div>
-    <div class="section folder-hint"><h2>Google Drive 資料夾</h2><div class="story">06_通往他的路<br>底下可以再分子資料夾，網站會讀下一層與更深層。</div></div>
+    <div class="section folder-hint"><h2></h2><div class="story">06_通往他的路<br>底下可以再分子資料夾，網站會讀下一層與更深層。</div></div>
     <div class="section"><h2>通往他的路</h2><div id="roadPhotoGrid" class="grid"><div class="empty">導航相關照片載入中…</div></div></div>
   </div>
 </section>
@@ -1422,7 +1422,7 @@ function finishOpeningMemoryCountdown(){
 let uiAudioCtx=null;
 let hintHidden=false;
 const CAPSULE_AREAS={
-  photo:'華光相館｜有你的時光',
+  photo:'華光相館｜你和我們的時光',
   video:'新時代影音館｜影片',
   home:'中間公寓｜他家',
   music:'金嗓卡拉OK｜他唱的歌',
@@ -1716,7 +1716,7 @@ function loadData(){api({action:'getMemorialData'}).then(r=>{if(!r.ok)throw Erro
 function detectAreaKey(text){
   text=String(text||'');
   const areas={
-    photo:['01_有你的時光','有你的時光','華光','相館'],
+    photo:['01_你和我們的時光','你和我們的時光','華光','相館'],
     video:['02_影音館','影音館','影片','新時代'],
     home:['03_他的家','他的家','他家','個人','中間公寓'],
     music:['04_金嗓卡拉OK','金嗓','卡拉OK','他唱的歌'],
@@ -1788,7 +1788,7 @@ function matchMediaKind(it,kind){
 }
 function cleanFolderLabel(path,area){
   let p=String(path||'').replace(/^\/+|\/+$/g,'');
-  const rootMap={photo:'01_有你的時光',video:'02_影音館',home:'03_他的家',music:'04_金嗓卡拉OK',food:'05_美而美早餐店',road:'06_通往他的路',friend:'07_好友投稿'};
+  const rootMap={photo:'01_你和我們的時光',video:'02_影音館',home:'03_他的家',music:'04_金嗓卡拉OK',food:'05_美而美早餐店',road:'06_通往他的路',friend:'07_好友投稿'};
   const root=rootMap[area]||'';
   if(p===root)return '主資料夾';
   if(root && p.startsWith(root+'/'))p=p.slice(root.length+1);
@@ -2038,7 +2038,7 @@ function ktvNext(){if(!KTV_SONGS.length)return;ktvSelectedIndex=ktvSelectedIndex
 function ktvVolume(delta){const p=ktvCurrentPlayer();if(!p){ktvSetOsd('尚未播放，無法調整音量');return;}p.volume=Math.max(0,Math.min(1,(p.volume||1)+delta));ktvSetOsd('音量 '+Math.round(p.volume*100)+'%');}
 
 function renderDynamic(){
-  renderFolderedMedia('photoGrid','photo','image','請在 Google Drive 建立「01_有你的時光」，底下可再分子資料夾。',DATA.photos||[]);
+  renderFolderedMedia('photoGrid','photo','image','請在 Google Drive 建立「01_你和我們的時光」，底下可再分子資料夾。',DATA.photos||[]);
   renderFolderedMedia('homePhotoGrid','home','image','這裡只讀「03_他的家」及其子資料夾。');
   renderFolderedMedia('foodPhotoGrid','food','image','請在 Google Drive 建立「05_美而美早餐店」，底下可再分子資料夾。');
   renderFolderedMedia('roadPhotoGrid','road','image','請在 Google Drive 建立「06_通往他的路」，底下可再分子資料夾。');
