@@ -7,7 +7,7 @@
 <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate, max-age=0">
 <!-- DearANG v16 KTV stage forced 20260620 -->
 <!-- DearANG v21 opening countdown video 20260620 -->
-<!-- DearANG v30 CRT mini world weather bridge 20260622 -->
+<!-- DearANG v31 real frame mini world + auto weather 20260623 -->
 <title>有你的時光｜Dear ANG v29</title>
 <style>
 :root{
@@ -762,7 +762,7 @@ a{color:inherit}
 
 
 
-/* ===== v30 CRT電視小世界中轉＋天氣同步：開場影片後先到CRT，再點螢幕進主街 ===== */
+/* ===== v31 真正外框小世界＋24.113978,120.782379 即時天氣同步 ===== */
 .mini-world{
   position:fixed;
   inset:0;
@@ -783,19 +783,20 @@ a{color:inherit}
 .mini-world.zooming .mini-crt-scene{transform:scale(2.38) translateY(-10%);}
 .mini-crt-scene{
   position:relative;
-  width:min(76vw,520px);
-  max-height:78svh;
-  aspect-ratio:646/1280;
+  width:min(92vw,540px);
+  max-height:94svh;
+  aspect-ratio:1080/1920;
   filter:drop-shadow(0 30px 70px rgba(0,0,0,.62));
   transform:scale(1);
   transition:transform .8s cubic-bezier(.22,1,.36,1);
   z-index:1;
 }
-.mini-crt-frame{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;user-select:none;-webkit-user-drag:none;pointer-events:none;}
+.mini-crt-frame{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;user-select:none;-webkit-user-drag:none;pointer-events:none;z-index:1;border-radius:0;}
+.mini-crt-frame-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;user-select:none;pointer-events:none;z-index:1;background:#050506;}
 .mini-crt-screen{
   position:absolute;
-  left:11.8%;top:3.55%;width:76.6%;height:28.8%;
-  border:0;padding:0;margin:0;border-radius:3.2%;overflow:hidden;
+  left:4.05%;top:34.95%;width:91.9%;height:29.15%;
+  border:0;padding:0;margin:0;border-radius:0;overflow:hidden;
   background:#000;box-shadow:inset 0 0 32px rgba(0,0,0,.75),0 0 0 2px rgba(255,255,255,.08);
   cursor:pointer;z-index:2;display:block;color:inherit;
 }
@@ -820,7 +821,9 @@ a{color:inherit}
 .mini-world-weather.storm,
 .world-weather.storm{opacity:.9;background:repeating-linear-gradient(112deg,rgba(255,255,255,0) 0 7px,rgba(255,255,255,.34) 8px 9px,rgba(255,255,255,0) 10px 16px),linear-gradient(180deg,rgba(0,20,48,.35),rgba(0,0,0,.25));animation:v29Rain .26s linear infinite;mix-blend-mode:normal;}
 .mini-world-weather.storm:after,.world-weather.storm:after{content:"";position:absolute;inset:0;background:rgba(255,255,255,.0);animation:v29Lightning 5.8s infinite;}
+.mini-world-weather.snow,.world-weather.snow{opacity:.86;background:radial-gradient(circle,rgba(255,255,255,.9) 0 1.5px,transparent 2px),radial-gradient(circle,rgba(255,255,255,.65) 0 1px,transparent 1.6px);background-size:34px 34px,52px 52px;background-position:0 0,18px 8px;animation:v31Snow 5.5s linear infinite;mix-blend-mode:screen;}
 @keyframes v29Rain{from{background-position:0 0}to{background-position:-90px 180px}}
+@keyframes v31Snow{from{background-position:0 -60px,18px -40px}to{background-position:0 180px,18px 210px}}
 @keyframes v29Heat{from{filter:blur(0)}to{filter:blur(1.4px)}}
 @keyframes v29Lightning{0%,92%,100%{background:rgba(255,255,255,0)}93%{background:rgba(255,255,255,.72)}94%{background:rgba(255,255,255,0)}95%{background:rgba(255,255,255,.35)}96%{background:rgba(255,255,255,0)}}
 .mini-world-panel{
@@ -920,18 +923,18 @@ a{color:inherit}
 
 <div class="mini-world hidden" id="miniWorld" aria-label="CRT電視小世界">
   <div class="mini-crt-scene">
-    <img src="assets/images/ktv-stage.png?v=20260622-v30-crt" class="mini-crt-frame" alt="CRT電視與金嗓卡拉OK櫃">
+    <video class="mini-crt-frame-video" src="assets/videos/mini-world-frame.mp4?v=20260623-v31" autoplay muted loop playsinline preload="auto" aria-hidden="true"></video>
     <button class="mini-crt-screen" type="button" onclick="enterMainWorld()" aria-label="點擊CRT螢幕進入富宜路街道">
       <img src="assets/images/memory-world.png?v=20260622-v30" class="mini-world-bg" id="miniWorldBg" alt="CRT螢幕裡的Q版小世界">
       <div class="mini-world-weather" id="miniWorldWeather"></div>
       <div class="mini-screen-shine"></div>
       <div class="mini-screen-hint">點螢幕進入世界</div>
     </button>
-    <div class="mini-crt-label">CRT 電視裡的小世界</div>
+    <div class="mini-crt-label">木框裡的小世界</div>
   </div>
   <div class="mini-world-panel">
     <div class="mini-world-tip" onclick="enterMainWorld()">點進這個世界｜進入富宜路街道</div>
-    <div class="mini-weather-buttons" id="miniWeatherButtons" aria-label="天氣切換"></div>
+    <div class="mini-weather-buttons" id="miniWeatherButtons" aria-label="自動天氣狀態"></div>
   </div>
 </div>
 
@@ -942,7 +945,7 @@ a{color:inherit}
     <div class="top-actions">
       <button class="icon-btn" onclick="toggleMusic()" id="musicBtn">♫</button>
       <button class="icon-btn lyric-toggle on" onclick="toggleLyrics()" id="lyricBtn">詞</button>
-      <button class="weather-chip" id="weatherChip" onclick="cycleMemoryWeather()" title="切換天氣">☀️</button>
+      <button class="weather-chip" id="weatherChip" onclick="cycleMemoryWeather()" title="依 24.113978,120.782379 自動天氣">☀️</button>
       <button class="icon-btn" onclick="centerWorld()">⌂</button>
     </div>
   </div>
@@ -1553,14 +1556,15 @@ const MEMORY_WEATHERS=[
   {key:'fog',label:'🌫️ 霧',chip:'🌫️',bg:'assets/images/weather/day-storm.png',fx:'fog'},
   {key:'haze',label:'😷 霾',chip:'😷',bg:'assets/images/weather/day-storm.png',fx:'haze'},
   {key:'night',label:'🌙 夜晚',chip:'🌙',bg:'assets/images/weather/night-clear.png',fx:'night'},
-  {key:'nightRain',label:'🌧️ 夜雨',chip:'🌧️',bg:'assets/images/weather/night-cloudy.png',fx:'rain night'}
+  {key:'nightRain',label:'🌧️ 夜雨',chip:'🌧️',bg:'assets/images/weather/night-cloudy.png',fx:'rain night'},
+  {key:'snow',label:'❄️ 下雪',chip:'❄️',bg:'assets/images/weather/night-cloudy.png',fx:'snow haze'}
 ];
 let memoryWeatherKey=localStorage.getItem('dearAngMemoryWeather')||'sunny';
 function memoryWeatherByKey(key){return MEMORY_WEATHERS.find(w=>w.key===key)||MEMORY_WEATHERS[0];}
 function renderMiniWeatherButtons(){
   const box=document.getElementById('miniWeatherButtons');
   if(!box)return;
-  box.innerHTML=MEMORY_WEATHERS.map(w=>`<button type="button" data-weather="${w.key}" onclick="setMemoryWeather('${w.key}',event)">${w.label}</button>`).join('');
+  box.innerHTML='<button type="button" class="active" id="autoWeatherStatus">讀取 24.113978,120.782379 天氣中…</button>';
 }
 function setMemoryWeather(key,ev){
   if(ev){ev.stopPropagation();}
@@ -1577,11 +1581,11 @@ function setMemoryWeather(key,ev){
   const worldFx=document.getElementById('worldWeather');
   if(miniFx)miniFx.className='mini-world-weather '+(w.fx||'');
   if(worldFx)worldFx.className='world-weather '+(w.fx||'');
-  document.querySelectorAll('#miniWeatherButtons button').forEach(b=>b.classList.toggle('active',b.dataset.weather===w.key));
+  const autoStatus=document.getElementById('autoWeatherStatus');
+  if(autoStatus)autoStatus.classList.add('active');
 }
 function cycleMemoryWeather(){
-  const idx=Math.max(0,MEMORY_WEATHERS.findIndex(w=>w.key===memoryWeatherKey));
-  setMemoryWeather(MEMORY_WEATHERS[(idx+1)%MEMORY_WEATHERS.length].key);
+  setupWeather(true);
 }
 function showMiniWorld(){
   renderMiniWeatherButtons();
@@ -1599,7 +1603,7 @@ function enterMainWorld(){
   }
 }
 
-window.addEventListener('load',()=>{centerWorld();setupExperienceLayer();preloadStaticAssets();renderMiniWeatherButtons();setMemoryWeather(memoryWeatherKey);loadLyricsFromRootFiles().finally(()=>setupLyricDanmaku());loadData();setupWeather();renderFood();renderMaps();});
+window.addEventListener('load',()=>{centerWorld();setupExperienceLayer();preloadStaticAssets();renderMiniWeatherButtons();setMemoryWeather(memoryWeatherKey);loadLyricsFromRootFiles().finally(()=>setupLyricDanmaku());loadData();setupWeather();setInterval(()=>setupWeather(true),10*60*1000);renderFood();renderMaps();});
 function enterWorld(){startOpeningMemoryCountdown()}
 function centerWorld(){const sc=document.getElementById('scroller');setTimeout(()=>{sc.scrollLeft=(sc.scrollWidth-sc.clientWidth)/2;},60)}
 function openPage(id){
@@ -2018,7 +2022,50 @@ function renderMaps(){
     return `<div class="map-row"><b>${p.id}｜${p.title}</b><span>${q}</span><div class="toolbar"><a class="pill soft" href="https://www.google.com/maps?q=${q}" target="_blank" rel="noopener">打開地圖</a><a class="pill soft" href="https://www.google.com/maps?q=${q}&layer=c" target="_blank" rel="noopener">開街景</a></div></div>`;
   }).join('')+`<div class="map-row"><b>導航到第六棵樹</b><span>從你現在的位置出發</span><div class="toolbar"><a class="pill" href="https://www.google.com/maps/dir/?api=1&destination=24.11397,120.7823878&travelmode=driving" target="_blank" rel="noopener">開始導航</a></div></div>`;
 }
-function setupWeather(){const label=document.getElementById('weatherLabel');const page=document.getElementById('page-nav');const lat=24.11397,lng=120.7823878;fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lng}&current=temperature_2m,weather_code,is_day,wind_speed_10m,precipitation,rain,showers&timezone=auto`).then(r=>r.json()).then(d=>{const c=d.current||{},code=+c.weather_code||0,temp=+c.temperature_2m,wind=+c.wind_speed_10m,rain=(+c.rain||0)+(+c.showers||0)+(+c.precipitation||0);let scene='天晴';if(code>=95)scene='暴風雨';else if(code>=80||(code>=51&&code<=67)||rain>0)scene=rain>=8?'暴雨':'下雨';else if(code===45||code===48)scene='霧';else if(code>=2&&code<=3)scene='陰天';else scene=(+c.is_day===1?'天晴':'天黑');label.textContent=`長眠地現在：${scene}｜${isFinite(temp)?temp.toFixed(1):'--'}°C｜風速 ${isFinite(wind)?wind.toFixed(0):'--'} km/h`;page.dataset.weather=scene;if(scene==='天黑')setMemoryWeather('night');else if(scene==='下雨')setMemoryWeather('rain');else if(scene==='暴雨'||scene==='暴風雨')setMemoryWeather('storm');else if(scene==='霧')setMemoryWeather('fog');else if(scene==='陰天')setMemoryWeather('overcast');}).catch(()=>{label.textContent='長眠地天氣暫時讀取不到，晚點再看看。'})}
+function weatherKeyFromOpenMeteo(c){
+  const code=Number(c.weather_code||0);
+  const isDay=Number(c.is_day)===1;
+  const temp=Number(c.temperature_2m);
+  const wind=Number(c.wind_speed_10m);
+  const rain=(Number(c.rain)||0)+(Number(c.showers)||0)+(Number(c.precipitation)||0);
+  if(code>=95 || wind>=45) return isDay?'storm':'nightRain';
+  if(code>=71 && code<=86) return 'snow';
+  if(code===45 || code===48) return 'fog';
+  if(code>=51 && code<=67) return rain>=8?'storm':(isDay?'rain':'nightRain');
+  if(code>=80 && code<=82) return rain>=8?'storm':(isDay?'rain':'nightRain');
+  if(rain>0) return rain>=8?'storm':(isDay?'rain':'nightRain');
+  if(!isDay) return 'night';
+  if(isFinite(temp) && temp>=32) return 'hot';
+  if(code===3) return 'overcast';
+  if(code===2) return 'cloudy';
+  return 'sunny';
+}
+function setupWeather(silent=false){
+  const label=document.getElementById('weatherLabel');
+  const page=document.getElementById('page-nav');
+  const status=document.getElementById('autoWeatherStatus');
+  const lat=24.113978,lng=120.782379;
+  if(status&&!silent)status.textContent='讀取 24.113978,120.782379 天氣中…';
+  fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lng}&current=temperature_2m,weather_code,is_day,wind_speed_10m,precipitation,rain,showers&timezone=auto`,{cache:'no-store'})
+    .then(r=>r.json())
+    .then(d=>{
+      const c=d.current||{};
+      const key=weatherKeyFromOpenMeteo(c);
+      setMemoryWeather(key);
+      const w=memoryWeatherByKey(key);
+      const temp=Number(c.temperature_2m),wind=Number(c.wind_speed_10m);
+      const text=`自動天氣：${w.label}｜${isFinite(temp)?temp.toFixed(1):'--'}°C｜風速 ${isFinite(wind)?wind.toFixed(0):'--'} km/h`;
+      if(label)label.textContent=`24.113978, 120.782379 現在：${text.replace('自動天氣：','')}`;
+      if(page)page.dataset.weather=w.label;
+      const chip=document.getElementById('weatherChip');
+      if(chip)chip.title='依 24.113978,120.782379 自動天氣｜點一下重新讀取';
+      if(status)status.textContent=text;
+    })
+    .catch(()=>{
+      if(label)label.textContent='24.113978, 120.782379 天氣暫時讀取不到，先使用上一次畫面。';
+      if(status)status.textContent='天氣暫時讀取不到，先使用上一次畫面';
+    });
+}
 </script>
 </body>
 </html>
