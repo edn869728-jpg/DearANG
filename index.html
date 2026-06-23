@@ -8,7 +8,8 @@
 <!-- DearANG v16 KTV stage forced 20260620 -->
 <!-- DearANG v21 opening countdown video 20260620 -->
 <!-- DearANG v35 Complete Restore Stable Cloud 20260623 -->
-<title>有你的時光｜Dear ANG v35</title>
+<!-- DearANG v36 Mini world mobile fit + video frame fix 20260624 -->
+<title>有你的時光｜Dear ANG v36</title>
 <style>
 :root{
   --bg:#0b0b0d;
@@ -791,42 +792,13 @@ a{color:inherit}
   transition:transform .8s cubic-bezier(.22,1,.36,1);
   z-index:1;
 }
-  
-.mini-crt-frame{   position:absolute;.mini-crt-frame{
-  position:absolute;
-  inset:0;
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  user-select:none;
-  -webkit-user-drag:none;
-  pointer-events:none;
-  background:#000;
-}
-                
+.mini-crt-frame{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;user-select:none;-webkit-user-drag:none;pointer-events:none;}
 .mini-crt-screen{
   position:absolute;
-
-  /* 影片 1080w × 1920h */
-  /* 框內小世界：left 50 / top 667 / width 976 / height 553 */
-  left:4.6296%;
-  top:34.7396%;
-  width:90.3704%;
-  height:28.8021%;
-
-  border:0;
-  padding:0;
-  margin:0;
-  border-radius:0.8%;
-  overflow:hidden;
-  background:#000;
-  box-shadow:
-    inset 0 0 32px rgba(0,0,0,.75),
-    0 0 0 2px rgba(255,255,255,.08);
-  cursor:pointer;
-  z-index:2;
-  display:block;
-  color:inherit;
+  left:4.1%;top:34.55%;width:91.8%;height:28.65%;
+  border:0;padding:0;margin:0;border-radius:0.8%;overflow:hidden;
+  background:#000;box-shadow:inset 0 0 32px rgba(0,0,0,.75),0 0 0 2px rgba(255,255,255,.08);
+  cursor:pointer;z-index:2;display:block;color:inherit;
 }
 .mini-crt-screen:active{filter:brightness(1.12)}
 .mini-world-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:saturate(1.02) contrast(1.04);}
@@ -913,6 +885,94 @@ a{color:inherit}
   .mini-weather-buttons::-webkit-scrollbar{display:none;}
 }
 
+/* ===== v36 修正：木框影片依手機等比例縮放 + 小世界框精準對位 =====
+   設計稿基準：1080 x 1920
+   小世界框：left 45px / top 654px / right 54px / bottom 700px
+   框尺寸：981 x 566
+*/
+.mini-world{
+  background:#000!important;
+}
+
+/* 讓整個木框影片「至少一邊貼齊手機」，但不超出、不被放大裁切 */
+.mini-crt-scene{
+  width:min(100vw, calc(100dvh * 1080 / 1920))!important;
+  height:min(100dvh, calc(100vw * 1920 / 1080))!important;
+  max-width:none!important;
+  max-height:none!important;
+  aspect-ratio:1080/1920!important;
+  overflow:hidden!important;
+  border-radius:0!important;
+  margin:auto!important;
+}
+
+/* 舊版 iPhone / 瀏覽器不支援 dvh 時的備援 */
+@supports not (height:100dvh){
+  .mini-crt-scene{
+    width:min(100vw, calc(100vh * 1080 / 1920))!important;
+    height:min(100vh, calc(100vw * 1920 / 1080))!important;
+  }
+}
+
+/* 外層木框改用影片也能正確鋪滿 1080x1920 舞台 */
+.mini-crt-frame,
+.mini-crt-frame-video{
+  position:absolute!important;
+  inset:0!important;
+  width:100%!important;
+  height:100%!important;
+  object-fit:cover!important;
+  object-position:center!important;
+  z-index:1!important;
+  background:#000!important;
+}
+
+/* 小世界框依你量的 1080x1920 座標定位 */
+.mini-crt-screen{
+  left:calc(45 / 1080 * 100%)!important;
+  top:calc(654 / 1920 * 100%)!important;
+  width:calc(981 / 1080 * 100%)!important;
+  height:calc(566 / 1920 * 100%)!important;
+  border:0!important;
+  border-radius:0!important;
+  padding:0!important;
+  margin:0!important;
+  overflow:hidden!important;
+  background:#000!important;
+  box-shadow:none!important;
+  z-index:3!important;
+}
+
+/* 小世界內容一定填滿白框，不留下白底 */
+.mini-world-bg{
+  position:absolute!important;
+  inset:0!important;
+  width:100%!important;
+  height:100%!important;
+  object-fit:cover!important;
+  object-position:center!important;
+  display:block!important;
+  z-index:1!important;
+  background:#000!important;
+}
+
+.mini-world-weather{z-index:2!important;}
+.mini-screen-shine{z-index:4!important;}
+.mini-screen-hint{z-index:5!important;}
+
+/* iPhone 直向避免底部/頂部安全區把畫面擠歪 */
+@media(max-width:760px){
+  .mini-world{
+    align-items:center!important;
+    justify-items:center!important;
+    padding:0!important;
+  }
+  .mini-crt-scene{
+    width:min(100vw, calc(100svh * 1080 / 1920))!important;
+    height:min(100svh, calc(100vw * 1920 / 1080))!important;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -950,17 +1010,10 @@ a{color:inherit}
 
 <div class="mini-world hidden" id="miniWorld" aria-label="CRT電視小世界">
   <div class="mini-crt-scene">
-    <video
-  class="mini-crt-frame"
-  id="miniFrameVideo"
-  src="assets/videos/mini-world-frame.mp4?v=20260623-v35"
-  autoplay
-  muted
-  loop
-  playsinline
-  preload="auto"
-  aria-label="兩個人趴在木框上看小世界">
-</video>
+    <video class="mini-crt-frame mini-crt-frame-video" id="miniFrameVideo" autoplay muted loop playsinline preload="auto" poster="assets/images/mini-frame.jpg?v=20260623-v33-frame" aria-label="兩個人趴在木框上看小世界">
+      <source src="assets/videos/video13.mp4?v=20260624-v36" type="video/mp4">
+      <source src="video13.mp4?v=20260624-v36" type="video/mp4">
+    </video>
     <button class="mini-crt-screen" type="button" onclick="enterMainWorld()" aria-label="點擊木框中間的小世界進入富宜路街道">
       <img src="assets/images/weather/day-sunny.png?v=20260623-v35" class="mini-world-bg" id="miniWorldBg" alt="木框裡的Q版小世界">
       <div class="mini-world-weather" id="miniWorldWeather"></div>
@@ -1638,6 +1691,8 @@ function setMemoryWeather(key,ev,source){
   const version='20260623-v35';
   const stage=document.getElementById('stage');
   if(stage)stage.style.setProperty('--memory-world-bg',`url("${w.bg}?v=${version}")`);
+  const miniScreen=document.querySelector('.mini-crt-screen');
+  if(miniScreen)miniScreen.style.backgroundImage=`url("${w.bg}?v=${version}")`;
   const miniBg=document.getElementById('miniWorldBg');
   if(miniBg){
     miniBg.src=w.bg+'?v='+version;
@@ -1717,6 +1772,16 @@ function showMiniWorld(){
   setMemoryWeather(memoryWeatherKey);
   const mini=document.getElementById('miniWorld');
   if(mini){mini.classList.remove('hidden','zooming');}
+  const frameVideo=document.getElementById('miniFrameVideo');
+  if(frameVideo){
+    try{
+      frameVideo.muted=true;
+      frameVideo.playsInline=true;
+      frameVideo.currentTime=0;
+      const p=frameVideo.play();
+      if(p&&p.catch)p.catch(()=>{});
+    }catch(e){}
+  }
 }
 function enterMainWorld(){
   const mini=document.getElementById('miniWorld');
