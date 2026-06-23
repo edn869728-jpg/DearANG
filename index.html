@@ -9,6 +9,8 @@
 <!-- DearANG v21 opening countdown video 20260620 -->
 <!-- DearANG v35 Complete Restore Stable Cloud 20260623 -->
 <!-- DearANG v36 Mini world mobile fit + video frame fix 20260624 -->
+<!-- DearANG v40 Gate layout refined 20260624 -->
+<!-- DearANG v37 Actual weather data only 20260624 -->
 <title>Dear 庚明</title>
 <style>
 :root{
@@ -31,9 +33,9 @@ a{color:inherit}
 .hidden{display:none!important}
 
 /* ===== Gate ===== */
-.gate{position:fixed;inset:10;z-index:50;display:flex;align-items:center;justify-content:center;text-align:left;padding:24px;background:radial-gradient(circle at 50% 28%,rgba(214,168,93,.22),transparent 26%),linear-gradient(180deg,#14100d,#050506);transition:.55s ease}
+.gate{position:fixed;inset:0;z-index:50;display:flex;align-items:center;justify-content:center;text-align:left;padding:24px;background:radial-gradient(circle at 50% 28%,rgba(214,168,93,.22),transparent 26%),linear-gradient(180deg,#14100d,#050506);transition:.55s ease}
 .gate.out{opacity:0;pointer-events:none;transform:scale(1.02)}
-.gate-card{width:min(680px,100%);text-al. ign:left;border:1px solid var(--line);background:rgba(255,248,239,.08);border-radius:30px;padding:34px 22px;backdrop-filter:blur(18px);box-shadow:var(--shadow)}
+.gate-card{width:min(680px,100%);text-align:left;border:1px solid var(--line);background:rgba(255,248,239,.08);border-radius:30px;padding:34px 22px;backdrop-filter:blur(18px);box-shadow:var(--shadow)}
 .kicker{letter-spacing:.24em;color:#ffd89a;font-weight:900;font-size:12px;margin-bottom:10px}.gate-title{font-size:clamp(32px,8vw,62px);line-height:1.35;font-weight:1000;margin:12px 0;text-shadow:0 4px 24px rgba(0,0,0,.55);text-align:left}
 .gate-title span{display:block}.gate-title .i1{padding-left:1.8em}.gate-title .i2{padding-left:3.6em}.gate-lead{color:var(--muted);line-height:1.9;margin:16px auto 22px;max-width:520px}.tiny{font-size:12px;color:rgba(247,240,230,.54);line-height:1.6}
 
@@ -973,23 +975,425 @@ a{color:inherit}
   }
 }
 
+
+/* ===== v37 實際天氣：不顯示假天氣選單，只保留重新讀取 ===== */
+.actual-weather-btn{
+  min-height:38px!important;
+  padding:8px 13px!important;
+  border-radius:999px!important;
+  background:linear-gradient(135deg,var(--gold),#b98034)!important;
+}
+
+
+/* ===== v38 Gate 首頁排版：標題三行保留原本錯落，其餘全部置中 ===== */
+.gate{
+  text-align:center!important;
+}
+.gate-card{
+  text-align:center!important;
+}
+/* 這三行「想見你」保留原本左對齊與階梯縮排，不跟著置中 */
+.gate-title{
+  text-align:left!important;
+}
+.gate-song-credit{
+  text-align:center!important;
+  margin-left:auto!important;
+  margin-right:auto!important;
+}
+.gate-song-credit .credit-kicker,
+.gate-song-credit .credit-title{
+  text-align:center!important;
+}
+.gate-song-credit .credit-row{
+  justify-content:center!important;
+  text-align:center!important;
+}
+.gate-song-credit .credit-row span:first-child{
+  flex:0 0 auto!important;
+  text-align:right!important;
+}
+.gate-lead,
+.tiny{
+  text-align:center!important;
+  margin-left:auto!important;
+  margin-right:auto!important;
+}
+.gate-card > button{
+  display:block!important;
+  margin-left:auto!important;
+  margin-right:auto!important;
+}
+
+
+/* ===== v39 Gate 細修：除三行想見你外，英文小標與主題曲小標全部強制置中 ===== */
+.gate .kicker{
+  display:block!important;
+  width:100%!important;
+  text-align:center!important;
+  margin-left:auto!important;
+  margin-right:auto!important;
+}
+.gate-song-credit{
+  display:block!important;
+  text-align:center!important;
+}
+.gate-song-credit .credit-kicker{
+  display:block!important;
+  width:100%!important;
+  text-align:center!important;
+  margin-left:auto!important;
+  margin-right:auto!important;
+}
+.gate-song-credit .credit-title{
+  display:block!important;
+  width:100%!important;
+  text-align:center!important;
+}
+.gate-song-credit .credit-row{
+  display:grid!important;
+  grid-template-columns:auto auto!important;
+  justify-content:center!important;
+  justify-items:center!important;
+  text-align:center!important;
+  gap:10px!important;
+}
+.gate-song-credit .credit-row span:first-child{
+  flex:none!important;
+  text-align:right!important;
+}
+
+
+
+/* ===== v40 Gate 排版重整：三行想見你保留錯落，其餘做成儀式感置中版 ===== */
+.gate{
+  inset:0!important;
+  padding:clamp(14px,3vw,32px)!important;
+  align-items:center!important;
+  justify-content:center!important;
+  text-align:center!important;
+  background:
+    radial-gradient(circle at 50% 16%,rgba(214,168,93,.18),transparent 30%),
+    radial-gradient(circle at 50% 72%,rgba(255,216,154,.08),transparent 28%),
+    linear-gradient(180deg,#1a120f 0%,#0d0b0b 52%,#050506 100%)!important;
+}
+.gate-card{
+  width:min(720px,calc(100vw - 34px))!important;
+  max-height:calc(100svh - 28px)!important;
+  overflow:auto!important;
+  padding:clamp(26px,4.4vw,46px) clamp(20px,4.2vw,42px)!important;
+  text-align:center!important;
+  border-radius:34px!important;
+  border:1px solid rgba(255,216,154,.18)!important;
+  background:
+    linear-gradient(180deg,rgba(255,248,239,.105),rgba(255,248,239,.045)),
+    rgba(13,10,9,.72)!important;
+  box-shadow:0 28px 88px rgba(0,0,0,.48)!important;
+  backdrop-filter:blur(18px)!important;
+}
+.gate .kicker{
+  display:block!important;
+  width:100%!important;
+  margin:0 auto 20px!important;
+  text-align:center!important;
+  color:#ffd89a!important;
+  font-size:12px!important;
+  line-height:1.45!important;
+  letter-spacing:.24em!important;
+  font-weight:1000!important;
+}
+.gate-title{
+  width:fit-content!important;
+  max-width:100%!important;
+  margin:0 auto 24px!important;
+  text-align:left!important;
+  font-size:clamp(44px,8.4vw,78px)!important;
+  line-height:1.16!important;
+  letter-spacing:.015em!important;
+  text-shadow:0 6px 30px rgba(0,0,0,.58)!important;
+}
+.gate-title span{display:block!important;}
+.gate-title .i1{padding-left:1.28em!important;}
+.gate-title .i2{padding-left:2.12em!important;}
+.gate-title:after{
+  content:"";
+  display:block;
+  width:86px;
+  height:1px;
+  margin:22px auto 0;
+  background:linear-gradient(90deg,transparent,rgba(255,216,154,.75),transparent);
+}
+.gate-song-credit{
+  width:min(560px,100%)!important;
+  margin:0 auto 24px!important;
+  padding:18px 20px 17px!important;
+  text-align:center!important;
+  border-radius:26px!important;
+  border:1px solid rgba(255,216,154,.24)!important;
+  background:
+    radial-gradient(circle at 50% 0%,rgba(214,168,93,.15),transparent 42%),
+    linear-gradient(180deg,rgba(255,248,239,.10),rgba(255,248,239,.045))!important;
+  box-shadow:0 18px 48px rgba(0,0,0,.28)!important;
+}
+.gate-song-credit .credit-kicker{
+  display:block!important;
+  width:100%!important;
+  margin:0 0 10px!important;
+  text-align:center!important;
+  color:#ffd89a!important;
+  font-size:12px!important;
+  line-height:1.4!important;
+  letter-spacing:.16em!important;
+  font-weight:1000!important;
+}
+.gate-song-credit .credit-title{
+  display:block!important;
+  width:100%!important;
+  margin:0 0 12px!important;
+  text-align:center!important;
+  color:#fff7e8!important;
+  font-size:clamp(21px,4.4vw,28px)!important;
+  line-height:1.35!important;
+  font-weight:1000!important;
+}
+.gate-song-credit .credit-row{
+  display:grid!important;
+  grid-template-columns:auto auto!important;
+  justify-content:center!important;
+  justify-items:center!important;
+  align-items:baseline!important;
+  gap:10px!important;
+  margin-top:4px!important;
+  text-align:center!important;
+  color:rgba(255,248,239,.86)!important;
+  font-size:14px!important;
+  line-height:1.7!important;
+  font-weight:900!important;
+}
+.gate-song-credit .credit-row span:first-child{
+  flex:none!important;
+  min-width:3.2em!important;
+  text-align:right!important;
+  color:rgba(255,216,154,.9)!important;
+  letter-spacing:.08em!important;
+}
+.gate-song-credit .credit-row b{
+  min-width:0!important;
+  text-align:left!important;
+}
+.gate-lead{
+  max-width:540px!important;
+  margin:0 auto 22px!important;
+  text-align:center!important;
+  color:rgba(247,240,230,.70)!important;
+  font-size:15px!important;
+  line-height:1.9!important;
+  font-weight:850!important;
+}
+.gate-card > button{
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  min-height:52px!important;
+  margin:0 auto 14px!important;
+  padding:0 28px!important;
+  border-radius:999px!important;
+  font-size:16px!important;
+  box-shadow:0 18px 42px rgba(185,128,52,.28)!important;
+}
+.gate .tiny{
+  max-width:520px!important;
+  margin:0 auto!important;
+  text-align:center!important;
+  color:rgba(247,240,230,.50)!important;
+  font-size:12px!important;
+  line-height:1.65!important;
+}
+@media(max-width:560px){
+  .gate{padding:14px!important;}
+  .gate-card{
+    width:calc(100vw - 24px)!important;
+    max-height:calc(100svh - 24px)!important;
+    padding:28px 18px 24px!important;
+    border-radius:30px!important;
+  }
+  .gate .kicker{
+    margin-bottom:18px!important;
+    font-size:11px!important;
+    letter-spacing:.18em!important;
+  }
+  .gate-title{
+    font-size:clamp(42px,14vw,64px)!important;
+    line-height:1.20!important;
+    margin-bottom:22px!important;
+  }
+  .gate-title .i1{padding-left:1.02em!important;}
+  .gate-title .i2{padding-left:1.74em!important;}
+  .gate-title:after{width:72px;margin-top:20px;}
+  .gate-song-credit{
+    margin-bottom:20px!important;
+    padding:16px 14px!important;
+    border-radius:24px!important;
+  }
+  .gate-song-credit .credit-title{font-size:22px!important;}
+  .gate-lead{font-size:14px!important;margin-bottom:20px!important;}
+  .gate-card > button{min-height:50px!important;font-size:15px!important;padding:0 24px!important;}
+}
+@media(max-height:720px){
+  .gate-card{padding-top:20px!important;padding-bottom:20px!important;}
+  .gate .kicker{margin-bottom:12px!important;}
+  .gate-title{font-size:clamp(34px,7.6vw,56px)!important;margin-bottom:16px!important;line-height:1.14!important;}
+  .gate-title:after{margin-top:14px!important;}
+  .gate-song-credit{margin-bottom:16px!important;padding-top:13px!important;padding-bottom:13px!important;}
+  .gate-lead{margin-bottom:16px!important;line-height:1.65!important;}
+}
+
+
+
+/* ===== v41 視覺升級版 Gate 排版：標題情緒漸弱 + 主題曲純文字 ===== */
+.gate-title {
+  width: fit-content !important;
+  max-width: 100% !important;
+  font-size: clamp(36px, 9vw, 66px) !important;
+  line-height: 1.4 !important;
+  margin: 20px auto 40px !important;
+  text-align: left !important;
+  text-shadow: 0 12px 40px rgba(0, 0, 0, 0.8) !important;
+}
+.gate-title:after{
+  display:none!important;
+}
+.gate-title span {
+  display: block !important;
+  opacity: 0.95 !important;
+}
+.gate-title .i1 {
+  padding-left: 1.2em !important;
+  opacity: 0.75 !important;
+}
+.gate-title .i2 {
+  padding-left: 2.4em !important;
+  opacity: 0.52 !important;
+}
+
+/* 主題曲區塊：拿掉卡片感，改成更像片頭字幕 */
+.gate-song-credit {
+  width: min(560px, 100%) !important;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  margin: 0 auto 40px !important;
+  padding: 0 !important;
+  text-align: center !important;
+}
+.gate-song-credit .credit-kicker {
+  display:block!important;
+  width:100%!important;
+  color: rgba(255, 216, 154, 0.6) !important;
+  letter-spacing: 0.4em !important;
+  font-size: 11px !important;
+  line-height: 1.55 !important;
+  margin: 0 0 12px !important;
+  text-align: center !important;
+}
+.gate-song-credit .credit-title {
+  display:block!important;
+  width:100%!important;
+  font-size: clamp(20px, 4.2vw, 24px) !important;
+  letter-spacing: 0.15em !important;
+  line-height: 1.45 !important;
+  margin: 0 0 16px !important;
+  color: #fff !important;
+  text-align: center !important;
+  text-shadow: 0 4px 16px rgba(0, 0, 0, 0.6) !important;
+}
+.gate-song-credit .credit-row {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: baseline !important;
+  gap: 16px !important;
+  margin-top: 4px !important;
+  color: rgba(255, 248, 239, 0.52) !important;
+  font-size: 12px !important;
+  line-height: 1.75 !important;
+  letter-spacing: 0.08em !important;
+  font-weight: 900 !important;
+  text-align: center !important;
+}
+.gate-song-credit .credit-row span:first-child {
+  flex: 0 0 auto !important;
+  min-width: 0 !important;
+  color: rgba(255, 216, 154, 0.62) !important;
+  text-align: right !important;
+}
+.gate-song-credit .credit-row b {
+  flex: 0 0 auto !important;
+  min-width: 0 !important;
+  color: rgba(255, 248, 239, 0.64) !important;
+  text-align: left !important;
+}
+
+/* 引言與按鈕：多留白、少一點卡片感 */
+.gate-lead {
+  max-width: 560px !important;
+  color: rgba(247, 240, 230, 0.70) !important;
+  letter-spacing: 0.08em !important;
+  line-height: 1.95 !important;
+  margin: 0 auto 32px !important;
+  text-align: center !important;
+}
+.gate-card > button {
+  transform: scale(1.05) !important;
+  box-shadow: 0 16px 32px rgba(185, 128, 52, 0.3) !important;
+}
+.gate .tiny{
+  margin-top: 18px !important;
+  opacity: .86 !important;
+}
+
+/* 手機高度不夠時，自動縮小間距，避免底部被吃掉 */
+@media(max-width:560px){
+  .gate-title{
+    font-size: clamp(40px, 13.2vw, 58px) !important;
+    line-height: 1.32 !important;
+    margin: 14px auto 30px !important;
+  }
+  .gate-title .i1{padding-left:1.05em!important;}
+  .gate-title .i2{padding-left:1.72em!important;}
+  .gate-song-credit{margin-bottom:30px!important;}
+  .gate-song-credit .credit-kicker{letter-spacing:.28em!important;}
+  .gate-song-credit .credit-title{font-size:20px!important;letter-spacing:.10em!important;}
+  .gate-lead{margin-bottom:26px!important;}
+}
+@media(max-height:720px){
+  .gate-title{
+    font-size:clamp(32px,7.3vw,52px)!important;
+    line-height:1.22!important;
+    margin:10px auto 22px!important;
+  }
+  .gate-song-credit{margin-bottom:22px!important;}
+  .gate-song-credit .credit-title{margin-bottom:10px!important;}
+  .gate-lead{margin-bottom:20px!important;line-height:1.65!important;}
+  .gate .tiny{margin-top:10px!important;}
+}
+
 </style>
 </head>
 <body>
 <div class="lyric-danmaku-layer" id="lyricDanmakuLayer" aria-hidden="true"></div>
 <div class="gate" id="gate">
   <div class="gate-card">
-    <div class="kicker">DEAR ANG MEMORY WORLD</div>
+    <div class="kicker">DEAR ANG｜有你的時光</div>
     <div class="gate-title"><span>想見你.</span><span class="i1">想見你..</span><span class="i2">想見你了….</span></div>
     <div class="gate-song-credit" aria-label="主題曲資訊">
-      <div class="credit-kicker">主題曲 Thenme Song</div>
-      <div class="credit-title">〈給安格 Dear ANG〉</div>
+      <div class="credit-kicker">🎵主題曲 Theme Song🎶</div>
+      <div class="credit-title">《 Dear ANG • 給安格 》</div>
       <div class="credit-row"><span>作詞:</span><b>Enden Mi</b></div>
       <div class="credit-row"><span>作曲:</span><b>Enden Mi</b></div>
     </div>
-    <p class="gate-lead">這是有你的時光。點一棟房子，就走進一段曾經。</p>
+    <p class="gate-lead">走進有你的時光。點開一棟房子，浮現一段曾經。</p>
     <button onclick="enterWorld()">回到有你的時光</button>
-    <div class="tiny" style="margin-top:14px">!!!!! 提醒 : 情緒敏感者，請備妥衛生紙。</div>
+    <div class="tiny" style="margin-top:14px">!!!!! 提醒 : 情緒敏感者，請備妥衛生紙。 !!!!!</div>
   </div>
 </div>
 
@@ -997,7 +1401,7 @@ a{color:inherit}
 <div class="opening-countdown" id="openingCountdown" aria-live="polite">
   <div class="opening-countdown-card">
     <video class="opening-countdown-video" id="openingCountdownVideo" src="assets/videos/opening-countdown.mp4?v=20260620-v21" playsinline preload="auto"></video>
-    <div class="opening-video-caption">回憶倒流中... 留意眼淚回流..	</div>
+    <div class="opening-video-caption">回憶倒流中... 請留意眼淚回流..	</div>
     <div class="credit-kicker">OPENING COUNTDOWN</div>
     <div class="opening-countdown-title">倒數</div>
     <div class="opening-countdown-sub">影片裡已有秒數。播放完後主題曲開始。</div>
@@ -1024,7 +1428,8 @@ a{color:inherit}
   </div>
   <div class="mini-world-panel">
     <div class="mini-world-tip" onclick="enterMainWorld()">因為是你，給我勇氣繼續前進</div>
-    <div class="mini-weather-buttons" id="miniWeatherButtons" aria-label="天氣切換"></div>
+    <div class="mini-weather-buttons" id="miniWeatherButtons" aria-label="實際天氣讀取"></div>
+    <div class="mini-weather-status" id="miniWeatherStatus">正在讀取實際天氣…</div>
   </div>
 </div>
 
@@ -1042,22 +1447,23 @@ a{color:inherit}
   <div class="scroller" id="scroller">
     <div class="stage" id="stage">
       <div class="world-weather" id="worldWeather"></div>
-      <div class="hotspot h-photo" data-label="華光相館｜有你的時光" onclick="openPage('photo')"></div>
-      <div class="hotspot h-video" data-label="新時代影音館｜影片" onclick="openPage('video')"></div>
-      <div class="hotspot h-home" data-label="富宜路86號｜他家" onclick="openPage('home')"></div>
-      <div class="hotspot h-music" data-label="金嗓卡拉OK｜他唱的歌" onclick="openPage('music')"></div>
-      <div class="hotspot h-food" data-label="美而美早餐店｜一起吃過的東西" onclick="openPage('food')"></div>
-      <div class="hotspot h-nav" data-label="公路局｜通往他的路" onclick="openPage('nav')"></div>
+      <div class="hotspot h-photo" data-label="華光相館｜你的形 和你的影" onclick="openPage('photo')"></div>
+      <div class="hotspot h-video" data-label="新時代影音館｜忘不掉的動態氣息" onclick="openPage('video')"></div>
+      <div class="hotspot h-home" data-label="富宜路86號｜阿明 記得常回家看看" onclick="openPage('home')"></div>
+      <div class="hotspot h-music" data-label="金嗓卡拉OK｜還是要一起唱吧" onclick="openPage('music')"></div>
+      <div class="hotspot h-food" data-label="美而美早餐店｜口味很像的我們" onclick="openPage('food')"></div>
+      <div class="hotspot h-nav" data-label="公路局｜當我想見你的時候" onclick="openPage('nav')"></div>
     </div>
   </div>
-  <div class="hint"><div class="hint-inner"><span>← →</span><div>左右滑這條街<small>點招牌或建築，進入每一段有他的時光。</small></div></div></div>
+  <div class="hint"><div class="hint-inner"><span>← →</span><div>左右滑這條街<small>每棟建築，每個招牌皆與有你的記憶。</small></div></div></div>
 </div>
 
 <audio id="themeAudio" preload="metadata" loop></audio>
 
 <!-- 華光相館｜照片 -->
 <section class="page" id="page-photo">
-  <div class="page-head"><button class="back" onclick="closePage()">← 回到街上</button><b>華光相館｜有你的時光</b></div>
+  <div class="page-head"><button class="back" onclick="closePage()">← 回到街上</button><b>華光相館｜你的形 和你的影
+</b></div>
   <div class="page-body">
     <div class="hero-card"><img src="assets/images/memory-world.png?v=20260620-v16-bg" alt="華光相館"><div class="hero-text"><h1>有你的時光</h1><p>資料從 Google Drive 讀取。請把一般照片放在「01_有你的時光」。</p></div></div>
     <div class="section folder-hint"><h2>Google Drive 資料夾</h2><div class="story">01_有你的時光<br>底下可以再分子資料夾，網站會讀下一層與更深層。</div></div>
@@ -1066,7 +1472,7 @@ a{color:inherit}
 </section>
 <!-- 新時代影音館｜影片 -->
 <section class="page" id="page-video">
-  <div class="page-head"><button class="back" onclick="closePage()">← 回到街上</button><b>新時代影音館｜影片</b></div>
+  <div class="page-head"><button class="back" onclick="closePage()">← 回到街上</button><b>新時代影音館｜忘不掉的動態氣息</b></div>
   <div class="page-body">
     <div class="hero-card"><img src="assets/images/memory-world.png?v=20260620-v16-bg" alt="新時代影音館"><div class="hero-text"><h1>影音館</h1><p>資料從 Google Drive 讀取。請把影片放在「02_影音館」。</p></div></div>
     <div class="section folder-hint"><h2>Google Drive 資料夾</h2><div class="story">02_影音館<br>底下可以再分子資料夾，網站會讀下一層與更深層。</div></div>
@@ -1075,7 +1481,7 @@ a{color:inherit}
 </section>
 <!-- 中間公寓｜他家 -->
 <section class="page" id="page-home">
-  <div class="page-head"><button class="back" onclick="closePage()">← 回到街上</button><b>中間公寓｜他家</b></div>
+  <div class="page-head"><button class="back" onclick="closePage()">← 回到街上</button><b>中間公寓｜阿明 記得常回家看看</b></div>
   <div class="page-body">
     <div class="hero-card"><img src="assets/images/memory-world.png?v=20260620-v16-bg" alt="中間公寓"><div class="hero-text"><h1>他家</h1><p>這裡只放他個人的照片。內容由你自己分類，不自動補故事。</p></div></div>
     <div class="section folder-hint"><h2>Google Drive 資料夾</h2><div class="story">03_他的家<br>底下可以再分子資料夾，網站會讀下一層與更深層。</div></div>
@@ -1084,7 +1490,8 @@ a{color:inherit}
 </section>
 <!-- 金嗓卡拉OK｜音樂 -->
 <section class="page" id="page-music">
-  <div class="page-head"><button class="back" onclick="closePage()">← 回到街上</button><b>金嗓卡拉OK｜他唱的歌</b></div>
+  <div class="page-head"><button class="back" onclick="closePage()">← 回到街上</button><b>金嗓卡拉OK｜還是要一起唱吧
+</b></div>
   <div class="page-body">
     <div class="ktv-machine">
       <div class="ktv-tv ktv-tv-machine">
@@ -1156,18 +1563,19 @@ a{color:inherit}
 </section>
 <!-- 美而美早餐店｜食物 -->
 <section class="page" id="page-food">
-  <div class="page-head"><button class="back" onclick="closePage()">← 回到街上</button><b>美而美早餐店｜食物記憶</b></div>
+  <div class="page-head"><button class="back" onclick="closePage()">← 回到街上</button><b>美而美早餐店｜口味很像的我們
+</b></div>
   <div class="page-body">
     <div class="hero-card"><img src="assets/images/memory-world.png?v=20260620-v16-bg" alt="美而美早餐店"><div class="hero-text"><h1>食物記憶</h1><p>一起吃過的、他喜歡吃的、他推薦你吃的，都由 Google Drive 分類讀取。</p></div></div>
-    <div class="section folder-hint"><h2>Google Drive 資料夾</h2><div class="story">05_美而美早餐店<br>底下可以再分子資料夾，網站會讀下一層與更深層。</div></div>
+    <div class="section folder-hint"><h2>Google Drive 資料夾</h2><div class="story">05_美而美早餐店<br>即將推出，敬請期待...</div></div>
     <div class="section"><h2>照片</h2><div id="foodPhotoGrid" class="grid"><div class="empty">食物照片載入中…</div></div></div>
   </div>
 </section>
 <!-- 公路局｜導航 -->
 <section class="page" id="page-nav" data-weather="">
-  <div class="page-head"><button class="back" onclick="closePage()">← 回到街上</button><b>公路局｜導航／街景</b></div>
+  <div class="page-head"><button class="back" onclick="closePage()">← 回到街上</button><b>公路局｜當我想見你的時候</b></div>
   <div class="page-body">
-    <div class="hero-card"><img src="assets/images/sixth_tree.jpeg?v=20260620-v16-tree" alt="第六棵樹"><div class="rain-layer"></div><div class="hero-text"><h1>通往他的路</h1><p>Google Maps 導航、街景、第六棵樹天氣。</p></div></div>
+    <div class="hero-card"><img src="assets/images/sixth_tree.jpeg?v=20260620-v16-tree" alt="第六棵樹"><div class="rain-layer"></div><div class="hero-text"><h1>通往他的路</h1><p>即將改版，敬請期待...</p></div></div>
     <div class="section weather-box"><h2>第六棵樹天氣</h2><div class="weather-card" id="weatherLabel">讀取長眠地天氣中…</div></div>
     <div class="section"><h2>導航</h2><div class="map-list" id="mapList"></div></div>
     <div class="section folder-hint"><h2>Google Drive 資料夾</h2><div class="story">06_通往他的路<br>底下可以再分子資料夾，網站會讀下一層與更深層。</div></div>
@@ -1365,7 +1773,7 @@ function toggleLyrics(){
 function testLyricDanmaku(){spawnLyric('想見你. 想見你.. 想見你… 了….');}
 
 const CONFIG={LOCAL_THEME:'assets/audio/dear-ang-theme.mp3',
-  APP_VERSION:'20260620_memory_world_v21_opening_countdown_video_lyrics20',
+  APP_VERSION:'20260624_memory_world_v37_actual_weather',
   GAS_API_URL:'https://script.google.com/macros/s/AKfycbzrduB_eXPk6OpqnGPXjNBNQCeUyarzAfki4IL-X_JIVQr7RS9sN5ayyvA2OEaXDXzv/exec',
   GITHUB_THEME_AUDIO:''
 };
@@ -1636,6 +2044,7 @@ function submitMemoryCapsule(id){
 
 
 
+// 天氣圖示對照表：只用來把實際天氣資料轉成對應背景，不再顯示成手動選項
 const MEMORY_WEATHERS=[
   {key:'sunny',label:'☀️ 晴天',chip:'☀️',bg:'assets/images/weather/day-sunny.png',fx:''},
   {key:'hot',label:'☀️ 炎熱',chip:'☀️',bg:'assets/images/weather/day-hot.png',fx:'heat'},
@@ -1677,7 +2086,7 @@ function timeBasedWeatherText(){
 function renderMiniWeatherButtons(){
   const box=document.getElementById('miniWeatherButtons');
   if(!box)return;
-  box.innerHTML=MEMORY_WEATHERS.map(w=>`<button type="button" data-weather="${w.key}" onclick="setMemoryWeather('${w.key}',event,'manual')">${w.label}</button>`).join('');
+  box.innerHTML=`<button class="actual-weather-btn" type="button" onclick="refreshAutoWeather(true,event)">🔄 重新讀取實際天氣</button>`;
 }
 function setMiniWeatherStatus(text){
   const el=document.getElementById('miniWeatherStatus');
@@ -1734,19 +2143,25 @@ function weatherKeyFromOpenMeteo(c){
 function weatherTextFromKey(key,c){
   const w=memoryWeatherByKey(key);
   const temp=Number(c.temperature_2m);
+  const apparent=Number(c.apparent_temperature);
+  const humidity=Number(c.relative_humidity_2m);
   const wind=Number(c.wind_speed_10m);
   const code=Number(c.weather_code||0);
-  return `已依 24.113978, 120.782379 即時天氣套用：${w.label}｜${isFinite(temp)?temp.toFixed(1):'--'}°C｜風速 ${isFinite(wind)?wind.toFixed(0):'--'} km/h｜代碼 ${code}`;
+  const time=c.time?String(c.time).replace('T',' '):'現在';
+  const feel=isFinite(apparent)?`｜體感 ${apparent.toFixed(1)}°C`:'';
+  const hum=isFinite(humidity)?`｜濕度 ${humidity.toFixed(0)}%`:'';
+  return `已依長眠地實際天氣套用：${w.label}｜${isFinite(temp)?temp.toFixed(1):'--'}°C${feel}${hum}｜風速 ${isFinite(wind)?wind.toFixed(0):'--'} km/h｜代碼 ${code}｜${time}`;
 }
-function refreshAutoWeather(showToast){
+function refreshAutoWeather(showToast,ev){
+  if(ev){ev.stopPropagation();}
   const label=document.getElementById('weatherLabel');
   const page=document.getElementById('page-nav');
   if(showToast)toast('正在重新讀取天氣…');
-  setMiniWeatherStatus('正在讀取 24.113978, 120.782379 即時天氣…');
+  setMiniWeatherStatus('正在讀取長眠地實際天氣…');
   const ctrl=new AbortController();
   const timeout=setTimeout(()=>ctrl.abort(),6500);
   const {lat,lng}=AUTO_WEATHER_POINT;
-  return fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lng}&current=temperature_2m,weather_code,is_day,wind_speed_10m,precipitation,rain,showers&timezone=Asia%2FTaipei`,{cache:'no-store',signal:ctrl.signal})
+  return fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lng}&current=temperature_2m,apparent_temperature,relative_humidity_2m,weather_code,is_day,wind_speed_10m,precipitation,rain,showers&timezone=Asia%2FTaipei`,{cache:'no-store',signal:ctrl.signal})
     .then(r=>{if(!r.ok)throw new Error('weather fetch failed');return r.json();})
     .then(d=>{
       clearTimeout(timeout);
@@ -1754,22 +2169,24 @@ function refreshAutoWeather(showToast){
       const key=weatherKeyFromOpenMeteo(c);
       const msg=weatherTextFromKey(key,c);
       setAutoMemoryWeather(key,msg);
-      if(label)label.textContent=msg.replace('已依 24.113978, 120.782379 即時天氣套用：','長眠地現在：');
+      if(label)label.textContent=msg.replace('已依長眠地實際天氣套用：','長眠地現在：');
       if(page)page.dataset.weather=memoryWeatherByKey(key).label;
       if(showToast)toast('天氣已更新');
     })
     .catch(()=>{
       clearTimeout(timeout);
-      const msg='即時天氣暫時讀取不到，先保留時間判斷畫面。';
+      const msg='實際天氣暫時讀取不到，先保留時間判斷畫面。';
       setMiniWeatherStatus(msg+' '+timeBasedWeatherText());
       if(label)label.textContent=msg;
-      if(showToast)toast('天氣讀取不到，先用時間判斷',1);
+      if(showToast)toast('實際天氣讀取不到，先用時間判斷',1);
     });
 }
+
 function cycleMemoryWeather(){refreshAutoWeather(true);}
 function showMiniWorld(){
   renderMiniWeatherButtons();
   setMemoryWeather(memoryWeatherKey);
+  refreshAutoWeather(false);
   const mini=document.getElementById('miniWorld');
   if(mini){mini.classList.remove('hidden','zooming');}
   const frameVideo=document.getElementById('miniFrameVideo');
