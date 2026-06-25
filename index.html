@@ -884,6 +884,279 @@ a{color:inherit}
   .mini-weather-buttons::-webkit-scrollbar{display:none;}
 }
 
+
+/* ===== v37：從 index(45) 補回 v36 功能：直式木框影片、主街新圖切割、免密碼訪客名片 ===== */
+.mini-crt-scene{
+  position:relative!important;
+  width:min(100vw, calc(100svh * 1080 / 1920), 560px)!important;
+  height:min(100svh, calc(100vw * 1920 / 1080))!important;
+  max-height:none!important;
+  aspect-ratio:1080/1920!important;
+  margin:auto!important;
+  overflow:hidden!important;
+}
+.mini-crt-frame{
+  position:absolute!important;
+  inset:0!important;
+  width:100%!important;
+  height:100%!important;
+  object-fit:cover!important;
+  background:#000!important;
+}
+.mini-crt-screen{
+  left:4.6296%!important;
+  top:34.7396%!important;
+  width:90.3704%!important;
+  height:28.8021%!important;
+  border-radius:.8%!important;
+}
+.stage{
+  background:none!important;
+  overflow:hidden!important;
+}
+.stage-world-img{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center;
+  z-index:0;
+  user-select:none;
+  -webkit-user-drag:none;
+  pointer-events:none;
+}
+.stage .world-weather{z-index:1;}
+.stage .hotspot{
+  z-index:3!important;
+  border:0!important;
+  background:transparent!important;
+  padding:0!important;
+  margin:0!important;
+  box-shadow:none!important;
+}
+/* 直接照新天氣圖切，不再沿用舊圖背景切法 */
+.h-photo{left:2.7%!important;top:12.6%!important;width:20.6%!important;height:71.0%!important;}
+.h-video{left:23.4%!important;top:12.4%!important;width:17.8%!important;height:71.0%!important;}
+.h-home {left:41.2%!important;top:11.8%!important;width:17.9%!important;height:72.4%!important;}
+.h-music{left:59.2%!important;top:11.4%!important;width:17.8%!important;height:72.8%!important;}
+.h-food {left:77.0%!important;top:12.1%!important;width:11.2%!important;height:71.8%!important;}
+.h-nav  {left:88.3%!important;top:12.2%!important;width:9.8%!important;height:71.5%!important;}
+.visitor-identity-modal{
+  position:fixed;
+  inset:0;
+  z-index:120;
+  display:grid;
+  place-items:center;
+  padding:18px;
+  background:rgba(0,0,0,.68);
+  backdrop-filter:blur(10px);
+}
+.visitor-identity-modal.hidden{display:none!important;}
+.visitor-identity-card{
+  width:min(92vw,460px);
+  border-radius:28px;
+  padding:22px 18px;
+  background:linear-gradient(180deg,rgba(32,24,18,.96),rgba(10,10,12,.96));
+  border:1px solid rgba(255,216,154,.24);
+  box-shadow:0 28px 80px rgba(0,0,0,.55);
+  color:#fff7e8;
+  text-align:center;
+}
+.visitor-identity-kicker{color:#ffd89a;font-size:12px;font-weight:1000;letter-spacing:.22em;margin-bottom:8px;}
+.visitor-identity-card h2{margin:0 0 10px;font-size:24px;line-height:1.35;}
+.visitor-identity-card p{margin:0 0 15px;color:rgba(255,248,239,.72);font-size:14px;line-height:1.8;font-weight:850;}
+.visitor-identity-card input,.visitor-identity-card select,.visitor-identity-card textarea{
+  width:100%;
+  margin:7px 0;
+  border:1px solid rgba(255,255,255,.16);
+  background:rgba(255,255,255,.09);
+  color:#fff;
+  border-radius:16px;
+  padding:12px 13px;
+  outline:none;
+  font-weight:900;
+}
+.visitor-identity-card select option{color:#111;}
+.visitor-identity-card textarea{min-height:86px;resize:vertical;line-height:1.7;}
+.visitor-identity-card input::placeholder,.visitor-identity-card textarea::placeholder{color:rgba(255,255,255,.45);}
+.visitor-identity-actions{display:flex;gap:10px;margin-top:12px;}
+.visitor-identity-actions button{flex:1;min-height:46px;}
+.visitor-identity-actions .soft{background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.15);box-shadow:none;}
+.visitor-identity-small{margin-top:12px;color:rgba(255,248,239,.52);font-size:12px;line-height:1.6;font-weight:850;}
+@media(max-width:520px){.visitor-identity-actions{flex-direction:column}.visitor-identity-card{padding:20px 16px}}
+
+
+
+/* ===== v38 公路局單檔內嵌藏寶圖：不再分 gemini-code 檔 ===== */
+#page-nav{
+  overflow:hidden!important;
+  background:#050403!important;
+  color:#382414!important;
+}
+#page-nav .page-head{
+  position:absolute!important;
+  top:0;left:0;right:0;
+  z-index:90!important;
+  background:linear-gradient(180deg,rgba(35,21,10,.76),rgba(35,21,10,.28))!important;
+  border-bottom:1px solid rgba(255,244,210,.20)!important;
+  color:#fff2cb!important;
+}
+#page-nav .back{
+  color:#fff2cb!important;
+  background:rgba(255,244,210,.18)!important;
+  border:1px solid rgba(255,244,210,.24)!important;
+}
+#page-nav .route-map-app{
+  --route-paper:rgba(255,244,210,.88);
+  --route-paper-soft:rgba(255,244,210,.24);
+  --route-ink:#382414;
+  --route-gold:#ffd65a;
+  --route-line-base:rgba(120,78,36,.14);
+  --route-line-done:rgba(255,211,82,.46);
+  --route-line-hot:rgba(255,241,143,.92);
+  --route-safe-top:env(safe-area-inset-top,0px);
+  --route-safe-bottom:env(safe-area-inset-bottom,0px);
+  position:absolute;
+  inset:0;
+  background:#050403;
+  overflow:hidden;
+  touch-action:pan-y;
+  overscroll-behavior:none;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
+  color:var(--route-ink);
+}
+#page-nav .route-map-bg{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:fill;
+  object-position:center center;
+  user-select:none;
+  -webkit-user-drag:none;
+  pointer-events:none;
+}
+#page-nav .route-svg{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  pointer-events:none;
+  overflow:visible;
+}
+#page-nav .route-base{fill:none;stroke:var(--route-line-base);stroke-width:22;stroke-linecap:round;stroke-linejoin:round}
+#page-nav .route-done{fill:none;stroke:var(--route-line-done);stroke-width:16;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 0 8px rgba(255,210,82,.24))}
+#page-nav .route-hot{fill:none;stroke:var(--route-line-hot);stroke-width:8;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 0 12px rgba(255,236,120,.78)) drop-shadow(0 0 20px rgba(255,156,42,.28))}
+#page-nav .route-halo{fill:rgba(255,219,92,.18);animation:routeHalo 1.8s infinite ease-in-out}
+#page-nav .route-ring{fill:rgba(255,184,34,.34);stroke:rgba(255,255,255,.95);stroke-width:6;animation:routeRing 1.2s infinite ease-in-out}
+#page-nav .route-core{fill:#fff8aa;filter:drop-shadow(0 0 12px #fff) drop-shadow(0 0 24px #ffd55a)}
+@keyframes routeHalo{0%,100%{r:44;opacity:.23}50%{r:72;opacity:.07}}
+@keyframes routeRing{0%,100%{r:22}50%{r:31}}
+#page-nav .route-spot{
+  position:absolute;
+  width:110px;
+  height:110px;
+  border-radius:999px;
+  transform:translate(-50%,-50%) scale(.82);
+  z-index:6;
+  pointer-events:auto;
+  background:rgba(255,222,104,.04);
+  border:1px solid rgba(255,222,104,0);
+  opacity:.35;
+  padding:0!important;
+  box-shadow:none;
+  transition:transform .55s ease,opacity .55s ease,box-shadow .55s ease,border-color .55s ease;
+}
+#page-nav .route-spot.active{
+  opacity:1;
+  transform:translate(-50%,-50%) scale(1);
+  border-color:rgba(255,232,128,.48);
+  box-shadow:0 0 0 12px rgba(255,226,109,.08),0 0 42px rgba(255,210,82,.42);
+  animation:routeFloat 2.4s infinite ease-in-out;
+}
+@keyframes routeFloat{0%,100%{filter:brightness(1)}50%{filter:brightness(1.18)}}
+#page-nav .route-title-pill{
+  position:absolute;
+  left:50%;
+  top:calc(60px + var(--route-safe-top));
+  transform:translateX(-50%);
+  z-index:12;
+  padding:7px 13px;
+  border-radius:999px;
+  background:rgba(35,21,10,.32);
+  color:#fff2cb;
+  backdrop-filter:blur(6px);
+  font-size:12px;
+  font-weight:900;
+  letter-spacing:.06em;
+  white-space:nowrap;
+  transition:opacity .35s ease;
+}
+#page-nav .route-title-pill.dim{opacity:.18}
+#page-nav .route-story-card{
+  position:absolute;
+  z-index:20;
+  left:7%;
+  top:68%;
+  width:min(42vw,340px);
+  max-width:calc(100vw - 32px);
+  min-height:92px;
+  max-height:29svh;
+  border-radius:22px;
+  padding:13px 15px 14px;
+  background:var(--route-paper-soft);
+  border:1px solid rgba(255,255,255,.22);
+  backdrop-filter:blur(4px);
+  box-shadow:0 14px 42px rgba(18,10,5,.18);
+  opacity:.26;
+  transform:translateY(-50%) translateX(-34px) scale(.96);
+  transition:transform .62s cubic-bezier(.22,1,.36,1),opacity .42s ease,background .42s ease,backdrop-filter .42s ease,box-shadow .42s ease,border-color .42s ease,filter .42s ease,max-height .42s ease,width .42s ease;
+  overflow:hidden;
+  pointer-events:auto;
+  will-change:transform,opacity,filter;
+  overscroll-behavior:contain;
+  touch-action:pan-y;
+}
+#page-nav .route-story-card.show,
+#page-nav .route-story-card:hover,
+#page-nav .route-story-card.open{
+  opacity:1;
+  transform:translateY(-50%) translateX(0) scale(1);
+  background:var(--route-paper);
+  backdrop-filter:blur(12px);
+  border-color:rgba(255,255,255,.62);
+  box-shadow:0 18px 54px rgba(18,10,5,.34);
+}
+#page-nav .route-story-card.open{max-height:min(62svh,560px)}
+#page-nav .route-story-card.switching{opacity:.16;transform:translateY(-50%) translateX(-46px) scale(.95);filter:blur(1.2px);pointer-events:none}
+#page-nav .route-story-card.justChanged{animation:routeCardSoftIn .52s cubic-bezier(.22,1,.36,1) both}
+@keyframes routeCardSoftIn{from{opacity:.18;transform:translateY(-50%) translateX(28px) scale(.972);filter:blur(1.6px)}to{opacity:1;transform:translateY(-50%) translateX(0) scale(1);filter:none}}
+#page-nav .route-story-top{display:flex;align-items:center;gap:10px;min-height:32px;cursor:pointer}
+#page-nav .route-num{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;flex:0 0 34px;background:#4d2c16;color:#fff4ce;font-weight:950;box-shadow:inset 0 -3px 0 rgba(0,0,0,.22)}
+#page-nav .route-story-title{margin:0;font-size:clamp(18px,4.8vw,26px);line-height:1.15;letter-spacing:.02em;color:#382414}
+#page-nav .route-tag{margin:3px 0 0;color:#806244;font-size:12px;font-weight:800}
+#page-nav .route-body{margin-top:10px;max-height:calc(29svh - 88px);overflow:auto;padding-right:2px;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;touch-action:pan-y;scrollbar-width:thin}
+#page-nav .route-story-card.open .route-body{max-height:calc(min(62svh,560px) - 88px)}
+#page-nav .route-body p{margin:0 0 8px;font-size:clamp(13px,3.5vw,16px);line-height:1.72;font-weight:650;color:#4f3928}
+#page-nav .route-body .em{font-weight:950;color:#2d1b10;font-size:1.06em}
+#page-nav .route-nav-buttons{position:absolute;z-index:25;right:10px;top:calc(100px + var(--route-safe-top));display:flex;flex-direction:column;gap:8px;opacity:.82}
+#page-nav .route-nav-buttons button{width:38px;height:38px;border:0;border-radius:999px;background:rgba(255,244,210,.34);backdrop-filter:blur(6px);color:#3b2413;font-size:18px;font-weight:950;box-shadow:0 8px 20px rgba(0,0,0,.16);padding:0!important}
+#page-nav .route-dots{position:absolute;left:50%;bottom:calc(8px + var(--route-safe-bottom));transform:translateX(-50%);z-index:24;display:flex;gap:5px;pointer-events:none;opacity:.72}
+#page-nav .route-dots span{width:6px;height:6px;border-radius:999px;background:rgba(70,43,21,.36);transition:.25s}
+#page-nav .route-dots span.on{width:22px;background:#ffb12d}
+#page-nav .route-hint{position:absolute;left:50%;bottom:calc(12px + var(--route-safe-bottom));transform:translateX(-50%);z-index:18;color:#fff4d4;background:rgba(36,21,10,.25);padding:5px 10px;border-radius:999px;font-size:11px;font-weight:800;backdrop-filter:blur(6px);opacity:.9;transition:.35s;white-space:nowrap}
+#page-nav .route-hint.hide{opacity:0}
+@media(min-width:760px){#page-nav .route-map-app{width:min(100vw,540px);height:100svh;left:50%;transform:translateX(-50%);box-shadow:0 0 80px rgba(0,0,0,.65)}#page-nav .route-spot{width:130px;height:130px}}
+@media(max-width:520px){
+  #page-nav .route-story-card{top:67%;width:min(52vw,250px);padding:11px 11px 10px;border-radius:16px;left:6%}
+  #page-nav .route-story-card.open{width:min(88vw,360px);max-height:58svh}
+  #page-nav .route-story-card.open .route-body{max-height:calc(58svh - 78px)}
+  #page-nav .route-story-title{font-size:16px}
+  #page-nav .route-body p{font-size:12px;line-height:1.5}
+  #page-nav .route-tag{font-size:8px}
+}
+
 </style>
 </head>
 <body>
@@ -893,12 +1166,12 @@ a{color:inherit}
     <div class="kicker">DEAR ANG MEMORY WORLD</div>
     <div class="gate-title"><span>想見你.</span><span class="i1">想見你..</span><span class="i2">想見你了….</span></div>
     <div class="gate-song-credit" aria-label="主題曲資訊">
-      <div class="credit-kicker">THEME SONG</div>
-      <div class="credit-title">〈給安格 Dear ANG〉</div>
-      <div class="credit-row"><span>作詞</span><b>Enden</b></div>
-      <div class="credit-row"><span>作曲</span><b>Enden</b></div>
+      <div class="credit-kicker">Theme Song</div>
+      <div class="credit-title">【 給安格 • Dear ANG 】</div>
+      <div class="credit-row"><span>作詞:</span><b>Enden Mi</b></div>
+      <div class="credit-row"><span>作曲 :</span><b>Enden Mi</b></div>
     </div>
-    <p class="gate-lead">這裡是你和我們的時光。一棟房子，一段曾經。</p>
+    <p class="gate-lead">我們的時光隧道。每一棟房子，都承載著一段美好曾經。</p>
     <button onclick="enterWorld()">踏上想你的旅程</button>
     <div class="tiny" style="margin-top:14px">!!!!! 提醒 : 情緒較為敏感者，請先準備好衛生紙。 !!!!!</div>
   </div>
@@ -958,10 +1231,74 @@ a{color:inherit}
       <div class="hotspot h-nav" data-label="公路局｜想你的時候" onclick="openPage('nav')"></div>
     </div>
   </div>
-  <div class="hint"><div class="hint-inner"><span>← →</span><div>左右滑這條街<small>點招牌或建築，進入對應的時光。</small></div></div></div>
+  <div class="hint"><div class="hint-inner"><span>← →</span><div>向左走向右走<small>每棟建築，都有你存在的痕跡。</small></div></div></div>
 </div>
 
 <audio id="themeAudio" preload="metadata" loop></audio>
+
+<div class="visitor-identity-modal hidden" id="visitorIdentityModal">
+  <div class="visitor-identity-card">
+    <div class="visitor-identity-kicker">DEAR ANG</div>
+    <h2>願意讓我們知道你是誰嗎？</h2>
+    <p>
+      不用登入，也不用密碼。<br>
+      這些資料不會公開顯示，只是讓 Enden 知道，
+      你曾經來看過他。
+    </p>
+
+    <input id="visitorNameInput" type="text" placeholder="你是誰？例如：Lisa / 小藍 / 同學 / 朋友">
+
+<select id="visitorCityInput" onchange="updateVisitorDistrictOptions()">
+  
+  <option value="">你大概在哪個城市？</option>
+  <!-- 北部 -->
+  <option value="基隆市">基隆市</option>
+  <option value="台北市">台北市</option>
+  <option value="新北市">新北市</option>
+  <option value="桃園市">桃園市</option>
+  <option value="新竹市">新竹市</option>
+  <option value="新竹縣">新竹縣</option>
+  <option value="宜蘭縣">宜蘭縣</option>
+  <!-- 中部 -->
+  <option value="苗栗縣">苗栗縣</option>
+  <option value="台中市">台中市</option>
+  <option value="彰化縣">彰化縣</option>
+  <option value="南投縣">南投縣</option>
+  <option value="雲林縣">雲林縣</option>
+  <!-- 南部 -->
+  <option value="嘉義市">嘉義市</option>
+  <option value="嘉義縣">嘉義縣</option>
+  <option value="台南市">台南市</option>
+  <option value="高雄市">高雄市</option>
+  <option value="屏東縣">屏東縣</option>
+  <!-- 東部 -->
+  <option value="花蓮縣">花蓮縣</option>
+  <option value="台東縣">台東縣</option>
+  <!-- 離島 -->
+  <option value="澎湖縣">澎湖縣</option>
+  <option value="金門縣">金門縣</option>
+  <option value="連江縣">連江縣</option>
+  <!-- 其他 -->
+  <option value="其他">其他</option>
+</select>
+
+    <select id="visitorDistrictInput" disabled>
+      <option value="">先選城市，再選區域</option>
+    </select>
+
+    <textarea id="visitorNoteInput" placeholder="想留一句話也可以，不填也沒關係"></textarea>
+
+    <div class="visitor-identity-actions">
+      <button type="button" onclick="saveVisitorIdentity()">留下我的名字</button>
+      <button type="button" class="soft" onclick="skipVisitorIdentity()">先不要</button>
+    </div>
+
+    <div class="visitor-identity-small">
+      有填名字才會記住；沒填的話，下次進來還會再問一次。
+    </div>
+  </div>
+</div>
+
 
 <!-- 華光相館｜照片 -->
 <section class="page" id="page-photo">
@@ -986,7 +1323,7 @@ a{color:inherit}
   <div class="page-head"><button class="back" onclick="closePage()">← 回到街上</button><b>中間公寓｜哥 記得常回家看看
 </b></div>
   <div class="page-body">
-    <div class="hero-card"><img src="assets/images/memory-world.png" alt="中間公寓"><div class="hero-text"><h1>你家</h1><p>想起你，你的樣貌，你的形態， 你英俊臉龐。</p></div></div>
+    <div class="hero-card"><img src="assets/images/memory-world.png" alt="中間公寓"><div class="hero-text"><h1>你家</h1><p>想起你，你的樣貌，你的體溫，和你的臉龐。</p></div></div>
     <div class="section folder-hint"><h2></h2><div class="story">03_你的家<br></div></div>
     <div class="section"><h2>他個人的照片</h2><div id="homePhotoGrid" class="album-mount"><div class="empty">載入中…</div></div></div>
   </div>
@@ -1065,7 +1402,7 @@ a{color:inherit}
 </section>
 <!-- 美而美早餐店｜食物 -->
 <section class="page" id="page-food">
-  <div class="page-head"><button class="back" onclick="closePage()">← 回到街上</button><b>美而美早餐店｜口味很像的我們</b></div>
+  <div class="page-head"><button class="back" onclick="closePage()">← 回到街上</button><b>美而美早餐店｜口味很像的我們。</b></div>
   <div class="page-body">
     <div class="hero-card"><img src="assets/images/memory-world.png?v=20260620-v16-bg" alt="美而美早餐店"><div class="hero-text"><h1>食物記憶</h1><p>一起吃過的、他喜歡吃的、他推薦你吃的，都由 Google Drive 分類讀取。</p></div></div>
     <div class="section folder-hint"><h2></h2><div class="story">05_美而美早餐店<br></div></div>
@@ -1074,7 +1411,7 @@ a{color:inherit}
 </section>
 <!-- 公路局｜導航 -->
 <section class="page" id="page-nav" data-weather="">
-  <div class="page-head"><button class="back" onclick="closePage()">← 回到街上</button><b>公路局｜導航／街景</b></div>
+  <div class="page-head"><button class="back" onclick="closePage()">← 回到街上</button><b>公路局｜當我想見你的時候。</b></div>
   <div class="page-body">
     <div class="hero-card"><img src="assets/images/sixth_tree.jpeg?v=20260620-v16-tree" alt="第六棵樹"><div class="rain-layer"></div><div class="hero-text"><h1>通往他的路</h1><p>Google Maps 導航、街景、第六棵樹天氣。</p></div></div>
     <div class="section weather-box"><h2>第六棵樹天氣</h2><div class="weather-card" id="weatherLabel">讀取長眠地天氣中…</div></div>
@@ -2115,6 +2452,277 @@ function setupWeather(){
   if(autoWeatherTimer)clearInterval(autoWeatherTimer);
   autoWeatherTimer=setInterval(()=>refreshAutoWeather(false),10*60*1000);
 }
+
+/* ===== v37：免密碼訪客名片＋私人訪客紀錄 ===== */
+const GEO_WORKER_URL = window.DEARANG_GEO_WORKER_URL || ''; 
+// 要自動預填城市時，先部署 geo-worker.js，再把網址填到 window.DEARANG_GEO_WORKER_URL 或直接填在這裡。
+
+const VISITOR_DISTRICTS = {
+  '基隆市': ['仁愛區', '信義區', '中正區', '中山區', '安樂區', '暖暖區', '七堵區'],
+  '台北市': ['中正區', '大同區', '中山區', '松山區', '大安區', '萬華區', '信義區', '士林區', '北投區', '內湖區', '南港區', '文山區'],
+  '新北市': ['板橋區', '三重區', '中和區', '永和區', '新莊區', '新店區', '樹林區', '鶯歌區', '三峽區', '淡水區', '汐止區', '瑞芳區', '土城區', '蘆洲區', '五股區', '泰山區', '林口區', '深坑區', '石碇區', '坪林區', '三芝區', '石門區', '八里區', '平溪區', '雙溪區', '貢寮區', '金山區', '萬里區', '烏來區'],
+  '桃園市': ['桃園區', '中壢區', '大溪區', '楊梅區', '蘆竹區', '大園區', '龜山區', '八德區', '龍潭區', '平鎮區', '新屋區', '觀音區', '復興區'],
+  '新竹市': ['東區', '北區', '香山區'],
+  '新竹縣': ['竹北市', '竹東鎮', '新埔鎮', '關西鎮', '湖口鄉', '新豐鄉', '芎林鄉', '橫山鄉', '北埔鄉', '寶山鄉', '峨眉鄉', '尖石鄉', '五峰鄉'],
+  '宜蘭縣': ['宜蘭市', '羅東鎮', '蘇澳鎮', '頭城鎮', '礁溪鄉', '壯圍鄉', '員山鄉', '冬山鄉', '五結鄉', '三星鄉', '大同鄉', '南澳鄉'],
+  '苗栗縣': ['苗栗市', '頭份市', '竹南鎮', '後龍鎮', '通霄鎮', '苑裡鎮', '造橋鄉', '西湖鄉', '頭屋鄉', '公館鄉', '銅鑼鄉', '三義鄉', '大湖鄉', '獅潭鄉', '卓蘭鎮', '泰安鄉', '南庄鄉', '三灣鄉'],
+  '台中市': ['中區', '東區', '西區', '南區', '北區', '西屯區', '南屯區', '北屯區', '豐原區', '東勢區', '大甲區', '清水區', '沙鹿區', '梧棲區', '后里區', '神岡區', '潭子區', '大雅區', '新社區', '石岡區', '外埔區', '大安區', '烏日區', '大肚區', '龍井區', '霧峰區', '太平區', '大里區', '和平區'],
+  '彰化縣': ['彰化市', '鹿港鎮', '和美鎮', '線西鄉', '伸港鄉', '福興鄉', '秀水鄉', '花壇鄉', '芬園鄉', '員林市', '溪湖鎮', '田中鎮', '大村鄉', '埔心鄉', '永靖鄉', '社頭鄉', '二水鄉', '北斗鎮', '二林鎮', '田尾鄉', '埤頭鄉', '芳苑鄉', '大城鄉', '竹塘鄉', '溪州鄉'],
+  '南投縣': ['南投市', '埔里鎮', '草屯鎮', '竹山鎮', '集集鎮', '名間鄉', '鹿谷鄉', '中寮鄉', '魚池鄉', '國卸鄉', '水里鄉', '信義鄉', '仁愛鄉'],
+  '雲林縣': ['斗六市', '斗南鎮', '虎尾鎮', '西螺鎮', '土庫鎮', '北港鎮', '古坑鄉', '大埤鄉', '莿桐鄉', '林內鄉', '二崙鄉', '崙背鄉', '麥寮鄉', '東勢鄉', '褒忠鄉', '台西鄉', '元長鄉', '四湖鄉', '口湖鄉', '水林鄉'],
+  '嘉義市': ['東區', '西區'],
+  '嘉義縣': ['太保市', '朴子市', '布袋鎮', '大林鎮', '民雄鄉', '溪口鄉', '新港鄉', '六腳鄉', '東石鄉', '義竹鄉', '鹿草鄉', '水上鄉', '中埔鄉', '竹崎鄉', '梅山鄉', '番路鄉', '大埔鄉', '阿里山鄉'],
+  '台南市': ['中西區', '東區', '南區', '北區', '安平區', '安南區', '永康區', '歸仁區', '新化區', '左鎮區', '玉井區', '楠西區', '南化區', '仁德區', '關廟區', '龍崎區', '官田區', '麻豆區', '佳里區', '西港區', '七股區', '將軍區', '學甲區', '北門區', '新營區', '後壁區', '白河區', '東山區', '六甲區', '下營區', '柳營區', '鹽水區', '善化區', '大內區', '山上區', '新市區', '安定區'],
+  '高雄市': ['新興區', '前金區', '苓雅區', '鹽埕區', '鼓山區', '左營區', '三民區', '前鎮區', '小港區', '鳳山區', '鳥松區', '大寮區', '林園區', '大樹區', '大社區', '仁武區', '岡山區', '橋頭區', '燕巢區', '阿蓮區', '路竹區', '湖內區', '茄萣區', '永安區', '彌陀區', '梓官區', '旗山區', '美濃區', '六龜區', '甲仙區', '杉林區', '內門區', '茂林區', '桃源區', '那瑪夏區', '田寮區'],
+  '屏東縣': ['屏東市', '三地門鄉', '霧台鄉', '瑪家鄉', '九如鄉', '里港鄉', '高樹鄉', '鹽埔鄉', '長治鄉', '麟洛鄉', '竹田鄉', '內埔鄉', '萬丹鄉', '潮州鎮', '泰武鄉', '來義鄉', '萬巒鄉', '嵌頂鄉', '新埤鄉', '南州鄉', '林邊鄉', '東港鎮', '琉球鄉', '佳冬鄉', '新園鄉', '枋寮鄉', '枋山鄉', '春日鄉', '獅子鄉', '車城鄉', '牡丹鄉', '恆春鎮', '滿州鄉'],
+  '花蓮縣': ['花蓮市', '新城鄉', '秀林鄉', '吉安鄉', '壽豐鄉', '鳳林鎮', '光復鄉', '豐濱鄉', '瑞穗鄉', '萬榮鄉', '玉里鎮', '卓溪鄉', '富里鄉'],
+  '台東縣': ['台東市', '綠島鄉', '蘭嶼鄉', '延平鄉', '卑南鄉', '鹿野鄉', '關山鎮', '海端鄉', '池上鄉', '東河鄉', '成功鎮', '長濱鄉', '太麻里鄉', '金峰鄉', '大武鄉', '達仁鄉'],
+  '澎湖縣': ['馬公市', '湖西鄉', '白沙鄉', '西嶼鄉', '望安鄉', '七美鄉'],
+  '金門縣': ['金城鎮', '金沙鎮', '金湖鎮', '金寧鄉', '烈嶼鄉', '烏坵鄉'],
+  '連江縣': ['南竿鄉', '北竿鄉', '莒光鄉', '東引鄉'],
+  '其他': ['美國']
+};
+
+function updateVisitorDistrictOptions(){
+  const city=document.getElementById('visitorCityInput')?.value || '';
+  const districtSelect=document.getElementById('visitorDistrictInput');
+  if(!districtSelect)return;
+  districtSelect.innerHTML='';
+  if(!city){
+    districtSelect.disabled=true;
+    districtSelect.innerHTML='<option value="">先選城市，再選區域</option>';
+    return;
+  }
+  const districts=VISITOR_DISTRICTS[city] || ['其他'];
+  districtSelect.disabled=false;
+  districtSelect.innerHTML='<option value="">選擇區域，可不填</option>';
+  districts.forEach(d=>{
+    const opt=document.createElement('option');
+    opt.value=d;
+    opt.textContent=d;
+    districtSelect.appendChild(opt);
+  });
+}
+
+function getDearAngDeviceId(){
+  const key='dear_ang_private_device_id_v1';
+  let id=localStorage.getItem(key);
+  if(!id){
+    id='DA-' + Date.now().toString(36) + '-' + Math.random().toString(36).slice(2,8).toUpperCase();
+    localStorage.setItem(key,id);
+  }
+  return id;
+}
+
+function getSavedVisitorIdentity(){
+  try{return JSON.parse(localStorage.getItem('dear_ang_visitor_identity_v1') || 'null');}
+  catch(e){return null;}
+}
+
+function normalizeTaiwanCityName(name){
+  const s=String(name || '').toLowerCase();
+  if(s.includes('taichung') || s.includes('台中')) return '台中市';
+  if(s.includes('nantou') || s.includes('南投')) return '南投縣';
+  if(s.includes('changhua') || s.includes('彰化')) return '彰化縣';
+  if(s.includes('new taipei') || s.includes('新北')) return '新北市';
+  if(s.includes('taipei') || s.includes('台北')) return '台北市';
+  if(s.includes('taoyuan') || s.includes('桃園')) return '桃園市';
+  if(s.includes('kaohsiung') || s.includes('高雄')) return '高雄市';
+  return '';
+}
+
+async function autoPrefillVisitorCity(){
+  const citySelect=document.getElementById('visitorCityInput');
+  if(!citySelect || citySelect.value)return;
+  if(!GEO_WORKER_URL)return;
+  try{
+    const r=await fetch(GEO_WORKER_URL + '?_=' + Date.now(),{cache:'no-store'});
+    const geo=await r.json();
+    const city=normalizeTaiwanCityName(geo.city || geo.region || geo.timezone || '');
+    if(city){citySelect.value=city;updateVisitorDistrictOptions();}
+  }catch(e){}
+}
+
+function showVisitorIdentityPrompt(){
+  const saved=getSavedVisitorIdentity();
+  if(saved && saved.name)return;
+  const modal=document.getElementById('visitorIdentityModal');
+  if(modal)modal.classList.remove('hidden');
+  setTimeout(autoPrefillVisitorCity,300);
+}
+
+function skipVisitorIdentity(){
+  const modal=document.getElementById('visitorIdentityModal');
+  if(modal)modal.classList.add('hidden');
+  sendPrivateVisitLog('identity_skipped',{identityStatus:'skipped'});
+}
+
+function saveVisitorIdentity(){
+  const name=(document.getElementById('visitorNameInput')?.value || '').trim();
+  const city=(document.getElementById('visitorCityInput')?.value || '').trim();
+  const district=(document.getElementById('visitorDistrictInput')?.value || '').trim();
+  const note=(document.getElementById('visitorNoteInput')?.value || '').trim();
+  if(!name){alert('至少填一下你是誰，之後就不會再跳這個視窗。');return;}
+  const data={name,city,district,note,savedAt:new Date().toISOString()};
+  localStorage.setItem('dear_ang_visitor_identity_v1',JSON.stringify(data));
+  sendPrivateVisitLog('identity_saved',{identityStatus:'saved',visitorName:name,visitorCity:city,visitorDistrict:district,visitorNote:note});
+  const modal=document.getElementById('visitorIdentityModal');
+  if(modal)modal.classList.add('hidden');
+}
+
+let dearAngVisitCountThisSession=null;
+function getVisitCount(){
+  if(dearAngVisitCountThisSession!==null)return dearAngVisitCountThisSession;
+  const key='dear_ang_visit_count_v1';
+  let n=Number(localStorage.getItem(key)||'0') + 1;
+  localStorage.setItem(key,String(n));
+  dearAngVisitCountThisSession=n;
+  return n;
+}
+
+function sendPrivateVisitLog(pageName, extra){
+  try{
+    if(!window.CONFIG || !CONFIG.GAS_API_URL)return;
+    extra=extra || {};
+    const identity=getSavedVisitorIdentity();
+    const payload={
+      action:'privateVisitLog',
+      deviceId:getDearAngDeviceId(),
+      visitCount:getVisitCount(),
+      page:pageName || location.pathname,
+      title:document.title || '',
+      visitorName:identity?.name || '',
+      visitorCity:identity?.city || '',
+      visitorDistrict:identity?.district || '',
+      visitorNote:identity?.note || '',
+      userAgent:navigator.userAgent || '',
+      language:navigator.language || '',
+      timezone:Intl.DateTimeFormat().resolvedOptions().timeZone || '',
+      screen:window.screen ? `${screen.width}x${screen.height}` : '',
+      referrer:document.referrer || '',
+      url:location.href,
+      time:new Date().toISOString()
+    };
+    Object.assign(payload,extra);
+    const url=CONFIG.GAS_API_URL
+      + '?action=privateVisitLog'
+      + '&data=' + encodeURIComponent(JSON.stringify(payload))
+      + '&_=' + Date.now();
+    const img=new Image();
+    img.src=url;
+  }catch(e){}
+}
+
+function askVisitorAfterEnterWorld(){setTimeout(showVisitorIdentityPrompt,800);}
+
+document.addEventListener('DOMContentLoaded',()=>{sendPrivateVisitLog('enter_site');});
+
+
+
+/* ===== v38 公路局單檔內嵌藏寶圖控制 ===== */
+(function(){
+  const routeStations=[
+    {n:1,title:'等你出來的小門',tag:'每次一起出去前，我都在這裡等你。',t:0,x:760,y:1565,body:['我們每次要一起出去的時候，我都會在停機車的地方入口那個小門等你。','這裡不是什麼特別大的地方，可是對我來說，它就是一個很熟悉的等待位置。','因為每次要見面、要一起出門、要一起去哪裡，我都會先站在那裡等你出現。','<span class="em">有些地方會被記住，不是因為它多漂亮，而是因為那裡裝著太多「每一次要見面前」的感覺。</span>']},
+    {n:2,title:'住得很近的那段日子',tag:'住得很近，動不動就往樓下跑。',t:.20,x:420,y:500,body:['我住在這一面的 7 樓，你住在我背面的 2 樓。','那時候我們動不動就是往下跑，跑去找你聊天、吃飯，或者等你上班，或一起回家。','我們那時候在同一間公司上班，所以很多時候根本也不是有什麼特別的大事，就是很自然地想找你。','有時候根本沒什麼事，但就是習慣膩在一起。那種靠近，不用特別約，不用特別講，就已經變成生活的一部分了。']},
+    {n:3,title:'搬到大雅',tag:'很多誤會的開始，也是彼此最深刻關愛的地方。',t:.40,x:1680,y:440,body:['搬到大雅，是很多誤會開始的地方，但也是最深刻關愛彼此的地方。','那裡不是只有爭執、拉扯、情緒，也不只是表面上那些說不清楚的誤會。','更深的其實是，就算有誤會、有碰撞、有難過，彼此還是在意，還是關心，還是把對方放在心裡。','因為在那裡，我也更清楚地感覺到，我們不是不在乎，反而是太在乎了。']},
+    {n:4,title:'你搬到最頂樓之後',tag:'表面分開，心裡卻還是像磁鐵一樣靠近。',t:.58,x:1510,y:1140,body:['從大雅搬離之後，表面上是吵架了、分開了，可是內心底就像兩顆磁鐵一樣，不管到哪裡，都還是會被彼此吸過去。','後來你搬到這棟最頂樓，每次我都是站在這個角度等你丟鑰匙下來，然後再坐電梯上去。😂','經歷過了很多事情，你還是一樣對我好。','重點是圍爐聚餐，你一定不會少問我。不管怎麼樣，你都還是會想到我，還是會留我的位置。']},
+    {n:5,title:'你的老家',tag:'回憶會停下來的地方。',t:.78,x:1540,y:2250,body:['這裡是你的老家。對別人來說，可能只是一個地址、一間房子、某一條街。','可是對我來說，這裡是很多回憶會停下來的地方。','好像只要走到這附近，就會覺得你還在。好像你只是等等會出來，或者還像以前一樣，會在門口出現，會叫我，會和我說話。','這裡像是很多回憶會回到原點的地方。不管前面經過多少事，最後想到你，還是會想到這裡。']},
+    {n:6,title:'最後一站／第六棵樹',tag:'最安靜、最捨不得，也最放不下的地方。',t:1,x:1295,y:3420,body:['這裡是最後一站。走到這裡的時候，很多情緒都會安靜下來。','如果前面的每一站，有的是等待、有的是陪伴、有的是誤會、有的是靠近，那這裡比較像是把所有想念都放下來，靜靜陪你待一下的地方。','這不是普通的地標，而是我心裡怎麼也不可能真的略過的地方。','<span class="em">因為不管前面怎麼走，最後還是會走到這裡。</span>']}
+  ];
+  let state=null;
+  function routeEscHtml(s){return String(s||'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));}
+  function ease(t){return t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2}
+  function inCard(e){return !!(e.target&&e.target.closest&&e.target.closest('#page-nav .route-story-card'))}
+  function pageVisible(){const p=document.getElementById('page-nav');return !!(p&&p.classList.contains('show'))}
+  function setProgress(t){
+    if(!state)return;
+    state.currentT=t;
+    const l=state.total*t;
+    const p=state.path.getPointAtLength(l);
+    state.light.setAttribute('transform',`translate(${p.x} ${p.y})`);
+    state.done.style.strokeDashoffset=state.total-l;
+    state.hot.style.strokeDashoffset=state.total-l-60;
+  }
+  function render(i){
+    if(!state)return;
+    const s=routeStations[i];
+    state.card.classList.remove('switching','justChanged');
+    state.num.textContent=s.n;
+    state.title.textContent=s.title;
+    state.tag.textContent=s.tag;
+    state.body.innerHTML=s.body.map(x=>`<p>${x}</p>`).join('');
+    state.body.scrollTop=0;
+    state.spotEls.forEach((el,k)=>el.classList.toggle('active',k===i));
+    state.dotEls.forEach((el,k)=>el.classList.toggle('on',k===i));
+    requestAnimationFrame(()=>{
+      state.card.classList.add('show','justChanged');
+      setTimeout(()=>state&&state.card.classList.remove('justChanged'),560);
+    });
+    state.hint.classList.remove('hide');
+    state.titlePill.classList.add('dim');
+    clearTimeout(state.autoHide);
+    state.autoHide=setTimeout(()=>{if(state&&!state.open){state.card.classList.remove('show');state.hint.classList.add('hide');state.titlePill.classList.remove('dim')}},4200);
+  }
+  function animateTo(targetT,cb){
+    if(!state)return;
+    cancelAnimationFrame(state.anim);
+    const start=state.currentT,diff=targetT-start,t0=performance.now(),dur=Math.max(1050,Math.abs(diff)*3200);
+    function step(now){
+      let p=Math.min(1,(now-t0)/dur);
+      setProgress(start+diff*ease(p));
+      if(p<1&&state)state.anim=requestAnimationFrame(step);else cb&&cb();
+    }
+    state.anim=requestAnimationFrame(step);
+  }
+  function go(i){
+    if(!state)return;
+    const nextIdx=Math.max(0,Math.min(routeStations.length-1,i));
+    if(nextIdx===state.idx&&state.card.classList.contains('show'))return;
+    state.idx=nextIdx;
+    state.open=false;
+    clearTimeout(state.autoHide);
+    state.card.classList.remove('open','justChanged');
+    state.card.classList.add('show','switching');
+    animateTo(routeStations[state.idx].t,()=>render(state.idx));
+    if(typeof playUiSound==='function')playUiSound('slide');
+  }
+  window.initRouteMapPage=function(){
+    const root=document.getElementById('routeMapApp');
+    if(!root)return;
+    if(state){setTimeout(()=>setProgress(state.currentT||0),40);return;}
+    const path=document.getElementById('routeMapPath'),done=document.getElementById('routeMapDone'),hot=document.getElementById('routeMapHot'),light=document.getElementById('routeMapLight');
+    const spots=document.getElementById('routeSpots'),dots=document.getElementById('routeDots');
+    const card=document.getElementById('routeCard'),num=document.getElementById('routeNum'),title=document.getElementById('routeStoryTitle'),tag=document.getElementById('routeStoryTag'),body=document.getElementById('routeStoryBody'),hint=document.getElementById('routeHint'),titlePill=document.getElementById('routeTitlePill');
+    if(!path||!done||!hot||!light||!spots||!dots||!card)return;
+    spots.innerHTML='';dots.innerHTML='';
+    routeStations.forEach((s,i)=>{
+      let b=document.createElement('button');
+      b.type='button';
+      b.className='route-spot';
+      b.style.left=(s.x/2160*100)+'%';
+      b.style.top=(s.y/3840*100)+'%';
+      b.setAttribute('aria-label',s.n+'｜'+s.title);
+      b.onclick=()=>go(i);
+      spots.appendChild(b);
+      dots.appendChild(document.createElement('span'));
+    });
+    const total=path.getTotalLength();
+    done.style.strokeDasharray=total;
+    hot.style.strokeDasharray='120 '+total;
+    state={root,path,done,hot,light,spots,dots,card,num,title,tag,body,hint,titlePill,total,idx:0,anim:null,autoHide:null,open:false,currentT:0,lock:false,sy:0,sx:0,touchOnCard:false,spotEls:[...spots.querySelectorAll('.route-spot')],dotEls:[...dots.querySelectorAll('span')]};
+    document.getElementById('routePrev').onclick=()=>go(state.idx-1);
+    document.getElementById('routeNext').onclick=()=>go(state.idx+1);
+    document.getElementById('routeCardTop').onclick=()=>{state.open=!state.open;state.card.classList.toggle('open',state.open);state.card.classList.add('show');state.hint.classList.toggle('hide',state.open)};
+    ['wheel','touchstart','touchmove','touchend'].forEach(type=>{body.addEventListener(type,e=>e.stopPropagation(),{passive:true})});
+    root.addEventListener('wheel',e=>{if(!pageVisible()||inCard(e))return;e.preventDefault();if(state.lock)return;state.lock=true;go(state.idx+(e.deltaY>0?1:-1));setTimeout(()=>{if(state)state.lock=false},920)},{passive:false});
+    root.addEventListener('touchstart',e=>{state.touchOnCard=inCard(e);if(state.touchOnCard)return;state.sy=e.touches[0].clientY;state.sx=e.touches[0].clientX},{passive:true});
+    root.addEventListener('touchend',e=>{if(state.touchOnCard){state.touchOnCard=false;return}let dy=e.changedTouches[0].clientY-state.sy,dx=e.changedTouches[0].clientX-state.sx;if(Math.abs(dy)>48&&Math.abs(dy)>Math.abs(dx)*1.25)go(state.idx+(dy<0?1:-1))},{passive:true});
+    document.addEventListener('keydown',e=>{if(!pageVisible()||!state)return;if(['ArrowDown','PageDown',' '].includes(e.key)){e.preventDefault();go(state.idx+1)} if(['ArrowUp','PageUp'].includes(e.key)){e.preventDefault();go(state.idx-1)}});
+    setProgress(0);
+    render(0);
+  };
+})();
+
 </script>
 </body>
 </html>
