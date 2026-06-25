@@ -8,8 +8,8 @@
 <!-- DearANG v16 KTV stage forced 20260620 -->
 <!-- DearANG v21 opening countdown video 20260620 -->
 <!-- DearANG v33 Real Frame Weather World Crop 20260623 -->
-<!-- DearANG v42 1080x2880 radio audio + mini-frame fallback 20260625 -->
-<title>你和我們的時光｜Dear ANG v42</title>
+<!-- DearANG v46 based on index(53): exact mini box/weather/letter coords + building hotspots kept 20260625 -->
+<title>你和我們的時光｜Dear ANG v46</title>
 <style>
 :root{
   --bg:#0b0b0d;
@@ -1159,7 +1159,7 @@ a{color:inherit}
 }
 
 
-/* ===== v42 使用者標示版：1080×2880、mini-frame fallback、radio 音檔鍵 ===== */
+/* ===== v43：以 index(53) 為參考，保留 mini-frame 影片讀取方式 + 1080×2880 紙張留言版 ===== */
 .gate-card{text-align:left!important;}
 .gate-title{width:max-content!important;max-width:100%!important;margin:12px auto 10px!important;text-align:left!important;display:grid!important;gap:.08em!important;line-height:1.22!important;}
 .gate-title span,.gate-title .i1,.gate-title .i2{padding-left:0!important;display:block!important;}
@@ -1168,28 +1168,76 @@ a{color:inherit}
 .gate-song-credit .credit-title{text-align:center!important;letter-spacing:.04em;}
 .gate-song-credit .credit-meta-line{display:flex;align-items:center;justify-content:space-evenly;gap:14px;white-space:nowrap;color:rgba(255,248,239,.88);font-size:13px;font-weight:950;letter-spacing:.03em;}
 .gate-song-credit .credit-meta-line span{flex:1;text-align:center;}.gate-song-credit .credit-meta-line i{font-style:normal;color:rgba(255,216,154,.72);font-weight:1000;}
-.gate-lead,.gate .tiny{text-align:center;}.gate button{display:block;margin-left:auto;margin-right:auto;}.gate{z-index:150!important;}.opening-countdown{z-index:160!important;}.world .topbar{z-index:92!important;}.top-actions{gap:6px!important;}.top-actions .icon-btn{width:40px;height:40px;position:relative;}#dataRefreshBtn.refreshing{animation:v42Spin .8s linear infinite;background:rgba(214,168,93,.34)!important;}@keyframes v42Spin{to{transform:rotate(360deg)}}
+.gate-lead,.gate .tiny{text-align:center;}.gate button{display:block;margin-left:auto;margin-right:auto;}.gate{z-index:150!important;}.opening-countdown{z-index:160!important;}.world .topbar{z-index:92!important;}.top-actions{gap:6px!important;}.top-actions .icon-btn{width:40px;height:40px;position:relative;}#dataRefreshBtn.refreshing{animation:v43Spin .8s linear infinite;background:rgba(214,168,93,.34)!important;}@keyframes v43Spin{to{transform:rotate(360deg)}}
 .mini-crt-label,.mini-world-tip,.mini-screen-hint,#miniWeatherButtons{display:none!important;}
 .mini-world{display:block!important;overflow:auto!important;-webkit-overflow-scrolling:touch!important;padding:calc(58px + env(safe-area-inset-top)) 0 calc(22px + env(safe-area-inset-bottom))!important;text-align:center!important;background:#050403!important;}
-.mini-world.hidden{display:none!important;}
 .mini-crt-scene{position:relative!important;width:min(96vw,560px)!important;height:auto!important;aspect-ratio:1080/2880!important;max-height:none!important;margin:0 auto!important;overflow:hidden!important;border-radius:0!important;filter:drop-shadow(0 30px 70px rgba(0,0,0,.62))!important;}
 .mini-crt-frame{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;object-fit:cover!important;background:#000 url("assets/images/mini-frame-poster.png") center/cover no-repeat!important;}
 .mini-crt-frame.frame-failed{opacity:.22!important;filter:sepia(.4) brightness(.7)!important;}
-.mini-crt-screen{left:4.6296%!important;top:23.1597%!important;width:90.3704%!important;height:19.2014%!important;border-radius:.8%!important;}
+/* 小世界木箱內圖片：x 75–1020 / y 653–1185（以 1080×2880 換算） */
+.mini-crt-screen{left:6.9444%!important;top:22.6736%!important;width:87.5000%!important;height:18.4722%!important;border-radius:.8%!important;}
 .mini-world-panel{display:block!important;position:static!important;width:0!important;height:0!important;margin:0!important;padding:0!important;overflow:hidden!important;}
-.mini-weather-status{position:absolute!important;z-index:6!important;left:22.7778%!important;top:56.85%!important;width:59.5370%!important;color:rgba(76,43,22,.78)!important;background:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;padding:0!important;text-align:left!important;font-size:clamp(7px,1.12vw + .15rem,12px)!important;line-height:1.35!important;font-weight:850!important;text-shadow:0 1px 0 rgba(255,247,220,.45)!important;pointer-events:none!important;backdrop-filter:none!important;}
-.frame-letter-card{position:absolute!important;z-index:5!important;left:22.7778%!important;top:59.0972%!important;width:59.5370%!important;height:37.1528%!important;margin:0!important;padding:0!important;overflow:hidden!important;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;backdrop-filter:none!important;color:#4b2b16!important;text-align:left!important;}
+/* 天氣資訊：x 60–655 / y 1204–1269 */
+.mini-weather-status{position:absolute!important;z-index:6!important;left:5.5556%!important;top:41.8056%!important;width:55.0926%!important;height:2.2569%!important;color:rgba(76,43,22,.82)!important;background:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;padding:0!important;text-align:left!important;font-size:clamp(7px,1.08vw + .13rem,12px)!important;line-height:1.28!important;font-weight:900!important;text-shadow:0 1px 0 rgba(255,247,220,.48)!important;pointer-events:none!important;backdrop-filter:none!important;overflow:hidden!important;}
+/* 給阿明的話：H 1750 up（從 y=1750 開始往下） */
+.frame-letter-card{position:absolute!important;z-index:5!important;left:22.7778%!important;top:60.7639%!important;width:59.5370%!important;height:35.4861%!important;margin:0!important;padding:0!important;overflow:hidden!important;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;backdrop-filter:none!important;color:#4b2b16!important;text-align:left!important;}
 .frame-letter-text{width:100%!important;height:100%!important;overflow:hidden!important;color:#4b2b16!important;font-size:clamp(7px,1.22vw + .16rem,13px)!important;line-height:1.56!important;font-weight:760!important;letter-spacing:.01em!important;text-shadow:0 1px 0 rgba(255,247,220,.36)!important;font-family:"Noto Serif TC","Noto Sans TC",serif!important;}
-/* 依你標的座標：播放 x708-768/y1450-1505；停止 x807-867/y1450-1505 */
+/* radio 座標：播放 x708–768/y1450–1505；停止 x807–867/y1450–1505 */
 .radio-audio-hit{position:absolute!important;z-index:9!important;top:50.3472%!important;width:5.5556%!important;height:1.9097%!important;min-height:0!important;padding:0!important;margin:0!important;border-radius:50%!important;display:grid!important;place-items:center!important;background:rgba(255,244,214,.12)!important;border:1px solid rgba(68,38,18,.18)!important;box-shadow:none!important;color:#251307!important;text-shadow:0 1px 0 rgba(255,248,220,.35)!important;cursor:pointer!important;backdrop-filter:none!important;}
 .radio-audio-play{left:65.5556%!important;}.radio-audio-stop{left:74.7222%!important;}
 .radio-audio-hit span{display:block!important;font-size:clamp(13px,3.8vw,23px)!important;line-height:1!important;font-weight:1000!important;transform:translateY(-2%);} .radio-audio-stop span{font-size:clamp(12px,3.3vw,21px)!important;}
 .radio-audio-hit:active,.radio-audio-hit.playing{background:rgba(255,216,154,.28)!important;box-shadow:0 0 0 3px rgba(255,216,154,.14)!important;}
 .person-tag-hotspot{position:absolute;z-index:4;width:5.8%;height:12%;border-radius:999px;transform:translate(-50%,-50%);cursor:pointer;outline:none;background:rgba(255,216,154,0);border:1px solid rgba(255,216,154,0);transition:.18s ease;}
 .person-tag-hotspot::before{content:attr(data-name);position:absolute;left:50%;bottom:100%;transform:translateX(-50%) translateY(-8px);white-space:nowrap;padding:7px 11px;border-radius:999px;background:rgba(0,0,0,.64);border:1px solid rgba(255,216,154,.25);color:#ffd89a;font-size:12px;font-weight:1000;letter-spacing:.05em;opacity:0;pointer-events:none;backdrop-filter:blur(10px);box-shadow:0 12px 28px rgba(0,0,0,.26);}
-.person-tag-hotspot:hover,.person-tag-hotspot:focus,.person-tag-hotspot.show-name{background:rgba(255,216,154,.08);border-color:rgba(255,216,154,.45);} .person-tag-hotspot:hover::before,.person-tag-hotspot:focus::before,.person-tag-hotspot.show-name::before{opacity:1;}
-.person-1{left:13.5%;top:68.2%;}.person-2{left:45.8%;top:63.5%;}.person-3{left:50.3%;top:63.2%;}.person-4{left:90.5%;top:67.5%;width:8.4%;}
+.person-tag-hotspot:hover,.person-tag-hotspot:focus,.person-tag-hotspot.show-name{background:rgba(255,216,154,.08);border-color:rgba(255,216,154,.45);}.person-tag-hotspot:hover::before,.person-tag-hotspot:focus::before,.person-tag-hotspot.show-name::before{opacity:1;}
+.person-1{left:43.8%;top:63.5%;}.person-2{left:48.9%;top:63.2%;}.person-3{left:13.5%;top:68.2%;}.person-4{left:90.5%;top:67.5%;width:8.4%;}
 @media(max-width:560px){.gate-title{margin-left:auto!important;margin-right:auto!important;font-size:clamp(34px,10vw,54px)!important}.gate-song-credit .credit-meta-line{gap:8px;font-size:12px}.mini-crt-scene{width:96vw!important}.frame-letter-text{font-size:clamp(7px,2.05vw,9.6px)!important;line-height:1.48!important}.mini-weather-status{font-size:clamp(6.5px,1.75vw,8.6px)!important}.radio-audio-hit span{font-size:clamp(12px,4.1vw,20px)!important;}}
+
+
+/* ===== v45：小世界/主街共用同一個天氣狀態；圖片缺檔也不空白 ===== */
+#stage.stage-weather-fallback,
+.mini-crt-screen.weather-fallback{
+  background-size:cover!important;
+  background-position:center!important;
+  background-repeat:no-repeat!important;
+}
+#stage.stage-weather-fallback[data-weather-key="sunny"],
+.mini-crt-screen.weather-fallback[data-weather-key="sunny"]{background-image:linear-gradient(180deg,#8fc7ef 0%,#f8dd97 38%,#c89755 62%,#5a3925 100%)!important;}
+#stage.stage-weather-fallback[data-weather-key="hot"],
+.mini-crt-screen.weather-fallback[data-weather-key="hot"]{background-image:linear-gradient(180deg,#f9d271 0%,#ee8b32 40%,#b46a3c 68%,#4b2b1c 100%)!important;}
+#stage.stage-weather-fallback[data-weather-key="cloudy"],
+.mini-crt-screen.weather-fallback[data-weather-key="cloudy"]{background-image:linear-gradient(180deg,#b8c1c5 0%,#d7c6a0 45%,#8f7354 70%,#403024 100%)!important;}
+#stage.stage-weather-fallback[data-weather-key="overcast"],
+.mini-crt-screen.weather-fallback[data-weather-key="overcast"]{background-image:linear-gradient(180deg,#7f8586 0%,#b1aaa1 44%,#77624e 72%,#292521 100%)!important;}
+#stage.stage-weather-fallback[data-weather-key="rain"],
+.mini-crt-screen.weather-fallback[data-weather-key="rain"]{background-image:linear-gradient(180deg,#596f82 0%,#6d6a61 45%,#4c3e35 72%,#18191b 100%)!important;}
+#stage.stage-weather-fallback[data-weather-key="storm"],
+.mini-crt-screen.weather-fallback[data-weather-key="storm"]{background-image:linear-gradient(180deg,#1a2536 0%,#39404a 45%,#2c2927 75%,#070708 100%)!important;}
+#stage.stage-weather-fallback[data-weather-key="fog"],
+.mini-crt-screen.weather-fallback[data-weather-key="fog"]{background-image:linear-gradient(180deg,#d4d7d1 0%,#c4c0b4 48%,#8b8172 76%,#4a4038 100%)!important;}
+#stage.stage-weather-fallback[data-weather-key="haze"],
+.mini-crt-screen.weather-fallback[data-weather-key="haze"]{background-image:linear-gradient(180deg,#c8ae74 0%,#a28a5e 48%,#6b5844 76%,#2f2a24 100%)!important;}
+#stage.stage-weather-fallback[data-weather-key="night"],
+#stage.stage-weather-fallback[data-weather-key="nightRain"],
+.mini-crt-screen.weather-fallback[data-weather-key="night"],
+.mini-crt-screen.weather-fallback[data-weather-key="nightRain"]{background-image:linear-gradient(180deg,#081432 0%,#121a2d 43%,#1f2027 70%,#050506 100%)!important;}
+#stage.stage-weather-fallback[data-weather-key="snow"],
+.mini-crt-screen.weather-fallback[data-weather-key="snow"]{background-image:linear-gradient(180deg,#dce7ee 0%,#b9c7cc 45%,#8e9290 74%,#343838 100%)!important;}
+#stage.stage-weather-fallback .stage-world-img,
+.mini-crt-screen.weather-fallback .mini-world-bg{opacity:0!important;}
+#stage:not(.stage-weather-fallback) .stage-world-img,
+.mini-crt-screen:not(.weather-fallback) .mini-world-bg{opacity:1!important;}
+
+
+/* ===== v46：主街進去後仍保留分建築物按鈕 ===== */
+#stage{position:relative!important;}
+#stage .stage-world-img{z-index:0!important;pointer-events:none!important;}
+#stage .world-weather{z-index:1!important;pointer-events:none!important;}
+#stage .person-tag-hotspot{z-index:4!important;pointer-events:auto!important;}
+#stage .hotspot{z-index:8!important;pointer-events:auto!important;background:rgba(255,216,154,0)!important;border:0!important;}
+#stage .hotspot::after{pointer-events:none!important;}
+#stage .hotspot::before{z-index:9!important;}
+#stage .hotspot:active::after,#stage .hotspot:hover::after{border-color:rgba(255,216,154,.68)!important;background:rgba(255,216,154,.10)!important;}
 
 </style>
 </head>
@@ -1204,7 +1252,7 @@ a{color:inherit}
       <div class="credit-title">【 給安格 • Dear ANG 】</div>
       <div class="credit-meta-line"><span>作詞 : Enden Mi</span><i>|</i><span>作曲 : Enden Mi</span></div>
     </div>
-    <p class="gate-lead">我們的時光隧道。每一棟房子，都承載著一段美好曾經。</p>
+    <p class="gate-lead">這裡是你和我們的時光。一棟房子，一段曾經。</p>
     <button onclick="enterWorld()">踏上想你的旅程</button>
     <div class="tiny" style="margin-top:14px">!!!!! 提醒 : 情緒較為敏感者，請先準備好衛生紙。 !!!!!</div>
   </div>
@@ -1213,7 +1261,7 @@ a{color:inherit}
 <div class="asset-preload-status" id="assetPreloadStatus">準備通往回憶…</div>
 <div class="opening-countdown" id="openingCountdown" aria-live="polite">
   <div class="opening-countdown-card">
-    <video class="opening-countdown-video" id="openingCountdownVideo" src="assets/videos/opening-countdown.mp4" playsinline preload="auto"></video>
+    <video class="opening-countdown-video" id="openingCountdownVideo" src="assets/videos/opening-countdown.mp4?v=20260620-v21" playsinline preload="auto"></video>
     <div class="opening-video-caption">回憶倒流中 請留意眼淚回流</div>
     <div class="credit-kicker">OPENING COUNTDOWN</div>
     <div class="opening-countdown-title">倒數</div>
@@ -1221,21 +1269,18 @@ a{color:inherit}
     <div class="opening-number" id="openingNumber">10</div>
     <div class="opening-photo-draw" id="openingPhotoDraw"></div>
     <div class="opening-start-note" id="openingStartNote">0 秒開始播放</div>
-    <button class="opening-video-skip" type="button" onclick="finishOpeningMemoryCountdown()">Heaven</button>
+    <button class="opening-video-skip" type="button" onclick="finishOpeningMemoryCountdown()">跳過倒數</button>
   </div>
 </div>
 
 <div class="mini-world hidden" id="miniWorld" aria-label="CRT電視小世界">
   <div class="mini-crt-scene">
-    <video class="mini-crt-frame" id="miniFrameVideo" autoplay muted loop playsinline preload="auto" poster="assets/images/mini-frame-poster.png" aria-label="木框影片">
-      <source src="assets/videos/mini-frame.mp4" type="video/mp4">
-      <source src="mini-frame.mp4" type="video/mp4">
-      <source src="按鈕排列與功能配置%20(1).mp4" type="video/mp4">
-    </video>
+    <video class="mini-crt-frame" id="miniFrameVideo" src="assets/videos/mini-frame.mp4?v=20260625-v46" autoplay muted loop playsinline preload="auto" poster="assets/images/mini-frame-poster.png" aria-label="木框影片"></video>
     <button class="mini-crt-screen" type="button" onclick="enterMainWorld()" aria-label="點擊木框中間的小世界進入富宜路街道">
       <img src="assets/images/memory-world.png" class="mini-world-bg" id="miniWorldBg" alt="木框裡的Q版小世界">
       <div class="mini-world-weather" id="miniWorldWeather"></div>
       <div class="mini-screen-shine"></div>
+      <div class="mini-screen-hint">回到你成長的街道</div>
     </button>
     <button class="radio-audio-hit radio-audio-play" type="button" onclick="playLetterAudio()" aria-label="播放留言音檔"><span>▶</span></button>
     <button class="radio-audio-hit radio-audio-stop" type="button" onclick="stopLetterAudio()" aria-label="停止留言音檔"><span>■</span></button>
@@ -1268,6 +1313,7 @@ a{color:inherit}
   </div>
   <div class="scroller" id="scroller">
     <div class="stage" id="stage">
+      <img class="stage-world-img" id="stageWorldImg" src="assets/images/weather/day-sunny.png?v=20260625-v37" alt="富宜路街道世界">
       <div class="world-weather" id="worldWeather"></div>
       <div class="person-tag-hotspot person-1" data-name="人物1" tabindex="0" aria-label="人物1"></div>
       <div class="person-tag-hotspot person-2" data-name="人物2" tabindex="0" aria-label="人物2"></div>
@@ -1281,7 +1327,7 @@ a{color:inherit}
       <div class="hotspot h-nav" data-label="公路局｜想你的時候" onclick="openPage('nav')"></div>
     </div>
   </div>
-  <div class="hint"><div class="hint-inner"><span>← →</span><div>向左走向右走<small>每棟建築，都有你存在的痕跡。</small></div></div></div>
+  <div class="hint"><div class="hint-inner"><span>← →</span><div>左右滑這條街<small>點招牌或建築，進入對應的時光。</small></div></div></div>
 </div>
 
 <audio id="themeAudio" preload="metadata" loop></audio>
@@ -1298,39 +1344,17 @@ a{color:inherit}
 
     <input id="visitorNameInput" type="text" placeholder="你是誰？例如：Lisa / 小藍 / 同學 / 朋友">
 
-<select id="visitorCityInput" onchange="updateVisitorDistrictOptions()">
-  
-  <option value="">你大概在哪個城市？</option>
-  <!-- 北部 -->
-  <option value="基隆市">基隆市</option>
-  <option value="台北市">台北市</option>
-  <option value="新北市">新北市</option>
-  <option value="桃園市">桃園市</option>
-  <option value="新竹市">新竹市</option>
-  <option value="新竹縣">新竹縣</option>
-  <option value="宜蘭縣">宜蘭縣</option>
-  <!-- 中部 -->
-  <option value="苗栗縣">苗栗縣</option>
-  <option value="台中市">台中市</option>
-  <option value="彰化縣">彰化縣</option>
-  <option value="南投縣">南投縣</option>
-  <option value="雲林縣">雲林縣</option>
-  <!-- 南部 -->
-  <option value="嘉義市">嘉義市</option>
-  <option value="嘉義縣">嘉義縣</option>
-  <option value="台南市">台南市</option>
-  <option value="高雄市">高雄市</option>
-  <option value="屏東縣">屏東縣</option>
-  <!-- 東部 -->
-  <option value="花蓮縣">花蓮縣</option>
-  <option value="台東縣">台東縣</option>
-  <!-- 離島 -->
-  <option value="澎湖縣">澎湖縣</option>
-  <option value="金門縣">金門縣</option>
-  <option value="連江縣">連江縣</option>
-  <!-- 其他 -->
-  <option value="其他">其他</option>
-</select>
+    <select id="visitorCityInput" onchange="updateVisitorDistrictOptions()">
+      <option value="">你大概在哪個城市？</option>
+      <option value="台中市">台中市</option>
+      <option value="南投縣">南投縣</option>
+      <option value="彰化縣">彰化縣</option>
+      <option value="台北市">台北市</option>
+      <option value="新北市">新北市</option>
+      <option value="桃園市">桃園市</option>
+      <option value="高雄市">高雄市</option>
+      <option value="其他">其他</option>
+    </select>
 
     <select id="visitorDistrictInput" disabled>
       <option value="">先選城市，再選區域</option>
@@ -1354,7 +1378,7 @@ a{color:inherit}
 <section class="page" id="page-photo">
   <div class="page-head"><button class="back" onclick="closePage()">← 回到街上</button><b>華光相館｜你的形 和你的影</b></div>
   <div class="page-body">
-    <div class="hero-card"><img src="assets/images/memory-world.png" alt="華光相館"><div class="hero-text"><h1>你和我們的時光</h1><p></p></div></div>
+    <div class="hero-card"><img src="assets/images/memory-world.png?v=20260620-v16-bg" alt="華光相館"><div class="hero-text"><h1>你和我們的時光</h1><p></p></div></div>
     <div class="section folder-hint"><h2></h2><div class="story">01_你和我們的時光<br></div></div>
     <div class="section"><h2>照片</h2><div id="photoGrid" class="album-mount"><div class="empty">照片載入中…</div></div></div>
   </div>
@@ -1373,7 +1397,7 @@ a{color:inherit}
   <div class="page-head"><button class="back" onclick="closePage()">← 回到街上</button><b>中間公寓｜哥 記得常回家看看
 </b></div>
   <div class="page-body">
-    <div class="hero-card"><img src="assets/images/memory-world.png" alt="中間公寓"><div class="hero-text"><h1>你家</h1><p>想起你，你的樣貌，你的體溫，和你的臉龐。</p></div></div>
+    <div class="hero-card"><img src="assets/images/memory-world.png" alt="中間公寓"><div class="hero-text"><h1>你家</h1><p>想起你，你的樣貌，你的形態， 你英俊臉龐。</p></div></div>
     <div class="section folder-hint"><h2></h2><div class="story">03_你的家<br></div></div>
     <div class="section"><h2>他個人的照片</h2><div id="homePhotoGrid" class="album-mount"><div class="empty">載入中…</div></div></div>
   </div>
@@ -1386,7 +1410,7 @@ a{color:inherit}
       <div class="ktv-tv ktv-tv-machine">
         <div class="ktv-tv-top">金嗓卡拉OK</div>
         <div class="ktv-stage-wrap">
-          <img src="assets/images/ktv-stage.png" alt="卡拉OK電視、麥克風與音響">
+          <img src="assets/images/ktv-stage.png?v=20260620-v16-stage" alt="卡拉OK電視、麥克風與音響">
           <div class="ktv-screen" id="ktvScreen">
             <video id="ktvVideo" controls playsinline preload="none"></video>
             <div class="ktv-audio-visual" id="ktvAudioVisual">
@@ -1410,7 +1434,7 @@ a{color:inherit}
           <h2>遙控器</h2>
           <div class="ktv-display"><span id="ktvDisplay">---</span><small id="ktvSelectedText">尚未選歌</small></div>
           <div class="ktv-remote-photo-wrap" aria-label="卡拉OK遙控器">
-            <img src="assets/images/ktv-remote.png" alt="卡拉OK遙控器">
+            <img src="assets/images/ktv-remote.png?v=20260620-v16-remote" alt="卡拉OK遙控器">
             <button class="ktv-img-hotspot side"  style="left:16.7%;top:11.0%" onclick="ktvRemoteHint('設定功能暫不使用')" aria-label="設定"></button>
             <button class="ktv-img-hotspot side"  style="left:16.7%;top:20.8%" onclick="document.getElementById('ktvSongbook')?.scrollIntoView({behavior:'smooth',block:'center'})" aria-label="菜單"></button>
             <button class="ktv-img-hotspot side"  style="left:16.7%;top:30.6%" onclick="ktvEnter()" aria-label="已點"></button>
@@ -1452,16 +1476,16 @@ a{color:inherit}
 </section>
 <!-- 美而美早餐店｜食物 -->
 <section class="page" id="page-food">
-  <div class="page-head"><button class="back" onclick="closePage()">← 回到街上</button><b>美而美早餐店｜口味很像的我們。</b></div>
+  <div class="page-head"><button class="back" onclick="closePage()">← 回到街上</button><b>美而美早餐店｜口味很像的我們</b></div>
   <div class="page-body">
-    <div class="hero-card"><img src="assets/images/memory-world.png" alt="美而美早餐店"><div class="hero-text"><h1>食物記憶</h1><p>一起吃過的、他喜歡吃的、他推薦你吃的，都由 Google Drive 分類讀取。</p></div></div>
+    <div class="hero-card"><img src="assets/images/memory-world.png?v=20260620-v16-bg" alt="美而美早餐店"><div class="hero-text"><h1>食物記憶</h1><p>一起吃過的、他喜歡吃的、他推薦你吃的，都由 Google Drive 分類讀取。</p></div></div>
     <div class="section folder-hint"><h2></h2><div class="story">05_美而美早餐店<br></div></div>
     <div class="section"><h2>照片</h2><div id="foodPhotoGrid" class="grid"><div class="empty">食物照片載入中…</div></div></div>
   </div>
 </section>
 <!-- 公路局｜導航 -->
 <section class="page" id="page-nav" data-weather="">
-  <div class="page-head"><button class="back" onclick="closePage()">← 回到街上</button><b>公路局｜當我想見你的時候。</b></div>
+  <div class="page-head"><button class="back" onclick="closePage()">← 回到街上</button><b>公路局｜導航／街景</b></div>
   <div class="route-map-app" id="routeMapApp" aria-label="通往他的路｜藏寶圖">
     <img class="route-map-bg" src="treasure_map_bg.png" alt="藏寶圖背景">
     <svg class="route-svg" viewBox="0 0 2160 3840" preserveAspectRatio="none" aria-hidden="true">
@@ -1882,7 +1906,7 @@ function preloadImage(src){
   img.src=src;
 }
 function preloadStaticAssets(){
-  ['assets/images/memory-world.png','assets/images/ktv-stage.png','assets/images/ktv-remote.png','assets/images/sixth_tree.jpeg'].forEach(preloadImage);
+  ['assets/images/memory-world.png?v=20260620-v17','assets/images/ktv-stage.png?v=20260620-v16-stage','assets/images/ktv-remote.png?v=20260620-v16-remote','assets/images/sixth_tree.jpeg?v=20260620-v17'].forEach(preloadImage);
 }
 function preloadFirstDriveAssets(){
   const first=(DATA.photos||[]).slice(0,8);
@@ -1961,25 +1985,35 @@ let memoryWeatherKey=timeBasedWeatherKey();
 let autoWeatherSource='time';
 let autoWeatherTimer=null;
 function memoryWeatherByKey(key){return MEMORY_WEATHERS.find(w=>w.key===key)||MEMORY_WEATHERS[0];}
+function taipeiParts(){
+  try{
+    const parts=new Intl.DateTimeFormat('en-US',{timeZone:'Asia/Taipei',hour:'2-digit',minute:'2-digit',hour12:false}).formatToParts(new Date());
+    const get=t=>Number((parts.find(p=>p.type===t)||{}).value);
+    return {hour:get('hour'),minute:get('minute')};
+  }catch(e){return {hour:new Date().getHours(),minute:new Date().getMinutes()};}
+}
 function taipeiNow(){
-  try{return new Date(new Date().toLocaleString('en-US',{timeZone:'Asia/Taipei'}));}
-  catch(e){return new Date();}
+  const p=taipeiParts();
+  const d=new Date();
+  d.setHours(isFinite(p.hour)?p.hour:d.getHours(),isFinite(p.minute)?p.minute:d.getMinutes(),0,0);
+  return d;
 }
 function timeBasedWeatherKey(){
-  const h=taipeiNow().getHours();
-  if(h>=5 && h<11)return 'sunny';       // 早上
-  if(h>=11 && h<16)return 'hot';        // 中午下午偏熱
-  if(h>=16 && h<18)return 'cloudy';     // 傍晚先用多雲
-  if(h>=18 && h<23)return 'night';      // 晚上
-  return 'night';                       // 半夜
+  const h=taipeiParts().hour;
+  if(h>=5 && h<11)return 'sunny';
+  if(h>=11 && h<16)return 'hot';
+  if(h>=16 && h<18)return 'cloudy';
+  return 'night';
 }
 function timeBasedWeatherText(){
-  const h=taipeiNow().getHours();
-  if(h>=5 && h<11)return '即時天氣讀取中，先用台灣時間判斷：早上晴天版';
-  if(h>=11 && h<16)return '即時天氣讀取中，先用台灣時間判斷：白天炎熱版';
-  if(h>=16 && h<18)return '即時天氣讀取中，先用台灣時間判斷：傍晚多雲版';
-  if(h>=18 && h<23)return '即時天氣讀取中，先用台灣時間判斷：晚上版';
-  return '即時天氣讀取中，先用台灣時間判斷：半夜版';
+  const p=taipeiParts();
+  const h=p.hour;
+  const hh=String(isFinite(p.hour)?p.hour:0).padStart(2,'0');
+  const mm=String(isFinite(p.minute)?p.minute:0).padStart(2,'0');
+  if(h>=5 && h<11)return `即時天氣暫時讀取不到，台灣時間 ${hh}:${mm}，先保留早上晴天備援`;
+  if(h>=11 && h<16)return `即時天氣暫時讀取不到，台灣時間 ${hh}:${mm}，先保留白天炎熱備援`;
+  if(h>=16 && h<18)return `即時天氣暫時讀取不到，台灣時間 ${hh}:${mm}，先保留傍晚多雲備援`;
+  return `即時天氣暫時讀取不到，台灣時間 ${hh}:${mm}，先保留夜晚備援`;
 }
 function renderMiniWeatherButtons(){
   const box=document.getElementById('miniWeatherButtons');
@@ -1990,19 +2024,70 @@ function setMiniWeatherStatus(text){
   const el=document.getElementById('miniWeatherStatus');
   if(el)el.textContent=text||'';
 }
+function resolveAssetUrl(path,version){
+  const clean=String(path||'').split('?')[0];
+  const stamp='?v='+(version||'20260625-v46');
+  const here=location.href.split('#')[0].replace(/[^\/]*$/,'');
+  return [
+    clean+stamp,
+    here+clean+stamp,
+    clean.replace(/^assets\//,'/DearANG/assets/')+stamp,
+    clean.replace(/^assets\/images\/weather\//,'assets/images/')+stamp,
+    clean.replace(/^assets\/images\/weather\//,'images/weather/')+stamp,
+    clean.replace(/^assets\/images\/weather\//,'weather/')+stamp
+  ].filter((v,i,a)=>v&&a.indexOf(v)===i);
+}
+function testImageCandidates(urls){
+  return new Promise((resolve,reject)=>{
+    let i=0;
+    const next=()=>{
+      if(i>=urls.length){reject(new Error('weather image not found'));return;}
+      const url=urls[i++];
+      const img=new Image();
+      img.onload=()=>resolve(url);
+      img.onerror=next;
+      img.src=url;
+    };
+    next();
+  });
+}
+function applyWeatherFallbackVisual(w){
+  const stage=document.getElementById('stage');
+  const screen=document.querySelector('.mini-crt-screen');
+  const stageImg=document.getElementById('stageWorldImg');
+  const miniBg=document.getElementById('miniWorldBg');
+  [stage,screen].forEach(el=>{if(el){el.classList.add('stage-weather-fallback','weather-fallback');el.dataset.weatherKey=w.key;}});
+  if(stage)stage.dataset.weatherKey=w.key;
+  if(screen)screen.dataset.weatherKey=w.key;
+  if(stageImg){stageImg.removeAttribute('src');stageImg.alt='富宜路街道世界｜'+w.label+'｜圖片缺檔備援';}
+  if(miniBg){miniBg.removeAttribute('src');miniBg.alt='木框裡的Q版小世界｜'+w.label+'｜圖片缺檔備援';}
+}
+function applyWeatherImageVisual(w){
+  const version='20260625-v46';
+  const urls=resolveAssetUrl(w.bg,version);
+  const stage=document.getElementById('stage');
+  const screen=document.querySelector('.mini-crt-screen');
+  const stageImg=document.getElementById('stageWorldImg');
+  const miniBg=document.getElementById('miniWorldBg');
+  if(stage)stage.dataset.weatherKey=w.key;
+  if(screen)screen.dataset.weatherKey=w.key;
+  return testImageCandidates(urls).then(url=>{
+    [stage,screen].forEach(el=>{if(el){el.classList.remove('stage-weather-fallback','weather-fallback');el.dataset.weatherKey=w.key;}});
+    if(stageImg){stageImg.src=url;stageImg.alt='富宜路街道世界｜'+w.label;}
+    if(miniBg){miniBg.src=url;miniBg.alt='木框裡的Q版小世界｜'+w.label;}
+    return true;
+  }).catch(()=>{
+    applyWeatherFallbackVisual(w);
+    setMiniWeatherStatus((document.getElementById('miniWeatherStatus')?.textContent||'')+'｜天氣圖檔缺檔，已用同一套備援底圖');
+    return false;
+  });
+}
 function setMemoryWeather(key,ev,source){
   if(ev){ev.stopPropagation();}
   const w=memoryWeatherByKey(key);
   memoryWeatherKey=w.key;
   autoWeatherSource=source||autoWeatherSource||'manual';
-  const version='20260623-v34';
-  const stage=document.getElementById('stage');
-  if(stage)stage.style.setProperty('--memory-world-bg',`url("${w.bg}?v=${version}")`);
-  const miniBg=document.getElementById('miniWorldBg');
-  if(miniBg){
-    miniBg.src=w.bg+'?v='+version;
-    miniBg.alt='木框裡的Q版小世界｜'+w.label;
-  }
+  applyWeatherImageVisual(w);
   const chip=document.getElementById('weatherChip');
   if(chip)chip.textContent=w.chip;
   const miniFx=document.getElementById('miniWorldWeather');
@@ -2065,41 +2150,47 @@ function refreshAutoWeather(showToast){
     })
     .catch(()=>{
       clearTimeout(timeout);
-      const msg='即時天氣暫時讀取不到，先保留時間判斷畫面。';
-      setMiniWeatherStatus(msg+' '+timeBasedWeatherText());
+      applyTimeWeatherFallback();
+      const msg=timeBasedWeatherText();
       if(label)label.textContent=msg;
-      if(showToast)toast('天氣讀取不到，先用時間判斷',1);
+      if(showToast)toast('天氣讀取不到，先用台灣時間備援',1);
     });
 }
 function cycleMemoryWeather(){refreshAutoWeather(true);}
 function showMiniWorld(){
   renderMiniWeatherButtons();
   setMemoryWeather(memoryWeatherKey);
+  setupMiniFrameVideo();
   const mini=document.getElementById('miniWorld');
   if(mini){mini.classList.remove('hidden','zooming');}
-  setupMiniFrameVideo();
+  const frameVideo=document.getElementById('miniFrameVideo');
+  if(frameVideo){
+    try{frameVideo.muted=true;frameVideo.loop=true;frameVideo.play().catch(()=>{});}catch(e){}
+  }
 }
 function enterMainWorld(){
   const mini=document.getElementById('miniWorld');
   if(mini){
     mini.classList.add('zooming');
-    setTimeout(()=>{mini.classList.add('hidden');mini.classList.remove('zooming');centerWorld();},620);
+    setTimeout(()=>{mini.classList.add('hidden');mini.classList.remove('zooming');centerWorld();askVisitorAfterEnterWorld();},620);
   }else{
     centerWorld();
+    askVisitorAfterEnterWorld();
   }
 }
 
 window.addEventListener('load',()=>{centerWorld();setupExperienceLayer();setupPersonNameHotspots();setupMiniFrameVideo();preloadStaticAssets();renderMiniWeatherButtons();setMemoryWeather(memoryWeatherKey);loadLyricsFromRootFiles().finally(()=>setupLyricDanmaku());loadData();setupWeather();renderFood();renderMaps();});
-try{const _letterAudio=document.getElementById('letterAudio');if(_letterAudio){_letterAudio.addEventListener('ended',()=>{const play=document.querySelector('.radio-audio-play');if(play)play.classList.remove('playing');});}}catch(e){}
 function enterWorld(){startOpeningMemoryCountdown()}
 function centerWorld(){const sc=document.getElementById('scroller');setTimeout(()=>{sc.scrollLeft=(sc.scrollWidth-sc.clientWidth)/2;},60)}
 function openPage(id){
   playUiSound('open');
+  if(typeof sendPrivateVisitLog==='function')sendPrivateVisitLog('page_'+id);
   const page=document.getElementById('page-'+id);
   if(!page)return;
   page.classList.remove('closing');
   page.classList.add('show');
   document.body.style.overflow='hidden';
+  if(id==='nav' && typeof initRouteMapPage==='function')setTimeout(()=>initRouteMapPage(),30);
   renderMemoryCapsule(id);
   preloadAreaAssets(id);
 }
@@ -2117,12 +2208,12 @@ function loadData(){return api({action:'getMemorialData'}).then(r=>{if(!r.ok)thr
 function detectAreaKey(text){
   text=String(text||'');
   const areas={
-    photo:['01_你和我們的時光','你和我們的時光','華光','相館'],
+    photo:['01_你和我們的時光','01_有你的時光','你和我們的時光','有你的時光','華光','相館'],
     video:['02_影音館','影音館','影片','新時代'],
-    home:['03_他的家','他的家','他家','個人','中間公寓'],
-    music:['04_金嗓卡拉OK','金嗓','卡拉OK','他唱的歌'],
+    home:['03_你的家','03_他的家','你的家','你家','他的家','他家','個人','中間公寓'],
+    music:['04_金嗓卡拉OK','金嗓','卡拉OK','你唱的歌','他唱的歌'],
     food:['05_美而美早餐店','美而美','早餐','食物','飲食','吃過','喜歡吃','推薦'],
-    road:['06_通往他的路','通往他的路','公路局','第六棵樹','長眠地','導航'],
+    road:['06_通往他的路','通往他的路','想你的時候','公路局','第六棵樹','長眠地','導航'],
     friend:['07_好友投稿','好友投稿','投稿']
   };
   for(const key of Object.keys(areas)){
@@ -2189,7 +2280,7 @@ function matchMediaKind(it,kind){
 }
 function cleanFolderLabel(path,area){
   let p=String(path||'').replace(/^\/+|\/+$/g,'');
-  const rootMap={photo:'01_你和我們的時光',video:'02_影音館',home:'03_他的家',music:'04_金嗓卡拉OK',food:'05_美而美早餐店',road:'06_通往他的路',friend:'07_好友投稿'};
+  const rootMap={photo:'01_你和我們的時光',video:'02_影音館',home:'03_你的家',music:'04_金嗓卡拉OK',food:'05_美而美早餐店',road:'06_通往他的路',friend:'07_好友投稿'};
   const root=rootMap[area]||'';
   if(p===root)return '主資料夾';
   if(root && p.startsWith(root+'/'))p=p.slice(root.length+1);
@@ -2518,12 +2609,20 @@ function refreshDataNoReload(){
   const btn=document.getElementById('dataRefreshBtn');
   if(btn){btn.classList.add('refreshing');btn.disabled=true;}
   toast('正在重新整理資料（不刷新頁面）…');
-  const tasks=[loadData(),refreshAutoWeather(false),loadLyricsFromRootFiles().then(()=>setupLyricDanmaku()).catch(()=>null)];
+  const tasks=[
+    loadData(),
+    refreshAutoWeather(false),
+    loadLyricsFromRootFiles().then(()=>setupLyricDanmaku()).catch(()=>null)
+  ];
   return Promise.allSettled(tasks).then(()=>{
-    renderDynamic();renderFood();renderMaps();
+    renderDynamic();
+    renderFood();
+    renderMaps();
     if(document.getElementById('page-nav')?.classList.contains('show') && typeof initRouteMapPage==='function')initRouteMapPage();
     toast('資料已重新整理（未刷新頁面）');
-  }).catch(()=>toast('部分資料讀取失敗，頁面未刷新',1)).finally(()=>{if(btn){btn.classList.remove('refreshing');btn.disabled=false;}});
+  }).catch(()=>toast('部分資料讀取失敗，頁面未刷新',1)).finally(()=>{
+    if(btn){btn.classList.remove('refreshing');btn.disabled=false;}
+  });
 }
 function smartBack(){
   const lb=document.getElementById('lightbox');
@@ -2541,17 +2640,16 @@ function playLetterAudio(){
   const a=document.getElementById('letterAudio');
   const play=document.querySelector('.radio-audio-play');
   if(!a){toast('音檔播放器尚未建立',1);return;}
-  if(!a.getAttribute('src')){toast('請先放入音檔：assets/audio/aming-message.mp3',1);return;}
+  if(!a.getAttribute('src')){toast('請先放入 assets/audio/aming-message.mp3',1);return;}
   a.play().then(()=>{if(play)play.classList.add('playing');}).catch(()=>toast('音檔尚未放入或被瀏覽器擋住',1));
 }
 function stopLetterAudio(){
   const a=document.getElementById('letterAudio');
   const play=document.querySelector('.radio-audio-play');
-  if(!a)return;
-  a.pause();
-  try{a.currentTime=0;}catch(e){}
+  if(a){try{a.pause();a.currentTime=0;}catch(e){}}
   if(play)play.classList.remove('playing');
 }
+try{const _letterAudio=document.getElementById('letterAudio');if(_letterAudio){_letterAudio.addEventListener('ended',()=>{const play=document.querySelector('.radio-audio-play');if(play)play.classList.remove('playing');});}}catch(e){}
 function setupPersonNameHotspots(){
   document.querySelectorAll('.person-tag-hotspot').forEach(el=>{
     if(el.dataset.ready)return;
@@ -2564,27 +2662,30 @@ function setupPersonNameHotspots(){
 function setupMiniFrameVideo(){
   const v=document.getElementById('miniFrameVideo');
   if(!v)return;
+  const stamp='?v=20260625-v46';
+  const here=location.href.split('#')[0].replace(/[^\/]*$/,'');
   const candidates=[
-    'assets/videos/mini-frame.mp4',
-    'mini-frame.mp4',
-    '按鈕排列與功能配置 (1).mp4',
-    'assets/video/mini-frame.mp4',
-    'videos/mini-frame.mp4'
+    here+'assets/videos/mini-frame.mp4'+stamp,
+    'assets/videos/mini-frame.mp4'+stamp,
+    here+'mini-frame.mp4'+stamp,
+    'mini-frame.mp4'+stamp,
+    '/DearANG/assets/videos/mini-frame.mp4'+stamp,
+    'assets/video/mini-frame.mp4'+stamp,
+    'videos/mini-frame.mp4'+stamp
   ];
   let idx=0;
-  const setSrc=()=>{
-    if(idx>=candidates.length){v.classList.add('frame-failed');setMiniWeatherStatus('mini-frame.mp4 讀取不到：請把影片放在 assets/videos/mini-frame.mp4');return;}
-    const url=new URL(candidates[idx],location.href).href;
-    idx++;
-    if(v.dataset.currentSrc===url){setSrc();return;}
-    v.dataset.currentSrc=url;
-    v.src=url;
+  const tryNext=()=>{
+    if(idx>=candidates.length){v.classList.add('frame-failed');console.warn('mini-frame.mp4 讀取不到：請把影片放在 assets/videos/mini-frame.mp4');return;}
+    const next=candidates[idx++];
+    if(v.dataset.srcTried===next){tryNext();return;}
+    v.dataset.srcTried=next;
+    v.src=next;
     v.load();
-    v.play().catch(()=>{});
+    try{v.muted=true;v.loop=true;const p=v.play();if(p&&p.catch)p.catch(()=>{});}catch(e){}
   };
-  v.addEventListener('error',setSrc);
-  v.addEventListener('loadeddata',()=>{v.classList.remove('frame-failed');v.play().catch(()=>{});},{once:false});
-  setSrc();
+  v.addEventListener('error',tryNext);
+  v.addEventListener('loadeddata',()=>{v.classList.remove('frame-failed');});
+  if(!v.currentSrc)tryNext();
 }
 
 function renderFood(){}
@@ -2597,7 +2698,7 @@ function renderMaps(){
   }).join('')+`<div class="map-row"><b>導航到第六棵樹</b><span>從你現在的位置出發</span><div class="toolbar"><a class="pill" href="https://www.google.com/maps/dir/?api=1&destination=24.11397,120.7823878&travelmode=driving" target="_blank" rel="noopener">開始導航</a></div></div>`;
 }
 function setupWeather(){
-  applyTimeWeatherFallback();
+  setMiniWeatherStatus('正在讀取長眠地即時天氣…');
   refreshAutoWeather(false);
   if(autoWeatherTimer)clearInterval(autoWeatherTimer);
   autoWeatherTimer=setInterval(()=>refreshAutoWeather(false),10*60*1000);
@@ -2607,30 +2708,15 @@ function setupWeather(){
 const GEO_WORKER_URL = window.DEARANG_GEO_WORKER_URL || ''; 
 // 要自動預填城市時，先部署 geo-worker.js，再把網址填到 window.DEARANG_GEO_WORKER_URL 或直接填在這裡。
 
-const VISITOR_DISTRICTS = {
-  '基隆市': ['仁愛區', '信義區', '中正區', '中山區', '安樂區', '暖暖區', '七堵區'],
-  '台北市': ['中正區', '大同區', '中山區', '松山區', '大安區', '萬華區', '信義區', '士林區', '北投區', '內湖區', '南港區', '文山區'],
-  '新北市': ['板橋區', '三重區', '中和區', '永和區', '新莊區', '新店區', '樹林區', '鶯歌區', '三峽區', '淡水區', '汐止區', '瑞芳區', '土城區', '蘆洲區', '五股區', '泰山區', '林口區', '深坑區', '石碇區', '坪林區', '三芝區', '石門區', '八里區', '平溪區', '雙溪區', '貢寮區', '金山區', '萬里區', '烏來區'],
-  '桃園市': ['桃園區', '中壢區', '大溪區', '楊梅區', '蘆竹區', '大園區', '龜山區', '八德區', '龍潭區', '平鎮區', '新屋區', '觀音區', '復興區'],
-  '新竹市': ['東區', '北區', '香山區'],
-  '新竹縣': ['竹北市', '竹東鎮', '新埔鎮', '關西鎮', '湖口鄉', '新豐鄉', '芎林鄉', '橫山鄉', '北埔鄉', '寶山鄉', '峨眉鄉', '尖石鄉', '五峰鄉'],
-  '宜蘭縣': ['宜蘭市', '羅東鎮', '蘇澳鎮', '頭城鎮', '礁溪鄉', '壯圍鄉', '員山鄉', '冬山鄉', '五結鄉', '三星鄉', '大同鄉', '南澳鄉'],
-  '苗栗縣': ['苗栗市', '頭份市', '竹南鎮', '後龍鎮', '通霄鎮', '苑裡鎮', '造橋鄉', '西湖鄉', '頭屋鄉', '公館鄉', '銅鑼鄉', '三義鄉', '大湖鄉', '獅潭鄉', '卓蘭鎮', '泰安鄉', '南庄鄉', '三灣鄉'],
-  '台中市': ['中區', '東區', '西區', '南區', '北區', '西屯區', '南屯區', '北屯區', '豐原區', '東勢區', '大甲區', '清水區', '沙鹿區', '梧棲區', '后里區', '神岡區', '潭子區', '大雅區', '新社區', '石岡區', '外埔區', '大安區', '烏日區', '大肚區', '龍井區', '霧峰區', '太平區', '大里區', '和平區'],
-  '彰化縣': ['彰化市', '鹿港鎮', '和美鎮', '線西鄉', '伸港鄉', '福興鄉', '秀水鄉', '花壇鄉', '芬園鄉', '員林市', '溪湖鎮', '田中鎮', '大村鄉', '埔心鄉', '永靖鄉', '社頭鄉', '二水鄉', '北斗鎮', '二林鎮', '田尾鄉', '埤頭鄉', '芳苑鄉', '大城鄉', '竹塘鄉', '溪州鄉'],
-  '南投縣': ['南投市', '埔里鎮', '草屯鎮', '竹山鎮', '集集鎮', '名間鄉', '鹿谷鄉', '中寮鄉', '魚池鄉', '國卸鄉', '水里鄉', '信義鄉', '仁愛鄉'],
-  '雲林縣': ['斗六市', '斗南鎮', '虎尾鎮', '西螺鎮', '土庫鎮', '北港鎮', '古坑鄉', '大埤鄉', '莿桐鄉', '林內鄉', '二崙鄉', '崙背鄉', '麥寮鄉', '東勢鄉', '褒忠鄉', '台西鄉', '元長鄉', '四湖鄉', '口湖鄉', '水林鄉'],
-  '嘉義市': ['東區', '西區'],
-  '嘉義縣': ['太保市', '朴子市', '布袋鎮', '大林鎮', '民雄鄉', '溪口鄉', '新港鄉', '六腳鄉', '東石鄉', '義竹鄉', '鹿草鄉', '水上鄉', '中埔鄉', '竹崎鄉', '梅山鄉', '番路鄉', '大埔鄉', '阿里山鄉'],
-  '台南市': ['中西區', '東區', '南區', '北區', '安平區', '安南區', '永康區', '歸仁區', '新化區', '左鎮區', '玉井區', '楠西區', '南化區', '仁德區', '關廟區', '龍崎區', '官田區', '麻豆區', '佳里區', '西港區', '七股區', '將軍區', '學甲區', '北門區', '新營區', '後壁區', '白河區', '東山區', '六甲區', '下營區', '柳營區', '鹽水區', '善化區', '大內區', '山上區', '新市區', '安定區'],
-  '高雄市': ['新興區', '前金區', '苓雅區', '鹽埕區', '鼓山區', '左營區', '三民區', '前鎮區', '小港區', '鳳山區', '鳥松區', '大寮區', '林園區', '大樹區', '大社區', '仁武區', '岡山區', '橋頭區', '燕巢區', '阿蓮區', '路竹區', '湖內區', '茄萣區', '永安區', '彌陀區', '梓官區', '旗山區', '美濃區', '六龜區', '甲仙區', '杉林區', '內門區', '茂林區', '桃源區', '那瑪夏區', '田寮區'],
-  '屏東縣': ['屏東市', '三地門鄉', '霧台鄉', '瑪家鄉', '九如鄉', '里港鄉', '高樹鄉', '鹽埔鄉', '長治鄉', '麟洛鄉', '竹田鄉', '內埔鄉', '萬丹鄉', '潮州鎮', '泰武鄉', '來義鄉', '萬巒鄉', '嵌頂鄉', '新埤鄉', '南州鄉', '林邊鄉', '東港鎮', '琉球鄉', '佳冬鄉', '新園鄉', '枋寮鄉', '枋山鄉', '春日鄉', '獅子鄉', '車城鄉', '牡丹鄉', '恆春鎮', '滿州鄉'],
-  '花蓮縣': ['花蓮市', '新城鄉', '秀林鄉', '吉安鄉', '壽豐鄉', '鳳林鎮', '光復鄉', '豐濱鄉', '瑞穗鄉', '萬榮鄉', '玉里鎮', '卓溪鄉', '富里鄉'],
-  '台東縣': ['台東市', '綠島鄉', '蘭嶼鄉', '延平鄉', '卑南鄉', '鹿野鄉', '關山鎮', '海端鄉', '池上鄉', '東河鄉', '成功鎮', '長濱鄉', '太麻里鄉', '金峰鄉', '大武鄉', '達仁鄉'],
-  '澎湖縣': ['馬公市', '湖西鄉', '白沙鄉', '西嶼鄉', '望安鄉', '七美鄉'],
-  '金門縣': ['金城鎮', '金沙鎮', '金湖鎮', '金寧鄉', '烈嶼鄉', '烏坵鄉'],
-  '連江縣': ['南竿鄉', '北竿鄉', '莒光鄉', '東引鄉'],
-  '其他': ['美國']
+const VISITOR_DISTRICTS={
+  '台中市':['中區','東區','西區','南區','北區','西屯區','南屯區','北屯區','太平區','大里區','霧峰區','烏日區','豐原區','后里區','石岡區','東勢區','和平區','新社區','潭子區','大雅區','神岡區','大肚區','沙鹿區','龍井區','梧棲區','清水區','大甲區','外埔區','大安區'],
+  '南投縣':['南投市','草屯鎮','埔里鎮','魚池鄉','仁愛鄉','國姓鄉','水里鄉','名間鄉','集集鎮','竹山鎮','鹿谷鄉','信義鄉','中寮鄉'],
+  '彰化縣':['彰化市','員林市','鹿港鎮','和美鎮','溪湖鎮','田中鎮','北斗鎮','二林鎮','花壇鄉','秀水鄉','大村鄉','埔心鄉','永靖鄉','社頭鄉','其他'],
+  '台北市':['中正區','大同區','中山區','松山區','大安區','萬華區','信義區','士林區','北投區','內湖區','南港區','文山區'],
+  '新北市':['板橋區','新莊區','中和區','永和區','土城區','樹林區','三重區','蘆洲區','汐止區','淡水區','林口區','新店區','其他'],
+  '桃園市':['桃園區','中壢區','平鎮區','八德區','楊梅區','蘆竹區','大溪區','龍潭區','龜山區','大園區','其他'],
+  '高雄市':['新興區','前金區','苓雅區','鹽埕區','鼓山區','左營區','三民區','前鎮區','小港區','鳳山區','岡山區','楠梓區','其他'],
+  '其他':['其他']
 };
 
 function updateVisitorDistrictOptions(){
