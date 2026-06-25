@@ -8,8 +8,9 @@
 <!-- DearANG v16 KTV stage forced 20260620 -->
 <!-- DearANG v21 opening countdown video 20260620 -->
 <!-- DearANG v33 Real Frame Weather World Crop 20260623 -->
-<!-- DearANG v46 based on index(53): exact mini box/weather/letter coords + building hotspots kept 20260625 -->
-<title>你和我們的時光｜Dear ANG v46</title>
+<!-- DearANG v47 based on index(53): calibrated building/person hotspots no cover crop 20260625 -->
+<!-- DearANG v48 KTV Drive preview + page top spacing + invisible building hotspots 20260625 -->
+<title>你和我們的時光｜Dear ANG v48</title>
 <style>
 :root{
   --bg:#0b0b0d;
@@ -1239,6 +1240,114 @@ a{color:inherit}
 #stage .hotspot::before{z-index:9!important;}
 #stage .hotspot:active::after,#stage .hotspot:hover::after{border-color:rgba(255,216,154,.68)!important;background:rgba(255,216,154,.10)!important;}
 
+
+/* ===== v47：修正主街房子 / 人物按鈕歪掉 =====
+   重點：主街圖改成 fill，不再 cover 裁切；按鈕座標直接對齊圖片百分比。 */
+.stage-world-img{
+  object-fit:fill!important;
+  object-position:center!important;
+}
+#stage .hotspot{
+  z-index:8!important;
+  pointer-events:auto!important;
+  border-radius:10px!important;
+  background:rgba(255,216,154,0)!important;
+}
+#stage .hotspot::after{
+  border-radius:inherit!important;
+}
+/* 六棟建築物：依目前主街圖實際位置重新校正 */
+#stage .h-photo{left:6.0%!important;top:54.0%!important;width:14.0%!important;height:26.5%!important;}
+#stage .h-video{left:22.0%!important;top:57.2%!important;width:13.5%!important;height:25.8%!important;}
+#stage .h-home {left:36.6%!important;top:54.4%!important;width:12.8%!important;height:25.8%!important;}
+#stage .h-music{left:52.0%!important;top:57.3%!important;width:13.0%!important;height:25.7%!important;}
+#stage .h-food {left:68.0%!important;top:54.2%!important;width:13.0%!important;height:25.8%!important;}
+#stage .h-nav  {left:81.4%!important;top:57.2%!important;width:13.0%!important;height:25.8%!important;}
+/* 人物熱區改成左到右的小圈，不再用舊座標 */
+#stage .person-tag-hotspot{
+  z-index:9!important;
+  pointer-events:auto!important;
+  width:4.6%!important;
+  height:10.5%!important;
+  border-radius:999px!important;
+}
+#stage .person-1{left:18.4%!important;top:76.0%!important;}
+#stage .person-2{left:43.5%!important;top:76.2%!important;}
+#stage .person-3{left:49.0%!important;top:76.2%!important;}
+#stage .person-4{left:84.5%!important;top:76.0%!important;width:6.5%!important;}
+/* 手機觸控時顯示得明顯一點，但不擋到開頁 */
+#stage .hotspot:active::after,
+#stage .hotspot:hover::after{
+  border-color:rgba(255,216,154,.78)!important;
+  background:rgba(255,216,154,.08)!important;
+}
+#stage .person-tag-hotspot:active,
+#stage .person-tag-hotspot:hover,
+#stage .person-tag-hotspot.show-name{
+  background:rgba(255,216,154,.10)!important;
+  border-color:rgba(255,216,154,.58)!important;
+}
+
+
+/* ===== v48：修正截圖問題：頁面不被右上列壓住、主街按鈕透明、KTV 改 Drive Preview 避免 ORB ===== */
+.page.show{
+  padding-top:calc(68px + env(safe-area-inset-top))!important;
+}
+.page.show .page-head{
+  position:fixed!important;
+  top:calc(58px + env(safe-area-inset-top))!important;
+  left:0!important;
+  right:0!important;
+  min-height:48px!important;
+  z-index:91!important;
+}
+.page.show .page-body{
+  padding-top:14px!important;
+}
+#page-nav.show{
+  padding-top:calc(58px + env(safe-area-inset-top))!important;
+}
+#page-nav.show .page-head{
+  top:calc(58px + env(safe-area-inset-top))!important;
+}
+#page-nav .route-map-app{
+  height:calc(100svh - 58px - env(safe-area-inset-top))!important;
+}
+/* 主街房子按鈕保留可點，但不要再顯示巨大透明框；只在滑鼠裝置 hover 或短按顯示名稱 */
+#stage .hotspot::after{
+  border-color:transparent!important;
+  background:transparent!important;
+}
+#stage .hotspot:active::after{
+  border-color:transparent!important;
+  background:transparent!important;
+}
+@media(hover:hover){
+  #stage .hotspot:hover::after{
+    border-color:rgba(255,216,154,.55)!important;
+    background:rgba(255,216,154,.05)!important;
+  }
+}
+#stage .hotspot:active::before,
+#stage .hotspot.show-name::before,
+#stage .hotspot:hover::before{
+  opacity:1!important;
+}
+/* KTV Drive preview iframe */
+.ktv-drive-frame{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  border:0;
+  display:none;
+  z-index:3;
+  background:#000;
+}
+#page-music .ktv-osd{
+  pointer-events:none;
+}
+
 </style>
 </head>
 <body>
@@ -1275,7 +1384,7 @@ a{color:inherit}
 
 <div class="mini-world hidden" id="miniWorld" aria-label="CRT電視小世界">
   <div class="mini-crt-scene">
-    <video class="mini-crt-frame" id="miniFrameVideo" src="assets/videos/mini-frame.mp4?v=20260625-v46" autoplay muted loop playsinline preload="auto" poster="assets/images/mini-frame-poster.png" aria-label="木框影片"></video>
+    <video class="mini-crt-frame" id="miniFrameVideo" src="assets/videos/mini-frame.mp4?v=20260625-v48" autoplay muted loop playsinline preload="auto" poster="assets/images/mini-frame-poster.png" aria-label="木框影片"></video>
     <button class="mini-crt-screen" type="button" onclick="enterMainWorld()" aria-label="點擊木框中間的小世界進入富宜路街道">
       <img src="assets/images/memory-world.png" class="mini-world-bg" id="miniWorldBg" alt="木框裡的Q版小世界">
       <div class="mini-world-weather" id="miniWorldWeather"></div>
@@ -2026,7 +2135,7 @@ function setMiniWeatherStatus(text){
 }
 function resolveAssetUrl(path,version){
   const clean=String(path||'').split('?')[0];
-  const stamp='?v='+(version||'20260625-v46');
+  const stamp='?v='+(version||'20260625-v48');
   const here=location.href.split('#')[0].replace(/[^\/]*$/,'');
   return [
     clean+stamp,
@@ -2063,7 +2172,7 @@ function applyWeatherFallbackVisual(w){
   if(miniBg){miniBg.removeAttribute('src');miniBg.alt='木框裡的Q版小世界｜'+w.label+'｜圖片缺檔備援';}
 }
 function applyWeatherImageVisual(w){
-  const version='20260625-v46';
+  const version='20260625-v48';
   const urls=resolveAssetUrl(w.bg,version);
   const stage=document.getElementById('stage');
   const screen=document.querySelector('.mini-crt-screen');
@@ -2489,17 +2598,51 @@ function ktvEnter(){
   const row=document.getElementById('ktv-row-'+idx);if(row)row.scrollIntoView({behavior:'smooth',block:'nearest'});
   ktvSetOsd('已選擇 '+no+'｜請按「開始播放」');
 }
+
+function extractDriveIdFromUrl(url){
+  url=String(url||'');
+  let m=url.match(/\/d\/([a-zA-Z0-9_-]{10,})/); if(m)return m[1];
+  m=url.match(/[?&]id=([a-zA-Z0-9_-]{10,})/); if(m)return m[1];
+  m=url.match(/\/uc\?[^#]*id=([a-zA-Z0-9_-]{10,})/); if(m)return m[1];
+  return '';
+}
+function ktvDrivePreviewUrl(item,src){
+  const id=(item&&item.id)||extractDriveIdFromUrl(src)||extractDriveIdFromUrl(item&&item.url)||extractDriveIdFromUrl(item&&item.streamUrl);
+  return id?`https://drive.google.com/file/d/${encodeURIComponent(id)}/preview`:'';
+}
+function ktvEnsureDriveFrame(){
+  const screen=document.getElementById('ktvScreen');
+  if(!screen)return null;
+  let f=document.getElementById('ktvDriveFrame');
+  if(!f){
+    f=document.createElement('iframe');
+    f.id='ktvDriveFrame';
+    f.className='ktv-drive-frame';
+    f.setAttribute('allow','autoplay; fullscreen; encrypted-media; picture-in-picture');
+    f.setAttribute('allowfullscreen','true');
+    f.setAttribute('referrerpolicy','no-referrer-when-downgrade');
+    screen.appendChild(f);
+  }
+  return f;
+}
+function ktvHideDriveFrame(){
+  const f=document.getElementById('ktvDriveFrame');
+  if(f){f.removeAttribute('src');f.style.display='none';}
+}
+
 function ktvStart(){
   if(ktvSelectedIndex<0)ktvEnter();
   if(ktvSelectedIndex<0||!KTV_SONGS[ktvSelectedIndex])return;
   const item=KTV_SONGS[ktvSelectedIndex];
   const src=item.streamUrl||item.url||'';
-  if(!src){ktvSetOsd('這首沒有可播放網址');return;}
+  if(!src&&!item.id){ktvSetOsd('這首沒有可播放網址');return;}
   const theme=document.getElementById('themeAudio');if(theme)theme.pause();
   const video=document.getElementById('ktvVideo');
   const audio=document.getElementById('ktvAudio');
+  const frame=ktvEnsureDriveFrame();
   const visual=document.getElementById('ktvAudioVisual');
   const title=document.getElementById('ktvAudioTitle');
+  if(frame){frame.removeAttribute('src');frame.style.display='none';}
   if(video){video.pause();video.removeAttribute('src');video.style.display='none';video.load();}
   if(audio){audio.pause();audio.removeAttribute('src');audio.style.display='none';audio.load();}
   if(title)title.textContent=item.name||'他唱的歌';
@@ -2507,7 +2650,15 @@ function ktvStart(){
   ktvSetOsd('正在播放 '+item.ktvNo+'｜'+(item.name||''));
   if(kind==='video'){
     if(visual)visual.style.display='none';
-    if(video){video.src=src;video.style.display='block';video.play().catch(()=>ktvSetOsd('請再按一次螢幕播放'));}
+    const preview=ktvDrivePreviewUrl(item,src);
+    if(preview&&frame){
+      frame.src=preview;
+      frame.style.display='block';
+      ktvSetOsd('用 Google Drive 預覽播放｜'+(item.name||''));
+    }else if(video){
+      video.src=src;video.style.display='block';
+      video.play().catch(()=>ktvSetOsd('請再按一次螢幕播放'));
+    }
   }else{
     if(visual)visual.style.display='grid';
     if(audio){audio.src=src;audio.style.display='block';audio.play().catch(()=>ktvSetOsd('請再按一次開始或音訊播放鍵'));}
@@ -2522,9 +2673,9 @@ function ktvCurrentPlayer(){
   if(audio&&audio.style.display==='block')return audio;
   return null;
 }
-function ktvStop(){const p=ktvCurrentPlayer();if(p){p.pause();try{p.currentTime=0;}catch(e){}}ktvSetOsd('已停止');}
-function ktvTogglePlayPause(){const p=ktvCurrentPlayer();if(p&&p.src){if(p.paused){p.play().catch(()=>ktvSetOsd('請再按一次播放'));ktvSetOsd('繼續播放');}else{p.pause();ktvSetOsd('已暫停');}return;}ktvStart();}
-function ktvReplay(){const p=ktvCurrentPlayer();if(p){try{p.currentTime=0;}catch(e){}p.play().catch(()=>ktvSetOsd('請再按一次重播'));ktvSetOsd('重新播放');}else ktvStart();}
+function ktvStop(){ktvHideDriveFrame();const p=ktvCurrentPlayer();if(p){p.pause();try{p.currentTime=0;}catch(e){}}ktvSetOsd('已停止');}
+function ktvTogglePlayPause(){const f=document.getElementById('ktvDriveFrame');if(f&&f.style.display==='block'){ktvSetOsd('Google Drive 預覽播放器請直接點螢幕內控制');return;}const p=ktvCurrentPlayer();if(p&&p.src){if(p.paused){p.play().catch(()=>ktvSetOsd('請再按一次播放'));ktvSetOsd('繼續播放');}else{p.pause();ktvSetOsd('已暫停');}return;}ktvStart();}
+function ktvReplay(){const f=document.getElementById('ktvDriveFrame');if(f&&f.style.display==='block'&&f.src){const old=f.src;f.removeAttribute('src');setTimeout(()=>{f.src=old;},80);ktvSetOsd('重新載入 Drive 預覽');return;}const p=ktvCurrentPlayer();if(p){try{p.currentTime=0;}catch(e){}p.play().catch(()=>ktvSetOsd('請再按一次重播'));ktvSetOsd('重新播放');}else ktvStart();}
 function ktvPrev(){if(!KTV_SONGS.length)return;ktvSelectedIndex=ktvSelectedIndex>0?ktvSelectedIndex-1:KTV_SONGS.length-1;ktvInput=KTV_SONGS[ktvSelectedIndex].ktvNo;ktvUpdateDisplay();ktvStart();}
 function ktvNext(){if(!KTV_SONGS.length)return;ktvSelectedIndex=ktvSelectedIndex>=0?(ktvSelectedIndex+1)%KTV_SONGS.length:0;ktvInput=KTV_SONGS[ktvSelectedIndex].ktvNo;ktvUpdateDisplay();ktvStart();}
 function ktvVolume(delta){const p=ktvCurrentPlayer();if(!p){ktvSetOsd('尚未播放，無法調整音量');return;}p.volume=Math.max(0,Math.min(1,(p.volume||1)+delta));ktvSetOsd('音量 '+Math.round(p.volume*100)+'%');}
@@ -2650,6 +2801,17 @@ function stopLetterAudio(){
   if(play)play.classList.remove('playing');
 }
 try{const _letterAudio=document.getElementById('letterAudio');if(_letterAudio){_letterAudio.addEventListener('ended',()=>{const play=document.querySelector('.radio-audio-play');if(play)play.classList.remove('playing');});}}catch(e){}
+
+function setupBuildingHotspotNames(){
+  document.querySelectorAll('#stage .hotspot').forEach(el=>{
+    if(el.dataset.buildingReady)return;
+    el.dataset.buildingReady='1';
+    const show=()=>{el.classList.add('show-name');clearTimeout(el._nameTimer);el._nameTimer=setTimeout(()=>el.classList.remove('show-name'),1400);};
+    el.addEventListener('touchstart',show,{passive:true});
+    el.addEventListener('click',show);
+  });
+}
+
 function setupPersonNameHotspots(){
   document.querySelectorAll('.person-tag-hotspot').forEach(el=>{
     if(el.dataset.ready)return;
@@ -2662,7 +2824,7 @@ function setupPersonNameHotspots(){
 function setupMiniFrameVideo(){
   const v=document.getElementById('miniFrameVideo');
   if(!v)return;
-  const stamp='?v=20260625-v46';
+  const stamp='?v=20260625-v48';
   const here=location.href.split('#')[0].replace(/[^\/]*$/,'');
   const candidates=[
     here+'assets/videos/mini-frame.mp4'+stamp,
