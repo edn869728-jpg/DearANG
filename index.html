@@ -9,7 +9,7 @@
 <!-- DearANG v21 opening countdown video 20260620 -->
 <!-- DearANG v33 Real Frame Weather World Crop 20260623 -->
 <!-- DearANG v47 based on index(53): calibrated building/person hotspots no cover crop 20260625 -->
-<!-- DearANG v48 KTV Drive preview + page top spacing + invisible building hotspots 20260625 -->
+<!-- DearANG v57 fixed clean entrances + albums without extra weather/rain effects 20260626 -->
 <title>摯愛｜Dear ANG </title>
 <style>
 :root{
@@ -1747,9 +1747,9 @@ button, .pill {
 /* 針對「給阿明的信」等主要文字區塊調整 */
 /* 針對「給阿明的信」等主要文字區塊調整 (字體微調縮小、保持密集) */
 .letter-text, .frame-letter-text {
-  font-size: clamp(12px, 3.2vw, 19px) !important; /* 縮小基準值與最大值 */
-  line-height: 0.9 !important; 
-  font-weight: 800 !important;
+  font-size: clamp(14px, 3.5vw, 19px) !important; /* 縮小基準值與最大值 */
+  line-height: 1.5 !important; 
+  font-weight: 700 !important;
   letter-spacing: 0em !important; 
   text-align: justify !important;
 }
@@ -1791,6 +1791,57 @@ button, .pill {
     linear-gradient(180deg,#5d3a1d,#d9b56d 38%,#8b5628 100%)!important;
 }
 
+
+
+/* ===== v57：取消額外天氣/下雨特效；保留原本天氣圖片/影片本身 ===== */
+.rain-layer,
+.mini-world-weather,
+.world-weather{
+  display:none!important;
+  opacity:0!important;
+  background:none!important;
+  animation:none!important;
+  filter:none!important;
+  backdrop-filter:none!important;
+  mix-blend-mode:normal!important;
+}
+.page[data-weather*="雨"] .rain-layer,
+.mini-world-weather.rain,
+.world-weather.rain,
+.mini-world-weather.storm,
+.world-weather.storm,
+.mini-world-weather.fog,
+.world-weather.fog,
+.mini-world-weather.haze,
+.world-weather.haze,
+.mini-world-weather.night,
+.world-weather.night,
+.mini-world-weather.heat,
+.world-weather.heat{
+  display:none!important;
+  opacity:0!important;
+  background:none!important;
+  animation:none!important;
+}
+.mini-world-weather::before,
+.mini-world-weather::after,
+.world-weather::before,
+.world-weather::after,
+#stage.stage-weather-fallback[data-weather-key="nightRain"]::before,
+.mini-crt-screen.weather-fallback[data-weather-key="nightRain"]::before{
+  content:none!important;
+  display:none!important;
+  opacity:0!important;
+  background:none!important;
+  animation:none!important;
+}
+.album-carousel.album-locked{
+  overflow-x:auto!important;
+  scroll-snap-type:x mandatory!important;
+  touch-action:pan-x pan-y!important;
+}
+.album-card.expanded .album-ritual-hint{display:none!important;}
+.album-carousel-hint{opacity:.86!important;}
 
 </style>
 </head>
@@ -1925,98 +1976,6 @@ button, .pill {
 
     <div class="visitor-identity-small">
       這張卡片可以上下滑；右上 ×、背景、或「先不要」都可以關閉。
-    </div>
-  </div>
-</div>
-
-
-<!-- 華光相館｜照片 -->
-<section class="page" id="page-photo">
-  <div class="page-head"><button class="back" onclick="closePage()">← 回到街上</button><b>華光相館｜你的形 和你的影</b></div>
-  <div class="page-body">
-    <div class="hero-card"><img src="assets/images/memory-world.png" alt="華光相館"><div class="hero-text"><h1>你和我們的時光</h1><p></p></div></div>
-    <div class="section folder-hint"><h2></h2><div class="story">01_你和我們的時光<br></div></div>
-    <div class="section"><h2>照片</h2><div id="photoGrid" class="album-mount"><div class="empty">照片載入中…</div></div></div>
-  </div>
-</section>
-<!-- 新時代影音館｜影片 -->
-<section class="page" id="page-video">
-  <div class="page-head"><button class="back" onclick="closePage()">← 回到街上</button><b>新時代影音館｜忘不掉的動態氣息</b></div>
-  <div class="page-body">
-    <div class="hero-card"><img src="assets/images/memory-world.png" alt="新時代影音館"><div class="hero-text"><h1>影音館</h1><p></p></div></div>
-    <div class="section folder-hint"><h2></h2><div class="story">02_影音館<br></div></div>
-    <div class="section"><h2>影片</h2><div class="video-grid" id="videoGrid"><div class=      <div class="hotspot h-photo" data-label="華光相館｜你和我們的時光" onclick="openPage('photo')"></div>
-      <div class="hotspot h-video" data-label="新時代影音館｜影片" onclick="openPage('video')"></div>
-      <div class="hotspot h-home" data-label="富宜路86號｜你家" onclick="openPage('home')"></div>
-      <div class="hotspot h-music" data-label="金嗓卡拉OK｜你唱的歌" onclick="openPage('music')"></div>
-      <div class="hotspot h-food" data-label="美而美早餐店｜一起吃過的東西" onclick="openPage('food')"></div>
-      <div class="hotspot h-nav" data-label="公路局｜想你的時候" onclick="openPage('nav')"></div>
-    </div>
-  </div>
-  <div class="hint"><div class="hint-inner"><span>← →</span><div>向左走向右走<small>每棟建築，都有你存在的痕跡。</small></div></div></div>
-</div>
-
-<audio id="themeAudio" preload="metadata" loop></audio>
-
-<div class="visitor-identity-modal hidden" id="visitorIdentityModal">
-  <div class="visitor-identity-card">
-    <div class="visitor-identity-kicker">DEAR ANG</div>
-    <h2>願意讓我們知道你是誰嗎？</h2>
-    <p>
-      不用登入，也不用密碼。<br>
-      這些資料不會公開顯示，只是讓 Enden 知道，
-      你曾經來看過他。
-    </p>
-
-    <input id="visitorNameInput" type="text" placeholder="你是誰？例如：Lisa / 小藍 / 同學 / 朋友">
-
-<select id="visitorCityInput" onchange="updateVisitorDistrictOptions()">
-  
-  <option value="">你大概在哪個城市？</option>
-  <!-- 北部 -->
-  <option value="基隆市">基隆市</option>
-  <option value="台北市">台北市</option>
-  <option value="新北市">新北市</option>
-  <option value="桃園市">桃園市</option>
-  <option value="新竹市">新竹市</option>
-  <option value="新竹縣">新竹縣</option>
-  <option value="宜蘭縣">宜蘭縣</option>
-  <!-- 中部 -->
-  <option value="苗栗縣">苗栗縣</option>
-  <option value="台中市">台中市</option>
-  <option value="彰化縣">彰化縣</option>
-  <option value="南投縣">南投縣</option>
-  <option value="雲林縣">雲林縣</option>
-  <!-- 南部 -->
-  <option value="嘉義市">嘉義市</option>
-  <option value="嘉義縣">嘉義縣</option>
-  <option value="台南市">台南市</option>
-  <option value="高雄市">高雄市</option>
-  <option value="屏東縣">屏東縣</option>
-  <!-- 東部 -->
-  <option value="花蓮縣">花蓮縣</option>
-  <option value="台東縣">台東縣</option>
-  <!-- 離島 -->
-  <option value="澎湖縣">澎湖縣</option>
-  <option value="金門縣">金門縣</option>
-  <option value="連江縣">連江縣</option>
-  <!-- 其他 -->
-  <option value="其他">其他</option>
-</select>
-
-    <select id="visitorDistrictInput" disabled>
-      <option value="">先選城市，再選區域</option>
-    </select>
-
-    <textarea id="visitorNoteInput" placeholder="想留一句話也可以，不填也沒關係"></textarea>
-
-    <div class="visitor-identity-actions">
-      <button type="button" onclick="saveVisitorIdentity()">留下我的名字</button>
-      <button type="button" class="soft" onclick="skipVisitorIdentity()">先不要</button>
-    </div>
-
-    <div class="visitor-identity-small">
-      有填名字才會記住；沒填的話，下次進來還會再問一次。
     </div>
   </div>
 </div>
@@ -2617,16 +2576,16 @@ function submitMemoryCapsule(id){
 
 const MEMORY_WEATHERS=[
   {key:'sunny',label:'☀️ 晴天',chip:'☀️',bg:'assets/images/weather/day-sunny.png',fx:''},
-  {key:'hot',label:'☀️ 炎熱',chip:'☀️',bg:'assets/images/weather/day-hot.png',fx:'heat'},
+  {key:'hot',label:'☀️ 炎熱',chip:'☀️',bg:'assets/images/weather/day-hot.png',fx:''},
   {key:'cloudy',label:'⛅ 多雲',chip:'⛅',bg:'assets/images/weather/day-cloudy.png',fx:''},
   {key:'overcast',label:'☁️ 陰天',chip:'☁️',bg:'assets/images/weather/day-overcast.png',fx:''},
-  {key:'rain',label:'🌧️ 雨天',chip:'🌧️',bg:'assets/images/weather/day-rain.png',fx:'rain'},
-  {key:'storm',label:'⛈️ 暴雨',chip:'⛈️',bg:'assets/images/weather/day-storm.png',fx:'storm'},
-  {key:'fog',label:'🌫️ 霧',chip:'🌫️',bg:'assets/images/weather/day-fog.png',fx:'fog'},
-  {key:'haze',label:'😷 霾',chip:'😷',bg:'assets/images/weather/day-haze.png',fx:'haze'},
-  {key:'night',label:'🌙 夜晚',chip:'🌙',bg:'assets/images/weather/night-clear.png',fx:'night'},
-  {key:'nightRain',label:'🌧️ 夜雨',chip:'🌧️',bg:'assets/images/weather/night-rain.png',fx:'rain night'},
-  {key:'snow',label:'❄️ 下雪',chip:'❄️',bg:'assets/images/weather/night-storm.png',fx:'snow haze'}
+  {key:'rain',label:'🌧️ 雨天',chip:'🌧️',bg:'assets/images/weather/day-rain.png',fx:''},
+  {key:'storm',label:'⛈️ 暴雨',chip:'⛈️',bg:'assets/images/weather/day-storm.png',fx:''},
+  {key:'fog',label:'🌫️ 霧',chip:'🌫️',bg:'assets/images/weather/day-fog.png',fx:''},
+  {key:'haze',label:'😷 霾',chip:'😷',bg:'assets/images/weather/day-haze.png',fx:''},
+  {key:'night',label:'🌙 夜晚',chip:'🌙',bg:'assets/images/weather/night-clear.png',fx:''},
+  {key:'nightRain',label:'🌧️ 夜雨',chip:'🌧️',bg:'assets/images/weather/night-rain.png',fx:''},
+  {key:'snow',label:'❄️ 下雪',chip:'❄️',bg:'assets/images/weather/night-storm.png',fx:''}
 ];
 const AUTO_WEATHER_POINT={lat:24.113978,lng:120.782379};
 let memoryWeatherKey=timeBasedWeatherKey();
@@ -2651,7 +2610,7 @@ function timeBasedWeatherKey(){
   if(h>=5 && h<11)return 'sunny';
   if(h>=11 && h<16)return 'hot';
   if(h>=16 && h<18)return 'cloudy';
-  return 'nightRain';
+  return 'night';
 }
 function timeBasedWeatherText(){
   const p=taipeiParts();
@@ -2661,7 +2620,7 @@ function timeBasedWeatherText(){
   if(h>=5 && h<11)return `即時天氣暫時讀取不到，台灣時間 ${hh}:${mm}，先保留早上晴天備援`;
   if(h>=11 && h<16)return `即時天氣暫時讀取不到，台灣時間 ${hh}:${mm}，先保留白天炎熱備援`;
   if(h>=16 && h<18)return `即時天氣暫時讀取不到，台灣時間 ${hh}:${mm}，先保留傍晚多雲備援`;
-  return `即時天氣暫時讀取不到，台灣時間 ${hh}:${mm}，先保留夜雨備援`;
+  return `即時天氣暫時讀取不到，台灣時間 ${hh}:${mm}，先保留夜晚備援`;
 }
 function renderMiniWeatherButtons(){
   const box=document.getElementById('miniWeatherButtons');
@@ -2741,7 +2700,7 @@ function applyWeatherImageVisual(w){
     return true;
   }).catch(()=>{
     applyWeatherFallbackVisual(w);
-    setMiniWeatherStatus((document.getElementById('miniWeatherStatus')?.textContent||'')+'｜天氣圖檔缺檔，已保留底圖並套用夜雨效果');
+    setMiniWeatherStatus((document.getElementById('miniWeatherStatus')?.textContent||'')+'｜天氣圖檔缺檔，已保留底圖，不再疊任何雨天特效');
     return false;
   });
 }
@@ -2755,8 +2714,8 @@ function setMemoryWeather(key,ev,source){
   if(chip)chip.textContent=w.chip;
   const miniFx=document.getElementById('miniWorldWeather');
   const worldFx=document.getElementById('worldWeather');
-  if(miniFx)miniFx.className='mini-world-weather '+(w.fx||'');
-  if(worldFx)worldFx.className='world-weather '+(w.fx||'');
+  if(miniFx)miniFx.className='mini-world-weather';
+  if(worldFx)worldFx.className='world-weather';
   document.querySelectorAll('#miniWeatherButtons button').forEach(b=>b.classList.toggle('active',b.dataset.weather===w.key));
 }
 function setAutoMemoryWeather(key,msg){
@@ -2775,8 +2734,11 @@ function weatherKeyFromOpenMeteo(c){
   const wind=Number(c.wind_speed_10m);
   const rain=(Number(c.rain)||0)+(Number(c.showers)||0)+(Number(c.precipitation)||0);
 
-  // v54：晚上不要再拿白天陰天圖。夜間一律用 night-rain；避免 night + overcast 變灰/空白。
-  if(!isDay)return 'nightRain';
+  // v57：晚上不再一律套夜雨；只有真的有雨才用夜雨圖，且不再疊雨絲特效。
+  if(!isDay){
+    if(rain>0 || (code>=51&&code<=67) || (code>=80&&code<=82))return 'nightRain';
+    return 'night';
+  }
 
   if(code>=95 || wind>=55)return 'storm';
   if(code>=71 && code<=77)return 'snow';
@@ -2975,6 +2937,10 @@ function setupAlbumRitualLock(){
   });
 }
 
+// v57：相簿不再使用「往下收合才可左右滑」的鎖定儀式，避免每本相簿卡住。
+setupAlbumRitualLock=function(){
+  document.querySelectorAll('.album-carousel').forEach(c=>c.classList.remove('album-locked'));
+};
 window.addEventListener('load',()=>{centerWorld();setupExperienceLayer();setupPersonNameHotspots();setupMiniFrameVideo();preloadStaticAssets();renderMiniWeatherButtons();setMemoryWeather(memoryWeatherKey);loadLyricsFromRootFiles().finally(()=>setupLyricDanmaku());loadData();setupWeather();renderFood();renderMaps();setupAlbumRitualLock();});
 function enterWorld(){startOpeningMemoryCountdown()}
 function centerWorld(){const sc=document.getElementById('scroller');setTimeout(()=>{sc.scrollLeft=(sc.scrollWidth-sc.clientWidth)/2;},60)}
@@ -3134,7 +3100,7 @@ function nextImageSource(img){
 function albumCarouselHtml(folders,area){
   const clean=(folders||[]).filter(f=>(f.items||[]).length);
   if(!clean.length)return '<div class="empty">目前沒有照片。</div>';
-  return `<div class="album-carousel-shell"><div class="album-carousel-hint">← 左右滑卡片｜往上滑展開照片 →</div><div class="album-carousel">`+
+  return `<div class="album-carousel-shell"><div class="album-carousel-hint">← 左右滑相簿｜點相簿打開照片 →</div><div class="album-carousel">`+
     clean.map((f,i)=>{
       const albumId='album_'+area+'_'+i+'_'+String(f.path||f.label||'').replace(/[^a-zA-Z0-9_\u4e00-\u9fa5]/g,'_').slice(0,24);
       const items=(f.items||[]).slice(0,240);
@@ -3142,8 +3108,8 @@ function albumCarouselHtml(folders,area){
       const cover=items[0]||{};
       const thumbs=items.slice(0,18).map((p,ti)=>`<button class="album-thumb ${ti===0?'active':''}" id="thumb-${albumId}-${ti}" onclick="setAlbumPhoto('${albumId}',${ti});event.stopPropagation()"><img ${imgAttrs(p)}></button>`).join('');
       return `<article class="album-card" data-album-id="${esc(albumId)}" ontouchstart="albumTouchStart(event)" ontouchend="albumTouchEnd(event)">
-        <div class="album-cover" onclick="expandAlbum('${albumId}')"><img ${imgAttrs(cover)}><div class="album-cover-text"><b>${esc(f.label||'相簿')}</b><small>${items.length} 張照片｜往上滑展開</small></div></div>
-        <div class="album-summary"><div class="album-path">${esc(f.path||'主資料夾')}</div><div class="album-ritual-hint">往下滑收合後，才能左右滑到下一本</div></div>
+        <div class="album-cover" onclick="expandAlbum('${albumId}')"><img ${imgAttrs(cover)}><div class="album-cover-text"><b>${esc(f.label||'相簿')}</b><small>${items.length} 張照片｜點一下打開</small></div></div>
+        <div class="album-summary"><div class="album-path">${esc(f.path||'主資料夾')}</div></div>
         <div class="album-detail">
           <div class="album-slide">
             <button class="album-slide-btn prev" onclick="nextAlbumPhoto('${albumId}',-1);event.stopPropagation()">‹</button>
