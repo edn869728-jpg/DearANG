@@ -1348,6 +1348,60 @@ a{color:inherit}
   pointer-events:none;
 }
 
+
+/* ===== v49：訪客登記修正｜可送出、可關閉、可滑動，不再卡死 APP ===== */
+.visitor-identity-modal{
+  z-index:9999!important;
+  display:flex!important;
+  align-items:flex-start!important;
+  justify-content:center!important;
+  overflow-y:auto!important;
+  overflow-x:hidden!important;
+  -webkit-overflow-scrolling:touch!important;
+  overscroll-behavior:contain!important;
+  touch-action:pan-y!important;
+  padding:calc(18px + env(safe-area-inset-top)) 14px calc(22px + env(safe-area-inset-bottom))!important;
+}
+.visitor-identity-modal.hidden{display:none!important;}
+.visitor-identity-card{
+  position:relative!important;
+  max-height:none!important;
+  overflow:visible!important;
+  margin:auto 0!important;
+  touch-action:pan-y!important;
+}
+.visitor-identity-close{
+  position:absolute!important;
+  top:10px!important;
+  right:10px!important;
+  z-index:3!important;
+  width:38px!important;
+  height:38px!important;
+  padding:0!important;
+  display:grid!important;
+  place-items:center!important;
+  border-radius:999px!important;
+  background:rgba(255,255,255,.10)!important;
+  border:1px solid rgba(255,255,255,.16)!important;
+  box-shadow:none!important;
+  color:#fff7e8!important;
+  font-size:20px!important;
+  line-height:1!important;
+}
+.visitor-identity-actions{position:sticky!important;bottom:0!important;padding-top:10px!important;background:linear-gradient(180deg,rgba(18,13,10,0),rgba(18,13,10,.94) 32%,rgba(18,13,10,.98))!important;z-index:2!important;}
+.visitor-identity-card input,
+.visitor-identity-card select,
+.visitor-identity-card textarea{font-size:16px!important;}
+@media(max-height:760px), (max-width:520px){
+  .visitor-identity-modal{align-items:flex-start!important;padding-top:calc(10px + env(safe-area-inset-top))!important;}
+  .visitor-identity-card{width:min(94vw,460px)!important;max-height:calc(100svh - 24px - env(safe-area-inset-top) - env(safe-area-inset-bottom))!important;overflow-y:auto!important;-webkit-overflow-scrolling:touch!important;padding:20px 16px 16px!important;}
+  .visitor-identity-card h2{font-size:22px!important;padding-right:36px!important;}
+  .visitor-identity-card p{font-size:13px!important;line-height:1.65!important;margin-bottom:10px!important;}
+  .visitor-identity-actions{flex-direction:column!important;gap:8px!important;}
+  .visitor-identity-actions button{min-height:44px!important;}
+  .visitor-identity-small{font-size:11px!important;}
+}
+
 </style>
 </head>
 <body>
@@ -1441,8 +1495,9 @@ a{color:inherit}
 
 <audio id="themeAudio" preload="metadata" loop></audio>
 
-<div class="visitor-identity-modal hidden" id="visitorIdentityModal">
-  <div class="visitor-identity-card">
+<div class="visitor-identity-modal hidden" id="visitorIdentityModal" onclick="visitorModalBackdropClose(event)">
+  <div class="visitor-identity-card" onclick="event.stopPropagation()">
+    <button type="button" class="visitor-identity-close" onclick="skipVisitorIdentity()" aria-label="關閉訪客登記">×</button>
     <div class="visitor-identity-kicker">DEAR ANG</div>
     <h2>願意讓我們知道你是誰嗎？</h2>
     <p>
@@ -1472,12 +1527,12 @@ a{color:inherit}
     <textarea id="visitorNoteInput" placeholder="想留一句話也可以，不填也沒關係"></textarea>
 
     <div class="visitor-identity-actions">
-      <button type="button" onclick="saveVisitorIdentity()">留下我的名字</button>
+      <button type="button" onclick="saveVisitorIdentity()">送出並關閉</button>
       <button type="button" class="soft" onclick="skipVisitorIdentity()">先不要</button>
     </div>
 
     <div class="visitor-identity-small">
-      有填名字才會記住；沒填的話，下次進來還會再問一次。
+      這張卡片可以上下滑；右上 ×、背景、或「先不要」都可以關閉。
     </div>
   </div>
 </div>
@@ -2904,10 +2959,11 @@ function updateVisitorDistrictOptions(){
 
 function getDearAngDeviceId(){
   const key='dear_ang_private_device_id_v1';
-  let id=localStorage.getItem(key);
+  let id='';
+  try{id=localStorage.getItem(key) || '';}catch(e){}
   if(!id){
     id='DA-' + Date.now().toString(36) + '-' + Math.random().toString(36).slice(2,8).toUpperCase();
-    localStorage.setItem(key,id);
+    try{localStorage.setItem(key,id);}catch(e){}
   }
   return id;
 }
@@ -2949,31 +3005,56 @@ function showVisitorIdentityPrompt(){
   setTimeout(autoPrefillVisitorCity,300);
 }
 
-function skipVisitorIdentity(){
+function closeVisitorIdentityModal(){
   const modal=document.getElementById('visitorIdentityModal');
   if(modal)modal.classList.add('hidden');
-  sendPrivateVisitLog('identity_skipped',{identityStatus:'skipped'});
+}
+
+function visitorModalBackdropClose(ev){
+  if(ev && ev.target && ev.target.id==='visitorIdentityModal')skipVisitorIdentity();
+}
+
+document.addEventListener('keydown',ev=>{
+  if(ev.key==='Escape'){
+    const modal=document.getElementById('visitorIdentityModal');
+    if(modal && !modal.classList.contains('hidden'))skipVisitorIdentity();
+  }
+});
+
+function safeSetVisitorIdentity(data){
+  try{localStorage.setItem('dear_ang_visitor_identity_v1',JSON.stringify(data));return true;}
+  catch(e){return false;}
+}
+
+function skipVisitorIdentity(){
+  closeVisitorIdentityModal();
+  try{sendPrivateVisitLog('identity_skipped',{identityStatus:'skipped'});}catch(e){}
 }
 
 function saveVisitorIdentity(){
-  const name=(document.getElementById('visitorNameInput')?.value || '').trim();
+  const rawName=(document.getElementById('visitorNameInput')?.value || '').trim();
+  const name=rawName || '匿名訪客';
   const city=(document.getElementById('visitorCityInput')?.value || '').trim();
   const district=(document.getElementById('visitorDistrictInput')?.value || '').trim();
   const note=(document.getElementById('visitorNoteInput')?.value || '').trim();
-  if(!name){alert('至少填一下你是誰，之後就不會再跳這個視窗。');return;}
   const data={name,city,district,note,savedAt:new Date().toISOString()};
-  localStorage.setItem('dear_ang_visitor_identity_v1',JSON.stringify(data));
-  sendPrivateVisitLog('identity_saved',{identityStatus:'saved',visitorName:name,visitorCity:city,visitorDistrict:district,visitorNote:note});
-  const modal=document.getElementById('visitorIdentityModal');
-  if(modal)modal.classList.add('hidden');
+  closeVisitorIdentityModal();
+  safeSetVisitorIdentity(data);
+  try{sendPrivateVisitLog('identity_saved',{identityStatus:'saved',visitorName:name,visitorCity:city,visitorDistrict:district,visitorNote:note});}catch(e){}
+  try{toast('訪客登記已送出');}catch(e){}
 }
 
 let dearAngVisitCountThisSession=null;
 function getVisitCount(){
   if(dearAngVisitCountThisSession!==null)return dearAngVisitCountThisSession;
   const key='dear_ang_visit_count_v1';
-  let n=Number(localStorage.getItem(key)||'0') + 1;
-  localStorage.setItem(key,String(n));
+  let n=1;
+  try{
+    n=Number(localStorage.getItem(key)||'0') + 1;
+    localStorage.setItem(key,String(n));
+  }catch(e){
+    n=1;
+  }
   dearAngVisitCountThisSession=n;
   return n;
 }
