@@ -133,7 +133,7 @@ let LYRIC_LINES = [
   { time: 223.57, end: 257.35, text: "我走了" },
   { time: 257.45, end: 263.45, text: "兄弟.." }
 ];
-const LYRIC_OFFSET_SECONDS = 8; // 歌詞固定提前 8 秒
+const LYRIC_OFFSET_SECONDS = 8; // 歌詞固定提前 20 秒
 function setupLyricDanmaku(){
   const audio=document.getElementById('themeAudio');
   if(!audio || audio.dataset.lyricBound==='1')return;
@@ -493,20 +493,13 @@ function cycleMemoryWeather(){
   setupWeather(true);
 }
 function showMiniWorld(){
+  // 小世界一出現就先用台灣時間判斷底圖，不等 API；API 回來後再自動覆蓋。
+  if(autoWeatherSource!=='auto')applyTimeWeatherFallback();
   renderMiniWeatherButtons();
-  setMemoryWeather(memoryWeatherKey);
-
+  setMemoryWeather(memoryWeatherKey,null,autoWeatherSource||'time');
+  refreshAutoWeather(false);
   const mini=document.getElementById('miniWorld');
   if(mini){mini.classList.remove('hidden','zooming');}
-
-  const frameVideo=document.getElementById('miniFrameVideo');
-  if(frameVideo){
-    try{
-      frameVideo.muted=true;
-      frameVideo.loop=true;
-      frameVideo.play().catch(()=>{});
-    }catch(e){}
-  }
 }
 function enterMainWorld(){
   const mini=document.getElementById('miniWorld');

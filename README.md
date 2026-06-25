@@ -1,34 +1,30 @@
-# Dear ANG v35｜完整還原包
+# Dear ANG v36｜完整還原＋訪客名片版
 
-這包是你說「我把東西全刪」後可直接還原用的完整 ZIP。
+這包已經整合：
 
-## 已包含
+- 使用你上傳的目前版 index.html 文字。
+- 倒數後進入直式 1080×1920 木框影片。
+- 木框影片檔：`assets/videos/mini-frame.mp4`。
+- 框內小世界位置：left 50 / top 667 / width 976 / height 553。
+- 點進世界後主街直接使用新的天氣圖，不再用舊圖背景切法。
+- 免密碼訪客名片：名字 / 城市 / 行政區 / 留言。
+- 有填名字：同一瀏覽器之後不再跳。
+- 沒填名字：下次進來還會再問。
+- 背景私人訪客紀錄，前台不公開顯示。
 
-- index.html
-- script.js 備份
-- config.js 備份
-- assets/audio/dear-ang-theme.mp3
-- assets/videos/opening-countdown.mp4
-- assets/videos/mini-world-frame.mp4
-- assets/images/mini-frame.jpg
-- assets/images/ktv-stage.png
-- assets/images/ktv-remote.png
-- assets/images/weather/* 指定天氣圖
-- 給安格.lrc / 給安格.srt
+## 上傳 GitHub Pages
 
-## 已修正
+把 ZIP 解壓後，整包內容上傳到 DearANG repo 根目錄。
 
-- 開場「想見你」靠左且等距拉開
-- 開場影片結束後先進木框小世界
-- 小世界與主街共用同一組天氣圖
-- 天氣座標：24.113978, 120.782379
-- 即時天氣讀取慢時，先依台灣時間顯示早上 / 白天 / 晚上 / 半夜
-- 雲端資料讀取改成 fetch + JSONP 雙模式，並自動重試
+## GAS 訪客紀錄
 
-## 上傳方式
+請打開 `GAS_訪客紀錄_加入原本Code.gs`，把裡面的程式碼照說明貼到你原本 GAS。
+貼完後重新部署 GAS 新版本。
 
-解壓後，把所有內容直接覆蓋 GitHub Pages 的 DearANG 專案根目錄。
+## 城市自動預填
 
-測試網址建議加版本：
+預設不會自動抓城市。若你要自動預填城市：
 
-https://edn869728-jpg.github.io/DearANG/?v=35
+1. 部署 `geo-worker.js` 到 Cloudflare Worker。
+2. 把 Worker `/geo` 網址填到 `index.html` 裡的 `GEO_WORKER_URL`。
+

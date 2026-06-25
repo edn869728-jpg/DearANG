@@ -7,9 +7,8 @@
 <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate, max-age=0">
 <!-- DearANG v16 KTV stage forced 20260620 -->
 <!-- DearANG v21 opening countdown video 20260620 -->
-<!-- DearANG v35 Complete Restore Stable Cloud 20260623 -->
-<!-- DearANG v36 Mini world mobile fit + video frame fix 20260624 -->
-<title>Dear 庚明</title>
+<!-- DearANG v33 Real Frame Weather World Crop 20260623 -->
+<title>你和我們的時光｜Dear ANG v29</title>
 <style>
 :root{
   --bg:#0b0b0d;
@@ -31,16 +30,16 @@ a{color:inherit}
 .hidden{display:none!important}
 
 /* ===== Gate ===== */
-.gate{position:fixed;inset:10;z-index:50;display:flex;align-items:center;justify-content:center;text-align:left;padding:24px;background:radial-gradient(circle at 50% 28%,rgba(214,168,93,.22),transparent 26%),linear-gradient(180deg,#14100d,#050506);transition:.55s ease}
+.gate{position:fixed;inset:0;z-index:50;display:flex;align-items:center;justify-content:center;text-align:center;padding:24px;background:radial-gradient(circle at 50% 28%,rgba(214,168,93,.22),transparent 26%),linear-gradient(180deg,#14100d,#050506);transition:.55s ease}
 .gate.out{opacity:0;pointer-events:none;transform:scale(1.02)}
-.gate-card{width:min(680px,100%);text-al. ign:left;border:1px solid var(--line);background:rgba(255,248,239,.08);border-radius:30px;padding:34px 22px;backdrop-filter:blur(18px);box-shadow:var(--shadow)}
-.kicker{letter-spacing:.24em;color:#ffd89a;font-weight:900;font-size:12px;margin-bottom:10px}.gate-title{font-size:clamp(32px,8vw,62px);line-height:1.35;font-weight:1000;margin:12px 0;text-shadow:0 4px 24px rgba(0,0,0,.55);text-align:left}
-.gate-title span{display:block}.gate-title .i1{padding-left:1.8em}.gate-title .i2{padding-left:3.6em}.gate-lead{color:var(--muted);line-height:1.9;margin:16px auto 22px;max-width:520px}.tiny{font-size:12px;color:rgba(247,240,230,.54);line-height:1.6}
+.gate-card{width:min(680px,100%);border:1px solid var(--line);background:rgba(255,248,239,.08);border-radius:30px;padding:34px 22px;backdrop-filter:blur(18px);box-shadow:var(--shadow)}
+.kicker{letter-spacing:.24em;color:#ffd89a;font-weight:900;font-size:12px;margin-bottom:10px}.gate-title{font-size:clamp(32px,8vw,62px);line-height:1.35;font-weight:1000;margin:12px 0;text-shadow:0 4px 24px rgba(0,0,0,.55)}
+.gate-title span{display:block}.gate-title .i1{padding-left:.9em}.gate-title .i2{padding-left:1.8em}.gate-lead{color:var(--muted);line-height:1.9;margin:16px auto 22px;max-width:520px}.tiny{font-size:12px;color:rgba(247,240,230,.54);line-height:1.6}
 
 /* ===== World ===== */
 .world{height:100svh;display:flex;flex-direction:column;background:linear-gradient(180deg,#100f0f,#050506)}
 .topbar{height:58px;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 14px calc(10px + env(safe-area-inset-top));z-index:3;background:linear-gradient(180deg,rgba(0,0,0,.64),rgba(0,0,0,.12));position:fixed;top:0;left:0;right:0;pointer-events:none}.topbar>*{pointer-events:auto}.brand{font-size:17px;font-weight:1000;letter-spacing:.08em}.brand small{display:block;font-size:10px;font-weight:900;color:#ffd89a;letter-spacing:.22em}.top-actions{display:flex;gap:7px}.icon-btn{width:40px;height:40px;padding:0;display:grid;place-items:center;background:rgba(0,0,0,.38);border:1px solid var(--line);box-shadow:none;backdrop-filter:blur(12px)}
-.scroller{height:100%;overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;scroll-behavior:smooth;padding-top:0}.stage{position:relative;height:100svh;min-width:1480px;width:235vw;max-width:2200px;background-image:var(--memory-world-bg,url("assets/images/weather/day-sunny.png"));background-position:center;background-size:cover;background-repeat:no-repeat;margin:auto}.stage:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.02),rgba(0,0,0,.04) 58%,rgba(0,0,0,.22));pointer-events:none}.hotspot{position:absolute;border-radius:22px;z-index:2;cursor:pointer;transition:.18s}.hotspot:before{content:attr(data-label);position:absolute;left:50%;bottom:100%;transform:translateX(-50%) translateY(-8px);white-space:nowrap;font-size:12px;font-weight:1000;letter-spacing:.08em;padding:7px 10px;border-radius:999px;background:rgba(0,0,0,.58);border:1px solid rgba(255,255,255,.18);backdrop-filter:blur(8px);color:#fff;opacity:.0;transition:.18s}.hotspot:after{content:"";position:absolute;inset:0;border:2px solid rgba(255,216,154,.0);border-radius:inherit;background:rgba(255,216,154,.0);transition:.18s}.hotspot:active:after,.hotspot:hover:after{border-color:rgba(255,216,154,.68);background:rgba(255,216,154,.10)}.hotspot:active:before,.hotspot:hover:before{opacity:1}
+.scroller{height:100%;overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;scroll-behavior:smooth;padding-top:0}.stage{position:relative;height:100svh;min-width:1480px;width:235vw;max-width:2200px;background:url("assets/images/memory-world.png") center/100% 100% no-repeat;margin:auto}.stage:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.02),rgba(0,0,0,.04) 58%,rgba(0,0,0,.22));pointer-events:none}.hotspot{position:absolute;border-radius:22px;z-index:2;cursor:pointer;transition:.18s}.hotspot:before{content:attr(data-label);position:absolute;left:50%;bottom:100%;transform:translateX(-50%) translateY(-8px);white-space:nowrap;font-size:12px;font-weight:1000;letter-spacing:.08em;padding:7px 10px;border-radius:999px;background:rgba(0,0,0,.58);border:1px solid rgba(255,255,255,.18);backdrop-filter:blur(8px);color:#fff;opacity:.0;transition:.18s}.hotspot:after{content:"";position:absolute;inset:0;border:2px solid rgba(255,216,154,.0);border-radius:inherit;background:rgba(255,216,154,.0);transition:.18s}.hotspot:active:after,.hotspot:hover:after{border-color:rgba(255,216,154,.68);background:rgba(255,216,154,.10)}.hotspot:active:before,.hotspot:hover:before{opacity:1}
 .h-photo{left:2.8%;top:16%;width:20.2%;height:68%}.h-video{left:23.1%;top:15%;width:17.8%;height:67%}.h-home{left:40.7%;top:13%;width:18.0%;height:70%}.h-music{left:58.5%;top:12%;width:17.9%;height:72%}.h-food{left:74.0%;top:13%;width:14.3%;height:70%}.h-nav{left:88.0%;top:14%;width:10.2%;height:68%}
 .hint{position:fixed;left:14px;right:14px;bottom:calc(14px + env(safe-area-inset-bottom));z-index:4;display:flex;justify-content:center;pointer-events:none}.hint-inner{max-width:520px;width:100%;border:1px solid rgba(255,255,255,.17);background:rgba(0,0,0,.43);backdrop-filter:blur(16px);border-radius:22px;padding:10px 13px;display:flex;align-items:center;gap:10px;box-shadow:0 16px 40px rgba(0,0,0,.28);font-weight:900}.hint-inner span{color:#ffd89a}.hint-inner small{display:block;color:rgba(255,255,255,.72);font-size:12px;font-weight:800;line-height:1.45}
 
@@ -55,7 +54,7 @@ a{color:inherit}
 .toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom));z-index:70;transform:translateX(-50%) translateY(16px);opacity:0;background:#5b3f2f;color:white;border-radius:999px;padding:11px 16px;font-weight:1000;transition:.2s}.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 
 @media(min-width:760px){.stage{min-width:1916px;width:1916px;height:821px;margin-top:70px;border-radius:58px;overflow:hidden;box-shadow:var(--shadow)}.world{align-items:center;justify-content:center}.scroller{display:flex;align-items:center}.grid{grid-template-columns:repeat(5,1fr)}}
-@media(max-width:560px){.stage{height:100svh;min-width:1280px;width:300vw;background-size:cover;background-position:center}.grid{grid-template-columns:repeat(3,1fr)}.hero-card{min-height:330px}.hero-card img{min-height:330px}.topbar{height:64px}.hint-inner{font-size:13px}.brand{font-size:15px}}
+@media(max-width:560px){.stage{height:100svh;min-width:1280px;width:300vw;background-size:100% 100%;background-position:center}.grid{grid-template-columns:repeat(3,1fr)}.hero-card{min-height:330px}.hero-card img{min-height:330px}.topbar{height:64px}.hint-inner{font-size:13px}.brand{font-size:15px}}
 
 /* ===== 歌詞彈幕：主題曲播放時會從右往左飄過 ===== */
 .lyric-danmaku-layer{position:fixed;inset:0;z-index:95;pointer-events:none;overflow:hidden}
@@ -792,7 +791,7 @@ a{color:inherit}
   transition:transform .8s cubic-bezier(.22,1,.36,1);
   z-index:1;
 }
-.mini-crt-frame{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;user-select:none;-webkit-user-drag:none;pointer-events:none;}
+.mini-crt-frame{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;user-select:none;-webkit-user-drag:none;pointer-events:none;}
 .mini-crt-screen{
   position:absolute;
   left:4.1%;top:34.55%;width:91.8%;height:28.65%;
@@ -871,7 +870,7 @@ a{color:inherit}
 }
 .mini-weather-buttons button.active{background:linear-gradient(135deg,var(--gold),#b98034);}
 .mini-weather-status{pointer-events:none;color:rgba(255,248,239,.76);font-size:12px;font-weight:900;line-height:1.5;text-shadow:0 2px 12px rgba(0,0,0,.55);background:rgba(0,0,0,.28);border:1px solid rgba(255,255,255,.10);border-radius:999px;padding:6px 10px;backdrop-filter:blur(10px);}
-.stage{background-image:var(--memory-world-bg, url("assets/images/weather/day-sunny.png"))!important;background-size:cover!important;background-position:center!important;background-repeat:no-repeat!important;}
+.stage{background-image:var(--memory-world-bg, url("assets/images/memory-world.png"))!important;}
 .world-weather{position:absolute;inset:0;z-index:1;pointer-events:none;opacity:0;border-radius:inherit;overflow:hidden;}
 .stage .hotspot{z-index:3;}
 .weather-chip{
@@ -885,94 +884,6 @@ a{color:inherit}
   .mini-weather-buttons::-webkit-scrollbar{display:none;}
 }
 
-/* ===== v36 修正：木框影片依手機等比例縮放 + 小世界框精準對位 =====
-   設計稿基準：1080 x 1920
-   小世界框：left 45px / top 654px / right 54px / bottom 700px
-   框尺寸：981 x 566
-*/
-.mini-world{
-  background:#000!important;
-}
-
-/* 讓整個木框影片「至少一邊貼齊手機」，但不超出、不被放大裁切 */
-.mini-crt-scene{
-  width:min(100vw, calc(100dvh * 1080 / 1920))!important;
-  height:min(100dvh, calc(100vw * 1920 / 1080))!important;
-  max-width:none!important;
-  max-height:none!important;
-  aspect-ratio:1080/1920!important;
-  overflow:hidden!important;
-  border-radius:0!important;
-  margin:auto!important;
-}
-
-/* 舊版 iPhone / 瀏覽器不支援 dvh 時的備援 */
-@supports not (height:100dvh){
-  .mini-crt-scene{
-    width:min(100vw, calc(100vh * 1080 / 1920))!important;
-    height:min(100vh, calc(100vw * 1920 / 1080))!important;
-  }
-}
-
-/* 外層木框改用影片也能正確鋪滿 1080x1920 舞台 */
-.mini-crt-frame,
-.mini-crt-frame-video{
-  position:absolute!important;
-  inset:0!important;
-  width:100%!important;
-  height:100%!important;
-  object-fit:cover!important;
-  object-position:center!important;
-  z-index:1!important;
-  background:#000!important;
-}
-
-/* 小世界框依你量的 1080x1920 座標定位 */
-.mini-crt-screen{
-  left:calc(45 / 1080 * 100%)!important;
-  top:calc(654 / 1920 * 100%)!important;
-  width:calc(981 / 1080 * 100%)!important;
-  height:calc(566 / 1920 * 100%)!important;
-  border:0!important;
-  border-radius:0!important;
-  padding:0!important;
-  margin:0!important;
-  overflow:hidden!important;
-  background:#000!important;
-  box-shadow:none!important;
-  z-index:3!important;
-}
-
-/* 小世界內容一定填滿白框，不留下白底 */
-.mini-world-bg{
-  position:absolute!important;
-  inset:0!important;
-  width:100%!important;
-  height:100%!important;
-  object-fit:cover!important;
-  object-position:center!important;
-  display:block!important;
-  z-index:1!important;
-  background:#000!important;
-}
-
-.mini-world-weather{z-index:2!important;}
-.mini-screen-shine{z-index:4!important;}
-.mini-screen-hint{z-index:5!important;}
-
-/* iPhone 直向避免底部/頂部安全區把畫面擠歪 */
-@media(max-width:760px){
-  .mini-world{
-    align-items:center!important;
-    justify-items:center!important;
-    padding:0!important;
-  }
-  .mini-crt-scene{
-    width:min(100vw, calc(100svh * 1080 / 1920))!important;
-    height:min(100svh, calc(100vw * 1920 / 1080))!important;
-  }
-}
-
 </style>
 </head>
 <body>
@@ -980,58 +891,55 @@ a{color:inherit}
 <div class="gate" id="gate">
   <div class="gate-card">
     <div class="kicker">DEAR ANG MEMORY WORLD</div>
-    <div class="gate-title"><span>想見你.</span><span class="i1">想見你..</span><span class="i2">想見你了….</span></div>
+    <div class="gate-title"><span>想見你.</span><span class="i1">想見你..</span><span class="i2">想見你… 了….</span></div>
     <div class="gate-song-credit" aria-label="主題曲資訊">
-      <div class="credit-kicker">主題曲 Thenme Song</div>
+      <div class="credit-kicker">THEME SONG</div>
       <div class="credit-title">〈給安格 Dear ANG〉</div>
-      <div class="credit-row"><span>作詞:</span><b>Enden Mi</b></div>
-      <div class="credit-row"><span>作曲:</span><b>Enden Mi</b></div>
+      <div class="credit-row"><span>作詞</span><b>Enden</b></div>
+      <div class="credit-row"><span>作曲</span><b>Enden</b></div>
     </div>
-    <p class="gate-lead">這是有你的時光。點一棟房子，就走進一段曾經。</p>
-    <button onclick="enterWorld()">回到有你的時光</button>
-    <div class="tiny" style="margin-top:14px">!!!!! 提醒 : 情緒敏感者，請備妥衛生紙。</div>
+    <p class="gate-lead">這裡是你和我們的時光。一棟房子，一段曾經。</p>
+    <button onclick="enterWorld()">踏上想你的旅程</button>
+    <div class="tiny" style="margin-top:14px">!!!!! 提醒 : 情緒較為敏感者，請先準備好衛生紙。 !!!!!</div>
   </div>
 </div>
 
-<div class="asset-preload-status" id="assetPreloadStatus">回憶加載中…</div>
+<div class="asset-preload-status" id="assetPreloadStatus">準備通往回憶…</div>
 <div class="opening-countdown" id="openingCountdown" aria-live="polite">
   <div class="opening-countdown-card">
     <video class="opening-countdown-video" id="openingCountdownVideo" src="assets/videos/opening-countdown.mp4?v=20260620-v21" playsinline preload="auto"></video>
-    <div class="opening-video-caption">回憶倒流中... 留意眼淚回流..	</div>
+    <div class="opening-video-caption">倒數結束，0 秒開始播放主題曲</div>
     <div class="credit-kicker">OPENING COUNTDOWN</div>
     <div class="opening-countdown-title">倒數</div>
     <div class="opening-countdown-sub">影片裡已有秒數。播放完後主題曲開始。</div>
     <div class="opening-number" id="openingNumber">10</div>
     <div class="opening-photo-draw" id="openingPhotoDraw"></div>
     <div class="opening-start-note" id="openingStartNote">0 秒開始播放</div>
-    <button class="opening-video-skip" type="button" onclick="finishOpeningMemoryCountdown()">Heaven</button>
+    <button class="opening-video-skip" type="button" onclick="finishOpeningMemoryCountdown()">跳過倒數</button>
   </div>
 </div>
 
 <div class="mini-world hidden" id="miniWorld" aria-label="CRT電視小世界">
   <div class="mini-crt-scene">
-    <video class="mini-crt-frame mini-crt-frame-video" id="miniFrameVideo" autoplay muted loop playsinline preload="auto" poster="assets/videos/mini-world-frame.mp4" aria-label="兩個人趴在木框上看小世界">
-      <source src="assets/videos/mini-world-frame.mp4" type="video/mp4">
-      <source src="assets/videos/mini-world-frame.mp4" type="video/mp4">
-    </video>
+    <video class="mini-crt-frame" src="assets/videos/mini-frame.mp4?v=20260623-v33-frame" playsinline preload="auto"></video>
     <button class="mini-crt-screen" type="button" onclick="enterMainWorld()" aria-label="點擊木框中間的小世界進入富宜路街道">
-      <img src="assets/images/weather/day-sunny.png" class="mini-world-bg" id="miniWorldBg" alt="木框裡的Q版小世界">
+      <img src="assets/images/memory-world.png" class="mini-world-bg" id="miniWorldBg" alt="木框裡的Q版小世界">
       <div class="mini-world-weather" id="miniWorldWeather"></div>
       <div class="mini-screen-shine"></div>
-      <div class="mini-screen-hint">找尋回憶的入口</div>
+      <div class="mini-screen-hint">點中間世界進入</div>
     </button>
-    <div class="mini-crt-label">很多道理我都知道，流完眼淚就能做到</div>
+    <div class="mini-crt-label">木框裡的小世界</div>
   </div>
   <div class="mini-world-panel">
-    <div class="mini-world-tip" onclick="enterMainWorld()">因為是你，給我勇氣繼續前進</div>
+    <div class="mini-world-tip" onclick="enterMainWorld()">點進這個世界｜進入富宜路街道</div>
     <div class="mini-weather-buttons" id="miniWeatherButtons" aria-label="天氣切換"></div>
   </div>
 </div>
 
 
-<div class="world" id="world" aria-label="有你的時光世界">
+<div class="world" id="world" aria-label="你和我們的時光世界">
   <div class="topbar">
-    <div class="brand"><small>DEAR ANG</small>有你的時光</div>
+    <div class="brand"><small>DEAR ANG</small>你和我們的時光</div>
     <div class="top-actions">
       <button class="icon-btn" onclick="toggleMusic()" id="musicBtn">♫</button>
       <button class="icon-btn lyric-toggle on" onclick="toggleLyrics()" id="lyricBtn">詞</button>
@@ -1042,25 +950,25 @@ a{color:inherit}
   <div class="scroller" id="scroller">
     <div class="stage" id="stage">
       <div class="world-weather" id="worldWeather"></div>
-      <div class="hotspot h-photo" data-label="華光相館｜有你的時光" onclick="openPage('photo')"></div>
+      <div class="hotspot h-photo" data-label="華光相館｜你和我們的時光" onclick="openPage('photo')"></div>
       <div class="hotspot h-video" data-label="新時代影音館｜影片" onclick="openPage('video')"></div>
-      <div class="hotspot h-home" data-label="富宜路86號｜他家" onclick="openPage('home')"></div>
-      <div class="hotspot h-music" data-label="金嗓卡拉OK｜他唱的歌" onclick="openPage('music')"></div>
+      <div class="hotspot h-home" data-label="富宜路86號｜你家" onclick="openPage('home')"></div>
+      <div class="hotspot h-music" data-label="金嗓卡拉OK｜你唱的歌" onclick="openPage('music')"></div>
       <div class="hotspot h-food" data-label="美而美早餐店｜一起吃過的東西" onclick="openPage('food')"></div>
-      <div class="hotspot h-nav" data-label="公路局｜通往他的路" onclick="openPage('nav')"></div>
+      <div class="hotspot h-nav" data-label="公路局｜想你的時候" onclick="openPage('nav')"></div>
     </div>
   </div>
-  <div class="hint"><div class="hint-inner"><span>← →</span><div>左右滑這條街<small>點招牌或建築，進入每一段有他的時光。</small></div></div></div>
+  <div class="hint"><div class="hint-inner"><span>← →</span><div>左右滑這條街<small>點招牌或建築，進入對應的時光。</small></div></div></div>
 </div>
 
 <audio id="themeAudio" preload="metadata" loop></audio>
 
 <!-- 華光相館｜照片 -->
 <section class="page" id="page-photo">
-  <div class="page-head"><button class="back" onclick="closePage()">← 回到街上</button><b>華光相館｜有你的時光</b></div>
+  <div class="page-head"><button class="back" onclick="closePage()">← 回到街上</button><b>華光相館｜你和我們的時光</b></div>
   <div class="page-body">
-    <div class="hero-card"><img src="assets/images/memory-world.png?v=20260620-v16-bg" alt="華光相館"><div class="hero-text"><h1>有你的時光</h1><p>資料從 Google Drive 讀取。請把一般照片放在「01_有你的時光」。</p></div></div>
-    <div class="section folder-hint"><h2>Google Drive 資料夾</h2><div class="story">01_有你的時光<br>底下可以再分子資料夾，網站會讀下一層與更深層。</div></div>
+    <div class="hero-card"><img src="assets/images/memory-world.png?v=20260620-v16-bg" alt="華光相館"><div class="hero-text"><h1>你和我們的時光</h1><p></p></div></div>
+    <div class="section folder-hint"><h2></h2><div class="story">01_你和我們的時光<br></div></div>
     <div class="section"><h2>照片</h2><div id="photoGrid" class="album-mount"><div class="empty">照片載入中…</div></div></div>
   </div>
 </section>
@@ -1068,17 +976,17 @@ a{color:inherit}
 <section class="page" id="page-video">
   <div class="page-head"><button class="back" onclick="closePage()">← 回到街上</button><b>新時代影音館｜影片</b></div>
   <div class="page-body">
-    <div class="hero-card"><img src="assets/images/memory-world.png?v=20260620-v16-bg" alt="新時代影音館"><div class="hero-text"><h1>影音館</h1><p>資料從 Google Drive 讀取。請把影片放在「02_影音館」。</p></div></div>
-    <div class="section folder-hint"><h2>Google Drive 資料夾</h2><div class="story">02_影音館<br>底下可以再分子資料夾，網站會讀下一層與更深層。</div></div>
+    <div class="hero-card"><img src="assets/images/memory-world.png" alt="新時代影音館"><div class="hero-text"><h1>影音館</h1><p></p></div></div>
+    <div class="section folder-hint"><h2></h2><div class="story">02_影音館<br></div></div>
     <div class="section"><h2>影片</h2><div class="video-grid" id="videoGrid"><div class="empty">影片載入中…</div></div></div>
   </div>
 </section>
-<!-- 中間公寓｜他家 -->
+<!-- 中間公寓｜你家 -->
 <section class="page" id="page-home">
-  <div class="page-head"><button class="back" onclick="closePage()">← 回到街上</button><b>中間公寓｜他家</b></div>
+  <div class="page-head"><button class="back" onclick="closePage()">← 回到街上</button><b>中間公寓｜你家</b></div>
   <div class="page-body">
-    <div class="hero-card"><img src="assets/images/memory-world.png?v=20260620-v16-bg" alt="中間公寓"><div class="hero-text"><h1>他家</h1><p>這裡只放他個人的照片。內容由你自己分類，不自動補故事。</p></div></div>
-    <div class="section folder-hint"><h2>Google Drive 資料夾</h2><div class="story">03_他的家<br>底下可以再分子資料夾，網站會讀下一層與更深層。</div></div>
+    <div class="hero-card"><img src="assets/images/memory-world.png" alt="中間公寓"><div class="hero-text"><h1>你家</h1><p>想起你，你的樣貌，你的形態， 你英俊臉龐。</p></div></div>
+    <div class="section folder-hint"><h2></h2><div class="story">03_你的家<br>底下可以再分子資料夾，網站會讀下一層與更深層。</div></div>
     <div class="section"><h2>他個人的照片</h2><div id="homePhotoGrid" class="album-mount"><div class="empty">載入中…</div></div></div>
   </div>
 </section>
@@ -1107,7 +1015,7 @@ a{color:inherit}
         <div class="section ktv-songbook">
           <h2>歌本</h2>
           <div id="ktvSongbook"><div class="empty">歌曲載入中…</div></div>
-          <div class="ktv-folder-note">讀取 Google Drive「04_金嗓卡拉OK」及底下所有子資料夾。</div>
+          <div class="ktv-folder-note"></div>
         </div>
 
         <div class="section ktv-remote">
@@ -1148,7 +1056,7 @@ a{color:inherit}
             <button class="ktv-img-hotspot round" style="left:60.4%;top:86.1%" onclick="ktvVolume(0.1)" aria-label="音量加"></button>
             <button class="ktv-img-hotspot round" style="left:79.8%;top:86.1%" onclick="ktvVolume(-0.1)" aria-label="音量減"></button>
           </div>
-          <div class="ktv-remote-caption">照這支遙控操作：輸入歌號 → 按「插入」→ 按「開始」播放。</div>
+          <div class="ktv-remote-caption">照這支遙控操作：輸入歌號 → 按「插入」→ 按「▶Ⅱ」播放。</div>
         </div>
       </div>
     </div>
@@ -1159,7 +1067,7 @@ a{color:inherit}
   <div class="page-head"><button class="back" onclick="closePage()">← 回到街上</button><b>美而美早餐店｜食物記憶</b></div>
   <div class="page-body">
     <div class="hero-card"><img src="assets/images/memory-world.png?v=20260620-v16-bg" alt="美而美早餐店"><div class="hero-text"><h1>食物記憶</h1><p>一起吃過的、他喜歡吃的、他推薦你吃的，都由 Google Drive 分類讀取。</p></div></div>
-    <div class="section folder-hint"><h2>Google Drive 資料夾</h2><div class="story">05_美而美早餐店<br>底下可以再分子資料夾，網站會讀下一層與更深層。</div></div>
+    <div class="section folder-hint"><h2></h2><div class="story">05_美而美早餐店<br>底下可以再分子資料夾，網站會讀下一層與更深層。</div></div>
     <div class="section"><h2>照片</h2><div id="foodPhotoGrid" class="grid"><div class="empty">食物照片載入中…</div></div></div>
   </div>
 </section>
@@ -1170,7 +1078,7 @@ a{color:inherit}
     <div class="hero-card"><img src="assets/images/sixth_tree.jpeg?v=20260620-v16-tree" alt="第六棵樹"><div class="rain-layer"></div><div class="hero-text"><h1>通往他的路</h1><p>Google Maps 導航、街景、第六棵樹天氣。</p></div></div>
     <div class="section weather-box"><h2>第六棵樹天氣</h2><div class="weather-card" id="weatherLabel">讀取長眠地天氣中…</div></div>
     <div class="section"><h2>導航</h2><div class="map-list" id="mapList"></div></div>
-    <div class="section folder-hint"><h2>Google Drive 資料夾</h2><div class="story">06_通往他的路<br>底下可以再分子資料夾，網站會讀下一層與更深層。</div></div>
+    <div class="section folder-hint"><h2></h2><div class="story">06_通往他的路<br>底下可以再分子資料夾，網站會讀下一層與更深層。</div></div>
     <div class="section"><h2>通往他的路</h2><div id="roadPhotoGrid" class="grid"><div class="empty">導航相關照片載入中…</div></div></div>
   </div>
 </section>
@@ -1318,7 +1226,7 @@ let LYRIC_LINES = [
   { time: 223.57, end: 257.35, text: "我走了" },
   { time: 257.45, end: 263.45, text: "兄弟.." }
 ];
-const LYRIC_OFFSET_SECONDS = 8; // 歌詞固定提前 8 秒
+const LYRIC_OFFSET_SECONDS = 8; // 歌詞固定提前 20 秒
 function setupLyricDanmaku(){
   const audio=document.getElementById('themeAudio');
   if(!audio || audio.dataset.lyricBound==='1')return;
@@ -1514,7 +1422,7 @@ function finishOpeningMemoryCountdown(){
 let uiAudioCtx=null;
 let hintHidden=false;
 const CAPSULE_AREAS={
-  photo:'華光相館｜有你的時光',
+  photo:'華光相館｜你和我們的時光',
   video:'新時代影音館｜影片',
   home:'中間公寓｜他家',
   music:'金嗓卡拉OK｜他唱的歌',
@@ -1688,11 +1596,9 @@ function setMemoryWeather(key,ev,source){
   const w=memoryWeatherByKey(key);
   memoryWeatherKey=w.key;
   autoWeatherSource=source||autoWeatherSource||'manual';
-  const version='20260623-v35';
+  const version='20260623-v34';
   const stage=document.getElementById('stage');
   if(stage)stage.style.setProperty('--memory-world-bg',`url("${w.bg}?v=${version}")`);
-  const miniScreen=document.querySelector('.mini-crt-screen');
-  if(miniScreen)miniScreen.style.backgroundImage=`url("${w.bg}?v=${version}")`;
   const miniBg=document.getElementById('miniWorldBg');
   if(miniBg){
     miniBg.src=w.bg+'?v='+version;
@@ -1772,16 +1678,6 @@ function showMiniWorld(){
   setMemoryWeather(memoryWeatherKey);
   const mini=document.getElementById('miniWorld');
   if(mini){mini.classList.remove('hidden','zooming');}
-  const frameVideo=document.getElementById('miniFrameVideo');
-  if(frameVideo){
-    try{
-      frameVideo.muted=true;
-      frameVideo.playsInline=true;
-      frameVideo.currentTime=0;
-      const p=frameVideo.play();
-      if(p&&p.catch)p.catch(()=>{});
-    }catch(e){}
-  }
 }
 function enterMainWorld(){
   const mini=document.getElementById('miniWorld');
@@ -1815,81 +1711,12 @@ function closePage(){
   document.body.style.overflow='hidden';
 }
 function toast(msg,bad){const t=document.getElementById('toast');t.textContent=msg;t.style.background=bad?'#963232':'#5b3f2f';t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2300)}
-function buildApiUrl(p,callback){
-  const u=new URL(CONFIG.GAS_API_URL);
-  Object.keys(p||{}).forEach(k=>u.searchParams.set(k,p[k]));
-  if(callback)u.searchParams.set('callback',callback);
-  u.searchParams.set('_ts',Date.now());
-  u.searchParams.set('v',CONFIG.APP_VERSION);
-  return u;
-}
-function parseApiText(text){
-  text=String(text||'').trim();
-  if(!text)throw new Error('雲端回傳空白');
-  try{return JSON.parse(text)}catch(e){}
-  const m=text.match(/^[\w$.]+\((([\s\S]*))\);?$/);
-  if(m){try{return JSON.parse(m[1])}catch(e){}}
-  throw new Error('雲端回傳格式不是 JSON');
-}
-function fetchApi(p){
-  const u=buildApiUrl(p);
-  return fetch(u.toString(),{cache:'no-store',credentials:'omit'}).then(async r=>{
-    const t=await r.text();
-    if(!r.ok)throw new Error('HTTP '+r.status);
-    return parseApiText(t);
-  });
-}
-function jsonpApi(p){
-  return new Promise((res,rej)=>{
-    const cb='cb'+Date.now()+Math.floor(Math.random()*9e4);
-    const u=buildApiUrl(p,cb);
-    const sc=document.createElement('script');
-    let doneFlag=false;
-    const tm=setTimeout(()=>done(rej,new Error('雲端讀取逾時')),12000);
-    window[cb]=x=>done(res,x);
-    function done(f,v){
-      if(doneFlag)return;doneFlag=true;
-      clearTimeout(tm);
-      try{delete window[cb]}catch(e){window[cb]=undefined}
-      if(sc&&sc.parentNode)sc.parentNode.removeChild(sc);
-      f(v);
-    }
-    sc.onerror=()=>done(rej,new Error('JSONP 讀取失敗'));
-    sc.src=u.toString();
-    document.head.appendChild(sc);
-  });
-}
-function wait(ms){return new Promise(r=>setTimeout(r,ms));}
-async function api(p){
-  let lastErr;
-  for(let i=0;i<3;i++){
-    try{return await fetchApi(p)}catch(e){lastErr=e}
-    try{return await jsonpApi(p)}catch(e){lastErr=e}
-    await wait(550*(i+1));
-  }
-  throw lastErr||new Error('雲端讀取失敗');
-}
-async function loadData(){
-  try{
-    const r=await api({action:'getMemorialData'});
-    if(!r||!r.ok)throw Error((r&&r.error)||'讀取失敗');
-    DATA=r;
-    DATA.photos=orderPhotos(DATA.photos||flatGroups(DATA.photoGroups||[]));
-    renderDynamic();
-    preloadFirstDriveAssets();
-    if(openingCountdownActive)renderOpeningPhotoDraw();
-    startTheme();
-    toast('雲端資料已同步');
-  }catch(e){
-    console.warn('DearANG cloud load failed:',e);
-    renderDynamic();
-    toast('雲端資料讀取失敗，先顯示本機內容',1);
-  }
-}
+function api(p){return new Promise((res,rej)=>{let cb='cb'+Date.now()+Math.floor(Math.random()*9e4),u=new URL(CONFIG.GAS_API_URL);Object.keys(p).forEach(k=>u.searchParams.set(k,p[k]));u.searchParams.set('callback',cb);u.searchParams.set('_ts',Date.now());u.searchParams.set('v',CONFIG.APP_VERSION);let sc=document.createElement('script'),tm=setTimeout(()=>done(rej,new Error('讀取逾時')),16000);window[cb]=x=>done(res,x);function done(f,v){clearTimeout(tm);delete window[cb];sc.remove();f(v)}sc.onerror=()=>done(rej,new Error('讀取失敗'));sc.src=u;document.head.appendChild(sc)})}
+function loadData(){api({action:'getMemorialData'}).then(r=>{if(!r.ok)throw Error(r.error||'讀取失敗');DATA=r;DATA.photos=orderPhotos(DATA.photos||flatGroups(DATA.photoGroups||[]));renderDynamic();preloadFirstDriveAssets();if(openingCountdownActive)renderOpeningPhotoDraw();startTheme();}).catch(e=>{renderDynamic();toast('雲端資料讀取失敗，先顯示本機內容',1)})}
 function detectAreaKey(text){
   text=String(text||'');
   const areas={
-    photo:['01_有你的時光','有你的時光','華光','相館'],
+    photo:['01_你和我們的時光','你和我們的時光','華光','相館'],
     video:['02_影音館','影音館','影片','新時代'],
     home:['03_他的家','他的家','他家','個人','中間公寓'],
     music:['04_金嗓卡拉OK','金嗓','卡拉OK','他唱的歌'],
@@ -1961,7 +1788,7 @@ function matchMediaKind(it,kind){
 }
 function cleanFolderLabel(path,area){
   let p=String(path||'').replace(/^\/+|\/+$/g,'');
-  const rootMap={photo:'01_有你的時光',video:'02_影音館',home:'03_他的家',music:'04_金嗓卡拉OK',food:'05_美而美早餐店',road:'06_通往他的路',friend:'07_好友投稿'};
+  const rootMap={photo:'01_你和我們的時光',video:'02_影音館',home:'03_他的家',music:'04_金嗓卡拉OK',food:'05_美而美早餐店',road:'06_通往他的路',friend:'07_好友投稿'};
   const root=rootMap[area]||'';
   if(p===root)return '主資料夾';
   if(root && p.startsWith(root+'/'))p=p.slice(root.length+1);
@@ -2211,7 +2038,7 @@ function ktvNext(){if(!KTV_SONGS.length)return;ktvSelectedIndex=ktvSelectedIndex
 function ktvVolume(delta){const p=ktvCurrentPlayer();if(!p){ktvSetOsd('尚未播放，無法調整音量');return;}p.volume=Math.max(0,Math.min(1,(p.volume||1)+delta));ktvSetOsd('音量 '+Math.round(p.volume*100)+'%');}
 
 function renderDynamic(){
-  renderFolderedMedia('photoGrid','photo','image','請在 Google Drive 建立「01_有你的時光」，底下可再分子資料夾。',DATA.photos||[]);
+  renderFolderedMedia('photoGrid','photo','image','請在 Google Drive 建立「01_你和我們的時光」，底下可再分子資料夾。',DATA.photos||[]);
   renderFolderedMedia('homePhotoGrid','home','image','這裡只讀「03_他的家」及其子資料夾。');
   renderFolderedMedia('foodPhotoGrid','food','image','請在 Google Drive 建立「05_美而美早餐店」，底下可再分子資料夾。');
   renderFolderedMedia('roadPhotoGrid','road','image','請在 Google Drive 建立「06_通往他的路」，底下可再分子資料夾。');
