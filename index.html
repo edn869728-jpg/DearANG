@@ -8,8 +8,8 @@
 <!-- DearANG v16 KTV stage forced 20260620 -->
 <!-- DearANG v21 opening countdown video 20260620 -->
 <!-- DearANG v33 Real Frame Weather World Crop 20260623 -->
-<!-- DearANG v45 based on index(53): unified weather images + fixed weather status coords + letter y1700 20260625 -->
-<title>你和我們的時光｜Dear ANG v45</title>
+<!-- DearANG v46 based on index(53): exact mini box/weather/letter coords + building hotspots kept 20260625 -->
+<title>你和我們的時光｜Dear ANG v46</title>
 <style>
 :root{
   --bg:#0b0b0d;
@@ -1174,10 +1174,13 @@ a{color:inherit}
 .mini-crt-scene{position:relative!important;width:min(96vw,560px)!important;height:auto!important;aspect-ratio:1080/2880!important;max-height:none!important;margin:0 auto!important;overflow:hidden!important;border-radius:0!important;filter:drop-shadow(0 30px 70px rgba(0,0,0,.62))!important;}
 .mini-crt-frame{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;object-fit:cover!important;background:#000 url("assets/images/mini-frame-poster.png") center/cover no-repeat!important;}
 .mini-crt-frame.frame-failed{opacity:.22!important;filter:sepia(.4) brightness(.7)!important;}
-.mini-crt-screen{left:4.6296%!important;top:23.1597%!important;width:90.3704%!important;height:19.2014%!important;border-radius:.8%!important;}
+/* 小世界木箱內圖片：x 75–1020 / y 653–1185（以 1080×2880 換算） */
+.mini-crt-screen{left:6.9444%!important;top:22.6736%!important;width:87.5000%!important;height:18.4722%!important;border-radius:.8%!important;}
 .mini-world-panel{display:block!important;position:static!important;width:0!important;height:0!important;margin:0!important;padding:0!important;overflow:hidden!important;}
-.mini-weather-status{position:absolute!important;z-index:6!important;left:5.5556%!important;top:41.8056%!important;width:54.5370%!important;height:2.2569%!important;color:rgba(76,43,22,.82)!important;background:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;padding:0!important;text-align:left!important;font-size:clamp(7px,1.08vw + .13rem,12px)!important;line-height:1.28!important;font-weight:900!important;text-shadow:0 1px 0 rgba(255,247,220,.48)!important;pointer-events:none!important;backdrop-filter:none!important;overflow:hidden!important;}
-.frame-letter-card{position:absolute!important;z-index:5!important;left:22.7778%!important;top:59.0278%!important;width:59.5370%!important;height:37.2222%!important;margin:0!important;padding:0!important;overflow:hidden!important;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;backdrop-filter:none!important;color:#4b2b16!important;text-align:left!important;}
+/* 天氣資訊：x 60–655 / y 1204–1269 */
+.mini-weather-status{position:absolute!important;z-index:6!important;left:5.5556%!important;top:41.8056%!important;width:55.0926%!important;height:2.2569%!important;color:rgba(76,43,22,.82)!important;background:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;padding:0!important;text-align:left!important;font-size:clamp(7px,1.08vw + .13rem,12px)!important;line-height:1.28!important;font-weight:900!important;text-shadow:0 1px 0 rgba(255,247,220,.48)!important;pointer-events:none!important;backdrop-filter:none!important;overflow:hidden!important;}
+/* 給阿明的話：H 1750 up（從 y=1750 開始往下） */
+.frame-letter-card{position:absolute!important;z-index:5!important;left:22.7778%!important;top:60.7639%!important;width:59.5370%!important;height:35.4861%!important;margin:0!important;padding:0!important;overflow:hidden!important;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;backdrop-filter:none!important;color:#4b2b16!important;text-align:left!important;}
 .frame-letter-text{width:100%!important;height:100%!important;overflow:hidden!important;color:#4b2b16!important;font-size:clamp(7px,1.22vw + .16rem,13px)!important;line-height:1.56!important;font-weight:760!important;letter-spacing:.01em!important;text-shadow:0 1px 0 rgba(255,247,220,.36)!important;font-family:"Noto Serif TC","Noto Sans TC",serif!important;}
 /* radio 座標：播放 x708–768/y1450–1505；停止 x807–867/y1450–1505 */
 .radio-audio-hit{position:absolute!important;z-index:9!important;top:50.3472%!important;width:5.5556%!important;height:1.9097%!important;min-height:0!important;padding:0!important;margin:0!important;border-radius:50%!important;display:grid!important;place-items:center!important;background:rgba(255,244,214,.12)!important;border:1px solid rgba(68,38,18,.18)!important;box-shadow:none!important;color:#251307!important;text-shadow:0 1px 0 rgba(255,248,220,.35)!important;cursor:pointer!important;backdrop-filter:none!important;}
@@ -1225,6 +1228,17 @@ a{color:inherit}
 #stage:not(.stage-weather-fallback) .stage-world-img,
 .mini-crt-screen:not(.weather-fallback) .mini-world-bg{opacity:1!important;}
 
+
+/* ===== v46：主街進去後仍保留分建築物按鈕 ===== */
+#stage{position:relative!important;}
+#stage .stage-world-img{z-index:0!important;pointer-events:none!important;}
+#stage .world-weather{z-index:1!important;pointer-events:none!important;}
+#stage .person-tag-hotspot{z-index:4!important;pointer-events:auto!important;}
+#stage .hotspot{z-index:8!important;pointer-events:auto!important;background:rgba(255,216,154,0)!important;border:0!important;}
+#stage .hotspot::after{pointer-events:none!important;}
+#stage .hotspot::before{z-index:9!important;}
+#stage .hotspot:active::after,#stage .hotspot:hover::after{border-color:rgba(255,216,154,.68)!important;background:rgba(255,216,154,.10)!important;}
+
 </style>
 </head>
 <body>
@@ -1261,7 +1275,7 @@ a{color:inherit}
 
 <div class="mini-world hidden" id="miniWorld" aria-label="CRT電視小世界">
   <div class="mini-crt-scene">
-    <video class="mini-crt-frame" id="miniFrameVideo" src="assets/videos/mini-frame.mp4?v=20260625-v45" autoplay muted loop playsinline preload="auto" poster="assets/images/mini-frame-poster.png" aria-label="木框影片"></video>
+    <video class="mini-crt-frame" id="miniFrameVideo" src="assets/videos/mini-frame.mp4?v=20260625-v46" autoplay muted loop playsinline preload="auto" poster="assets/images/mini-frame-poster.png" aria-label="木框影片"></video>
     <button class="mini-crt-screen" type="button" onclick="enterMainWorld()" aria-label="點擊木框中間的小世界進入富宜路街道">
       <img src="assets/images/memory-world.png" class="mini-world-bg" id="miniWorldBg" alt="木框裡的Q版小世界">
       <div class="mini-world-weather" id="miniWorldWeather"></div>
@@ -2012,7 +2026,7 @@ function setMiniWeatherStatus(text){
 }
 function resolveAssetUrl(path,version){
   const clean=String(path||'').split('?')[0];
-  const stamp='?v='+(version||'20260625-v45');
+  const stamp='?v='+(version||'20260625-v46');
   const here=location.href.split('#')[0].replace(/[^\/]*$/,'');
   return [
     clean+stamp,
@@ -2049,7 +2063,7 @@ function applyWeatherFallbackVisual(w){
   if(miniBg){miniBg.removeAttribute('src');miniBg.alt='木框裡的Q版小世界｜'+w.label+'｜圖片缺檔備援';}
 }
 function applyWeatherImageVisual(w){
-  const version='20260625-v45';
+  const version='20260625-v46';
   const urls=resolveAssetUrl(w.bg,version);
   const stage=document.getElementById('stage');
   const screen=document.querySelector('.mini-crt-screen');
@@ -2648,7 +2662,7 @@ function setupPersonNameHotspots(){
 function setupMiniFrameVideo(){
   const v=document.getElementById('miniFrameVideo');
   if(!v)return;
-  const stamp='?v=20260625-v45';
+  const stamp='?v=20260625-v46';
   const here=location.href.split('#')[0].replace(/[^\/]*$/,'');
   const candidates=[
     here+'assets/videos/mini-frame.mp4'+stamp,
