@@ -2,7 +2,7 @@
 <html lang="zh-Hant">
 <head>
 <meta charset="UTF-8">
-<base href="/DearANG/">
+<base href="./">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate, max-age=0">
 <!-- DearANG v16 KTV stage forced 20260620 -->
@@ -10,7 +10,7 @@
 <!-- DearANG v33 Real Frame Weather World Crop 20260623 -->
 <!-- DearANG v47 based on index(53): calibrated building/person hotspots no cover crop 20260625 -->
 <!-- DearANG v48 KTV Drive preview + page top spacing + invisible building hotspots 20260625 -->
-<title>你和我們的時光｜Dear ANG v48</title>
+<title>摯愛｜Dear ANG </title>
 <style>
 :root{
   --bg:#0b0b0d;
@@ -32,11 +32,11 @@ a{color:inherit}
 .hidden{display:none!important}
 
 /* ===== Gate ===== */
-.gate{position:fixed;inset:0;z-index:50;display:flex;align-items:center;justify-content:center;text-align:center;padding:24px;background:radial-gradient(circle at 50% 28%,rgba(214,168,93,.22),transparent 26%),linear-gradient(180deg,#14100d,#050506);transition:.55s ease}
+.gate{position:fixed;inset:0;z-index:50;display:flex;align-items:center;justify-content:center;text-align:left;padding:24px;background:radial-gradient(circle at 50% 28%,rgba(214,168,93,.22),transparent 26%),linear-gradient(180deg,#14100d,#050506);transition:.55s ease}
 .gate.out{opacity:0;pointer-events:none;transform:scale(1.02)}
-.gate-card{width:min(680px,100%);border:1px solid var(--line);background:rgba(255,248,239,.08);border-radius:30px;padding:34px 22px;backdrop-filter:blur(18px);box-shadow:var(--shadow)}
-.kicker{letter-spacing:.24em;color:#ffd89a;font-weight:900;font-size:12px;margin-bottom:10px}.gate-title{font-size:clamp(32px,8vw,62px);line-height:1.35;font-weight:1000;margin:12px 0;text-shadow:0 4px 24px rgba(0,0,0,.55)}
-.gate-title span{display:block}.gate-title .i1{padding-left:.9em}.gate-title .i2{padding-left:1.8em}.gate-lead{color:var(--muted);line-height:1.9;margin:16px auto 22px;max-width:520px}.tiny{font-size:12px;color:rgba(247,240,230,.54);line-height:1.6}
+.gate-card{width:min(680px,100%);text-align:left;border:1px solid var(--line);background:rgba(255,248,239,.08);border-radius:30px;padding:34px 22px;backdrop-filter:blur(18px);box-shadow:var(--shadow)}
+.kicker{letter-spacing:.24em;color:#ffd89a;font-weight:900;font-size:12px;margin-bottom:10px}.gate-title{font-size:clamp(32px,8vw,62px);line-height:1.35;font-weight:1000;margin:12px 0;text-shadow:0 4px 24px rgba(0,0,0,.55);text-align:left}
+.gate-title span{display:block}.gate-title .i1{padding-left:1.8em}.gate-title .i2{padding-left:3.6em}.gate-lead{color:var(--muted);line-height:1.9;margin:16px auto 22px;max-width:520px}.tiny{font-size:12px;color:rgba(247,240,230,.54);line-height:1.6}
 
 /* ===== World ===== */
 .world{height:100svh;display:flex;flex-direction:column;background:linear-gradient(180deg,#100f0f,#050506)}
@@ -1181,8 +1181,8 @@ a{color:inherit}
 /* 天氣資訊：x 60–655 / y 1204–1269 */
 .mini-weather-status{position:absolute!important;z-index:6!important;left:5.5556%!important;top:41.8056%!important;width:55.0926%!important;height:2.2569%!important;color:rgba(76,43,22,.82)!important;background:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;padding:0!important;text-align:left!important;font-size:clamp(7px,1.08vw + .13rem,12px)!important;line-height:1.28!important;font-weight:900!important;text-shadow:0 1px 0 rgba(255,247,220,.48)!important;pointer-events:none!important;backdrop-filter:none!important;overflow:hidden!important;}
 /* 給阿明的話：H 1750 up（從 y=1750 開始往下） */
-.frame-letter-card{position:absolute!important;z-index:5!important;left:22.7778%!important;top:60.7639%!important;width:59.5370%!important;height:35.4861%!important;margin:0!important;padding:0!important;overflow:hidden!important;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;backdrop-filter:none!important;color:#4b2b16!important;text-align:left!important;}
-.frame-letter-text{width:100%!important;height:100%!important;overflow:hidden!important;color:#4b2b16!important;font-size:clamp(7px,1.22vw + .16rem,13px)!important;line-height:1.56!important;font-weight:760!important;letter-spacing:.01em!important;text-shadow:0 1px 0 rgba(255,247,220,.36)!important;font-family:"Noto Serif TC","Noto Sans TC",serif!important;}
+.frame-letter-card{position:absolute!important;z-index:5!important;left:22.7778%!important;top:58.7639%!important;width:59.5370%!important;height:35.4861%!important;margin:0!important;padding:0!important;overflow:hidden!important;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;backdrop-filter:none!important;color:#4b2b16!important;text-align:left!important;}
+.frame-letter-text{width:100%!important;height:100%!important;overflow:hidden!important;color:#4b2b16!important;font-size:clamp(12px,21.22vw + .16rem,13px)!important;line-height:1.56!important;font-weight:760!important;letter-spacing:.01em!important;text-shadow:0 1px 0 rgba(255,247,220,.36)!important;font-family:"Noto Serif TC","Noto Sans TC",serif!important;}
 /* radio 座標：播放 x708–768/y1450–1505；停止 x807–867/y1450–1505 */
 .radio-audio-hit{position:absolute!important;z-index:9!important;top:50.3472%!important;width:5.5556%!important;height:1.9097%!important;min-height:0!important;padding:0!important;margin:0!important;border-radius:50%!important;display:grid!important;place-items:center!important;background:rgba(255,244,214,.12)!important;border:1px solid rgba(68,38,18,.18)!important;box-shadow:none!important;color:#251307!important;text-shadow:0 1px 0 rgba(255,248,220,.35)!important;cursor:pointer!important;backdrop-filter:none!important;}
 .radio-audio-play{left:65.5556%!important;}.radio-audio-stop{left:74.7222%!important;}
@@ -1192,7 +1192,7 @@ a{color:inherit}
 .person-tag-hotspot::before{content:attr(data-name);position:absolute;left:50%;bottom:100%;transform:translateX(-50%) translateY(-8px);white-space:nowrap;padding:7px 11px;border-radius:999px;background:rgba(0,0,0,.64);border:1px solid rgba(255,216,154,.25);color:#ffd89a;font-size:12px;font-weight:1000;letter-spacing:.05em;opacity:0;pointer-events:none;backdrop-filter:blur(10px);box-shadow:0 12px 28px rgba(0,0,0,.26);}
 .person-tag-hotspot:hover,.person-tag-hotspot:focus,.person-tag-hotspot.show-name{background:rgba(255,216,154,.08);border-color:rgba(255,216,154,.45);}.person-tag-hotspot:hover::before,.person-tag-hotspot:focus::before,.person-tag-hotspot.show-name::before{opacity:1;}
 .person-1{left:43.8%;top:63.5%;}.person-2{left:48.9%;top:63.2%;}.person-3{left:13.5%;top:68.2%;}.person-4{left:90.5%;top:67.5%;width:8.4%;}
-@media(max-width:560px){.gate-title{margin-left:auto!important;margin-right:auto!important;font-size:clamp(34px,10vw,54px)!important}.gate-song-credit .credit-meta-line{gap:8px;font-size:12px}.mini-crt-scene{width:96vw!important}.frame-letter-text{font-size:clamp(7px,2.05vw,9.6px)!important;line-height:1.48!important}.mini-weather-status{font-size:clamp(6.5px,1.75vw,8.6px)!important}.radio-audio-hit span{font-size:clamp(12px,4.1vw,20px)!important;}}
+@media(max-width:560px){.gate-title{margin-left:auto!important;margin-right:auto!important;font-size:clamp(34px,10vw,54px)!important}.gate-song-credit .credit-meta-line{gap:8px;font-size:12px}.mini-crt-scene{width:96vw!important}.frame-letter-text{font-size:clamp(12px,8vw,12px)!important;line-height:1.48!important}.mini-weather-status{font-size:clamp(6.5px,1.75vw,8.6px)!important}.radio-audio-hit span{font-size:clamp(12px,4.1vw,20px)!important;}}
 
 
 /* ===== v45：小世界/主街共用同一個天氣狀態；圖片缺檔也不空白 ===== */
@@ -1257,12 +1257,12 @@ a{color:inherit}
   border-radius:inherit!important;
 }
 /* 六棟建築物：依目前主街圖實際位置重新校正 */
-#stage .h-photo{left:6.0%!important;top:54.0%!important;width:14.0%!important;height:26.5%!important;}
-#stage .h-video{left:22.0%!important;top:57.2%!important;width:13.5%!important;height:25.8%!important;}
-#stage .h-home {left:36.6%!important;top:54.4%!important;width:12.8%!important;height:25.8%!important;}
-#stage .h-music{left:52.0%!important;top:57.3%!important;width:13.0%!important;height:25.7%!important;}
-#stage .h-food {left:68.0%!important;top:54.2%!important;width:13.0%!important;height:25.8%!important;}
-#stage .h-nav  {left:81.4%!important;top:57.2%!important;width:13.0%!important;height:25.8%!important;}
+#stage .h-photo{left:12%!important;top:24%!important;width:14%!important;height:47%!important;}
+#stage .h-video{left:26%!important;top:24%!important;width:14%!important;height:47%!important;}
+#stage .h-home {left:40%!important;top:24%!important;width:17%!important;height:47%!important;}
+#stage .h-music{left:57%!important;top:24%!important;width:15%!important;height:47%!important;}
+#stage .h-food {left:72%!important;top:24%!important;width:11%!important;height:47%!important;}
+#stage .h-nav  {left:83%!important;top:24%!important;width:12%!important;height:47%!important;}
 /* 人物熱區改成左到右的小圈，不再用舊座標 */
 #stage .person-tag-hotspot{
   z-index:9!important;
@@ -1348,6 +1348,450 @@ a{color:inherit}
   pointer-events:none;
 }
 
+
+/* ===== v49：訪客登記修正｜可送出、可關閉、可滑動，不再卡死 APP ===== */
+.visitor-identity-modal{
+  z-index:9999!important;
+  display:flex!important;
+  align-items:flex-start!important;
+  justify-content:center!important;
+  overflow-y:auto!important;
+  overflow-x:hidden!important;
+  -webkit-overflow-scrolling:touch!important;
+  overscroll-behavior:contain!important;
+  touch-action:pan-y!important;
+  padding:calc(18px + env(safe-area-inset-top)) 14px calc(22px + env(safe-area-inset-bottom))!important;
+}
+.visitor-identity-modal.hidden{display:none!important;}
+.visitor-identity-card{
+  position:relative!important;
+  max-height:none!important;
+  overflow:visible!important;
+  margin:auto 0!important;
+  touch-action:pan-y!important;
+}
+.visitor-identity-close{
+  position:absolute!important;
+  top:10px!important;
+  right:10px!important;
+  z-index:3!important;
+  width:38px!important;
+  height:38px!important;
+  padding:0!important;
+  display:grid!important;
+  place-items:center!important;
+  border-radius:999px!important;
+  background:rgba(255,255,255,.10)!important;
+  border:1px solid rgba(255,255,255,.16)!important;
+  box-shadow:none!important;
+  color:#fff7e8!important;
+  font-size:20px!important;
+  line-height:1!important;
+}
+.visitor-identity-actions{position:sticky!important;bottom:0!important;padding-top:10px!important;background:linear-gradient(180deg,rgba(18,13,10,0),rgba(18,13,10,.94) 32%,rgba(18,13,10,.98))!important;z-index:2!important;}
+.visitor-identity-card input,
+.visitor-identity-card select,
+.visitor-identity-card textarea{font-size:16px!important;}
+@media(max-height:760px), (max-width:520px){
+  .visitor-identity-modal{align-items:flex-start!important;padding-top:calc(10px + env(safe-area-inset-top))!important;}
+  .visitor-identity-card{width:min(94vw,460px)!important;max-height:calc(100svh - 24px - env(safe-area-inset-top) - env(safe-area-inset-bottom))!important;overflow-y:auto!important;-webkit-overflow-scrolling:touch!important;padding:20px 16px 16px!important;}
+  .visitor-identity-card h2{font-size:22px!important;padding-right:36px!important;}
+  .visitor-identity-card p{font-size:13px!important;line-height:1.65!important;margin-bottom:10px!important;}
+  .visitor-identity-actions{flex-direction:column!important;gap:8px!important;}
+  .visitor-identity-actions button{min-height:44px!important;}
+  .visitor-identity-small{font-size:11px!important;}
+}
+
+
+
+/* ===== v50 手機寬邊更貼齊 ===== */
+.mini-world{padding-left:0!important;padding-right:0!important;}
+.mini-crt-scene{width:min(100vw,620px)!important;max-width:100vw!important;margin-left:auto!important;margin-right:auto!important;}
+@media(max-width:760px){.mini-crt-scene{width:100vw!important;max-width:100vw!important;}}
+
+
+
+/* ===== v51：邊界貼齊 + 放大鏡 2 倍寬，不用手勢縮放 ===== */
+html,body{
+  overscroll-behavior:none!important;
+  touch-action:pan-x pan-y!important;
+}
+
+/* 橫向滑動的地方：貼滿上下邊，不留上下空白 */
+.world,
+.world .scroller{
+  height:100dvh!important;
+  min-height:100dvh!important;
+  padding-top:0!important;
+  padding-bottom:0!important;
+}
+.world .stage{
+  margin-top:0!important;
+  margin-bottom:0!important;
+  height:100dvh!important;
+  min-height:100dvh!important;
+  border-radius:0!important;
+}
+
+/* 直向滑動的地方：貼滿左右邊，不留左右邊距 */
+.page,
+.page.show,
+.page-body,
+.page-body>.section,
+.page-body>.hero-card{
+  max-width:none!important;
+}
+.page-body{
+  width:100vw!important;
+  padding-left:0!important;
+  padding-right:0!important;
+}
+.page-body>.section,
+.page-body>.hero-card{
+  margin-left:0!important;
+  margin-right:0!important;
+  border-left:0!important;
+  border-right:0!important;
+  border-radius:0!important;
+}
+
+/* 小世界是直向滑動：左右貼邊 */
+.mini-world{
+  padding-left:0!important;
+  padding-right:0!important;
+}
+.mini-crt-scene{
+  width:100vw!important;
+  max-width:100vw!important;
+  margin-left:0!important;
+  margin-right:0!important;
+}
+
+/* 放大鏡按下後：目前畫面寬度變 2 倍，靠滑動看，不靠手勢縮放 */
+body.view-zoom-2x .mini-world .mini-crt-scene{
+  width:200vw!important;
+  max-width:200vw!important;
+}
+body.view-zoom-2x .world .stage{
+  width:470vw!important;
+  max-width:none!important;
+  min-width:2960px!important;
+}
+body.view-zoom-2x .page-body{
+  width:200vw!important;
+  max-width:200vw!important;
+}
+body.view-zoom-2x #zoomBtn{
+  background:linear-gradient(135deg,var(--gold),#b98034)!important;
+  color:#fff!important;
+  box-shadow:0 0 0 3px rgba(214,168,93,.22)!important;
+}
+#zoomBtn{
+  font-size:18px!important;
+}
+
+/* 手機上確保貼齊 */
+@media(max-width:760px){
+  .world .stage{
+    margin:0!important;
+    height:100dvh!important;
+    min-height:100dvh!important;
+  }
+  .page-body{
+    width:100vw!important;
+  }
+  body.view-zoom-2x .page-body{
+    width:200vw!important;
+  }
+}
+
+
+
+/* ===== v52：木框下面天氣字放大 + 亮色發光 ===== */
+.mini-weather-status{
+  color:#fff4c9!important;
+  background:rgba(38,23,8,.38)!important;
+  border:1px solid rgba(255,216,154,.46)!important;
+  border-radius:14px!important;
+  box-shadow:
+    0 0 16px rgba(255,216,154,.18),
+    inset 0 0 12px rgba(255,248,220,.08)!important;
+  padding:5px 8px!important;
+  font-size:clamp(11px,1.45vw + .24rem,18px)!important;
+  line-height:1.22!important;
+  font-weight:1000!important;
+  letter-spacing:.02em!important;
+  text-shadow:
+    0 0 8px rgba(255,216,154,.92),
+    0 2px 4px rgba(0,0,0,.88)!important;
+  overflow:hidden!important;
+  backdrop-filter:blur(5px)!important;
+}
+
+/* 手機版再亮一點、可讀性高一點 */
+@media(max-width:760px){
+  .mini-weather-status{
+    font-size:clamp(10.5px,2.35vw,14.5px)!important;
+    line-height:1.22!important;
+    color:#fff7d6!important;
+    text-shadow:
+      0 0 7px rgba(255,216,154,.95),
+      0 2px 4px rgba(0,0,0,.92)!important;
+  }
+}
+
+
+
+/* ===== v53：相簿儀式感｜移除打開按鈕，展開後鎖左右滑 ===== */
+.album-open{
+  display:none!important;
+}
+.album-card{
+  touch-action:pan-y!important;
+}
+.album-card:not(.expanded){
+  cursor:pointer;
+}
+.album-card.expanded{
+  cursor:default;
+}
+.album-carousel.album-locked{
+  overflow-x:hidden!important;
+  scroll-snap-type:none!important;
+  touch-action:pan-y!important;
+}
+.album-carousel.album-locked .album-card{
+  flex-basis:calc(100vw - 28px)!important;
+}
+.album-card.expanded .album-summary{
+  padding-bottom:10px!important;
+}
+.album-card.expanded .album-detail{
+  touch-action:pan-y!important;
+}
+.album-ritual-hint{
+  display:none;
+  margin:8px 14px 12px;
+  padding:8px 11px;
+  border-radius:999px;
+  background:rgba(0,0,0,.32);
+  border:1px solid rgba(255,216,154,.18);
+  color:rgba(255,248,220,.78);
+  font-size:12px;
+  font-weight:1000;
+  text-align:center;
+}
+.album-card.expanded .album-ritual-hint{
+  display:block;
+}
+
+
+
+/* ===== v54：夜間固定 night-rain，小世界不再因缺圖變空白 ===== */
+#stage.stage-weather-fallback .stage-world-img,
+.mini-crt-screen.weather-fallback .mini-world-bg{
+  opacity:1!important;
+  filter:saturate(1.02) contrast(1.03) brightness(.72)!important;
+}
+#stage.stage-weather-fallback[data-weather-key="nightRain"] .stage-world-img,
+.mini-crt-screen.weather-fallback[data-weather-key="nightRain"] .mini-world-bg{
+  filter:saturate(1.08) contrast(1.08) brightness(.55) sepia(.06)!important;
+}
+#stage.stage-weather-fallback[data-weather-key="nightRain"]::before,
+.mini-crt-screen.weather-fallback[data-weather-key="nightRain"]::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:2;
+  pointer-events:none;
+  background:
+    repeating-linear-gradient(112deg,rgba(255,255,255,0) 0 10px,rgba(255,255,255,.25) 11px 12px,rgba(255,255,255,0) 13px 22px),
+    linear-gradient(180deg,rgba(2,12,34,.44),rgba(0,0,0,.20));
+  animation:v29Rain .42s linear infinite;
+  mix-blend-mode:screen;
+}
+.mini-crt-screen.weather-fallback[data-weather-key="nightRain"] .mini-world-weather{
+  opacity:.75!important;
+}
+
+
+
+/* ===== v55：天氣行短版，避免內容太多 ===== */
+.mini-weather-status{
+  white-space:nowrap!important;
+  text-overflow:ellipsis!important;
+}
+
+
+/* ===== v56 開場標題：三行靠左，慢慢往右形成梯形 ===== */
+.gate-card{
+  text-align:left!important;
+}
+.gate-title{
+  width:max-content!important;
+  max-width:100%!important;
+  margin:12px 0 10px!important;
+  text-align:left!important;
+  display:block!important;
+  line-height:1.35!important;
+  font-size:clamp(32px,8vw,62px)!important;
+  font-weight:1000!important;
+  letter-spacing:.03em!important;
+  text-shadow:0 4px 24px rgba(0,0,0,.55)!important;
+}
+.gate-title span{
+  display:block!important;
+  margin:0!important;
+  padding-left:0!important;
+}
+.gate-title .i1{
+  padding-left:.65em!important;
+}
+.gate-title .i2{
+  padding-left:1.3em!important;
+}
+@media(max-width:560px){
+  .gate-title{
+    margin-left:0!important;
+    margin-right:auto!important;
+    font-size:clamp(34px,10vw,54px)!important;
+  }
+  .gate-title .i1{
+    padding-left:.62em!important;
+  }
+  .gate-title .i2{
+    padding-left:1.24em!important;
+  }
+}
+
+
+/* ===== 整體文字平均放大 ===== */
+body{
+  font-size: 18px !important;
+  line-height: 1.75 !important;
+}
+
+/* 一般段落、按鈕、卡片文字同步偏大 */
+p,
+button,
+.card,
+.card p,
+.section,
+.section p,
+.memory,
+.memory p,
+.story,
+.story p,
+.note,
+.note p{
+  font-size: 1.08em !important;
+  line-height: 1.75 !important;
+}
+
+/* ===== Letter text 加粗加大 ===== */
+.letter-text,
+.letterText,
+.letter text,
+#letter-text{
+  font-size: clamp(22px, 4.6vw, 34px) !important;
+  line-height: 1.85 !important;
+  font-weight: 800 !important;
+  letter-spacing: .04em !important;
+}
+
+/* Letter 裡面的段落也一起吃到 */
+.letter-text p,
+.letterText p,
+#letter-text p{
+  font-size: inherit !important;
+  line-height: inherit !important;
+  font-weight: inherit !important;
+}
+
+/* 手機版再稍微放大，但不要爆版 */
+@media (max-width: 768px){
+  body{
+    font-size: 18px !important;
+  }
+
+  .letter-text,
+  .letterText,
+  #letter-text{
+    font-size: clamp(23px, 5.4vw, 32px) !important;
+  }
+}
+
+
+
+
+/* ===== v49 字體整體放大＋FRAME Letter text 真正加粗加大 20260626 ===== */
+html,
+/* ===== 整體文字密集排版設定 ===== */
+body {
+  font-size: 16px !important;
+  line-height: 1.45 !important; /* 大幅縮小行距 (原本為 1.75 或 1.8) */
+  letter-spacing: -0.02em !important; /* 微調縮小字與字之間的距離 */
+}
+
+p, .story, .note, .capsule-msg, .route-body p {
+  font-size: 1.05em !important;
+  line-height: 1.45 !important; /* 縮小段落行距 */
+  letter-spacing: -0.01em !important; 
+  text-align: justify !important; /* 強制左右對齊，消除右側參差不齊的空白，視覺更密集 */
+}
+
+button, .pill {
+  font-size: 1.05em !important;
+}
+
+/* 針對「給阿明的信」等主要文字區塊調整 */
+/* 針對「給阿明的信」等主要文字區塊調整 (字體微調縮小、保持密集) */
+.letter-text, .frame-letter-text {
+  font-size: clamp(14px, 3.5vw, 19px) !important; /* 縮小基準值與最大值 */
+  line-height: 1.5 !important; 
+  font-weight: 700 !important;
+  letter-spacing: 0em !important; 
+  text-align: justify !important;
+}
+
+@media (max-width: 768px) {
+  .letter-text, .frame-letter-text {
+    font-size: clamp(13px, 4vw, 16px) !important; /* 手機版字體進一步微調縮小 */
+  }
+}
+
+/* ===== v56：修正小世界藏寶地圖入口 =====
+   小世界裡左下方那張斜放的藏寶圖是影片/圖片的一部分，
+   本來沒有真正可點擊區，所以按了不會進公路局。 */
+.treasure-map-hit{
+  position:absolute!important;
+  z-index:8!important;
+  left:9.2%!important;
+  top:43.8%!important;
+  width:52.8%!important;
+  height:15.8%!important;
+  min-height:0!important;
+  padding:0!important;
+  margin:0!important;
+  border:0!important;
+  border-radius:14px!important;
+  background:rgba(255,216,154,0)!important;
+  box-shadow:none!important;
+  cursor:pointer!important;
+  -webkit-tap-highlight-color:transparent!important;
+  touch-action:manipulation!important;
+}
+.treasure-map-hit:active{
+  background:rgba(255,216,154,.13)!important;
+  box-shadow:0 0 0 3px rgba(255,216,154,.12)!important;
+}
+#page-nav .route-map-app{
+  background:
+    radial-gradient(circle at 50% 22%,rgba(255,228,150,.26),transparent 34%),
+    linear-gradient(180deg,#5d3a1d,#d9b56d 38%,#8b5628 100%)!important;
+}
+
+
 </style>
 </head>
 <body>
@@ -1355,7 +1799,11 @@ a{color:inherit}
 <div class="gate" id="gate">
   <div class="gate-card">
     <div class="kicker">DEAR ANG MEMORY WORLD</div>
-    <div class="gate-title"><span>想見你.</span><span class="i1">想見你..</span><span class="i2">想見你了….</span></div>
+    <div class="gate-title" aria-label="想見你標題">
+      <span>想見你.</span>
+      <span class="i1">想見你..</span>
+      <span class="i2">想見你了….</span>
+    </div>
     <div class="gate-song-credit" aria-label="主題曲資訊">
       <div class="credit-kicker">Theme Song</div>
       <div class="credit-title">【 給安格 • Dear ANG 】</div>
@@ -1370,7 +1818,7 @@ a{color:inherit}
 <div class="asset-preload-status" id="assetPreloadStatus">準備通往回憶…</div>
 <div class="opening-countdown" id="openingCountdown" aria-live="polite">
   <div class="opening-countdown-card">
-    <video class="opening-countdown-video" id="openingCountdownVideo" src="assets/videos/opening-countdown.mp4?v=20260620-v21" playsinline preload="auto"></video>
+    <video class="opening-countdown-video" id="openingCountdownVideo" src="assets/videos/opening-countdown.mp4" playsinline preload="auto"></video>
     <div class="opening-video-caption">回憶倒流中 請留意眼淚回流</div>
     <div class="credit-kicker">OPENING COUNTDOWN</div>
     <div class="opening-countdown-title">倒數</div>
@@ -1384,17 +1832,18 @@ a{color:inherit}
 
 <div class="mini-world hidden" id="miniWorld" aria-label="CRT電視小世界">
   <div class="mini-crt-scene">
-    <video class="mini-crt-frame" id="miniFrameVideo" src="assets/videos/mini-frame.mp4?v=20260625-v48" autoplay muted loop playsinline preload="auto" poster="assets/images/mini-frame-poster.png" aria-label="木框影片"></video>
+    <video class="mini-crt-frame" id="miniFrameVideo" src="assets/videos/mini-frame.mp4" autoplay muted loop playsinline preload="auto" poster="assets/images/mini-frame-poster.png" aria-label="木框影片"></video>
     <button class="mini-crt-screen" type="button" onclick="enterMainWorld()" aria-label="點擊木框中間的小世界進入富宜路街道">
       <img src="assets/images/memory-world.png" class="mini-world-bg" id="miniWorldBg" alt="木框裡的Q版小世界">
       <div class="mini-world-weather" id="miniWorldWeather"></div>
       <div class="mini-screen-shine"></div>
       <div class="mini-screen-hint">回到你成長的街道</div>
     </button>
+      <button class="treasure-map-hit" type="button" onclick="openTreasureMapFromMini(event)" aria-label="打開藏寶地圖｜通往他的路"></button>
     <button class="radio-audio-hit radio-audio-play" type="button" onclick="playLetterAudio()" aria-label="播放留言音檔"><span>▶</span></button>
     <button class="radio-audio-hit radio-audio-stop" type="button" onclick="stopLetterAudio()" aria-label="停止留言音檔"><span>■</span></button>
     <audio id="letterAudio" preload="metadata" src="assets/audio/aming-message.mp3"></audio>
-    <div class="mini-weather-status" id="miniWeatherStatus">長眠地實際天氣讀取中…</div>
+    <div class="mini-weather-status" id="miniWeatherStatus">你那邊的天氣：讀取中・--°C・風速 -- km/h</div>
     <section class="frame-letter-card" aria-label="FRAME 下方留言">
       <div class="frame-letter-text">親愛的阿明<br>
 沒想到你就這樣離開了，連一句再見都沒說，即使夏日將至，我還是不願接受，不敢相信。<br><br>
@@ -1417,23 +1866,20 @@ a{color:inherit}
       <button class="icon-btn" onclick="toggleMusic()" id="musicBtn" title="音樂開關" aria-label="音樂開關">♫</button>
       <button class="icon-btn lyric-toggle on" onclick="toggleLyrics()" id="lyricBtn" title="歌詞開關" aria-label="歌詞開關">詞</button>
       <button class="icon-btn" onclick="refreshDataNoReload()" id="dataRefreshBtn" title="重新整理資料（不刷新頁面）" aria-label="重新整理資料，不刷新頁面">↻</button>
+      <button class="icon-btn" onclick="toggleViewZoom()" id="zoomBtn" title="放大 / 還原" aria-label="放大鏡">🔍</button>
       <button class="icon-btn" onclick="smartBack()" id="backBtn" title="返回 / 回上層 / 重播開場" aria-label="返回鍵">🔙</button>
     </div>
   </div>
   <div class="scroller" id="scroller">
     <div class="stage" id="stage">
-      <img class="stage-world-img" id="stageWorldImg" src="assets/images/weather/day-sunny.png?v=20260625-v37" alt="富宜路街道世界">
+      <img class="stage-world-img" id="stageWorldImg" src="assets/images/weather/day-sunny.png" alt="富宜路街道世界">
       <div class="world-weather" id="worldWeather"></div>
-      <div class="person-tag-hotspot person-1" data-name="人物1" tabindex="0" aria-label="人物1"></div>
-      <div class="person-tag-hotspot person-2" data-name="人物2" tabindex="0" aria-label="人物2"></div>
-      <div class="person-tag-hotspot person-3" data-name="人物3" tabindex="0" aria-label="人物3"></div>
-      <div class="person-tag-hotspot person-4" data-name="人物4" tabindex="0" aria-label="人物4"></div>
       <div class="hotspot h-photo" data-label="華光相館｜你和我們的時光" onclick="openPage('photo')"></div>
       <div class="hotspot h-video" data-label="新時代影音館｜影片" onclick="openPage('video')"></div>
-      <div class="hotspot h-home" data-label="富宜路86號｜你家" onclick="openPage('home')"></div>
-      <div class="hotspot h-music" data-label="金嗓卡拉OK｜你唱的歌" onclick="openPage('music')"></div>
+      <div class="hotspot h-home" data-label="富宜路86號｜你唯一的避風港" onclick="openPage('home')"></div>
+      <div class="hotspot h-music" data-label="金嗓卡拉OK｜最想和你一起" onclick="openPage('music')"></div>
       <div class="hotspot h-food" data-label="美而美早餐店｜一起吃過的東西" onclick="openPage('food')"></div>
-      <div class="hotspot h-nav" data-label="公路局｜想你的時候" onclick="openPage('nav')"></div>
+      <div class="hotspot h-nav" data-label="公路局｜想你的時候" onclick="openTreasureMapFromStreet(event)"></div>
     </div>
   </div>
   <div class="hint"><div class="hint-inner"><span>← →</span><div>左右滑這條街<small>點招牌或建築，進入對應的時光。</small></div></div></div>
@@ -1441,8 +1887,9 @@ a{color:inherit}
 
 <audio id="themeAudio" preload="metadata" loop></audio>
 
-<div class="visitor-identity-modal hidden" id="visitorIdentityModal">
-  <div class="visitor-identity-card">
+<div class="visitor-identity-modal hidden" id="visitorIdentityModal" onclick="visitorModalBackdropClose(event)">
+  <div class="visitor-identity-card" onclick="event.stopPropagation()">
+    <button type="button" class="visitor-identity-close" onclick="skipVisitorIdentity()" aria-label="關閉訪客登記">×</button>
     <div class="visitor-identity-kicker">DEAR ANG</div>
     <h2>願意讓我們知道你是誰嗎？</h2>
     <p>
@@ -1472,6 +1919,98 @@ a{color:inherit}
     <textarea id="visitorNoteInput" placeholder="想留一句話也可以，不填也沒關係"></textarea>
 
     <div class="visitor-identity-actions">
+      <button type="button" onclick="saveVisitorIdentity()">送出並關閉</button>
+      <button type="button" class="soft" onclick="skipVisitorIdentity()">先不要</button>
+    </div>
+
+    <div class="visitor-identity-small">
+      這張卡片可以上下滑；右上 ×、背景、或「先不要」都可以關閉。
+    </div>
+  </div>
+</div>
+
+
+<!-- 華光相館｜照片 -->
+<section class="page" id="page-photo">
+  <div class="page-head"><button class="back" onclick="closePage()">← 回到街上</button><b>華光相館｜你的形 和你的影</b></div>
+  <div class="page-body">
+    <div class="hero-card"><img src="assets/images/memory-world.png" alt="華光相館"><div class="hero-text"><h1>你和我們的時光</h1><p></p></div></div>
+    <div class="section folder-hint"><h2></h2><div class="story">01_你和我們的時光<br></div></div>
+    <div class="section"><h2>照片</h2><div id="photoGrid" class="album-mount"><div class="empty">照片載入中…</div></div></div>
+  </div>
+</section>
+<!-- 新時代影音館｜影片 -->
+<section class="page" id="page-video">
+  <div class="page-head"><button class="back" onclick="closePage()">← 回到街上</button><b>新時代影音館｜忘不掉的動態氣息</b></div>
+  <div class="page-body">
+    <div class="hero-card"><img src="assets/images/memory-world.png" alt="新時代影音館"><div class="hero-text"><h1>影音館</h1><p></p></div></div>
+    <div class="section folder-hint"><h2></h2><div class="story">02_影音館<br></div></div>
+    <div class="section"><h2>影片</h2><div class="video-grid" id="videoGrid"><div class=      <div class="hotspot h-photo" data-label="華光相館｜你和我們的時光" onclick="openPage('photo')"></div>
+      <div class="hotspot h-video" data-label="新時代影音館｜影片" onclick="openPage('video')"></div>
+      <div class="hotspot h-home" data-label="富宜路86號｜你家" onclick="openPage('home')"></div>
+      <div class="hotspot h-music" data-label="金嗓卡拉OK｜你唱的歌" onclick="openPage('music')"></div>
+      <div class="hotspot h-food" data-label="美而美早餐店｜一起吃過的東西" onclick="openPage('food')"></div>
+      <div class="hotspot h-nav" data-label="公路局｜想你的時候" onclick="openPage('nav')"></div>
+    </div>
+  </div>
+  <div class="hint"><div class="hint-inner"><span>← →</span><div>向左走向右走<small>每棟建築，都有你存在的痕跡。</small></div></div></div>
+</div>
+
+<audio id="themeAudio" preload="metadata" loop></audio>
+
+<div class="visitor-identity-modal hidden" id="visitorIdentityModal">
+  <div class="visitor-identity-card">
+    <div class="visitor-identity-kicker">DEAR ANG</div>
+    <h2>願意讓我們知道你是誰嗎？</h2>
+    <p>
+      不用登入，也不用密碼。<br>
+      這些資料不會公開顯示，只是讓 Enden 知道，
+      你曾經來看過他。
+    </p>
+
+    <input id="visitorNameInput" type="text" placeholder="你是誰？例如：Lisa / 小藍 / 同學 / 朋友">
+
+<select id="visitorCityInput" onchange="updateVisitorDistrictOptions()">
+  
+  <option value="">你大概在哪個城市？</option>
+  <!-- 北部 -->
+  <option value="基隆市">基隆市</option>
+  <option value="台北市">台北市</option>
+  <option value="新北市">新北市</option>
+  <option value="桃園市">桃園市</option>
+  <option value="新竹市">新竹市</option>
+  <option value="新竹縣">新竹縣</option>
+  <option value="宜蘭縣">宜蘭縣</option>
+  <!-- 中部 -->
+  <option value="苗栗縣">苗栗縣</option>
+  <option value="台中市">台中市</option>
+  <option value="彰化縣">彰化縣</option>
+  <option value="南投縣">南投縣</option>
+  <option value="雲林縣">雲林縣</option>
+  <!-- 南部 -->
+  <option value="嘉義市">嘉義市</option>
+  <option value="嘉義縣">嘉義縣</option>
+  <option value="台南市">台南市</option>
+  <option value="高雄市">高雄市</option>
+  <option value="屏東縣">屏東縣</option>
+  <!-- 東部 -->
+  <option value="花蓮縣">花蓮縣</option>
+  <option value="台東縣">台東縣</option>
+  <!-- 離島 -->
+  <option value="澎湖縣">澎湖縣</option>
+  <option value="金門縣">金門縣</option>
+  <option value="連江縣">連江縣</option>
+  <!-- 其他 -->
+  <option value="其他">其他</option>
+</select>
+
+    <select id="visitorDistrictInput" disabled>
+      <option value="">先選城市，再選區域</option>
+    </select>
+
+    <textarea id="visitorNoteInput" placeholder="想留一句話也可以，不填也沒關係"></textarea>
+
+    <div class="visitor-identity-actions">
       <button type="button" onclick="saveVisitorIdentity()">留下我的名字</button>
       <button type="button" class="soft" onclick="skipVisitorIdentity()">先不要</button>
     </div>
@@ -1487,7 +2026,7 @@ a{color:inherit}
 <section class="page" id="page-photo">
   <div class="page-head"><button class="back" onclick="closePage()">← 回到街上</button><b>華光相館｜你的形 和你的影</b></div>
   <div class="page-body">
-    <div class="hero-card"><img src="assets/images/memory-world.png?v=20260620-v16-bg" alt="華光相館"><div class="hero-text"><h1>你和我們的時光</h1><p></p></div></div>
+    <div class="hero-card"><img src="assets/images/memory-world.png" alt="華光相館"><div class="hero-text"><h1>你和我們的時光</h1><p></p></div></div>
     <div class="section folder-hint"><h2></h2><div class="story">01_你和我們的時光<br></div></div>
     <div class="section"><h2>照片</h2><div id="photoGrid" class="album-mount"><div class="empty">照片載入中…</div></div></div>
   </div>
@@ -1506,7 +2045,7 @@ a{color:inherit}
   <div class="page-head"><button class="back" onclick="closePage()">← 回到街上</button><b>中間公寓｜哥 記得常回家看看
 </b></div>
   <div class="page-body">
-    <div class="hero-card"><img src="assets/images/memory-world.png" alt="中間公寓"><div class="hero-text"><h1>你家</h1><p>想起你，你的樣貌，你的形態， 你英俊臉龐。</p></div></div>
+    <div class="hero-card"><img src="assets/images/memory-world.png" alt="中間公寓"><div class="hero-text"><h1>你家</h1><p>想起你，你的樣貌，你的體溫，和你的臉龐。</p></div></div>
     <div class="section folder-hint"><h2></h2><div class="story">03_你的家<br></div></div>
     <div class="section"><h2>他個人的照片</h2><div id="homePhotoGrid" class="album-mount"><div class="empty">載入中…</div></div></div>
   </div>
@@ -1519,7 +2058,7 @@ a{color:inherit}
       <div class="ktv-tv ktv-tv-machine">
         <div class="ktv-tv-top">金嗓卡拉OK</div>
         <div class="ktv-stage-wrap">
-          <img src="assets/images/ktv-stage.png?v=20260620-v16-stage" alt="卡拉OK電視、麥克風與音響">
+          <img src="assets/images/ktv-stage.png" alt="卡拉OK電視、麥克風與音響">
           <div class="ktv-screen" id="ktvScreen">
             <video id="ktvVideo" controls playsinline preload="none"></video>
             <div class="ktv-audio-visual" id="ktvAudioVisual">
@@ -1543,7 +2082,7 @@ a{color:inherit}
           <h2>遙控器</h2>
           <div class="ktv-display"><span id="ktvDisplay">---</span><small id="ktvSelectedText">尚未選歌</small></div>
           <div class="ktv-remote-photo-wrap" aria-label="卡拉OK遙控器">
-            <img src="assets/images/ktv-remote.png?v=20260620-v16-remote" alt="卡拉OK遙控器">
+            <img src="assets/images/ktv-remote.png" alt="卡拉OK遙控器">
             <button class="ktv-img-hotspot side"  style="left:16.7%;top:11.0%" onclick="ktvRemoteHint('設定功能暫不使用')" aria-label="設定"></button>
             <button class="ktv-img-hotspot side"  style="left:16.7%;top:20.8%" onclick="document.getElementById('ktvSongbook')?.scrollIntoView({behavior:'smooth',block:'center'})" aria-label="菜單"></button>
             <button class="ktv-img-hotspot side"  style="left:16.7%;top:30.6%" onclick="ktvEnter()" aria-label="已點"></button>
@@ -1585,18 +2124,18 @@ a{color:inherit}
 </section>
 <!-- 美而美早餐店｜食物 -->
 <section class="page" id="page-food">
-  <div class="page-head"><button class="back" onclick="closePage()">← 回到街上</button><b>美而美早餐店｜口味很像的我們</b></div>
+  <div class="page-head"><button class="back" onclick="closePage()">← 回到街上</button><b>美而美早餐店｜口味很像的我們。</b></div>
   <div class="page-body">
-    <div class="hero-card"><img src="assets/images/memory-world.png?v=20260620-v16-bg" alt="美而美早餐店"><div class="hero-text"><h1>食物記憶</h1><p>一起吃過的、他喜歡吃的、他推薦你吃的，都由 Google Drive 分類讀取。</p></div></div>
+    <div class="hero-card"><img src="assets/images/memory-world.png" alt="美而美早餐店"><div class="hero-text"><h1>食物記憶</h1><p>一起吃過的、他喜歡吃的、他推薦你吃的，都由 Google Drive 分類讀取。</p></div></div>
     <div class="section folder-hint"><h2></h2><div class="story">05_美而美早餐店<br></div></div>
     <div class="section"><h2>照片</h2><div id="foodPhotoGrid" class="grid"><div class="empty">食物照片載入中…</div></div></div>
   </div>
 </section>
 <!-- 公路局｜導航 -->
 <section class="page" id="page-nav" data-weather="">
-  <div class="page-head"><button class="back" onclick="closePage()">← 回到街上</button><b>公路局｜導航／街景</b></div>
+  <div class="page-head"><button class="back" onclick="closePage()">← 回到街上</button><b>公路局｜當我想見你的時候。</b></div>
   <div class="route-map-app" id="routeMapApp" aria-label="通往他的路｜藏寶圖">
-    <img class="route-map-bg" src="treasure_map_bg.png" alt="藏寶圖背景">
+    <img class="route-map-bg" src="treasure_map_bg.png" alt="藏寶圖背景" onerror="this.onerror=null;this.src='assets/images/treasure_map_bg.png'">
     <svg class="route-svg" viewBox="0 0 2160 3840" preserveAspectRatio="none" aria-hidden="true">
       <path id="routeMapPath" class="route-base" d="M 760 1565 C 560 1240, 430 870, 420 500 C 760 420, 1220 390, 1680 440 C 1640 700, 1585 950, 1510 1140 C 1530 1510, 1545 1860, 1540 2250 C 1450 2680, 1365 3070, 1295 3420" />
       <path id="routeMapDone" class="route-done" d="M 760 1565 C 560 1240, 430 870, 420 500 C 760 420, 1220 390, 1680 440 C 1640 700, 1585 950, 1510 1140 C 1530 1510, 1545 1860, 1540 2250 C 1450 2680, 1365 3070, 1295 3420" />
@@ -1802,7 +2341,7 @@ function toggleLyrics(){
   if(!lyricsEnabled){clearLyricLayer();toast('歌詞彈幕已關閉');}
   else{lastLyricIndex=-1;toast('歌詞彈幕已開啟');}
 }
-function testLyricDanmaku(){spawnLyric('想見你. 想見你.. 想見你… 了….');}
+function testLyricDanmaku(){spawnLyric('想見你. 想見你.. 想見你了….');}
 
 const CONFIG={LOCAL_THEME:'assets/audio/dear-ang-theme.mp3',
   APP_VERSION:'20260620_memory_world_v21_opening_countdown_video_lyrics20',
@@ -2015,7 +2554,7 @@ function preloadImage(src){
   img.src=src;
 }
 function preloadStaticAssets(){
-  ['assets/images/memory-world.png?v=20260620-v17','assets/images/ktv-stage.png?v=20260620-v16-stage','assets/images/ktv-remote.png?v=20260620-v16-remote','assets/images/sixth_tree.jpeg?v=20260620-v17'].forEach(preloadImage);
+  ['assets/images/memory-world.png','assets/images/ktv-remote.png','assets/images/sixth_tree.jpeg'].forEach(preloadImage);
 }
 function preloadFirstDriveAssets(){
   const first=(DATA.photos||[]).slice(0,8);
@@ -2112,7 +2651,7 @@ function timeBasedWeatherKey(){
   if(h>=5 && h<11)return 'sunny';
   if(h>=11 && h<16)return 'hot';
   if(h>=16 && h<18)return 'cloudy';
-  return 'night';
+  return 'nightRain';
 }
 function timeBasedWeatherText(){
   const p=taipeiParts();
@@ -2122,7 +2661,7 @@ function timeBasedWeatherText(){
   if(h>=5 && h<11)return `即時天氣暫時讀取不到，台灣時間 ${hh}:${mm}，先保留早上晴天備援`;
   if(h>=11 && h<16)return `即時天氣暫時讀取不到，台灣時間 ${hh}:${mm}，先保留白天炎熱備援`;
   if(h>=16 && h<18)return `即時天氣暫時讀取不到，台灣時間 ${hh}:${mm}，先保留傍晚多雲備援`;
-  return `即時天氣暫時讀取不到，台灣時間 ${hh}:${mm}，先保留夜晚備援`;
+  return `即時天氣暫時讀取不到，台灣時間 ${hh}:${mm}，先保留夜雨備援`;
 }
 function renderMiniWeatherButtons(){
   const box=document.getElementById('miniWeatherButtons');
@@ -2165,11 +2704,26 @@ function applyWeatherFallbackVisual(w){
   const screen=document.querySelector('.mini-crt-screen');
   const stageImg=document.getElementById('stageWorldImg');
   const miniBg=document.getElementById('miniWorldBg');
-  [stage,screen].forEach(el=>{if(el){el.classList.add('stage-weather-fallback','weather-fallback');el.dataset.weatherKey=w.key;}});
+  const fallbackSrc='assets/images/memory-world.png';
+
+  [stage,screen].forEach(el=>{
+    if(el){
+      el.classList.add('stage-weather-fallback','weather-fallback');
+      el.dataset.weatherKey=w.key;
+    }
+  });
   if(stage)stage.dataset.weatherKey=w.key;
   if(screen)screen.dataset.weatherKey=w.key;
-  if(stageImg){stageImg.removeAttribute('src');stageImg.alt='富宜路街道世界｜'+w.label+'｜圖片缺檔備援';}
-  if(miniBg){miniBg.removeAttribute('src');miniBg.alt='木框裡的Q版小世界｜'+w.label+'｜圖片缺檔備援';}
+
+  // v54：圖檔缺失時不再 remove src，不讓木框變空白；至少保留同一張街景底圖。
+  if(stageImg){
+    if(!stageImg.getAttribute('src'))stageImg.src=fallbackSrc;
+    stageImg.alt='富宜路街道世界｜'+w.label+'｜保留底圖備援';
+  }
+  if(miniBg){
+    if(!miniBg.getAttribute('src'))miniBg.src=fallbackSrc;
+    miniBg.alt='木框裡的Q版小世界｜'+w.label+'｜保留底圖備援';
+  }
 }
 function applyWeatherImageVisual(w){
   const version='20260625-v48';
@@ -2187,7 +2741,7 @@ function applyWeatherImageVisual(w){
     return true;
   }).catch(()=>{
     applyWeatherFallbackVisual(w);
-    setMiniWeatherStatus((document.getElementById('miniWeatherStatus')?.textContent||'')+'｜天氣圖檔缺檔，已用同一套備援底圖');
+    setMiniWeatherStatus((document.getElementById('miniWeatherStatus')?.textContent||'')+'｜天氣圖檔缺檔，已保留底圖並套用夜雨效果');
     return false;
   });
 }
@@ -2220,13 +2774,16 @@ function weatherKeyFromOpenMeteo(c){
   const temp=Number(c.temperature_2m);
   const wind=Number(c.wind_speed_10m);
   const rain=(Number(c.rain)||0)+(Number(c.showers)||0)+(Number(c.precipitation)||0);
+
+  // v54：晚上不要再拿白天陰天圖。夜間一律用 night-rain；避免 night + overcast 變灰/空白。
+  if(!isDay)return 'nightRain';
+
   if(code>=95 || wind>=55)return 'storm';
   if(code>=71 && code<=77)return 'snow';
   if(code===45 || code===48)return 'fog';
-  if(rain>0 || (code>=51&&code<=67) || (code>=80&&code<=82))return isDay?'rain':'nightRain';
+  if(rain>0 || (code>=51&&code<=67) || (code>=80&&code<=82))return 'rain';
   if(code===3)return 'overcast';
-  if(code===2)return isDay?'cloudy':'night';
-  if(!isDay)return 'night';
+  if(code===2)return 'cloudy';
   if(isFinite(temp) && temp>=32)return 'hot';
   return 'sunny';
 }
@@ -2288,7 +2845,137 @@ function enterMainWorld(){
   }
 }
 
-window.addEventListener('load',()=>{centerWorld();setupExperienceLayer();setupPersonNameHotspots();setupMiniFrameVideo();preloadStaticAssets();renderMiniWeatherButtons();setMemoryWeather(memoryWeatherKey);loadLyricsFromRootFiles().finally(()=>setupLyricDanmaku());loadData();setupWeather();renderFood();renderMaps();});
+
+
+/* ===== v51 放大鏡：只用按鈕 2 倍寬，禁用雙指縮放 ===== */
+function toggleViewZoom(){
+  const on = document.body.classList.toggle('view-zoom-2x');
+  const btn = document.getElementById('zoomBtn');
+  if(btn){
+    btn.textContent = on ? '🔎' : '🔍';
+    btn.title = on ? '還原寬度' : '放大成 2 倍寬';
+  }
+  try{
+    if(on){
+      const mini=document.getElementById('miniWorld');
+      if(mini && !mini.classList.contains('hidden')){
+        mini.scrollLeft = Math.max(0, (mini.scrollWidth - mini.clientWidth) / 2);
+      }else{
+        const sc=document.querySelector('.scroller');
+        if(sc) sc.scrollLeft = Math.max(0, (sc.scrollWidth - sc.clientWidth) / 2);
+      }
+    }
+  }catch(e){}
+  toast(on ? '已放大成 2 倍寬' : '已還原寬度');
+}
+(function preventPinchZoom(){
+  window.addEventListener('gesturestart', e=>e.preventDefault(), {passive:false});
+  window.addEventListener('gesturechange', e=>e.preventDefault(), {passive:false});
+  window.addEventListener('gestureend', e=>e.preventDefault(), {passive:false});
+  let lastTouchEnd=0;
+  document.addEventListener('touchend', function(e){
+    const now=Date.now();
+    if(now-lastTouchEnd<=300)e.preventDefault();
+    lastTouchEnd=now;
+  }, {passive:false});
+  document.addEventListener('touchmove', function(e){
+    if(e.touches && e.touches.length>1)e.preventDefault();
+  }, {passive:false});
+})();
+
+
+
+/* ===== v53 相簿儀式感：往上展開後，必須往下收合，才可左右滑 ===== */
+
+function addAlbumRitualHints(){
+  document.querySelectorAll('.album-card').forEach(card=>{
+    if(!card.querySelector('.album-ritual-hint')){
+      const target=card.querySelector('.album-summary')||card;
+      const hint=document.createElement('div');
+      hint.className='album-ritual-hint';
+      hint.textContent='往下滑收合後，才能左右滑到下一本';
+      target.appendChild(hint);
+    }
+  });
+}
+
+function setupAlbumRitualLock(){
+  addAlbumRitualHints();
+  document.querySelectorAll('.album-carousel').forEach(carousel=>{
+    if(carousel.dataset.ritualReady)return;
+    carousel.dataset.ritualReady='1';
+
+    let sx=0, sy=0, activeCard=null, moved=false;
+
+    const lockToCard=(card)=>{
+      if(!card || !carousel)return;
+      carousel.classList.add('album-locked');
+      requestAnimationFrame(()=>{
+        try{ carousel.scrollTo({left:card.offsetLeft-14, behavior:'smooth'}); }catch(e){ carousel.scrollLeft=card.offsetLeft-14; }
+      });
+    };
+
+    const unlock=()=>{
+      carousel.classList.remove('album-locked');
+    };
+
+    carousel.addEventListener('touchstart',e=>{
+      const t=e.touches&&e.touches[0];
+      if(!t)return;
+      sx=t.clientX; sy=t.clientY; moved=false;
+      activeCard=e.target.closest('.album-card');
+    },{passive:true});
+
+    carousel.addEventListener('touchmove',e=>{
+      const t=e.touches&&e.touches[0];
+      if(!t || !activeCard)return;
+      const dx=t.clientX-sx;
+      const dy=t.clientY-sy;
+      if(Math.abs(dx)+Math.abs(dy)<10)return;
+      moved=true;
+
+      // 展開後，左右滑直接阻止，保持儀式感：只能先往下收合
+      if(activeCard.classList.contains('expanded')){
+        if(Math.abs(dx)>Math.abs(dy)){
+          e.preventDefault();
+          lockToCard(activeCard);
+          return;
+        }
+        // 往下滑收合
+        if(dy>42 && Math.abs(dy)>Math.abs(dx)*1.15){
+          activeCard.classList.remove('expanded');
+          unlock();
+          toast('已收合相簿，可以左右滑了');
+          e.preventDefault();
+          return;
+        }
+      }else{
+        // 未展開時，往上滑打開
+        if(dy<-42 && Math.abs(dy)>Math.abs(dx)*1.15){
+          document.querySelectorAll('.album-card.expanded').forEach(c=>c.classList.remove('expanded'));
+          activeCard.classList.add('expanded');
+          lockToCard(activeCard);
+          toast('相簿已打開，往下滑收合後才能左右滑');
+          e.preventDefault();
+          return;
+        }
+      }
+    },{passive:false});
+
+    carousel.addEventListener('click',e=>{
+      const card=e.target.closest('.album-card');
+      if(!card || e.target.closest('.album-slide-btn,.album-thumb,.album-slide,img'))return;
+      if(!moved && !card.classList.contains('expanded')){
+        document.querySelectorAll('.album-card.expanded').forEach(c=>c.classList.remove('expanded'));
+        card.classList.add('expanded');
+        lockToCard(card);
+        toast('相簿已打開，往下滑收合後才能左右滑');
+      }
+    });
+  });
+}
+
+window.addEventListener('load',()=>{centerWorld();setupExperienceLayer();setupPersonNameHotspots();setupMiniFrameVideo();preloadStaticAssets();renderMiniWeatherButtons();setMemoryWeather(memoryWeatherKey);loadLyricsFromRootFiles().finally(()=>setupLyricDanmaku());loadData();setupWeather();renderFood();renderMaps();setupAlbumRitualLock();});
 function enterWorld(){startOpeningMemoryCountdown()}
 function centerWorld(){const sc=document.getElementById('scroller');setTimeout(()=>{sc.scrollLeft=(sc.scrollWidth-sc.clientWidth)/2;},60)}
 function openPage(id){
@@ -2313,7 +3000,7 @@ function closePage(){
 }
 function toast(msg,bad){const t=document.getElementById('toast');t.textContent=msg;t.style.background=bad?'#963232':'#5b3f2f';t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2300)}
 function api(p){return new Promise((res,rej)=>{let cb='cb'+Date.now()+Math.floor(Math.random()*9e4),u=new URL(CONFIG.GAS_API_URL);Object.keys(p).forEach(k=>u.searchParams.set(k,p[k]));u.searchParams.set('callback',cb);u.searchParams.set('_ts',Date.now());u.searchParams.set('v',CONFIG.APP_VERSION);let sc=document.createElement('script'),tm=setTimeout(()=>done(rej,new Error('讀取逾時')),16000);window[cb]=x=>done(res,x);function done(f,v){clearTimeout(tm);delete window[cb];sc.remove();f(v)}sc.onerror=()=>done(rej,new Error('讀取失敗'));sc.src=u;document.head.appendChild(sc)})}
-function loadData(){return api({action:'getMemorialData'}).then(r=>{if(!r.ok)throw Error(r.error||'讀取失敗');DATA=r;DATA.photos=orderPhotos(DATA.photos||flatGroups(DATA.photoGroups||[]));renderDynamic();preloadFirstDriveAssets();if(openingCountdownActive)renderOpeningPhotoDraw();startTheme();return r;}).catch(e=>{renderDynamic();toast('雲端資料讀取失敗，先顯示本機內容',1);return null;})}
+function loadData(){return api({action:'getMemorialData'}).then(r=>{if(!r.ok)throw Error(r.error||'讀取失敗');DATA=r;DATA.photos=orderPhotos(DATA.photos||flatGroups(DATA.photoGroups||[]));renderDynamic();setupAlbumRitualLock();preloadFirstDriveAssets();if(openingCountdownActive)renderOpeningPhotoDraw();startTheme();return r;}).catch(e=>{renderDynamic();toast('雲端資料讀取失敗，先顯示本機內容',1);return null;})}
 function detectAreaKey(text){
   text=String(text||'');
   const areas={
@@ -2456,7 +3143,7 @@ function albumCarouselHtml(folders,area){
       const thumbs=items.slice(0,18).map((p,ti)=>`<button class="album-thumb ${ti===0?'active':''}" id="thumb-${albumId}-${ti}" onclick="setAlbumPhoto('${albumId}',${ti});event.stopPropagation()"><img ${imgAttrs(p)}></button>`).join('');
       return `<article class="album-card" data-album-id="${esc(albumId)}" ontouchstart="albumTouchStart(event)" ontouchend="albumTouchEnd(event)">
         <div class="album-cover" onclick="expandAlbum('${albumId}')"><img ${imgAttrs(cover)}><div class="album-cover-text"><b>${esc(f.label||'相簿')}</b><small>${items.length} 張照片｜往上滑展開</small></div></div>
-        <div class="album-summary"><div class="album-path">${esc(f.path||'主資料夾')}</div><button class="album-open" onclick="expandAlbum('${albumId}')">打開這本相簿</button></div>
+        <div class="album-summary"><div class="album-path">${esc(f.path||'主資料夾')}</div><div class="album-ritual-hint">往下滑收合後，才能左右滑到下一本</div></div>
         <div class="album-detail">
           <div class="album-slide">
             <button class="album-slide-btn prev" onclick="nextAlbumPhoto('${albumId}',-1);event.stopPropagation()">‹</button>
@@ -2904,10 +3591,11 @@ function updateVisitorDistrictOptions(){
 
 function getDearAngDeviceId(){
   const key='dear_ang_private_device_id_v1';
-  let id=localStorage.getItem(key);
+  let id='';
+  try{id=localStorage.getItem(key) || '';}catch(e){}
   if(!id){
     id='DA-' + Date.now().toString(36) + '-' + Math.random().toString(36).slice(2,8).toUpperCase();
-    localStorage.setItem(key,id);
+    try{localStorage.setItem(key,id);}catch(e){}
   }
   return id;
 }
@@ -2949,31 +3637,56 @@ function showVisitorIdentityPrompt(){
   setTimeout(autoPrefillVisitorCity,300);
 }
 
-function skipVisitorIdentity(){
+function closeVisitorIdentityModal(){
   const modal=document.getElementById('visitorIdentityModal');
   if(modal)modal.classList.add('hidden');
-  sendPrivateVisitLog('identity_skipped',{identityStatus:'skipped'});
+}
+
+function visitorModalBackdropClose(ev){
+  if(ev && ev.target && ev.target.id==='visitorIdentityModal')skipVisitorIdentity();
+}
+
+document.addEventListener('keydown',ev=>{
+  if(ev.key==='Escape'){
+    const modal=document.getElementById('visitorIdentityModal');
+    if(modal && !modal.classList.contains('hidden'))skipVisitorIdentity();
+  }
+});
+
+function safeSetVisitorIdentity(data){
+  try{localStorage.setItem('dear_ang_visitor_identity_v1',JSON.stringify(data));return true;}
+  catch(e){return false;}
+}
+
+function skipVisitorIdentity(){
+  closeVisitorIdentityModal();
+  try{sendPrivateVisitLog('identity_skipped',{identityStatus:'skipped'});}catch(e){}
 }
 
 function saveVisitorIdentity(){
-  const name=(document.getElementById('visitorNameInput')?.value || '').trim();
+  const rawName=(document.getElementById('visitorNameInput')?.value || '').trim();
+  const name=rawName || '匿名訪客';
   const city=(document.getElementById('visitorCityInput')?.value || '').trim();
   const district=(document.getElementById('visitorDistrictInput')?.value || '').trim();
   const note=(document.getElementById('visitorNoteInput')?.value || '').trim();
-  if(!name){alert('至少填一下你是誰，之後就不會再跳這個視窗。');return;}
   const data={name,city,district,note,savedAt:new Date().toISOString()};
-  localStorage.setItem('dear_ang_visitor_identity_v1',JSON.stringify(data));
-  sendPrivateVisitLog('identity_saved',{identityStatus:'saved',visitorName:name,visitorCity:city,visitorDistrict:district,visitorNote:note});
-  const modal=document.getElementById('visitorIdentityModal');
-  if(modal)modal.classList.add('hidden');
+  closeVisitorIdentityModal();
+  safeSetVisitorIdentity(data);
+  try{sendPrivateVisitLog('identity_saved',{identityStatus:'saved',visitorName:name,visitorCity:city,visitorDistrict:district,visitorNote:note});}catch(e){}
+  try{toast('訪客登記已送出');}catch(e){}
 }
 
 let dearAngVisitCountThisSession=null;
 function getVisitCount(){
   if(dearAngVisitCountThisSession!==null)return dearAngVisitCountThisSession;
   const key='dear_ang_visit_count_v1';
-  let n=Number(localStorage.getItem(key)||'0') + 1;
-  localStorage.setItem(key,String(n));
+  let n=1;
+  try{
+    n=Number(localStorage.getItem(key)||'0') + 1;
+    localStorage.setItem(key,String(n));
+  }catch(e){
+    n=1;
+  }
   dearAngVisitCountThisSession=n;
   return n;
 }
@@ -3016,6 +3729,32 @@ function askVisitorAfterEnterWorld(){setTimeout(showVisitorIdentityPrompt,800);}
 document.addEventListener('DOMContentLoaded',()=>{sendPrivateVisitLog('enter_site');});
 
 
+
+
+/* ===== v56：藏寶地圖入口保險開啟 ===== */
+function forceInitTreasureRouteMap(){
+  try{
+    if(typeof initRouteMapPage==='function')initRouteMapPage();
+    setTimeout(()=>{try{if(typeof initRouteMapPage==='function')initRouteMapPage();}catch(e){}},120);
+  }catch(e){}
+}
+function openTreasureMapFromMini(event){
+  if(event){event.preventDefault();event.stopPropagation();}
+  try{stopLetterAudio&&stopLetterAudio();}catch(e){}
+  document.body.classList.remove('view-zoom-2x');
+  const mini=document.getElementById('miniWorld');
+  if(mini){mini.classList.add('hidden');mini.classList.remove('zooming');}
+  const world=document.getElementById('world');
+  if(world)world.classList.remove('hidden','hint-muted');
+  openPage('nav');
+  forceInitTreasureRouteMap();
+  try{toast('已打開藏寶地圖');}catch(e){}
+}
+function openTreasureMapFromStreet(event){
+  if(event){event.preventDefault();event.stopPropagation();}
+  openPage('nav');
+  forceInitTreasureRouteMap();
+}
 
 /* ===== v38 公路局單檔內嵌藏寶圖控制 ===== */
 (function(){
@@ -3120,6 +3859,31 @@ document.addEventListener('DOMContentLoaded',()=>{sendPrivateVisitLog('enter_sit
     render(0);
   };
 })();
+
+
+
+/* ===== v55：木框天氣文字強制簡短，只顯示狀態、溫度、風速 ===== */
+function compactMiniWeatherText(){
+  const el=document.getElementById('miniWeatherStatus');
+  if(!el)return;
+  let txt=(el.textContent||'').trim();
+  if(!txt)return;
+  if(txt.includes('你那邊的天氣：'))return;
+
+  const statusMatch=txt.match(/(?:使用：|天氣[:：]?\s*)([^，,｜|。；;]+)|([☀️🌤️☁️🌧️⛈️🌫️🌙❄️][^，,｜|。；;]*)/);
+  const tempMatch=txt.match(/(-?\d+(?:\.\d+)?)\s*°?C/);
+  const windMatch=txt.match(/風速\s*([0-9.]+)\s*(?:km\/h|公里|m\/s)?/i);
+  const status=(statusMatch&&(statusMatch[1]||statusMatch[2])||'讀取中').replace(/^使用[:：]?/,'').trim();
+  const temp=tempMatch?`${tempMatch[1]}°C`:'--°C';
+  const wind=windMatch?`${windMatch[1]} km/h`:'-- km/h';
+  el.textContent=`你那邊的天氣：${status}・${temp}・風速 ${wind}`;
+}
+(function observeMiniWeatherText(){
+  const run=()=>compactMiniWeatherText();
+  window.addEventListener('load',()=>setTimeout(run,500));
+  setInterval(run,1800);
+})();
+
 
 </script>
 </body>
