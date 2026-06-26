@@ -1843,6 +1843,80 @@ button, .pill {
 .album-card.expanded .album-ritual-hint{display:none!important;}
 .album-carousel-hint{opacity:.86!important;}
 
+
+
+/* ===== v58：新 mini-frame 1080×2880 對位 =====
+   上方：留言區 x70 y653 w950 h536
+   下方：小世界影片 x226 y1508 w730 h1208
+*/
+
+/* 外框影片維持整張 1080×2880 滿版 */
+.mini-crt-frame{
+  position:absolute!important;
+  inset:0!important;
+  width:100%!important;
+  height:100%!important;
+  object-fit:cover!important;
+}
+
+/* 下面小世界影片區 */
+.mini-crt-screen{
+  left:20.9259%!important;   /* 226 / 1080 */
+  top:52.3611%!important;    /* 1508 / 2880 */
+  width:67.5926%!important;  /* 730 / 1080 */
+  height:41.9444%!important; /* 1208 / 2880 */
+  border-radius:.4%!important;
+  overflow:hidden!important;
+  z-index:2!important;
+}
+
+/* 上面留言區 */
+.frame-letter-card{
+  left:6.4815%!important;    /* 70 / 1080 */
+  top:22.6736%!important;    /* 653 / 2880 */
+  width:87.9630%!important;  /* 950 / 1080 */
+  height:18.6111%!important; /* 536 / 2880 */
+  padding:20px 24px!important;
+  overflow:hidden!important;
+  z-index:5!important;
+}
+
+/* 留言文字塞進上方留言板 */
+.frame-letter-text{
+  font-size:clamp(12px,3.1vw,17px)!important;
+  line-height:1.42!important;
+  font-weight:720!important;
+  letter-spacing:0!important;
+  color:#4b2b16!important;
+  text-align:justify!important;
+}
+
+/* 藏寶地圖點擊區不要壓到下面影片 */
+.treasure-map-hit{
+  left:9.2%!important;
+  top:43.3%!important;
+  width:52.8%!important;
+  height:8.2%!important;
+  z-index:8!important;
+}
+
+/* 天氣字維持在留言板下方、影片上方 */
+.mini-weather-status{
+  left:5.5556%!important;
+  top:41.8056%!important;
+  width:55.0926%!important;
+  height:2.2569%!important;
+  z-index:6!important;
+}
+
+/* radio 按鈕維持在影片上方 */
+.radio-audio-hit{
+  top:50.3472%!important;
+  z-index:9!important;
+}
+
+
+  
 </style>
 </head>
 <body>
