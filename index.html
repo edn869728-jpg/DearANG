@@ -1845,62 +1845,69 @@ button, .pill {
 
 
 
-/* ===== v58：新 mini-frame 1080×2880 對位 =====
-   上方：留言區 x70 y653 w950 h536
-   下方：小世界影片 x226 y1508 w730 h1208
+/* ===== v59：修正 mini-frame 區塊反了 =====
+   上方白框：影片 / 小世界入口
+   下方紙張：留言
+   右側斜圖：藏寶圖入口
 */
 
-/* 外框影片維持整張 1080×2880 滿版 */
-.mini-crt-frame{
-  position:absolute!important;
-  inset:0!important;
-  width:100%!important;
-  height:100%!important;
-  object-fit:cover!important;
-}
-
-/* 下面小世界影片區 */
+/* 上方影片區：x70 y653 w950 h約536 */
 .mini-crt-screen{
-  left:20.9259%!important;   /* 226 / 1080 */
-  top:52.3611%!important;    /* 1508 / 2880 */
-  width:67.5926%!important;  /* 730 / 1080 */
-  height:41.9444%!important; /* 1208 / 2880 */
+  left:6.4815%!important;     /* 70 / 1080 */
+  top:22.6736%!important;     /* 653 / 2880 */
+  width:87.9630%!important;   /* 950 / 1080 */
+  height:18.6111%!important;  /* 約536 / 2880 */
   border-radius:.4%!important;
   overflow:hidden!important;
   z-index:2!important;
 }
 
-/* 上面留言區 */
+/* 下方紙張留言區：x226 y1508 w730 h1208 */
 .frame-letter-card{
-  left:6.4815%!important;    /* 70 / 1080 */
-  top:22.6736%!important;    /* 653 / 2880 */
-  width:87.9630%!important;  /* 950 / 1080 */
-  height:18.6111%!important; /* 536 / 2880 */
-  padding:20px 24px!important;
+  left:20.9259%!important;    /* 226 / 1080 */
+  top:52.3611%!important;     /* 1508 / 2880 */
+  width:67.5926%!important;   /* 730 / 1080 */
+  height:41.9444%!important;  /* 1208 / 2880 */
+  padding:22px 26px!important;
   overflow:hidden!important;
   z-index:5!important;
+  background:transparent!important;
 }
 
-/* 留言文字塞進上方留言板 */
+/* 留言文字塞進下方紙張 */
 .frame-letter-text{
-  font-size:clamp(12px,3.1vw,17px)!important;
-  line-height:1.42!important;
+  font-size:clamp(13px,3.5vw,18px)!important;
+  line-height:1.48!important;
   font-weight:720!important;
   letter-spacing:0!important;
   color:#4b2b16!important;
   text-align:justify!important;
 }
 
-/* 藏寶地圖點擊區不要壓到下面影片 */
+/* 藏寶圖入口：右邊斜放那張地圖 */
 .treasure-map-hit{
-  left:9.2%!important;
-  top:43.3%!important;
-  width:52.8%!important;
-  height:8.2%!important;
-  z-index:8!important;
+  left:72.5%!important;
+  top:57.8%!important;
+  width:27.5%!important;
+  height:13.8%!important;
+  z-index:10!important;
+  border-radius:18px!important;
+  background:rgba(255,216,154,0)!important;
 }
 
-/* 天氣字維持在留言板下方、影片上方 */
+/* 按到時給一點回饋 */
+.treasure-map-hit:active{
+  background:rgba(255,216,154,.14)!important;
+  box-shadow:0 0 0 3px rgba(255,216,154,.12)!important;
+}
+
+/* radio 播放鍵位置維持 */
+.radio-audio-hit{
+  top:50.3472%!important;
+  z-index:9!important;
+}
+
+/* 天氣字在白框下、收音機上方 */
 .mini-weather-status{
   left:5.5556%!important;
   top:41.8056%!important;
@@ -1909,13 +1916,182 @@ button, .pill {
   z-index:6!important;
 }
 
-/* radio 按鈕維持在影片上方 */
-.radio-audio-hit{
-  top:50.3472%!important;
-  z-index:9!important;
+/* ===== v60：公路局修正｜橫幅不壓地圖、路線更明顯、地標放大置中 ===== */
+
+#page-nav{
+  --dear-topbar-h:58px;
+  --route-head-h:94px;
+  --route-scale:1;
+  --route-pan-x:0px;
+  --route-pan-y:0px;
+  padding-top:0!important;
+  overflow:hidden!important;
+  background:#050403!important;
 }
 
+/* 公路局橫幅固定在上面，不再蓋住地圖 */
+#page-nav.show .page-head{
+  position:fixed!important;
+  top:calc(var(--dear-topbar-h) + env(safe-area-inset-top))!important;
+  left:0!important;
+  right:0!important;
+  height:var(--route-head-h)!important;
+  min-height:var(--route-head-h)!important;
+  z-index:120!important;
+  padding:12px 14px!important;
+  background:linear-gradient(180deg,rgba(86,65,42,.96),rgba(117,98,66,.88))!important;
+  border-bottom:1px solid rgba(255,244,210,.28)!important;
+  box-shadow:0 12px 26px rgba(0,0,0,.22)!important;
+}
 
+/* 地圖從橫幅下面開始，不再疊在一起 */
+#page-nav .route-map-app{
+  position:fixed!important;
+  left:0!important;
+  right:0!important;
+  top:calc(var(--dear-topbar-h) + env(safe-area-inset-top) + var(--route-head-h))!important;
+  bottom:0!important;
+  width:100vw!important;
+  height:auto!important;
+  transform:none!important;
+  overflow:hidden!important;
+  touch-action:pan-y!important;
+}
+
+/* 電腦版維持手機比例置中 */
+@media(min-width:760px){
+  #page-nav .route-map-app{
+    width:min(100vw,540px)!important;
+    left:50%!important;
+    right:auto!important;
+    transform:translateX(-50%)!important;
+  }
+}
+
+/* 讓地圖、路線、地標一起平滑放大移動 */
+#page-nav .route-map-bg,
+#page-nav .route-svg,
+#page-nav #routeSpots{
+  transform-origin:0 0!important;
+  transform:
+    translate3d(var(--route-pan-x), var(--route-pan-y), 0)
+    scale(var(--route-scale))!important;
+  transition:transform 900ms cubic-bezier(.22,1,.36,1)!important;
+  will-change:transform!important;
+}
+
+#page-nav #routeSpots{
+  position:absolute!important;
+  inset:0!important;
+  z-index:8!important;
+  pointer-events:none!important;
+}
+
+#page-nav #routeSpots .route-spot{
+  pointer-events:auto!important;
+}
+
+/* 路線變明顯 */
+#page-nav .route-base{
+  stroke:rgba(83,49,18,.52)!important;
+  stroke-width:28!important;
+}
+
+#page-nav .route-done{
+  stroke:rgba(255,198,48,.88)!important;
+  stroke-width:23!important;
+  filter:
+    drop-shadow(0 0 8px rgba(255,214,80,.75))
+    drop-shadow(0 0 18px rgba(255,177,45,.35))!important;
+}
+
+#page-nav .route-hot{
+  stroke:#fff36d!important;
+  stroke-width:13!important;
+  filter:
+    drop-shadow(0 0 10px rgba(255,255,180,.95))
+    drop-shadow(0 0 24px rgba(255,197,54,.65))
+    drop-shadow(0 0 36px rgba(255,130,25,.32))!important;
+}
+
+/* 光點再明顯一點 */
+#page-nav .route-halo{
+  fill:rgba(255,230,94,.28)!important;
+}
+
+#page-nav .route-ring{
+  fill:rgba(255,184,34,.52)!important;
+  stroke:rgba(255,255,255,1)!important;
+  stroke-width:8!important;
+}
+
+#page-nav .route-core{
+  fill:#fffde0!important;
+  filter:
+    drop-shadow(0 0 12px #fff)
+    drop-shadow(0 0 28px #ffd55a)!important;
+}
+
+/* 卡片滑順，不要突然卡一下 */
+#page-nav .route-story-card{
+  will-change:transform,opacity!important;
+  transition:
+    transform .72s cubic-bezier(.22,1,.36,1),
+    opacity .52s ease,
+    background .42s ease,
+    box-shadow .42s ease,
+    max-height .42s ease!important;
+  transform:translate3d(-34px,-50%,0) scale(.96)!important;
+  backface-visibility:hidden!important;
+}
+
+#page-nav .route-story-card.show,
+#page-nav .route-story-card:hover,
+#page-nav .route-story-card.open{
+  transform:translate3d(0,-50%,0) scale(1)!important;
+}
+
+#page-nav .route-story-card.switching{
+  opacity:.55!important;
+  transform:translate3d(-16px,-50%,0) scale(.985)!important;
+  filter:none!important;
+}
+
+#page-nav .route-story-card.justChanged{
+  animation:routeCardSmoothIn .58s cubic-bezier(.22,1,.36,1) both!important;
+}
+
+@keyframes routeCardSmoothIn{
+  from{
+    opacity:.45;
+    transform:translate3d(22px,-50%,0) scale(.985);
+  }
+  to{
+    opacity:1;
+    transform:translate3d(0,-50%,0) scale(1);
+  }
+}
+
+/* 橫幅下方後，標題/按鈕位置也改成地圖內 */
+#page-nav .route-title-pill{
+  top:14px!important;
+}
+
+#page-nav .route-nav-buttons{
+  top:18px!important;
+}
+
+/* 手機卡片別太大，避免遮住中央地標 */
+@media(max-width:520px){
+  #page-nav .route-story-card{
+    top:66%!important;
+    width:min(56vw,270px)!important;
+  }
+
+  #page-nav .route-story-card.open{
+    width:min(88vw,360px)!important;
+  }
+}
   
 </style>
 </head>
