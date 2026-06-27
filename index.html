@@ -1821,6 +1821,576 @@ button, .pill {
   }
 }
 
+
+/* ===== v57 華光相館同檔內嵌回憶摩天輪：不跳頁，主題曲不中斷 ===== */
+#page-photo.photo-wheel-page{
+  background:radial-gradient(circle at 50% 15%,rgba(255,207,127,.24),transparent 25%),
+             radial-gradient(circle at 50% 64%,rgba(255,116,72,.14),transparent 42%),
+             linear-gradient(180deg,#071024 0%,#15112b 43%,#1d1012 74%,#050505 100%)!important;
+  overflow-y:auto!important;
+  overflow-x:hidden!important;
+}
+#page-photo.photo-wheel-page .page-head b{color:#ffe3a4}
+#page-photo.photo-wheel-page .page-body{
+  width:100%!important;
+  max-width:none!important;
+  padding:0 0 calc(34px + env(safe-area-inset-bottom))!important;
+  margin:0!important;
+}
+.photo-wheel-wrap{
+  position:relative;
+  width:100%;
+  min-height:calc(100svh - 58px);
+  overflow:hidden;
+  padding:24px 0 34px;
+  color:#fff0c8;
+}
+.photo-wheel-wrap:before{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background:
+    radial-gradient(circle at 8% 13%,#ffe2a7 0 1px,transparent 2px),
+    radial-gradient(circle at 23% 7%,rgba(255,226,167,.7) 0 1px,transparent 2px),
+    radial-gradient(circle at 82% 11%,#ffe2a7 0 1px,transparent 2px),
+    radial-gradient(circle at 94% 38%,rgba(255,226,167,.6) 0 1px,transparent 2px),
+    radial-gradient(circle at 70% 31%,rgba(255,226,167,.5) 0 1px,transparent 2px),
+    radial-gradient(circle at 18% 38%,rgba(255,226,167,.5) 0 1px,transparent 2px);
+  opacity:.82;
+}
+.photo-wheel-head{
+  position:relative;
+  z-index:5;
+  text-align:center;
+  padding:12px 72px 0;
+}
+.photo-wheel-title{
+  margin:8px 0 0;
+  color:#ffe4a8;
+  font-size:clamp(38px,9.5vw,72px);
+  line-height:1.05;
+  font-weight:1000;
+  letter-spacing:.08em;
+  text-shadow:0 2px 0 rgba(121,68,26,.9),0 16px 46px rgba(0,0,0,.78),0 0 35px rgba(255,208,122,.22);
+}
+.photo-wheel-sub{
+  margin-top:9px;
+  color:rgba(255,224,166,.9);
+  font-size:13px;
+  font-weight:1000;
+  letter-spacing:.24em;
+}
+.photo-wheel-hint{
+  display:inline-flex;
+  gap:10px;
+  align-items:center;
+  justify-content:center;
+  margin-top:15px;
+  min-width:min(82vw,460px);
+  min-height:46px;
+  padding:10px 20px;
+  border:1px solid rgba(255,222,160,.32);
+  border-radius:999px;
+  background:linear-gradient(180deg,rgba(255,245,220,.16),rgba(255,235,200,.06));
+  box-shadow:0 18px 50px rgba(0,0,0,.34),inset 0 1px 0 rgba(255,255,255,.16);
+  font-size:15px;
+  font-weight:1000;
+  letter-spacing:.12em;
+}
+.photo-wheel-zone{
+  position:relative;
+  z-index:4;
+  width:100%;
+  max-width:760px;
+  height:min(70vh,780px);
+  min-height:570px;
+  margin:2px auto 0;
+}
+.photo-wheel-stage{
+  position:absolute;
+  left:50%;
+  top:43%;
+  width:min(101vw,620px);
+  height:min(101vw,620px);
+  transform:translate(-50%,-50%);
+}
+.photo-wheel-ring{
+  position:absolute;
+  inset:5%;
+  border-radius:50%;
+  border:3px solid rgba(255,207,126,.58);
+  box-shadow:0 0 0 8px rgba(255,207,126,.06),0 0 60px rgba(255,176,80,.30),inset 0 0 72px rgba(255,176,80,.11);
+}
+.photo-wheel-ring:before,
+.photo-wheel-ring:after{
+  content:"";
+  position:absolute;
+  border-radius:50%;
+  border:1px solid rgba(255,207,126,.24);
+}
+.photo-wheel-ring:before{inset:7%}
+.photo-wheel-ring:after{inset:19%}
+.photo-wheel-bulbs{
+  position:absolute;
+  inset:4.4%;
+  border-radius:50%;
+  background:conic-gradient(from 0deg,rgba(255,229,150,.95) 0deg 2deg,transparent 2deg 9deg);
+  -webkit-mask:radial-gradient(farthest-side,transparent calc(100% - 15px),#000 calc(100% - 14px));
+  mask:radial-gradient(farthest-side,transparent calc(100% - 15px),#000 calc(100% - 14px));
+  filter:drop-shadow(0 0 10px rgba(255,213,129,.9));
+  animation:pawPulse 2.4s ease-in-out infinite;
+}
+@keyframes pawPulse{0%,100%{opacity:.72}50%{opacity:1}}
+.photo-wheel-spokes{position:absolute;inset:10%;border-radius:50%}
+.photo-wheel-spokes i{
+  position:absolute;
+  left:50%;
+  top:50%;
+  width:48%;
+  height:2px;
+  transform-origin:left center;
+  background:linear-gradient(90deg,rgba(255,219,145,.92),rgba(255,219,145,.08));
+  box-shadow:0 0 14px rgba(255,209,130,.25);
+}
+.photo-wheel-support{
+  position:absolute;
+  left:50%;
+  top:50%;
+  width:34px;
+  height:43%;
+  z-index:14;
+  pointer-events:none;
+  transform-origin:50% 0;
+  border:1px solid rgba(255,215,143,.42);
+  background:linear-gradient(90deg,rgba(255,235,170,.54),rgba(118,61,25,.80),rgba(255,220,136,.58));
+  box-shadow:0 0 24px rgba(255,186,86,.28),inset 0 0 18px rgba(0,0,0,.34);
+  border-radius:18px 18px 8px 8px;
+}
+.photo-wheel-support.left{transform:translateX(-50%) rotate(24deg)}
+.photo-wheel-support.right{transform:translateX(-50%) rotate(-24deg)}
+.photo-wheel-hub{
+  position:absolute;
+  left:50%;
+  top:50%;
+  width:124px;
+  height:124px;
+  transform:translate(-50%,-50%);
+  border-radius:50%;
+  z-index:28;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  border:2px solid rgba(255,217,143,.74);
+  background:radial-gradient(circle at 50% 28%,rgba(255,229,170,.28),transparent 28%),linear-gradient(180deg,#6a3c1e,#2b1711 70%,#160c0a);
+  box-shadow:0 0 0 7px rgba(255,213,139,.08),0 0 42px rgba(255,190,90,.38),inset 0 2px 18px rgba(255,234,170,.18);
+  text-align:center;
+  color:#ffe3a8;
+}
+.photo-wheel-hub small{font-size:13px;letter-spacing:.16em}
+.photo-wheel-hub strong{font-size:30px;letter-spacing:.1em}
+.photo-wheel-foot{
+  position:absolute;
+  left:50%;
+  top:91%;
+  transform:translateX(-50%);
+  width:min(86vw,540px);
+  height:48px;
+  z-index:16;
+  border-radius:28px 28px 8px 8px;
+  background:linear-gradient(180deg,#b9783b,#4c2918);
+  border:1px solid rgba(255,218,160,.42);
+  box-shadow:0 18px 48px rgba(0,0,0,.42),inset 0 1px 0 rgba(255,236,184,.25);
+}
+.photo-wheel-foot:before{
+  content:"支點平台";
+  position:absolute;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%);
+  color:rgba(255,238,191,.68);
+  font-size:12px;
+  font-weight:1000;
+  letter-spacing:.32em;
+}
+.photo-wheel-boarding{
+  position:absolute;
+  left:50%;
+  top:82%;
+  width:170px;
+  height:82px;
+  transform:translateX(-50%);
+  z-index:45;
+  pointer-events:none;
+  border-radius:42px 42px 12px 12px;
+  background:radial-gradient(circle at 50% 0%,rgba(255,229,150,.38),transparent 42%),linear-gradient(180deg,rgba(255,221,145,.40),rgba(83,43,22,.94));
+  border:1px solid rgba(255,225,170,.48);
+  box-shadow:0 0 42px rgba(255,190,90,.32),inset 0 1px 0 rgba(255,255,255,.22);
+}
+.photo-wheel-boarding:before{
+  content:"開門入口";
+  position:absolute;
+  left:50%;
+  bottom:8px;
+  transform:translateX(-50%);
+  white-space:nowrap;
+  color:#ffe9bc;
+  font-size:12px;
+  font-weight:1000;
+  letter-spacing:.2em;
+  text-shadow:0 2px 12px rgba(0,0,0,.65);
+}
+.photo-wheel-boarding:after{
+  content:"";
+  position:absolute;
+  left:50%;
+  top:14px;
+  width:48px;
+  height:42px;
+  transform:translateX(-50%);
+  border-radius:28px 28px 8px 8px;
+  background:linear-gradient(180deg,#ffe2a4,#8f4a21 62%,#22100a);
+  box-shadow:0 0 20px rgba(255,218,130,.42);
+}
+.photo-wheel-cabin{
+  position:absolute;
+  left:50%;
+  top:50%;
+  width:104px;
+  height:132px;
+  margin-left:-52px;
+  margin-top:-66px;
+  padding:0!important;
+  border:1px solid rgba(255,229,180,.50)!important;
+  border-radius:23px!important;
+  overflow:hidden;
+  background:linear-gradient(180deg,rgba(255,255,255,.20),rgba(255,255,255,.07))!important;
+  box-shadow:0 18px 48px rgba(0,0,0,.48),inset 0 1px 0 rgba(255,255,255,.25)!important;
+  backdrop-filter:blur(13px);
+  transition:transform .85s cubic-bezier(.2,.9,.2,1),opacity .85s,filter .85s,box-shadow .45s;
+  z-index:30;
+}
+.photo-wheel-cabin:before{
+  content:"";
+  position:absolute;
+  left:50%;
+  top:2px;
+  width:18px;
+  height:18px;
+  transform:translate(-50%,-50%);
+  border-radius:50%;
+  background:#ffd98f;
+  box-shadow:0 0 18px rgba(255,217,143,.85);
+  z-index:3;
+}
+.photo-wheel-cabin.active{
+  border-color:rgba(255,238,194,.98)!important;
+  box-shadow:0 26px 64px rgba(0,0,0,.60),0 0 46px rgba(255,201,107,.42),inset 0 1px 0 rgba(255,255,255,.38)!important;
+}
+.photo-wheel-cabin-photo{
+  height:84px;
+  margin:8px 8px 0;
+  border-radius:16px 16px 9px 9px;
+  display:grid;
+  place-items:center;
+  text-align:center;
+  padding:8px;
+  color:rgba(255,245,220,.92);
+  text-shadow:0 4px 12px rgba(0,0,0,.45);
+  font-size:14px;
+  font-weight:1000;
+  letter-spacing:.05em;
+}
+.photo-wheel-cabin-label{
+  height:36px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:13px;
+  font-weight:1000;
+  letter-spacing:.03em;
+  white-space:nowrap;
+  text-shadow:0 5px 12px rgba(0,0,0,.5);
+}
+.photo-wheel-cabin.active .photo-wheel-cabin-label:after{content:"｜開門";color:#ffe2a4}
+.photo-wheel-controls{
+  position:absolute;
+  left:16px;
+  right:16px;
+  top:46%;
+  z-index:70;
+  display:flex;
+  justify-content:space-between;
+  pointer-events:none;
+}
+.photo-wheel-ctrl{
+  pointer-events:auto;
+  width:50px;
+  height:50px;
+  padding:0!important;
+  border-radius:50%!important;
+  border:1px solid rgba(255,225,170,.45)!important;
+  background:rgba(13,8,8,.34)!important;
+  box-shadow:0 12px 36px rgba(0,0,0,.35)!important;
+  backdrop-filter:blur(10px);
+  color:#ffe1a3!important;
+  font-size:28px;
+  font-weight:1000;
+}
+.photo-wheel-info{
+  position:relative;
+  z-index:18;
+  width:min(92vw,640px);
+  margin:-34px auto 12px;
+  border-radius:28px;
+  background:linear-gradient(180deg,rgba(255,249,236,.98),rgba(255,238,207,.98));
+  color:#332016;
+  box-shadow:0 28px 80px rgba(0,0,0,.48),0 -10px 36px rgba(255,190,92,.14);
+  padding:22px 20px 20px 128px;
+  overflow:hidden;
+  min-height:142px;
+}
+.photo-wheel-info:after{
+  content:"目前顯示";
+  position:absolute;
+  right:16px;
+  top:14px;
+  padding:6px 10px;
+  border-radius:999px;
+  background:rgba(45,142,137,.12);
+  color:#217c79;
+  font-size:11px;
+  font-weight:1000;
+  letter-spacing:.16em;
+}
+.photo-wheel-polaroid{
+  position:absolute;
+  left:20px;
+  top:34px;
+  width:86px;
+  height:74px;
+  padding:6px 6px 16px;
+  border-radius:7px;
+  background:#fff7e8;
+  box-shadow:0 12px 26px rgba(95,58,34,.25);
+  transform:rotate(-8deg);
+}
+.photo-wheel-pic{width:100%;height:100%;border-radius:4px}
+.photo-wheel-info h2{
+  margin:28px 0 0;
+  padding-right:76px;
+  display:flex;
+  align-items:center;
+  gap:9px;
+  color:#217c79;
+  font-size:clamp(25px,6vw,40px);
+  line-height:1.08;
+  font-weight:1000;
+  letter-spacing:.06em;
+}
+.photo-wheel-icon{
+  width:34px;
+  height:34px;
+  display:grid;
+  place-items:center;
+  border-radius:50%;
+  background:#2d8e89;
+  color:#fff7df;
+  font-size:17px;
+  flex:0 0 auto;
+}
+.photo-wheel-info p{
+  margin:12px 0 0;
+  color:#3f2b21;
+  font-size:15px;
+  line-height:1.65;
+  font-weight:800;
+  letter-spacing:.03em;
+}
+.photo-wheel-mall{
+  position:relative;
+  z-index:12;
+  width:min(96vw,720px);
+  margin:0 auto;
+  padding:0 10px;
+}
+.photo-wheel-mall-sign{
+  width:min(78vw,460px);
+  margin:0 auto -8px;
+  position:relative;
+  z-index:6;
+  border-radius:15px 15px 6px 6px;
+  border:1px solid rgba(255,225,160,.42);
+  background:linear-gradient(180deg,rgba(115,65,31,.92),rgba(45,24,17,.94));
+  color:#fff0c7;
+  text-align:center;
+  padding:11px 14px 9px;
+  box-shadow:0 16px 34px rgba(0,0,0,.35),0 0 30px rgba(255,183,82,.18);
+}
+.photo-wheel-mall-sign b{display:block;font-size:clamp(28px,7vw,44px);letter-spacing:.06em;line-height:1}
+.photo-wheel-mall-sign small{display:block;margin-top:3px;font-size:11px;letter-spacing:.22em;color:rgba(255,236,192,.8)}
+.photo-wheel-buildings{
+  position:relative;
+  height:210px;
+  display:grid;
+  grid-template-columns:1fr 1.08fr 1.18fr 1.08fr 1fr;
+  gap:4px;
+  align-items:end;
+  padding:36px 0 34px;
+}
+.photo-wheel-building{
+  position:relative;
+  min-height:96px;
+  border:1px solid rgba(255,221,158,.34);
+  background:linear-gradient(180deg,rgba(255,232,177,.18),rgba(129,78,38,.40) 22%,rgba(52,31,24,.95));
+  border-radius:14px 14px 0 0;
+  box-shadow:0 16px 40px rgba(0,0,0,.34),inset 0 1px 0 rgba(255,255,255,.2);
+  overflow:hidden;
+}
+.photo-wheel-building:nth-child(2),
+.photo-wheel-building:nth-child(4){min-height:122px}
+.photo-wheel-building:nth-child(3){min-height:150px;border-radius:24px 24px 0 0}
+.photo-wheel-entry{
+  position:absolute;
+  left:50%;
+  bottom:0;
+  z-index:8;
+  transform:translateX(-50%);
+  display:flex;
+  gap:10px;
+  align-items:center;
+  justify-content:center;
+  width:min(84%,380px);
+  height:48px;
+  padding:7px 10px;
+  border-radius:24px 24px 8px 8px;
+  background:linear-gradient(180deg,rgba(255,228,160,.32),rgba(52,28,19,.96));
+  border:1px solid rgba(255,223,164,.38);
+  box-shadow:0 12px 34px rgba(0,0,0,.38),inset 0 1px 0 rgba(255,255,255,.18);
+}
+.photo-wheel-entry button{
+  min-width:92px;
+  height:30px;
+  padding:0 16px!important;
+  border:1px solid rgba(255,230,180,.45)!important;
+  border-radius:999px!important;
+  background:linear-gradient(180deg,#9d5a2a,#36160f)!important;
+  color:#ffe8b6!important;
+  font-weight:1000;
+  letter-spacing:.22em;
+  box-shadow:0 0 18px rgba(255,187,92,.18)!important;
+}
+.photo-wheel-hidden-grid{display:none!important}
+.photo-wheel-modal{
+  position:fixed;
+  inset:0;
+  z-index:82;
+  display:none;
+  align-items:flex-end;
+  justify-content:center;
+  background:rgba(0,0,0,.60);
+  backdrop-filter:blur(12px);
+}
+.photo-wheel-modal.open{display:flex}
+.photo-wheel-sheet{
+  width:min(100%,720px);
+  max-height:86svh;
+  overflow:auto;
+  border-radius:30px 30px 0 0;
+  border:1px solid rgba(255,225,170,.32);
+  background:linear-gradient(180deg,#17100e,#070606);
+  box-shadow:0 -20px 70px rgba(0,0,0,.5);
+  padding:24px 20px calc(24px + env(safe-area-inset-bottom));
+  color:#ffe9c0;
+}
+.photo-wheel-sheet-head{display:flex;gap:12px;align-items:flex-start;justify-content:space-between}
+.photo-wheel-sheet h2{margin:0;font-size:32px;font-weight:1000;letter-spacing:.08em}
+.photo-wheel-sheet p{margin:8px 0 0;color:rgba(255,234,196,.75);line-height:1.7;font-weight:850}
+.photo-wheel-close{
+  flex:0 0 auto;
+  width:44px;
+  height:44px;
+  padding:0!important;
+  border-radius:50%!important;
+  border:1px solid rgba(255,225,170,.35)!important;
+  background:rgba(255,255,255,.08)!important;
+  box-shadow:none!important;
+  font-size:24px;
+}
+.photo-wheel-grid{
+  margin-top:20px;
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:12px;
+}
+.photo-wheel-tile{
+  min-height:142px;
+  border-radius:22px;
+  overflow:hidden;
+  border:1px solid rgba(255,230,180,.24);
+  position:relative;
+  display:grid;
+  place-items:center;
+  padding:16px;
+  text-align:center;
+  font-weight:1000;
+  color:#fff6de;
+  text-shadow:0 3px 14px rgba(0,0,0,.50);
+}
+.photo-wheel-toast{
+  position:fixed;
+  left:50%;
+  bottom:calc(22px + env(safe-area-inset-bottom));
+  transform:translateX(-50%) translateY(120px);
+  z-index:90;
+  max-width:86vw;
+  padding:12px 18px;
+  border-radius:999px;
+  background:rgba(24,14,12,.82);
+  color:#ffe6b7;
+  border:1px solid rgba(255,225,160,.3);
+  box-shadow:0 14px 42px rgba(0,0,0,.42);
+  transition:.35s;
+  font-weight:1000;
+}
+.photo-wheel-toast.show{transform:translateX(-50%) translateY(0)}
+@media(min-width:761px){
+  .photo-wheel-wrap{padding-top:28px}
+  .photo-wheel-zone{max-width:880px;height:760px}
+  .photo-wheel-stage{width:720px;height:720px}
+  .photo-wheel-cabin{width:126px;height:156px;margin-left:-63px;margin-top:-78px}
+  .photo-wheel-cabin-photo{height:100px}
+  .photo-wheel-cabin-label{height:42px;font-size:15px}
+  .photo-wheel-info{max-width:760px;margin-top:-24px;padding-left:170px;min-height:170px}
+  .photo-wheel-polaroid{left:30px;top:36px;width:112px;height:96px}
+  .photo-wheel-info h2{font-size:44px;margin-top:34px}
+  .photo-wheel-info p{font-size:18px}
+  .photo-wheel-buildings{height:260px}
+  .photo-wheel-grid{grid-template-columns:repeat(3,1fr)}
+  .photo-wheel-tile{min-height:170px}
+}
+@media(max-width:420px){
+  .photo-wheel-head{padding-left:62px;padding-right:62px}
+  .photo-wheel-title{font-size:34px}
+  .photo-wheel-sub{font-size:11px}
+  .photo-wheel-hint{font-size:13px;min-height:42px;letter-spacing:.08em}
+  .photo-wheel-zone{min-height:540px;height:560px}
+  .photo-wheel-stage{width:min(104vw,500px);height:min(104vw,500px)}
+  .photo-wheel-hub{width:100px;height:100px}
+  .photo-wheel-hub strong{font-size:24px}
+  .photo-wheel-cabin{width:92px;height:118px;margin-left:-46px;margin-top:-59px;border-radius:20px!important}
+  .photo-wheel-cabin-photo{height:74px;font-size:12px}
+  .photo-wheel-cabin-label{height:32px;font-size:12px}
+  .photo-wheel-cabin.active .photo-wheel-cabin-label:after{content:"｜開門"}
+  .photo-wheel-info{margin-top:-42px;padding:18px 16px 18px 108px;min-height:132px}
+  .photo-wheel-polaroid{left:18px;top:30px;width:76px;height:66px}
+  .photo-wheel-info h2{font-size:22px;margin-top:20px}
+  .photo-wheel-info p{font-size:13px}
+  .photo-wheel-mall-sign b{font-size:28px}
+  .photo-wheel-buildings{height:180px}
+}
+
 </style>
 </head>
 <body>
@@ -1960,12 +2530,74 @@ button, .pill {
 
 
 <!-- 華光相館｜照片 -->
-<section class="page" id="page-photo">
-  <div class="page-head"><button class="back" onclick="closePage()">← 回到街上</button><b>華光相館｜你的形 和你的影</b></div>
+<section class="page photo-wheel-page" id="page-photo">
+  <div class="page-head"><button class="back" onclick="closePage()">← 回到街上</button><b>華光相館｜回憶摩天輪相簿</b></div>
   <div class="page-body">
-    <div class="hero-card"><img src="assets/images/memory-world.png" alt="華光相館"><div class="hero-text"><h1>你和我們的時光</h1><p></p></div></div>
-    <div class="section folder-hint"><h2></h2><div class="story">01_你和我們的時光<br></div></div>
-    <div class="section"><h2>照片</h2><div id="photoGrid" class="album-mount"><div class="empty">照片載入中…</div></div></div>
+    <section class="photo-wheel-wrap" aria-label="華光相館回憶摩天輪">
+      <header class="photo-wheel-head">
+        <h1 class="photo-wheel-title">回憶摩天輪</h1>
+        <div class="photo-wheel-sub">珍藏回憶・永遠在心</div>
+        <div class="photo-wheel-hint"><span>車廂到下面才開門</span><span>☝</span></div>
+      </header>
+
+      <section class="photo-wheel-zone">
+        <div class="photo-wheel-stage" id="photoWheelStage">
+          <div class="photo-wheel-ring"></div>
+          <div class="photo-wheel-bulbs"></div>
+          <div class="photo-wheel-spokes" id="photoWheelSpokes"></div>
+          <div class="photo-wheel-support left"></div>
+          <div class="photo-wheel-support right"></div>
+          <div class="photo-wheel-foot"></div>
+          <div class="photo-wheel-hub"><span>♥</span><small>我們的</small><strong>回憶</strong></div>
+          <div class="photo-wheel-boarding"></div>
+          <div id="photoWheelCabins"></div>
+        </div>
+        <div class="photo-wheel-controls">
+          <button type="button" class="photo-wheel-ctrl" id="photoWheelPrev" aria-label="上一個相簿">‹</button>
+          <button type="button" class="photo-wheel-ctrl" id="photoWheelNext" aria-label="下一個相簿">›</button>
+        </div>
+      </section>
+
+      <article class="photo-wheel-info">
+        <div class="photo-wheel-polaroid"><div class="photo-wheel-pic" id="photoWheelPic"></div></div>
+        <h2><span class="photo-wheel-icon" id="photoWheelIcon">📷</span><span id="photoWheelTitle">愛的旅程</span><span>♡</span></h2>
+        <p id="photoWheelText">記錄我們一起走過的每個重要時刻。</p>
+      </article>
+
+      <section class="photo-wheel-mall" aria-label="麗寶 Outlet 下方建築">
+        <div class="photo-wheel-mall-sign"><b>麗寶 OUTLET</b><small>LIHPAO OUTLET MALL</small></div>
+        <div class="photo-wheel-buildings">
+          <div class="photo-wheel-building"></div>
+          <div class="photo-wheel-building"></div>
+          <div class="photo-wheel-building"></div>
+          <div class="photo-wheel-building"></div>
+          <div class="photo-wheel-building"></div>
+          <div class="photo-wheel-entry">
+            <button type="button">入口</button>
+            <button type="button">出口</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="section photo-wheel-hidden-grid" aria-hidden="true">
+        <h2>照片</h2>
+        <div id="photoGrid" class="album-mount"><div class="empty">照片載入中…</div></div>
+      </section>
+    </section>
+
+    <div class="photo-wheel-modal" id="photoWheelModal" aria-label="摩天輪主題相簿">
+      <div class="photo-wheel-sheet">
+        <div class="photo-wheel-sheet-head">
+          <div>
+            <h2 id="photoWheelModalTitle">主題相簿</h2>
+            <p id="photoWheelModalDesc"></p>
+          </div>
+          <button type="button" class="photo-wheel-close" id="photoWheelClose" aria-label="關閉">×</button>
+        </div>
+        <div class="photo-wheel-grid" id="photoWheelGrid"></div>
+      </div>
+    </div>
+    <div class="photo-wheel-toast" id="photoWheelToast">已切換主題</div>
   </div>
 </section>
 <!-- 新時代影音館｜影片 -->
@@ -3982,5 +4614,155 @@ function compactMiniWeatherText(){
 
 
 </script>
+
+<script>
+/* ===== v57 華光相館同檔摩天輪：保留 themeAudio 不換頁 ===== */
+(function(){
+  const albums=[
+    {title:'愛的旅程',short:'愛的旅程',icon:'📷',tone:['#63c6b9','#224b57'],text:['記錄我們一起走過的每個重要時刻，','從相遇、相戀到共同築起的未來。','每一張照片，都是愛的證明。']},
+    {title:'童年時光',short:'童年時光',icon:'🌸',tone:['#ff9db6','#7d394a'],text:['有些笑容，是時間也帶不走的光。','把那些天真、可愛、還沒有長大的瞬間，','一格一格收進摩天輪裡。']},
+    {title:'家庭聚會',short:'家庭聚會',icon:'🏠',tone:['#ffcb69','#8b5221'],text:['家人坐在一起的畫面，永遠最溫暖。','那些吃飯、聊天、拍照、團聚的時刻，','都是回憶裡最亮的燈。']},
+    {title:'旅行記憶',short:'旅行記憶',icon:'🧳',tone:['#b98cff','#4a386f'],text:['一起走過的路，不只是地圖上的距離。','每一次出發、等待、抵達和回頭看，','都變成心裡不會消失的風景。']},
+    {title:'知心好友',short:'知心好友',icon:'🤍',tone:['#87d986','#275d35'],text:['有些朋友不是常常說想念，','而是只要想起來，就會覺得心裡很滿。','謝謝你們也把他放在心上。']},
+    {title:'寵物日記',short:'寵物日記',icon:'🐾',tone:['#70c9ff','#234d69'],text:['那些陪伴過日常的小生命，','也一起走進了我們的回憶裡。','牠們的眼神和靠近，都很珍貴。']},
+    {title:'思念長輩',short:'思念長輩',icon:'🕯️',tone:['#f0a85a','#6d351c'],text:['有些愛不會因為時間變遠。','想念會慢慢沉下來，變成溫柔的光。','我們用照片，把那份牽掛留下。']},
+    {title:'成長足跡',short:'成長足跡',icon:'🎓',tone:['#6aa7ff','#273f78'],text:['每一個階段都值得被記住。','那些努力、改變、跌倒又站起來的時候，','都讓今天的我們更靠近心裡的自己。']}
+  ];
+  let cur=0,inited=false,paused=false,timer=null,autoTimer=null,startX=0;
+  function qs(id){return document.getElementById(id)}
+  function esc(s){return String(s||'').replace(/[&<>]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[m]))}
+  function say(s){
+    const t=qs('photoWheelToast');
+    if(!t)return;
+    t.textContent=s;
+    t.classList.add('show');
+    clearTimeout(say.t);
+    say.t=setTimeout(()=>t.classList.remove('show'),1300);
+  }
+  function pause(){
+    paused=true;
+    clearTimeout(timer);
+    timer=setTimeout(()=>paused=false,5200);
+  }
+  function build(){
+    if(inited)return;
+    const spokes=qs('photoWheelSpokes');
+    const cabins=qs('photoWheelCabins');
+    if(!spokes||!cabins)return;
+    for(let i=0;i<20;i++){
+      const e=document.createElement('i');
+      e.style.transform='rotate('+(i*18)+'deg)';
+      spokes.appendChild(e);
+    }
+    albums.forEach((a,i)=>{
+      const b=document.createElement('button');
+      b.type='button';
+      b.className='photo-wheel-cabin';
+      b.dataset.i=i;
+      b.innerHTML='<div class="photo-wheel-cabin-photo" style="background:linear-gradient(135deg,'+a.tone[0]+','+a.tone[1]+')">'+esc(a.short)+'</div><div class="photo-wheel-cabin-label">'+esc(a.short)+' ♡</div>';
+      b.addEventListener('click',()=>{
+        if(i!==cur){
+          cur=i;
+          pause();
+          render();
+          say('車廂移到下方開門口');
+        }else{
+          openAlbum(i);
+        }
+      });
+      cabins.appendChild(b);
+    });
+    const next=qs('photoWheelNext'),prev=qs('photoWheelPrev'),stage=qs('photoWheelStage'),modal=qs('photoWheelModal'),close=qs('photoWheelClose');
+    if(next)next.onclick=()=>{cur=(cur+1)%albums.length;pause();render();};
+    if(prev)prev.onclick=()=>{cur=(cur-1+albums.length)%albums.length;pause();render();};
+    if(stage){
+      stage.addEventListener('touchstart',e=>{startX=e.touches[0].clientX;},{passive:true});
+      stage.addEventListener('touchend',e=>{
+        const d=e.changedTouches[0].clientX-startX;
+        if(Math.abs(d)>42){
+          cur=(cur+(d<0?1:-1)+albums.length)%albums.length;
+          pause();
+          render();
+        }
+      },{passive:true});
+    }
+    if(close)close.onclick=()=>modal&&modal.classList.remove('open');
+    if(modal)modal.onclick=e=>{if(e.target===modal)modal.classList.remove('open');};
+    window.addEventListener('resize',render);
+    autoTimer=setInterval(()=>{if(!paused && qs('page-photo')?.classList.contains('show')){cur=(cur+1)%albums.length;render();}},3600);
+    inited=true;
+    render();
+  }
+  function render(){
+    const stage=qs('photoWheelStage');
+    const bs=[...document.querySelectorAll('#photoWheelCabins .photo-wheel-cabin')];
+    if(!stage||!bs.length)return;
+    const total=bs.length;
+    const w=stage.getBoundingClientRect().width || 620;
+    const r=w*.34;
+    bs.forEach((b,i)=>{
+      const a=albums[i];
+      const off=i-cur;
+      const ang=(off/total)*Math.PI*2+Math.PI/2;
+      const x=Math.cos(ang)*r;
+      const y=Math.sin(ang)*r;
+      const front=Math.sin(ang);
+      const active=i===cur;
+      const scale=active?1.22:Math.max(.72,.84+front*.08);
+      const op=active?1:Math.max(.32,.55+front*.18);
+      const blur=active?0:Math.max(0,1.1-front);
+      b.classList.toggle('active',active);
+      b.style.transform='translate('+x+'px,'+y+'px) scale('+scale+')';
+      b.style.opacity=op;
+      b.style.filter='blur('+blur+'px) brightness('+(active?1.13:.86)+')';
+      b.style.zIndex=active?66:Math.round(20+front*10);
+    });
+    const a=albums[cur];
+    const title=qs('photoWheelTitle'),icon=qs('photoWheelIcon'),text=qs('photoWheelText'),pic=qs('photoWheelPic');
+    if(title)title.textContent=a.title;
+    if(icon)icon.textContent=a.icon;
+    if(text)text.innerHTML=a.text.map(esc).join('<br>');
+    if(pic)pic.style.background='radial-gradient(circle at 72% 20%,rgba(255,250,190,.9) 0 10%,transparent 11%),linear-gradient(180deg,'+a.tone[0]+','+a.tone[1]+' 55%,#160d12)';
+  }
+  function openAlbum(i){
+    const a=albums[i];
+    const modal=qs('photoWheelModal'),mt=qs('photoWheelModalTitle'),md=qs('photoWheelModalDesc'),grid=qs('photoWheelGrid');
+    if(!modal||!grid)return;
+    if(mt)mt.textContent=a.title;
+    if(md)md.textContent=a.text.join('');
+    grid.innerHTML='';
+    for(let n=0;n<6;n++){
+      const tile=document.createElement('div');
+      tile.className='photo-wheel-tile';
+      tile.style.background='linear-gradient(135deg,'+a.tone[0]+','+a.tone[1]+')';
+      tile.textContent=a.short+' '+(n+1);
+      grid.appendChild(tile);
+    }
+    modal.classList.add('open');
+    pause();
+  }
+  window.initPhotoWheel=function(){
+    build();
+    setTimeout(render,40);
+    setTimeout(render,260);
+  };
+  const oldOpenPage=window.openPage;
+  if(typeof oldOpenPage==='function' && !oldOpenPage.__photoWheelWrapped){
+    const wrapped=function(id){
+      const result=oldOpenPage.apply(this,arguments);
+      if(id==='photo')window.initPhotoWheel();
+      return result;
+    };
+    wrapped.__photoWheelWrapped=true;
+    window.openPage=wrapped;
+  }
+  if(document.readyState==='loading'){
+    document.addEventListener('DOMContentLoaded',build);
+  }else{
+    build();
+  }
+})();
+</script>
+
 </body>
 </html>
