@@ -2,7 +2,7 @@
 <html lang="zh-Hant">
 <head>
 <meta charset="UTF-8">
-<base href="./">
+<base href="/DearANG/">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate, max-age=0">
 <!-- DearANG v16 KTV stage forced 20260620 -->
@@ -2924,6 +2924,20 @@ button, .pill {
     margin-left:-63px!important;
     margin-top:-88px!important;
   }
+}
+
+
+/* ===== v70 開場影片結束防卡死：強制切到 miniworld ===== */
+.opening-countdown.v70-force-hide{
+  display:none!important;
+  opacity:0!important;
+  pointer-events:none!important;
+}
+#miniWorld.v70-force-show{
+  display:block!important;
+  opacity:1!important;
+  visibility:visible!important;
+  pointer-events:auto!important;
 }
 
 </style>
@@ -5953,6 +5967,159 @@ function compactMiniWeatherText(){
     wrapped.__v69FastFerris=true;
     window.openPage=wrapped;
   }
+})();
+</script>
+
+
+<script>
+/* ===== v70 開場影片結束防卡死：ended / error / fallback 都會進 miniworld ===== */
+(function(){
+  if(window.__DEAR_ANG_V70_OPENING_FIX__)return;
+  window.__DEAR_ANG_V70_OPENING_FIX__=true;
+
+  let finishing=false;
+  let watchdogTimer=null;
+
+  function clearWatchdog(){
+    if(watchdogTimer){
+      clearTimeout(watchdogTimer);
+      watchdogTimer=null;
+    }
+  }
+
+  function forceShowMiniWorld(){
+    const overlay=document.getElementById('openingCountdown');
+    const gate=document.getElementById('gate');
+    const mini=document.getElementById('miniWorld');
+
+    if(overlay){
+      overlay.classList.add('v70-force-hide');
+      overlay.classList.remove('show','done');
+      overlay.style.display='none';
+      overlay.style.opacity='0';
+      overlay.style.pointerEvents='none';
+    }
+    if(gate){
+      gate.classList.add('hidden','out');
+      gate.style.display='none';
+    }
+    if(mini){
+      mini.classList.remove('hidden','zooming');
+      mini.classList.add('v70-force-show');
+      mini.style.display='block';
+      mini.style.opacity='1';
+      mini.style.visibility='visible';
+    }
+
+    try{ if(typeof renderMiniWeatherButtons==='function')renderMiniWeatherButtons(); }catch(e){}
+    try{ if(typeof setMemoryWeather==='function')setMemoryWeather(typeof memoryWeatherKey!=='undefined'?memoryWeatherKey:'sunny'); }catch(e){}
+    try{ if(typeof setupMiniFrameVideo==='function')setupMiniFrameVideo(); }catch(e){}
+    try{
+      if(typeof setMiniFrameVideoByWeatherReal==='function'){
+        setMiniFrameVideoByWeatherReal(typeof memoryWeatherKey!=='undefined'?memoryWeatherKey:'sunny');
+      }
+    }catch(e){}
+
+    const frameVideo=document.getElementById('miniFrameVideo');
+    if(frameVideo){
+      try{
+        frameVideo.muted=true;
+        frameVideo.loop=true;
+        frameVideo.setAttribute('playsinline','');
+        const p=frameVideo.play();
+        if(p&&p.catch)p.catch(()=>{});
+      }catch(e){}
+    }
+  }
+
+  const oldFinish=window.finishOpeningMemoryCountdown;
+  window.finishOpeningMemoryCountdown=function(){
+    if(finishing)return;
+    finishing=true;
+    clearWatchdog();
+
+    const video=document.getElementById('openingCountdownVideo');
+    try{
+      if(video){
+        video.onended=null;
+        video.onerror=null;
+        video.pause();
+        video.currentTime=0;
+      }
+    }catch(e){}
+
+    try{
+      window.musicWanted=true;
+      const a=document.getElementById('themeAudio');
+      if(a)a.volume=1;
+      if(typeof startTheme==='function')startTheme();
+    }catch(e){}
+
+    setTimeout(function(){
+      forceShowMiniWorld();
+      window.openingCountdownActive=false;
+      finishing=false;
+    },80);
+  };
+
+  const oldStart=window.startOpeningMemoryCountdown;
+  window.startOpeningMemoryCountdown=function(){
+    finishing=false;
+    clearWatchdog();
+
+    try{
+      if(typeof oldStart==='function'){
+        oldStart.apply(this,arguments);
+      }
+    }catch(e){
+      console.warn('DearANG v70 opening start failed, fallback to miniworld:',e);
+      window.finishOpeningMemoryCountdown();
+      return;
+    }
+
+    const video=document.getElementById('openingCountdownVideo');
+    function schedule(ms){
+      clearWatchdog();
+      watchdogTimer=setTimeout(function(){
+        console.warn('DearANG v70 opening watchdog fired');
+        window.finishOpeningMemoryCountdown();
+      },ms);
+    }
+
+    if(video){
+      video.addEventListener('ended',function(){
+        window.finishOpeningMemoryCountdown();
+      },{once:false});
+
+      video.addEventListener('error',function(){
+        window.finishOpeningMemoryCountdown();
+      },{once:false});
+
+      video.addEventListener('loadedmetadata',function(){
+        const d=Number(video.duration);
+        if(isFinite(d) && d>0) schedule(Math.min(Math.max(d*1000+1600,6000),30000));
+      },{once:true});
+
+      if(video.readyState>=1){
+        const d=Number(video.duration);
+        if(isFinite(d) && d>0) schedule(Math.min(Math.max(d*1000+1600,6000),30000));
+        else schedule(12000);
+      }else{
+        schedule(14000);
+      }
+    }else{
+      schedule(12000);
+    }
+  };
+
+  const oldShow=window.showMiniWorld;
+  window.showMiniWorld=function(){
+    try{ forceShowMiniWorld(); }catch(e){}
+    if(typeof oldShow==='function'){
+      try{ oldShow.apply(this,arguments); }catch(e){console.warn('DearANG v70 old showMiniWorld failed:',e);}
+    }
+    forceShowMiniWorld();
+  };
 })();
 </script>
 
