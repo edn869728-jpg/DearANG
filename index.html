@@ -2944,7 +2944,7 @@ button, .pill {
 <script src="https://script.google.com/macros/s/AKfycbzrduB_eXPk6OpqnGPXjNBNQCeUyarzAfki4IL-X_JIVQr7RS9sN5ayyvA2OEaXDXzv/exec?action=getMemorialData&amp;callback=cb178288435872854350&amp;_ts=1782884358729&amp;v=20260620_memory_world_v21_opening_countdown_video_lyrics20"></script></head>
 <body>
 <div class="lyric-danmaku-layer" id="lyricDanmakuLayer" aria-hidden="true"></div>
-<div class="gate out hidden" id="gate">
+<div class="gate" id="gate">
   <div class="gate-card">
     <div class="kicker">DEAR ANG MEMORY WORLD</div>
     <div class="gate-title" aria-label="想見你標題">
@@ -2964,7 +2964,7 @@ button, .pill {
 </div>
 
 <div class="asset-preload-status" id="assetPreloadStatus">準備通往回憶…</div>
-<div class="opening-countdown show done" id="openingCountdown" aria-live="polite">
+<div class="opening-countdown" id="openingCountdown" aria-live="polite">
   <div class="opening-countdown-card">
     <video class="opening-countdown-video" id="openingCountdownVideo" src="assets/videos/opening-countdown.mp4" playsinline="" preload="auto"></video>
     <div class="opening-video-caption">回憶倒流中 請留意眼淚回流</div>
@@ -2978,7 +2978,7 @@ button, .pill {
   </div>
 </div>
 
-<div class="mini-world" id="miniWorld" aria-label="CRT電視小世界">
+<div class="mini-world hidden" id="miniWorld" aria-label="CRT電視小世界">
   <div class="mini-crt-scene">
 <video class="mini-crt-frame" id="miniFrameVideo" src="assets/videos/weather-mini/07-thunderstorm.mp420260627-v56" autoplay="" muted="" loop="" playsinline="" preload="auto" poster="assets/images/mini-frame-poster.webp" aria-label="木框影片" data-weather-frame-key="storm" data-weather-video-base="assets/videos/weather-mini/07-thunderstorm.mp4" data-weather-video-ready="0"></video>
     <div class="mini-crt-screen stage-weather-fallback" aria-label="木框透明入口區" data-weather-default-reason="before-showMiniWorld" data-weather-key="storm">
@@ -3008,7 +3008,7 @@ button, .pill {
 </div>
 
 
-<div class="world hint-muted" id="world" aria-label="你和我們的時光世界">
+<div class="world hidden hint-muted" id="world" aria-label="你和我們的時光世界">
   <div class="topbar">
     <div class="brand"><small>DEAR ANG</small>你和我們的時光</div>
     <div class="top-actions">
@@ -3617,6 +3617,7 @@ function startOpeningMemoryCountdown(){
 function finishOpeningMemoryCountdown(){
   const overlay=document.getElementById('openingCountdown');
   const video=document.getElementById('openingCountdownVideo');
+  const world=document.getElementById('world');
   if(video){try{video.pause();video.currentTime=0;}catch(e){}}
   const gate=document.getElementById('gate');
   musicWanted=true;
@@ -3626,6 +3627,7 @@ function finishOpeningMemoryCountdown(){
   setTimeout(()=>{
     if(overlay){overlay.classList.add('done');setTimeout(()=>overlay.classList.remove('show','done'),360);}
     if(gate)gate.classList.add('hidden');
+    if(world){world.classList.remove('hidden','hint-muted');}
     showMiniWorld();
     openingCountdownActive=false;
   },260);
@@ -4121,7 +4123,7 @@ function setupAlbumRitualLock(){
 window.addEventListener('load',()=>{centerWorld();setupExperienceLayer();setupPersonNameHotspots();setupMiniFrameVideo();preloadStaticAssets();renderMiniWeatherButtons();setMemoryWeather(memoryWeatherKey);loadLyricsFromRootFiles().finally(()=>setupLyricDanmaku());loadData();setupWeather();renderFood();renderMaps();setupAlbumRitualLock();});
 function enterWorld(){
   const gate=document.getElementById('gate');
-  if(gate){gate.classList.remove('hidden','out');}
+  if(gate){gate.classList.remove('hidden');gate.classList.add('out');}
   startOpeningMemoryCountdown();
 }
 function centerWorld(){const sc=document.getElementById('scroller');setTimeout(()=>{sc.scrollLeft=(sc.scrollWidth-sc.clientWidth)/2;},60)}
