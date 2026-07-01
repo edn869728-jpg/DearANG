@@ -31,11 +31,11 @@ a{color:inherit}
 .hidden{display:none!important}
 
 /* ===== Gate ===== */
-.gate{position:fixed;inset:0;z-index:50;display:flex;align-items:center;justify-content:center;text-align:center;padding:24px;background:radial-gradient(circle at 50% 28%,rgba(214,168,93,.22),transparent 26%),linear-gradient(180deg,#14100d,#050506);transition:.55s ease}
+.gate{position:fixed;inset:0;z-index:50;display:flex;align-items:center;justify-content:center;text-align:left;padding:24px;background:radial-gradient(circle at 50% 28%,rgba(214,168,93,.22),transparent 26%),linear-gradient(180deg,#14100d,#050506);transition:.55s ease}
 .gate.out{opacity:0;pointer-events:none;transform:scale(1.02)}
-.gate-card{width:min(680px,100%);border:1px solid var(--line);background:rgba(255,248,239,.08);border-radius:30px;padding:34px 22px;backdrop-filter:blur(18px);box-shadow:var(--shadow)}
-.kicker{letter-spacing:.24em;color:#ffd89a;font-weight:900;font-size:12px;margin-bottom:10px}.gate-title{font-size:clamp(32px,8vw,62px);line-height:1.35;font-weight:1000;margin:12px 0;text-shadow:0 4px 24px rgba(0,0,0,.55)}
-.gate-title span{display:block}.gate-title .i1{padding-left:.9em}.gate-title .i2{padding-left:1.8em}.gate-lead{color:var(--muted);line-height:1.9;margin:16px auto 22px;max-width:520px}.tiny{font-size:12px;color:rgba(247,240,230,.54);line-height:1.6}
+.gate-card{width:min(680px,100%);text-align:left;border:1px solid var(--line);background:rgba(255,248,239,.08);border-radius:30px;padding:34px 22px;backdrop-filter:blur(18px);box-shadow:var(--shadow)}
+.kicker{letter-spacing:.24em;color:#ffd89a;font-weight:900;font-size:12px;margin-bottom:10px}.gate-title{font-size:clamp(32px,8vw,62px);line-height:1.35;font-weight:1000;margin:12px 0;text-shadow:0 4px 24px rgba(0,0,0,.55);text-align:left}
+.gate-title span{display:block}.gate-title .i1{padding-left:1.8em}.gate-title .i2{padding-left:3.6em}.gate-lead{color:var(--muted);line-height:1.9;margin:16px auto 22px;max-width:520px}.tiny{font-size:12px;color:rgba(247,240,230,.54);line-height:1.6}
 
 /* ===== World ===== */
 .world{height:100svh;display:flex;flex-direction:column;background:linear-gradient(180deg,#100f0f,#050506)}
@@ -2941,10 +2941,10 @@ button, .pill {
 }
 
 </style>
-</head>
+<script src="https://script.google.com/macros/s/AKfycbzrduB_eXPk6OpqnGPXjNBNQCeUyarzAfki4IL-X_JIVQr7RS9sN5ayyvA2OEaXDXzv/exec?action=getMemorialData&amp;callback=cb178288435872854350&amp;_ts=1782884358729&amp;v=20260620_memory_world_v21_opening_countdown_video_lyrics20"></script></head>
 <body>
 <div class="lyric-danmaku-layer" id="lyricDanmakuLayer" aria-hidden="true"></div>
-<div class="gate" id="gate">
+<div class="gate out hidden" id="gate">
   <div class="gate-card">
     <div class="kicker">DEAR ANG MEMORY WORLD</div>
     <div class="gate-title" aria-label="想見你標題">
@@ -2964,9 +2964,9 @@ button, .pill {
 </div>
 
 <div class="asset-preload-status" id="assetPreloadStatus">準備通往回憶…</div>
-<div class="opening-countdown" id="openingCountdown" aria-live="polite">
+<div class="opening-countdown show done" id="openingCountdown" aria-live="polite">
   <div class="opening-countdown-card">
-    <video class="opening-countdown-video" id="openingCountdownVideo" src="assets/videos/opening-countdown.mp4" playsinline preload="auto"></video>
+    <video class="opening-countdown-video" id="openingCountdownVideo" src="assets/videos/opening-countdown.mp4" playsinline="" preload="auto"></video>
     <div class="opening-video-caption">回憶倒流中 請留意眼淚回流</div>
     <div class="credit-kicker">OPENING COUNTDOWN</div>
     <div class="opening-countdown-title">倒數</div>
@@ -2978,10 +2978,10 @@ button, .pill {
   </div>
 </div>
 
-<div class="mini-world hidden" id="miniWorld" aria-label="CRT電視小世界">
+<div class="mini-world" id="miniWorld" aria-label="CRT電視小世界">
   <div class="mini-crt-scene">
-<video class="mini-crt-frame" id="miniFrameVideo" src="assets/videos/mini-frame.mp4" autoplay muted loop playsinline preload="auto" poster="assets/images/mini-frame-poster.webp" aria-label="木框影片"></video>
-    <div class="mini-crt-screen" aria-label="木框透明入口區">
+<video class="mini-crt-frame" id="miniFrameVideo" src="assets/videos/weather-mini/07-thunderstorm.mp420260627-v56" autoplay="" muted="" loop="" playsinline="" preload="auto" poster="assets/images/mini-frame-poster.webp" aria-label="木框影片" data-weather-frame-key="storm" data-weather-video-base="assets/videos/weather-mini/07-thunderstorm.mp4" data-weather-video-ready="0"></video>
+    <div class="mini-crt-screen stage-weather-fallback" aria-label="木框透明入口區" data-weather-default-reason="before-showMiniWorld" data-weather-key="storm">
       <button class="mini-world-enter-hotspot" type="button" onclick="enterMainWorld()" aria-label="進入富宜路街道"></button>
       <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" class="mini-world-bg" id="miniWorldBg" alt="木框裡的Q版小世界｜☀️ 炎熱晴天｜保留底圖備援">
       <div class="mini-world-weather" id="miniWorldWeather" style="display: none;"></div>
@@ -3008,7 +3008,7 @@ button, .pill {
 </div>
 
 
-<div class="world" id="world" aria-label="你和我們的時光世界">
+<div class="world hint-muted" id="world" aria-label="你和我們的時光世界">
   <div class="topbar">
     <div class="brand"><small>DEAR ANG</small>你和我們的時光</div>
     <div class="top-actions">
@@ -3021,7 +3021,7 @@ button, .pill {
     </div>
   </div>
   <div class="scroller" id="scroller">
-    <div class="stage" id="stage">
+    <div class="stage weather-fallback" id="stage" data-weather-default-reason="before-showMiniWorld" data-weather-key="storm">
       <img class="stage-world-img" id="stageWorldImg" src="assets/images/weather/day-sunny.webp" alt="富宜路街道世界｜☀️ 炎熱晴天｜保留底圖備援">
       <div class="world-weather" id="worldWeather" style="display: none;"></div>
       <div class="hotspot h-photo" data-label="華光相館｜你和我們的時光" onclick="openPage('photo')"></div>
@@ -3817,7 +3817,7 @@ function setMiniWeatherStatus(text){
 function resolveAssetUrl(path,version){
   const clean=String(path||'').split('?')[0];
   const stamp=''+(version||'20260625-v48');
-  const q=''+encodeURIComponent(stamp);
+  const q='?v='+encodeURIComponent(stamp);
   const here=location.href.split('#')[0].replace(/[^\/]*$/,'');
   return [
     clean+q,
@@ -4119,7 +4119,11 @@ function setupAlbumRitualLock(){
 }
 
 window.addEventListener('load',()=>{centerWorld();setupExperienceLayer();setupPersonNameHotspots();setupMiniFrameVideo();preloadStaticAssets();renderMiniWeatherButtons();setMemoryWeather(memoryWeatherKey);loadLyricsFromRootFiles().finally(()=>setupLyricDanmaku());loadData();setupWeather();renderFood();renderMaps();setupAlbumRitualLock();});
-function enterWorld(){startOpeningMemoryCountdown()}
+function enterWorld(){
+  const gate=document.getElementById('gate');
+  if(gate){gate.classList.remove('hidden','out');}
+  startOpeningMemoryCountdown();
+}
 function centerWorld(){const sc=document.getElementById('scroller');setTimeout(()=>{sc.scrollLeft=(sc.scrollWidth-sc.clientWidth)/2;},60)}
 function openPage(id){
   playUiSound('open');
@@ -5054,7 +5058,7 @@ function compactMiniWeatherText(){
   function miniVideoCandidates(path){
     const clean=String(path||'assets/videos/mini-frame.mp4').split('?')[0];
     const stamp=''+MINI_FRAME_STAMP;
-    const q=''+encodeURIComponent(stamp);
+    const q='?v='+encodeURIComponent(stamp);
     const here=location.href.split('#')[0].replace(/[^\/]*$/,'');
     return [
       clean+q,
@@ -5117,7 +5121,7 @@ function compactMiniWeatherText(){
     try{applyMiniFrameWeatherVideo(memoryWeatherByKey(memoryWeatherKey));}catch(e){
       const v=document.getElementById('miniFrameVideo');
       if(v){
-        v.src='assets/videos/mini-frame.mp4' + '' + encodeURIComponent(MINI_FRAME_STAMP);
+        v.src='assets/videos/mini-frame.mp4' + '?v=' + encodeURIComponent(MINI_FRAME_STAMP);
         v.load();
         try{v.muted=true;v.loop=true;v.play().catch(()=>{});}catch(err){}
       }
@@ -6157,31 +6161,4 @@ function compactMiniWeatherText(){
 </script>
 
 
-<div id="departureDayCounter" class="departure-day-counter">今天是你離開的第 115 天<small>2026.03.09</small></div>
-<script>
-/* ===== v72-restore-gate-opening：強制還原 Gate + Opening 初始狀態 ===== */
-(function(){
-  if(window.__DEAR_ANG_RESTORE_GATE_OPENING__)return;
-  window.__DEAR_ANG_RESTORE_GATE_OPENING__=true;
-  function restoreInitialGateState(){
-    try{
-      if(window.openingCountdownActive)return;
-      var gate=document.getElementById('gate');
-      var opening=document.getElementById('openingCountdown');
-      var mini=document.getElementById('miniWorld');
-      var video=document.getElementById('openingCountdownVideo');
-      if(gate){gate.className='gate';gate.style.display='';gate.style.opacity='';gate.style.pointerEvents='';}
-      if(opening){opening.className='opening-countdown';opening.style.display='';opening.style.opacity='';opening.style.pointerEvents='';}
-      if(mini && !mini.classList.contains('hidden'))mini.classList.add('hidden');
-      if(video){
-        video.setAttribute('src','assets/videos/opening-countdown.mp4');
-        try{video.pause();video.currentTime=0;}catch(e){}
-      }
-    }catch(e){console.warn('[DearANG] restore gate/opening failed:',e);}
-  }
-  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',restoreInitialGateState,{once:true});
-  else restoreInitialGateState();
-})();
-</script>
-
-</body></html>
+<div id="departureDayCounter" class="departure-day-counter">今天是你離開的第 115 天<small>2026.03.09</small></div></body></html>
