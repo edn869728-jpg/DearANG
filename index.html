@@ -2974,7 +2974,7 @@ button, .pill {
     <div class="opening-number" id="openingNumber">10</div>
     <div class="opening-photo-draw" id="openingPhotoDraw"></div>
     <div class="opening-start-note" id="openingStartNote">0 秒開始播放</div>
-    <button class="opening-video-skip" type="button" onclick="finishOpeningMemoryCountdown()">跳過倒數</button>
+    <button class="opening-video-skip" type="button" onclick="finishOpeningMemoryCountdown()">Heaven</button>
   </div>
 </div>
 
@@ -3482,6 +3482,7 @@ let musicWanted=false;
 let openingCountdownActive=false;
 let openingCountdownTimer=null;
 let openingCountdownSeconds=10;
+let openingCountdownFinishing=false;
 
 function shuffleOpening(arr){
   arr=(arr||[]).slice();
@@ -3564,6 +3565,7 @@ function primeThemeBeforeCountdown(){
 function startOpeningMemoryCountdown(){
   if(openingCountdownActive)return;
   openingCountdownActive=true;
+  openingCountdownFinishing=false;
   playUiSound('open');
   primeThemeBeforeCountdown();
 
@@ -3573,7 +3575,7 @@ function startOpeningMemoryCountdown(){
   if(gate)gate.classList.add('out');
   if(overlay){overlay.classList.remove('done');overlay.classList.add('show');}
 
-  clearInterval(openingCountdownTimer);
+  clearTimeout(openingCountdownTimer);
   if(video){
     try{
       video.currentTime=0;
@@ -3584,6 +3586,7 @@ function startOpeningMemoryCountdown(){
       if(openingCountdownTimer){clearTimeout(openingCountdownTimer);openingCountdownTimer=null;}
       video.removeEventListener('ended', onVideoEnded);
       video.removeEventListener('error', onVideoError);
+      video.removeEventListener('timeupdate', onVideoTimeUpdate);
     };
     const onVideoEnded = ()=>{
       cleanupCountdown();
@@ -3593,16 +3596,23 @@ function startOpeningMemoryCountdown(){
       cleanupCountdown();
       finishOpeningMemoryCountdown();
     };
+    const onVideoTimeUpdate = ()=>{
+      if(Number.isFinite(video.duration) && video.duration > 0 && video.currentTime >= video.duration - 0.18){
+        cleanupCountdown();
+        finishOpeningMemoryCountdown();
+      }
+    };
     video.addEventListener('ended', onVideoEnded, {once:true});
     video.addEventListener('error', onVideoError, {once:true});
+    video.addEventListener('timeupdate', onVideoTimeUpdate);
+    const durationMs = Number.isFinite(video.duration) && video.duration > 0 ? Math.max(12000, Math.min(14000, Math.round(video.duration * 1000) + 200)) : 12500;
     openingCountdownTimer=setTimeout(()=>{
       cleanupCountdown();
       finishOpeningMemoryCountdown();
-    },12000);
+    },durationMs);
     const p=video.play();
     if(p&&p.catch){
       p.catch(()=>{
-        // 若手機擋住影片音訊，改靜音播放倒數；主題曲仍會在結束後播放
         try{video.muted=true;video.play().catch(()=>{});}catch(e){}
       });
     }
@@ -3615,6 +3625,8 @@ function startOpeningMemoryCountdown(){
   }
 }
 function finishOpeningMemoryCountdown(){
+  if(openingCountdownFinishing)return;
+  openingCountdownFinishing=true;
   const overlay=document.getElementById('openingCountdown');
   const video=document.getElementById('openingCountdownVideo');
   const world=document.getElementById('world');
