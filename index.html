@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <base href="/DearANG/">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate, max-age=0">
+<!-- v70-cache：已取消 HTML 強制不快取；WebView / 瀏覽器可正常使用快取 -->
 <!-- DearANG v16 KTV stage forced 20260620 -->
 <!-- DearANG v21 opening countdown video 20260620 -->
 <!-- DearANG v33 Real Frame Weather World Crop 20260623 -->
@@ -2868,6 +2868,46 @@ button, .pill {
   display:none!important;
 }
 
+
+/* ===== v69-radio-only：收音機播放／停止按鈕精準對齊 1080×2880 =====
+   播放：X312–375 / Y1401–1466
+   停止：X412–478 / Y1401–1466
+   只修 radio 按鈕，不動 opening 流程。 */
+#miniWorld .radio-audio-hit{
+  position:absolute!important;
+  top:calc(1401 / 2880 * 100%)!important;
+  height:calc((1466 - 1401) / 2880 * 100%)!important;
+  min-height:0!important;
+  padding:0!important;
+  margin:0!important;
+  transform:none!important;
+  z-index:220!important;
+  pointer-events:auto!important;
+}
+#miniWorld .radio-audio-play{
+  left:calc(312 / 1080 * 100%)!important;
+  width:calc((375 - 312) / 1080 * 100%)!important;
+}
+#miniWorld .radio-audio-stop{
+  left:calc(412 / 1080 * 100%)!important;
+  width:calc((478 - 412) / 1080 * 100%)!important;
+}
+
+
+/* ===== v70-cache：取消強制不快取 + 新增更新快取按鈕 ===== */
+.cache-btn{font-size:14px!important;letter-spacing:.02em!important}
+.cache-btn.updating{
+  animation:v70CacheSpin .85s linear infinite;
+  background:rgba(214,168,93,.34)!important;
+  color:#fff!important;
+}
+.cache-btn.done{
+  background:linear-gradient(135deg,var(--gold),#b98034)!important;
+  color:#fff!important;
+  box-shadow:0 0 0 3px rgba(214,168,93,.22)!important;
+}
+@keyframes v70CacheSpin{to{transform:rotate(360deg)}}
+
 </style>
 </head>
 <body>
@@ -2908,15 +2948,13 @@ button, .pill {
 
 <div class="mini-world hidden" id="miniWorld" aria-label="CRT電視小世界">
   <div class="mini-crt-scene">
-    <video class="mini-crt-frame" id="miniFrameVideo" src="assets/videos/mini-frame.mp4" autoplay muted loop playsinline preload="auto" poster="assets/images/mini-frame-poster.png" aria-label="木框影片"></video>
-    <div class="mini-crt-screen" aria-label="木框透明入口區">
-      <button class="mini-world-enter-hotspot" type="button" onclick="enterMainWorld()" aria-label="進入富宜路街道"></button>
-      <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" class="mini-world-bg" id="miniWorldBg" alt="透明佔位｜不顯示小世界照片">
+    <video class="mini-crt-frame" id="miniFrameVideo" src="assets/videos/mini-frame.mp4?v=20260625-v48" autoplay muted loop playsinline preload="auto" poster="assets/images/mini-frame-poster.png" aria-label="木框影片"></video>
+    <button class="mini-crt-screen" type="button" onclick="enterMainWorld()" aria-label="進入富宜路街道">
+      <img src="assets/images/memory-world.png" class="mini-world-bg" id="miniWorldBg" alt="木框裡的Q版小世界">
       <div class="mini-world-weather" id="miniWorldWeather"></div>
       <div class="mini-screen-shine"></div>
       <div class="mini-screen-hint">回到你成長的街道</div>
-    </div>
-      <button class="treasure-map-hit" type="button" onclick="openTreasureMapFromMini(event)" aria-label="打開藏寶地圖｜通往他的路"></button>
+    </button>
     <button class="radio-audio-hit radio-audio-play" type="button" onclick="playLetterAudio()" aria-label="播放留言音檔"><span>▶</span></button>
     <button class="radio-audio-hit radio-audio-stop" type="button" onclick="stopLetterAudio()" aria-label="停止留言音檔"><span>■</span></button>
     <audio id="letterAudio" preload="metadata" src="assets/audio/aming-message.mp3"></audio>
@@ -2943,6 +2981,7 @@ button, .pill {
       <button class="icon-btn" onclick="toggleMusic()" id="musicBtn" title="音樂開關" aria-label="音樂開關">♫</button>
       <button class="icon-btn lyric-toggle on" onclick="toggleLyrics()" id="lyricBtn" title="歌詞開關" aria-label="歌詞開關">詞</button>
       <button class="icon-btn" onclick="refreshDataNoReload()" id="dataRefreshBtn" title="重新整理資料（不刷新頁面）" aria-label="重新整理資料，不刷新頁面">↻</button>
+      <button class="icon-btn cache-btn" onclick="refreshDearAngCache()" id="cacheRefreshBtn" title="更新快取" aria-label="更新快取">存</button>
       <button class="icon-btn" onclick="toggleViewZoom()" id="zoomBtn" title="放大 / 還原" aria-label="放大鏡">🔍</button>
       <button class="icon-btn" onclick="smartBack()" id="backBtn" title="返回 / 回上層 / 重播開場" aria-label="返回鍵">🔙</button>
     </div>
@@ -3008,8 +3047,8 @@ button, .pill {
 
 
 <!-- 華光相館｜照片 -->
-<section class="page photo-wheel-page" id="page-photo">
-  <div class="page-head"><button class="back" onclick="closePage()">← 回到街上</button><b>華光相館｜回憶摩天輪相簿</b></div>
+<section class="page" id="page-photo">
+  <div class="page-head"><button class="back" onclick="closePage()">← 回到街上</button><b>華光相館｜你的形 和你的影</b></div>
   <div class="page-body">
     <section class="photo-wheel-wrap" aria-label="華光相館回憶摩天輪">
       <header class="photo-wheel-head">
@@ -3057,18 +3096,63 @@ button, .pill {
         </div>
       </section>
 
-      <section class="section photo-wheel-hidden-grid" aria-hidden="true">
-        <h2>照片</h2>
-        <div id="photoGrid" class="album-mount"><div class="empty">照片載入中…</div></div>
-      </section>
-    </section>
+<audio id="themeAudio" preload="metadata" loop></audio>
 
-    <div class="photo-wheel-modal" id="photoWheelModal" aria-label="摩天輪主題相簿">
-      <div class="photo-wheel-sheet">
-        <div class="photo-wheel-sheet-head">
-          <div>
-            <h2 id="photoWheelModalTitle">主題相簿</h2>
-            <p id="photoWheelModalDesc"></p>
+<div class="visitor-identity-modal hidden" id="visitorIdentityModal">
+  <div class="visitor-identity-card">
+    <div class="visitor-identity-kicker">DEAR ANG</div>
+    <h2>願意讓我們知道你是誰嗎？</h2>
+    <p>
+      不用登入，也不用密碼。<br>
+      這些資料不會公開顯示，只是讓 Enden 知道，
+      你曾經來看過他。
+    </p>
+
+    <input id="visitorNameInput" type="text" placeholder="你是誰？例如：Lisa / 小藍 / 同學 / 朋友">
+
+<select id="visitorCityInput" onchange="updateVisitorDistrictOptions()">
+  
+  <option value="">你大概在哪個城市？</option>
+  <!-- 北部 -->
+  <option value="基隆市">基隆市</option>
+  <option value="台北市">台北市</option>
+  <option value="新北市">新北市</option>
+  <option value="桃園市">桃園市</option>
+  <option value="新竹市">新竹市</option>
+  <option value="新竹縣">新竹縣</option>
+  <option value="宜蘭縣">宜蘭縣</option>
+  <!-- 中部 -->
+  <option value="苗栗縣">苗栗縣</option>
+  <option value="台中市">台中市</option>
+  <option value="彰化縣">彰化縣</option>
+  <option value="南投縣">南投縣</option>
+  <option value="雲林縣">雲林縣</option>
+  <!-- 南部 -->
+  <option value="嘉義市">嘉義市</option>
+  <option value="嘉義縣">嘉義縣</option>
+  <option value="台南市">台南市</option>
+  <option value="高雄市">高雄市</option>
+  <option value="屏東縣">屏東縣</option>
+  <!-- 東部 -->
+  <option value="花蓮縣">花蓮縣</option>
+  <option value="台東縣">台東縣</option>
+  <!-- 離島 -->
+  <option value="澎湖縣">澎湖縣</option>
+  <option value="金門縣">金門縣</option>
+  <option value="連江縣">連江縣</option>
+  <!-- 其他 -->
+  <option value="其他">其他</option>
+</select>
+
+    <select id="visitorDistrictInput" disabled>
+      <option value="">先選城市，再選區域</option>
+    </select>
+
+    <textarea id="visitorNoteInput" placeholder="想留一句話也可以，不填也沒關係"></textarea>
+
+    <div class="visitor-identity-actions">
+      <button type="button" onclick="saveVisitorIdentity()">留下我的名字</button>
+      <button type="button" class="soft" onclick="skipVisitorIdentity()">先不要</button>
           </div>
           <button type="button" class="photo-wheel-close" id="photoWheelClose" aria-label="關閉">×</button>
         </div>
@@ -5798,6 +5882,138 @@ function compactMiniWeatherText(){
     setTimeout(boot,120);
   }
   window.addEventListener('load',()=>setTimeout(boot,350));
+})();
+</script>
+
+
+<script>
+/* ===== v70-cache：手動更新並重存快取，不動 opening 流程 ===== */
+(function(){
+  if(window.__DEAR_ANG_CACHE_BUTTON__)return;
+  window.__DEAR_ANG_CACHE_BUTTON__=true;
+
+  function cacheToast(msg){
+    try{
+      if(typeof toast==='function')toast(msg);
+      else console.log(msg);
+    }catch(e){console.log(msg);}
+  }
+
+  function absUrl(path){
+    try{return new URL(path, document.baseURI || location.href).href;}
+    catch(e){return path;}
+  }
+
+  function collectDearAngCacheUrls(){
+    const urls=new Set();
+    urls.add(location.href.split('#')[0]);
+
+    [
+      'assets/audio/dear-ang-theme.mp3',
+      'assets/audio/aming-message.mp3',
+      'assets/videos/opening-countdown.mp4',
+      'assets/videos/mini-frame.mp4',
+      'assets/videos/weather-mini/01-night-rain.mp4',
+      'assets/videos/weather-mini/02-deep-night-rain.mp4',
+      'assets/videos/weather-mini/03-cloudy.mp4',
+      'assets/videos/weather-mini/04-overcast.mp4',
+      'assets/videos/weather-mini/05-sunny.mp4',
+      'assets/videos/weather-mini/06-fog.mp4',
+      'assets/videos/weather-mini/07-thunderstorm.mp4',
+      'assets/videos/weather-mini/08-night-shower.mp4',
+      'assets/videos/weather-mini/09-hot-sunny.mp4',
+      'assets/videos/weather-mini/10-day-rain.mp4',
+      'assets/videos/weather-mini/11-clear-night.mp4',
+      'assets/images/mini-frame-poster.png',
+      'assets/images/memory-world.png',
+      'assets/images/ktv-stage.png',
+      'assets/images/ktv-remote.png',
+      'assets/images/weather/day-sunny.png',
+      'treasure_map_bg.png',
+      'assets/images/treasure_map_bg.png',
+      '給安格.lrc',
+      '給安格.srt',
+      'lyrics_embedded.js.txt'
+    ].forEach(u=>urls.add(absUrl(u)));
+
+    document.querySelectorAll('img[src],video[src],audio[src],source[src],iframe[src]').forEach(el=>{
+      const src=el.getAttribute('src');
+      if(src && !src.startsWith('data:'))urls.add(absUrl(src));
+    });
+
+    return [...urls].filter(Boolean);
+  }
+
+  window.refreshDearAngCache=async function(){
+    const btn=document.getElementById('cacheRefreshBtn');
+    const version=Date.now();
+    const urls=collectDearAngCacheUrls();
+
+    if(btn){
+      btn.classList.add('updating');
+      btn.classList.remove('done');
+      btn.textContent='…';
+    }
+
+    cacheToast('正在更新快取…');
+    let ok=0, fail=0;
+
+    try{
+      if('caches' in window){
+        try{
+          const keys=await caches.keys();
+          await Promise.all(keys.filter(k=>/^dearang-manual-cache/.test(k)).map(k=>caches.delete(k)));
+        }catch(e){}
+
+        try{
+          const manualCache=await caches.open('dearang-manual-cache-'+version);
+          for(const u of urls){
+            try{
+              const r=await fetch(u,{cache:'reload',credentials:'same-origin'});
+              if(r && r.ok){
+                await manualCache.put(u,r.clone());
+                ok++;
+              }else fail++;
+            }catch(e){fail++;}
+          }
+        }catch(e){
+          for(const u of urls){
+            try{
+              const r=await fetch(u,{cache:'reload',credentials:'same-origin'});
+              if(r && r.ok)ok++; else fail++;
+            }catch(err){fail++;}
+          }
+        }
+      }else{
+        for(const u of urls){
+          try{
+            const r=await fetch(u,{cache:'reload',credentials:'same-origin'});
+            if(r && r.ok)ok++; else fail++;
+          }catch(err){fail++;}
+        }
+      }
+
+      try{
+        localStorage.setItem('dearAngCacheVersion',String(version));
+        localStorage.setItem('dearAngCacheUpdatedAt',new Date().toISOString());
+      }catch(e){}
+
+      cacheToast('快取已更新：成功 '+ok+'，略過 '+fail);
+      if(btn){
+        btn.classList.remove('updating');
+        btn.classList.add('done');
+        btn.textContent='存';
+        setTimeout(()=>btn.classList.remove('done'),1400);
+      }
+    }catch(e){
+      console.warn('[DearANG cache] update failed:',e);
+      cacheToast('快取更新失敗，請稍後再試');
+      if(btn){
+        btn.classList.remove('updating');
+        btn.textContent='存';
+      }
+    }
+  };
 })();
 </script>
 
