@@ -1174,7 +1174,7 @@ a{color:inherit}
 .mini-crt-label,.mini-world-tip,.mini-screen-hint,#miniWeatherButtons{display:none!important;}
 .mini-world{display:block!important;overflow:auto!important;-webkit-overflow-scrolling:touch!important;padding:calc(58px + env(safe-area-inset-top)) 0 calc(22px + env(safe-area-inset-bottom))!important;text-align:center!important;background:#050403!important;}
 .mini-crt-scene{position:relative!important;width:min(96vw,560px)!important;height:auto!important;aspect-ratio:1080/2880!important;max-height:none!important;margin:0 auto!important;overflow:hidden!important;border-radius:0!important;filter:drop-shadow(0 30px 70px rgba(0,0,0,.62))!important;}
-.mini-crt-frame{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;object-fit:cover!important;background:#000 url("assets/images/mini-frame-poster.webp") center/cover no-repeat!important;}
+.mini-crt-frame{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;object-fit:cover!important;background:#000 url("assets/images/mini-frame.webp") center/cover no-repeat!important;}
 .mini-crt-frame.frame-failed{opacity:.22!important;filter:sepia(.4) brightness(.7)!important;}
 /* 小世界木箱內圖片：x 75–1020 / y 653–1185（以 1080×2880 換算） */
 .mini-crt-screen{left:6.9444%!important;top:22.6736%!important;width:87.5000%!important;height:18.4722%!important;border-radius:.8%!important;}
@@ -2982,7 +2982,7 @@ button, .pill {
 
 <div class="mini-world hidden" id="miniWorld" aria-label="CRT電視小世界">
   <div class="mini-crt-scene">
-    <video class="mini-crt-frame" id="miniFrameVideo" src="assets/videos/mini-frame.mp4" autoplay muted loop playsinline preload="auto" poster="assets/images/mini-frame-poster.webp" aria-label="木框影片"></video>
+    <video class="mini-crt-frame" id="miniFrameVideo" src="assets/videos/mini-frame.mp4" autoplay muted loop playsinline preload="auto" poster="assets/images/mini-frame.webp" aria-label="木框影片"></video>
     <div class="mini-crt-screen" aria-label="木框透明入口區">
       <button class="mini-world-enter-hotspot" type="button" onclick="enterMainWorld()" aria-label="進入富宜路街道"></button>
       <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" class="mini-world-bg" id="miniWorldBg" alt="透明佔位｜不顯示小世界照片">
@@ -3676,7 +3676,7 @@ function preloadImage(src){
   img.src=src;
 }
 function preloadStaticAssets(){
-  ['assets/images/memory-world.webp','assets/images/ktv-remote.webp','assets/images/sixth_tree.jpeg'].forEach(preloadImage);
+  ['assets/images/memory-world.webp','assets/images/ktv-remote.webp','assets/images/sixth_tree.webp'].forEach(preloadImage);
 }
 function preloadFirstDriveAssets(){
   const first=(DATA.photos||[]).slice(0,8);
@@ -3797,14 +3797,15 @@ function setMiniWeatherStatus(text){
 function resolveAssetUrl(path,version){
   const clean=String(path||'').split('?')[0];
   const stamp=''+(version||'20260625-v48');
+  const q='?v='+encodeURIComponent(stamp);
   const here=location.href.split('#')[0].replace(/[^\/]*$/,'');
   return [
-    clean+stamp,
-    here+clean+stamp,
-    clean.replace(/^assets\//,'/DearANG/assets/')+stamp,
-    clean.replace(/^assets\/images\/weather\//,'assets/images/')+stamp,
-    clean.replace(/^assets\/images\/weather\//,'images/weather/')+stamp,
-    clean.replace(/^assets\/images\/weather\//,'weather/')+stamp
+    clean+q,
+    here+clean+q,
+    clean.replace(/^assets\//,'/DearANG/assets/')+q,
+    clean.replace(/^assets\/images\/weather\//,'assets/images/')+q,
+    clean.replace(/^assets\/images\/weather\//,'images/weather/')+q,
+    clean.replace(/^assets\/images\/weather\//,'weather/')+q
   ].filter((v,i,a)=>v&&a.indexOf(v)===i);
 }
 function testImageCandidates(urls){
@@ -5034,16 +5035,17 @@ function compactMiniWeatherText(){
   function miniVideoCandidates(path){
     const clean=String(path||'assets/videos/mini-frame.mp4').split('?')[0];
     const stamp=''+MINI_FRAME_STAMP;
+    const q='?v='+encodeURIComponent(stamp);
     const here=location.href.split('#')[0].replace(/[^\/]*$/,'');
     return [
-      clean+stamp,
-      here+clean+stamp,
-      clean.replace(/^assets\//,'/DearANG/assets/')+stamp,
-      clean.replace(/^assets\/videos\/weather-mini\//,'weather-mini/')+stamp,
-      clean.replace(/^assets\/videos\/weather-mini\//,'assets/video/weather-mini/')+stamp,
-      'assets/videos/mini-frame.mp4'+stamp,
-      here+'assets/videos/mini-frame.mp4'+stamp,
-      'mini-frame.mp4'+stamp
+      clean+q,
+      here+clean+q,
+      clean.replace(/^assets\//,'/DearANG/assets/')+q,
+      clean.replace(/^assets\/videos\/weather-mini\//,'weather-mini/')+q,
+      clean.replace(/^assets\/videos\/weather-mini\//,'assets/video/weather-mini/')+q,
+      'assets/videos/mini-frame.mp4'+q,
+      here+'assets/videos/mini-frame.mp4'+q,
+      'mini-frame.mp4'+q
     ].filter((v,i,a)=>v&&a.indexOf(v)===i);
   }
 
@@ -5096,7 +5098,7 @@ function compactMiniWeatherText(){
     try{applyMiniFrameWeatherVideo(memoryWeatherByKey(memoryWeatherKey));}catch(e){
       const v=document.getElementById('miniFrameVideo');
       if(v){
-        v.src='assets/videos/mini-frame.mp4'+MINI_FRAME_STAMP;
+        v.src='assets/videos/mini-frame.mp4' + '?v=' + encodeURIComponent(MINI_FRAME_STAMP);
         v.load();
         try{v.muted=true;v.loop=true;v.play().catch(()=>{});}catch(err){}
       }
@@ -5915,13 +5917,12 @@ function compactMiniWeatherText(){
       'assets/videos/weather-mini/09-hot-sunny.mp4',
       'assets/videos/weather-mini/10-day-rain.mp4',
       'assets/videos/weather-mini/11-clear-night.mp4',
-      'assets/images/mini-frame-poster.webp',
+      'assets/images/mini-frame.webp',
       'assets/images/memory-world.webp',
       'assets/images/ktv-stage.webp',
       'assets/images/ktv-remote.webp',
       'assets/images/weather/day-sunny.webp',
       'treasure_map_bg.webp',
-      'assets/images/treasure_map_bg.webp',
       '給安格.lrc',
       '給安格.srt',
       'lyrics_embedded.js.txt'

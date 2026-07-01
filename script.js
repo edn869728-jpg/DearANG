@@ -390,7 +390,7 @@ function preloadImage(src){
   img.src=src;
 }
 function preloadStaticAssets(){
-  ['assets/images/memory-world.png?v=20260620-v17','assets/images/ktv-stage.png?v=20260620-v16-stage','assets/images/ktv-remote.png?v=20260620-v16-remote','assets/images/sixth_tree.jpeg?v=20260620-v17'].forEach(preloadImage);
+  ['assets/images/memory-world.png?v=20260620-v17','assets/images/ktv-stage.png?v=20260620-v16-stage','assets/images/ktv-remote.png?v=20260620-v16-remote','assets/images/sixth_tree.webp?v=20260620-v17'].forEach(preloadImage);
 }
 function preloadFirstDriveAssets(){
   const first=(DATA.photos||[]).slice(0,8);
