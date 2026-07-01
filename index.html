@@ -3584,11 +3584,19 @@ function startOpeningMemoryCountdown(){
     }catch(e){}
     const cleanupCountdown = ()=>{
       if(openingCountdownTimer){clearTimeout(openingCountdownTimer);openingCountdownTimer=null;}
-      video.removeEventListener('ended', cleanupCountdown);
-      video.removeEventListener('error', cleanupCountdown);
+      video.removeEventListener('ended', onVideoEnded);
+      video.removeEventListener('error', onVideoError);
     };
-    video.addEventListener('ended', cleanupCountdown, {once:true});
-    video.addEventListener('error', cleanupCountdown, {once:true});
+    const onVideoEnded = ()=>{
+      cleanupCountdown();
+      finishOpeningMemoryCountdown();
+    };
+    const onVideoError = ()=>{
+      cleanupCountdown();
+      finishOpeningMemoryCountdown();
+    };
+    video.addEventListener('ended', onVideoEnded, {once:true});
+    video.addEventListener('error', onVideoError, {once:true});
     openingCountdownTimer=setTimeout(()=>{
       cleanupCountdown();
       finishOpeningMemoryCountdown();
@@ -3599,6 +3607,10 @@ function startOpeningMemoryCountdown(){
         // 若手機擋住影片音訊，改靜音播放倒數；主題曲仍會在結束後播放
         try{video.muted=true;video.play().catch(()=>{});}catch(e){}
       });
+    }
+    if(video.error){
+      cleanupCountdown();
+      finishOpeningMemoryCountdown();
     }
   }else{
     openingCountdownTimer=setTimeout(()=>finishOpeningMemoryCountdown(),10000);
