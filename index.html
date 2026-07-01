@@ -3543,8 +3543,8 @@ function primeThemeBeforeCountdown(){
   if(!a)return;
   setupLyricDanmaku();
   if(!a.src){
-    if(CONFIG.LOCAL_THEME)a.src=CONFIG.LOCAL_THEME+'?v='+CONFIG.APP_VERSION;
-    else if(CONFIG.GITHUB_THEME_AUDIO)a.src=CONFIG.GITHUB_THEME_AUDIO+'?v='+CONFIG.APP_VERSION;
+    if(CONFIG.LOCAL_THEME)a.src=CONFIG.LOCAL_THEME+''+CONFIG.APP_VERSION;
+    else if(CONFIG.GITHUB_THEME_AUDIO)a.src=CONFIG.GITHUB_THEME_AUDIO+''+CONFIG.APP_VERSION;
     else if(DATA.theme&&DATA.theme.streamUrl)a.src=DATA.theme.streamUrl;
   }
   try{
@@ -3796,7 +3796,7 @@ function setMiniWeatherStatus(text){
 }
 function resolveAssetUrl(path,version){
   const clean=String(path||'').split('?')[0];
-  const stamp='?v='+(version||'20260625-v48');
+  const stamp=''+(version||'20260625-v48');
   const here=location.href.split('#')[0].replace(/[^\/]*$/,'');
   return [
     clean+stamp,
@@ -4537,15 +4537,15 @@ function startTheme(){
   // Google Drive 的 00_主題曲只當備份，不再優先蓋掉 GitHub 音樂。
   if(!a.src){
     if(CONFIG.LOCAL_THEME){
-      a.src=CONFIG.LOCAL_THEME+'?v='+CONFIG.APP_VERSION;
+      a.src=CONFIG.LOCAL_THEME+''+CONFIG.APP_VERSION;
     }else if(CONFIG.GITHUB_THEME_AUDIO){
-      a.src=CONFIG.GITHUB_THEME_AUDIO+'?v='+CONFIG.APP_VERSION;
+      a.src=CONFIG.GITHUB_THEME_AUDIO+''+CONFIG.APP_VERSION;
     }else if(DATA.theme&&DATA.theme.streamUrl){
       a.src=DATA.theme.streamUrl;
     }
   }
   if(musicWanted){
-    if(!a.src && CONFIG.LOCAL_THEME){a.src=CONFIG.LOCAL_THEME+'?v='+CONFIG.APP_VERSION;}
+    if(!a.src && CONFIG.LOCAL_THEME){a.src=CONFIG.LOCAL_THEME+''+CONFIG.APP_VERSION;}
     if(!a.src){toast('主題曲路徑不存在');return;}
     a.play().catch(()=>toast('手機瀏覽器擋住音樂，請再按一次 ♫'));
   }
@@ -4633,7 +4633,7 @@ function setupPersonNameHotspots(){
 function setupMiniFrameVideo(){
   const v=document.getElementById('miniFrameVideo');
   if(!v)return;
-  const stamp='?v=20260625-v48';
+  const stamp='';
   const here=location.href.split('#')[0].replace(/[^\/]*$/,'');
   const candidates=[
     here+'assets/videos/mini-frame.mp4'+stamp,
@@ -5033,7 +5033,7 @@ function compactMiniWeatherText(){
 
   function miniVideoCandidates(path){
     const clean=String(path||'assets/videos/mini-frame.mp4').split('?')[0];
-    const stamp='?v='+MINI_FRAME_STAMP;
+    const stamp=''+MINI_FRAME_STAMP;
     const here=location.href.split('#')[0].replace(/[^\/]*$/,'');
     return [
       clean+stamp,
@@ -5096,7 +5096,7 @@ function compactMiniWeatherText(){
     try{applyMiniFrameWeatherVideo(memoryWeatherByKey(memoryWeatherKey));}catch(e){
       const v=document.getElementById('miniFrameVideo');
       if(v){
-        v.src='assets/videos/mini-frame.mp4?v='+MINI_FRAME_STAMP;
+        v.src='assets/videos/mini-frame.mp4'+MINI_FRAME_STAMP;
         v.load();
         try{v.muted=true;v.loop=true;v.play().catch(()=>{});}catch(err){}
       }
@@ -5833,11 +5833,11 @@ function compactMiniWeatherText(){
     const v=document.getElementById('miniFrameVideo');
     if(!v)return;
     key=normalizeMiniWeatherKey(key||getWeatherKey());
-    const src=(WEATHER_MINI_REAL[key]||WEATHER_MINI_REAL.sunny)+'?v=20260630_v68_real_weather_mini';
+    const src=(WEATHER_MINI_REAL[key]||WEATHER_MINI_REAL.sunny)+'';
     if(v.getAttribute('src')!==src){
       v.onerror=function(){
         v.onerror=null;
-        v.src='assets/videos/mini-frame.mp4?v=20260630_v68_fallback';
+        v.src='assets/videos/mini-frame.mp4';
         try{v.load();v.muted=true;v.loop=true;v.play().catch(()=>{});}catch(e){}
       };
       v.src=src;
