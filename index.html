@@ -3329,7 +3329,7 @@ function parseSrt(text){
   return rows;
 }
 async function fetchTextFile(url){
-  const r=await fetch(url+(url.includes('?')?'&':'?')+'_=' + Date.now(),{cache:'no-store'});
+  const r=await fetch(url,{cache:'default'});
   if(!r.ok)throw new Error(url+' 讀取失敗');
   return await r.text();
 }
@@ -3543,8 +3543,8 @@ function primeThemeBeforeCountdown(){
   if(!a)return;
   setupLyricDanmaku();
   if(!a.src){
-    if(CONFIG.LOCAL_THEME)a.src=CONFIG.LOCAL_THEME+''+CONFIG.APP_VERSION;
-    else if(CONFIG.GITHUB_THEME_AUDIO)a.src=CONFIG.GITHUB_THEME_AUDIO+''+CONFIG.APP_VERSION;
+    if(CONFIG.LOCAL_THEME)a.src=CONFIG.LOCAL_THEME;
+    else if(CONFIG.GITHUB_THEME_AUDIO)a.src=CONFIG.GITHUB_THEME_AUDIO;
     else if(DATA.theme&&DATA.theme.streamUrl)a.src=DATA.theme.streamUrl;
   }
   try{
@@ -4537,15 +4537,15 @@ function startTheme(){
   // Google Drive 的 00_主題曲只當備份，不再優先蓋掉 GitHub 音樂。
   if(!a.src){
     if(CONFIG.LOCAL_THEME){
-      a.src=CONFIG.LOCAL_THEME+''+CONFIG.APP_VERSION;
+      a.src=CONFIG.LOCAL_THEME;
     }else if(CONFIG.GITHUB_THEME_AUDIO){
-      a.src=CONFIG.GITHUB_THEME_AUDIO+''+CONFIG.APP_VERSION;
+      a.src=CONFIG.GITHUB_THEME_AUDIO;
     }else if(DATA.theme&&DATA.theme.streamUrl){
       a.src=DATA.theme.streamUrl;
     }
   }
   if(musicWanted){
-    if(!a.src && CONFIG.LOCAL_THEME){a.src=CONFIG.LOCAL_THEME+''+CONFIG.APP_VERSION;}
+    if(!a.src && CONFIG.LOCAL_THEME){a.src=CONFIG.LOCAL_THEME;}
     if(!a.src){toast('主題曲路徑不存在');return;}
     a.play().catch(()=>toast('手機瀏覽器擋住音樂，請再按一次 ♫'));
   }
@@ -4744,7 +4744,7 @@ async function autoPrefillVisitorCity(){
   if(!citySelect || citySelect.value)return;
   if(!GEO_WORKER_URL)return;
   try{
-    const r=await fetch(GEO_WORKER_URL + '?_=' + Date.now(),{cache:'no-store'});
+    const r=await fetch(GEO_WORKER_URL,{cache:'no-store'});
     const geo=await r.json();
     const city=normalizeTaiwanCityName(geo.city || geo.region || geo.timezone || '');
     if(city){citySelect.value=city;updateVisitorDistrictOptions();}
@@ -4839,8 +4839,7 @@ function sendPrivateVisitLog(pageName, extra){
     Object.assign(payload,extra);
     const url=CONFIG.GAS_API_URL
       + '?action=privateVisitLog'
-      + '&data=' + encodeURIComponent(JSON.stringify(payload))
-      + '&_=' + Date.now();
+      + '&data=' + encodeURIComponent(JSON.stringify(payload));
     const img=new Image();
     img.src=url;
   }catch(e){}
@@ -5669,22 +5668,22 @@ function compactMiniWeatherText(){
   const MINI_FRAME_WEATHER_STAMP='20260630_v66_weather_frame';
 
   const WEATHER_FRAME_VIDEO={
-    sunny:'assets/videos/weather-mini/day-sunny.mp4',
-    hot:'assets/videos/weather-mini/day-hot.mp4',
+    sunny:'assets/videos/weather-mini/05-sunny.mp4',
+    hot:'assets/videos/weather-mini/09-hot-sunny.mp4',
     cloudy:'assets/videos/weather-mini/day-cloudy.mp4',
     overcast:'assets/videos/weather-mini/day-overcast.mp4',
-    rain:'assets/videos/weather-mini/day-rain.mp4',
+    rain:'assets/videos/weather-mini/10-day-rain.mp4',
     storm:'assets/videos/weather-mini/day-storm.mp4',
     fog:'assets/videos/weather-mini/day-fog.mp4',
     haze:'assets/videos/weather-mini/day-haze.mp4',
-    night:'assets/videos/weather-mini/night-clear.mp4',
-    nightShower:'assets/videos/weather-mini/night-rain.mp4',
-    deepNightRain:'assets/videos/weather-mini/night-rain.mp4',
-    nightRain:'assets/videos/weather-mini/night-rain.mp4'
+    night:'assets/videos/weather-mini/11-clear-night.mp4',
+    nightShower:'assets/videos/weather-mini/01-night-rain.mp4',
+    deepNightRain:'assets/videos/weather-mini/01-night-rain.mp4',
+    nightRain:'assets/videos/weather-mini/01-night-rain.mp4'
   };
 
   const FALLBACKS=[
-    'assets/videos/weather-mini/day-sunny.mp4',
+    'assets/videos/weather-mini/05-sunny.mp4',
     'assets/videos/mini-frame.mp4'
   ];
 
