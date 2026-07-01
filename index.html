@@ -3582,7 +3582,17 @@ function startOpeningMemoryCountdown(){
       video.muted=false;
       video.volume=1;
     }catch(e){}
-    video.onended=()=>finishOpeningMemoryCountdown();
+    const cleanupCountdown = ()=>{
+      if(openingCountdownTimer){clearTimeout(openingCountdownTimer);openingCountdownTimer=null;}
+      video.removeEventListener('ended', cleanupCountdown);
+      video.removeEventListener('error', cleanupCountdown);
+    };
+    video.addEventListener('ended', cleanupCountdown, {once:true});
+    video.addEventListener('error', cleanupCountdown, {once:true});
+    openingCountdownTimer=setTimeout(()=>{
+      cleanupCountdown();
+      finishOpeningMemoryCountdown();
+    },12000);
     const p=video.play();
     if(p&&p.catch){
       p.catch(()=>{
