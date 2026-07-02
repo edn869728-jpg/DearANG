@@ -2980,7 +2980,7 @@ button, .pill {
 <div class="asset-preload-status" id="assetPreloadStatus">準備通往回憶…</div>
 <div class="opening-countdown" id="openingCountdown" aria-live="polite">
   <div class="opening-countdown-card">
-    <video class="opening-countdown-video" id="openingCountdownVideo" src="assets/videos/opening-countdown.mp4" playsinline="" preload="auto"></video>
+    <video class="opening-countdown-video" id="openingCountdownVideo" src="assets/videos/opening-countdown.mp4" playsinline="" preload="metadata"></video>
     <div class="opening-video-caption">回憶倒流中 請留意眼淚回流</div>
     <div class="credit-kicker">OPENING COUNTDOWN</div>
     <div class="opening-countdown-title">倒數</div>
@@ -2994,7 +2994,7 @@ button, .pill {
 
 <div class="mini-world hidden" id="miniWorld" aria-label="CRT電視小世界">
   <div class="mini-crt-scene">
-<video class="mini-crt-frame" id="miniFrameVideo" src="assets/videos/weather-mini/07-thunderstorm.mp4" autoplay="" muted="" loop="" playsinline="" preload="auto" poster="assets/images/mini-frame-poster.webp" aria-label="木框影片" data-weather-frame-key="storm" data-weather-video-base="assets/videos/weather-mini/07-thunderstorm.mp4" data-weather-video-ready="0"></video>
+<video class="mini-crt-frame" id="miniFrameVideo" src="assets/videos/weather-mini/07-thunderstorm.mp4" muted="" loop="" playsinline="" preload="metadata" poster="assets/images/mini-frame-poster.webp" aria-label="木框影片" data-weather-frame-key="storm" data-weather-video-base="assets/videos/weather-mini/07-thunderstorm.mp4" data-weather-video-ready="0"></video>
     <div class="mini-crt-screen stage-weather-fallback" aria-label="木框透明入口區" data-weather-default-reason="before-showMiniWorld" data-weather-key="storm">
       <button class="mini-world-enter-hotspot" type="button" onclick="enterMainWorld()" aria-label="進入富宜路街道"></button>
       <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" class="mini-world-bg" id="miniWorldBg" alt="木框裡的Q版小世界｜☀️ 炎熱晴天｜保留底圖備援">
@@ -3049,7 +3049,7 @@ button, .pill {
   <div class="hint"><div class="hint-inner"><span>← →</span><div>左右滑這條街<small>點招牌或建築，進入對應的時光。</small></div></div></div>
 </div>
 
-<audio id="themeAudio" preload="metadata" loop="" data-lyric-bound="1" src="assets/audio/dear-ang-theme.mp3"></audio>
+<audio id="themeAudio" preload="metadata" loop="" src="assets/audio/dear-ang-theme.mp3"></audio>
 
 <div class="visitor-identity-modal hidden" id="visitorIdentityModal" onclick="visitorModalBackdropClose(event)">
   <div class="visitor-identity-card" onclick="event.stopPropagation()">
@@ -3499,6 +3499,25 @@ let openingCountdownSeconds=10;
 let openingCountdownFinishing=false;
 let openingCountdownWatchdogTimer=null;
 let openingCountdownStallTimer=null;
+const DEAR_ANG_ENTERED_KEY='dearAngEnteredOnce';
+
+function markEnteredOnce(){
+  try{sessionStorage.setItem(DEAR_ANG_ENTERED_KEY,'1');}catch(e){}
+}
+function hasEnteredOnce(){
+  try{return sessionStorage.getItem(DEAR_ANG_ENTERED_KEY)==='1';}catch(e){return false;}
+}
+function restoreEnteredViewIfNeeded(){
+  if(!hasEnteredOnce())return;
+  const gate=document.getElementById('gate');
+  const overlay=document.getElementById('openingCountdown');
+  const world=document.getElementById('world');
+  const mini=document.getElementById('miniWorld');
+  if(gate)gate.classList.add('out','hidden');
+  if(overlay)overlay.classList.remove('show','done');
+  if(world)world.classList.remove('hidden','hint-muted');
+  if(mini)mini.classList.add('hidden');
+}
 
 function bindOpeningSkipButton(){
   const btn=document.querySelector('.opening-video-skip');
@@ -3593,6 +3612,7 @@ function primeThemeBeforeCountdown(){
 }
 function startOpeningMemoryCountdown(){
   if(openingCountdownActive)return;
+  markEnteredOnce();
   openingCountdownActive=true;
   openingCountdownFinishing=false;
   bindOpeningSkipButton();
@@ -3680,6 +3700,7 @@ function startOpeningMemoryCountdown(){
 }
 function finishOpeningMemoryCountdown(){
   if(openingCountdownFinishing)return;
+  markEnteredOnce();
   openingCountdownFinishing=true;
   clearTimeout(openingCountdownTimer);
   clearTimeout(openingCountdownWatchdogTimer);
@@ -4192,7 +4213,7 @@ function setupAlbumRitualLock(){
   });
 }
 
-window.addEventListener('load',()=>{centerWorld();setupExperienceLayer();setupPersonNameHotspots();setupMiniFrameVideo();preloadStaticAssets();renderMiniWeatherButtons();setMemoryWeather(memoryWeatherKey);loadLyricsFromRootFiles().finally(()=>setupLyricDanmaku());loadData();setupWeather();renderFood();renderMaps();setupAlbumRitualLock();bindOpeningSkipButton();});
+window.addEventListener('load',()=>{centerWorld();setupExperienceLayer();setupPersonNameHotspots();setupMiniFrameVideo();preloadStaticAssets();renderMiniWeatherButtons();setMemoryWeather(memoryWeatherKey);loadLyricsFromRootFiles().finally(()=>setupLyricDanmaku());loadData();setupWeather();renderFood();renderMaps();setupAlbumRitualLock();bindOpeningSkipButton();restoreEnteredViewIfNeeded();});
 function enterWorld(){
   const gate=document.getElementById('gate');
   if(gate){gate.classList.remove('hidden');gate.classList.add('out');}
@@ -6265,4 +6286,329 @@ function compactMiniWeatherText(){
 </script>
 
 
-<div id="departureDayCounter" class="departure-day-counter">今天是你離開的第 115 天<small>2026.03.09</small></div></body></html>
+<div id="departureDayCounter" class="departure-day-counter">今天是你離開的第 115 天<small>2026.03.09</small></div>
+
+<script>
+/* ===== v72 opening-flow-stability：Gate 手動播放、影片結束必到 mini world、mini idle 不自動重整 ===== */
+(function(){
+  if(window.__DEAR_ANG_V72_OPENING_FLOW_STABILITY__)return;
+  window.__DEAR_ANG_V72_OPENING_FLOW_STABILITY__=true;
+
+  const MINI_REAL={
+    nightRain:'assets/videos/weather-mini/01-night-rain.mp4',
+    deepNightRain:'assets/videos/weather-mini/02-deep-night-rain.mp4',
+    cloudy:'assets/videos/weather-mini/03-cloudy.mp4',
+    overcast:'assets/videos/weather-mini/04-overcast.mp4',
+    sunny:'assets/videos/weather-mini/05-sunny.mp4',
+    fog:'assets/videos/weather-mini/06-fog.mp4',
+    storm:'assets/videos/weather-mini/07-thunderstorm.mp4',
+    thunderstorm:'assets/videos/weather-mini/07-thunderstorm.mp4',
+    nightShower:'assets/videos/weather-mini/08-night-shower.mp4',
+    hot:'assets/videos/weather-mini/09-hot-sunny.mp4',
+    rain:'assets/videos/weather-mini/10-day-rain.mp4',
+    dayRain:'assets/videos/weather-mini/10-day-rain.mp4',
+    night:'assets/videos/weather-mini/11-clear-night.mp4',
+    clearNight:'assets/videos/weather-mini/11-clear-night.mp4'
+  };
+
+  function miniVisible(){
+    const mini=document.getElementById('miniWorld');
+    return !!(mini && !mini.classList.contains('hidden'));
+  }
+  function canPlayMiniFrame(){
+    return !!window.__DEAR_ANG_ALLOW_MINI_FRAME_PLAY__ || miniVisible();
+  }
+  function normalizeMiniKey(key){
+    key=String(key||'').trim();
+    if(MINI_REAL[key])return key;
+    if(/deep.*night.*rain|深夜.*雨/i.test(key))return 'deepNightRain';
+    if(/night.*rain|夜雨/i.test(key))return 'nightRain';
+    if(/night.*shower|夜.*陣雨/i.test(key))return 'nightShower';
+    if(/thunder|storm|雷|暴|豪|颱/i.test(key))return 'storm';
+    if(/rain|shower|雨/i.test(key))return 'rain';
+    if(/fog|霧/i.test(key))return 'fog';
+    if(/overcast|陰/i.test(key))return 'overcast';
+    if(/cloud|雲/i.test(key))return 'cloudy';
+    if(/hot|熱/i.test(key))return 'hot';
+    if(/night|clear.*night|夜/i.test(key))return 'night';
+    try{ if(typeof timeBasedWeatherKey==='function')return normalizeMiniKey(timeBasedWeatherKey()); }catch(e){}
+    return 'sunny';
+  }
+  function currentMiniKey(){
+    try{ if(typeof memoryWeatherKey!=='undefined' && memoryWeatherKey)return normalizeMiniKey(memoryWeatherKey); }catch(e){}
+    return normalizeMiniKey('');
+  }
+  function prepareMiniVideo(v){
+    if(!v)return;
+    try{
+      v.muted=true;
+      v.loop=true;
+      v.playsInline=true;
+      v.setAttribute('playsinline','');
+      v.preload=canPlayMiniFrame()?'auto':'metadata';
+    }catch(e){}
+  }
+  function playMiniVideoIfAllowed(v){
+    if(!v)return;
+    prepareMiniVideo(v);
+    if(!canPlayMiniFrame()){
+      try{v.pause();}catch(e){}
+      return;
+    }
+    try{
+      const p=v.play();
+      if(p&&p.catch)p.catch(()=>{});
+    }catch(e){}
+  }
+
+  // mini frame 只在進入 mini world 後播放；頁面載入時不要偷跑或一直換 src。
+  window.setMiniFrameVideoByWeatherReal=function(key){
+    const v=document.getElementById('miniFrameVideo');
+    if(!v)return;
+    key=normalizeMiniKey(key||currentMiniKey());
+    const src=MINI_REAL[key]||MINI_REAL.sunny;
+    prepareMiniVideo(v);
+    if(v.getAttribute('src')!==src){
+      v.onerror=function(){
+        v.onerror=null;
+        v.src=MINI_REAL.sunny;
+        try{v.load();}catch(e){}
+        playMiniVideoIfAllowed(v);
+      };
+      v.src=src;
+      try{v.load();}catch(e){}
+    }
+    v.dataset.weatherFrameKey=key;
+    playMiniVideoIfAllowed(v);
+  };
+
+  window.setupMiniFrameVideo=function(){
+    window.setMiniFrameVideoByWeatherReal(currentMiniKey());
+  };
+  try{setupMiniFrameVideo=window.setupMiniFrameVideo;}catch(e){}
+
+  const oldSetMemoryWeather=window.setMemoryWeather;
+  if(typeof oldSetMemoryWeather==='function'){
+    window.setMemoryWeather=function(key,ev,source){
+      const r=oldSetMemoryWeather.apply(this,arguments);
+      // mini world 還沒出現時，只更新資料，不重新載入/播放 frame video。
+      if(canPlayMiniFrame())setTimeout(()=>window.setMiniFrameVideoByWeatherReal(key),30);
+      return r;
+    };
+    try{setMemoryWeather=window.setMemoryWeather;}catch(e){}
+  }
+
+  // 天氣不再每 10 分鐘自動打 API；停在 mini world 時就讓音樂循環即可。
+  window.setupWeather=function(){
+    try{ if(typeof autoWeatherTimer!=='undefined' && autoWeatherTimer)clearInterval(autoWeatherTimer); }catch(e){}
+    try{ if(typeof setMiniWeatherStatus==='function' && typeof timeBasedWeatherText==='function')setMiniWeatherStatus(timeBasedWeatherText()); }catch(e){}
+    try{ if(typeof window.applyDefaultWeatherBeforeReady==='function')window.applyDefaultWeatherBeforeReady('v72-idle-default'); }catch(e){}
+  };
+  try{setupWeather=window.setupWeather;}catch(e){}
+
+  // 歌詞只綁一次事件，不用 data-lyric-bound，避免 HTML 先寫 1 導致根本沒綁到。
+  window.setupLyricDanmaku=function(){
+    const audio=document.getElementById('themeAudio');
+    if(!audio || audio.__lyricDanmakuBound)return;
+    audio.__lyricDanmakuBound=true;
+    try{delete audio.dataset.lyricBound;}catch(e){}
+    audio.addEventListener('timeupdate',()=>{
+      if(!lyricsEnabled)return;
+      const t=audio.currentTime + LYRIC_OFFSET_SECONDS;
+      if(audio.currentTime < lastAudioTime-1){lastLyricIndex=-1;clearLyricLayer();}
+      lastAudioTime=audio.currentTime;
+      for(let i=0;i<LYRIC_LINES.length;i++){
+        const line=LYRIC_LINES[i];
+        if(i!==lastLyricIndex && t>=line.time && t<(line.end||line.time+4)){
+          lastLyricIndex=i;
+          spawnLyric(line.text);
+          break;
+        }
+      }
+    });
+    audio.addEventListener('seeked',()=>{lastLyricIndex=-1;clearLyricLayer();});
+    audio.addEventListener('ended',()=>{lastLyricIndex=-1;clearLyricLayer();});
+  };
+  try{setupLyricDanmaku=window.setupLyricDanmaku;}catch(e){}
+
+  function resetToGate(){
+    try{sessionStorage.removeItem(DEAR_ANG_ENTERED_KEY);}catch(e){}
+    const gate=document.getElementById('gate');
+    const overlay=document.getElementById('openingCountdown');
+    const world=document.getElementById('world');
+    const mini=document.getElementById('miniWorld');
+    if(gate)gate.classList.remove('out','hidden');
+    if(overlay)overlay.classList.remove('show','done');
+    if(world)world.classList.add('hidden','hint-muted');
+    if(mini)mini.classList.add('hidden');
+    window.__DEAR_ANG_ALLOW_MINI_FRAME_PLAY__=false;
+    const mv=document.getElementById('miniFrameVideo');
+    if(mv){try{mv.pause();mv.preload='metadata';}catch(e){}}
+  }
+  window.restoreEnteredViewIfNeeded=resetToGate;
+  try{restoreEnteredViewIfNeeded=window.restoreEnteredViewIfNeeded;}catch(e){}
+
+  window.startOpeningMemoryCountdown=function(){
+    if(openingCountdownActive && !openingCountdownFinishing)return;
+    markEnteredOnce();
+    openingCountdownActive=true;
+    openingCountdownFinishing=false;
+    bindOpeningSkipButton();
+    playUiSound('open');
+    primeThemeBeforeCountdown();
+
+    const gate=document.getElementById('gate');
+    const overlay=document.getElementById('openingCountdown');
+    const video=document.getElementById('openingCountdownVideo');
+    const world=document.getElementById('world');
+    const mini=document.getElementById('miniWorld');
+    if(gate)gate.classList.add('out');
+    if(world)world.classList.add('hidden','hint-muted');
+    if(mini)mini.classList.add('hidden');
+    if(overlay){overlay.classList.remove('done');overlay.classList.add('show');}
+
+    clearTimeout(openingCountdownTimer);
+    clearTimeout(openingCountdownWatchdogTimer);
+    clearTimeout(openingCountdownStallTimer);
+    openingCountdownTimer=openingCountdownWatchdogTimer=openingCountdownStallTimer=null;
+
+    const finishNow=()=>window.finishOpeningMemoryCountdown();
+    if(video){
+      try{ if(video.__openingCleanup)video.__openingCleanup(); }catch(e){}
+      let done=false;
+      const cleanup=()=>{
+        if(done)return;
+        done=true;
+        clearTimeout(openingCountdownTimer);
+        clearTimeout(openingCountdownWatchdogTimer);
+        clearTimeout(openingCountdownStallTimer);
+        openingCountdownTimer=openingCountdownWatchdogTimer=openingCountdownStallTimer=null;
+        video.removeEventListener('ended',onEnded);
+        video.removeEventListener('error',onError);
+        video.removeEventListener('timeupdate',onTimeUpdate);
+        video.removeEventListener('loadedmetadata',onLoadedMetadata);
+      };
+      const safeFinish=()=>{cleanup();finishNow();};
+      const onEnded=()=>safeFinish();
+      const onError=()=>safeFinish();
+      const onTimeUpdate=()=>{
+        if(Number.isFinite(video.duration) && video.duration>0 && video.currentTime>=video.duration-.12)safeFinish();
+      };
+      const onLoadedMetadata=()=>{
+        clearTimeout(openingCountdownTimer);
+        const maxMs=Number.isFinite(video.duration)&&video.duration>0 ? Math.min(32000,Math.max(4000,Math.round(video.duration*1000)+900)) : 12000;
+        openingCountdownTimer=setTimeout(safeFinish,maxMs);
+      };
+      video.__openingCleanup=cleanup;
+      video.addEventListener('ended',onEnded);
+      video.addEventListener('error',onError);
+      video.addEventListener('timeupdate',onTimeUpdate);
+      video.addEventListener('loadedmetadata',onLoadedMetadata);
+      try{
+        video.preload='auto';
+        video.muted=false;
+        video.volume=1;
+        video.currentTime=0;
+        video.load();
+      }catch(e){}
+      const p=video.play();
+      if(p&&p.catch){
+        p.catch(()=>{
+          try{
+            video.muted=true;
+            const p2=video.play();
+            if(p2&&p2.catch)p2.catch(()=>setTimeout(safeFinish,900));
+          }catch(e){setTimeout(safeFinish,900);}
+        });
+      }
+      // 影片卡在 0 秒或完全沒資料，就不要讓使用者停在黑頁。
+      openingCountdownStallTimer=setTimeout(()=>{
+        try{
+          if(openingCountdownFinishing)return;
+          const stuck=video.paused || video.readyState<2 || !Number.isFinite(video.currentTime) || video.currentTime<0.05;
+          if(stuck)safeFinish();
+        }catch(e){safeFinish();}
+      },2600);
+      openingCountdownWatchdogTimer=setTimeout(safeFinish,34000);
+    }else{
+      openingCountdownTimer=setTimeout(finishNow,1000);
+    }
+  };
+  try{startOpeningMemoryCountdown=window.startOpeningMemoryCountdown;}catch(e){}
+
+  window.finishOpeningMemoryCountdown=function(){
+    if(openingCountdownFinishing)return;
+    markEnteredOnce();
+    openingCountdownFinishing=true;
+    clearTimeout(openingCountdownTimer);
+    clearTimeout(openingCountdownWatchdogTimer);
+    clearTimeout(openingCountdownStallTimer);
+    openingCountdownTimer=openingCountdownWatchdogTimer=openingCountdownStallTimer=null;
+    const overlay=document.getElementById('openingCountdown');
+    const video=document.getElementById('openingCountdownVideo');
+    const gate=document.getElementById('gate');
+    const world=document.getElementById('world');
+    if(video){try{if(video.__openingCleanup)video.__openingCleanup();video.pause();video.currentTime=0;}catch(e){}}
+    musicWanted=true;
+    const a=document.getElementById('themeAudio');
+    if(a)a.volume=1;
+    startTheme();
+    window.__DEAR_ANG_ALLOW_MINI_FRAME_PLAY__=true;
+    if(gate)gate.classList.add('hidden');
+    if(world)world.classList.remove('hidden');
+    if(overlay){overlay.classList.add('done');setTimeout(()=>overlay.classList.remove('show','done'),180);}
+    setTimeout(()=>{
+      window.showMiniWorld();
+      openingCountdownActive=false;
+      openingCountdownFinishing=false;
+    },90);
+  };
+  try{finishOpeningMemoryCountdown=window.finishOpeningMemoryCountdown;}catch(e){}
+
+  window.showMiniWorld=function(){
+    window.__DEAR_ANG_ALLOW_MINI_FRAME_PLAY__=true;
+    const mini=document.getElementById('miniWorld');
+    if(mini)mini.classList.remove('hidden','zooming');
+    try{renderMiniWeatherButtons();}catch(e){}
+    try{ if(typeof window.applyDefaultWeatherBeforeReady==='function')window.applyDefaultWeatherBeforeReady('v72-show-mini'); }catch(e){}
+    try{window.setMiniFrameVideoByWeatherReal(currentMiniKey());}catch(e){}
+    try{
+      const frameVideo=document.getElementById('miniFrameVideo');
+      playMiniVideoIfAllowed(frameVideo);
+    }catch(e){}
+  };
+  try{showMiniWorld=window.showMiniWorld;}catch(e){}
+
+  // 手動重新整理資料不要重抓歌詞；彈幕只照目前 LYRIC_LINES 走，不重設整層。
+  window.refreshDataNoReload=function(){
+    const btn=document.getElementById('dataRefreshBtn');
+    if(btn){btn.classList.add('refreshing');btn.disabled=true;}
+    toast('正在重新整理資料（不刷新頁面）…');
+    const tasks=[loadData()];
+    return Promise.allSettled(tasks).then(()=>{
+      renderDynamic();
+      renderFood();
+      renderMaps();
+      if(document.getElementById('page-nav')?.classList.contains('show') && typeof initRouteMapPage==='function')initRouteMapPage();
+      setupLyricDanmaku();
+      toast('資料已重新整理（未刷新頁面）');
+    }).catch(()=>toast('部分資料讀取失敗，頁面未刷新',1)).finally(()=>{
+      if(btn){btn.classList.remove('refreshing');btn.disabled=false;}
+    });
+  };
+  try{refreshDataNoReload=window.refreshDataNoReload;}catch(e){}
+
+  // mini world 層級高於主街 topbar，避免轉場後看起來像還卡在上一層。
+  const st=document.createElement('style');
+  st.textContent='#miniWorld{z-index:112!important}.opening-countdown{z-index:160!important}.gate{z-index:150!important}#miniWorld.hidden{display:none!important}';
+  document.head.appendChild(st);
+
+  if(document.readyState==='loading'){
+    document.addEventListener('DOMContentLoaded',()=>{resetToGate();setupLyricDanmaku();},{once:true});
+  }else{
+    resetToGate();
+    setupLyricDanmaku();
+  }
+})();
+</script>
+</body></html>
