@@ -1,7 +1,18 @@
 <html lang="zh-Hant"><head>
 <meta charset="UTF-8">
-<base href="/DearANG/">
+<base id="appBaseHref" href="/DearANG/">
+<script>
+(function(){
+  try{
+    if(/^(localhost|127\.0\.0\.1)$/i.test(location.hostname)){
+      var base=document.getElementById('appBaseHref');
+      if(base)base.setAttribute('href','/');
+    }
+  }catch(e){}
+})();
+</script>
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='28' fill='%23d6a85d'/%3E%3Ctext x='32' y='41' font-size='28' text-anchor='middle' fill='white'%3E%E2%99%A1%3C/text%3E%3C/svg%3E">
 <!-- v70-cache：已取消 HTML 強制不快取；WebView / 瀏覽器可正常使用快取 -->
 <!-- DearANG v16 KTV stage forced 20260620 -->
 <!-- DearANG v21 opening countdown video 20260620 -->
@@ -725,6 +736,7 @@ a{color:inherit}
   object-fit:cover;
   background:#000;
   z-index:1;
+  pointer-events:none;
 }
 .opening-countdown-card>.credit-kicker,
 .opening-countdown-title,
@@ -739,6 +751,8 @@ a{color:inherit}
   right:14px;
   bottom:calc(16px + env(safe-area-inset-bottom));
   z-index:4;
+  pointer-events:auto;
+  touch-action:manipulation;
   background:rgba(0,0,0,.42)!important;
   border:1px solid rgba(255,255,255,.18)!important;
   backdrop-filter:blur(12px);
@@ -2941,7 +2955,7 @@ button, .pill {
 }
 
 </style>
-<script src="https://script.google.com/macros/s/AKfycbzrduB_eXPk6OpqnGPXjNBNQCeUyarzAfki4IL-X_JIVQr7RS9sN5ayyvA2OEaXDXzv/exec?action=getMemorialData&amp;callback=cb178288435872854350&amp;_ts=1782884358729&amp;v=20260620_memory_world_v21_opening_countdown_video_lyrics20"></script></head>
+</head>
 <body>
 <div class="lyric-danmaku-layer" id="lyricDanmakuLayer" aria-hidden="true"></div>
 <div class="gate" id="gate">
@@ -2974,13 +2988,13 @@ button, .pill {
     <div class="opening-number" id="openingNumber">10</div>
     <div class="opening-photo-draw" id="openingPhotoDraw"></div>
     <div class="opening-start-note" id="openingStartNote">0 秒開始播放</div>
-    <button class="opening-video-skip" type="button" onclick="finishOpeningMemoryCountdown()">Heaven</button>
+    <button class="opening-video-skip" type="button" onclick="finishOpeningMemoryCountdown();return false;" onpointerup="finishOpeningMemoryCountdown();return false;" ontouchend="finishOpeningMemoryCountdown();return false;">Heaven</button>
   </div>
 </div>
 
 <div class="mini-world hidden" id="miniWorld" aria-label="CRT電視小世界">
   <div class="mini-crt-scene">
-<video class="mini-crt-frame" id="miniFrameVideo" src="assets/videos/weather-mini/07-thunderstorm.mp420260627-v56" autoplay="" muted="" loop="" playsinline="" preload="auto" poster="assets/images/mini-frame-poster.webp" aria-label="木框影片" data-weather-frame-key="storm" data-weather-video-base="assets/videos/weather-mini/07-thunderstorm.mp4" data-weather-video-ready="0"></video>
+<video class="mini-crt-frame" id="miniFrameVideo" src="assets/videos/weather-mini/07-thunderstorm.mp4" autoplay="" muted="" loop="" playsinline="" preload="auto" poster="assets/images/mini-frame-poster.webp" aria-label="木框影片" data-weather-frame-key="storm" data-weather-video-base="assets/videos/weather-mini/07-thunderstorm.mp4" data-weather-video-ready="0"></video>
     <div class="mini-crt-screen stage-weather-fallback" aria-label="木框透明入口區" data-weather-default-reason="before-showMiniWorld" data-weather-key="storm">
       <button class="mini-world-enter-hotspot" type="button" onclick="enterMainWorld()" aria-label="進入富宜路街道"></button>
       <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" class="mini-world-bg" id="miniWorldBg" alt="木框裡的Q版小世界｜☀️ 炎熱晴天｜保留底圖備援">
@@ -3483,6 +3497,21 @@ let openingCountdownActive=false;
 let openingCountdownTimer=null;
 let openingCountdownSeconds=10;
 let openingCountdownFinishing=false;
+let openingCountdownWatchdogTimer=null;
+let openingCountdownStallTimer=null;
+
+function bindOpeningSkipButton(){
+  const btn=document.querySelector('.opening-video-skip');
+  if(!btn || btn.dataset.boundSkip==='1')return;
+  btn.dataset.boundSkip='1';
+  const doSkip=(e)=>{
+    if(e){e.preventDefault();e.stopPropagation();}
+    finishOpeningMemoryCountdown();
+  };
+  btn.addEventListener('click',doSkip,{passive:false});
+  btn.addEventListener('touchend',doSkip,{passive:false});
+  btn.addEventListener('pointerup',doSkip,{passive:false});
+}
 
 function shuffleOpening(arr){
   arr=(arr||[]).slice();
@@ -3566,6 +3595,7 @@ function startOpeningMemoryCountdown(){
   if(openingCountdownActive)return;
   openingCountdownActive=true;
   openingCountdownFinishing=false;
+  bindOpeningSkipButton();
   playUiSound('open');
   primeThemeBeforeCountdown();
 
@@ -3576,6 +3606,8 @@ function startOpeningMemoryCountdown(){
   if(overlay){overlay.classList.remove('done');overlay.classList.add('show');}
 
   clearTimeout(openingCountdownTimer);
+  clearTimeout(openingCountdownWatchdogTimer);
+  clearTimeout(openingCountdownStallTimer);
   if(video){
     try{
       video.currentTime=0;
@@ -3584,6 +3616,7 @@ function startOpeningMemoryCountdown(){
     }catch(e){}
     const cleanupCountdown = ()=>{
       if(openingCountdownTimer){clearTimeout(openingCountdownTimer);openingCountdownTimer=null;}
+      if(openingCountdownStallTimer){clearTimeout(openingCountdownStallTimer);openingCountdownStallTimer=null;}
       video.removeEventListener('ended', onVideoEnded);
       video.removeEventListener('error', onVideoError);
       video.removeEventListener('timeupdate', onVideoTimeUpdate);
@@ -3605,7 +3638,7 @@ function startOpeningMemoryCountdown(){
     video.addEventListener('ended', onVideoEnded, {once:true});
     video.addEventListener('error', onVideoError, {once:true});
     video.addEventListener('timeupdate', onVideoTimeUpdate);
-    const durationMs = Number.isFinite(video.duration) && video.duration > 0 ? Math.max(12000, Math.min(14000, Math.round(video.duration * 1000) + 200)) : 12500;
+    const durationMs = Number.isFinite(video.duration) && video.duration > 0 ? Math.max(12000, Math.min(14000, Math.round(video.duration * 1000) + 200)) : 3000;
     openingCountdownTimer=setTimeout(()=>{
       cleanupCountdown();
       finishOpeningMemoryCountdown();
@@ -3620,13 +3653,40 @@ function startOpeningMemoryCountdown(){
       cleanupCountdown();
       finishOpeningMemoryCountdown();
     }
+
+    // 影片被瀏覽器或資源問題卡在 0 秒時，快速轉場避免停住
+    openingCountdownStallTimer=setTimeout(()=>{
+      try{
+        if(openingCountdownFinishing)return;
+        const noProgress = !Number.isFinite(video.currentTime) || video.currentTime<0.05;
+        const noData = !Number.isFinite(video.duration) || video.duration<=0 || video.readyState<2;
+        if(video.paused || noProgress || noData){
+          cleanupCountdown();
+          finishOpeningMemoryCountdown();
+        }
+      }catch(e){
+        finishOpeningMemoryCountdown();
+      }
+    },1500);
   }else{
     openingCountdownTimer=setTimeout(()=>finishOpeningMemoryCountdown(),10000);
   }
+
+  // 最後保險：避免任何瀏覽器事件失效造成卡住
+  openingCountdownWatchdogTimer=setTimeout(()=>{
+    const overlay=document.getElementById('openingCountdown');
+    if(overlay&&overlay.classList.contains('show'))finishOpeningMemoryCountdown();
+  },15000);
 }
 function finishOpeningMemoryCountdown(){
   if(openingCountdownFinishing)return;
   openingCountdownFinishing=true;
+  clearTimeout(openingCountdownTimer);
+  clearTimeout(openingCountdownWatchdogTimer);
+  clearTimeout(openingCountdownStallTimer);
+  openingCountdownTimer=null;
+  openingCountdownWatchdogTimer=null;
+  openingCountdownStallTimer=null;
   const overlay=document.getElementById('openingCountdown');
   const video=document.getElementById('openingCountdownVideo');
   const world=document.getElementById('world');
@@ -4132,7 +4192,7 @@ function setupAlbumRitualLock(){
   });
 }
 
-window.addEventListener('load',()=>{centerWorld();setupExperienceLayer();setupPersonNameHotspots();setupMiniFrameVideo();preloadStaticAssets();renderMiniWeatherButtons();setMemoryWeather(memoryWeatherKey);loadLyricsFromRootFiles().finally(()=>setupLyricDanmaku());loadData();setupWeather();renderFood();renderMaps();setupAlbumRitualLock();});
+window.addEventListener('load',()=>{centerWorld();setupExperienceLayer();setupPersonNameHotspots();setupMiniFrameVideo();preloadStaticAssets();renderMiniWeatherButtons();setMemoryWeather(memoryWeatherKey);loadLyricsFromRootFiles().finally(()=>setupLyricDanmaku());loadData();setupWeather();renderFood();renderMaps();setupAlbumRitualLock();bindOpeningSkipButton();});
 function enterWorld(){
   const gate=document.getElementById('gate');
   if(gate){gate.classList.remove('hidden');gate.classList.add('out');}
@@ -4160,7 +4220,34 @@ function closePage(){
   document.body.style.overflow='hidden';
 }
 function toast(msg,bad){const t=document.getElementById('toast');t.textContent=msg;t.style.background=bad?'#963232':'#5b3f2f';t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2300)}
-function api(p){return new Promise((res,rej)=>{let cb='cb'+Date.now()+Math.floor(Math.random()*9e4),u=new URL(CONFIG.GAS_API_URL);Object.keys(p).forEach(k=>u.searchParams.set(k,p[k]));u.searchParams.set('callback',cb);u.searchParams.set('_ts',Date.now());u.searchParams.set('v',CONFIG.APP_VERSION);let sc=document.createElement('script'),tm=setTimeout(()=>done(rej,new Error('讀取逾時')),16000);window[cb]=x=>done(res,x);function done(f,v){clearTimeout(tm);delete window[cb];sc.remove();f(v)}sc.onerror=()=>done(rej,new Error('讀取失敗'));sc.src=u;document.head.appendChild(sc)})}
+function api(p){
+  return new Promise((res,rej)=>{
+    const cb='cb'+Date.now()+Math.floor(Math.random()*9e4);
+    const u=new URL(CONFIG.GAS_API_URL);
+    Object.keys(p).forEach(k=>u.searchParams.set(k,p[k]));
+    u.searchParams.set('callback',cb);
+    u.searchParams.set('_ts',Date.now());
+    u.searchParams.set('v',CONFIG.APP_VERSION);
+
+    let settled=false;
+    const sc=document.createElement('script');
+    const finish=(fn,val)=>{
+      if(settled)return;
+      settled=true;
+      clearTimeout(tm);
+      try{sc.remove();}catch(e){}
+      fn(val);
+      // 延後清理 callback，避免回應延遲到達時出現「callback 未定義」。
+      setTimeout(()=>{try{delete window[cb];}catch(e){window[cb]=undefined;}},30000);
+    };
+
+    const tm=setTimeout(()=>finish(rej,new Error('讀取逾時')),16000);
+    window[cb]=x=>finish(res,x);
+    sc.onerror=()=>finish(rej,new Error('讀取失敗'));
+    sc.src=u;
+    document.head.appendChild(sc);
+  });
+}
 function loadData(){return api({action:'getMemorialData'}).then(r=>{if(!r.ok)throw Error(r.error||'讀取失敗');DATA=r;DATA.photos=orderPhotos(DATA.photos||flatGroups(DATA.photoGroups||[]));renderDynamic();setupAlbumRitualLock();preloadFirstDriveAssets();if(openingCountdownActive)renderOpeningPhotoDraw();startTheme();return r;}).catch(e=>{renderDynamic();toast('雲端資料讀取失敗，先顯示本機內容',1);return null;})}
 function detectAreaKey(text){
   text=String(text||'');
@@ -5360,8 +5447,9 @@ function compactMiniWeatherText(){
 <script>
 /* ===== v62 摩天輪車廂圖片化 + 點開接原本相片區 ===== */
 (function(){
+  if(/^(localhost|127\.0\.0\.1)$/i.test(location.hostname))return;
   const GONDOLA_BASE='https://pub-a5bb8e437f004bb8aecca934db50299f.r2.dev/Ferris%20Wheel/Gondola';
-  const COLORS=['blue','green'];
+  const COLORS=['Blue','Green'];
 
   function esc(s){
     return String(s||'').replace(/[&<>"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]));
@@ -5380,10 +5468,11 @@ function compactMiniWeatherText(){
     cabins.forEach((btn,i)=>{
       if(btn.dataset.gondolaSkinned==='1')return;
       const color=COLORS[i%COLORS.length];
+      const colorClass=color.toLowerCase();
       const title=titleFromCabin(btn,i);
       btn.dataset.gondolaSkinned='1';
       btn.dataset.gondolaColor=color;
-      btn.classList.add('gondola-img-mode','gondola-'+color);
+      btn.classList.add('gondola-img-mode','gondola-'+colorClass);
       btn.innerHTML=
         '<img class="gondola-img gondola-base" src="'+file(color,'without_door.png')+'" alt="'+esc(title)+' 車廂本體">'+
         '<img class="gondola-img gondola-door close left" src="'+file(color,'close_left_door.png')+'" alt="">'+
@@ -5635,6 +5724,7 @@ function compactMiniWeatherText(){
 <script>
 /* ===== v65 使用你給的正確 R2 路徑：/Gondola/Green/close_door.png ===== */
 (function(){
+  if(/^(localhost|127\.0\.0\.1)$/i.test(location.hostname))return;
   const BASE='https://pub-a5bb8e437f004bb8aecca934db50299f.r2.dev/Ferris%20Wheel/Gondola';
   const COLORS=['Green','Blue'];
 
