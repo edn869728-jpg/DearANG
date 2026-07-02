@@ -1,6 +1,6 @@
-﻿<html lang="zh-Hant"><head>
+<html lang="zh-Hant"><head>
 <meta charset="UTF-8">
-<base href="/DearANG/">
+<base id="appBaseHref" href="./">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <!-- v70-cache：已取消 HTML 強制不快取；WebView / 瀏覽器可正常使用快取 -->
 <!-- DearANG v16 KTV stage forced 20260620 -->
@@ -5003,6 +5003,223 @@ function compactMiniWeatherText(){
   }
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',restoreInitialGateState,{once:true});
   else restoreInitialGateState();
+})();
+</script>
+
+
+<script>
+/* ===== v73-app-safe-opening-frame：WebView 開場不半路切掉 + Mini Frame 強制重載播放 ===== */
+(function(){
+  if(window.__DEARANG_APP_SAFE_OPENING_FRAME__)return;
+  window.__DEARANG_APP_SAFE_OPENING_FRAME__=true;
+
+  function uniqueList(list){
+    var seen={};
+    return list.filter(function(x){
+      x=String(x||'').trim();
+      if(!x||seen[x])return false;
+      seen[x]=true;
+      return true;
+    });
+  }
+
+  function playVideoQuietly(v){
+    if(!v)return;
+    try{
+      v.setAttribute('playsinline','');
+      v.setAttribute('webkit-playsinline','');
+      v.muted=true;
+      v.loop=true;
+      v.preload='auto';
+      var p=v.play();
+      if(p&&p.catch)p.catch(function(){
+        setTimeout(function(){try{v.play().catch(function(){});}catch(e){}},220);
+      });
+    }catch(e){}
+  }
+
+  window.setupMiniFrameVideo=function(forceReload){
+    var v=document.getElementById('miniFrameVideo');
+    if(!v)return;
+    var candidates=uniqueList([
+      'assets/videos/mini-frame.mp4',
+      './assets/videos/mini-frame.mp4',
+      'assets/videos/weather-mini/05-sunny.mp4',
+      './assets/videos/weather-mini/05-sunny.mp4',
+      'assets/videos/weather-mini/11-clear-night.mp4',
+      './assets/videos/weather-mini/11-clear-night.mp4'
+    ]);
+    if(v.dataset.framePatchReady!=='1'){
+      v.dataset.framePatchReady='1';
+      v.addEventListener('loadeddata',function(){
+        v.classList.remove('frame-failed');
+        playVideoQuietly(v);
+      });
+      v.addEventListener('canplay',function(){
+        v.classList.remove('frame-failed');
+        playVideoQuietly(v);
+      });
+      v.addEventListener('error',function(){
+        var idx=parseInt(v.dataset.frameCandidateIndex||'0',10)+1;
+        if(idx<candidates.length){
+          loadFrameCandidate(idx);
+        }else{
+          v.classList.add('frame-failed');
+          console.warn('[DearANG] mini-frame 讀不到：請放 app/src/main/assets/www/assets/videos/mini-frame.mp4，或放天氣備援影片。');
+        }
+      });
+    }
+    function loadFrameCandidate(idx){
+      v.dataset.frameCandidateIndex=String(idx);
+      try{
+        v.pause();
+        v.src=candidates[idx];
+        v.load();
+        setTimeout(function(){playVideoQuietly(v);},80);
+      }catch(e){}
+    }
+    var srcNow=v.getAttribute('src')||'';
+    if(forceReload || !srcNow || v.error || v.readyState===0){
+      loadFrameCandidate(0);
+    }else{
+      playVideoQuietly(v);
+    }
+  };
+
+  var oldShowMiniWorld=window.showMiniWorld;
+  window.showMiniWorld=function(){
+    var r;
+    try{r=oldShowMiniWorld&&oldShowMiniWorld.apply(this,arguments);}catch(e){console.warn('[DearANG] showMiniWorld old failed:',e);}
+    try{
+      var mini=document.getElementById('miniWorld');
+      if(mini)mini.classList.remove('hidden','zooming');
+      window.setupMiniFrameVideo(true);
+      setTimeout(function(){window.setupMiniFrameVideo(false);},500);
+    }catch(e){}
+    return r;
+  };
+
+  window.startOpeningMemoryCountdown=function(){
+    if(typeof openingCountdownActive!=='undefined' && openingCountdownActive)return;
+    try{openingCountdownActive=true;}catch(e){}
+    try{playUiSound('open');}catch(e){}
+    try{primeThemeBeforeCountdown();}catch(e){}
+
+    var gate=document.getElementById('gate');
+    var overlay=document.getElementById('openingCountdown');
+    var video=document.getElementById('openingCountdownVideo');
+    if(gate)gate.classList.add('out');
+    if(overlay){overlay.classList.remove('done');overlay.classList.add('show');}
+
+    try{clearTimeout(openingCountdownTimer);openingCountdownTimer=null;}catch(e){}
+
+    if(!video){
+      try{openingCountdownTimer=setTimeout(function(){finishOpeningMemoryCountdown();},1000);}catch(e){}
+      return;
+    }
+
+    var candidates=uniqueList([
+      video.getAttribute('src'),
+      'assets/videos/opening-countdown.mp4',
+      './assets/videos/opening-countdown.mp4'
+    ]);
+    var finished=false;
+    var started=false;
+    var candidateIndex=0;
+
+    function cleanup(){
+      try{clearTimeout(openingCountdownTimer);openingCountdownTimer=null;}catch(e){}
+      video.removeEventListener('ended',onEnded);
+      video.removeEventListener('error',onError);
+      video.removeEventListener('playing',onPlaying);
+      video.removeEventListener('canplay',onCanPlay);
+      video.removeEventListener('loadeddata',onCanPlay);
+    }
+    function finishOnce(){
+      if(finished)return;
+      finished=true;
+      cleanup();
+      window.finishOpeningMemoryCountdown();
+    }
+    function tryPlay(){
+      try{
+        video.setAttribute('playsinline','');
+        video.setAttribute('webkit-playsinline','');
+        video.preload='auto';
+        video.muted=false;
+        video.volume=1;
+        var p=video.play();
+        if(p&&p.catch){
+          p.catch(function(){
+            // Android / iOS 若擋有聲影片，就改成靜音繼續播；不要直接跳走。
+            try{
+              video.muted=true;
+              video.play().catch(function(){
+                console.warn('[DearANG] opening video play blocked; 等使用者按跳過或再次點擊。');
+              });
+            }catch(e){}
+          });
+        }
+      }catch(e){}
+    }
+    function loadCandidate(i){
+      candidateIndex=i;
+      try{
+        video.pause();
+        video.src=candidates[i];
+        video.currentTime=0;
+        video.load();
+      }catch(e){}
+      setTimeout(tryPlay,80);
+    }
+    function onEnded(){finishOnce();}
+    function onPlaying(){
+      started=true;
+      try{clearTimeout(openingCountdownTimer);openingCountdownTimer=null;}catch(e){}
+    }
+    function onCanPlay(){tryPlay();}
+    function onError(){
+      if(candidateIndex+1<candidates.length){
+        loadCandidate(candidateIndex+1);
+        return;
+      }
+      console.warn('[DearANG] opening-countdown.mp4 讀不到，才跳過開場。');
+      finishOnce();
+    }
+
+    video.addEventListener('ended',onEnded);
+    video.addEventListener('error',onError);
+    video.addEventListener('playing',onPlaying);
+    video.addEventListener('canplay',onCanPlay);
+    video.addEventListener('loadeddata',onCanPlay);
+
+    // 只防「影片完全沒開始」；不再用固定 10/12 秒切掉，所以不會播到一半消失。
+    try{
+      openingCountdownTimer=setTimeout(function(){
+        if(!started && (!video.readyState || video.error))finishOnce();
+      },9000);
+    }catch(e){}
+
+    loadCandidate(0);
+  };
+
+  window.finishOpeningMemoryCountdown=function(){
+    var overlay=document.getElementById('openingCountdown');
+    var video=document.getElementById('openingCountdownVideo');
+    try{clearTimeout(openingCountdownTimer);openingCountdownTimer=null;}catch(e){}
+    if(video){try{video.pause();video.currentTime=0;}catch(e){}}
+    var gate=document.getElementById('gate');
+    try{musicWanted=true;}catch(e){}
+    var a=document.getElementById('themeAudio');
+    if(a)a.volume=1;
+    try{startTheme();}catch(e){}
+    setTimeout(function(){
+      if(overlay){overlay.classList.add('done');setTimeout(function(){overlay.classList.remove('show','done');},360);}
+      if(gate)gate.classList.add('hidden');
+      try{window.showMiniWorld();}catch(e){}
+      try{openingCountdownActive=false;}catch(e){}
+    },260);
+  };
 })();
 </script>
 
