@@ -1,0 +1,101 @@
+﻿<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>摩天輪｜建構中</title>
+<style>
+:root{
+  --bg1:#0f1726;
+  --bg2:#1d2b3b;
+  --glow:#f6d59c;
+  --text:#f8edd7;
+  --muted:#d7c5a1;
+  --panel:rgba(16,22,30,.72);
+}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;font-family:"Noto Sans TC","Microsoft JhengHei",sans-serif;color:var(--text)}
+body{
+  background:
+    radial-gradient(1200px 500px at 10% -5%,rgba(246,213,156,.24),transparent 45%),
+    radial-gradient(900px 500px at 90% 110%,rgba(123,200,180,.18),transparent 50%),
+    linear-gradient(160deg,var(--bg1),var(--bg2));
+  display:grid;
+  place-items:center;
+  padding:24px;
+}
+.wrap{
+  width:min(760px,100%);
+  border:1px solid rgba(255,232,192,.28);
+  background:var(--panel);
+  backdrop-filter:blur(10px);
+  border-radius:24px;
+  box-shadow:0 24px 70px rgba(0,0,0,.35);
+  overflow:hidden;
+}
+.head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  padding:14px 16px;
+  border-bottom:1px solid rgba(255,232,192,.18);
+}
+.back{
+  text-decoration:none;
+  color:var(--text);
+  border:1px solid rgba(255,232,192,.35);
+  border-radius:999px;
+  padding:8px 12px;
+  font-weight:800;
+}
+.title{font-weight:900;color:var(--glow)}
+.main{padding:28px 22px 30px;text-align:center}
+.badge{
+  display:inline-block;
+  padding:6px 12px;
+  border-radius:999px;
+  border:1px solid rgba(255,232,192,.3);
+  color:var(--muted);
+  letter-spacing:.08em;
+  font-size:12px;
+  font-weight:800;
+}
+h1{margin:14px 0 8px;font-size:clamp(30px,7vw,48px);line-height:1.1;color:var(--glow)}
+p{margin:0 auto;max-width:560px;line-height:1.75;color:var(--muted);font-size:16px}
+.links{margin-top:22px;display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+.link{
+  text-decoration:none;
+  color:#10141b;
+  background:linear-gradient(180deg,#ffe8bf,#eec57f);
+  border-radius:999px;
+  padding:10px 16px;
+  font-weight:900;
+}
+.link.soft{
+  color:var(--text);
+  background:transparent;
+  border:1px solid rgba(255,232,192,.32);
+}
+.note{margin-top:14px;font-size:13px;color:rgba(255,243,218,.72)}
+</style>
+</head>
+<body>
+  <section class="wrap" aria-label="摩天輪建構中通知">
+    <div class="head">
+      <a class="back" href="index.html">← 回主頁</a>
+      <div class="title">華光相館｜連結預留</div>
+    </div>
+    <div class="main">
+      <div class="badge">FERRIS WHEEL / IN PROGRESS</div>
+      <h1>摩天輪建構中</h1>
+      <p>這裡目前先保留連接位置，正式內容完成後會直接接上。</p>
+      <div class="links">
+        <a class="link" href="index.html">先回主頁</a>
+        <a class="link soft" href="#" onclick="location.reload();return false;">重新整理看看</a>
+      </div>
+      <div class="note">若之後要改成外部連結或正式頁面，請調整 index 的 openPhotoWheelPage。</div>
+    </div>
+  </section>
+</body>
+</html>
