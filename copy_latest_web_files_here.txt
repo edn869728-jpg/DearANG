@@ -1,0 +1,7 @@
+網頁主檔位置：
+app/src/main/assets/www/index.html
+app/src/main/assets/www/gallery-wheel.html
+app/src/main/assets/www/gallery-wheel-manifest.js
+
+之後如果首頁更新，只要覆蓋 assets/www/index.html。
+如果相館摩天輪更新，只要覆蓋 gallery-wheel.html / gallery-wheel-manifest.js。
