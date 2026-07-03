@@ -565,7 +565,24 @@ function getRawItems(g){
     const v=g&&g[k];
     if(Array.isArray(v))out.push(...v);
   });
-  return out;
+  return uniqueMediaItems(out);
+}
+function mediaIdentity(it){
+  if(!it)return '';
+  const id=String(it.id||it.fileId||it.driveId||'').trim();
+  if(id)return 'id:'+id;
+  const url=String(it.streamUrl||it.url||it.webViewUrl||it.thumbnailUrl||'').trim();
+  if(url)return 'url:'+url.split('#')[0];
+  return ['name',String(it.name||it.filename||'').trim().toLowerCase(),'type',String(it.mimeType||it.type||'').trim().toLowerCase(),'size',String(it.size||it.bytes||'').trim(),'folder',String(it._folderPath||'').trim()].join('|');
+}
+function uniqueMediaItems(items){
+  const seen=new Set();
+  return (items||[]).filter(it=>{
+    const key=mediaIdentity(it);
+    if(!key || seen.has(key))return false;
+    seen.add(key);
+    return true;
+  });
 }
 function normalizeDriveGroups(groups){
   const out=[];
@@ -622,16 +639,16 @@ function collectAreaFolders(area,kind,fallbackItems){
   normalized.forEach(g=>{
     let root=g.rootKey || detectAreaKey(g.path) || detectAreaKey(g.name);
     if(root!==area)return;
-    const items=(g.items||[]).filter(it=>matchMediaKind(it,kind));
+    const items=uniqueMediaItems((g.items||[]).filter(it=>matchMediaKind(it,kind)));
     if(!items.length)return;
     const label=cleanFolderLabel(g.path,area);
     const key=g.path||label;
     if(!buckets.has(key))buckets.set(key,{label,path:g.path,items:[]});
     buckets.get(key).items.push(...items);
   });
-  let arr=[...buckets.values()].filter(x=>x.items.length);
+  let arr=[...buckets.values()].map(x=>Object.assign({},x,{items:uniqueMediaItems(x.items)})).filter(x=>x.items.length);
   if(!arr.length && Array.isArray(fallbackItems) && fallbackItems.length){
-    arr=[{label:'主資料夾',path:'',items:fallbackItems.filter(it=>matchMediaKind(it,kind))}].filter(x=>x.items.length);
+    arr=[{label:'主資料夾',path:'',items:uniqueMediaItems(fallbackItems.filter(it=>matchMediaKind(it,kind)))}].filter(x=>x.items.length);
   }
   return arr;
 }
