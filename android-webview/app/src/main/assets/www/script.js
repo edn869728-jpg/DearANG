@@ -136,7 +136,8 @@ let LYRIC_LINES = [
 const LYRIC_OFFSET_SECONDS = 8; // 歌詞固定提前 20 秒
 function setupLyricDanmaku(){
   const audio=document.getElementById('themeAudio');
-  if(!audio || audio.dataset.lyricBound==='1')return;
+  if(!audio || audio.__lyricDanmakuBound)return;
+  audio.__lyricDanmakuBound=true;
   audio.dataset.lyricBound='1';
   audio.addEventListener('timeupdate',()=>{
     if(!lyricsEnabled)return;
