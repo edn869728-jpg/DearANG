@@ -118,6 +118,11 @@
       .detail-actions{grid-column:1 / -1; flex-direction:row;}
       .mini-btn{flex:1;}
     }
+    
+
+    /* v74：點車廂後先轉到月臺，再顯示回憶；避免點哪裡就硬跳哪裡 */
+    #stationLive{display:inline-block;margin-top:3px;color:rgba(80,52,36,.62);font-size:12px;font-weight:1000;letter-spacing:.04em}
+    .cabin.arriving .cabin-inner{filter:brightness(1.12) saturate(1.16);box-shadow:0 22px 40px rgba(0,0,0,.44),0 0 0 6px rgba(247,214,148,.28),0 0 28px rgba(255,214,148,.38)}
     @media (prefers-reduced-motion: reduce){.stars,.stars:before,.stars:after{animation:none}.wheel-spin{transition:none!important}}
   </style>
 </head>
@@ -148,7 +153,7 @@
         <div class="support" aria-hidden="true"></div>
         <div class="station">
           <div class="station-sign">富宜相館 · 摩天輪</div>
-          <div class="station-sub">沒事的時候自己繞，想看的時候點一下。回憶不急，我們慢慢看。</div>
+          <div class="station-sub">沒事的時候自己繞，想看的時候點一下。回憶不急，我們慢慢看。<br><span id="stationLive">第 01 車廂停在月臺。</span></div>
         </div>
       </div>
     </section>
@@ -214,6 +219,7 @@
     const modalTitle = document.getElementById('modalTitle');
     const modalText = document.getElementById('modalText');
     const closeModalBtn = document.getElementById('closeModalBtn');
+    const stationLive = document.getElementById('stationLive');
 
     const cabins = [];
     let selectedIndex = 0;
@@ -221,6 +227,8 @@
     let lastTs = performance.now();
     let paused = false;
     let speed = 0.012; // deg per ms
+    let snapAnimating = false;
+    let snapAnim = null;
 
     const makeImage = (src, alt, fallbackEmoji) => {
       const holder = document.createElement('div');
@@ -301,7 +309,7 @@
     function tick(ts){
       const dt = Math.min(48, ts - lastTs);
       lastTs = ts;
-      if(!paused && !window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+      if(!paused && !snapAnimating && !window.matchMedia('(prefers-reduced-motion: reduce)').matches){
         rotation = (rotation + dt * speed) % 360;
       }
       wheelSpin.style.transform = `rotate(${rotation}deg)`;
@@ -315,19 +323,74 @@
       target.appendChild(wrap);
     }
 
-    function selectCabin(i, userAction){
+    function showCabinDetails(i){
       selectedIndex = i;
       const item = items[i] || items[0];
+      cabins.forEach((c,k)=>c.classList.toggle('arriving', k===i));
       detailTitle.textContent = item.title || `照片 ${i+1}`;
       detailText.textContent = item.text || item.description || '這裡可以放照片說明。';
       fillThumb(detailThumb, item);
       detailCard.classList.add('show');
       detailCard.setAttribute('aria-hidden','false');
+      openBtn.textContent = item.href ? '前往' : '打開';
+      if(stationLive)stationLive.textContent = `第 ${String(i+1).padStart(2,'0')} 車廂已到月臺。`;
+    }
+
+    function normalizeDeg(v){
+      v = v % 360;
+      return v < 0 ? v + 360 : v;
+    }
+
+    function shortestDelta(from, to){
+      return ((to - from + 540) % 360) - 180;
+    }
+
+    function targetRotationForIndex(i){
+      const count = cabins.length || 1;
+      const step = 360 / count;
+      return normalizeDeg(180 - step * i);
+    }
+
+    function rotateToCabin(i, cb){
+      if(!cabins.length){ cb && cb(); return; }
+      if(snapAnim)cancelAnimationFrame(snapAnim);
+      snapAnimating = true;
+      detailCard.classList.remove('show');
+      cabins.forEach((c,k)=>c.classList.toggle('arriving', k===i));
+      if(stationLive)stationLive.textContent = `第 ${String(i+1).padStart(2,'0')} 車廂正在進月臺…`;
+      const start = normalizeDeg(rotation);
+      const target = targetRotationForIndex(i);
+      const delta = shortestDelta(start, target);
+      const t0 = performance.now();
+      const dur = Math.min(1650, Math.max(780, Math.abs(delta) * 7.2));
+      function easeOutCubic(t){return 1 - Math.pow(1 - t, 3)}
+      function step(now){
+        const p = Math.min(1, (now - t0) / dur);
+        rotation = normalizeDeg(start + delta * easeOutCubic(p));
+        wheelSpin.style.transform = `rotate(${rotation}deg)`;
+        layoutCabins();
+        if(p < 1){ snapAnim = requestAnimationFrame(step); }
+        else{
+          rotation = target;
+          snapAnimating = false;
+          snapAnim = null;
+          wheelSpin.style.transform = `rotate(${rotation}deg)`;
+          layoutCabins();
+          cb && cb();
+        }
+      }
+      snapAnim = requestAnimationFrame(step);
+    }
+
+    function selectCabin(i, userAction){
+      selectedIndex = i;
       if(userAction){
         paused = true;
         pauseBtn.textContent = '▶';
+        rotateToCabin(i, () => showCabinDetails(i));
+        return;
       }
-      openBtn.textContent = item.href ? '前往' : '打開';
+      showCabinDetails(i);
     }
 
     function openSelected(){
@@ -367,6 +430,9 @@
     document.addEventListener('keydown', e => { if(e.key === 'Escape') closeModal(); });
 
     buildWheel();
+    rotation = targetRotationForIndex(0);
+    wheelSpin.style.transform = `rotate(${rotation}deg)`;
+    layoutCabins();
     selectCabin(0, false);
     requestAnimationFrame(tick);
   })();

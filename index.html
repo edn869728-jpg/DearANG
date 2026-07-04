@@ -1,4 +1,4 @@
-﻿<html lang="zh-Hant"><head>
+<html lang="zh-Hant"><head>
 <meta charset="UTF-8">
 <base id="appBaseHref" href="./">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
@@ -1178,9 +1178,9 @@ a{color:inherit}
 .mini-crt-screen{left:6.9444%!important;top:22.6736%!important;width:87.5000%!important;height:18.4722%!important;border-radius:.8%!important;}
 .mini-world-panel{display:block!important;position:static!important;width:0!important;height:0!important;margin:0!important;padding:0!important;overflow:hidden!important;}
 /* 天氣資訊：x 60–655 / y 1204–1269 */
-.mini-weather-status{position:absolute!important;z-index:6!important;left:4.8%!importan0%!important;width:55.0926%!important;height:2.2569%!important;color:rgba(76,43,22,.82)!important;background:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;padding:0!important;text-align:left!important;font-size:clamp(7px,1.08vw + .13rem,12px)!important;line-height:1.28!important;font-weight:900!important;text-shadow:0 1px 0 rgba(255,247,220,.48)!important;pointer-events:none!important;backdrop-filter:none!important;overflow:hidden!important;}
-/* 給阿明的話：從 x=180 / y=1570 開始（以 1080x2880 換算） */
-.frame-letter-card{position:absolute!important;z-index:5!important;left:16.6667%!important;top:54.5139%!important;width:59.5370%!important;height:35.4861%!important;margin:0!important;padding:0!important;overflow:hidden!important;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;backdrop-filter:none!important;color:#4b2b16!important;text-align:left!important;}
+.mini-weather-status{position:absolute!important;z-index:6!important;left:5.5556%!important;top:41.8056%!important;width:55.0926%!important;height:2.2569%!important;color:rgba(76,43,22,.82)!important;background:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;padding:0!important;text-align:left!important;font-size:clamp(7px,1.08vw + .13rem,12px)!important;line-height:1.28!important;font-weight:900!important;text-shadow:0 1px 0 rgba(255,247,220,.48)!important;pointer-events:none!important;backdrop-filter:none!important;overflow:hidden!important;}
+/* 給阿明的話：H 1750 up（從 y=1750 開始往下） */
+.frame-letter-card{position:absolute!important;z-index:5!important;left:22.7778%!important;top:58.7639%!important;width:59.5370%!important;height:35.4861%!important;margin:0!important;padding:0!important;overflow:hidden!important;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;backdrop-filter:none!important;color:#4b2b16!important;text-align:left!important;}
 .frame-letter-text{width:100%!important;height:100%!important;overflow:hidden!important;color:#4b2b16!important;font-size:clamp(12px,21.22vw + .16rem,13px)!important;line-height:1.56!important;font-weight:760!important;letter-spacing:.01em!important;text-shadow:0 1px 0 rgba(255,247,220,.36)!important;font-family:"Noto Serif TC","Noto Sans TC",serif!important;}
 /* radio 座標：播放 x708–768/y1450–1505；停止 x807–867/y1450–1505 */
 .radio-audio-hit{position:absolute!important;z-index:9!important;top:50.3472%!important;width:5.5556%!important;height:1.9097%!important;min-height:0!important;padding:0!important;margin:0!important;border-radius:50%!important;display:grid!important;place-items:center!important;background:rgba(255,244,214,.12)!important;border:1px solid rgba(68,38,18,.18)!important;box-shadow:none!important;color:#251307!important;text-shadow:0 1px 0 rgba(255,248,220,.35)!important;cursor:pointer!important;backdrop-filter:none!important;}
@@ -1746,8 +1746,8 @@ button, .pill {
 /* 針對「給阿明的信」等主要文字區塊調整 */
 /* 針對「給阿明的信」等主要文字區塊調整 (字體微調縮小、保持密集) */
 .letter-text, .frame-letter-text {
-  font-size: clamp(12px, 3.2vw, 19px) !important; /* 縮小基準值與最大值 */
-  line-height: 1.28 !important; 
+  font-size: clamp(14px, 3.5vw, 19px) !important; /* 縮小基準值與最大值 */
+  line-height: 1.5 !important; 
   font-weight: 700 !important;
   letter-spacing: 0em !important; 
   text-align: justify !important;
@@ -1974,7 +1974,7 @@ button, .pill {
 /* 信件文字：不改大小，只加粗、收密一點，給長輩看仍清楚 */
 #miniWorld .frame-letter-text{
   font-weight:950!important;
-  line-height:1.28!important;
+  line-height:1.38!important;
   letter-spacing:-0.012em!important;
   word-spacing:-0.04em!important;
 }
@@ -2230,7 +2230,112 @@ button, .pill {
   background:#000!important;
 }
 
-</style>
+
+
+/* ===== v74 公路局：地標到站蹦出放大 + 故事卡往下靠，不再撞上方橫幅 ===== */
+#page-nav .route-landmark-pop{
+  position:absolute;
+  left:50%;
+  top:50%;
+  z-index:23;
+  width:clamp(96px, 28vw, 184px);
+  min-height:76px;
+  transform:translate(-50%,-86%) scale(.55);
+  transform-origin:50% 100%;
+  opacity:0;
+  pointer-events:none;
+  filter:drop-shadow(0 14px 22px rgba(0,0,0,.28));
+  transition:opacity .22s ease, transform .42s cubic-bezier(.18,1.35,.32,1), filter .35s ease;
+}
+#page-nav .route-landmark-pop.show{
+  opacity:1;
+  transform:translate(-50%,-108%) scale(1);
+  animation:routeLandmarkBounce .62s cubic-bezier(.18,1.35,.32,1) both;
+}
+#page-nav .route-landmark-pop img{
+  display:block;
+  width:100%;
+  height:auto;
+  max-height:160px;
+  object-fit:contain;
+  margin:0 auto;
+  border-radius:10px;
+}
+#page-nav .route-landmark-pop.missing img{display:none}
+#page-nav .route-landmark-label{
+  display:inline-flex;
+  margin:4px auto 0;
+  max-width:100%;
+  padding:4px 8px;
+  border-radius:999px;
+  background:rgba(54,32,14,.72);
+  color:#fff2cb;
+  font-size:10px;
+  line-height:1.25;
+  font-weight:950;
+  letter-spacing:.03em;
+  white-space:nowrap;
+  transform:translateX(-50%);
+  position:relative;
+  left:50%;
+  backdrop-filter:blur(6px);
+  box-shadow:0 6px 16px rgba(0,0,0,.18);
+}
+@keyframes routeLandmarkBounce{
+  0%{opacity:0;transform:translate(-50%,-76%) scale(.42)}
+  62%{opacity:1;transform:translate(-50%,-112%) scale(1.12)}
+  100%{opacity:1;transform:translate(-50%,-108%) scale(1)}
+}
+#page-nav .route-story-card{
+  left:50%!important;
+  top:auto!important;
+  bottom:calc(68px + var(--route-safe-bottom))!important;
+  width:min(82vw,430px)!important;
+  max-width:calc(100vw - 28px)!important;
+  min-height:74px!important;
+  max-height:150px!important;
+  padding:10px 12px 11px!important;
+  border-radius:18px!important;
+  background:rgba(5,4,3,.54)!important;
+  border-color:rgba(255,232,180,.26)!important;
+  color:#fff2cb!important;
+  backdrop-filter:blur(10px)!important;
+  box-shadow:0 14px 38px rgba(0,0,0,.36)!important;
+  transform:translateX(-50%) translateY(10px) scale(.98)!important;
+}
+#page-nav .route-story-card.show,
+#page-nav .route-story-card:hover,
+#page-nav .route-story-card.open{
+  opacity:1!important;
+  transform:translateX(-50%) translateY(0) scale(1)!important;
+  background:rgba(5,4,3,.68)!important;
+}
+#page-nav .route-story-card.switching{
+  opacity:.22!important;
+  transform:translateX(-50%) translateY(18px) scale(.96)!important;
+}
+#page-nav .route-story-card.open{
+  width:min(90vw,480px)!important;
+  max-height:min(34svh,360px)!important;
+}
+#page-nav .route-story-card.justChanged{animation:routeCardBottomSoftIn .45s cubic-bezier(.22,1,.36,1) both!important}
+@keyframes routeCardBottomSoftIn{from{opacity:.18;transform:translateX(-50%) translateY(24px) scale(.96);filter:blur(1.4px)}to{opacity:1;transform:translateX(-50%) translateY(0) scale(1);filter:none}}
+#page-nav .route-story-title{color:#fff4d8!important;font-size:clamp(16px,4.2vw,22px)!important}
+#page-nav .route-tag{color:rgba(255,232,190,.72)!important;font-size:11px!important}
+#page-nav .route-body{max-height:72px!important;margin-top:7px!important}
+#page-nav .route-story-card.open .route-body{max-height:calc(min(34svh,360px) - 78px)!important}
+#page-nav .route-body p{color:rgba(255,255,255,.82)!important;font-size:clamp(12px,3.35vw,15px)!important;line-height:1.58!important}
+#page-nav .route-body .em{color:#fff7d6!important}
+#page-nav .route-num{background:#d49d4e!important;color:#2c180c!important;box-shadow:0 0 0 3px rgba(255,255,255,.08), inset 0 -3px 0 rgba(0,0,0,.18)!important}
+#page-nav .route-dots{bottom:calc(38px + var(--route-safe-bottom))!important;z-index:26!important}
+#page-nav .route-hint{bottom:calc(220px + var(--route-safe-bottom))!important;background:rgba(5,4,3,.42)!important}
+@media(max-width:520px){
+  #page-nav .route-story-card{width:min(84vw,410px)!important;bottom:calc(70px + var(--route-safe-bottom))!important;left:50%!important}
+  #page-nav .route-story-card.open{width:min(92vw,470px)!important;max-height:36svh!important}
+  #page-nav .route-landmark-pop{width:clamp(88px, 30vw, 156px)}
+}
+
+  </style>
 </head>
 <body>
 <div class="lyric-danmaku-layer" id="lyricDanmakuLayer" aria-hidden="true"></div>
@@ -2325,7 +2430,7 @@ button, .pill {
   <div class="hint"><div class="hint-inner"><span>← →</span><div>左右滑這條街<small>點招牌或建築，進入對應的時光。</small></div></div></div>
 </div>
 
-<audio id="themeAudio" preload="metadata" loop="" src="assets/audio/dear-ang-theme.mp3"></audio>
+<audio id="themeAudio" preload="metadata" loop="" data-lyric-bound="1" src="assets/audio/dear-ang-theme.mp3"></audio>
 
 <div class="visitor-identity-modal hidden" id="visitorIdentityModal" onclick="visitorModalBackdropClose(event)">
   <div class="visitor-identity-card" onclick="event.stopPropagation()">
@@ -2485,6 +2590,7 @@ button, .pill {
     <div class="route-title-pill" id="routeTitlePill">通往他的路｜當我想見你的時候</div>
     <div class="route-nav-buttons"><button id="routePrev" type="button" aria-label="上一站">↑</button><button id="routeNext" type="button" aria-label="下一站">↓</button></div>
     <div id="routeSpots"></div>
+    <div class="route-landmark-pop" id="routeLandmarkPop" aria-hidden="true"><img id="routeLandmarkImg" alt=""><div class="route-landmark-label" id="routeLandmarkLabel"></div></div>
     <article class="route-story-card" id="routeCard">
       <div class="route-story-top" id="routeCardTop"><div class="route-num" id="routeNum">1</div><div><h2 class="route-story-title" id="routeStoryTitle"></h2><div class="route-tag" id="routeStoryTag"></div></div></div>
       <div class="route-body" id="routeStoryBody"></div>
@@ -2640,8 +2746,7 @@ let LYRIC_LINES = [
 const LYRIC_OFFSET_SECONDS = 8; // 歌詞固定提前 20 秒
 function setupLyricDanmaku(){
   const audio=document.getElementById('themeAudio');
-  if(!audio || audio.__lyricDanmakuBound)return;
-  audio.__lyricDanmakuBound=true;
+  if(!audio || audio.dataset.lyricBound==='1')return;
   audio.dataset.lyricBound='1';
   audio.addEventListener('timeupdate',()=>{
     if(!lyricsEnabled)return;
@@ -3395,24 +3500,7 @@ function getRawItems(g){
     const v=g&&g[k];
     if(Array.isArray(v))out.push(...v);
   });
-  return uniqueMediaItems(out);
-}
-function mediaIdentity(it){
-  if(!it)return '';
-  const id=String(it.id||it.fileId||it.driveId||'').trim();
-  if(id)return 'id:'+id;
-  const url=String(it.streamUrl||it.url||it.webViewUrl||it.thumbnailUrl||'').trim();
-  if(url)return 'url:'+url.split('#')[0];
-  return ['name',String(it.name||it.filename||'').trim().toLowerCase(),'type',String(it.mimeType||it.type||'').trim().toLowerCase(),'size',String(it.size||it.bytes||'').trim(),'folder',String(it._folderPath||'').trim()].join('|');
-}
-function uniqueMediaItems(items){
-  const seen=new Set();
-  return (items||[]).filter(it=>{
-    const key=mediaIdentity(it);
-    if(!key || seen.has(key))return false;
-    seen.add(key);
-    return true;
-  });
+  return out;
 }
 function normalizeDriveGroups(groups){
   const out=[];
@@ -3469,16 +3557,16 @@ function collectAreaFolders(area,kind,fallbackItems){
   normalized.forEach(g=>{
     let root=g.rootKey || detectAreaKey(g.path) || detectAreaKey(g.name);
     if(root!==area)return;
-    const items=uniqueMediaItems((g.items||[]).filter(it=>matchMediaKind(it,kind)));
+    const items=(g.items||[]).filter(it=>matchMediaKind(it,kind));
     if(!items.length)return;
     const label=cleanFolderLabel(g.path,area);
     const key=g.path||label;
     if(!buckets.has(key))buckets.set(key,{label,path:g.path,items:[]});
     buckets.get(key).items.push(...items);
   });
-  let arr=[...buckets.values()].map(x=>Object.assign({},x,{items:uniqueMediaItems(x.items)})).filter(x=>x.items.length);
+  let arr=[...buckets.values()].filter(x=>x.items.length);
   if(!arr.length && Array.isArray(fallbackItems) && fallbackItems.length){
-    arr=[{label:'主資料夾',path:'',items:uniqueMediaItems(fallbackItems.filter(it=>matchMediaKind(it,kind)))}].filter(x=>x.items.length);
+    arr=[{label:'主資料夾',path:'',items:fallbackItems.filter(it=>matchMediaKind(it,kind))}].filter(x=>x.items.length);
   }
   return arr;
 }
@@ -4150,6 +4238,40 @@ function openTreasureMapFromStreet(event){
   function routeEscHtml(s){return String(s||'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));}
   function ease(t){return t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2}
   function inCard(e){return !!(e.target&&e.target.closest&&e.target.closest('#page-nav .route-story-card'))}
+  function routePad(n){return String(n).padStart(2,'0')}
+  function routeLandmarkCandidates(n){
+    const p=routePad(n);
+    const bases=[`landmark-${p}`,`station-${p}`,`route-${p}`,`spot-${p}`,p];
+    const exts=['webp','png','jpg','jpeg','gif'];
+    const out=[];
+    bases.forEach(b=>exts.forEach(ext=>out.push(`assets/images/route/${b}.${ext}`)));
+    return out;
+  }
+  function showRouteLandmark(s){
+    if(!state||!state.pop)return;
+    const pop=state.pop,img=state.popImg,label=state.popLabel;
+    pop.classList.remove('show','missing');
+    pop.setAttribute('aria-hidden','true');
+    pop.style.left=(s.x/2160*100)+'%';
+    pop.style.top=(s.y/3840*100)+'%';
+    if(label)label.textContent=s.n+'｜'+s.title;
+    let cands=routeLandmarkCandidates(s.n), idx=0;
+    if(img){
+      img.alt=s.title||'';
+      img.onerror=()=>{
+        idx++;
+        if(idx<cands.length){ img.src=cands[idx]; }
+        else{ pop.classList.add('missing'); img.removeAttribute('src'); }
+      };
+      img.src=cands[idx];
+    }
+    clearTimeout(state.popTimer);
+    state.popTimer=setTimeout(()=>{
+      if(!state)return;
+      pop.classList.add('show');
+      pop.setAttribute('aria-hidden','false');
+    },90);
+  }
   function pageVisible(){const p=document.getElementById('page-nav');return !!(p&&p.classList.contains('show'))}
   function setProgress(t){
     if(!state)return;
@@ -4168,6 +4290,7 @@ function openTreasureMapFromStreet(event){
     state.title.textContent=s.title;
     state.tag.textContent=s.tag;
     state.body.innerHTML=s.body.map(x=>`<p>${x}</p>`).join('');
+    showRouteLandmark(s);
     state.body.scrollTop=0;
     state.spotEls.forEach((el,k)=>el.classList.toggle('active',k===i));
     state.dotEls.forEach((el,k)=>el.classList.toggle('on',k===i));
@@ -4199,6 +4322,7 @@ function openTreasureMapFromStreet(event){
     state.open=false;
     clearTimeout(state.autoHide);
     state.card.classList.remove('open','justChanged');
+    if(state.pop)state.pop.classList.remove('show');
     state.card.classList.add('show','switching');
     animateTo(routeStations[state.idx].t,()=>render(state.idx));
     if(typeof playUiSound==='function')playUiSound('slide');
@@ -4209,7 +4333,7 @@ function openTreasureMapFromStreet(event){
     if(state){setTimeout(()=>setProgress(state.currentT||0),40);return;}
     const path=document.getElementById('routeMapPath'),done=document.getElementById('routeMapDone'),hot=document.getElementById('routeMapHot'),light=document.getElementById('routeMapLight');
     const spots=document.getElementById('routeSpots'),dots=document.getElementById('routeDots');
-    const card=document.getElementById('routeCard'),num=document.getElementById('routeNum'),title=document.getElementById('routeStoryTitle'),tag=document.getElementById('routeStoryTag'),body=document.getElementById('routeStoryBody'),hint=document.getElementById('routeHint'),titlePill=document.getElementById('routeTitlePill');
+    const card=document.getElementById('routeCard'),num=document.getElementById('routeNum'),title=document.getElementById('routeStoryTitle'),tag=document.getElementById('routeStoryTag'),body=document.getElementById('routeStoryBody'),hint=document.getElementById('routeHint'),titlePill=document.getElementById('routeTitlePill'),pop=document.getElementById('routeLandmarkPop'),popImg=document.getElementById('routeLandmarkImg'),popLabel=document.getElementById('routeLandmarkLabel');
     if(!path||!done||!hot||!light||!spots||!dots||!card)return;
     spots.innerHTML='';dots.innerHTML='';
     routeStations.forEach((s,i)=>{
@@ -4226,7 +4350,7 @@ function openTreasureMapFromStreet(event){
     const total=path.getTotalLength();
     done.style.strokeDasharray=total;
     hot.style.strokeDasharray='120 '+total;
-    state={root,path,done,hot,light,spots,dots,card,num,title,tag,body,hint,titlePill,total,idx:0,anim:null,autoHide:null,open:false,currentT:0,lock:false,sy:0,sx:0,touchOnCard:false,spotEls:[...spots.querySelectorAll('.route-spot')],dotEls:[...dots.querySelectorAll('span')]};
+    state={root,path,done,hot,light,spots,dots,card,num,title,tag,body,hint,titlePill,pop,popImg,popLabel,popTimer:null,total,idx:0,anim:null,autoHide:null,open:false,currentT:0,lock:false,sy:0,sx:0,touchOnCard:false,spotEls:[...spots.querySelectorAll('.route-spot')],dotEls:[...dots.querySelectorAll('span')]};
     document.getElementById('routePrev').onclick=()=>go(state.idx-1);
     document.getElementById('routeNext').onclick=()=>go(state.idx+1);
     document.getElementById('routeCardTop').onclick=()=>{state.open=!state.open;state.card.classList.toggle('open',state.open);state.card.classList.add('show');state.hint.classList.toggle('hide',state.open)};
