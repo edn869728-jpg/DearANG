@@ -6963,4 +6963,183 @@ function compactMiniWeatherText(){
   window.addEventListener('load',function(){bindKtvObserver();window.setupMiniFrameVideo(false);});
 })();
 </script>
+
+<script>
+/* ===== v76：街道世界跟 Mini World 使用同一個天氣，不再被預設晴天蓋掉 ===== */
+(function(){
+  if(window.__DEARANG_V76_STREET_WEATHER_SYNC__)return;
+  window.__DEARANG_V76_STREET_WEATHER_SYNC__=true;
+
+  function normalizeStreetWeatherKey(key){
+    key=String(key||'').trim();
+    if(/deep.*night.*rain|night.*rain|夜雨/i.test(key))return 'nightRain';
+    if(/night|clear.*night|夜/i.test(key))return 'night';
+    if(/thunder|storm|雷|暴|豪|颱/i.test(key))return 'storm';
+    if(/rain|shower|雨/i.test(key))return 'rain';
+    if(/fog|霧/i.test(key))return 'fog';
+    if(/haze|霾/i.test(key))return 'haze';
+    if(/overcast|陰/i.test(key))return 'overcast';
+    if(/cloud|雲/i.test(key))return 'cloudy';
+    if(/hot|熱/i.test(key))return 'hot';
+    if(/snow|雪/i.test(key))return 'snow';
+    return key||'sunny';
+  }
+
+  function getStreetWeather(){
+    var key='sunny';
+    try{if(typeof memoryWeatherKey!=='undefined'&&memoryWeatherKey)key=memoryWeatherKey;}catch(e){}
+    key=normalizeStreetWeatherKey(key);
+    try{
+      if(typeof memoryWeatherByKey==='function')return memoryWeatherByKey(key);
+    }catch(e){}
+    return {key:key,label:key,bg:'assets/images/weather/day-sunny.webp',fx:''};
+  }
+
+  function setImgWithFallback(img,src){
+    if(!img||!src)return;
+    if((img.getAttribute('src')||'')===src)return;
+    var test=new Image();
+    test.onload=function(){img.src=src;};
+    test.onerror=function(){
+      img.src='assets/images/memory-world.webp';
+      var stage=document.getElementById('stage');
+      if(stage)stage.classList.add('stage-weather-fallback');
+    };
+    test.src=src;
+  }
+
+  window.syncStreetWeatherFromMemory=function(){
+    var w=getStreetWeather();
+    var stage=document.getElementById('stage');
+    var img=document.getElementById('stageWorldImg');
+    var fx=document.getElementById('worldWeather');
+    if(stage){
+      stage.dataset.weatherKey=w.key;
+      stage.classList.remove('stage-weather-fallback');
+      stage.dataset.weatherSynced='v76';
+    }
+    if(img){
+      setImgWithFallback(img,w.bg);
+      img.alt='富宜路街道世界｜'+(w.label||w.key);
+      img.style.opacity='1';
+    }
+    if(fx){
+      fx.className='world-weather '+(w.fx||'');
+      fx.style.display=w.fx?'':'none';
+    }
+  };
+
+  var oldSet=window.setMemoryWeather;
+  if(typeof oldSet==='function'&&!oldSet.__v76StreetWeatherWrapped){
+    window.setMemoryWeather=function(key,ev,source){
+      var r=oldSet.apply(this,arguments);
+      try{memoryWeatherKey=normalizeStreetWeatherKey(key||memoryWeatherKey);}catch(e){}
+      setTimeout(window.syncStreetWeatherFromMemory,0);
+      setTimeout(window.syncStreetWeatherFromMemory,160);
+      return r;
+    };
+    window.setMemoryWeather.__v76StreetWeatherWrapped=true;
+  }
+
+  var oldEnter=window.enterMainWorld;
+  if(typeof oldEnter==='function'&&!oldEnter.__v76StreetWeatherWrapped){
+    window.enterMainWorld=function(){
+      window.syncStreetWeatherFromMemory();
+      var r=oldEnter.apply(this,arguments);
+      setTimeout(window.syncStreetWeatherFromMemory,80);
+      setTimeout(window.syncStreetWeatherFromMemory,720);
+      return r;
+    };
+    window.enterMainWorld.__v76StreetWeatherWrapped=true;
+  }
+
+  var oldShow=window.showMiniWorld;
+  if(typeof oldShow==='function'&&!oldShow.__v76StreetWeatherWrapped){
+    window.showMiniWorld=function(){
+      var r=oldShow.apply(this,arguments);
+      setTimeout(window.syncStreetWeatherFromMemory,180);
+      return r;
+    };
+    window.showMiniWorld.__v76StreetWeatherWrapped=true;
+  }
+
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',function(){setTimeout(window.syncStreetWeatherFromMemory,300);},{once:true});
+  else setTimeout(window.syncStreetWeatherFromMemory,300);
+  window.addEventListener('load',function(){setTimeout(window.syncStreetWeatherFromMemory,500);});
+})();
+</script>
+
+<script>
+/* ===== v77：從場館返回街道後強制解鎖，避免街道滑動/點擊卡住 ===== */
+(function(){
+  if(window.__DEARANG_V77_STREET_RETURN_UNLOCK__)return;
+  window.__DEARANG_V77_STREET_RETURN_UNLOCK__=true;
+
+  window.restoreStreetAfterPageClose=function(){
+    try{
+      document.querySelectorAll('.page.closing').forEach(function(p){p.classList.remove('show','closing');});
+      document.querySelectorAll('.page:not(.show)').forEach(function(p){p.classList.remove('closing');});
+
+      document.querySelectorAll('.page video,.page audio').forEach(function(m){
+        try{m.pause();}catch(e){}
+      });
+      try{if(typeof ktvStop==='function')ktvStop();}catch(e){}
+      try{if(typeof ktvHideDriveFrame==='function')ktvHideDriveFrame();}catch(e){}
+
+      var world=document.getElementById('world');
+      var scroller=document.getElementById('scroller');
+      var stage=document.getElementById('stage');
+      var mini=document.getElementById('miniWorld');
+      if(world){
+        world.classList.remove('hidden');
+        world.style.pointerEvents='';
+      }
+      if(mini&&mini.classList.contains('hidden')){
+        mini.classList.remove('zooming');
+        mini.style.pointerEvents='';
+      }
+      if(scroller){
+        scroller.style.overflowX='auto';
+        scroller.style.overflowY='hidden';
+        scroller.style.pointerEvents='auto';
+        scroller.style.touchAction='pan-x';
+        scroller.style.webkitOverflowScrolling='touch';
+      }
+      if(stage){
+        stage.style.pointerEvents='auto';
+        stage.querySelectorAll('.hotspot,.person-tag-hotspot').forEach(function(el){
+          el.style.pointerEvents='auto';
+          el.classList.remove('show-name');
+        });
+      }
+      document.body.style.overflow='hidden';
+      document.body.classList.remove('modal-open','page-open','route-lock');
+      try{if(typeof syncStreetWeatherFromMemory==='function')syncStreetWeatherFromMemory();}catch(e){}
+      try{if(typeof startTheme==='function')startTheme();}catch(e){}
+    }catch(e){
+      console.warn('[DearANG] restore street failed:',e);
+    }
+  };
+
+  var oldClose=window.closePage;
+  if(typeof oldClose==='function'&&!oldClose.__v77StreetUnlockWrapped){
+    window.closePage=function(){
+      var r=oldClose.apply(this,arguments);
+      setTimeout(window.restoreStreetAfterPageClose,80);
+      setTimeout(window.restoreStreetAfterPageClose,260);
+      return r;
+    };
+    window.closePage.__v77StreetUnlockWrapped=true;
+  }
+
+  var oldOpen=window.openPage;
+  if(typeof oldOpen==='function'&&!oldOpen.__v77StreetUnlockWrapped){
+    window.openPage=function(id){
+      try{document.querySelectorAll('.page.closing').forEach(function(p){p.classList.remove('show','closing');});}catch(e){}
+      return oldOpen.apply(this,arguments);
+    };
+    window.openPage.__v77StreetUnlockWrapped=true;
+  }
+})();
+</script>
 </body></html>
