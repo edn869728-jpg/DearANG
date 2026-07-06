@@ -20,6 +20,8 @@ setTimeout(function(){
 <!-- DearANG focused fix: lyrics binding/path + mini-frame weather video 20260706 -->
 <!-- DearANG smart-lock strict flow corrected 20260706 -->
 <!-- DearANG split smart-lock flow: first code → Gate → second code → Opening 20260707 -->
+<!-- DearANG fixed-rate password animation 80ms per key 20260707 -->
+<!-- DearANG balanced password speed 210ms per key 20260707 -->
 <title>摯愛｜Dear ANG </title>
 <style>
 :root{
@@ -6733,7 +6735,7 @@ html.dearang-before-mini #angSmartLockGate{
   width:calc(100% - clamp(126px,15.5vw,184px));
   transform-origin:0 50%;
   transform:translateY(-50%) rotate(0deg);
-  transition:transform 1.08s cubic-bezier(.2,.76,.18,1);
+  transition:transform .42s cubic-bezier(.22,.78,.2,1);
   z-index:3;
 }
 
@@ -6789,7 +6791,7 @@ html.dearang-before-mini #angSmartLockGate{
   font-weight:450;
   line-height:1;
   transform:scale(1);
-  transition:color .12s ease,text-shadow .12s ease,transform .12s ease;
+  transition:color .07s linear,text-shadow .07s linear,transform .07s linear;
   user-select:none;
 }
 
@@ -7088,24 +7090,40 @@ html.dearang-before-mini #angSmartLockGate{
   }
 
   async function flashCode(code,color){
+    var LIGHT_MS=155;
+    var DARK_MS=55;
+
     for(var i=0;i<code.length;i++){
       var key=keyFor(code.charAt(i));
 
-      keys.forEach(function(item){item.classList.remove('active');});
+      keys.forEach(function(item){
+        item.classList.remove('active');
+      });
 
       if(key){
-        key.classList.add('active');
+        /*
+          強制重新開始發光效果。
+          即使連續兩次是同一個數字，也不會黏在一起，
+          每一顆都固定亮 58ms、暗 22ms。
+        */
+        key.classList.remove('active');
+        void key.offsetWidth;
+
         if(color)key.classList.add(color);
+        key.classList.add('active');
       }
 
-      await wait(95);
+      await wait(LIGHT_MS);
 
       if(key){
         key.classList.remove('active');
-        if(!color)key.classList.remove('green','blue');
+
+        if(!color){
+          key.classList.remove('green','blue');
+        }
       }
 
-      await wait(25);
+      await wait(DARK_MS);
     }
   }
 
@@ -7415,7 +7433,6 @@ html.dearang-before-mini #angSmartLockGate{
 
     S.phase='lock';
     pauseEverythingExceptOpening();
-    prepareOnlyOpeningVideo();
 
     clearKeys();
 
@@ -7433,7 +7450,7 @@ html.dearang-before-mini #angSmartLockGate{
     showLockOverlay();
 
     setStatus('第一組密碼');
-    await wait(160);
+    await wait(140);
 
     await flashCode(FIRST_CODE,'');
 
@@ -7442,12 +7459,12 @@ html.dearang-before-mini #angSmartLockGate{
     if(device)device.classList.add('state-green');
 
     setStatus('第一道記憶通過','green');
-    await wait(210);
+    await wait(220);
 
     if(device)device.classList.add('angle-45');
 
     setStatus('門把轉至 45°','green');
-    await wait(540);
+    await wait(440);
 
     await hideLockOverlay();
 
@@ -7466,6 +7483,14 @@ html.dearang-before-mini #angSmartLockGate{
       gate.style.visibility='';
       gate.style.pointerEvents='';
     }
+
+    /*
+      第一組完成、Gate 已經顯示後才預備 Opening。
+      避免影片解碼與數字動畫同時進行造成忽快忽慢。
+    */
+    setTimeout(function(){
+      prepareOnlyOpeningVideo();
+    },180);
   }
 
   async function runSecondLockThenOpening(){
@@ -7480,7 +7505,6 @@ html.dearang-before-mini #angSmartLockGate{
     S.phase='lock';
 
     pauseEverythingExceptOpening();
-    prepareOnlyOpeningVideo();
 
     var gate=document.getElementById('gate');
     if(gate)gate.classList.add('out');
@@ -7498,7 +7522,7 @@ html.dearang-before-mini #angSmartLockGate{
     if(unlockIcon)unlockIcon.classList.remove('show');
 
     setStatus('第二組密碼','blue');
-    await wait(220);
+    await wait(140);
 
     clearKeys();
 
@@ -7512,7 +7536,7 @@ html.dearang-before-mini #angSmartLockGate{
     colorAll('blue');
     setStatus('第二道記憶通過','blue');
 
-    await wait(210);
+    await wait(220);
 
     if(device){
       device.classList.remove('angle-45');
@@ -7520,12 +7544,12 @@ html.dearang-before-mini #angSmartLockGate{
     }
 
     setStatus('門把轉至 90°','blue');
-    await wait(620);
+    await wait(440);
 
     if(unlockIcon)unlockIcon.classList.add('show');
 
     setStatus('已解鎖','blue');
-    await wait(330);
+    await wait(260);
 
     await enterStrictOpening();
   }
