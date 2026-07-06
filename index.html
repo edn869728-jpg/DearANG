@@ -1,18 +1,7 @@
 <html lang="zh-Hant"><head>
 <meta charset="UTF-8">
-<base id="appBaseHref" href="/DearANG/">
-<script>
-(function(){
-  try{
-    if(/^(localhost|127\.0\.0\.1)$/i.test(location.hostname)){
-      var base=document.getElementById('appBaseHref');
-      if(base)base.setAttribute('href','/');
-    }
-  }catch(e){}
-})();
-</script>
+<base href="/DearANG/">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='28' fill='%23d6a85d'/%3E%3Ctext x='32' y='41' font-size='28' text-anchor='middle' fill='white'%3E%E2%99%A1%3C/text%3E%3C/svg%3E">
 <!-- v70-cache：已取消 HTML 強制不快取；WebView / 瀏覽器可正常使用快取 -->
 <!-- DearANG v16 KTV stage forced 20260620 -->
 <!-- DearANG v21 opening countdown video 20260620 -->
@@ -20,6 +9,7 @@
 <!-- DearANG v47 based on index(53): calibrated building/person hotspots no cover crop 20260625 -->
 <!-- DearANG v48 KTV Drive preview + page top spacing + invisible building hotspots 20260625 -->
 <!-- DearANG v56 mini-frame 11 weather videos + KTV left + map title fix 20260627 -->
+<!-- DearANG focused fix: lyrics binding/path + mini-frame weather video 20260706 -->
 <title>摯愛｜Dear ANG </title>
 <style>
 :root{
@@ -42,11 +32,11 @@ a{color:inherit}
 .hidden{display:none!important}
 
 /* ===== Gate ===== */
-.gate{position:fixed;inset:0;z-index:50;display:flex;align-items:center;justify-content:center;text-align:left;padding:24px;background:radial-gradient(circle at 50% 28%,rgba(214,168,93,.22),transparent 26%),linear-gradient(180deg,#14100d,#050506);transition:.55s ease}
+.gate{position:fixed;inset:0;z-index:50;display:flex;align-items:center;justify-content:center;text-align:center;padding:24px;background:radial-gradient(circle at 50% 28%,rgba(214,168,93,.22),transparent 26%),linear-gradient(180deg,#14100d,#050506);transition:.55s ease}
 .gate.out{opacity:0;pointer-events:none;transform:scale(1.02)}
-.gate-card{width:min(680px,100%);text-align:left;border:1px solid var(--line);background:rgba(255,248,239,.08);border-radius:30px;padding:34px 22px;backdrop-filter:blur(18px);box-shadow:var(--shadow)}
-.kicker{letter-spacing:.24em;color:#ffd89a;font-weight:900;font-size:12px;margin-bottom:10px}.gate-title{font-size:clamp(32px,8vw,62px);line-height:1.35;font-weight:1000;margin:12px 0;text-shadow:0 4px 24px rgba(0,0,0,.55);text-align:left}
-.gate-title span{display:block}.gate-title .i1{padding-left:1.8em}.gate-title .i2{padding-left:3.6em}.gate-lead{color:var(--muted);line-height:1.9;margin:16px auto 22px;max-width:520px}.tiny{font-size:12px;color:rgba(247,240,230,.54);line-height:1.6}
+.gate-card{width:min(680px,100%);border:1px solid var(--line);background:rgba(255,248,239,.08);border-radius:30px;padding:34px 22px;backdrop-filter:blur(18px);box-shadow:var(--shadow)}
+.kicker{letter-spacing:.24em;color:#ffd89a;font-weight:900;font-size:12px;margin-bottom:10px}.gate-title{font-size:clamp(32px,8vw,62px);line-height:1.35;font-weight:1000;margin:12px 0;text-shadow:0 4px 24px rgba(0,0,0,.55)}
+.gate-title span{display:block}.gate-title .i1{padding-left:.9em}.gate-title .i2{padding-left:1.8em}.gate-lead{color:var(--muted);line-height:1.9;margin:16px auto 22px;max-width:520px}.tiny{font-size:12px;color:rgba(247,240,230,.54);line-height:1.6}
 
 /* ===== World ===== */
 .world{height:100svh;display:flex;flex-direction:column;background:linear-gradient(180deg,#100f0f,#050506)}
@@ -736,7 +726,6 @@ a{color:inherit}
   object-fit:cover;
   background:#000;
   z-index:1;
-  pointer-events:none;
 }
 .opening-countdown-card>.credit-kicker,
 .opening-countdown-title,
@@ -751,8 +740,6 @@ a{color:inherit}
   right:14px;
   bottom:calc(16px + env(safe-area-inset-bottom));
   z-index:4;
-  pointer-events:auto;
-  touch-action:manipulation;
   background:rgba(0,0,0,.42)!important;
   border:1px solid rgba(255,255,255,.18)!important;
   backdrop-filter:blur(12px);
@@ -2980,7 +2967,7 @@ button, .pill {
 <div class="asset-preload-status" id="assetPreloadStatus">準備通往回憶…</div>
 <div class="opening-countdown" id="openingCountdown" aria-live="polite">
   <div class="opening-countdown-card">
-    <video class="opening-countdown-video" id="openingCountdownVideo" src="assets/videos/opening-countdown.mp4" playsinline="" preload="auto"></video>
+    <video class="opening-countdown-video" id="openingCountdownVideo" src="assets/videos/opening-countdown.mp4" playsinline preload="auto"></video>
     <div class="opening-video-caption">回憶倒流中 請留意眼淚回流</div>
     <div class="credit-kicker">OPENING COUNTDOWN</div>
     <div class="opening-countdown-title">倒數</div>
@@ -2988,14 +2975,14 @@ button, .pill {
     <div class="opening-number" id="openingNumber">10</div>
     <div class="opening-photo-draw" id="openingPhotoDraw"></div>
     <div class="opening-start-note" id="openingStartNote">0 秒開始播放</div>
-    <button class="opening-video-skip" type="button" onclick="finishOpeningMemoryCountdown();return false;" onpointerup="finishOpeningMemoryCountdown();return false;" ontouchend="finishOpeningMemoryCountdown();return false;">Heaven</button>
+    <button class="opening-video-skip" type="button" onclick="finishOpeningMemoryCountdown()">跳過倒數</button>
   </div>
 </div>
 
 <div class="mini-world hidden" id="miniWorld" aria-label="CRT電視小世界">
   <div class="mini-crt-scene">
-<video class="mini-crt-frame" id="miniFrameVideo" src="assets/videos/weather-mini/07-thunderstorm.mp4" autoplay="" muted="" loop="" playsinline="" preload="auto" poster="assets/images/mini-frame-poster.webp" aria-label="木框影片" data-weather-frame-key="storm" data-weather-video-base="assets/videos/weather-mini/07-thunderstorm.mp4" data-weather-video-ready="0"></video>
-    <div class="mini-crt-screen stage-weather-fallback" aria-label="木框透明入口區" data-weather-default-reason="before-showMiniWorld" data-weather-key="storm">
+<video class="mini-crt-frame" id="miniFrameVideo" src="assets/videos/mini-frame.mp4" autoplay muted loop playsinline preload="auto" poster="assets/images/mini-frame-poster.webp" aria-label="木框影片"></video>
+    <div class="mini-crt-screen" aria-label="木框透明入口區">
       <button class="mini-world-enter-hotspot" type="button" onclick="enterMainWorld()" aria-label="進入富宜路街道"></button>
       <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" class="mini-world-bg" id="miniWorldBg" alt="木框裡的Q版小世界｜☀️ 炎熱晴天｜保留底圖備援">
       <div class="mini-world-weather" id="miniWorldWeather" style="display: none;"></div>
@@ -3022,7 +3009,7 @@ button, .pill {
 </div>
 
 
-<div class="world hidden hint-muted" id="world" aria-label="你和我們的時光世界">
+<div class="world" id="world" aria-label="你和我們的時光世界">
   <div class="topbar">
     <div class="brand"><small>DEAR ANG</small>你和我們的時光</div>
     <div class="top-actions">
@@ -3035,7 +3022,7 @@ button, .pill {
     </div>
   </div>
   <div class="scroller" id="scroller">
-    <div class="stage weather-fallback" id="stage" data-weather-default-reason="before-showMiniWorld" data-weather-key="storm">
+    <div class="stage" id="stage">
       <img class="stage-world-img" id="stageWorldImg" src="assets/images/weather/day-sunny.webp" alt="富宜路街道世界｜☀️ 炎熱晴天｜保留底圖備援">
       <div class="world-weather" id="worldWeather" style="display: none;"></div>
       <div class="hotspot h-photo" data-label="華光相館｜你和我們的時光" onclick="openPage('photo')"></div>
@@ -3049,7 +3036,7 @@ button, .pill {
   <div class="hint"><div class="hint-inner"><span>← →</span><div>左右滑這條街<small>點招牌或建築，進入對應的時光。</small></div></div></div>
 </div>
 
-<audio id="themeAudio" preload="metadata" loop="" data-lyric-bound="1" src="assets/audio/dear-ang-theme.mp3"></audio>
+<audio id="themeAudio" preload="metadata" loop="" src="assets/audio/dear-ang-theme.mp3"></audio>
 
 <div class="visitor-identity-modal hidden" id="visitorIdentityModal" onclick="visitorModalBackdropClose(event)">
   <div class="visitor-identity-card" onclick="event.stopPropagation()">
@@ -3302,9 +3289,9 @@ let lyricsEnabled=true;
 let lastLyricIndex=-1;
 let lastAudioTime=0;
 const ROOT_LYRIC_FILES={
-  lrc:'./給安格.lrc',
-  srt:'./給安格.srt',
-  embedded:'./lyrics_embedded.js.txt'
+  lrc:['assets/lyrics/給安格.lrc','./給安格.lrc'],
+  srt:['assets/lyrics/給安格.srt','./給安格.srt'],
+  embedded:['assets/lyrics/lyrics_embedded.js.txt','./lyrics_embedded.js.txt']
 };
 function parseTimeToSeconds(s){
   if(!s)return 0;
@@ -3345,24 +3332,32 @@ async function fetchTextFile(url){
   if(!r.ok)throw new Error(url+' 讀取失敗');
   return await r.text();
 }
+async function fetchFirstTextFile(urls){
+  let lastError=null;
+  for(const url of (Array.isArray(urls)?urls:[urls])){
+    try{return {url,text:await fetchTextFile(url)};}
+    catch(e){lastError=e;}
+  }
+  throw lastError||new Error('歌詞檔讀取失敗');
+}
 async function loadLyricsFromRootFiles(){
-  // 你的歌詞檔就在 DearANG 根目錄，不搬家、不改名：給安格.lrc / 給安格.srt / lyrics_embedded.js.txt
+  // 優先讀 assets/lyrics，與 index.html 同層的舊檔保留為備援。
   try{
-    const lrc=await fetchTextFile(ROOT_LYRIC_FILES.lrc);
-    const parsed=parseLrc(lrc);
-    if(parsed.length){LYRIC_LINES=parsed;return '給安格.lrc';}
+    const file=await fetchFirstTextFile(ROOT_LYRIC_FILES.lrc);
+    const parsed=parseLrc(file.text);
+    if(parsed.length){LYRIC_LINES=parsed;return file.url;}
   }catch(e){}
   try{
-    const srt=await fetchTextFile(ROOT_LYRIC_FILES.srt);
-    const parsed=parseSrt(srt);
-    if(parsed.length){LYRIC_LINES=parsed;return '給安格.srt';}
+    const file=await fetchFirstTextFile(ROOT_LYRIC_FILES.srt);
+    const parsed=parseSrt(file.text);
+    if(parsed.length){LYRIC_LINES=parsed;return file.url;}
   }catch(e){}
   try{
-    const txt=await fetchTextFile(ROOT_LYRIC_FILES.embedded);
-    const m=txt.match(/LYRIC_LINES\s*=\s*(\[[\s\S]*?\]);/);
+    const file=await fetchFirstTextFile(ROOT_LYRIC_FILES.embedded);
+    const m=file.text.match(/LYRIC_LINES\s*=\s*(\[[\s\S]*?\]);/);
     if(m){
       const parsed=Function('return '+m[1])();
-      if(Array.isArray(parsed)&&parsed.length){LYRIC_LINES=parsed;return 'lyrics_embedded.js.txt';}
+      if(Array.isArray(parsed)&&parsed.length){LYRIC_LINES=parsed;return file.url;}
     }
   }catch(e){}
   return 'index.html 內建備援歌詞';
@@ -3478,7 +3473,6 @@ function toggleLyrics(){
 function testLyricDanmaku(){spawnLyric('想見你. 想見你.. 想見你了….');}
 
 const CONFIG={LOCAL_THEME:'assets/audio/dear-ang-theme.mp3',
-  APP_VERSION:'20260620_memory_world_v21_opening_countdown_video_lyrics20',
   GAS_API_URL:'https://script.google.com/macros/s/AKfycbzrduB_eXPk6OpqnGPXjNBNQCeUyarzAfki4IL-X_JIVQr7RS9sN5ayyvA2OEaXDXzv/exec',
   GITHUB_THEME_AUDIO:''
 };
@@ -3496,41 +3490,6 @@ let musicWanted=false;
 let openingCountdownActive=false;
 let openingCountdownTimer=null;
 let openingCountdownSeconds=10;
-let openingCountdownFinishing=false;
-let openingCountdownWatchdogTimer=null;
-let openingCountdownStallTimer=null;
-const DEAR_ANG_ENTERED_KEY='dearAngEnteredOnce';
-
-function markEnteredOnce(){
-  try{sessionStorage.setItem(DEAR_ANG_ENTERED_KEY,'1');}catch(e){}
-}
-function hasEnteredOnce(){
-  try{return sessionStorage.getItem(DEAR_ANG_ENTERED_KEY)==='1';}catch(e){return false;}
-}
-function restoreEnteredViewIfNeeded(){
-  if(!hasEnteredOnce())return;
-  const gate=document.getElementById('gate');
-  const overlay=document.getElementById('openingCountdown');
-  const world=document.getElementById('world');
-  const mini=document.getElementById('miniWorld');
-  if(gate)gate.classList.add('out','hidden');
-  if(overlay)overlay.classList.remove('show','done');
-  if(world)world.classList.remove('hidden','hint-muted');
-  if(mini)mini.classList.add('hidden');
-}
-
-function bindOpeningSkipButton(){
-  const btn=document.querySelector('.opening-video-skip');
-  if(!btn || btn.dataset.boundSkip==='1')return;
-  btn.dataset.boundSkip='1';
-  const doSkip=(e)=>{
-    if(e){e.preventDefault();e.stopPropagation();}
-    finishOpeningMemoryCountdown();
-  };
-  btn.addEventListener('click',doSkip,{passive:false});
-  btn.addEventListener('touchend',doSkip,{passive:false});
-  btn.addEventListener('pointerup',doSkip,{passive:false});
-}
 
 function shuffleOpening(arr){
   arr=(arr||[]).slice();
@@ -3612,10 +3571,7 @@ function primeThemeBeforeCountdown(){
 }
 function startOpeningMemoryCountdown(){
   if(openingCountdownActive)return;
-  markEnteredOnce();
   openingCountdownActive=true;
-  openingCountdownFinishing=false;
-  bindOpeningSkipButton();
   playUiSound('open');
   primeThemeBeforeCountdown();
 
@@ -3625,9 +3581,7 @@ function startOpeningMemoryCountdown(){
   if(gate)gate.classList.add('out');
   if(overlay){overlay.classList.remove('done');overlay.classList.add('show');}
 
-  clearTimeout(openingCountdownTimer);
-  clearTimeout(openingCountdownWatchdogTimer);
-  clearTimeout(openingCountdownStallTimer);
+  clearInterval(openingCountdownTimer);
   if(video){
     try{
       video.currentTime=0;
@@ -3636,10 +3590,8 @@ function startOpeningMemoryCountdown(){
     }catch(e){}
     const cleanupCountdown = ()=>{
       if(openingCountdownTimer){clearTimeout(openingCountdownTimer);openingCountdownTimer=null;}
-      if(openingCountdownStallTimer){clearTimeout(openingCountdownStallTimer);openingCountdownStallTimer=null;}
       video.removeEventListener('ended', onVideoEnded);
       video.removeEventListener('error', onVideoError);
-      video.removeEventListener('timeupdate', onVideoTimeUpdate);
     };
     const onVideoEnded = ()=>{
       cleanupCountdown();
@@ -3649,23 +3601,16 @@ function startOpeningMemoryCountdown(){
       cleanupCountdown();
       finishOpeningMemoryCountdown();
     };
-    const onVideoTimeUpdate = ()=>{
-      if(Number.isFinite(video.duration) && video.duration > 0 && video.currentTime >= video.duration - 0.18){
-        cleanupCountdown();
-        finishOpeningMemoryCountdown();
-      }
-    };
     video.addEventListener('ended', onVideoEnded, {once:true});
     video.addEventListener('error', onVideoError, {once:true});
-    video.addEventListener('timeupdate', onVideoTimeUpdate);
-    const durationMs = Number.isFinite(video.duration) && video.duration > 0 ? Math.max(12000, Math.min(14000, Math.round(video.duration * 1000) + 200)) : 3000;
     openingCountdownTimer=setTimeout(()=>{
       cleanupCountdown();
       finishOpeningMemoryCountdown();
-    },durationMs);
+    },12000);
     const p=video.play();
     if(p&&p.catch){
       p.catch(()=>{
+        // 若手機擋住影片音訊，改靜音播放倒數；主題曲仍會在結束後播放
         try{video.muted=true;video.play().catch(()=>{});}catch(e){}
       });
     }
@@ -3673,44 +3618,13 @@ function startOpeningMemoryCountdown(){
       cleanupCountdown();
       finishOpeningMemoryCountdown();
     }
-
-    // 影片被瀏覽器或資源問題卡在 0 秒時，快速轉場避免停住
-    openingCountdownStallTimer=setTimeout(()=>{
-      try{
-        if(openingCountdownFinishing)return;
-        const noProgress = !Number.isFinite(video.currentTime) || video.currentTime<0.05;
-        const noData = !Number.isFinite(video.duration) || video.duration<=0 || video.readyState<2;
-        if(video.paused || noProgress || noData){
-          cleanupCountdown();
-          finishOpeningMemoryCountdown();
-        }
-      }catch(e){
-        finishOpeningMemoryCountdown();
-      }
-    },1500);
   }else{
     openingCountdownTimer=setTimeout(()=>finishOpeningMemoryCountdown(),10000);
   }
-
-  // 最後保險：避免任何瀏覽器事件失效造成卡住
-  openingCountdownWatchdogTimer=setTimeout(()=>{
-    const overlay=document.getElementById('openingCountdown');
-    if(overlay&&overlay.classList.contains('show'))finishOpeningMemoryCountdown();
-  },15000);
 }
 function finishOpeningMemoryCountdown(){
-  if(openingCountdownFinishing)return;
-  markEnteredOnce();
-  openingCountdownFinishing=true;
-  clearTimeout(openingCountdownTimer);
-  clearTimeout(openingCountdownWatchdogTimer);
-  clearTimeout(openingCountdownStallTimer);
-  openingCountdownTimer=null;
-  openingCountdownWatchdogTimer=null;
-  openingCountdownStallTimer=null;
   const overlay=document.getElementById('openingCountdown');
   const video=document.getElementById('openingCountdownVideo');
-  const world=document.getElementById('world');
   if(video){try{video.pause();video.currentTime=0;}catch(e){}}
   const gate=document.getElementById('gate');
   musicWanted=true;
@@ -3720,7 +3634,6 @@ function finishOpeningMemoryCountdown(){
   setTimeout(()=>{
     if(overlay){overlay.classList.add('done');setTimeout(()=>overlay.classList.remove('show','done'),360);}
     if(gate)gate.classList.add('hidden');
-    if(world){world.classList.remove('hidden','hint-muted');}
     showMiniWorld();
     openingCountdownActive=false;
   },260);
@@ -3909,18 +3822,16 @@ function setMiniWeatherStatus(text){
   const el=document.getElementById('miniWeatherStatus');
   if(el)el.textContent=text||'';
 }
-function resolveAssetUrl(path,version){
+function resolveAssetUrl(path){
   const clean=String(path||'').split('?')[0];
-  const stamp=''+(version||'20260625-v48');
-  const q='?v='+encodeURIComponent(stamp);
   const here=location.href.split('#')[0].replace(/[^\/]*$/,'');
   return [
-    clean+q,
-    here+clean+q,
-    clean.replace(/^assets\//,'/DearANG/assets/')+q,
-    clean.replace(/^assets\/images\/weather\//,'assets/images/')+q,
-    clean.replace(/^assets\/images\/weather\//,'images/weather/')+q,
-    clean.replace(/^assets\/images\/weather\//,'weather/')+q
+    clean,
+    here+clean,
+    clean.replace(/^assets\//,'/DearANG/assets/'),
+    clean.replace(/^assets\/images\/weather\//,'assets/images/'),
+    clean.replace(/^assets\/images\/weather\//,'images/weather/'),
+    clean.replace(/^assets\/images\/weather\//,'weather/')
   ].filter((v,i,a)=>v&&a.indexOf(v)===i);
 }
 function testImageCandidates(urls){
@@ -3964,8 +3875,7 @@ function applyWeatherFallbackVisual(w){
   }
 }
 function applyWeatherImageVisual(w){
-  const version='20260625-v48';
-  const urls=resolveAssetUrl(w.bg,version);
+  const urls=resolveAssetUrl(w.bg);
   const stage=document.getElementById('stage');
   const screen=document.querySelector('.mini-crt-screen');
   const stageImg=document.getElementById('stageWorldImg');
@@ -4213,12 +4123,8 @@ function setupAlbumRitualLock(){
   });
 }
 
-window.addEventListener('load',()=>{centerWorld();setupExperienceLayer();setupPersonNameHotspots();setupMiniFrameVideo();preloadStaticAssets();renderMiniWeatherButtons();setMemoryWeather(memoryWeatherKey);loadLyricsFromRootFiles().finally(()=>setupLyricDanmaku());loadData();setupWeather();renderFood();renderMaps();setupAlbumRitualLock();bindOpeningSkipButton();restoreEnteredViewIfNeeded();});
-function enterWorld(){
-  const gate=document.getElementById('gate');
-  if(gate){gate.classList.remove('hidden');gate.classList.add('out');}
-  startOpeningMemoryCountdown();
-}
+window.addEventListener('load',()=>{centerWorld();setupExperienceLayer();setupPersonNameHotspots();setupMiniFrameVideo();preloadStaticAssets();renderMiniWeatherButtons();setMemoryWeather(memoryWeatherKey);loadLyricsFromRootFiles().finally(()=>setupLyricDanmaku());loadData();setupWeather();renderFood();renderMaps();setupAlbumRitualLock();});
+function enterWorld(){startOpeningMemoryCountdown()}
 function centerWorld(){const sc=document.getElementById('scroller');setTimeout(()=>{sc.scrollLeft=(sc.scrollWidth-sc.clientWidth)/2;},60)}
 function openPage(id){
   playUiSound('open');
@@ -4241,34 +4147,7 @@ function closePage(){
   document.body.style.overflow='hidden';
 }
 function toast(msg,bad){const t=document.getElementById('toast');t.textContent=msg;t.style.background=bad?'#963232':'#5b3f2f';t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2300)}
-function api(p){
-  return new Promise((res,rej)=>{
-    const cb='cb'+Date.now()+Math.floor(Math.random()*9e4);
-    const u=new URL(CONFIG.GAS_API_URL);
-    Object.keys(p).forEach(k=>u.searchParams.set(k,p[k]));
-    u.searchParams.set('callback',cb);
-    u.searchParams.set('_ts',Date.now());
-    u.searchParams.set('v',CONFIG.APP_VERSION);
-
-    let settled=false;
-    const sc=document.createElement('script');
-    const finish=(fn,val)=>{
-      if(settled)return;
-      settled=true;
-      clearTimeout(tm);
-      try{sc.remove();}catch(e){}
-      fn(val);
-      // 延後清理 callback，避免回應延遲到達時出現「callback 未定義」。
-      setTimeout(()=>{try{delete window[cb];}catch(e){window[cb]=undefined;}},30000);
-    };
-
-    const tm=setTimeout(()=>finish(rej,new Error('讀取逾時')),16000);
-    window[cb]=x=>finish(res,x);
-    sc.onerror=()=>finish(rej,new Error('讀取失敗'));
-    sc.src=u;
-    document.head.appendChild(sc);
-  });
-}
+function api(p){return new Promise((res,rej)=>{let cb='cb'+Date.now()+Math.floor(Math.random()*9e4),u=new URL(CONFIG.GAS_API_URL);Object.keys(p).forEach(k=>u.searchParams.set(k,p[k]));u.searchParams.set('callback',cb);u.searchParams.set('_ts',Date.now());let sc=document.createElement('script'),tm=setTimeout(()=>done(rej,new Error('讀取逾時')),16000);window[cb]=x=>done(res,x);function done(f,v){clearTimeout(tm);delete window[cb];sc.remove();f(v)}sc.onerror=()=>done(rej,new Error('讀取失敗'));sc.src=u;document.head.appendChild(sc)})}
 function loadData(){return api({action:'getMemorialData'}).then(r=>{if(!r.ok)throw Error(r.error||'讀取失敗');DATA=r;DATA.photos=orderPhotos(DATA.photos||flatGroups(DATA.photoGroups||[]));renderDynamic();setupAlbumRitualLock();preloadFirstDriveAssets();if(openingCountdownActive)renderOpeningPhotoDraw();startTheme();return r;}).catch(e=>{renderDynamic();toast('雲端資料讀取失敗，先顯示本機內容',1);return null;})}
 function detectAreaKey(text){
   text=String(text||'');
@@ -5156,7 +5035,6 @@ function compactMiniWeatherText(){
 
 /* ===== v56：mini-frame 分成 11 個天氣影片 + 公路局標題固定 ===== */
 (function(){
-  const MINI_FRAME_STAMP='20260627-v56';
   const WEATHER_VIDEO_LIST=[
     {key:'nightRain',label:'🌧️ 夜雨',chip:'🌧️',bg:'assets/images/weather/night-rain.webp',fx:'rain night',miniVideo:'assets/videos/weather-mini/01-night-rain.mp4'},
     {key:'deepNightRain',label:'🌧️ 深夜雨',chip:'🌧️',bg:'assets/images/weather/night-rain.webp',fx:'storm night',miniVideo:'assets/videos/weather-mini/02-deep-night-rain.mp4'},
@@ -5179,18 +5057,16 @@ function compactMiniWeatherText(){
 
   function miniVideoCandidates(path){
     const clean=String(path||'assets/videos/mini-frame.mp4').split('?')[0];
-    const stamp=''+MINI_FRAME_STAMP;
-    const q='?v='+encodeURIComponent(stamp);
     const here=location.href.split('#')[0].replace(/[^\/]*$/,'');
     return [
-      clean+q,
-      here+clean+q,
-      clean.replace(/^assets\//,'/DearANG/assets/')+q,
-      clean.replace(/^assets\/videos\/weather-mini\//,'weather-mini/')+q,
-      clean.replace(/^assets\/videos\/weather-mini\//,'assets/video/weather-mini/')+q,
-      'assets/videos/mini-frame.mp4'+q,
-      here+'assets/videos/mini-frame.mp4'+q,
-      'mini-frame.mp4'+q
+      clean,
+      here+clean,
+      clean.replace(/^assets\//,'/DearANG/assets/'),
+      clean.replace(/^assets\/videos\/weather-mini\//,'weather-mini/'),
+      clean.replace(/^assets\/videos\/weather-mini\//,'assets/video/weather-mini/'),
+      'assets/videos/mini-frame.mp4',
+      here+'assets/videos/mini-frame.mp4',
+      'mini-frame.mp4'
     ].filter((v,i,a)=>v&&a.indexOf(v)===i);
   }
 
@@ -5243,7 +5119,7 @@ function compactMiniWeatherText(){
     try{applyMiniFrameWeatherVideo(memoryWeatherByKey(memoryWeatherKey));}catch(e){
       const v=document.getElementById('miniFrameVideo');
       if(v){
-        v.src='assets/videos/mini-frame.mp4' + '?v=' + encodeURIComponent(MINI_FRAME_STAMP);
+        v.src='assets/videos/mini-frame.mp4';
         v.load();
         try{v.muted=true;v.loop=true;v.play().catch(()=>{});}catch(err){}
       }
@@ -5468,9 +5344,8 @@ function compactMiniWeatherText(){
 <script>
 /* ===== v62 摩天輪車廂圖片化 + 點開接原本相片區 ===== */
 (function(){
-  if(/^(localhost|127\.0\.0\.1)$/i.test(location.hostname))return;
   const GONDOLA_BASE='https://pub-a5bb8e437f004bb8aecca934db50299f.r2.dev/Ferris%20Wheel/Gondola';
-  const COLORS=['Blue','Green'];
+  const COLORS=['blue','green'];
 
   function esc(s){
     return String(s||'').replace(/[&<>"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]));
@@ -5489,11 +5364,10 @@ function compactMiniWeatherText(){
     cabins.forEach((btn,i)=>{
       if(btn.dataset.gondolaSkinned==='1')return;
       const color=COLORS[i%COLORS.length];
-      const colorClass=color.toLowerCase();
       const title=titleFromCabin(btn,i);
       btn.dataset.gondolaSkinned='1';
       btn.dataset.gondolaColor=color;
-      btn.classList.add('gondola-img-mode','gondola-'+colorClass);
+      btn.classList.add('gondola-img-mode','gondola-'+color);
       btn.innerHTML=
         '<img class="gondola-img gondola-base" src="'+file(color,'without_door.png')+'" alt="'+esc(title)+' 車廂本體">'+
         '<img class="gondola-img gondola-door close left" src="'+file(color,'close_left_door.png')+'" alt="">'+
@@ -5745,7 +5619,6 @@ function compactMiniWeatherText(){
 <script>
 /* ===== v65 使用你給的正確 R2 路徑：/Gondola/Green/close_door.png ===== */
 (function(){
-  if(/^(localhost|127\.0\.0\.1)$/i.test(location.hostname))return;
   const BASE='https://pub-a5bb8e437f004bb8aecca934db50299f.r2.dev/Ferris%20Wheel/Gondola';
   const COLORS=['Green','Blue'];
 
@@ -6216,7 +6089,11 @@ function compactMiniWeatherText(){
 
   window.applyDefaultWeatherBeforeReady=function(reason){
     try{
-      safeSetVideoSrc(document.getElementById('miniFrameVideo'),pickDefaultFrameVideo());
+      var miniFrame=document.getElementById('miniFrameVideo');
+      // 只有尚未選出天氣影片時才放預設影片；已選出的天氣影片不可被預設值蓋回去。
+      if(!miniFrame || !miniFrame.dataset.weatherVideoBase){
+        safeSetVideoSrc(miniFrame,pickDefaultFrameVideo());
+      }
       safeSetImageSrc(document.getElementById('stageWorldImg'),pickDefaultStreetImage());
 
       var stage=document.getElementById('stage');
@@ -6286,4 +6163,31 @@ function compactMiniWeatherText(){
 </script>
 
 
-<div id="departureDayCounter" class="departure-day-counter">今天是你離開的第 115 天<small>2026.03.09</small></div></body></html>
+<div id="departureDayCounter" class="departure-day-counter">今天是你離開的第 115 天<small>2026.03.09</small></div>
+<script>
+/* ===== v72-restore-gate-opening：強制還原 Gate + Opening 初始狀態 ===== */
+(function(){
+  if(window.__DEAR_ANG_RESTORE_GATE_OPENING__)return;
+  window.__DEAR_ANG_RESTORE_GATE_OPENING__=true;
+  function restoreInitialGateState(){
+    try{
+      if(window.openingCountdownActive)return;
+      var gate=document.getElementById('gate');
+      var opening=document.getElementById('openingCountdown');
+      var mini=document.getElementById('miniWorld');
+      var video=document.getElementById('openingCountdownVideo');
+      if(gate){gate.className='gate';gate.style.display='';gate.style.opacity='';gate.style.pointerEvents='';}
+      if(opening){opening.className='opening-countdown';opening.style.display='';opening.style.opacity='';opening.style.pointerEvents='';}
+      if(mini && !mini.classList.contains('hidden'))mini.classList.add('hidden');
+      if(video){
+        video.setAttribute('src','assets/videos/opening-countdown.mp4');
+        try{video.pause();video.currentTime=0;}catch(e){}
+      }
+    }catch(e){console.warn('[DearANG] restore gate/opening failed:',e);}
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',restoreInitialGateState,{once:true});
+  else restoreInitialGateState();
+})();
+</script>
+
+</body></html>
