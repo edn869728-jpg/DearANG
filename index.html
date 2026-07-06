@@ -62,33 +62,6 @@ a{color:inherit}
 /* ===== 歌詞彈幕：主題曲播放時會從右往左飄過 ===== */
 .lyric-danmaku-layer{position:fixed;inset:0;z-index:95;pointer-events:none;overflow:hidden}
 .lyric-danmaku{position:absolute;right:-90vw;max-width:88vw;white-space:nowrap;padding:8px 14px;border-radius:999px;color:#fff7e8;background:rgba(68,42,28,.46);border:1px solid rgba(255,255,255,.18);box-shadow:0 12px 28px rgba(45,25,12,.24);backdrop-filter:blur(8px);font-weight:900;text-shadow:0 2px 8px rgba(0,0,0,.30);animation:lyricFly var(--flyDur,10s) linear forwards}.lyric-danmaku.soft{color:#5a3d2f;background:rgba(255,248,239,.78);border-color:rgba(90,61,45,.14);text-shadow:none}@keyframes lyricFly{from{transform:translateX(0);opacity:0}8%{opacity:1}92%{opacity:1}to{transform:translateX(calc(-100vw - 120%));opacity:0}}.lyric-toggle.on{background:linear-gradient(135deg,var(--gold),#b98034);color:#fff}.lyric-toggle.off{background:rgba(255,255,255,.11);color:#fff}@media(max-width:760px){.lyric-danmaku{font-size:14px;padding:7px 12px;max-width:92vw}}
-.lyrics-container{
-  position:fixed;
-  left:50%;
-  bottom:calc(74px + env(safe-area-inset-bottom));
-  z-index:96;
-  width:min(92vw,760px);
-  min-height:60px;
-  transform:translateX(-50%);
-  pointer-events:none;
-  overflow:hidden;
-  text-align:center;
-}
-.lyric-line{
-  position:absolute;
-  left:0;
-  top:50%;
-  width:100%;
-  transform:translateY(-50%);
-  opacity:0;
-  color:#fff8df;
-  font-weight:1000;
-  line-height:1.45;
-  text-shadow:0 2px 14px rgba(0,0,0,.72),0 0 9px rgba(255,216,154,.45);
-  transition:opacity .24s ease,color .24s ease,filter .24s ease;
-}
-.lyric-line.active{opacity:1;filter:brightness(1.08)}
-@media(max-width:760px){.lyrics-container{bottom:calc(62px + env(safe-area-inset-bottom));min-height:54px}.lyric-line{font-size:15px}}
 
 
 
@@ -3157,7 +3130,6 @@ button, .pill {
 </head>
 <body>
 <div class="lyric-danmaku-layer" id="lyricDanmakuLayer" aria-hidden="true"></div>
-<div class="lyrics-container" id="lyricsContainer" aria-live="polite" aria-atomic="true"></div>
 <div class="gate" id="gate">
   <div class="gate-card">
     <div class="kicker">DEAR ANG MEMORY WORLD</div>
@@ -3547,6 +3519,8 @@ let lyricsEnabled=true;
 let lastLyricIndex=-1;
 let lastAudioTime=0;
 let lastLyricSpawnAt=0;
+let lyricSpawnTimes={};
+let lyricLaneIndex=0;
 const ROOT_LYRIC_FILES={
   lrc:['assets/lyrics/給安格.lrc','./給安格.lrc'],
   srt:['assets/lyrics/給安格.srt','./給安格.srt'],
@@ -3604,33 +3578,22 @@ async function loadLyricsFromRootFiles(){
   try{
     const file=await fetchFirstTextFile(ROOT_LYRIC_FILES.lrc);
     const parsed=parseLrc(file.text);
-    if(parsed.length){LYRIC_LINES=parsed;buildPersistentLyrics();return file.url;}
+    if(parsed.length){LYRIC_LINES=parsed;return file.url;}
   }catch(e){}
   try{
     const file=await fetchFirstTextFile(ROOT_LYRIC_FILES.srt);
     const parsed=parseSrt(file.text);
-    if(parsed.length){LYRIC_LINES=parsed;buildPersistentLyrics();return file.url;}
+    if(parsed.length){LYRIC_LINES=parsed;return file.url;}
   }catch(e){}
   try{
     const file=await fetchFirstTextFile(ROOT_LYRIC_FILES.embedded);
     const m=file.text.match(/LYRIC_LINES\s*=\s*(\[[\s\S]*?\]);/);
     if(m){
       const parsed=Function('return '+m[1])();
-      if(Array.isArray(parsed)&&parsed.length){LYRIC_LINES=parsed;buildPersistentLyrics();return file.url;}
+      if(Array.isArray(parsed)&&parsed.length){LYRIC_LINES=parsed;return file.url;}
     }
   }catch(e){}
   return 'index.html 內建備援歌詞';
-}
-
-function buildPersistentLyrics(){
-  const box=document.getElementById('lyricsContainer');
-  if(!box)return;
-  box.innerHTML=(LYRIC_LINES||[]).map((line,i)=>`<div class="lyric-line" data-idx="${i}" data-time="${line.time||0}">${esc(line.text||'')}</div>`).join('');
-}
-function setPersistentLyricActive(idx){
-  const box=document.getElementById('lyricsContainer');
-  if(!box)return;
-  box.querySelectorAll('.lyric-line').forEach((el,i)=>el.classList.toggle('active',i===idx));
 }
 
 let LYRIC_LINES = [
@@ -3700,20 +3663,24 @@ const LYRIC_OFFSET_SECONDS = 8; // 歌詞固定提前 20 秒
 function setupLyricDanmaku(){
   const audio=document.getElementById('themeAudio');
   if(!audio || audio.dataset.lyricBound==='1')return;
-  buildPersistentLyrics();
   audio.dataset.lyricBound='1';
   const tick=()=>{
     if(!lyricsEnabled)return;
     const t=audio.currentTime + LYRIC_OFFSET_SECONDS;
-    if(audio.currentTime < lastAudioTime-1){lastLyricIndex=-1;clearLyricLayer();}
+    if(audio.currentTime < lastAudioTime-1){lastLyricIndex=-1;lyricSpawnTimes={};}
     lastAudioTime=audio.currentTime;
+    const now=Date.now();
     for(let i=0;i<LYRIC_LINES.length;i++){
       const line=LYRIC_LINES[i];
       const active=t>=line.time && t<(line.end||line.time+4);
-      const longLineNeedsRefresh=i===lastLyricIndex && active && !document.querySelector('#lyricDanmakuLayer .lyric-danmaku') && Date.now()-lastLyricSpawnAt>1800;
-      if((i!==lastLyricIndex && active) || longLineNeedsRefresh){
+      if(active){
+        const key=String(i);
+        const last=lyricSpawnTimes[key]||0;
+        const isNewLine=i!==lastLyricIndex;
+        const shouldRepeat=now-last>2400;
+        if(!isNewLine && !shouldRepeat)break;
         lastLyricIndex=i;
-        setPersistentLyricActive(i);
+        lyricSpawnTimes[key]=now;
         spawnLyric(line.text);
         break;
       }
@@ -3723,16 +3690,20 @@ function setupLyricDanmaku(){
   audio.addEventListener('play',tick);
   audio.addEventListener('playing',tick);
   setInterval(()=>{if(!audio.paused&&!audio.ended)tick();},900);
-  audio.addEventListener('seeked',()=>{lastLyricIndex=-1;setPersistentLyricActive(-1);clearLyricLayer();});
-  audio.addEventListener('ended',()=>{lastLyricIndex=-1;setPersistentLyricActive(-1);});
+  audio.addEventListener('seeked',()=>{lastLyricIndex=-1;lyricSpawnTimes={};});
+  audio.addEventListener('ended',()=>{lastLyricIndex=-1;lyricSpawnTimes={};});
 }
 function spawnLyric(text){
   const layer=document.getElementById('lyricDanmakuLayer');
   if(!layer || !text)return;
+  const live=[...layer.querySelectorAll('.lyric-danmaku')];
+  if(live.length>=10 && live[0]&&live[0].parentNode)live[0].parentNode.removeChild(live[0]);
   const el=document.createElement('div');
   el.className='lyric-danmaku'+(Math.random()>.55?' soft':'');
   el.textContent=text;
-  el.style.top=(12+Math.random()*66).toFixed(1)+'vh';
+  const lanes=[12,20,28,36,44,52,60,68,76];
+  const lane=lanes[lyricLaneIndex++%lanes.length]+(Math.random()*2.6-1.3);
+  el.style.top=Math.max(8,Math.min(80,lane)).toFixed(1)+'vh';
   el.style.setProperty('--flyDur',(9+Math.random()*4).toFixed(1)+'s');
   layer.appendChild(el);
   lastLyricSpawnAt=Date.now();
@@ -3747,7 +3718,7 @@ function toggleLyrics(){
   const btn=document.getElementById('lyricBtn');
   if(btn){btn.textContent=lyricsEnabled?'詞':'詞';btn.classList.toggle('on',lyricsEnabled);btn.classList.toggle('off',!lyricsEnabled);}
   if(!lyricsEnabled){clearLyricLayer();toast('歌詞彈幕已關閉');}
-  else{lastLyricIndex=-1;buildPersistentLyrics();toast('歌詞彈幕已開啟');}
+  else{lastLyricIndex=-1;lyricSpawnTimes={};toast('歌詞彈幕已開啟');}
 }
 function testLyricDanmaku(){spawnLyric('想見你. 想見你.. 想見你了….');}
 
