@@ -1,16 +1,76 @@
+<!DOCTYPE html>
 <html lang="zh-Hant"><head>
+
+<script id="dearang-strict-opening-early">
+(function(){
+  if(window.__DEARANG_STRICT_BOOT__)return;
+
+  var mediaProto=window.HTMLMediaElement&&HTMLMediaElement.prototype;
+  var state=window.__DEARANG_STRICT_BOOT__={
+    phase:'gate',
+    allowBackgroundLoad:false,
+    nativePlay:mediaProto&&mediaProto.play,
+    nativeLoad:mediaProto&&mediaProto.load
+  };
+
+  document.documentElement.classList.add('dearang-before-mini');
+
+  if(!mediaProto)return;
+
+  mediaProto.play=function(){
+    var phase=state.phase||'gate';
+    var opening=this&&this.id==='openingCountdownVideo';
+    var priming=opening&&this.dataset&&this.dataset.smartPrime==='1';
+
+    if((phase==='gate'||phase==='lock')&&!priming){
+      return Promise.resolve();
+    }
+
+    if(phase==='opening'&&!opening){
+      return Promise.resolve();
+    }
+
+    return state.nativePlay.apply(this,arguments);
+  };
+
+  mediaProto.load=function(){
+    var phase=state.phase||'gate';
+    var opening=this&&this.id==='openingCountdownVideo';
+    var allowedBackground=
+      phase==='opening'&&
+      state.allowBackgroundLoad&&
+      this&&
+      (this.id==='themeAudio'||this.id==='miniFrameVideo');
+
+    if((phase==='gate'||phase==='lock')&&!opening){
+      if(this&&this.dataset)this.dataset.strictLoadQueued='1';
+      return;
+    }
+
+    if(phase==='opening'&&!opening&&!allowedBackground){
+      if(this&&this.dataset)this.dataset.strictLoadQueued='1';
+      return;
+    }
+
+    return state.nativeLoad.apply(this,arguments);
+  };
+})();
+</script>
+
+
+
 <meta charset="UTF-8">
 <base href="/DearANG/">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<!-- v70-cache：已取消 HTML 強制不快取；WebView / 瀏覽器可正常使用快取 -->
-<!-- DearANG v16 KTV stage forced 20260620 -->
-<!-- DearANG v21 opening countdown video 20260620 -->
-<!-- DearANG v33 Real Frame Weather World Crop 20260623 -->
-<!-- DearANG v47 based on index(53): calibrated building/person hotspots no cover crop 20260625 -->
-<!-- DearANG v48 KTV Drive preview + page top spacing + invisible building hotspots 20260625 -->
-<!-- DearANG v56 mini-frame 11 weather videos + KTV left + map title fix 20260627 -->
-<!-- DearANG v75 opening/KTV/map banner/mini-weather/ferris construction 20260706 -->
+
+
+
+
+
+
+
 <!-- DearANG focused fix: lyrics binding/path + mini-frame weather video 20260706 -->
+<!-- DearANG smart-lock strict opening corrected 20260706 -->
 <title>摯愛｜Dear ANG </title>
 <style>
 :root{
@@ -65,7 +125,7 @@ a{color:inherit}
 
 
 
-/* ===== V10 相簿輪轉卡片：像入口方案卡一樣橫向輪播，往上滑展開照片 ===== */
+
 .album-carousel-shell{position:relative;margin:6px -4px 0;padding:4px 0 10px;}
 .album-carousel-hint{display:flex;align-items:center;justify-content:center;gap:8px;color:rgba(255,216,154,.86);font-size:13px;font-weight:1000;letter-spacing:.04em;margin:2px 0 8px;}
 .album-carousel{display:flex;gap:14px;overflow-x:auto;overflow-y:visible;scroll-snap-type:x mandatory;scroll-padding-left:18px;scroll-padding-right:18px;padding:8px 18px 18px;-webkit-overflow-scrolling:touch;scrollbar-width:none;overscroll-behavior-x:contain;}
@@ -143,7 +203,7 @@ a{color:inherit}
 
 
 
-/* ===== v13：用你給的遙控器圖片當真正網頁遙控 ===== */
+
 .ktv-remote{background:linear-gradient(180deg,rgba(25,25,28,.88),rgba(8,8,10,.92));border-color:rgba(255,255,255,.13)}
 .ktv-remote-photo-wrap{position:relative;width:min(100%,360px);margin:12px auto 0;border-radius:24px;overflow:hidden;background:#111;box-shadow:0 18px 46px rgba(0,0,0,.42),inset 0 1px 0 rgba(255,255,255,.08);touch-action:manipulation;}
 .ktv-remote-photo-wrap img{display:block;width:100%;height:auto;user-select:none;-webkit-user-drag:none;}
@@ -158,7 +218,7 @@ a{color:inherit}
 
 
 
-/* ===== v15 金嗓卡拉OK｜使用電視音響櫃圖片當舞台 ===== */
+
 .ktv-tv.ktv-tv-machine{background:linear-gradient(180deg,rgba(25,20,16,.74),rgba(8,8,10,.88));border-color:rgba(255,216,154,.20);padding:10px;border-radius:28px;}
 .ktv-stage-wrap{position:relative;width:min(100%,520px);margin:0 auto;border-radius:24px;overflow:visible;filter:drop-shadow(0 22px 46px rgba(0,0,0,.40));}
 .ktv-stage-wrap>img{display:block;width:100%;height:auto;user-select:none;-webkit-user-drag:none;}
@@ -173,7 +233,7 @@ a{color:inherit}
 @media(max-width:760px){.ktv-stage-wrap{width:min(100%,430px)}.ktv-tv.ktv-tv-machine{padding:8px}.ktv-stage-wrap .ktv-audio-visual b{font-size:12px}.ktv-stage-wrap .ktv-note{width:42px;height:42px;font-size:24px}.ktv-stage-wrap .ktv-osd{font-size:9px;min-height:22px}.ktv-stage-wrap .ktv-screen audio{height:24px}}
 
 
-/* ===== v16 強制顯示：金嗓卡拉OK舞台圖一定在上方 ===== */
+
 #page-music .ktv-machine{gap:18px}
 #page-music .ktv-tv.ktv-tv-machine{
   background:transparent!important;
@@ -210,7 +270,7 @@ a{color:inherit}
 }
 
 
-/* ===== v17 照片區手機滿版：主街橫滑，內頁直滑，照片卡片滿版 ===== */
+
 .album-mount,
 #photoGrid,
 #homePhotoGrid{
@@ -374,7 +434,7 @@ a{color:inherit}
 }
 
 
-/* ===== v18 感官體驗＋開始流程優化 ===== */
+
 .page.show{
   animation:pageFadeIn .32s cubic-bezier(.22,1,.36,1) both;
 }
@@ -511,7 +571,7 @@ a{color:inherit}
 }
 
 
-/* ===== v19 開場主題曲資訊 ===== */
+
 .gate-song-credit{
   margin:18px auto 22px;
   max-width:520px;
@@ -556,7 +616,7 @@ a{color:inherit}
 }
 
 
-/* ===== v20 開始按鈕後：抽 11 張個人照＋10 秒倒數，0 秒播放 ===== */
+
 .opening-countdown{
   position:fixed;
   inset:0;
@@ -701,7 +761,7 @@ a{color:inherit}
 }
 
 
-/* ===== v21 開場倒數影片：影片本身已有秒數，不再疊加數字 ===== */
+
 .opening-countdown{
   padding:0!important;
   background:#000!important;
@@ -765,7 +825,7 @@ a{color:inherit}
 
 
 
-/* ===== v33 真正木框小世界＋天氣圖同步：開場影片後先到木框，再點中間世界進主街 ===== */
+
 .mini-world{
   position:fixed;
   inset:0;
@@ -888,7 +948,7 @@ a{color:inherit}
 }
 
 
-/* ===== v37：從 index(45) 補回 v36 功能：直式木框影片、主街新圖切割、免密碼訪客名片 ===== */
+
 .mini-crt-scene{
   position:relative!important;
   width:min(100vw, calc(100svh * 1080 / 1920), 560px)!important;
@@ -991,7 +1051,7 @@ a{color:inherit}
 
 
 
-/* ===== v38 公路局單檔內嵌藏寶圖：不再分 gemini-code 檔 ===== */
+
 #page-nav{
   overflow:hidden!important;
   background:#050403!important;
@@ -1162,7 +1222,7 @@ a{color:inherit}
 }
 
 
-/* ===== v43：以 index(53) 為參考，保留 mini-frame 影片讀取方式 + 1080×2880 紙張留言版 ===== */
+
 .gate-card{text-align:left!important;}
 .gate-title{width:max-content!important;max-width:100%!important;margin:12px auto 10px!important;text-align:left!important;display:grid!important;gap:.08em!important;line-height:1.22!important;}
 .gate-title span,.gate-title .i1,.gate-title .i2{padding-left:0!important;display:block!important;}
@@ -1197,7 +1257,7 @@ a{color:inherit}
 @media(max-width:560px){.gate-title{margin-left:auto!important;margin-right:auto!important;font-size:clamp(34px,10vw,54px)!important}.gate-song-credit .credit-meta-line{gap:8px;font-size:12px}.mini-crt-scene{width:96vw!important}.frame-letter-text{font-size:clamp(12px,8vw,12px)!important;line-height:1.48!important}.mini-weather-status{font-size:clamp(6.5px,1.75vw,8.6px)!important}.radio-audio-hit span{font-size:clamp(12px,4.1vw,20px)!important;}}
 
 
-/* ===== v45：小世界/主街共用同一個天氣狀態；圖片缺檔也不空白 ===== */
+
 #stage.stage-weather-fallback,
 .mini-crt-screen.weather-fallback{
   background-size:cover!important;
@@ -1232,7 +1292,7 @@ a{color:inherit}
 .mini-crt-screen:not(.weather-fallback) .mini-world-bg{opacity:1!important;}
 
 
-/* ===== v46：主街進去後仍保留分建築物按鈕 ===== */
+
 #stage{position:relative!important;}
 #stage .stage-world-img{z-index:0!important;pointer-events:none!important;}
 #stage .world-weather{z-index:1!important;pointer-events:none!important;}
@@ -1291,7 +1351,7 @@ a{color:inherit}
 }
 
 
-/* ===== v48：修正截圖問題：頁面不被右上列壓住、主街按鈕透明、KTV 改 Drive Preview 避免 ORB ===== */
+
 .page.show{
   padding-top:calc(68px + env(safe-area-inset-top))!important;
 }
@@ -1351,7 +1411,7 @@ a{color:inherit}
 }
 
 
-/* ===== v49：訪客登記修正｜可送出、可關閉、可滑動，不再卡死 APP ===== */
+
 .visitor-identity-modal{
   z-index:9999!important;
   display:flex!important;
@@ -1406,14 +1466,14 @@ a{color:inherit}
 
 
 
-/* ===== v50 手機寬邊更貼齊 ===== */
+
 .mini-world{padding-left:0!important;padding-right:0!important;}
 .mini-crt-scene{width:min(100vw,620px)!important;max-width:100vw!important;margin-left:auto!important;margin-right:auto!important;}
 @media(max-width:760px){.mini-crt-scene{width:100vw!important;max-width:100vw!important;}}
 
 
 
-/* ===== v51：邊界貼齊 + 放大鏡 2 倍寬，不用手勢縮放 ===== */
+
 html,body{
   overscroll-behavior:none!important;
   touch-action:pan-x pan-y!important;
@@ -1509,7 +1569,7 @@ body.view-zoom-2x #zoomBtn{
 
 
 
-/* ===== v52：木框下面天氣字放大 + 亮色發光 ===== */
+
 .mini-weather-status{
   color:#fff4c9!important;
   background:rgba(38,23,8,.38)!important;
@@ -1544,7 +1604,7 @@ body.view-zoom-2x #zoomBtn{
 
 
 
-/* ===== v53：相簿儀式感｜移除打開按鈕，展開後鎖左右滑 ===== */
+
 .album-open{
   display:none!important;
 }
@@ -1589,7 +1649,7 @@ body.view-zoom-2x #zoomBtn{
 
 
 
-/* ===== v54：夜間固定 night-rain，小世界不再因缺圖變空白 ===== */
+
 #stage.stage-weather-fallback .stage-world-img,
 .mini-crt-screen.weather-fallback .mini-world-bg{
   opacity:1!important;
@@ -1618,14 +1678,14 @@ body.view-zoom-2x #zoomBtn{
 
 
 
-/* ===== v55：天氣行短版，避免內容太多 ===== */
+
 .mini-weather-status{
   white-space:nowrap!important;
   text-overflow:ellipsis!important;
 }
 
 
-/* ===== v56 開場標題：三行靠左，慢慢往右形成梯形 ===== */
+
 .gate-card{
   text-align:left!important;
 }
@@ -1726,7 +1786,7 @@ button,
 
 
 
-/* ===== v49 字體整體放大＋FRAME Letter text 真正加粗加大 20260626 ===== */
+
 html,
 /* ===== 整體文字密集排版設定 ===== */
 body {
@@ -1795,7 +1855,7 @@ button, .pill {
 
 
 
-/* ===== v56 修正：KTV STAGE 左邊貼邊、地圖標題不再誤用影音館 ===== */
+
 #page-music .ktv-stage-wrap{
   margin-left:0!important;
   margin-right:auto!important;
@@ -1823,7 +1883,7 @@ button, .pill {
 }
 
 
-/* ===== v57 華光相館同檔內嵌回憶摩天輪：不跳頁，主題曲不中斷 ===== */
+
 #page-photo.photo-wheel-page{
   background:radial-gradient(circle at 50% 15%,rgba(255,207,127,.24),transparent 25%),
              radial-gradient(circle at 50% 64%,rgba(255,116,72,.14),transparent 42%),
@@ -2393,7 +2453,7 @@ button, .pill {
 }
 
 
-/* ===== v57 移除每個內頁上方標題列：拿掉「回到街上／頁面標題」那條 ===== */
+
 .page-head{
   display:none!important;
 }
@@ -2408,7 +2468,7 @@ button, .pill {
 }
 
 
-/* ===== v58 公路局地圖避開上方主工具列：粉紅框那排不再疊到地圖 ===== */
+
 #page-nav{
   padding-top:calc(76px + env(safe-area-inset-top))!important;
   background:#050403!important;
@@ -2441,7 +2501,7 @@ button, .pill {
 }
 
 
-/* ===== v59 木框小世界改成 HOTSPOT：圖片只做底圖，點擊層獨立 ===== */
+
 .mini-world-hotspot{
   position:absolute!important;
   inset:0!important;
@@ -2465,7 +2525,7 @@ button, .pill {
 }
 
 
-/* ===== v60 小世界頁：拿掉木框內小世界，改透明，但保留 HOTSPOT 可點 ===== */
+
 .mini-crt-screen{
   background:transparent!important;
   box-shadow:none!important;
@@ -2488,7 +2548,7 @@ button, .pill {
 }
 
 
-/* ===== v61 小世界頁：移除假天氣顯示與切換 ===== */
+
 #miniWorld .mini-world-weather,
 #miniWorld .world-weather,
 #miniWorld .mini-weather-status,
@@ -2511,7 +2571,7 @@ button, .pill {
 }
 
 
-/* ===== v62 摩天輪車廂改用 Canva/R2 blue-green 車廂圖，並接回原本 photoGrid 相片 ===== */
+
 .photo-wheel-cabin.gondola-img-mode{
   width:128px!important;
   height:178px!important;
@@ -2628,7 +2688,7 @@ button, .pill {
 }
 
 
-/* ===== v63 小世界頁只保留錄音/停止；信件字體加粗密集；底部離開天數 ===== */
+
 
 /* 修正小世界頁可點擊區：只留錄音與停止錄音，避免誤點上方跳藏寶圖或進主街 */
 #miniWorld .mini-crt-screen,
@@ -2707,7 +2767,7 @@ button, .pill {
 }
 
 
-/* ===== v64 小世界入口改成透明按鈕；摩天輪破圖時不顯示破圖 icon ===== */
+
 
 /* 小世界頁：中間進主街的區域用透明按鈕，不再用照片當入口 */
 #miniWorld .mini-crt-screen{
@@ -2782,7 +2842,7 @@ button, .pill {
 }
 
 
-/* ===== v65 車廂路徑鎖定：Green/Blue + close_door.png / open_door.png ===== */
+
 .photo-wheel-cabin.gondola-img-mode.v65-gondola{
   background:transparent!important;
 }
@@ -2805,7 +2865,7 @@ button, .pill {
 }
 
 
-/* ===== v66 MiniWorld Frame：只讓 frame 影片依天氣換背景，中間入口透明 ===== */
+
 #miniWorld .mini-crt-frame{
   display:block!important;
   opacity:1!important;
@@ -2827,7 +2887,7 @@ button, .pill {
 }
 
 
-/* ===== v67 錄音播放／停止按鈕往左移到接近中間 ===== */
+
 /* 以 1080x1920 木框比例定位：播放約 x=520，停止約 x=620 */
 #miniWorld .radio-audio-hit{
   top:50.3472%!important;
@@ -2848,7 +2908,7 @@ button, .pill {
 }
 
 
-/* ===== v68 移除摩天輪多餘提示字；修正 weather-mini 實際檔名 ===== */
+
 .photo-wheel-tip,
 .photo-wheel-wheel-hint,
 .photo-wheel-stage-hint,
@@ -2895,7 +2955,7 @@ button, .pill {
 }
 
 
-/* ===== v70-cache：取消強制不快取 + 新增更新快取按鈕 ===== */
+
 .cache-btn{font-size:14px!important;letter-spacing:.02em!important}
 .cache-btn.updating{
   animation:v70CacheSpin .85s linear infinite;
@@ -2910,7 +2970,7 @@ button, .pill {
 @keyframes v70CacheSpin{to{transform:rotate(360deg)}}
 
 
-/* ===== v71-weather-default：拿掉假天氣動畫，只保留真實 frame / street 圖影片 ===== */
+
 .rain-layer,
 .world-weather,
 .mini-world-weather,
@@ -2943,7 +3003,6 @@ button, .pill {
   background:#000!important;
 }
 
-/* ===== v74 公路局：地標到站蹦出放大 + 故事卡往下靠，不再撞上方橫幅 ===== */
 #page-nav .route-landmark-pop{
   position:absolute;
   left:50%;
@@ -3048,7 +3107,7 @@ button, .pill {
 
   
 
-/* ===== v75 主要修正：Opening / Mini World / KTV / Treasure Map / 摩天輪建構中 ===== */
+
 .opening-countdown{
   background:
     linear-gradient(180deg,rgba(9,6,16,.40),rgba(3,3,10,.82)),
@@ -3088,32 +3147,6 @@ button, .pill {
   #page-music .ktv-songbook,#page-music .ktv-remote{border-radius:22px!important;margin:0!important;}
 }
 
-/* Treasure Map：橫幅獨立在上方，地圖從橫幅下方開始。 */
-#page-nav{--route-global-top:58px;--route-banner-height:70px;padding:0!important;overflow:hidden!important;}
-#page-nav.show{padding:0!important;}
-#page-nav.show>.page-head{display:none!important;}
-#page-nav .route-top-banner{
-  position:absolute;left:0;right:0;top:var(--route-global-top);height:var(--route-banner-height);z-index:94;
-  display:grid;grid-template-columns:46px minmax(0,1fr) 46px;align-items:center;gap:9px;padding:8px 12px;
-  color:#fff2cb;background:
-    linear-gradient(90deg,rgba(60,35,16,.98),rgba(128,77,32,.96) 48%,rgba(60,35,16,.98)),
-    url("assets/images/treasure_map_bg.webp") center 18%/cover no-repeat;
-  border-bottom:2px solid rgba(255,222,150,.52);box-shadow:0 8px 24px rgba(0,0,0,.36);overflow:hidden;
-}
-#page-nav .route-top-banner::after{content:"";position:absolute;inset:5px;border:1px solid rgba(255,232,178,.25);pointer-events:none;}
-#page-nav .route-banner-back{position:relative;z-index:2;width:40px;height:40px;padding:0!important;display:grid;place-items:center;background:rgba(255,245,212,.15)!important;border:1px solid rgba(255,238,194,.30)!important;box-shadow:none!important;font-size:23px!important;}
-#page-nav .route-banner-copy{position:relative;z-index:2;text-align:center;line-height:1.2;min-width:0;}
-#page-nav .route-banner-copy strong{display:block;font-family:"Noto Serif TC",serif;font-size:clamp(16px,4.5vw,24px);letter-spacing:.08em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-#page-nav .route-banner-copy small{display:block;margin-top:4px;color:rgba(255,241,205,.72);font-size:10px;font-weight:900;letter-spacing:.18em;}
-#page-nav .route-banner-mark{position:relative;z-index:2;justify-self:end;color:#4a2b15;background:#f3d38c;border-radius:8px;padding:4px 5px;font-size:9px;font-weight:1000;letter-spacing:.08em;transform:rotate(4deg);}
-#page-nav .route-map-app{top:calc(var(--route-global-top) + var(--route-banner-height))!important;bottom:0!important;left:0!important;right:0!important;height:auto!important;min-height:0!important;transform:none!important;}
-#page-nav .route-title-pill{display:none!important;}
-@media(min-width:760px){
-  #page-nav .route-top-banner{left:50%!important;right:auto!important;width:min(100vw,540px)!important;transform:translateX(-50%)!important;}
-  #page-nav .route-map-app{left:50%!important;right:auto!important;width:min(100vw,540px)!important;transform:translateX(-50%)!important;}
-}
-@media(max-width:760px){#page-nav{--route-global-top:64px;--route-banner-height:72px;}}
-
 /* 摩天輪建構中預覽。 */
 .ferris-construction{position:fixed;inset:0;z-index:130;display:grid;place-items:center;padding:18px;background:rgba(2,3,17,.86);backdrop-filter:blur(12px);overflow:auto;}
 .ferris-build-card{width:min(92vw,520px);border:1px solid rgba(255,222,154,.35);border-radius:30px;padding:22px 18px 24px;text-align:center;background:radial-gradient(circle at 50% 28%,rgba(83,103,190,.30),transparent 38%),linear-gradient(180deg,#11183e,#09091e 64%,#1d110b);box-shadow:0 28px 80px rgba(0,0,0,.56);}
@@ -3126,6 +3159,154 @@ button, .pill {
 .ferris-build-card p{margin:5px auto 0;max-width:390px;color:rgba(255,244,220,.70);font-size:13px!important;line-height:1.7!important;text-align:center!important;}
 .ferris-build-close{position:fixed;right:14px;top:calc(14px + env(safe-area-inset-top));z-index:2;width:44px;height:44px;padding:0!important;display:grid;place-items:center;background:rgba(255,255,255,.12)!important;border:1px solid rgba(255,255,255,.20)!important;box-shadow:none!important;font-size:27px!important;}
 @media(prefers-reduced-motion:reduce){.ferris-build-rotor{animation:none;}}
+
+
+/* ===== 互動層單一化：隱藏頁面絕對不能接收點擊 ===== */
+.page:not(.show),
+.page:not(.show) *,
+.page.closing,
+.page.closing *{
+  pointer-events:none!important;
+  visibility:hidden!important;
+}
+.page.show:not(.closing){
+  pointer-events:auto!important;
+  visibility:visible!important;
+}
+#miniWorld.hidden,
+#miniWorld.hidden *,
+#miniWorld.zooming,
+#miniWorld.zooming *{
+  pointer-events:none!important;
+}
+#miniWorld.hidden{
+  display:none!important;
+  visibility:hidden!important;
+}
+body:not([data-dearang-view="mini"]) #miniWorld .radio-audio-hit,
+body:not([data-dearang-view="mini"]) #miniWorld .mini-world-enter-hotspot{
+  pointer-events:none!important;
+}
+body[data-dearang-view="mini"] #miniWorld:not(.hidden):not(.zooming) .radio-audio-hit,
+body[data-dearang-view="mini"] #miniWorld:not(.hidden):not(.zooming) .mini-world-enter-hotspot{
+  pointer-events:auto!important;
+}
+.visitor-identity-modal.hidden,
+.visitor-identity-modal.hidden *,
+.ferris-construction.hidden,
+.ferris-construction.hidden *,
+.lightbox:not(.show),
+.lightbox:not(.show) *,
+.opening-countdown:not(.show),
+.opening-countdown:not(.show) *{
+  pointer-events:none!important;
+  visibility:hidden!important;
+}
+body[data-dearang-view="page"] #stage,
+body[data-dearang-view="page"] #stage *,
+body[data-dearang-view="mini"] #stage,
+body[data-dearang-view="mini"] #stage *,
+body[data-dearang-view="opening"] #stage,
+body[data-dearang-view="opening"] #stage *,
+body[data-dearang-view="gate"] #stage,
+body[data-dearang-view="gate"] #stage *{
+  pointer-events:none!important;
+}
+body[data-dearang-view="street"] #stage,
+body[data-dearang-view="street"] #stage .hotspot{
+  pointer-events:auto!important;
+}
+
+</style>
+
+<style id="route-map-left-story-fix-20260706">
+/* 公路局：移除上方橫幅，地圖直接接在全站工具列下方。 */
+#page-nav{
+  --route-global-top:58px!important;
+  --route-banner-height:0px!important;
+  padding:0!important;
+}
+#page-nav .route-top-banner{display:none!important;}
+#page-nav .route-map-app{
+  top:var(--route-global-top)!important;
+  bottom:0!important;
+  height:auto!important;
+  min-height:0!important;
+  padding-top:0!important;
+}
+
+/* 1～6 故事固定在左側並加高，右半邊保留給地圖。 */
+#page-nav .route-story-card{
+  left:12px!important;
+  right:auto!important;
+  top:auto!important;
+  bottom:calc(46px + var(--route-safe-bottom))!important;
+  width:min(50%,250px)!important;
+  max-width:250px!important;
+  min-height:184px!important;
+  max-height:min(43svh,390px)!important;
+  padding:12px 12px 13px!important;
+  transform:translateY(10px) scale(.98)!important;
+  transform-origin:left bottom!important;
+}
+#page-nav .route-story-card.show,
+#page-nav .route-story-card:hover,
+#page-nav .route-story-card.open{
+  transform:translateY(0) scale(1)!important;
+}
+#page-nav .route-story-card.switching{
+  transform:translateY(16px) scale(.96)!important;
+}
+#page-nav .route-story-card.open{
+  width:min(54%,280px)!important;
+  max-width:280px!important;
+  max-height:min(64svh,590px)!important;
+}
+#page-nav .route-body{
+  max-height:118px!important;
+  margin-top:9px!important;
+  padding-right:4px!important;
+}
+#page-nav .route-story-card.open .route-body{
+  max-height:calc(min(64svh,590px) - 92px)!important;
+}
+#page-nav .route-story-title,
+#page-nav .route-tag,
+#page-nav .route-body{text-align:left!important;}
+#page-nav .route-hint{
+  left:12px!important;
+  right:auto!important;
+  transform:none!important;
+  bottom:calc(14px + var(--route-safe-bottom))!important;
+}
+
+/* 每一站的小土墩／地標圖放大；固定讀取 assets/images/map_photo/1.webp～6.webp，PNG 為備援。 */
+#page-nav .route-landmark-pop{
+  width:clamp(150px,40vw,260px)!important;
+  min-height:112px!important;
+  z-index:30!important;
+}
+#page-nav .route-landmark-pop img{
+  width:100%!important;
+  max-height:250px!important;
+  object-fit:contain!important;
+  border-radius:14px!important;
+}
+@media(max-width:760px){
+  #page-nav{--route-global-top:64px!important;}
+}
+@media(max-width:420px){
+  #page-nav .route-story-card{
+    left:8px!important;
+    width:52%!important;
+    max-width:215px!important;
+    min-height:176px!important;
+  }
+  #page-nav .route-story-card.open{width:58%!important;max-width:236px!important;}
+  #page-nav .route-story-title{font-size:15px!important;}
+  #page-nav .route-body p{font-size:12px!important;line-height:1.56!important;}
+  #page-nav .route-landmark-pop{width:clamp(138px,42vw,210px)!important;}
+}
 </style>
 </head>
 <body>
@@ -3167,7 +3348,7 @@ button, .pill {
 
 <div class="mini-world hidden" id="miniWorld" aria-label="CRT電視小世界">
   <div class="mini-crt-scene">
-<video class="mini-crt-frame" id="miniFrameVideo" autoplay muted loop playsinline webkit-playsinline preload="auto" poster="assets/images/mini-frame-poster.webp" aria-label="木框天氣影片"></video>
+<video class="mini-crt-frame" id="miniFrameVideo" muted loop playsinline webkit-playsinline preload="none" poster="assets/images/mini-frame-poster.webp" aria-label="木框天氣影片"></video>
     <div class="mini-crt-screen" aria-label="木框透明入口區">
       <button class="mini-world-enter-hotspot" type="button" onclick="enterMainWorld()" aria-label="進入富宜路街道"></button>
       <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" class="mini-world-bg" id="miniWorldBg" alt="木框裡的Q版小世界｜☀️ 炎熱晴天｜保留底圖備援">
@@ -3178,7 +3359,7 @@ button, .pill {
       <button class="treasure-map-hit" type="button" onclick="openTreasureMapFromMini(event)" aria-label="打開藏寶地圖｜通往他的路"></button>
     <button class="radio-audio-hit radio-audio-play" type="button" onclick="playLetterAudio()" aria-label="播放留言音檔"><span>▶</span></button>
     <button class="radio-audio-hit radio-audio-stop" type="button" onclick="stopLetterAudio()" aria-label="停止留言音檔"><span>■</span></button>
-    <audio id="letterAudio" preload="metadata" src="assets/audio/aming-message.mp3" data-v63-bound="1"></audio>
+    <audio id="letterAudio" preload="none" src="assets/audio/aming-message.mp3"></audio>
     <div class="mini-weather-status" id="miniWeatherStatus">你那邊的天氣：套用：⛈️ 雷雨・31.4°C・風速 11 km/h</div>
     <section class="frame-letter-card" aria-label="FRAME 下方留言">
       <div class="frame-letter-text">親愛的阿明<br>
@@ -3222,7 +3403,7 @@ button, .pill {
   <div class="hint"><div class="hint-inner"><span>← →</span><div>左右滑這條街<small>點招牌或建築，進入對應的時光。</small></div></div></div>
 </div>
 
-<audio id="themeAudio" preload="metadata" loop="" src="assets/audio/dear-ang-theme.mp3"></audio>
+<audio id="themeAudio" preload="none" loop="" src="assets/audio/dear-ang-theme.mp3"></audio>
 
 <div class="visitor-identity-modal hidden" id="visitorIdentityModal" onclick="visitorModalBackdropClose(event)">
   <div class="visitor-identity-card" onclick="event.stopPropagation()">
@@ -3282,13 +3463,13 @@ button, .pill {
         <div class="photo-wheel-stage" id="photoWheelStage">
           <div class="photo-wheel-ring"></div>
           <div class="photo-wheel-bulbs"></div>
-          <div class="photo-wheel-spokes" id="photoWheelSpokes"><i style="transform: rotate(0deg);"></i><i style="transform: rotate(18deg);"></i><i style="transform: rotate(36deg);"></i><i style="transform: rotate(54deg);"></i><i style="transform: rotate(72deg);"></i><i style="transform: rotate(90deg);"></i><i style="transform: rotate(108deg);"></i><i style="transform: rotate(126deg);"></i><i style="transform: rotate(144deg);"></i><i style="transform: rotate(162deg);"></i><i style="transform: rotate(180deg);"></i><i style="transform: rotate(198deg);"></i><i style="transform: rotate(216deg);"></i><i style="transform: rotate(234deg);"></i><i style="transform: rotate(252deg);"></i><i style="transform: rotate(270deg);"></i><i style="transform: rotate(288deg);"></i><i style="transform: rotate(306deg);"></i><i style="transform: rotate(324deg);"></i><i style="transform: rotate(342deg);"></i></div>
+          <div class="photo-wheel-spokes" id="photoWheelSpokes"></div>
           <div class="photo-wheel-support left"></div>
           <div class="photo-wheel-support right"></div>
           <div class="photo-wheel-foot"></div>
           <div class="photo-wheel-hub"><span>♥</span><small>我們的</small><strong>回憶</strong></div>
           <div class="photo-wheel-boarding"></div>
-          <div id="photoWheelCabins" data-real-photo-bound="1"><button type="button" class="photo-wheel-cabin active gondola-img-mode v65-gondola gondola-green gondola-blue" data-i="0" data-gondola-color="blue" data-gondola-skinned="1" style="transform: translate(0px, 210.8px) scale(1.22); opacity: 1; filter: blur(0px) brightness(1.13); z-index: 66;"><img class="gondola-img gondola-base" src="https://pub-a5bb8e437f004bb8aecca934db50299f.r2.dev/Ferris%20Wheel/Gondola/blue/without_door.png" alt="相簿 1 車廂本體" data-v64-fallback-bound="1" data-try-index="0"><img class="gondola-img gondola-door close left" src="https://pub-a5bb8e437f004bb8aecca934db50299f.r2.dev/Ferris%20Wheel/Gondola/blue/close_left_door.png" alt="" data-v64-fallback-bound="1" data-try-index="0"><img class="gondola-img gondola-door close right" src="https://pub-a5bb8e437f004bb8aecca934db50299f.r2.dev/Ferris%20Wheel/Gondola/blue/close_right_door.png" alt="" data-v64-fallback-bound="1" data-try-index="0"><img class="gondola-img gondola-door open left" src="https://pub-a5bb8e437f004bb8aecca934db50299f.r2.dev/Ferris%20Wheel/Gondola/blue/open_left_door.png" alt="" data-v64-fallback-bound="1" data-try-index="0"><img class="gondola-img gondola-door open right" src="https://pub-a5bb8e437f004bb8aecca934db50299f.r2.dev/Ferris%20Wheel/Gondola/blue/open_right_door.png" alt="" data-v64-fallback-bound="1" data-try-index="0"><span class="gondola-title">相簿 1</span><span class="gondola-hotspot-note">點開相片</span></button><button type="button" class="photo-wheel-cabin gondola-img-mode v65-gondola gondola-blue gondola-green" data-i="1" data-gondola-color="green" data-gondola-skinned="1" style="transform: translate(-149.058109px, 149.058109px) scale(0.896569); opacity: 0.677279; filter: blur(0.392893px) brightness(0.86); z-index: 27;"><img class="gondola-img gondola-base" src="https://pub-a5bb8e437f004bb8aecca934db50299f.r2.dev/Ferris%20Wheel/Gondola/green/without_door.png" alt="相簿 2 車廂本體" data-v64-fallback-bound="1" data-try-index="0"><img class="gondola-img gondola-door close left" src="https://pub-a5bb8e437f004bb8aecca934db50299f.r2.dev/Ferris%20Wheel/Gondola/green/close_left_door.png" alt="" data-v64-fallback-bound="1" data-try-index="0"><img class="gondola-img gondola-door close right" src="https://pub-a5bb8e437f004bb8aecca934db50299f.r2.dev/Ferris%20Wheel/Gondola/green/close_right_door.png" alt="" data-v64-fallback-bound="1" data-try-index="0"><img class="gondola-img gondola-door open left" src="https://pub-a5bb8e437f004bb8aecca934db50299f.r2.dev/Ferris%20Wheel/Gondola/green/open_left_door.png" alt="" data-v64-fallback-bound="1" data-try-index="0"><img class="gondola-img gondola-door open right" src="https://pub-a5bb8e437f004bb8aecca934db50299f.r2.dev/Ferris%20Wheel/Gondola/green/open_right_door.png" alt="" data-v64-fallback-bound="1" data-try-index="0"><span class="gondola-title">相簿 2</span><span class="gondola-hotspot-note">點開相片</span></button><button type="button" class="photo-wheel-cabin gondola-img-mode v65-gondola gondola-green gondola-blue" data-i="2" data-gondola-color="blue" data-gondola-skinned="1" style="transform: translate(-210.8px, 0px) scale(0.84); opacity: 0.55; filter: blur(1.1px) brightness(0.86); z-index: 20;"><img class="gondola-img gondola-base" src="https://pub-a5bb8e437f004bb8aecca934db50299f.r2.dev/Ferris%20Wheel/Gondola/blue/without_door.png" alt="相簿 3 車廂本體" data-v64-fallback-bound="1" data-try-index="0"><img class="gondola-img gondola-door close left" src="https://pub-a5bb8e437f004bb8aecca934db50299f.r2.dev/Ferris%20Wheel/Gondola/blue/close_left_door.png" alt="" data-v64-fallback-bound="1" data-try-index="0"><img class="gondola-img gondola-door close right" src="https://pub-a5bb8e437f004bb8aecca934db50299f.r2.dev/Ferris%20Wheel/Gondola/blue/close_right_door.png" alt="" data-v64-fallback-bound="1" data-try-index="0"><img class="gondola-img gondola-door open left" src="https://pub-a5bb8e437f004bb8aecca934db50299f.r2.dev/Ferris%20Wheel/Gondola/blue/open_left_door.png" alt="" data-v64-fallback-bound="1" data-try-index="0"><img class="gondola-img gondola-door open right" src="https://pub-a5bb8e437f004bb8aecca934db50299f.r2.dev/Ferris%20Wheel/Gondola/blue/open_right_door.png" alt="" data-v64-fallback-bound="1" data-try-index="0"><span class="gondola-title">相簿 3</span><span class="gondola-hotspot-note">點開相片</span></button><button type="button" class="photo-wheel-cabin gondola-img-mode v65-gondola gondola-blue gondola-green" data-i="3" data-gondola-color="green" data-gondola-skinned="1" style="transform: translate(-149.058109px, -149.058109px) scale(0.783431); opacity: 0.422721; filter: blur(1.807107px) brightness(0.86); z-index: 13;"><img class="gondola-img gondola-base" src="https://pub-a5bb8e437f004bb8aecca934db50299f.r2.dev/Ferris%20Wheel/Gondola/green/without_door.png" alt="相簿 4 車廂本體" data-v64-fallback-bound="1" data-try-index="0"><img class="gondola-img gondola-door close left" src="https://pub-a5bb8e437f004bb8aecca934db50299f.r2.dev/Ferris%20Wheel/Gondola/green/close_left_door.png" alt="" data-v64-fallback-bound="1" data-try-index="0"><img class="gondola-img gondola-door close right" src="https://pub-a5bb8e437f004bb8aecca934db50299f.r2.dev/Ferris%20Wheel/Gondola/green/close_right_door.png" alt="" data-v64-fallback-bound="1" data-try-index="0"><img class="gondola-img gondola-door open left" src="https://pub-a5bb8e437f004bb8aecca934db50299f.r2.dev/Ferris%20Wheel/Gondola/green/open_left_door.png" alt="" data-v64-fallback-bound="1" data-try-index="0"><img class="gondola-img gondola-door open right" src="https://pub-a5bb8e437f004bb8aecca934db50299f.r2.dev/Ferris%20Wheel/Gondola/green/open_right_door.png" alt="" data-v64-fallback-bound="1" data-try-index="0"><span class="gondola-title">相簿 4</span><span class="gondola-hotspot-note">點開相片</span></button><button type="button" class="photo-wheel-cabin gondola-img-mode v65-gondola gondola-green gondola-blue" data-i="4" data-gondola-color="blue" data-gondola-skinned="1" style="transform: translate(0px, -210.8px) scale(0.76); opacity: 0.37; filter: blur(2.1px) brightness(0.86); z-index: 10;"><img class="gondola-img gondola-base" src="https://pub-a5bb8e437f004bb8aecca934db50299f.r2.dev/Ferris%20Wheel/Gondola/blue/without_door.png" alt="相簿 5 車廂本體" data-v64-fallback-bound="1" data-try-index="0"><img class="gondola-img gondola-door close left" src="https://pub-a5bb8e437f004bb8aecca934db50299f.r2.dev/Ferris%20Wheel/Gondola/blue/close_left_door.png" alt="" data-v64-fallback-bound="1" data-try-index="0"><img class="gondola-img gondola-door close right" src="https://pub-a5bb8e437f004bb8aecca934db50299f.r2.dev/Ferris%20Wheel/Gondola/blue/close_right_door.png" alt="" data-v64-fallback-bound="1" data-try-index="0"><img class="gondola-img gondola-door open left" src="https://pub-a5bb8e437f004bb8aecca934db50299f.r2.dev/Ferris%20Wheel/Gondola/blue/open_left_door.png" alt="" data-v64-fallback-bound="1" data-try-index="0"><img class="gondola-img gondola-door open right" src="https://pub-a5bb8e437f004bb8aecca934db50299f.r2.dev/Ferris%20Wheel/Gondola/blue/open_right_door.png" alt="" data-v64-fallback-bound="1" data-try-index="0"><span class="gondola-title">相簿 5</span><span class="gondola-hotspot-note">點開相片</span></button><button type="button" class="photo-wheel-cabin gondola-img-mode v65-gondola gondola-blue gondola-green" data-i="5" data-gondola-color="green" data-gondola-skinned="1" style="transform: translate(149.058109px, -149.058109px) scale(0.783431); opacity: 0.422721; filter: blur(1.807107px) brightness(0.86); z-index: 13;"><img class="gondola-img gondola-base" src="https://pub-a5bb8e437f004bb8aecca934db50299f.r2.dev/Ferris%20Wheel/Gondola/green/without_door.png" alt="相簿 6 車廂本體" data-v64-fallback-bound="1" data-try-index="0"><img class="gondola-img gondola-door close left" src="https://pub-a5bb8e437f004bb8aecca934db50299f.r2.dev/Ferris%20Wheel/Gondola/green/close_left_door.png" alt="" data-v64-fallback-bound="1" data-try-index="0"><img class="gondola-img gondola-door close right" src="https://pub-a5bb8e437f004bb8aecca934db50299f.r2.dev/Ferris%20Wheel/Gondola/green/close_right_door.png" alt="" data-v64-fallback-bound="1" data-try-index="0"><img class="gondola-img gondola-door open left" src="https://pub-a5bb8e437f004bb8aecca934db50299f.r2.dev/Ferris%20Wheel/Gondola/green/open_left_door.png" alt="" data-v64-fallback-bound="1" data-try-index="0"><img class="gondola-img gondola-door open right" src="https://pub-a5bb8e437f004bb8aecca934db50299f.r2.dev/Ferris%20Wheel/Gondola/green/open_right_door.png" alt="" data-v64-fallback-bound="1" data-try-index="0"><span class="gondola-title">相簿 6</span><span class="gondola-hotspot-note">點開相片</span></button><button type="button" class="photo-wheel-cabin gondola-img-mode v65-gondola gondola-green gondola-blue" data-i="6" data-gondola-color="blue" data-gondola-skinned="1" style="transform: translate(210.8px, 0px) scale(0.84); opacity: 0.55; filter: blur(1.1px) brightness(0.86); z-index: 20;"><img class="gondola-img gondola-base" src="https://pub-a5bb8e437f004bb8aecca934db50299f.r2.dev/Ferris%20Wheel/Gondola/blue/without_door.png" alt="相簿 7 車廂本體" data-v64-fallback-bound="1" data-try-index="0"><img class="gondola-img gondola-door close left" src="https://pub-a5bb8e437f004bb8aecca934db50299f.r2.dev/Ferris%20Wheel/Gondola/blue/close_left_door.png" alt="" data-v64-fallback-bound="1" data-try-index="0"><img class="gondola-img gondola-door close right" src="https://pub-a5bb8e437f004bb8aecca934db50299f.r2.dev/Ferris%20Wheel/Gondola/blue/close_right_door.png" alt="" data-v64-fallback-bound="1" data-try-index="0"><img class="gondola-img gondola-door open left" src="https://pub-a5bb8e437f004bb8aecca934db50299f.r2.dev/Ferris%20Wheel/Gondola/blue/open_left_door.png" alt="" data-v64-fallback-bound="1" data-try-index="0"><img class="gondola-img gondola-door open right" src="https://pub-a5bb8e437f004bb8aecca934db50299f.r2.dev/Ferris%20Wheel/Gondola/blue/open_right_door.png" alt="" data-v64-fallback-bound="1" data-try-index="0"><span class="gondola-title">相簿 7</span><span class="gondola-hotspot-note">點開相片</span></button><button type="button" class="photo-wheel-cabin gondola-img-mode v65-gondola gondola-blue gondola-green" data-i="7" data-gondola-color="green" data-gondola-skinned="1" style="transform: translate(149.058109px, 149.058109px) scale(0.896569); opacity: 0.677279; filter: blur(0.392893px) brightness(0.86); z-index: 27;"><img class="gondola-img gondola-base" src="https://pub-a5bb8e437f004bb8aecca934db50299f.r2.dev/Ferris%20Wheel/Gondola/green/without_door.png" alt="相簿 8 車廂本體" data-v64-fallback-bound="1" data-try-index="0"><img class="gondola-img gondola-door close left" src="https://pub-a5bb8e437f004bb8aecca934db50299f.r2.dev/Ferris%20Wheel/Gondola/green/close_left_door.png" alt="" data-v64-fallback-bound="1" data-try-index="0"><img class="gondola-img gondola-door close right" src="https://pub-a5bb8e437f004bb8aecca934db50299f.r2.dev/Ferris%20Wheel/Gondola/green/close_right_door.png" alt="" data-v64-fallback-bound="1" data-try-index="0"><img class="gondola-img gondola-door open left" src="https://pub-a5bb8e437f004bb8aecca934db50299f.r2.dev/Ferris%20Wheel/Gondola/green/open_left_door.png" alt="" data-v64-fallback-bound="1" data-try-index="0"><img class="gondola-img gondola-door open right" src="https://pub-a5bb8e437f004bb8aecca934db50299f.r2.dev/Ferris%20Wheel/Gondola/green/open_right_door.png" alt="" data-v64-fallback-bound="1" data-try-index="0"><span class="gondola-title">相簿 8</span><span class="gondola-hotspot-note">點開相片</span></button></div>
+          <div id="photoWheelCabins"></div>
         </div>
         <div class="photo-wheel-controls">
           <button type="button" class="photo-wheel-ctrl" id="photoWheelPrev" aria-label="上一個相簿">‹</button>
@@ -3441,11 +3622,6 @@ button, .pill {
 <!-- 公路局｜導航 -->
 <section class="page" id="page-nav" data-weather="⛈️ 雷雨">
   <div class="page-head"><button class="back" onclick="closePage()">← 回到街上</button><b>公路局｜通往他的路</b></div>
-  <header class="route-top-banner" aria-label="公路局藏寶圖橫幅">
-    <button class="route-banner-back" type="button" onclick="closePage()" aria-label="回到街上">←</button>
-    <div class="route-banner-copy"><strong>公路局｜通往他的路</strong><small>當我想見你的時候</small></div>
-    <span class="route-banner-mark" aria-hidden="true">MAP</span>
-  </header>
   <div class="route-map-app" id="routeMapApp" aria-label="通往他的路｜藏寶圖">
     <img class="route-map-bg" src="assets/images/treasure_map_bg.webp" alt="藏寶圖背景" onerror="this.onerror=null;this.src='assets/images/treasure_map_bg.png'">
     <svg class="route-svg" viewBox="0 0 2160 3840" preserveAspectRatio="none" aria-hidden="true">
@@ -3659,7 +3835,7 @@ let LYRIC_LINES = [
   { time: 223.57, end: 257.35, text: "我走了" },
   { time: 257.45, end: 263.45, text: "兄弟.." }
 ];
-const LYRIC_OFFSET_SECONDS = 8; // 歌詞固定提前 20 秒
+const LYRIC_OFFSET_SECONDS = 8;
 function setupLyricDanmaku(){
   const audio=document.getElementById('themeAudio');
   if(!audio || audio.dataset.lyricBound==='1')return;
@@ -3738,6 +3914,7 @@ let DATA={photos:[],photoGroups:[],songs:[],memories:[],comments:[],theme:null};
 let musicWanted=false;
 
 let openingCountdownActive=false;
+let openingPlaybackCompleted=false;
 let openingCountdownTimer=null;
 let openingCountdownSeconds=10;
 
@@ -3803,91 +3980,17 @@ function primeThemeBeforeCountdown(){
     else if(CONFIG.GITHUB_THEME_AUDIO)a.src=CONFIG.GITHUB_THEME_AUDIO;
     else if(DATA.theme&&DATA.theme.streamUrl)a.src=DATA.theme.streamUrl;
   }
+  // Opening 期間只預載，不以靜音播放解鎖，避免歌曲搶在影片前面發聲。
   try{
-    const oldVol=a.volume || 1;
-    a.volume=0;
-    const p=a.play();
-    if(p&&p.then){
-      p.then(()=>{
-        setTimeout(()=>{
-          try{a.pause();a.currentTime=0;}catch(e){}
-          a.volume=oldVol;
-        },120);
-      }).catch(()=>{a.volume=oldVol;});
-    }else{
-      setTimeout(()=>{try{a.pause();a.currentTime=0;}catch(e){}a.volume=oldVol;},120);
-    }
+    a.pause();
+    a.currentTime=0;
+    a.volume=1;
+    a.preload='auto';
+    a.load();
   }catch(e){}
 }
-function startOpeningMemoryCountdown(){
-  if(openingCountdownActive)return;
-  openingCountdownActive=true;
-  playUiSound('open');
-  primeThemeBeforeCountdown();
 
-  const gate=document.getElementById('gate');
-  const overlay=document.getElementById('openingCountdown');
-  const video=document.getElementById('openingCountdownVideo');
-  if(gate)gate.classList.add('out');
-  if(overlay){overlay.classList.remove('done');overlay.classList.add('show');}
 
-  clearInterval(openingCountdownTimer);
-  if(video){
-    try{
-      video.currentTime=0;
-      video.muted=false;
-      video.volume=1;
-    }catch(e){}
-    const cleanupCountdown = ()=>{
-      if(openingCountdownTimer){clearTimeout(openingCountdownTimer);openingCountdownTimer=null;}
-      video.removeEventListener('ended', onVideoEnded);
-      video.removeEventListener('error', onVideoError);
-    };
-    const onVideoEnded = ()=>{
-      cleanupCountdown();
-      finishOpeningMemoryCountdown();
-    };
-    const onVideoError = ()=>{
-      cleanupCountdown();
-      finishOpeningMemoryCountdown();
-    };
-    video.addEventListener('ended', onVideoEnded, {once:true});
-    video.addEventListener('error', onVideoError, {once:true});
-    openingCountdownTimer=setTimeout(()=>{
-      cleanupCountdown();
-      finishOpeningMemoryCountdown();
-    },12000);
-    const p=video.play();
-    if(p&&p.catch){
-      p.catch(()=>{
-        // 若手機擋住影片音訊，改靜音播放倒數；主題曲仍會在結束後播放
-        try{video.muted=true;video.play().catch(()=>{});}catch(e){}
-      });
-    }
-    if(video.error){
-      cleanupCountdown();
-      finishOpeningMemoryCountdown();
-    }
-  }else{
-    openingCountdownTimer=setTimeout(()=>finishOpeningMemoryCountdown(),10000);
-  }
-}
-function finishOpeningMemoryCountdown(){
-  const overlay=document.getElementById('openingCountdown');
-  const video=document.getElementById('openingCountdownVideo');
-  if(video){try{video.pause();video.currentTime=0;}catch(e){}}
-  const gate=document.getElementById('gate');
-  musicWanted=true;
-  const a=document.getElementById('themeAudio');
-  if(a)a.volume=1;
-  startTheme();
-  setTimeout(()=>{
-    if(overlay){overlay.classList.add('done');setTimeout(()=>overlay.classList.remove('show','done'),360);}
-    if(gate)gate.classList.add('hidden');
-    showMiniWorld();
-    openingCountdownActive=false;
-  },260);
-}
 
 
 let uiAudioCtx=null;
@@ -4245,7 +4348,7 @@ function enterMainWorld(){
 
 
 
-/* ===== v51 放大鏡：只用按鈕 2 倍寬，禁用雙指縮放 ===== */
+
 function toggleViewZoom(){
   const on = document.body.classList.toggle('view-zoom-2x');
   const btn = document.getElementById('zoomBtn');
@@ -4283,7 +4386,7 @@ function toggleViewZoom(){
 
 
 
-/* ===== v53 相簿儀式感：往上展開後，必須往下收合，才可左右滑 ===== */
+
 
 function addAlbumRitualHints(){
   document.querySelectorAll('.album-card').forEach(card=>{
@@ -4398,7 +4501,7 @@ function closePage(){
 }
 function toast(msg,bad){const t=document.getElementById('toast');t.textContent=msg;t.style.background=bad?'#963232':'#5b3f2f';t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2300)}
 function api(p){return new Promise((res,rej)=>{let cb='cb'+Date.now()+Math.floor(Math.random()*9e4),u=new URL(CONFIG.GAS_API_URL);Object.keys(p).forEach(k=>u.searchParams.set(k,p[k]));u.searchParams.set('callback',cb);u.searchParams.set('_ts',Date.now());let sc=document.createElement('script'),tm=setTimeout(()=>done(rej,new Error('讀取逾時')),16000);window[cb]=x=>done(res,x);function done(f,v){clearTimeout(tm);delete window[cb];sc.remove();f(v)}sc.onerror=()=>done(rej,new Error('讀取失敗'));sc.src=u;document.head.appendChild(sc)})}
-function loadData(){return api({action:'getMemorialData'}).then(r=>{if(!r.ok)throw Error(r.error||'讀取失敗');DATA=r;DATA.photos=orderPhotos(DATA.photos||flatGroups(DATA.photoGroups||[]));renderDynamic();setupAlbumRitualLock();preloadFirstDriveAssets();if(openingCountdownActive)renderOpeningPhotoDraw();startTheme();return r;}).catch(e=>{renderDynamic();toast('雲端資料讀取失敗，先顯示本機內容',1);return null;})}
+function loadData(){return api({action:'getMemorialData'}).then(r=>{if(!r.ok)throw Error(r.error||'讀取失敗');DATA=r;DATA.photos=orderPhotos(DATA.photos||flatGroups(DATA.photoGroups||[]));renderDynamic();setupAlbumRitualLock();preloadFirstDriveAssets();if(typeof refreshRouteLandmark==='function')refreshRouteLandmark();if(openingCountdownActive)renderOpeningPhotoDraw();return r;}).catch(e=>{renderDynamic();toast('雲端資料讀取失敗，先顯示本機內容',1);return null;})}
 function detectAreaKey(text){
   text=String(text||'');
   const areas={
@@ -4808,9 +4911,10 @@ function lbTouchEnd(e){const t=e.changedTouches&&e.changedTouches[0];if(!t)retur
 document.addEventListener('keydown',e=>{const lb=document.getElementById('lightbox');if(!lb||!lb.classList.contains('show'))return;if(e.key==='ArrowLeft')moveLightbox(-1);if(e.key==='ArrowRight')moveLightbox(1);if(e.key==='Escape')closeLightbox();});
 function startTheme(){
   const a=document.getElementById('themeAudio');
+  if(!a)return;
   setupLyricDanmaku();
   // 主題曲固定優先使用 GitHub Pages 本機檔：assets/audio/dear-ang-theme.mp3
-  // Google Drive 的 00_主題曲只當備份，不再優先蓋掉 GitHub 音樂。
+  // Google Drive / Webhook 的 00_主題曲只當備份，不得在 Opening 結束前播放。
   if(!a.src){
     if(CONFIG.LOCAL_THEME){
       a.src=CONFIG.LOCAL_THEME;
@@ -4820,6 +4924,16 @@ function startTheme(){
       a.src=DATA.theme.streamUrl;
     }
   }
+
+  const overlay=document.getElementById('openingCountdown');
+  const openingStillRunning=!openingPlaybackCompleted || openingCountdownActive ||
+    !!(overlay && overlay.classList.contains('show'));
+  if(openingStillRunning){
+    // 即使資料提早載入、返回鍵或其他函式誤呼叫，也只能保持停止。
+    try{a.pause();a.currentTime=0;}catch(e){}
+    return;
+  }
+
   if(musicWanted){
     if(!a.src && CONFIG.LOCAL_THEME){a.src=CONFIG.LOCAL_THEME;}
     if(!a.src){toast('主題曲路徑不存在');return;}
@@ -4872,19 +4986,8 @@ function smartBack(){
   toast('重播開場');
   startOpeningMemoryCountdown();
 }
-function playLetterAudio(){
-  const a=document.getElementById('letterAudio');
-  const play=document.querySelector('.radio-audio-play');
-  if(!a){toast('音檔播放器尚未建立',1);return;}
-  if(!a.getAttribute('src')){toast('請先放入 assets/audio/aming-message.mp3',1);return;}
-  a.play().then(()=>{if(play)play.classList.add('playing');}).catch(()=>toast('音檔尚未放入或被瀏覽器擋住',1));
-}
-function stopLetterAudio(){
-  const a=document.getElementById('letterAudio');
-  const play=document.querySelector('.radio-audio-play');
-  if(a){try{a.pause();a.currentTime=0;}catch(e){}}
-  if(play)play.classList.remove('playing');
-}
+
+
 try{const _letterAudio=document.getElementById('letterAudio');if(_letterAudio){_letterAudio.addEventListener('ended',()=>{const play=document.querySelector('.radio-audio-play');if(play)play.classList.remove('playing');});}}catch(e){}
 
 function setupBuildingHotspotNames(){
@@ -4906,34 +5009,7 @@ function setupPersonNameHotspots(){
     el.addEventListener('click',show);
   });
 }
-function setupMiniFrameVideo(){
-  const v=document.getElementById('miniFrameVideo');
-  if(!v)return;
-  const stamp='';
-  const here=location.href.split('#')[0].replace(/[^\/]*$/,'');
-  const candidates=[
-    here+'assets/videos/mini-frame.mp4'+stamp,
-    'assets/videos/mini-frame.mp4'+stamp,
-    here+'mini-frame.mp4'+stamp,
-    'mini-frame.mp4'+stamp,
-    '/DearANG/assets/videos/mini-frame.mp4'+stamp,
-    'assets/video/mini-frame.mp4'+stamp,
-    'videos/mini-frame.mp4'+stamp
-  ];
-  let idx=0;
-  const tryNext=()=>{
-    if(idx>=candidates.length){v.classList.add('frame-failed');console.warn('mini-frame.mp4 讀取不到：請把影片放在 assets/videos/mini-frame.mp4');return;}
-    const next=candidates[idx++];
-    if(v.dataset.srcTried===next){tryNext();return;}
-    v.dataset.srcTried=next;
-    v.src=next;
-    v.load();
-    try{v.muted=true;v.loop=true;const p=v.play();if(p&&p.catch)p.catch(()=>{});}catch(e){}
-  };
-  v.addEventListener('error',tryNext);
-  v.addEventListener('loadeddata',()=>{v.classList.remove('frame-failed');});
-  if(!v.currentSrc)tryNext();
-}
+
 
 function renderFood(){}
 function renderMaps(){
@@ -4951,7 +5027,7 @@ function setupWeather(){
   autoWeatherTimer=setInterval(()=>refreshAutoWeather(false),10*60*1000);
 }
 
-/* ===== v37：免密碼訪客名片＋私人訪客紀錄 ===== */
+
 const GEO_WORKER_URL = window.DEARANG_GEO_WORKER_URL || ''; 
 // 要自動預填城市時，先部署 geo-worker.js，再把網址填到 window.DEARANG_GEO_WORKER_URL 或直接填在這裡。
 
@@ -5128,7 +5204,7 @@ document.addEventListener('DOMContentLoaded',()=>{sendPrivateVisitLog('enter_sit
 
 
 
-/* ===== v56：藏寶地圖入口保險開啟 ===== */
+
 function forceInitTreasureRouteMap(){
   try{
     if(typeof initRouteMapPage==='function')initRouteMapPage();
@@ -5153,7 +5229,7 @@ function openTreasureMapFromStreet(event){
   forceInitTreasureRouteMap();
 }
 
-/* ===== v38 公路局單檔內嵌藏寶圖控制 ===== */
+
 (function(){
   const routeStations=[
     {n:1,title:'等你出來的小門',tag:'每次一起出去前，我都在這裡等你。',t:0,x:760,y:1565,body:['我們每次要一起出去的時候，我都會在停機車的地方入口那個小門等你。','這裡不是什麼特別大的地方，可是對我來說，它就是一個很熟悉的等待位置。','因為每次要見面、要一起出門、要一起去哪裡，我都會先站在那裡等你出現。','<span class="em">有些地方會被記住，不是因為它多漂亮，而是因為那裡裝著太多「每一次要見面前」的感覺。</span>']},
@@ -5169,37 +5245,60 @@ function openTreasureMapFromStreet(event){
   function inCard(e){return !!(e.target&&e.target.closest&&e.target.closest('#page-nav .route-story-card'))}
   function routePad(n){return String(n).padStart(2,'0')}
   function routeLandmarkCandidates(n){
-    const p=routePad(n);
-    const bases=[`landmark-${p}`,`station-${p}`,`route-${p}`,`spot-${p}`,p];
-    const exts=['webp','png','jpg','jpeg','gif'];
-    const out=[`assets/images/map_photo/${Number(n)}.webp`,`assets/images/map_photo/${Number(n)}.png`];
-    bases.forEach(b=>exts.forEach(ext=>out.push(`assets/images/route/${b}.${ext}`)));
-    return out;
+    // 專案內實際檔名固定為 assets/images/map_photo/1～6。
+    // 先讀 WebP；舊瀏覽器或檔案不存在時，再退回同號 PNG。
+    const number=String(Number(n));
+    const base=`assets/images/map_photo/${number}`;
+    const makeUrl=(path)=>{
+      try{return new URL(path,document.baseURI).href;}catch(e){return path;}
+    };
+    return [makeUrl(base+'.webp'),makeUrl(base+'.png')];
+  }
+  function preloadRouteLandmarks(){
+    routeStations.forEach(station=>{
+      const urls=routeLandmarkCandidates(station.n);
+      if(!urls.length)return;
+      const image=new Image();
+      image.src=urls[0];
+      image.onerror=()=>{if(urls[1])image.src=urls[1];};
+    });
   }
   function showRouteLandmark(s){
     if(!state||!state.pop)return;
     const pop=state.pop,img=state.popImg,label=state.popLabel;
+    const requestId=(state.popRequestId||0)+1;
+    state.popRequestId=requestId;
+    clearTimeout(state.popTimer);
     pop.classList.remove('show','missing');
     pop.setAttribute('aria-hidden','true');
     pop.style.left=(s.x/2160*100)+'%';
     pop.style.top=(s.y/3840*100)+'%';
     if(label)label.textContent=s.n+'｜'+s.title;
-    let cands=routeLandmarkCandidates(s.n), idx=0;
-    if(img){
-      img.alt=s.title||'';
-      img.onerror=()=>{
-        idx++;
-        if(idx<cands.length){ img.src=cands[idx]; }
-        else{ pop.classList.add('missing'); img.removeAttribute('src'); }
-      };
-      img.src=cands[idx];
-    }
-    clearTimeout(state.popTimer);
-    state.popTimer=setTimeout(()=>{
-      if(!state)return;
+    const candidates=routeLandmarkCandidates(s.n);
+    let index=0;
+    const reveal=()=>{
+      if(!state||state.popRequestId!==requestId)return;
+      pop.classList.remove('missing');
+      // 重新觸發每一站的小土墩放大動畫。
+      void pop.offsetWidth;
       pop.classList.add('show');
       pop.setAttribute('aria-hidden','false');
-    },90);
+    };
+    const loadNext=()=>{
+      if(!img||state.popRequestId!==requestId)return;
+      if(index>=candidates.length){
+        pop.classList.add('missing');
+        img.removeAttribute('src');
+        return;
+      }
+      img.src=candidates[index++];
+    };
+    if(img){
+      img.alt=s.title||('第 '+s.n+' 站地標');
+      img.onload=reveal;
+      img.onerror=loadNext;
+      loadNext();
+    }
   }
   function pageVisible(){const p=document.getElementById('page-nav');return !!(p&&p.classList.contains('show'))}
   function setProgress(t){
@@ -5286,7 +5385,7 @@ function openTreasureMapFromStreet(event){
       pop.innerHTML='<img alt=""><span class="route-landmark-label"></span>';
       root.appendChild(pop);
     }
-    state={root,path,done,hot,light,spots,dots,card,num,title,tag,body,hint,titlePill,total,idx:0,anim:null,autoHide:null,open:false,currentT:0,lock:false,sy:0,sx:0,touchOnCard:false,spotEls:[...spots.querySelectorAll('.route-spot')],dotEls:[...dots.querySelectorAll('span')],pop,popImg:pop.querySelector('img'),popLabel:pop.querySelector('.route-landmark-label'),popTimer:null};
+    state={root,path,done,hot,light,spots,dots,card,num,title,tag,body,hint,titlePill,total,idx:0,anim:null,autoHide:null,open:false,currentT:0,lock:false,sy:0,sx:0,touchOnCard:false,spotEls:[...spots.querySelectorAll('.route-spot')],dotEls:[...dots.querySelectorAll('span')],pop,popImg:pop.querySelector('img'),popLabel:pop.querySelector('.route-landmark-label'),popTimer:null,popRequestId:0};
     document.getElementById('routePrev').onclick=()=>go(state.idx-1);
     document.getElementById('routeNext').onclick=()=>go(state.idx+1);
     document.getElementById('routeCardTop').onclick=()=>{state.open=!state.open;state.card.classList.toggle('open',state.open);state.card.classList.add('show');state.hint.classList.toggle('hide',state.open)};
@@ -5295,197 +5394,30 @@ function openTreasureMapFromStreet(event){
     root.addEventListener('touchstart',e=>{state.touchOnCard=inCard(e);if(state.touchOnCard)return;state.sy=e.touches[0].clientY;state.sx=e.touches[0].clientX},{passive:true});
     root.addEventListener('touchend',e=>{if(state.touchOnCard){state.touchOnCard=false;return}let dy=e.changedTouches[0].clientY-state.sy,dx=e.changedTouches[0].clientX-state.sx;if(Math.abs(dy)>48&&Math.abs(dy)>Math.abs(dx)*1.25)go(state.idx+(dy<0?1:-1))},{passive:true});
     document.addEventListener('keydown',e=>{if(!pageVisible()||!state)return;if(['ArrowDown','PageDown',' '].includes(e.key)){e.preventDefault();go(state.idx+1)} if(['ArrowUp','PageUp'].includes(e.key)){e.preventDefault();go(state.idx-1)}});
+    preloadRouteLandmarks();
     setProgress(0);
     render(0);
   };
+  window.refreshRouteLandmark=function(){
+    if(state&&routeStations[state.idx])showRouteLandmark(routeStations[state.idx]);
+  };
 })();
 
 
 
-/* ===== v55：木框天氣文字強制簡短，只顯示狀態、溫度、風速 ===== */
-function compactMiniWeatherText(){
-  const el=document.getElementById('miniWeatherStatus');
-  if(!el)return;
-  let txt=(el.textContent||'').trim();
-  if(!txt)return;
-  if(txt.includes('你那邊的天氣：'))return;
-
-  const statusMatch=txt.match(/(?:使用：|天氣[:：]?\s*)([^，,｜|。；;]+)|([☀️🌤️☁️🌧️⛈️🌫️🌙❄️][^，,｜|。；;]*)/);
-  const tempMatch=txt.match(/(-?\d+(?:\.\d+)?)\s*°?C/);
-  const windMatch=txt.match(/風速\s*([0-9.]+)\s*(?:km\/h|公里|m\/s)?/i);
-  const status=(statusMatch&&(statusMatch[1]||statusMatch[2])||'讀取中').replace(/^使用[:：]?/,'').trim();
-  const temp=tempMatch?`${tempMatch[1]}°C`:'--°C';
-  const wind=windMatch?`${windMatch[1]} km/h`:'-- km/h';
-  el.textContent=`你那邊的天氣：${status}・${temp}・風速 ${wind}`;
-}
-(function observeMiniWeatherText(){
-  const run=()=>compactMiniWeatherText();
-  window.addEventListener('load',()=>setTimeout(run,500));
-  setInterval(run,1800);
-})();
 
 
 
-/* ===== v56：mini-frame 分成 11 個天氣影片 + 公路局標題固定 ===== */
-(function(){
-  const WEATHER_VIDEO_LIST=[
-    {key:'nightRain',label:'🌧️ 夜雨',chip:'🌧️',bg:'assets/images/weather/night-rain.webp',fx:'rain night',miniVideo:'assets/videos/weather-mini/01-night-rain.mp4'},
-    {key:'deepNightRain',label:'🌧️ 深夜雨',chip:'🌧️',bg:'assets/images/weather/night-rain.webp',fx:'storm night',miniVideo:'assets/videos/weather-mini/02-deep-night-rain.mp4'},
-    {key:'cloudy',label:'⛅ 多雲',chip:'⛅',bg:'assets/images/weather/day-cloudy.webp',fx:'',miniVideo:'assets/videos/weather-mini/03-cloudy.mp4'},
-    {key:'overcast',label:'☁️ 陰天',chip:'☁️',bg:'assets/images/weather/day-overcast.webp',fx:'',miniVideo:'assets/videos/weather-mini/04-overcast.mp4'},
-    {key:'sunny',label:'☀️ 晴天',chip:'☀️',bg:'assets/images/weather/day-sunny.webp',fx:'',miniVideo:'assets/videos/weather-mini/05-sunny.mp4'},
-    {key:'fog',label:'🌫️ 濃霧',chip:'🌫️',bg:'assets/images/weather/day-fog.webp',fx:'fog',miniVideo:'assets/videos/weather-mini/06-fog.mp4'},
-    {key:'storm',label:'⛈️ 雷雨',chip:'⛈️',bg:'assets/images/weather/day-storm.webp',fx:'storm',miniVideo:'assets/videos/weather-mini/07-thunderstorm.mp4'},
-    {key:'nightShower',label:'🌧️ 夜間陣雨',chip:'🌧️',bg:'assets/images/weather/night-rain.webp',fx:'rain night',miniVideo:'assets/videos/weather-mini/08-night-shower.mp4'},
-    {key:'hot',label:'☀️ 炎熱晴天',chip:'☀️',bg:'assets/images/weather/day-hot.webp',fx:'heat',miniVideo:'assets/videos/weather-mini/09-hot-sunny.mp4'},
-    {key:'rain',label:'🌧️ 白天降雨',chip:'🌧️',bg:'assets/images/weather/day-rain.webp',fx:'rain',miniVideo:'assets/videos/weather-mini/10-day-rain.mp4'},
-    {key:'night',label:'🌙 晴朗夜晚',chip:'🌙',bg:'assets/images/weather/night-clear.webp',fx:'night',miniVideo:'assets/videos/weather-mini/11-clear-night.mp4'}
-  ];
 
-  try{
-    if(Array.isArray(MEMORY_WEATHERS)){
-      MEMORY_WEATHERS.splice(0, MEMORY_WEATHERS.length, ...WEATHER_VIDEO_LIST);
-    }
-  }catch(e){}
 
-  function miniVideoCandidates(path){
-    const clean=String(path||'assets/videos/mini-frame.mp4').split('?')[0];
-    const here=location.href.split('#')[0].replace(/[^\/]*$/,'');
-    return [
-      clean,
-      here+clean,
-      clean.replace(/^assets\//,'/DearANG/assets/'),
-      clean.replace(/^assets\/videos\/weather-mini\//,'weather-mini/'),
-      clean.replace(/^assets\/videos\/weather-mini\//,'assets/video/weather-mini/'),
-      'assets/videos/mini-frame.mp4',
-      here+'assets/videos/mini-frame.mp4',
-      'mini-frame.mp4'
-    ].filter((v,i,a)=>v&&a.indexOf(v)===i);
-  }
 
-  function applyMiniFrameWeatherVideo(w){
-    const v=document.getElementById('miniFrameVideo');
-    if(!v)return;
-    const videoPath=(w&&w.miniVideo)||'assets/videos/mini-frame.mp4';
-    if(v.dataset.weatherVideoBase===videoPath && v.dataset.weatherVideoReady==='1')return;
 
-    const candidates=miniVideoCandidates(videoPath);
-    let idx=0;
-    v.dataset.weatherVideoBase=videoPath;
-    v.dataset.weatherVideoReady='0';
-
-    const tryNext=()=>{
-      if(v.dataset.weatherVideoBase!==videoPath)return;
-      if(idx>=candidates.length){
-        v.classList.add('frame-failed');
-        console.warn('mini-frame 天氣影片讀取不到，請確認 assets/videos/weather-mini/ 內有 11 支影片：', videoPath);
-        return;
-      }
-      const next=candidates[idx++];
-      v.onerror=tryNext;
-      v.onloadeddata=()=>{
-        v.classList.remove('frame-failed');
-        v.dataset.weatherVideoReady='1';
-      };
-      v.src=next;
-      v.load();
-      try{
-        v.muted=true;
-        v.loop=true;
-        v.setAttribute('playsinline','');
-        const p=v.play();
-        if(p&&p.catch)p.catch(()=>{});
-      }catch(e){}
-    };
-    tryNext();
-  }
-
-  const originalSetMemoryWeather=typeof setMemoryWeather==='function'?setMemoryWeather:null;
-  if(originalSetMemoryWeather){
-    setMemoryWeather=function(key,ev,source){
-      originalSetMemoryWeather(key,ev,source);
-      try{applyMiniFrameWeatherVideo(memoryWeatherByKey(key));}catch(e){}
-    };
-  }
-
-  setupMiniFrameVideo=function(){
-    try{applyMiniFrameWeatherVideo(memoryWeatherByKey(memoryWeatherKey));}catch(e){
-      const v=document.getElementById('miniFrameVideo');
-      if(v){
-        v.src='assets/videos/mini-frame.mp4';
-        v.load();
-        try{v.muted=true;v.loop=true;v.play().catch(()=>{});}catch(err){}
-      }
-    }
-  };
-
-  timeBasedWeatherKey=function(){
-    const h=taipeiParts().hour;
-    if(h>=5 && h<11)return 'sunny';
-    if(h>=11 && h<16)return 'hot';
-    if(h>=16 && h<18)return 'cloudy';
-    if(h>=18 && h<22)return 'night';
-    return 'nightRain';
-  };
-
-  timeBasedWeatherText=function(){
-    const p=taipeiParts();
-    const h=p.hour;
-    const hh=String(isFinite(p.hour)?p.hour:0).padStart(2,'0');
-    const mm=String(isFinite(p.minute)?p.minute:0).padStart(2,'0');
-    if(h>=5 && h<11)return `你那邊的天氣：晴天・--°C・風速 -- km/h`;
-    if(h>=11 && h<16)return `你那邊的天氣：炎熱晴天・--°C・風速 -- km/h`;
-    if(h>=16 && h<18)return `你那邊的天氣：多雲・--°C・風速 -- km/h`;
-    if(h>=18 && h<22)return `你那邊的天氣：晴朗夜晚・--°C・風速 -- km/h`;
-    return `你那邊的天氣：夜雨・--°C・風速 -- km/h`;
-  };
-
-  weatherKeyFromOpenMeteo=function(c){
-    const code=Number(c.weather_code||0);
-    const isDay=Number(c.is_day)===1;
-    const temp=Number(c.temperature_2m);
-    const wind=Number(c.wind_speed_10m);
-    const rain=(Number(c.rain)||0)+(Number(c.showers)||0)+(Number(c.precipitation)||0);
-
-    if(!isDay){
-      if(code>=95 || wind>=55 || rain>=3 || code===65 || code===67 || code===82)return 'deepNightRain';
-      if(rain>0 || (code>=51&&code<=67) || (code>=80&&code<=81))return 'nightShower';
-      return 'night';
-    }
-
-    if(code>=95 || wind>=55)return 'storm';
-    if(code===45 || code===48)return 'fog';
-    if(rain>0 || (code>=51&&code<=67) || (code>=80&&code<=82))return 'rain';
-    if(code===3)return 'overcast';
-    if(code===2)return 'cloudy';
-    if(isFinite(temp) && temp>=32)return 'hot';
-    return 'sunny';
-  };
-
-  function fixDearAngPageTitles(){
-    const navTitle=document.querySelector('#page-nav .page-head b');
-    if(navTitle)navTitle.textContent='公路局｜通往他的路';
-    const videoTitle=document.querySelector('#page-video .page-head b');
-    if(videoTitle)videoTitle.textContent='新時代影音館｜忘不掉的動態氣息';
-  }
-
-  document.addEventListener('DOMContentLoaded',()=>{
-    fixDearAngPageTitles();
-    renderMiniWeatherButtons();
-    setupMiniFrameVideo();
-  });
-  window.addEventListener('load',()=>{
-    fixDearAngPageTitles();
-    setupMiniFrameVideo();
-    try{setMemoryWeather(memoryWeatherKey,null,autoWeatherSource||'time');}catch(e){}
-  });
-})();
 
 
 </script>
 
 <script>
-/* ===== v57 華光相館同檔摩天輪：保留 themeAudio 不換頁 ===== */
+
 (function(){
   const albums=[
     {title:'愛的旅程',short:'愛的旅程',icon:'📷',tone:['#63c6b9','#224b57'],text:['記錄我們一起走過的每個重要時刻，','從相遇、相戀到共同築起的未來。','每一張照片，都是愛的證明。']},
@@ -5635,7 +5567,7 @@ function compactMiniWeatherText(){
 
 
 <script>
-/* ===== v62 摩天輪車廂圖片化 + 點開接原本相片區 ===== */
+
 (function(){
   const GONDOLA_BASE='https://pub-a5bb8e437f004bb8aecca934db50299f.r2.dev/Ferris%20Wheel/Gondola';
   const COLORS=['blue','green'];
@@ -5741,7 +5673,7 @@ function compactMiniWeatherText(){
 
 
 <script>
-/* ===== v63 錄音播放時主題曲自動小聲；停止/播完恢復；計算離開第幾天 ===== */
+
 (function(){
   const LEFT_DATE={y:2026,m:3,d:9};
 
@@ -5837,80 +5769,12 @@ function compactMiniWeatherText(){
 </script>
 
 
-<script>
-/* ===== v64 R2 車廂圖片路徑備援：大小寫/空白編碼都試，失敗才用 CSS 佔位 ===== */
-(function(){
-  const HOST='https://pub-a5bb8e437f004bb8aecca934db50299f.r2.dev';
-  const BASES=[
-    HOST+'/Ferris%20Wheel/Gondola',
-    HOST+'/Ferris Wheel/Gondola',
-    HOST+'/Ferris%2520Wheel/Gondola'
-  ];
-  const COLOR_CASES={blue:['blue','Blue','BLUE'],green:['green','Green','GREEN']};
 
-  function parseInfo(img){
-    const src=String(img.getAttribute('src')||'');
-    const m=src.match(/\/Gondola\/([^\/]+)\/([^\/]+)$/);
-    if(!m)return null;
-    return {color:decodeURIComponent(m[1]).toLowerCase(), name:m[2]};
-  }
 
-  function buildList(info){
-    const colors=COLOR_CASES[info.color]||[info.color];
-    const urls=[];
-    BASES.forEach(base=>{
-      colors.forEach(c=>{
-        urls.push(base+'/'+c+'/'+info.name);
-      });
-    });
-    return [...new Set(urls)];
-  }
-
-  function markFallback(img){
-    const cabin=img.closest('.photo-wheel-cabin');
-    if(cabin)cabin.classList.add('gondola-fallback');
-  }
-
-  function bindOne(img){
-    if(img.dataset.v64FallbackBound==='1')return;
-    img.dataset.v64FallbackBound='1';
-
-    const info=parseInfo(img);
-    if(!info){
-      img.addEventListener('error',()=>markFallback(img),{once:true});
-      return;
-    }
-    const list=buildList(info);
-    img.dataset.tryIndex='0';
-
-    img.onerror=function(){
-      let i=Number(img.dataset.tryIndex||0)+1;
-      if(i<list.length){
-        img.dataset.tryIndex=String(i);
-        img.src=list[i];
-      }else{
-        markFallback(img);
-      }
-    };
-  }
-
-  function bindAll(){
-    document.querySelectorAll('.gondola-img').forEach(bindOne);
-  }
-
-  if(document.readyState==='loading'){
-    document.addEventListener('DOMContentLoaded',()=>setTimeout(bindAll,120));
-  }else{
-    setTimeout(bindAll,120);
-  }
-  window.addEventListener('load',()=>setTimeout(bindAll,500));
-  setInterval(bindAll,1200);
-})();
-</script>
 
 
 <script>
-/* ===== v65 使用你給的正確 R2 路徑：/Gondola/Green/close_door.png ===== */
+
 (function(){
   const BASE='https://pub-a5bb8e437f004bb8aecca934db50299f.r2.dev/Ferris%20Wheel/Gondola';
   const COLORS=['Green','Blue'];
@@ -5979,222 +5843,16 @@ function compactMiniWeatherText(){
 </script>
 
 
-<script>
-/* ===== v66 MiniWorld Frame 天氣背景：使用 miniFrameVideo 依天氣換不同影片 ===== */
-(function(){
-  const MINI_FRAME_WEATHER_STAMP='20260630_v66_weather_frame';
 
-  const WEATHER_FRAME_VIDEO={
-    sunny:'assets/videos/weather-mini/05-sunny.mp4',
-    hot:'assets/videos/weather-mini/09-hot-sunny.mp4',
-    cloudy:'assets/videos/weather-mini/day-cloudy.mp4',
-    overcast:'assets/videos/weather-mini/day-overcast.mp4',
-    rain:'assets/videos/weather-mini/10-day-rain.mp4',
-    storm:'assets/videos/weather-mini/day-storm.mp4',
-    fog:'assets/videos/weather-mini/day-fog.mp4',
-    haze:'assets/videos/weather-mini/day-haze.mp4',
-    night:'assets/videos/weather-mini/11-clear-night.mp4',
-    nightShower:'assets/videos/weather-mini/01-night-rain.mp4',
-    deepNightRain:'assets/videos/weather-mini/01-night-rain.mp4',
-    nightRain:'assets/videos/weather-mini/01-night-rain.mp4'
-  };
 
-  const FALLBACKS=[
-    'assets/videos/weather-mini/05-sunny.mp4',
-    'assets/videos/mini-frame.mp4'
-  ];
 
-  function normalizeWeatherKey(key){
-    key=String(key||'').trim();
-    if(WEATHER_FRAME_VIDEO[key])return key;
-    if(/storm|thunder|雷|暴|豪|颱/i.test(key))return 'storm';
-    if(/rain|shower|雨/i.test(key))return 'rain';
-    if(/fog|霧/i.test(key))return 'fog';
-    if(/haze|霾/i.test(key))return 'haze';
-    if(/night/i.test(key))return 'night';
-    if(/hot|熱/i.test(key))return 'hot';
-    if(/overcast|陰/i.test(key))return 'overcast';
-    if(/cloud|雲/i.test(key))return 'cloudy';
-    return 'sunny';
-  }
 
-  function currentMiniWeatherKey(){
-    try{
-      if(typeof memoryWeatherKey!=='undefined' && memoryWeatherKey)return normalizeWeatherKey(memoryWeatherKey);
-    }catch(e){}
-    try{
-      if(typeof timeBasedWeatherKey==='function')return normalizeWeatherKey(timeBasedWeatherKey());
-    }catch(e){}
-    return 'sunny';
-  }
 
-  function setMiniFrameVideoByWeather(key){
-    const v=document.getElementById('miniFrameVideo');
-    if(!v)return;
 
-    key=normalizeWeatherKey(key||currentMiniWeatherKey());
-    const primary=WEATHER_FRAME_VIDEO[key]||WEATHER_FRAME_VIDEO.sunny;
-    const candidates=[primary,...FALLBACKS].filter((x,i,a)=>x&&a.indexOf(x)===i);
-    let idx=0;
-
-    function tryNext(){
-      if(idx>=candidates.length)return;
-      const src=candidates[idx++]+(candidates[idx-1].includes('?')?'&':'?')+'v='+MINI_FRAME_WEATHER_STAMP;
-      v.onerror=tryNext;
-      if(v.getAttribute('src')!==src){
-        v.src=src;
-        v.load();
-      }
-      try{
-        v.muted=true;
-        v.loop=true;
-        v.playsInline=true;
-        v.setAttribute('playsinline','');
-        const p=v.play();
-        if(p&&p.catch)p.catch(()=>{});
-      }catch(e){}
-    }
-
-    v.dataset.weatherFrameKey=key;
-    tryNext();
-  }
-
-  const oldApply=window.applyMiniFrameWeatherVideo;
-  window.applyMiniFrameWeatherVideo=function(key){
-    setMiniFrameVideoByWeather(key);
-    if(typeof oldApply==='function'){
-      try{oldApply(key);}catch(e){}
-    }
-  };
-
-  const oldSet=window.setMemoryWeather;
-  if(typeof oldSet==='function' && !oldSet.__v66WeatherFrameWrapped){
-    window.setMemoryWeather=function(key,ev,source){
-      const r=oldSet.apply(this,arguments);
-      setMiniFrameVideoByWeather(key);
-      return r;
-    };
-    window.setMemoryWeather.__v66WeatherFrameWrapped=true;
-  }
-
-  const oldSetup=window.setupMiniFrameVideo;
-  window.setupMiniFrameVideo=function(){
-    setMiniFrameVideoByWeather(currentMiniWeatherKey());
-    if(typeof oldSetup==='function'){
-      try{oldSetup();}catch(e){}
-    }
-  };
-
-  function boot(){
-    setMiniFrameVideoByWeather(currentMiniWeatherKey());
-  }
-
-  if(document.readyState==='loading'){
-    document.addEventListener('DOMContentLoaded',()=>setTimeout(boot,80));
-  }else{
-    setTimeout(boot,80);
-  }
-  window.addEventListener('load',()=>setTimeout(boot,260));
-})();
-</script>
 
 
 <script>
-/* ===== v68 weather-mini 正確檔名：01~11 版本 ===== */
-(function(){
-  const WEATHER_MINI_REAL={
-    nightRain:'assets/videos/weather-mini/01-night-rain.mp4',
-    deepNightRain:'assets/videos/weather-mini/02-deep-night-rain.mp4',
-    cloudy:'assets/videos/weather-mini/03-cloudy.mp4',
-    overcast:'assets/videos/weather-mini/04-overcast.mp4',
-    sunny:'assets/videos/weather-mini/05-sunny.mp4',
-    fog:'assets/videos/weather-mini/06-fog.mp4',
-    storm:'assets/videos/weather-mini/07-thunderstorm.mp4',
-    thunderstorm:'assets/videos/weather-mini/07-thunderstorm.mp4',
-    nightShower:'assets/videos/weather-mini/08-night-shower.mp4',
-    hot:'assets/videos/weather-mini/09-hot-sunny.mp4',
-    rain:'assets/videos/weather-mini/10-day-rain.mp4',
-    dayRain:'assets/videos/weather-mini/10-day-rain.mp4',
-    night:'assets/videos/weather-mini/11-clear-night.mp4',
-    clearNight:'assets/videos/weather-mini/11-clear-night.mp4'
-  };
 
-  function normalizeMiniWeatherKey(key){
-    key=String(key||'').trim();
-    if(WEATHER_MINI_REAL[key])return key;
-    if(/deep.*night.*rain|深夜.*雨/i.test(key))return 'deepNightRain';
-    if(/night.*rain|夜雨/i.test(key))return 'nightRain';
-    if(/night.*shower|夜.*陣雨/i.test(key))return 'nightShower';
-    if(/thunder|storm|雷|暴|豪|颱/i.test(key))return 'storm';
-    if(/rain|shower|雨/i.test(key))return 'rain';
-    if(/fog|霧/i.test(key))return 'fog';
-    if(/overcast|陰/i.test(key))return 'overcast';
-    if(/cloud|雲/i.test(key))return 'cloudy';
-    if(/hot|熱/i.test(key))return 'hot';
-    if(/night|clear.*night|夜/i.test(key))return 'night';
-    return 'sunny';
-  }
-
-  function getWeatherKey(){
-    try{
-      if(typeof memoryWeatherKey!=='undefined' && memoryWeatherKey)return normalizeMiniWeatherKey(memoryWeatherKey);
-    }catch(e){}
-    try{
-      if(typeof timeBasedWeatherKey==='function')return normalizeMiniWeatherKey(timeBasedWeatherKey());
-    }catch(e){}
-    return 'sunny';
-  }
-
-  window.setMiniFrameVideoByWeatherReal=function(key){
-    const v=document.getElementById('miniFrameVideo');
-    if(!v)return;
-    key=normalizeMiniWeatherKey(key||getWeatherKey());
-    const src=(WEATHER_MINI_REAL[key]||WEATHER_MINI_REAL.sunny)+'';
-    if(v.getAttribute('src')!==src){
-      v.onerror=function(){
-        v.onerror=null;
-        v.src='assets/videos/mini-frame.mp4';
-        try{v.load();v.muted=true;v.loop=true;v.play().catch(()=>{});}catch(e){}
-      };
-      v.src=src;
-      try{v.load();v.muted=true;v.loop=true;v.setAttribute('playsinline','');v.play().catch(()=>{});}catch(e){}
-    }
-    v.dataset.weatherFrameKey=key;
-  };
-
-  const oldSet=window.setMemoryWeather;
-  if(typeof oldSet==='function' && !oldSet.__v68RealMiniWeatherWrapped){
-    window.setMemoryWeather=function(key,ev,source){
-      const r=oldSet.apply(this,arguments);
-      setTimeout(()=>window.setMiniFrameVideoByWeatherReal(key),30);
-      return r;
-    };
-    window.setMemoryWeather.__v68RealMiniWeatherWrapped=true;
-  }
-
-  const oldSetup=window.setupMiniFrameVideo;
-  window.setupMiniFrameVideo=function(){
-    window.setMiniFrameVideoByWeatherReal(getWeatherKey());
-    if(typeof oldSetup==='function'){
-      try{oldSetup();}catch(e){}
-    }
-  };
-
-  function boot(){
-    window.setMiniFrameVideoByWeatherReal(getWeatherKey());
-  }
-  if(document.readyState==='loading'){
-    document.addEventListener('DOMContentLoaded',()=>setTimeout(boot,120));
-  }else{
-    setTimeout(boot,120);
-  }
-  window.addEventListener('load',()=>setTimeout(boot,350));
-})();
-</script>
-
-
-<script>
-/* ===== v70-cache：手動更新並重存快取，不動 opening 流程 ===== */
 (function(){
   if(window.__DEAR_ANG_CACHE_BUTTON__)return;
   window.__DEAR_ANG_CACHE_BUTTON__=true;
@@ -6324,384 +5982,20 @@ function compactMiniWeatherText(){
 </script>
 
 
-<script>
-/* ===== v71-weather-default：FRAME / STREET 天氣未讀取完成先用預設，避免卡頓 ===== */
-(function(){
-  if(window.__DEAR_ANG_V71_WEATHER_DEFAULT__)return;
-  window.__DEAR_ANG_V71_WEATHER_DEFAULT__=true;
-
-  var DEFAULT_FRAME_DAY='assets/videos/weather-mini/05-sunny.mp4';
-  var DEFAULT_FRAME_NIGHT='assets/videos/weather-mini/11-clear-night.mp4';
-  var DEFAULT_STREET_DAY='assets/images/weather/day-sunny.webp';
-  var DEFAULT_STREET_NIGHT='assets/images/weather/night-clear.webp';
-
-  function isNightTime(){
-    var h=new Date().getHours();
-    return h<6 || h>=18;
-  }
-  function absAsset(path){
-    try{return new URL(path,document.baseURI||location.href).href;}
-    catch(e){return path;}
-  }
-  function pickDefaultFrameVideo(){
-    return isNightTime()?DEFAULT_FRAME_NIGHT:DEFAULT_FRAME_DAY;
-  }
-  function pickDefaultStreetImage(){
-    return isNightTime()?DEFAULT_STREET_NIGHT:DEFAULT_STREET_DAY;
-  }
-  function safeSetVideoSrc(video,path){
-    if(!video || !path)return;
-    var next=absAsset(path);
-    var current=video.currentSrc || video.src || '';
-    if(current && current.indexOf(path)>-1)return;
-    try{
-      video.pause();
-      video.src=next;
-      video.muted=true;
-      video.loop=true;
-      video.setAttribute('playsinline','');
-      video.load();
-      var p=video.play();
-      if(p&&p.catch)p.catch(function(){});
-    }catch(e){
-      console.warn('[DearANG] default frame weather video failed:',e);
-    }
-  }
-  function safeSetImageSrc(img,path){
-    if(!img || !path)return;
-    var next=absAsset(path);
-    var current=img.currentSrc || img.src || '';
-    if(current && current.indexOf(path)>-1)return;
-    var test=new Image();
-    test.onload=function(){img.src=next;};
-    test.onerror=function(){
-      if(path!==DEFAULT_STREET_DAY)img.src=absAsset(DEFAULT_STREET_DAY);
-    };
-    test.src=next;
-  }
-
-  window.applyDefaultWeatherBeforeReady=function(reason){
-    try{
-      var miniFrame=document.getElementById('miniFrameVideo');
-      // 只有尚未選出天氣影片時才放預設影片；已選出的天氣影片不可被預設值蓋回去。
-      if(!miniFrame || !miniFrame.dataset.weatherVideoBase){
-        safeSetVideoSrc(miniFrame,pickDefaultFrameVideo());
-      }
-      safeSetImageSrc(document.getElementById('stageWorldImg'),pickDefaultStreetImage());
-
-      var stage=document.getElementById('stage');
-      if(stage){
-        stage.classList.remove('stage-weather-fallback');
-        stage.dataset.weatherDefaultReason=reason||'before-ready';
-      }
-
-      var screen=document.querySelector('#miniWorld .mini-crt-screen');
-      if(screen){
-        screen.classList.remove('weather-fallback');
-        screen.dataset.weatherDefaultReason=reason||'before-ready';
-      }
-
-      var worldWeather=document.getElementById('worldWeather');
-      var miniWeather=document.getElementById('miniWorldWeather');
-      if(worldWeather){worldWeather.className='world-weather';worldWeather.style.display='none';}
-      if(miniWeather){miniWeather.className='mini-world-weather';miniWeather.style.display='none';}
-    }catch(e){
-      console.warn('[DearANG] apply default weather failed:',e);
-    }
-  };
-
-  window.applyDefaultWeatherBeforeReady('early');
-
-  if(document.readyState==='loading'){
-    document.addEventListener('DOMContentLoaded',function(){
-      window.applyDefaultWeatherBeforeReady('dom-ready');
-    },{once:true});
-  }else{
-    setTimeout(function(){window.applyDefaultWeatherBeforeReady('dom-ready');},0);
-  }
-
-  var oldShowMiniWorld=window.showMiniWorld;
-  if(typeof oldShowMiniWorld==='function' && !oldShowMiniWorld.__weatherDefaultWrapped){
-    window.showMiniWorld=function(){
-      window.applyDefaultWeatherBeforeReady('before-showMiniWorld');
-      var r=oldShowMiniWorld.apply(this,arguments);
-      setTimeout(function(){window.applyDefaultWeatherBeforeReady('after-showMiniWorld');},80);
-      return r;
-    };
-    window.showMiniWorld.__weatherDefaultWrapped=true;
-  }
-
-  var oldSetMemoryWeather=window.setMemoryWeather;
-  if(typeof oldSetMemoryWeather==='function' && !oldSetMemoryWeather.__noFakeWeatherWrapped){
-    window.setMemoryWeather=function(){
-      var r;
-      try{
-        r=oldSetMemoryWeather.apply(this,arguments);
-      }catch(e){
-        console.warn('[DearANG] setMemoryWeather failed, use default:',e);
-        window.applyDefaultWeatherBeforeReady('setMemoryWeather-error');
-        return;
-      }
-      try{
-        var worldWeather=document.getElementById('worldWeather');
-        var miniWeather=document.getElementById('miniWorldWeather');
-        if(worldWeather){worldWeather.className='world-weather';worldWeather.style.display='none';}
-        if(miniWeather){miniWeather.className='mini-world-weather';miniWeather.style.display='none';}
-      }catch(e){}
-      return r;
-    };
-    window.setMemoryWeather.__noFakeWeatherWrapped=true;
-  }
-})();
-</script>
 
 
-<div id="departureDayCounter" class="departure-day-counter">今天是你離開的第 115 天<small>2026.03.09</small></div>
-<script>
-/* ===== v72-restore-gate-opening：強制還原 Gate + Opening 初始狀態 ===== */
-(function(){
-  if(window.__DEAR_ANG_RESTORE_GATE_OPENING__)return;
-  window.__DEAR_ANG_RESTORE_GATE_OPENING__=true;
-  function restoreInitialGateState(){
-    try{
-      if(window.openingCountdownActive)return;
-      var gate=document.getElementById('gate');
-      var opening=document.getElementById('openingCountdown');
-      var mini=document.getElementById('miniWorld');
-      var video=document.getElementById('openingCountdownVideo');
-      if(gate){gate.className='gate';gate.style.display='';gate.style.opacity='';gate.style.pointerEvents='';}
-      if(opening){opening.className='opening-countdown';opening.style.display='';opening.style.opacity='';opening.style.pointerEvents='';}
-      if(mini && !mini.classList.contains('hidden'))mini.classList.add('hidden');
-      if(video){
-        video.setAttribute('src','assets/videos/opening-countdown.mp4');
-        try{video.pause();video.currentTime=0;}catch(e){}
-      }
-    }catch(e){console.warn('[DearANG] restore gate/opening failed:',e);}
-  }
-  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',restoreInitialGateState,{once:true});
-  else restoreInitialGateState();
-})();
-</script>
 
-<script>
-/* ===== v73-app-safe-opening-frame：WebView 開場不半路切掉 + Mini Frame 強制重載播放 ===== */
-(function(){
-  if(window.__DEARANG_APP_SAFE_OPENING_FRAME__)return;
-  window.__DEARANG_APP_SAFE_OPENING_FRAME__=true;
 
-  function uniqueList(list){
-    var seen={};
-    return list.filter(function(x){
-      x=String(x||'').trim();
-      if(!x||seen[x])return false;
-      seen[x]=true;
-      return true;
-    });
-  }
+<div id="departureDayCounter" class="departure-day-counter"></div>
 
-  function playVideoQuietly(v){
-    if(!v)return;
-    try{
-      v.setAttribute('playsinline','');
-      v.setAttribute('webkit-playsinline','');
-      v.muted=true;
-      v.loop=true;
-      v.preload='auto';
-      var p=v.play();
-      if(p&&p.catch)p.catch(function(){
-        setTimeout(function(){try{v.play().catch(function(){});}catch(e){}},220);
-      });
-    }catch(e){}
-  }
 
-  window.setupMiniFrameVideo=function(forceReload){
-    var v=document.getElementById('miniFrameVideo');
-    if(!v)return;
-    var candidates=uniqueList([
-      'assets/videos/mini-frame.mp4',
-      './assets/videos/mini-frame.mp4',
-      'assets/videos/weather-mini/05-sunny.mp4',
-      './assets/videos/weather-mini/05-sunny.mp4',
-      'assets/videos/weather-mini/11-clear-night.mp4',
-      './assets/videos/weather-mini/11-clear-night.mp4'
-    ]);
-    if(v.dataset.framePatchReady!=='1'){
-      v.dataset.framePatchReady='1';
-      v.addEventListener('loadeddata',function(){
-        v.classList.remove('frame-failed');
-        playVideoQuietly(v);
-      });
-      v.addEventListener('canplay',function(){
-        v.classList.remove('frame-failed');
-        playVideoQuietly(v);
-      });
-      v.addEventListener('error',function(){
-        var idx=parseInt(v.dataset.frameCandidateIndex||'0',10)+1;
-        if(idx<candidates.length){
-          loadFrameCandidate(idx);
-        }else{
-          v.classList.add('frame-failed');
-          console.warn('[DearANG] mini-frame 讀不到：請放 app/src/main/assets/www/assets/videos/mini-frame.mp4，或放天氣備援影片。');
-        }
-      });
-    }
-    function loadFrameCandidate(idx){
-      v.dataset.frameCandidateIndex=String(idx);
-      try{
-        v.pause();
-        v.src=candidates[idx];
-        v.load();
-        setTimeout(function(){playVideoQuietly(v);},80);
-      }catch(e){}
-    }
-    var srcNow=v.getAttribute('src')||'';
-    if(forceReload || !srcNow || v.error || v.readyState===0){
-      loadFrameCandidate(0);
-    }else{
-      playVideoQuietly(v);
-    }
-  };
 
-  var oldShowMiniWorld=window.showMiniWorld;
-  window.showMiniWorld=function(){
-    var r;
-    try{r=oldShowMiniWorld&&oldShowMiniWorld.apply(this,arguments);}catch(e){console.warn('[DearANG] showMiniWorld old failed:',e);}
-    try{
-      var mini=document.getElementById('miniWorld');
-      if(mini)mini.classList.remove('hidden','zooming');
-      window.setupMiniFrameVideo(true);
-      setTimeout(function(){window.setupMiniFrameVideo(false);},500);
-    }catch(e){}
-    return r;
-  };
 
-  window.startOpeningMemoryCountdown=function(){
-    if(typeof openingCountdownActive!=='undefined' && openingCountdownActive)return;
-    try{openingCountdownActive=true;}catch(e){}
-    try{playUiSound('open');}catch(e){}
-    try{primeThemeBeforeCountdown();}catch(e){}
 
-    var gate=document.getElementById('gate');
-    var overlay=document.getElementById('openingCountdown');
-    var video=document.getElementById('openingCountdownVideo');
-    if(gate)gate.classList.add('out');
-    if(overlay){overlay.classList.remove('done');overlay.classList.add('show');}
-
-    try{clearTimeout(openingCountdownTimer);openingCountdownTimer=null;}catch(e){}
-
-    if(!video){
-      try{openingCountdownTimer=setTimeout(function(){finishOpeningMemoryCountdown();},1000);}catch(e){}
-      return;
-    }
-
-    var candidates=uniqueList([
-      video.getAttribute('src'),
-      'assets/videos/opening-countdown.mp4',
-      './assets/videos/opening-countdown.mp4'
-    ]);
-    var finished=false;
-    var started=false;
-    var candidateIndex=0;
-
-    function cleanup(){
-      try{clearTimeout(openingCountdownTimer);openingCountdownTimer=null;}catch(e){}
-      video.removeEventListener('ended',onEnded);
-      video.removeEventListener('error',onError);
-      video.removeEventListener('playing',onPlaying);
-      video.removeEventListener('canplay',onCanPlay);
-      video.removeEventListener('loadeddata',onCanPlay);
-    }
-    function finishOnce(){
-      if(finished)return;
-      finished=true;
-      cleanup();
-      window.finishOpeningMemoryCountdown();
-    }
-    function tryPlay(){
-      try{
-        video.setAttribute('playsinline','');
-        video.setAttribute('webkit-playsinline','');
-        video.preload='auto';
-        video.muted=false;
-        video.volume=1;
-        var p=video.play();
-        if(p&&p.catch){
-          p.catch(function(){
-            // Android / iOS 若擋有聲影片，就改成靜音繼續播；不要直接跳走。
-            try{
-              video.muted=true;
-              video.play().catch(function(){
-                console.warn('[DearANG] opening video play blocked; 等使用者按跳過或再次點擊。');
-              });
-            }catch(e){}
-          });
-        }
-      }catch(e){}
-    }
-    function loadCandidate(i){
-      candidateIndex=i;
-      try{
-        video.pause();
-        video.src=candidates[i];
-        video.currentTime=0;
-        video.load();
-      }catch(e){}
-      setTimeout(tryPlay,80);
-    }
-    function onEnded(){finishOnce();}
-    function onPlaying(){
-      started=true;
-      try{clearTimeout(openingCountdownTimer);openingCountdownTimer=null;}catch(e){}
-    }
-    function onCanPlay(){tryPlay();}
-    function onError(){
-      if(candidateIndex+1<candidates.length){
-        loadCandidate(candidateIndex+1);
-        return;
-      }
-      console.warn('[DearANG] opening-countdown.mp4 讀不到，才跳過開場。');
-      finishOnce();
-    }
-
-    video.addEventListener('ended',onEnded);
-    video.addEventListener('error',onError);
-    video.addEventListener('playing',onPlaying);
-    video.addEventListener('canplay',onCanPlay);
-    video.addEventListener('loadeddata',onCanPlay);
-
-    // 只防「影片完全沒開始」；不再用固定 10/12 秒切掉，所以不會播到一半消失。
-    try{
-      openingCountdownTimer=setTimeout(function(){
-        if(!started && (!video.readyState || video.error))finishOnce();
-      },9000);
-    }catch(e){}
-
-    loadCandidate(0);
-  };
-
-  window.finishOpeningMemoryCountdown=function(){
-    var overlay=document.getElementById('openingCountdown');
-    var video=document.getElementById('openingCountdownVideo');
-    try{clearTimeout(openingCountdownTimer);openingCountdownTimer=null;}catch(e){}
-    if(video){try{video.pause();video.currentTime=0;}catch(e){}}
-    var gate=document.getElementById('gate');
-    try{musicWanted=true;}catch(e){}
-    var a=document.getElementById('themeAudio');
-    if(a)a.volume=1;
-    try{startTheme();}catch(e){}
-    setTimeout(function(){
-      if(overlay){overlay.classList.add('done');setTimeout(function(){overlay.classList.remove('show','done');},360);}
-      if(gate)gate.classList.add('hidden');
-      try{window.showMiniWorld();}catch(e){}
-      try{openingCountdownActive=false;}catch(e){}
-    },260);
-  };
-})();
-</script>
 
 
 <script>
-/* ===== v75-final：最後覆蓋舊版衝突邏輯 ===== */
+
 (function(){
   if(window.__DEARANG_V75_FINAL__)return;
   window.__DEARANG_V75_FINAL__=true;
@@ -6868,10 +6162,6 @@ function compactMiniWeatherText(){
     var gate=document.getElementById('gate');
     try{clearTimeout(openingCountdownTimer);openingCountdownTimer=null;}catch(e){}
     if(video){try{video.pause();video.currentTime=0;}catch(e){}}
-    try{musicWanted=true;}catch(e){}
-    var a=document.getElementById('themeAudio');
-    if(a)a.volume=1;
-    try{startTheme();}catch(e){}
     if(overlay){
       overlay.classList.remove('loading','video-ready','playing');
       overlay.classList.remove('show','done');
@@ -6888,11 +6178,21 @@ function compactMiniWeatherText(){
       mini.style.opacity='';
       mini.style.pointerEvents='';
     }
-    try{openingCountdownActive=false;}catch(e){}
+
+    // 先正式結束 Opening，再允許歌曲開始，避免 Webhook / loadData 提早搶播。
+    try{openingCountdownActive=false;openingPlaybackCompleted=true;}catch(e){}
+    window.__dearAngOpeningFinished=true;
+    try{musicWanted=true;}catch(e){}
+    var a=document.getElementById('themeAudio');
+    if(a)a.volume=1;
+    setTimeout(function(){try{startTheme();}catch(e){}},0);
   };
   window.startOpeningMemoryCountdown=function(){
     if(typeof openingCountdownActive!=='undefined'&&openingCountdownActive)return;
-    try{openingCountdownActive=true;}catch(e){}
+    try{openingCountdownActive=true;openingPlaybackCompleted=false;}catch(e){}
+    window.__dearAngOpeningFinished=false;
+    var theme=document.getElementById('themeAudio');
+    if(theme){try{theme.pause();theme.currentTime=0;theme.volume=1;}catch(e){}}
     try{playUiSound('open');primeThemeBeforeCountdown();}catch(e){}
     var gate=document.getElementById('gate'),overlay=document.getElementById('openingCountdown'),video=document.getElementById('openingCountdownVideo');
     if(overlay){
@@ -6965,7 +6265,6 @@ function compactMiniWeatherText(){
 </script>
 
 <script>
-/* ===== v76：街道世界跟 Mini World 使用同一個天氣，不再被預設晴天蓋掉 ===== */
 (function(){
   if(window.__DEARANG_V76_STREET_WEATHER_SYNC__)return;
   window.__DEARANG_V76_STREET_WEATHER_SYNC__=true;
@@ -7069,77 +6368,1252 @@ function compactMiniWeatherText(){
 })();
 </script>
 
+
 <script>
-/* ===== v77：從場館返回街道後強制解鎖，避免街道滑動/點擊卡住 ===== */
+/* ===== 互動與返回單一控制器：只允許目前畫面接收點擊 ===== */
 (function(){
-  if(window.__DEARANG_V77_STREET_RETURN_UNLOCK__)return;
-  window.__DEARANG_V77_STREET_RETURN_UNLOCK__=true;
+  if(window.__DEARANG_INTERACTION_ISOLATION__)return;
+  window.__DEARANG_INTERACTION_ISOLATION__=true;
 
-  window.restoreStreetAfterPageClose=function(){
-    try{
-      document.querySelectorAll('.page.closing').forEach(function(p){p.classList.remove('show','closing');});
-      document.querySelectorAll('.page:not(.show)').forEach(function(p){p.classList.remove('closing');});
+  function isVisible(el){
+    if(!el)return false;
+    if(el.classList.contains('hidden'))return false;
+    var s=getComputedStyle(el);
+    return s.display!=='none' && s.visibility!=='hidden';
+  }
 
-      document.querySelectorAll('.page video,.page audio').forEach(function(m){
-        try{m.pause();}catch(e){}
-      });
-      try{if(typeof ktvStop==='function')ktvStop();}catch(e){}
-      try{if(typeof ktvHideDriveFrame==='function')ktvHideDriveFrame();}catch(e){}
+  function currentView(){
+    var opening=document.getElementById('openingCountdown');
+    var gate=document.getElementById('gate');
+    var page=document.querySelector('.page.show:not(.closing)');
+    var mini=document.getElementById('miniWorld');
+    if(opening && opening.classList.contains('show'))return 'opening';
+    if(gate && !gate.classList.contains('hidden') && !gate.classList.contains('out') && isVisible(gate))return 'gate';
+    if(page)return 'page';
+    if(mini && !mini.classList.contains('hidden') && !mini.classList.contains('zooming') && isVisible(mini))return 'mini';
+    return 'street';
+  }
 
-      var world=document.getElementById('world');
-      var scroller=document.getElementById('scroller');
-      var stage=document.getElementById('stage');
-      var mini=document.getElementById('miniWorld');
-      if(world){
-        world.classList.remove('hidden');
-        world.style.pointerEvents='';
-      }
-      if(mini&&mini.classList.contains('hidden')){
-        mini.classList.remove('zooming');
-        mini.style.pointerEvents='';
-      }
-      if(scroller){
-        scroller.style.overflowX='auto';
-        scroller.style.overflowY='hidden';
-        scroller.style.pointerEvents='auto';
-        scroller.style.touchAction='pan-x';
-        scroller.style.webkitOverflowScrolling='touch';
-      }
-      if(stage){
-        stage.style.pointerEvents='auto';
-        stage.querySelectorAll('.hotspot,.person-tag-hotspot').forEach(function(el){
-          el.style.pointerEvents='auto';
-          el.classList.remove('show-name');
-        });
-      }
-      document.body.style.overflow='hidden';
-      document.body.classList.remove('modal-open','page-open','route-lock');
-      try{if(typeof syncStreetWeatherFromMemory==='function')syncStreetWeatherFromMemory();}catch(e){}
-      try{if(typeof startTheme==='function')startTheme();}catch(e){}
-    }catch(e){
-      console.warn('[DearANG] restore street failed:',e);
+  window.syncDearAngInteractionState=function(){
+    var view=currentView();
+    document.body.setAttribute('data-dearang-view',view);
+
+    document.querySelectorAll('.page').forEach(function(p){
+      var active=p.classList.contains('show')&&!p.classList.contains('closing');
+      p.setAttribute('aria-hidden',active?'false':'true');
+      if(!active){p.style.pointerEvents='none';}
+      else{p.style.pointerEvents='auto';}
+    });
+
+    var mini=document.getElementById('miniWorld');
+    if(mini){
+      var miniOn=view==='mini';
+      mini.setAttribute('aria-hidden',miniOn?'false':'true');
+      mini.style.pointerEvents=miniOn?'auto':'none';
     }
+
+    var stage=document.getElementById('stage');
+    if(stage)stage.style.pointerEvents=view==='street'?'auto':'none';
+    return view;
   };
 
-  var oldClose=window.closePage;
-  if(typeof oldClose==='function'&&!oldClose.__v77StreetUnlockWrapped){
-    window.closePage=function(){
-      var r=oldClose.apply(this,arguments);
-      setTimeout(window.restoreStreetAfterPageClose,80);
-      setTimeout(window.restoreStreetAfterPageClose,260);
-      return r;
-    };
-    window.closePage.__v77StreetUnlockWrapped=true;
+  function stopPageMedia(){
+    document.querySelectorAll('.page video,.page audio').forEach(function(m){
+      try{m.pause();}catch(e){}
+    });
+    try{if(typeof ktvStop==='function')ktvStop();}catch(e){}
+    try{if(typeof ktvHideDriveFrame==='function')ktvHideDriveFrame();}catch(e){}
   }
 
-  var oldOpen=window.openPage;
-  if(typeof oldOpen==='function'&&!oldOpen.__v77StreetUnlockWrapped){
-    window.openPage=function(id){
-      try{document.querySelectorAll('.page.closing').forEach(function(p){p.classList.remove('show','closing');});}catch(e){}
-      return oldOpen.apply(this,arguments);
-    };
-    window.openPage.__v77StreetUnlockWrapped=true;
+  function closePhotoWheelModal(){
+    var modal=document.getElementById('photoWheelModal');
+    if(modal&&modal.classList.contains('open')){
+      modal.classList.remove('open');
+      return true;
+    }
+    return false;
   }
+
+  window.openPage=function(id){
+    var page=document.getElementById('page-'+id);
+    if(!page)return;
+    try{playUiSound('open');}catch(e){}
+    try{if(typeof sendPrivateVisitLog==='function')sendPrivateVisitLog('page_'+id);}catch(e){}
+
+    document.querySelectorAll('.page').forEach(function(p){
+      p.classList.remove('show','closing');
+      p.style.pointerEvents='none';
+    });
+    var mini=document.getElementById('miniWorld');
+    if(mini){mini.classList.add('hidden');mini.classList.remove('zooming');mini.style.pointerEvents='none';}
+    page.classList.add('show');
+    page.classList.remove('closing');
+    page.style.pointerEvents='auto';
+    page.scrollTop=0;
+    document.body.style.overflow='hidden';
+
+    try{renderMemoryCapsule(id);}catch(e){}
+    try{preloadAreaAssets(id);}catch(e){}
+    if(id==='photo')try{if(typeof initPhotoWheel==='function')setTimeout(initPhotoWheel,20);}catch(e){}
+    if(id==='nav')try{if(typeof initRouteMapPage==='function')setTimeout(initRouteMapPage,30);}catch(e){}
+    window.syncDearAngInteractionState();
+  };
+
+  window.closePage=function(){
+    try{playUiSound('close');}catch(e){}
+    stopPageMedia();
+    closePhotoWheelModal();
+    document.querySelectorAll('.page').forEach(function(p){
+      p.classList.remove('show','closing');
+      p.style.pointerEvents='none';
+      p.setAttribute('aria-hidden','true');
+    });
+    var ferris=document.getElementById('ferrisConstruction');
+    if(ferris)ferris.classList.add('hidden');
+    var visitor=document.getElementById('visitorIdentityModal');
+    if(visitor)visitor.classList.add('hidden');
+    var mini=document.getElementById('miniWorld');
+    if(mini){mini.classList.add('hidden');mini.classList.remove('zooming');mini.style.pointerEvents='none';}
+    var world=document.getElementById('world');
+    if(world){world.classList.remove('hidden');world.style.pointerEvents='';}
+    var scroller=document.getElementById('scroller');
+    if(scroller){scroller.style.pointerEvents='auto';scroller.style.overflowX='auto';scroller.style.overflowY='hidden';}
+    document.body.style.overflow='hidden';
+    document.body.classList.remove('modal-open','page-open','route-lock');
+    try{if(typeof syncStreetWeatherFromMemory==='function')syncStreetWeatherFromMemory();}catch(e){}
+    try{if(typeof startTheme==='function')startTheme();}catch(e){}
+    window.syncDearAngInteractionState();
+  };
+
+  window.enterMainWorld=function(){
+    var mini=document.getElementById('miniWorld');
+    if(!mini){window.syncDearAngInteractionState();return;}
+    mini.classList.add('zooming');
+    mini.style.pointerEvents='none';
+    window.syncDearAngInteractionState();
+    setTimeout(function(){
+      mini.classList.add('hidden');
+      mini.classList.remove('zooming');
+      mini.style.pointerEvents='none';
+      try{centerWorld();}catch(e){}
+      try{askVisitorAfterEnterWorld();}catch(e){}
+      window.syncDearAngInteractionState();
+    },620);
+  };
+
+  var originalShowMiniWorld=window.showMiniWorld;
+  window.showMiniWorld=function(){
+    document.querySelectorAll('.page').forEach(function(p){p.classList.remove('show','closing');p.style.pointerEvents='none';});
+    var r;
+    try{if(typeof originalShowMiniWorld==='function')r=originalShowMiniWorld.apply(this,arguments);}catch(e){}
+    var mini=document.getElementById('miniWorld');
+    if(mini){mini.classList.remove('hidden','zooming');mini.style.pointerEvents='auto';}
+    setTimeout(window.syncDearAngInteractionState,0);
+    return r;
+  };
+
+  window.smartBack=function(){
+    var lb=document.getElementById('lightbox');
+    if(lb&&lb.classList.contains('show')){try{closeLightbox();}catch(e){}window.syncDearAngInteractionState();return;}
+    if(closePhotoWheelModal()){window.syncDearAngInteractionState();return;}
+    var ferris=document.getElementById('ferrisConstruction');
+    if(ferris&&!ferris.classList.contains('hidden')){try{closeFerrisConstruction();}catch(e){ferris.classList.add('hidden');}window.syncDearAngInteractionState();return;}
+    var visitor=document.getElementById('visitorIdentityModal');
+    if(visitor&&!visitor.classList.contains('hidden')){visitor.classList.add('hidden');window.syncDearAngInteractionState();return;}
+    if(document.querySelector('.page.show')){window.closePage();return;}
+    var mini=document.getElementById('miniWorld');
+    if(mini&&!mini.classList.contains('hidden')){
+      try{stopLetterAudio();}catch(e){}
+      try{toast('重播開場');}catch(e){}
+      try{startOpeningMemoryCountdown();}catch(e){}
+      setTimeout(window.syncDearAngInteractionState,0);
+      return;
+    }
+    window.showMiniWorld();
+    try{toast('回到小世界');}catch(e){}
+  };
+
+  function pageFolderUrl(path){
+    try{
+      var href=location.href.split('#')[0].split('?')[0];
+      return new URL(path,href.replace(/[^/]*$/,'')).href;
+    }catch(e){return path;}
+  }
+  function baseUrl(path){try{return new URL(path,document.baseURI||location.href).href;}catch(e){return path;}}
+  function unique(list){var seen={};return list.filter(function(x){x=String(x||'');if(!x||seen[x])return false;seen[x]=1;return true;});}
+  function letterCandidates(){
+    var audio=document.getElementById('letterAudio');
+    return unique([
+      audio&&audio.getAttribute('src'),
+      pageFolderUrl('assets/audio/aming-message.mp3'),
+      baseUrl('assets/audio/aming-message.mp3'),
+      pageFolderUrl('aming-message.mp3'),
+      baseUrl('aming-message.mp3'),
+      pageFolderUrl('assets/audio/aming.mp3'),
+      baseUrl('assets/audio/aming.mp3'),
+      pageFolderUrl('assets/audio/阿明留言.mp3'),
+      baseUrl('assets/audio/阿明留言.mp3')
+    ]);
+  }
+  function themeAudio(){return document.getElementById('themeAudio');}
+  function duckThemeFinal(){
+    var t=themeAudio();if(!t)return;
+    if(t.dataset.beforeLetterVolume==null)t.dataset.beforeLetterVolume=String(isFinite(t.volume)?t.volume:1);
+    try{t.volume=.12;}catch(e){}
+  }
+  function restoreThemeFinal(){
+    var t=themeAudio();if(!t)return;
+    var old=t.dataset.beforeLetterVolume;
+    try{t.volume=old==null?1:Math.max(0,Math.min(1,Number(old)||1));}catch(e){}
+    delete t.dataset.beforeLetterVolume;
+  }
+  function markRadioPlaying(on){
+    var b=document.querySelector('#miniWorld .radio-audio-play');
+    if(b)b.classList.toggle('playing',!!on);
+  }
+
+  window.playLetterAudio=function(){
+    if(window.syncDearAngInteractionState()!=='mini')return;
+    var a=document.getElementById('letterAudio');
+    if(!a){try{toast('找不到 Radio 音檔播放器',1);}catch(e){}return;}
+    var list=letterCandidates(),index=0,done=false,timer=null;
+    duckThemeFinal();
+    markRadioPlaying(false);
+
+    function cleanupAttempt(){clearTimeout(timer);a.oncanplay=null;a.onloadeddata=null;a.onerror=null;}
+    function failAll(){cleanupAttempt();restoreThemeFinal();markRadioPlaying(false);try{toast('Radio 音檔讀不到，請確認 assets/audio/aming-message.mp3',1);}catch(e){}}
+    function actuallyPlay(){
+      if(done)return;
+      var p;
+      try{a.volume=1;p=a.play();}catch(e){p=null;}
+      if(p&&p.then){
+        p.then(function(){done=true;cleanupAttempt();markRadioPlaying(true);}).catch(function(){tryNext();});
+      }else if(!a.paused){done=true;cleanupAttempt();markRadioPlaying(true);}
+      else tryNext();
+    }
+    function tryNext(){
+      if(done)return;
+      cleanupAttempt();
+      if(index>=list.length){failAll();return;}
+      var src=list[index++];
+      a.onerror=tryNext;
+      try{
+        a.pause();
+        a.src=src;
+        a.load();
+        var immediate=a.play();
+        if(immediate&&immediate.then){
+          immediate.then(function(){done=true;cleanupAttempt();markRadioPlaying(true);}).catch(function(err){
+            if(done)return;
+            if(err&&err.name==='NotAllowedError'){
+              cleanupAttempt();restoreThemeFinal();markRadioPlaying(false);
+              try{toast('請再按一次 Radio 播放鍵',1);}catch(e){}
+            }else{
+              tryNext();
+            }
+          });
+        }else if(!a.paused){done=true;cleanupAttempt();markRadioPlaying(true);}
+      }catch(e){tryNext();return;}
+      timer=setTimeout(function(){if(!done)tryNext();},3200);
+    }
+    tryNext();
+  };
+
+  window.stopLetterAudio=function(){
+    var a=document.getElementById('letterAudio');
+    if(a){try{a.pause();a.currentTime=0;}catch(e){}}
+    markRadioPlaying(false);
+    restoreThemeFinal();
+  };
+
+  function bindLetterAudioFinal(){
+    var a=document.getElementById('letterAudio');
+    if(!a||a.dataset.interactionBound==='1')return;
+    a.dataset.interactionBound='1';
+    ['ended','pause','error'].forEach(function(type){
+      a.addEventListener(type,function(){
+        if(type!=='pause'||a.currentTime===0||a.ended){markRadioPlaying(false);restoreThemeFinal();}
+      });
+    });
+  }
+
+  function boot(){
+    bindLetterAudioFinal();
+    window.syncDearAngInteractionState();
+    var targets=[document.getElementById('gate'),document.getElementById('openingCountdown'),document.getElementById('miniWorld')].concat(Array.from(document.querySelectorAll('.page,.lightbox,.visitor-identity-modal,.ferris-construction'))).filter(Boolean);
+    var ob=new MutationObserver(function(){window.syncDearAngInteractionState();});
+    targets.forEach(function(el){ob.observe(el,{attributes:true,attributeFilter:['class']});});
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot,{once:true});else boot();
+  window.addEventListener('load',boot,{once:true});
 })();
 </script>
+
+<style id="dearang-smart-lock-style">
+html.dearang-before-mini #miniWorld,
+html.dearang-before-mini #world,
+html.dearang-before-mini #lyricDanmakuLayer{
+  visibility:hidden!important;
+  pointer-events:none!important;
+}
+
+html.dearang-before-mini #gate,
+html.dearang-before-mini #openingCountdown,
+html.dearang-before-mini #angSmartLockGate{
+  visibility:visible!important;
+}
+
+#angSmartLockGate{
+  --lock-green:#45ec83;
+  --lock-blue:#42a5ff;
+  position:fixed;
+  inset:0;
+  z-index:1000000;
+  display:none;
+  place-items:center;
+  overflow:hidden;
+  padding:max(16px,env(safe-area-inset-top)) 14px max(18px,env(safe-area-inset-bottom));
+  background:
+    radial-gradient(circle at 50% 34%,rgba(255,255,255,.98),rgba(238,239,242,.96) 45%,rgba(202,205,210,.98));
+  color:#15171a;
+  opacity:0;
+  transition:opacity .45s ease;
+  touch-action:none;
+}
+
+#angSmartLockGate.show{
+  display:grid;
+}
+
+#angSmartLockGate.visible{
+  opacity:1;
+}
+
+#angSmartLockGate.leaving{
+  opacity:0;
+  pointer-events:none;
+}
+
+#angSmartLockGate .ang-lock-stage{
+  position:relative;
+  width:min(96vw,980px);
+  height:min(88svh,760px);
+  display:grid;
+  place-items:center;
+}
+
+#angSmartLockGate .ang-lock-kicker{
+  position:absolute;
+  top:3%;
+  left:50%;
+  transform:translateX(-50%);
+  white-space:nowrap;
+  color:rgba(22,25,29,.5);
+  font-size:clamp(11px,1.45vw,15px);
+  font-weight:800;
+  letter-spacing:.23em;
+}
+
+#angSmartLockGate .ang-lock-device{
+  position:relative;
+  width:min(90vw,860px);
+  height:clamp(180px,25vw,260px);
+  transform:translateY(-2vh);
+  filter:drop-shadow(0 27px 28px rgba(0,0,0,.25));
+}
+
+#angSmartLockGate .ang-lock-rosette{
+  position:absolute;
+  left:0;
+  top:50%;
+  width:clamp(142px,19vw,220px);
+  aspect-ratio:1;
+  transform:translateY(-50%);
+  border-radius:50%;
+  background:
+    radial-gradient(circle at 42% 36%,#42464c 0 5%,transparent 27%),
+    radial-gradient(circle,#22262b 0 36%,#0d0f12 37% 46%,#32363c 47% 58%,#111316 59% 68%,#353a40 69% 77%,#0b0d0f 78% 100%);
+  box-shadow:
+    inset 0 0 0 2px rgba(255,255,255,.09),
+    0 18px 26px rgba(0,0,0,.24);
+}
+
+#angSmartLockGate .ang-lock-ring{
+  position:absolute;
+  inset:8%;
+  border:4px solid transparent;
+  border-radius:50%;
+  opacity:0;
+  transition:opacity .3s ease,border-color .3s ease,filter .3s ease;
+}
+
+#angSmartLockGate .ang-lock-device.state-green .ang-lock-ring{
+  opacity:1;
+  border-color:var(--lock-green);
+  filter:drop-shadow(0 0 12px var(--lock-green));
+}
+
+#angSmartLockGate .ang-lock-device.state-blue .ang-lock-ring{
+  opacity:1;
+  border-color:var(--lock-blue);
+  filter:drop-shadow(0 0 12px var(--lock-blue));
+}
+
+#angSmartLockGate .ang-lock-neck{
+  position:absolute;
+  left:clamp(77px,10vw,120px);
+  top:50%;
+  width:clamp(90px,10.8vw,126px);
+  aspect-ratio:1;
+  transform:translateY(-50%);
+  border-radius:50%;
+  z-index:2;
+  background:radial-gradient(circle at 38% 34%,#40444a,#111316 68%);
+  box-shadow:inset 0 0 0 2px rgba(255,255,255,.08);
+}
+
+#angSmartLockGate .ang-lock-handle-wrap{
+  position:absolute;
+  left:clamp(126px,15.5vw,184px);
+  top:50%;
+  width:calc(100% - clamp(126px,15.5vw,184px));
+  transform-origin:0 50%;
+  transform:translateY(-50%) rotate(0deg);
+  transition:transform 1.08s cubic-bezier(.2,.76,.18,1);
+  z-index:3;
+}
+
+#angSmartLockGate .ang-lock-device.angle-45 .ang-lock-handle-wrap{
+  transform:translateY(-50%) rotate(45deg);
+}
+
+#angSmartLockGate .ang-lock-device.angle-90 .ang-lock-handle-wrap{
+  transform:translateY(-50%) rotate(90deg);
+}
+
+#angSmartLockGate .ang-lock-handle{
+  position:relative;
+  width:100%;
+  height:clamp(88px,10.8vw,130px);
+  overflow:hidden;
+  border:2px solid #08090b;
+  border-radius:clamp(23px,2.7vw,34px);
+  background:
+    linear-gradient(180deg,rgba(255,255,255,.08),transparent 17%,transparent 83%,rgba(0,0,0,.28)),
+    linear-gradient(95deg,#181b1f,#292d31 52%,#111316);
+  box-shadow:
+    inset 0 0 0 2px rgba(255,255,255,.13),
+    inset 0 12px 18px rgba(255,255,255,.025),
+    0 12px 20px rgba(0,0,0,.22);
+}
+
+#angSmartLockGate .ang-lock-handle:after{
+  content:"";
+  position:absolute;
+  inset:8px;
+  border:1px solid rgba(255,255,255,.06);
+  border-radius:calc(clamp(23px,2.7vw,34px) - 8px);
+  pointer-events:none;
+}
+
+#angSmartLockGate .ang-lock-keys{
+  position:absolute;
+  inset:0 clamp(16px,2.4vw,30px);
+  display:grid;
+  grid-template-columns:repeat(11,minmax(0,1fr));
+  align-items:center;
+  gap:clamp(1px,.45vw,7px);
+}
+
+#angSmartLockGate .ang-lock-key{
+  display:grid;
+  place-items:center;
+  min-width:0;
+  color:rgba(255,255,255,.30);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+  font-size:clamp(19px,2.8vw,39px);
+  font-weight:450;
+  line-height:1;
+  transform:scale(1);
+  transition:color .12s ease,text-shadow .12s ease,transform .12s ease;
+  user-select:none;
+}
+
+#angSmartLockGate .ang-lock-key.active{
+  color:#fff;
+  transform:scale(1.14);
+  text-shadow:
+    0 0 5px rgba(255,255,255,1),
+    0 0 14px rgba(255,255,255,.8),
+    0 0 28px rgba(255,255,255,.52);
+}
+
+#angSmartLockGate .ang-lock-key.green{
+  color:var(--lock-green);
+  text-shadow:
+    0 0 6px rgba(69,236,131,1),
+    0 0 17px rgba(69,236,131,.78),
+    0 0 32px rgba(69,236,131,.5);
+}
+
+#angSmartLockGate .ang-lock-key.blue{
+  color:var(--lock-blue);
+  text-shadow:
+    0 0 6px rgba(66,165,255,1),
+    0 0 17px rgba(66,165,255,.8),
+    0 0 32px rgba(66,165,255,.52);
+}
+
+#angSmartLockGate .ang-lock-status{
+  position:absolute;
+  left:50%;
+  bottom:4%;
+  width:min(90vw,680px);
+  transform:translateX(-50%);
+  text-align:center;
+}
+
+#angSmartLockGate .ang-lock-status-text{
+  min-height:1.6em;
+  color:rgba(20,23,27,.68);
+  font-size:clamp(15px,2vw,21px);
+  font-weight:800;
+  letter-spacing:.12em;
+  transition:color .25s ease,text-shadow .25s ease;
+}
+
+#angSmartLockGate .ang-lock-status-text.green{
+  color:#148c42;
+  text-shadow:0 0 14px rgba(69,236,131,.22);
+}
+
+#angSmartLockGate .ang-lock-status-text.blue{
+  color:#176fbd;
+  text-shadow:0 0 14px rgba(66,165,255,.24);
+}
+
+#angSmartLockGate .ang-lock-unlocked{
+  position:absolute;
+  right:-62px;
+  top:50%;
+  color:var(--lock-blue);
+  font-size:clamp(44px,6vw,74px);
+  opacity:0;
+  transform:translateY(-50%) scale(.7);
+  filter:drop-shadow(0 0 16px rgba(66,165,255,.64));
+  transition:opacity .38s ease,transform .52s cubic-bezier(.2,.8,.2,1);
+  user-select:none;
+}
+
+#angSmartLockGate .ang-lock-unlocked.show{
+  opacity:1;
+  transform:translateY(-50%) scale(1);
+}
+
+#openingCountdown.strict-opening-active{
+  display:flex!important;
+  opacity:1!important;
+  visibility:visible!important;
+  pointer-events:auto!important;
+}
+
+#openingCountdown.strict-opening-active .opening-countdown-video{
+  display:block!important;
+  visibility:visible!important;
+  opacity:1!important;
+}
+
+#openingVideoLoader.strict-message{
+  display:flex!important;
+  opacity:1!important;
+  visibility:visible!important;
+}
+
+@media(max-width:700px){
+  #angSmartLockGate .ang-lock-stage{
+    width:100vw;
+    height:100svh;
+  }
+
+  #angSmartLockGate .ang-lock-device{
+    width:94vw;
+    height:180px;
+    transform:translateY(-9vh);
+  }
+
+  #angSmartLockGate .ang-lock-rosette{
+    width:134px;
+  }
+
+  #angSmartLockGate .ang-lock-neck{
+    left:70px;
+    width:88px;
+  }
+
+  #angSmartLockGate .ang-lock-handle-wrap{
+    left:116px;
+    width:calc(100% - 116px);
+  }
+
+  #angSmartLockGate .ang-lock-handle{
+    height:88px;
+  }
+
+  #angSmartLockGate .ang-lock-key{
+    font-size:clamp(17px,4.4vw,27px);
+  }
+
+  #angSmartLockGate .ang-lock-unlocked{
+    right:5vw;
+    top:82%;
+  }
+
+  #angSmartLockGate .ang-lock-status{
+    bottom:max(4%,env(safe-area-inset-bottom));
+  }
+}
+
+@media(prefers-reduced-motion:reduce){
+  #angSmartLockGate .ang-lock-handle-wrap,
+  #angSmartLockGate .ang-lock-key,
+  #angSmartLockGate .ang-lock-unlocked{
+    transition-duration:.01ms!important;
+  }
+}
+</style>
+
+<div id="angSmartLockGate" aria-hidden="true">
+  <div class="ang-lock-stage">
+    <div class="ang-lock-kicker">DEAR ANG · MEMORY GATE</div>
+
+    <section class="ang-lock-device" aria-label="智慧門鎖驗證動畫">
+      <div class="ang-lock-rosette">
+        <div class="ang-lock-ring"></div>
+      </div>
+
+      <div class="ang-lock-neck"></div>
+
+      <div class="ang-lock-handle-wrap">
+        <div class="ang-lock-handle">
+          <div class="ang-lock-keys">
+            <span class="ang-lock-key" data-key="1">1</span>
+            <span class="ang-lock-key" data-key="2">2</span>
+            <span class="ang-lock-key" data-key="3">3</span>
+            <span class="ang-lock-key" data-key="4">4</span>
+            <span class="ang-lock-key" data-key="5">5</span>
+            <span class="ang-lock-key" data-key="6">6</span>
+            <span class="ang-lock-key" data-key="7">7</span>
+            <span class="ang-lock-key" data-key="8">8</span>
+            <span class="ang-lock-key" data-key="9">9</span>
+            <span class="ang-lock-key" data-key="0">0</span>
+            <span class="ang-lock-key" data-key="#">#</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="ang-lock-unlocked" aria-hidden="true">🔓</div>
+    </section>
+
+    <div class="ang-lock-status">
+      <div class="ang-lock-status-text">準備開啟回憶之門</div>
+    </div>
+  </div>
+</div>
+
+<script id="dearang-smart-lock-strict-flow">
+(function(){
+  if(window.__DEARANG_SMART_LOCK_STRICT_FLOW__)return;
+  window.__DEARANG_SMART_LOCK_STRICT_FLOW__=true;
+
+  var S=window.__DEARANG_STRICT_BOOT__||{
+    phase:'gate',
+    allowBackgroundLoad:false,
+    nativePlay:HTMLMediaElement.prototype.play,
+    nativeLoad:HTMLMediaElement.prototype.load
+  };
+
+  var overlay=document.getElementById('angSmartLockGate');
+  var device=overlay&&overlay.querySelector('.ang-lock-device');
+  var statusText=overlay&&overlay.querySelector('.ang-lock-status-text');
+  var unlockIcon=overlay&&overlay.querySelector('.ang-lock-unlocked');
+  var keys=overlay?Array.prototype.slice.call(overlay.querySelectorAll('.ang-lock-key')):[];
+  var opening=document.getElementById('openingCountdown');
+  var openingVideo=document.getElementById('openingCountdownVideo');
+  var openingLoader=document.getElementById('openingVideoLoader');
+
+  var FIRST_CODE='19890603#';
+  var SECOND_CODE='20260309#';
+
+  var running=false;
+  var openingFinished=false;
+  var openingStarted=false;
+  var backgroundStarted=false;
+  var noStartTimer=null;
+
+  var O={
+    setupMiniFrameVideo:window.setupMiniFrameVideo,
+    preloadStaticAssets:window.preloadStaticAssets,
+    renderMiniWeatherButtons:window.renderMiniWeatherButtons,
+    setMemoryWeather:window.setMemoryWeather,
+    loadLyricsFromRootFiles:window.loadLyricsFromRootFiles,
+    setupLyricDanmaku:window.setupLyricDanmaku,
+    loadData:window.loadData,
+    setupWeather:window.setupWeather,
+    renderFood:window.renderFood,
+    renderMaps:window.renderMaps,
+    setupAlbumRitualLock:window.setupAlbumRitualLock,
+    startTheme:window.startTheme,
+    showMiniWorld:window.showMiniWorld,
+    toggleMusic:window.toggleMusic,
+    primeThemeBeforeCountdown:window.primeThemeBeforeCountdown
+  };
+
+  function resolved(){
+    return Promise.resolve();
+  }
+
+  /*
+    原本 load 事件會一次啟動歌詞、天氣、Mini Frame、資料和預載。
+    先全部攔下，等 Opening 真正 playing 後再依序放行。
+  */
+  if(typeof O.setupMiniFrameVideo==='function')window.setupMiniFrameVideo=function(){};
+  if(typeof O.preloadStaticAssets==='function')window.preloadStaticAssets=function(){};
+  if(typeof O.renderMiniWeatherButtons==='function')window.renderMiniWeatherButtons=function(){};
+  if(typeof O.setMemoryWeather==='function')window.setMemoryWeather=function(){};
+  if(typeof O.loadLyricsFromRootFiles==='function')window.loadLyricsFromRootFiles=resolved;
+  if(typeof O.setupLyricDanmaku==='function')window.setupLyricDanmaku=function(){};
+  if(typeof O.loadData==='function')window.loadData=resolved;
+  if(typeof O.setupWeather==='function')window.setupWeather=function(){};
+  if(typeof O.renderFood==='function')window.renderFood=function(){};
+  if(typeof O.renderMaps==='function')window.renderMaps=function(){};
+  if(typeof O.setupAlbumRitualLock==='function')window.setupAlbumRitualLock=function(){};
+  if(typeof O.startTheme==='function')window.startTheme=function(){};
+  if(typeof O.showMiniWorld==='function')window.showMiniWorld=function(){};
+  if(typeof O.primeThemeBeforeCountdown==='function')window.primeThemeBeforeCountdown=function(){};
+
+  function pauseEverythingExceptOpening(){
+    Array.prototype.forEach.call(document.querySelectorAll('audio,video'),function(media){
+      if(media===openingVideo)return;
+      try{
+        media.autoplay=false;
+        media.removeAttribute('autoplay');
+        media.preload='none';
+        media.pause();
+      }catch(e){}
+    });
+  }
+
+  pauseEverythingExceptOpening();
+
+  function wait(ms){
+    return new Promise(function(resolve){setTimeout(resolve,ms);});
+  }
+
+  function keyFor(char){
+    for(var i=0;i<keys.length;i++){
+      if(keys[i].getAttribute('data-key')===char)return keys[i];
+    }
+    return null;
+  }
+
+  function clearKeys(){
+    keys.forEach(function(key){
+      key.classList.remove('active','green','blue');
+    });
+  }
+
+  function colorAll(color){
+    keys.forEach(function(key){key.classList.add(color);});
+  }
+
+  function setStatus(text,color){
+    if(!statusText)return;
+    statusText.textContent=text;
+    statusText.classList.remove('green','blue');
+    if(color)statusText.classList.add(color);
+  }
+
+  async function flashCode(code,color){
+    for(var i=0;i<code.length;i++){
+      var key=keyFor(code.charAt(i));
+
+      keys.forEach(function(item){item.classList.remove('active');});
+
+      if(key){
+        key.classList.add('active');
+        if(color)key.classList.add(color);
+      }
+
+      await wait(260);
+
+      if(key){
+        key.classList.remove('active');
+        if(!color)key.classList.remove('green','blue');
+      }
+
+      await wait(70);
+    }
+  }
+
+  function prepareOnlyOpeningVideo(){
+    if(!openingVideo)return;
+
+    try{
+      openingVideo.preload='auto';
+      openingVideo.setAttribute('playsinline','');
+      openingVideo.setAttribute('webkit-playsinline','');
+      openingVideo.dataset.smartPrime='1';
+      openingVideo.muted=true;
+      openingVideo.volume=0;
+      S.nativeLoad.call(openingVideo);
+
+      var p=S.nativePlay.call(openingVideo);
+      if(p&&typeof p.then==='function'){
+        p.then(function(){
+          setTimeout(function(){
+            try{
+              openingVideo.pause();
+              openingVideo.currentTime=0;
+              openingVideo.muted=false;
+              openingVideo.volume=1;
+              delete openingVideo.dataset.smartPrime;
+            }catch(e){}
+          },70);
+        }).catch(function(){
+          try{
+            openingVideo.pause();
+            openingVideo.currentTime=0;
+            openingVideo.muted=false;
+            openingVideo.volume=1;
+            delete openingVideo.dataset.smartPrime;
+          }catch(e){}
+        });
+      }
+    }catch(e){}
+  }
+
+  function restore(name){
+    if(typeof O[name]==='function')window[name]=O[name];
+  }
+
+  function beginBackgroundLoading(){
+    if(backgroundStarted)return;
+    backgroundStarted=true;
+
+    /*
+      Opening 已經 playing 後才開始：
+      1. 主題曲只載入，不播放
+      2. LRC 歌詞
+      3. 真實天氣與 Mini Frame
+      4. 網站資料
+      5. 小型靜態圖
+      各項錯開，不使用 Promise.all。
+    */
+
+    setTimeout(function(){
+      var theme=document.getElementById('themeAudio');
+      if(theme){
+        try{
+          var held=theme.getAttribute('data-strict-src');
+          if(held&&!theme.getAttribute('src'))theme.setAttribute('src',held);
+          theme.preload='auto';
+          S.allowBackgroundLoad=true;
+          S.nativeLoad.call(theme);
+          S.allowBackgroundLoad=false;
+        }catch(e){}
+      }
+    },180);
+
+    setTimeout(function(){
+      restore('loadLyricsFromRootFiles');
+      restore('setupLyricDanmaku');
+
+      try{
+        var p=typeof O.loadLyricsFromRootFiles==='function'
+          ?O.loadLyricsFromRootFiles()
+          :Promise.resolve();
+
+        Promise.resolve(p).then(function(){
+          if(typeof O.setupLyricDanmaku==='function')O.setupLyricDanmaku();
+        }).catch(function(){});
+      }catch(e){}
+    },520);
+
+    setTimeout(function(){
+      restore('renderMiniWeatherButtons');
+      restore('setMemoryWeather');
+      restore('setupWeather');
+
+      try{
+        if(typeof O.renderMiniWeatherButtons==='function')O.renderMiniWeatherButtons();
+      }catch(e){}
+
+      try{
+        if(typeof O.setupWeather==='function')O.setupWeather();
+      }catch(e){}
+    },900);
+
+    setTimeout(function(){
+      restore('setupMiniFrameVideo');
+      S.allowBackgroundLoad=true;
+
+      try{
+        if(typeof O.setupMiniFrameVideo==='function')O.setupMiniFrameVideo(false);
+      }catch(e){}
+
+      var miniVideo=document.getElementById('miniFrameVideo');
+      if(miniVideo){
+        try{
+          miniVideo.autoplay=false;
+          miniVideo.preload='auto';
+          miniVideo.pause();
+          S.nativeLoad.call(miniVideo);
+        }catch(e){}
+      }
+
+      S.allowBackgroundLoad=false;
+    },1250);
+
+    setTimeout(function(){
+      restore('loadData');
+      restore('renderFood');
+      restore('renderMaps');
+
+      try{
+        var p=typeof O.loadData==='function'?O.loadData():Promise.resolve();
+        Promise.resolve(p).then(function(){
+          try{if(typeof O.renderFood==='function')O.renderFood();}catch(e){}
+          try{if(typeof O.renderMaps==='function')O.renderMaps();}catch(e){}
+        }).catch(function(){});
+      }catch(e){}
+    },1650);
+
+    setTimeout(function(){
+      try{
+        if(typeof O.preloadStaticAssets==='function')O.preloadStaticAssets();
+      }catch(e){}
+    },2600);
+  }
+
+  function restoreNormalFunctions(){
+    Object.keys(O).forEach(function(name){restore(name);});
+  }
+
+  function removeOpeningListeners(){
+    if(!openingVideo)return;
+    openingVideo.removeEventListener('playing',onOpeningPlaying);
+    openingVideo.removeEventListener('ended',onOpeningEnded);
+    openingVideo.removeEventListener('error',onOpeningError);
+  }
+
+  function onOpeningPlaying(){
+    openingStarted=true;
+
+    if(noStartTimer){
+      clearTimeout(noStartTimer);
+      noStartTimer=null;
+    }
+
+    if(openingLoader){
+      openingLoader.classList.remove('strict-message');
+      openingLoader.style.display='none';
+    }
+
+    beginBackgroundLoading();
+  }
+
+  function onOpeningEnded(){
+    finishStrictOpening('ended');
+  }
+
+  function onOpeningError(){
+    finishStrictOpening('error');
+  }
+
+  function startOpeningPlayback(){
+    if(!openingVideo){
+      finishStrictOpening('missing-video');
+      return;
+    }
+
+    try{
+      openingVideo.pause();
+      openingVideo.currentTime=0;
+      openingVideo.preload='auto';
+      openingVideo.muted=false;
+      openingVideo.volume=1;
+      delete openingVideo.dataset.smartPrime;
+      S.nativeLoad.call(openingVideo);
+    }catch(e){}
+
+    removeOpeningListeners();
+    openingVideo.addEventListener('playing',onOpeningPlaying);
+    openingVideo.addEventListener('ended',onOpeningEnded);
+    openingVideo.addEventListener('error',onOpeningError);
+
+    noStartTimer=setTimeout(function(){
+      if(!openingStarted)finishStrictOpening('not-started');
+    },9000);
+
+    var p;
+    try{
+      p=S.nativePlay.call(openingVideo);
+    }catch(e){
+      p=null;
+    }
+
+    if(p&&typeof p.catch==='function'){
+      p.catch(function(){
+        try{
+          openingVideo.muted=true;
+          var mutedPlay=S.nativePlay.call(openingVideo);
+
+          if(mutedPlay&&typeof mutedPlay.catch==='function'){
+            mutedPlay.catch(function(){
+              if(openingLoader){
+                openingLoader.textContent='點一下畫面播放開場';
+                openingLoader.classList.add('strict-message');
+                openingLoader.style.display='flex';
+              }
+
+              var retry=function(ev){
+                if(ev&&ev.target&&ev.target.closest&&ev.target.closest('.opening-video-skip'))return;
+                opening.removeEventListener('click',retry);
+
+                try{
+                  openingVideo.muted=false;
+                  S.nativePlay.call(openingVideo).catch(function(){
+                    openingVideo.muted=true;
+                    S.nativePlay.call(openingVideo).catch(function(){});
+                  });
+                }catch(e){}
+              };
+
+              if(opening)opening.addEventListener('click',retry);
+            });
+          }
+        }catch(e){}
+      });
+    }
+  }
+
+  async function enterStrictOpening(){
+    S.phase='opening';
+    document.documentElement.classList.add('dearang-before-mini');
+
+    if(overlay){
+      overlay.classList.add('leaving');
+      await wait(430);
+      overlay.classList.remove('show','visible','leaving');
+      overlay.setAttribute('aria-hidden','true');
+    }
+
+    var gate=document.getElementById('gate');
+    if(gate)gate.classList.add('out');
+
+    if(opening){
+      opening.classList.remove('done');
+      opening.classList.add('show','strict-opening-active');
+
+      if(openingLoader){
+        openingLoader.textContent='影片準備中…';
+        openingLoader.classList.add('strict-message');
+        openingLoader.style.display='flex';
+      }
+    }
+
+    startOpeningPlayback();
+  }
+
+  async function runSmartLock(){
+    if(running)return;
+    running=true;
+    openingFinished=false;
+    openingStarted=false;
+    backgroundStarted=false;
+
+    S.phase='lock';
+    pauseEverythingExceptOpening();
+    prepareOnlyOpeningVideo();
+
+    if(overlay){
+      overlay.classList.add('show');
+      overlay.setAttribute('aria-hidden','false');
+
+      requestAnimationFrame(function(){
+        requestAnimationFrame(function(){
+          overlay.classList.add('visible');
+        });
+      });
+    }
+
+    clearKeys();
+    if(device)device.classList.remove('state-green','state-blue','angle-45','angle-90');
+    if(unlockIcon)unlockIcon.classList.remove('show');
+
+    setStatus('正在驗證第一道記憶');
+    await wait(420);
+
+    await flashCode(FIRST_CODE,'');
+
+    colorAll('green');
+    if(device)device.classList.add('state-green');
+    setStatus('第一道記憶通過','green');
+
+    await wait(520);
+
+    if(device)device.classList.add('angle-45');
+    setStatus('門把轉至 45°','green');
+
+    await wait(1300);
+
+    clearKeys();
+    if(device){
+      device.classList.remove('state-green');
+      device.classList.add('state-blue');
+    }
+
+    setStatus('正在驗證第二道記憶','blue');
+    await wait(400);
+
+    await flashCode(SECOND_CODE,'blue');
+
+    colorAll('blue');
+    setStatus('第二道記憶通過','blue');
+
+    await wait(520);
+
+    if(device){
+      device.classList.remove('angle-45');
+      device.classList.add('angle-90');
+    }
+
+    setStatus('門把轉至 90°','blue');
+
+    await wait(1250);
+
+    if(unlockIcon)unlockIcon.classList.add('show');
+    setStatus('已解鎖','blue');
+
+    await wait(720);
+    await enterStrictOpening();
+  }
+
+  function finishStrictOpening(reason){
+    if(openingFinished)return;
+    openingFinished=true;
+
+    if(noStartTimer){
+      clearTimeout(noStartTimer);
+      noStartTimer=null;
+    }
+
+    removeOpeningListeners();
+
+    if(!backgroundStarted)beginBackgroundLoading();
+
+    try{
+      if(openingVideo){
+        openingVideo.pause();
+        openingVideo.currentTime=0;
+      }
+    }catch(e){}
+
+    if(opening){
+      opening.classList.add('done');
+
+      setTimeout(function(){
+        opening.classList.remove('show','done','strict-opening-active');
+        opening.style.display='';
+        opening.style.opacity='';
+        opening.style.pointerEvents='';
+      },330);
+    }
+
+    var gate=document.getElementById('gate');
+    if(gate)gate.classList.add('hidden');
+
+    S.phase='mini';
+    S.allowBackgroundLoad=false;
+
+    document.documentElement.classList.remove('dearang-before-mini');
+
+    restoreNormalFunctions();
+
+    /*
+      Opening 完全結束後才：
+      1. 顯示 Mini World
+      2. 播放 Mini Frame
+      3. 啟動主題曲和歌詞
+    */
+    setTimeout(function(){
+      try{
+        if(typeof O.showMiniWorld==='function')O.showMiniWorld();
+      }catch(e){}
+
+      try{
+        if(typeof O.setupMiniFrameVideo==='function')O.setupMiniFrameVideo(true);
+      }catch(e){}
+
+      try{
+        var miniVideo=document.getElementById('miniFrameVideo');
+        if(miniVideo){
+          miniVideo.autoplay=true;
+          miniVideo.muted=true;
+          miniVideo.loop=true;
+          var mp=S.nativePlay.call(miniVideo);
+          if(mp&&typeof mp.catch==='function')mp.catch(function(){});
+        }
+      }catch(e){}
+    },180);
+
+    setTimeout(function(){
+      try{
+        var theme=document.getElementById('themeAudio');
+
+        if(theme&&theme.paused&&typeof O.toggleMusic==='function'){
+          O.toggleMusic();
+        }else if(typeof O.startTheme==='function'){
+          O.startTheme();
+        }
+      }catch(e){}
+    },420);
+
+    setTimeout(function(){
+      try{
+        if(typeof O.setupAlbumRitualLock==='function')O.setupAlbumRitualLock();
+      }catch(e){}
+    },900);
+
+    if(window.HTMLMediaElement&&HTMLMediaElement.prototype){
+      try{
+        HTMLMediaElement.prototype.play=S.nativePlay;
+        HTMLMediaElement.prototype.load=S.nativeLoad;
+      }catch(e){}
+    }
+
+    running=false;
+
+    try{
+      window.dispatchEvent(new CustomEvent('dear-ang-strict-opening-finished',{
+        detail:{reason:reason||'ended'}
+      }));
+    }catch(e){}
+  }
+
+  window.finishOpeningMemoryCountdown=finishStrictOpening;
+  window.startOpeningMemoryCountdown=runSmartLock;
+  window.enterWorld=runSmartLock;
+
+  /*
+    同頁重播開場時，也必須重新經過智慧門鎖，
+    不允許主題曲或 Mini World 搶先。
+  */
+  window.DearAngSmartLockGate={
+    start:runSmartLock,
+    finishOpening:finishStrictOpening
+  };
+})();
+</script>
+
 </body></html>
