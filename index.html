@@ -1,7 +1,19 @@
 <html lang="zh-Hant"><head>
 <meta charset="UTF-8">
-<base href="/DearANG/">
+<base id="appBaseHref" href="/DearANG/">
+<script>
+(function(){
+  try{
+    // GitHub Pages 維持 /DearANG/；直接雙擊 HTML 或使用 localhost 時，改讀目前資料夾。
+    if(location.protocol==='file:' || /^(localhost|127\.0\.0\.1)$/i.test(location.hostname)){
+      var base=document.getElementById('appBaseHref');
+      if(base)base.setAttribute('href','./');
+    }
+  }catch(e){}
+})();
+</script>
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='28' fill='%23d6a85d'/%3E%3Ctext x='32' y='41' font-size='28' text-anchor='middle' fill='white'%3E%E2%99%A1%3C/text%3E%3C/svg%3E">
 <!-- v70-cache：已取消 HTML 強制不快取；WebView / 瀏覽器可正常使用快取 -->
 <!-- DearANG v16 KTV stage forced 20260620 -->
 <!-- DearANG v21 opening countdown video 20260620 -->
@@ -9,6 +21,7 @@
 <!-- DearANG v47 based on index(53): calibrated building/person hotspots no cover crop 20260625 -->
 <!-- DearANG v48 KTV Drive preview + page top spacing + invisible building hotspots 20260625 -->
 <!-- DearANG v56 mini-frame 11 weather videos + KTV left + map title fix 20260627 -->
+<!-- DearANG v73 local/GitHub media path + assets lyrics fallback fix 20260706 -->
 <title>摯愛｜Dear ANG </title>
 <style>
 :root{
@@ -31,11 +44,11 @@ a{color:inherit}
 .hidden{display:none!important}
 
 /* ===== Gate ===== */
-.gate{position:fixed;inset:0;z-index:50;display:flex;align-items:center;justify-content:center;text-align:center;padding:24px;background:radial-gradient(circle at 50% 28%,rgba(214,168,93,.22),transparent 26%),linear-gradient(180deg,#14100d,#050506);transition:.55s ease}
+.gate{position:fixed;inset:0;z-index:50;display:flex;align-items:center;justify-content:center;text-align:left;padding:24px;background:radial-gradient(circle at 50% 28%,rgba(214,168,93,.22),transparent 26%),linear-gradient(180deg,#14100d,#050506);transition:.55s ease}
 .gate.out{opacity:0;pointer-events:none;transform:scale(1.02)}
-.gate-card{width:min(680px,100%);border:1px solid var(--line);background:rgba(255,248,239,.08);border-radius:30px;padding:34px 22px;backdrop-filter:blur(18px);box-shadow:var(--shadow)}
-.kicker{letter-spacing:.24em;color:#ffd89a;font-weight:900;font-size:12px;margin-bottom:10px}.gate-title{font-size:clamp(32px,8vw,62px);line-height:1.35;font-weight:1000;margin:12px 0;text-shadow:0 4px 24px rgba(0,0,0,.55)}
-.gate-title span{display:block}.gate-title .i1{padding-left:.9em}.gate-title .i2{padding-left:1.8em}.gate-lead{color:var(--muted);line-height:1.9;margin:16px auto 22px;max-width:520px}.tiny{font-size:12px;color:rgba(247,240,230,.54);line-height:1.6}
+.gate-card{width:min(680px,100%);text-align:left;border:1px solid var(--line);background:rgba(255,248,239,.08);border-radius:30px;padding:34px 22px;backdrop-filter:blur(18px);box-shadow:var(--shadow)}
+.kicker{letter-spacing:.24em;color:#ffd89a;font-weight:900;font-size:12px;margin-bottom:10px}.gate-title{font-size:clamp(32px,8vw,62px);line-height:1.35;font-weight:1000;margin:12px 0;text-shadow:0 4px 24px rgba(0,0,0,.55);text-align:left}
+.gate-title span{display:block}.gate-title .i1{padding-left:1.8em}.gate-title .i2{padding-left:3.6em}.gate-lead{color:var(--muted);line-height:1.9;margin:16px auto 22px;max-width:520px}.tiny{font-size:12px;color:rgba(247,240,230,.54);line-height:1.6}
 
 /* ===== World ===== */
 .world{height:100svh;display:flex;flex-direction:column;background:linear-gradient(180deg,#100f0f,#050506)}
@@ -725,6 +738,7 @@ a{color:inherit}
   object-fit:cover;
   background:#000;
   z-index:1;
+  pointer-events:none;
 }
 .opening-countdown-card>.credit-kicker,
 .opening-countdown-title,
@@ -739,6 +753,8 @@ a{color:inherit}
   right:14px;
   bottom:calc(16px + env(safe-area-inset-bottom));
   z-index:4;
+  pointer-events:auto;
+  touch-action:manipulation;
   background:rgba(0,0,0,.42)!important;
   border:1px solid rgba(255,255,255,.18)!important;
   backdrop-filter:blur(12px);
@@ -2966,7 +2982,7 @@ button, .pill {
 <div class="asset-preload-status" id="assetPreloadStatus">準備通往回憶…</div>
 <div class="opening-countdown" id="openingCountdown" aria-live="polite">
   <div class="opening-countdown-card">
-    <video class="opening-countdown-video" id="openingCountdownVideo" src="assets/videos/opening-countdown.mp4" playsinline preload="auto"></video>
+    <video class="opening-countdown-video" id="openingCountdownVideo" src="assets/videos/opening-countdown.mp4" playsinline="" preload="auto"></video>
     <div class="opening-video-caption">回憶倒流中 請留意眼淚回流</div>
     <div class="credit-kicker">OPENING COUNTDOWN</div>
     <div class="opening-countdown-title">倒數</div>
@@ -2974,14 +2990,14 @@ button, .pill {
     <div class="opening-number" id="openingNumber">10</div>
     <div class="opening-photo-draw" id="openingPhotoDraw"></div>
     <div class="opening-start-note" id="openingStartNote">0 秒開始播放</div>
-    <button class="opening-video-skip" type="button" onclick="finishOpeningMemoryCountdown()">跳過倒數</button>
+    <button class="opening-video-skip" type="button" onclick="finishOpeningMemoryCountdown();return false;" onpointerup="finishOpeningMemoryCountdown();return false;" ontouchend="finishOpeningMemoryCountdown();return false;">Heaven</button>
   </div>
 </div>
 
 <div class="mini-world hidden" id="miniWorld" aria-label="CRT電視小世界">
   <div class="mini-crt-scene">
-<video class="mini-crt-frame" id="miniFrameVideo" src="assets/videos/mini-frame.mp4" autoplay muted loop playsinline preload="auto" poster="assets/images/mini-frame-poster.webp" aria-label="木框影片"></video>
-    <div class="mini-crt-screen" aria-label="木框透明入口區">
+<video class="mini-crt-frame" id="miniFrameVideo" src="assets/videos/weather-mini/07-thunderstorm.mp4" muted="" loop="" playsinline="" preload="metadata" poster="assets/images/mini-frame-poster.webp" aria-label="木框影片" data-weather-frame-key="storm" data-weather-video-base="assets/videos/weather-mini/07-thunderstorm.mp4" data-weather-video-ready="0"></video>
+    <div class="mini-crt-screen stage-weather-fallback" aria-label="木框透明入口區" data-weather-default-reason="before-showMiniWorld" data-weather-key="storm">
       <button class="mini-world-enter-hotspot" type="button" onclick="enterMainWorld()" aria-label="進入富宜路街道"></button>
       <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" class="mini-world-bg" id="miniWorldBg" alt="木框裡的Q版小世界｜☀️ 炎熱晴天｜保留底圖備援">
       <div class="mini-world-weather" id="miniWorldWeather" style="display: none;"></div>
@@ -3008,7 +3024,7 @@ button, .pill {
 </div>
 
 
-<div class="world" id="world" aria-label="你和我們的時光世界">
+<div class="world hidden hint-muted" id="world" aria-label="你和我們的時光世界">
   <div class="topbar">
     <div class="brand"><small>DEAR ANG</small>你和我們的時光</div>
     <div class="top-actions">
@@ -3021,7 +3037,7 @@ button, .pill {
     </div>
   </div>
   <div class="scroller" id="scroller">
-    <div class="stage" id="stage">
+    <div class="stage weather-fallback" id="stage" data-weather-default-reason="before-showMiniWorld" data-weather-key="storm">
       <img class="stage-world-img" id="stageWorldImg" src="assets/images/weather/day-sunny.webp" alt="富宜路街道世界｜☀️ 炎熱晴天｜保留底圖備援">
       <div class="world-weather" id="worldWeather" style="display: none;"></div>
       <div class="hotspot h-photo" data-label="華光相館｜你和我們的時光" onclick="openPage('photo')"></div>
@@ -3035,7 +3051,7 @@ button, .pill {
   <div class="hint"><div class="hint-inner"><span>← →</span><div>左右滑這條街<small>點招牌或建築，進入對應的時光。</small></div></div></div>
 </div>
 
-<audio id="themeAudio" preload="metadata" loop="" data-lyric-bound="1" src="assets/audio/dear-ang-theme.mp3"></audio>
+<audio id="themeAudio" preload="metadata" loop="" src="assets/audio/dear-ang-theme.mp3"></audio>
 
 <div class="visitor-identity-modal hidden" id="visitorIdentityModal" onclick="visitorModalBackdropClose(event)">
   <div class="visitor-identity-card" onclick="event.stopPropagation()">
@@ -3288,9 +3304,10 @@ let lyricsEnabled=true;
 let lastLyricIndex=-1;
 let lastAudioTime=0;
 const ROOT_LYRIC_FILES={
-  lrc:'./給安格.lrc',
-  srt:'./給安格.srt',
-  embedded:'./lyrics_embedded.js.txt'
+  // 正式檔放在 assets/lyrics；根目錄同層檔保留為第二順位備援。
+  lrc:['assets/lyrics/給安格.lrc','./給安格.lrc'],
+  srt:['assets/lyrics/給安格.srt','./給安格.srt'],
+  embedded:['assets/lyrics/lyrics_embedded.js.txt','./lyrics_embedded.js.txt']
 };
 function parseTimeToSeconds(s){
   if(!s)return 0;
@@ -3332,25 +3349,39 @@ async function fetchTextFile(url){
   return await r.text();
 }
 async function loadLyricsFromRootFiles(){
-  // 你的歌詞檔就在 DearANG 根目錄，不搬家、不改名：給安格.lrc / 給安格.srt / lyrics_embedded.js.txt
-  try{
-    const lrc=await fetchTextFile(ROOT_LYRIC_FILES.lrc);
-    const parsed=parseLrc(lrc);
-    if(parsed.length){LYRIC_LINES=parsed;return '給安格.lrc';}
-  }catch(e){}
-  try{
-    const srt=await fetchTextFile(ROOT_LYRIC_FILES.srt);
-    const parsed=parseSrt(srt);
-    if(parsed.length){LYRIC_LINES=parsed;return '給安格.srt';}
-  }catch(e){}
-  try{
-    const txt=await fetchTextFile(ROOT_LYRIC_FILES.embedded);
-    const m=txt.match(/LYRIC_LINES\s*=\s*(\[[\s\S]*?\]);/);
-    if(m){
-      const parsed=Function('return '+m[1])();
-      if(Array.isArray(parsed)&&parsed.length){LYRIC_LINES=parsed;return 'lyrics_embedded.js.txt';}
+  async function tryFiles(files, parser, label){
+    for(const url of files){
+      try{
+        const raw=await fetchTextFile(url);
+        const parsed=parser(raw);
+        if(parsed && parsed.length){
+          LYRIC_LINES=parsed;
+          return label+'｜'+url;
+        }
+      }catch(e){}
     }
-  }catch(e){}
+    return '';
+  }
+
+  const lrcSource=await tryFiles(ROOT_LYRIC_FILES.lrc,parseLrc,'LRC');
+  if(lrcSource)return lrcSource;
+
+  const srtSource=await tryFiles(ROOT_LYRIC_FILES.srt,parseSrt,'SRT');
+  if(srtSource)return srtSource;
+
+  for(const url of ROOT_LYRIC_FILES.embedded){
+    try{
+      const txt=await fetchTextFile(url);
+      const m=txt.match(/LYRIC_LINES\s*=\s*(\[[\s\S]*?\]);/);
+      if(m){
+        const parsed=Function('return '+m[1])();
+        if(Array.isArray(parsed)&&parsed.length){
+          LYRIC_LINES=parsed;
+          return '內嵌歌詞｜'+url;
+        }
+      }
+    }catch(e){}
+  }
   return 'index.html 內建備援歌詞';
 }
 
@@ -3482,6 +3513,41 @@ let musicWanted=false;
 let openingCountdownActive=false;
 let openingCountdownTimer=null;
 let openingCountdownSeconds=10;
+let openingCountdownFinishing=false;
+let openingCountdownWatchdogTimer=null;
+let openingCountdownStallTimer=null;
+const DEAR_ANG_ENTERED_KEY='dearAngEnteredOnce';
+
+function markEnteredOnce(){
+  try{sessionStorage.setItem(DEAR_ANG_ENTERED_KEY,'1');}catch(e){}
+}
+function hasEnteredOnce(){
+  try{return sessionStorage.getItem(DEAR_ANG_ENTERED_KEY)==='1';}catch(e){return false;}
+}
+function restoreEnteredViewIfNeeded(){
+  if(!hasEnteredOnce())return;
+  const gate=document.getElementById('gate');
+  const overlay=document.getElementById('openingCountdown');
+  const world=document.getElementById('world');
+  const mini=document.getElementById('miniWorld');
+  if(gate)gate.classList.add('out','hidden');
+  if(overlay)overlay.classList.remove('show','done');
+  if(world)world.classList.remove('hidden','hint-muted');
+  if(mini)mini.classList.add('hidden');
+}
+
+function bindOpeningSkipButton(){
+  const btn=document.querySelector('.opening-video-skip');
+  if(!btn || btn.dataset.boundSkip==='1')return;
+  btn.dataset.boundSkip='1';
+  const doSkip=(e)=>{
+    if(e){e.preventDefault();e.stopPropagation();}
+    finishOpeningMemoryCountdown();
+  };
+  btn.addEventListener('click',doSkip,{passive:false});
+  btn.addEventListener('touchend',doSkip,{passive:false});
+  btn.addEventListener('pointerup',doSkip,{passive:false});
+}
 
 function shuffleOpening(arr){
   arr=(arr||[]).slice();
@@ -3563,7 +3629,10 @@ function primeThemeBeforeCountdown(){
 }
 function startOpeningMemoryCountdown(){
   if(openingCountdownActive)return;
+  markEnteredOnce();
   openingCountdownActive=true;
+  openingCountdownFinishing=false;
+  bindOpeningSkipButton();
   playUiSound('open');
   primeThemeBeforeCountdown();
 
@@ -3573,7 +3642,9 @@ function startOpeningMemoryCountdown(){
   if(gate)gate.classList.add('out');
   if(overlay){overlay.classList.remove('done');overlay.classList.add('show');}
 
-  clearInterval(openingCountdownTimer);
+  clearTimeout(openingCountdownTimer);
+  clearTimeout(openingCountdownWatchdogTimer);
+  clearTimeout(openingCountdownStallTimer);
   if(video){
     try{
       video.currentTime=0;
@@ -3582,8 +3653,10 @@ function startOpeningMemoryCountdown(){
     }catch(e){}
     const cleanupCountdown = ()=>{
       if(openingCountdownTimer){clearTimeout(openingCountdownTimer);openingCountdownTimer=null;}
+      if(openingCountdownStallTimer){clearTimeout(openingCountdownStallTimer);openingCountdownStallTimer=null;}
       video.removeEventListener('ended', onVideoEnded);
       video.removeEventListener('error', onVideoError);
+      video.removeEventListener('timeupdate', onVideoTimeUpdate);
     };
     const onVideoEnded = ()=>{
       cleanupCountdown();
@@ -3593,16 +3666,23 @@ function startOpeningMemoryCountdown(){
       cleanupCountdown();
       finishOpeningMemoryCountdown();
     };
+    const onVideoTimeUpdate = ()=>{
+      if(Number.isFinite(video.duration) && video.duration > 0 && video.currentTime >= video.duration - 0.18){
+        cleanupCountdown();
+        finishOpeningMemoryCountdown();
+      }
+    };
     video.addEventListener('ended', onVideoEnded, {once:true});
     video.addEventListener('error', onVideoError, {once:true});
+    video.addEventListener('timeupdate', onVideoTimeUpdate);
+    const durationMs = Number.isFinite(video.duration) && video.duration > 0 ? Math.max(12000, Math.min(14000, Math.round(video.duration * 1000) + 200)) : 3000;
     openingCountdownTimer=setTimeout(()=>{
       cleanupCountdown();
       finishOpeningMemoryCountdown();
-    },12000);
+    },durationMs);
     const p=video.play();
     if(p&&p.catch){
       p.catch(()=>{
-        // 若手機擋住影片音訊，改靜音播放倒數；主題曲仍會在結束後播放
         try{video.muted=true;video.play().catch(()=>{});}catch(e){}
       });
     }
@@ -3610,13 +3690,44 @@ function startOpeningMemoryCountdown(){
       cleanupCountdown();
       finishOpeningMemoryCountdown();
     }
+
+    // 影片被瀏覽器或資源問題卡在 0 秒時，快速轉場避免停住
+    openingCountdownStallTimer=setTimeout(()=>{
+      try{
+        if(openingCountdownFinishing)return;
+        const noProgress = !Number.isFinite(video.currentTime) || video.currentTime<0.05;
+        const noData = !Number.isFinite(video.duration) || video.duration<=0 || video.readyState<2;
+        if(video.paused || noProgress || noData){
+          cleanupCountdown();
+          finishOpeningMemoryCountdown();
+        }
+      }catch(e){
+        finishOpeningMemoryCountdown();
+      }
+    },1500);
   }else{
     openingCountdownTimer=setTimeout(()=>finishOpeningMemoryCountdown(),10000);
   }
+
+  // 最後保險：避免任何瀏覽器事件失效造成卡住
+  openingCountdownWatchdogTimer=setTimeout(()=>{
+    const overlay=document.getElementById('openingCountdown');
+    if(overlay&&overlay.classList.contains('show'))finishOpeningMemoryCountdown();
+  },15000);
 }
 function finishOpeningMemoryCountdown(){
+  if(openingCountdownFinishing)return;
+  markEnteredOnce();
+  openingCountdownFinishing=true;
+  clearTimeout(openingCountdownTimer);
+  clearTimeout(openingCountdownWatchdogTimer);
+  clearTimeout(openingCountdownStallTimer);
+  openingCountdownTimer=null;
+  openingCountdownWatchdogTimer=null;
+  openingCountdownStallTimer=null;
   const overlay=document.getElementById('openingCountdown');
   const video=document.getElementById('openingCountdownVideo');
+  const world=document.getElementById('world');
   if(video){try{video.pause();video.currentTime=0;}catch(e){}}
   const gate=document.getElementById('gate');
   musicWanted=true;
@@ -3626,6 +3737,7 @@ function finishOpeningMemoryCountdown(){
   setTimeout(()=>{
     if(overlay){overlay.classList.add('done');setTimeout(()=>overlay.classList.remove('show','done'),360);}
     if(gate)gate.classList.add('hidden');
+    if(world){world.classList.remove('hidden','hint-muted');}
     showMiniWorld();
     openingCountdownActive=false;
   },260);
@@ -3817,7 +3929,7 @@ function setMiniWeatherStatus(text){
 function resolveAssetUrl(path,version){
   const clean=String(path||'').split('?')[0];
   const stamp=''+(version||'20260625-v48');
-  const q=''+encodeURIComponent(stamp);
+  const q='?v='+encodeURIComponent(stamp);
   const here=location.href.split('#')[0].replace(/[^\/]*$/,'');
   return [
     clean+q,
@@ -4118,8 +4230,12 @@ function setupAlbumRitualLock(){
   });
 }
 
-window.addEventListener('load',()=>{centerWorld();setupExperienceLayer();setupPersonNameHotspots();setupMiniFrameVideo();preloadStaticAssets();renderMiniWeatherButtons();setMemoryWeather(memoryWeatherKey);loadLyricsFromRootFiles().finally(()=>setupLyricDanmaku());loadData();setupWeather();renderFood();renderMaps();setupAlbumRitualLock();});
-function enterWorld(){startOpeningMemoryCountdown()}
+window.addEventListener('load',()=>{centerWorld();setupExperienceLayer();setupPersonNameHotspots();setupMiniFrameVideo();preloadStaticAssets();renderMiniWeatherButtons();setMemoryWeather(memoryWeatherKey);loadLyricsFromRootFiles().finally(()=>setupLyricDanmaku());loadData();setupWeather();renderFood();renderMaps();setupAlbumRitualLock();bindOpeningSkipButton();restoreEnteredViewIfNeeded();});
+function enterWorld(){
+  const gate=document.getElementById('gate');
+  if(gate){gate.classList.remove('hidden');gate.classList.add('out');}
+  startOpeningMemoryCountdown();
+}
 function centerWorld(){const sc=document.getElementById('scroller');setTimeout(()=>{sc.scrollLeft=(sc.scrollWidth-sc.clientWidth)/2;},60)}
 function openPage(id){
   playUiSound('open');
@@ -4142,7 +4258,34 @@ function closePage(){
   document.body.style.overflow='hidden';
 }
 function toast(msg,bad){const t=document.getElementById('toast');t.textContent=msg;t.style.background=bad?'#963232':'#5b3f2f';t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2300)}
-function api(p){return new Promise((res,rej)=>{let cb='cb'+Date.now()+Math.floor(Math.random()*9e4),u=new URL(CONFIG.GAS_API_URL);Object.keys(p).forEach(k=>u.searchParams.set(k,p[k]));u.searchParams.set('callback',cb);u.searchParams.set('_ts',Date.now());u.searchParams.set('v',CONFIG.APP_VERSION);let sc=document.createElement('script'),tm=setTimeout(()=>done(rej,new Error('讀取逾時')),16000);window[cb]=x=>done(res,x);function done(f,v){clearTimeout(tm);delete window[cb];sc.remove();f(v)}sc.onerror=()=>done(rej,new Error('讀取失敗'));sc.src=u;document.head.appendChild(sc)})}
+function api(p){
+  return new Promise((res,rej)=>{
+    const cb='cb'+Date.now()+Math.floor(Math.random()*9e4);
+    const u=new URL(CONFIG.GAS_API_URL);
+    Object.keys(p).forEach(k=>u.searchParams.set(k,p[k]));
+    u.searchParams.set('callback',cb);
+    u.searchParams.set('_ts',Date.now());
+    u.searchParams.set('v',CONFIG.APP_VERSION);
+
+    let settled=false;
+    const sc=document.createElement('script');
+    const finish=(fn,val)=>{
+      if(settled)return;
+      settled=true;
+      clearTimeout(tm);
+      try{sc.remove();}catch(e){}
+      fn(val);
+      // 延後清理 callback，避免回應延遲到達時出現「callback 未定義」。
+      setTimeout(()=>{try{delete window[cb];}catch(e){window[cb]=undefined;}},30000);
+    };
+
+    const tm=setTimeout(()=>finish(rej,new Error('讀取逾時')),16000);
+    window[cb]=x=>finish(res,x);
+    sc.onerror=()=>finish(rej,new Error('讀取失敗'));
+    sc.src=u;
+    document.head.appendChild(sc);
+  });
+}
 function loadData(){return api({action:'getMemorialData'}).then(r=>{if(!r.ok)throw Error(r.error||'讀取失敗');DATA=r;DATA.photos=orderPhotos(DATA.photos||flatGroups(DATA.photoGroups||[]));renderDynamic();setupAlbumRitualLock();preloadFirstDriveAssets();if(openingCountdownActive)renderOpeningPhotoDraw();startTheme();return r;}).catch(e=>{renderDynamic();toast('雲端資料讀取失敗，先顯示本機內容',1);return null;})}
 function detectAreaKey(text){
   text=String(text||'');
@@ -5054,7 +5197,7 @@ function compactMiniWeatherText(){
   function miniVideoCandidates(path){
     const clean=String(path||'assets/videos/mini-frame.mp4').split('?')[0];
     const stamp=''+MINI_FRAME_STAMP;
-    const q=''+encodeURIComponent(stamp);
+    const q='?v='+encodeURIComponent(stamp);
     const here=location.href.split('#')[0].replace(/[^\/]*$/,'');
     return [
       clean+q,
@@ -5117,7 +5260,7 @@ function compactMiniWeatherText(){
     try{applyMiniFrameWeatherVideo(memoryWeatherByKey(memoryWeatherKey));}catch(e){
       const v=document.getElementById('miniFrameVideo');
       if(v){
-        v.src='assets/videos/mini-frame.mp4' + '' + encodeURIComponent(MINI_FRAME_STAMP);
+        v.src='assets/videos/mini-frame.mp4' + '?v=' + encodeURIComponent(MINI_FRAME_STAMP);
         v.load();
         try{v.muted=true;v.loop=true;v.play().catch(()=>{});}catch(err){}
       }
@@ -5342,8 +5485,9 @@ function compactMiniWeatherText(){
 <script>
 /* ===== v62 摩天輪車廂圖片化 + 點開接原本相片區 ===== */
 (function(){
+  if(/^(localhost|127\.0\.0\.1)$/i.test(location.hostname))return;
   const GONDOLA_BASE='https://pub-a5bb8e437f004bb8aecca934db50299f.r2.dev/Ferris%20Wheel/Gondola';
-  const COLORS=['blue','green'];
+  const COLORS=['Blue','Green'];
 
   function esc(s){
     return String(s||'').replace(/[&<>"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]));
@@ -5362,10 +5506,11 @@ function compactMiniWeatherText(){
     cabins.forEach((btn,i)=>{
       if(btn.dataset.gondolaSkinned==='1')return;
       const color=COLORS[i%COLORS.length];
+      const colorClass=color.toLowerCase();
       const title=titleFromCabin(btn,i);
       btn.dataset.gondolaSkinned='1';
       btn.dataset.gondolaColor=color;
-      btn.classList.add('gondola-img-mode','gondola-'+color);
+      btn.classList.add('gondola-img-mode','gondola-'+colorClass);
       btn.innerHTML=
         '<img class="gondola-img gondola-base" src="'+file(color,'without_door.png')+'" alt="'+esc(title)+' 車廂本體">'+
         '<img class="gondola-img gondola-door close left" src="'+file(color,'close_left_door.png')+'" alt="">'+
@@ -5617,6 +5762,7 @@ function compactMiniWeatherText(){
 <script>
 /* ===== v65 使用你給的正確 R2 路徑：/Gondola/Green/close_door.png ===== */
 (function(){
+  if(/^(localhost|127\.0\.0\.1)$/i.test(location.hostname))return;
   const BASE='https://pub-a5bb8e437f004bb8aecca934db50299f.r2.dev/Ferris%20Wheel/Gondola';
   const COLORS=['Green','Blue'];
 
@@ -6158,30 +6304,328 @@ function compactMiniWeatherText(){
 
 
 <div id="departureDayCounter" class="departure-day-counter">今天是你離開的第 115 天<small>2026.03.09</small></div>
+
 <script>
-/* ===== v72-restore-gate-opening：強制還原 Gate + Opening 初始狀態 ===== */
+/* ===== v72 opening-flow-stability：Gate 手動播放、影片結束必到 mini world、mini idle 不自動重整 ===== */
 (function(){
-  if(window.__DEAR_ANG_RESTORE_GATE_OPENING__)return;
-  window.__DEAR_ANG_RESTORE_GATE_OPENING__=true;
-  function restoreInitialGateState(){
-    try{
-      if(window.openingCountdownActive)return;
-      var gate=document.getElementById('gate');
-      var opening=document.getElementById('openingCountdown');
-      var mini=document.getElementById('miniWorld');
-      var video=document.getElementById('openingCountdownVideo');
-      if(gate){gate.className='gate';gate.style.display='';gate.style.opacity='';gate.style.pointerEvents='';}
-      if(opening){opening.className='opening-countdown';opening.style.display='';opening.style.opacity='';opening.style.pointerEvents='';}
-      if(mini && !mini.classList.contains('hidden'))mini.classList.add('hidden');
-      if(video){
-        video.setAttribute('src','assets/videos/opening-countdown.mp4');
-        try{video.pause();video.currentTime=0;}catch(e){}
-      }
-    }catch(e){console.warn('[DearANG] restore gate/opening failed:',e);}
+  if(window.__DEAR_ANG_V72_OPENING_FLOW_STABILITY__)return;
+  window.__DEAR_ANG_V72_OPENING_FLOW_STABILITY__=true;
+
+  const MINI_REAL={
+    nightRain:'assets/videos/weather-mini/01-night-rain.mp4',
+    deepNightRain:'assets/videos/weather-mini/02-deep-night-rain.mp4',
+    cloudy:'assets/videos/weather-mini/03-cloudy.mp4',
+    overcast:'assets/videos/weather-mini/04-overcast.mp4',
+    sunny:'assets/videos/weather-mini/05-sunny.mp4',
+    fog:'assets/videos/weather-mini/06-fog.mp4',
+    storm:'assets/videos/weather-mini/07-thunderstorm.mp4',
+    thunderstorm:'assets/videos/weather-mini/07-thunderstorm.mp4',
+    nightShower:'assets/videos/weather-mini/08-night-shower.mp4',
+    hot:'assets/videos/weather-mini/09-hot-sunny.mp4',
+    rain:'assets/videos/weather-mini/10-day-rain.mp4',
+    dayRain:'assets/videos/weather-mini/10-day-rain.mp4',
+    night:'assets/videos/weather-mini/11-clear-night.mp4',
+    clearNight:'assets/videos/weather-mini/11-clear-night.mp4'
+  };
+
+  function miniVisible(){
+    const mini=document.getElementById('miniWorld');
+    return !!(mini && !mini.classList.contains('hidden'));
   }
-  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',restoreInitialGateState,{once:true});
-  else restoreInitialGateState();
+  function canPlayMiniFrame(){
+    return !!window.__DEAR_ANG_ALLOW_MINI_FRAME_PLAY__ || miniVisible();
+  }
+  function normalizeMiniKey(key){
+    key=String(key||'').trim();
+    if(MINI_REAL[key])return key;
+    if(/deep.*night.*rain|深夜.*雨/i.test(key))return 'deepNightRain';
+    if(/night.*rain|夜雨/i.test(key))return 'nightRain';
+    if(/night.*shower|夜.*陣雨/i.test(key))return 'nightShower';
+    if(/thunder|storm|雷|暴|豪|颱/i.test(key))return 'storm';
+    if(/rain|shower|雨/i.test(key))return 'rain';
+    if(/fog|霧/i.test(key))return 'fog';
+    if(/overcast|陰/i.test(key))return 'overcast';
+    if(/cloud|雲/i.test(key))return 'cloudy';
+    if(/hot|熱/i.test(key))return 'hot';
+    if(/night|clear.*night|夜/i.test(key))return 'night';
+    try{ if(typeof timeBasedWeatherKey==='function')return normalizeMiniKey(timeBasedWeatherKey()); }catch(e){}
+    return 'sunny';
+  }
+  function currentMiniKey(){
+    try{ if(typeof memoryWeatherKey!=='undefined' && memoryWeatherKey)return normalizeMiniKey(memoryWeatherKey); }catch(e){}
+    return normalizeMiniKey('');
+  }
+  function prepareMiniVideo(v){
+    if(!v)return;
+    try{
+      v.muted=true;
+      v.loop=true;
+      v.playsInline=true;
+      v.setAttribute('playsinline','');
+      v.preload=canPlayMiniFrame()?'auto':'metadata';
+    }catch(e){}
+  }
+  function playMiniVideoIfAllowed(v){
+    if(!v)return;
+    prepareMiniVideo(v);
+    if(!canPlayMiniFrame()){
+      try{v.pause();}catch(e){}
+      return;
+    }
+    try{
+      const p=v.play();
+      if(p&&p.catch)p.catch(()=>{});
+    }catch(e){}
+  }
+
+  // mini frame 只在進入 mini world 後播放；頁面載入時不要偷跑或一直換 src。
+  window.setMiniFrameVideoByWeatherReal=function(key){
+    const v=document.getElementById('miniFrameVideo');
+    if(!v)return;
+    key=normalizeMiniKey(key||currentMiniKey());
+    const src=MINI_REAL[key]||MINI_REAL.sunny;
+    prepareMiniVideo(v);
+    if(v.getAttribute('src')!==src){
+      v.onerror=function(){
+        v.onerror=null;
+        v.src=MINI_REAL.sunny;
+        try{v.load();}catch(e){}
+        playMiniVideoIfAllowed(v);
+      };
+      v.src=src;
+      try{v.load();}catch(e){}
+    }
+    v.dataset.weatherFrameKey=key;
+    playMiniVideoIfAllowed(v);
+  };
+
+  window.setupMiniFrameVideo=function(){
+    window.setMiniFrameVideoByWeatherReal(currentMiniKey());
+  };
+  try{setupMiniFrameVideo=window.setupMiniFrameVideo;}catch(e){}
+
+  const oldSetMemoryWeather=window.setMemoryWeather;
+  if(typeof oldSetMemoryWeather==='function'){
+    window.setMemoryWeather=function(key,ev,source){
+      const r=oldSetMemoryWeather.apply(this,arguments);
+      // mini world 還沒出現時，只更新資料，不重新載入/播放 frame video。
+      if(canPlayMiniFrame())setTimeout(()=>window.setMiniFrameVideoByWeatherReal(key),30);
+      return r;
+    };
+    try{setMemoryWeather=window.setMemoryWeather;}catch(e){}
+  }
+
+  // 天氣不再每 10 分鐘自動打 API；停在 mini world 時就讓音樂循環即可。
+  window.setupWeather=function(){
+    try{ if(typeof autoWeatherTimer!=='undefined' && autoWeatherTimer)clearInterval(autoWeatherTimer); }catch(e){}
+    try{ if(typeof setMiniWeatherStatus==='function' && typeof timeBasedWeatherText==='function')setMiniWeatherStatus(timeBasedWeatherText()); }catch(e){}
+    try{ if(typeof window.applyDefaultWeatherBeforeReady==='function')window.applyDefaultWeatherBeforeReady('v72-idle-default'); }catch(e){}
+  };
+  try{setupWeather=window.setupWeather;}catch(e){}
+
+  // 歌詞只綁一次事件，不用 data-lyric-bound，避免 HTML 先寫 1 導致根本沒綁到。
+  window.setupLyricDanmaku=function(){
+    const audio=document.getElementById('themeAudio');
+    if(!audio || audio.__lyricDanmakuBound)return;
+    audio.__lyricDanmakuBound=true;
+    try{delete audio.dataset.lyricBound;}catch(e){}
+    audio.addEventListener('timeupdate',()=>{
+      if(!lyricsEnabled)return;
+      const t=audio.currentTime + LYRIC_OFFSET_SECONDS;
+      if(audio.currentTime < lastAudioTime-1){lastLyricIndex=-1;clearLyricLayer();}
+      lastAudioTime=audio.currentTime;
+      for(let i=0;i<LYRIC_LINES.length;i++){
+        const line=LYRIC_LINES[i];
+        if(i!==lastLyricIndex && t>=line.time && t<(line.end||line.time+4)){
+          lastLyricIndex=i;
+          spawnLyric(line.text);
+          break;
+        }
+      }
+    });
+    audio.addEventListener('seeked',()=>{lastLyricIndex=-1;clearLyricLayer();});
+    audio.addEventListener('ended',()=>{lastLyricIndex=-1;clearLyricLayer();});
+  };
+  try{setupLyricDanmaku=window.setupLyricDanmaku;}catch(e){}
+
+  function resetToGate(){
+    try{sessionStorage.removeItem(DEAR_ANG_ENTERED_KEY);}catch(e){}
+    const gate=document.getElementById('gate');
+    const overlay=document.getElementById('openingCountdown');
+    const world=document.getElementById('world');
+    const mini=document.getElementById('miniWorld');
+    if(gate)gate.classList.remove('out','hidden');
+    if(overlay)overlay.classList.remove('show','done');
+    if(world)world.classList.add('hidden','hint-muted');
+    if(mini)mini.classList.add('hidden');
+    window.__DEAR_ANG_ALLOW_MINI_FRAME_PLAY__=false;
+    const mv=document.getElementById('miniFrameVideo');
+    if(mv){try{mv.pause();mv.preload='metadata';}catch(e){}}
+  }
+  window.restoreEnteredViewIfNeeded=resetToGate;
+  try{restoreEnteredViewIfNeeded=window.restoreEnteredViewIfNeeded;}catch(e){}
+
+  window.startOpeningMemoryCountdown=function(){
+    if(openingCountdownActive && !openingCountdownFinishing)return;
+    markEnteredOnce();
+    openingCountdownActive=true;
+    openingCountdownFinishing=false;
+    bindOpeningSkipButton();
+    playUiSound('open');
+    primeThemeBeforeCountdown();
+
+    const gate=document.getElementById('gate');
+    const overlay=document.getElementById('openingCountdown');
+    const video=document.getElementById('openingCountdownVideo');
+    const world=document.getElementById('world');
+    const mini=document.getElementById('miniWorld');
+    if(gate)gate.classList.add('out');
+    if(world)world.classList.add('hidden','hint-muted');
+    if(mini)mini.classList.add('hidden');
+    if(overlay){overlay.classList.remove('done');overlay.classList.add('show');}
+
+    clearTimeout(openingCountdownTimer);
+    clearTimeout(openingCountdownWatchdogTimer);
+    clearTimeout(openingCountdownStallTimer);
+    openingCountdownTimer=openingCountdownWatchdogTimer=openingCountdownStallTimer=null;
+
+    const finishNow=()=>window.finishOpeningMemoryCountdown();
+    if(video){
+      try{ if(video.__openingCleanup)video.__openingCleanup(); }catch(e){}
+      let done=false;
+      const cleanup=()=>{
+        if(done)return;
+        done=true;
+        clearTimeout(openingCountdownTimer);
+        clearTimeout(openingCountdownWatchdogTimer);
+        clearTimeout(openingCountdownStallTimer);
+        openingCountdownTimer=openingCountdownWatchdogTimer=openingCountdownStallTimer=null;
+        video.removeEventListener('ended',onEnded);
+        video.removeEventListener('error',onError);
+        video.removeEventListener('timeupdate',onTimeUpdate);
+        video.removeEventListener('loadedmetadata',onLoadedMetadata);
+      };
+      const safeFinish=()=>{cleanup();finishNow();};
+      const onEnded=()=>safeFinish();
+      const onError=()=>safeFinish();
+      const onTimeUpdate=()=>{
+        if(Number.isFinite(video.duration) && video.duration>0 && video.currentTime>=video.duration-.12)safeFinish();
+      };
+      const onLoadedMetadata=()=>{
+        clearTimeout(openingCountdownTimer);
+        const maxMs=Number.isFinite(video.duration)&&video.duration>0 ? Math.min(32000,Math.max(4000,Math.round(video.duration*1000)+900)) : 12000;
+        openingCountdownTimer=setTimeout(safeFinish,maxMs);
+      };
+      video.__openingCleanup=cleanup;
+      video.addEventListener('ended',onEnded);
+      video.addEventListener('error',onError);
+      video.addEventListener('timeupdate',onTimeUpdate);
+      video.addEventListener('loadedmetadata',onLoadedMetadata);
+      try{
+        video.preload='auto';
+        video.muted=false;
+        video.volume=1;
+        video.currentTime=0;
+        video.load();
+      }catch(e){}
+      const p=video.play();
+      if(p&&p.catch){
+        p.catch(()=>{
+          try{
+            video.muted=true;
+            const p2=video.play();
+            if(p2&&p2.catch)p2.catch(()=>setTimeout(safeFinish,900));
+          }catch(e){setTimeout(safeFinish,900);}
+        });
+      }
+      // 影片卡在 0 秒或完全沒資料，就不要讓使用者停在黑頁。
+      openingCountdownStallTimer=setTimeout(()=>{
+        try{
+          if(openingCountdownFinishing)return;
+          const stuck=video.paused || video.readyState<2 || !Number.isFinite(video.currentTime) || video.currentTime<0.05;
+          if(stuck)safeFinish();
+        }catch(e){safeFinish();}
+      },2600);
+      openingCountdownWatchdogTimer=setTimeout(safeFinish,34000);
+    }else{
+      openingCountdownTimer=setTimeout(finishNow,1000);
+    }
+  };
+  try{startOpeningMemoryCountdown=window.startOpeningMemoryCountdown;}catch(e){}
+
+  window.finishOpeningMemoryCountdown=function(){
+    if(openingCountdownFinishing)return;
+    markEnteredOnce();
+    openingCountdownFinishing=true;
+    clearTimeout(openingCountdownTimer);
+    clearTimeout(openingCountdownWatchdogTimer);
+    clearTimeout(openingCountdownStallTimer);
+    openingCountdownTimer=openingCountdownWatchdogTimer=openingCountdownStallTimer=null;
+    const overlay=document.getElementById('openingCountdown');
+    const video=document.getElementById('openingCountdownVideo');
+    const gate=document.getElementById('gate');
+    const world=document.getElementById('world');
+    if(video){try{if(video.__openingCleanup)video.__openingCleanup();video.pause();video.currentTime=0;}catch(e){}}
+    musicWanted=true;
+    const a=document.getElementById('themeAudio');
+    if(a)a.volume=1;
+    startTheme();
+    window.__DEAR_ANG_ALLOW_MINI_FRAME_PLAY__=true;
+    if(gate)gate.classList.add('hidden');
+    if(world)world.classList.remove('hidden');
+    if(overlay){overlay.classList.add('done');setTimeout(()=>overlay.classList.remove('show','done'),180);}
+    setTimeout(()=>{
+      window.showMiniWorld();
+      openingCountdownActive=false;
+      openingCountdownFinishing=false;
+    },90);
+  };
+  try{finishOpeningMemoryCountdown=window.finishOpeningMemoryCountdown;}catch(e){}
+
+  window.showMiniWorld=function(){
+    window.__DEAR_ANG_ALLOW_MINI_FRAME_PLAY__=true;
+    const mini=document.getElementById('miniWorld');
+    if(mini)mini.classList.remove('hidden','zooming');
+    try{renderMiniWeatherButtons();}catch(e){}
+    try{ if(typeof window.applyDefaultWeatherBeforeReady==='function')window.applyDefaultWeatherBeforeReady('v72-show-mini'); }catch(e){}
+    try{window.setMiniFrameVideoByWeatherReal(currentMiniKey());}catch(e){}
+    try{
+      const frameVideo=document.getElementById('miniFrameVideo');
+      playMiniVideoIfAllowed(frameVideo);
+    }catch(e){}
+  };
+  try{showMiniWorld=window.showMiniWorld;}catch(e){}
+
+  // 手動重新整理資料不要重抓歌詞；彈幕只照目前 LYRIC_LINES 走，不重設整層。
+  window.refreshDataNoReload=function(){
+    const btn=document.getElementById('dataRefreshBtn');
+    if(btn){btn.classList.add('refreshing');btn.disabled=true;}
+    toast('正在重新整理資料（不刷新頁面）…');
+    const tasks=[loadData()];
+    return Promise.allSettled(tasks).then(()=>{
+      renderDynamic();
+      renderFood();
+      renderMaps();
+      if(document.getElementById('page-nav')?.classList.contains('show') && typeof initRouteMapPage==='function')initRouteMapPage();
+      setupLyricDanmaku();
+      toast('資料已重新整理（未刷新頁面）');
+    }).catch(()=>toast('部分資料讀取失敗，頁面未刷新',1)).finally(()=>{
+      if(btn){btn.classList.remove('refreshing');btn.disabled=false;}
+    });
+  };
+  try{refreshDataNoReload=window.refreshDataNoReload;}catch(e){}
+
+  // mini world 層級高於主街 topbar，避免轉場後看起來像還卡在上一層。
+  const st=document.createElement('style');
+  st.textContent='#miniWorld{z-index:112!important}.opening-countdown{z-index:160!important}.gate{z-index:150!important}#miniWorld.hidden{display:none!important}';
+  document.head.appendChild(st);
+
+  if(document.readyState==='loading'){
+    document.addEventListener('DOMContentLoaded',()=>{resetToGate();setupLyricDanmaku();},{once:true});
+  }else{
+    resetToGate();
+    setupLyricDanmaku();
+  }
 })();
 </script>
-
 </body></html>
