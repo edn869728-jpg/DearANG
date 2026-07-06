@@ -3167,7 +3167,7 @@ button, .pill {
 
 <div class="mini-world hidden" id="miniWorld" aria-label="CRT電視小世界">
   <div class="mini-crt-scene">
-<video class="mini-crt-frame" id="miniFrameVideo" autoplay muted loop playsinline webkit-playsinline preload="auto" poster="assets/images/mini-frame-poster.png" aria-label="木框天氣影片"></video>
+<video class="mini-crt-frame" id="miniFrameVideo" autoplay muted loop playsinline webkit-playsinline preload="auto" poster="assets/images/mini-frame-poster.webp" aria-label="木框天氣影片"></video>
     <div class="mini-crt-screen" aria-label="木框透明入口區">
       <button class="mini-world-enter-hotspot" type="button" onclick="enterMainWorld()" aria-label="進入富宜路街道"></button>
       <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" class="mini-world-bg" id="miniWorldBg" alt="木框裡的Q版小世界｜☀️ 炎熱晴天｜保留底圖備援">
@@ -5172,7 +5172,7 @@ function openTreasureMapFromStreet(event){
     const p=routePad(n);
     const bases=[`landmark-${p}`,`station-${p}`,`route-${p}`,`spot-${p}`,p];
     const exts=['webp','png','jpg','jpeg','gif'];
-    const out=[`assets/images/map_photo/${Number(n)}.png`];
+    const out=[`assets/images/map_photo/${Number(n)}.webp`,`assets/images/map_photo/${Number(n)}.png`];
     bases.forEach(b=>exts.forEach(ext=>out.push(`assets/images/route/${b}.${ext}`)));
     return out;
   }
