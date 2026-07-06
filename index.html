@@ -4,16 +4,14 @@
 <script>
 (function(){
   try{
-    // GitHub Pages 維持 /DearANG/；直接雙擊 HTML 或使用 localhost 時，改讀目前資料夾。
-    if(location.protocol==='file:' || /^(localhost|127\.0\.0\.1)$/i.test(location.hostname)){
+    if(/^(localhost|127\.0\.0\.1)$/i.test(location.hostname)){
       var base=document.getElementById('appBaseHref');
-      if(base)base.setAttribute('href','./');
+      if(base)base.setAttribute('href','/');
     }
   }catch(e){}
 })();
 </script>
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<link rel="preload" href="assets/videos/opening-countdown.mp4" as="video" type="video/mp4" fetchpriority="high">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='28' fill='%23d6a85d'/%3E%3Ctext x='32' y='41' font-size='28' text-anchor='middle' fill='white'%3E%E2%99%A1%3C/text%3E%3C/svg%3E">
 <!-- v70-cache：已取消 HTML 強制不快取；WebView / 瀏覽器可正常使用快取 -->
 <!-- DearANG v16 KTV stage forced 20260620 -->
@@ -22,8 +20,6 @@
 <!-- DearANG v47 based on index(53): calibrated building/person hotspots no cover crop 20260625 -->
 <!-- DearANG v48 KTV Drive preview + page top spacing + invisible building hotspots 20260625 -->
 <!-- DearANG v56 mini-frame 11 weather videos + KTV left + map title fix 20260627 -->
-<!-- DearANG v76 critical cache order + strict Gate/Opening/Mini state lock 20260706 -->
-<!-- DearANG v73 local/GitHub media path + assets lyrics fallback fix 20260706 -->
 <title>摯愛｜Dear ANG </title>
 <style>
 :root{
@@ -2984,7 +2980,7 @@ button, .pill {
 <div class="asset-preload-status" id="assetPreloadStatus">準備通往回憶…</div>
 <div class="opening-countdown" id="openingCountdown" aria-live="polite">
   <div class="opening-countdown-card">
-    <video class="opening-countdown-video" id="openingCountdownVideo" src="assets/videos/opening-countdown.mp4" playsinline="" webkit-playsinline="" preload="auto" fetchpriority="high"></video>
+    <video class="opening-countdown-video" id="openingCountdownVideo" src="assets/videos/opening-countdown.mp4" playsinline="" preload="metadata"></video>
     <div class="opening-video-caption">回憶倒流中 請留意眼淚回流</div>
     <div class="credit-kicker">OPENING COUNTDOWN</div>
     <div class="opening-countdown-title">倒數</div>
@@ -2998,10 +2994,10 @@ button, .pill {
 
 <div class="mini-world hidden" id="miniWorld" aria-label="CRT電視小世界">
   <div class="mini-crt-scene">
-<video class="mini-crt-frame" id="miniFrameVideo" muted="" loop="" playsinline="" webkit-playsinline="" preload="none" data-poster="assets/images/mini-frame-poster.webp" aria-label="木框影片" data-default-src="assets/videos/weather-mini/05-sunny.mp4" data-weather-video-ready="0"></video>
+<video class="mini-crt-frame" id="miniFrameVideo" src="assets/videos/weather-mini/07-thunderstorm.mp4" muted="" loop="" playsinline="" preload="metadata" poster="assets/images/mini-frame-poster.webp" aria-label="木框影片" data-weather-frame-key="storm" data-weather-video-base="assets/videos/weather-mini/07-thunderstorm.mp4" data-weather-video-ready="0"></video>
     <div class="mini-crt-screen stage-weather-fallback" aria-label="木框透明入口區" data-weather-default-reason="before-showMiniWorld" data-weather-key="storm">
       <button class="mini-world-enter-hotspot" type="button" onclick="enterMainWorld()" aria-label="進入富宜路街道"></button>
-      <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" class="mini-world-bg" id="miniWorldBg" loading="eager" alt="木框裡的Q版小世界｜☀️ 炎熱晴天｜保留底圖備援">
+      <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" class="mini-world-bg" id="miniWorldBg" alt="木框裡的Q版小世界｜☀️ 炎熱晴天｜保留底圖備援">
       <div class="mini-world-weather" id="miniWorldWeather" style="display: none;"></div>
       <div class="mini-screen-shine"></div>
       <div class="mini-screen-hint">回到你成長的街道</div>
@@ -3009,7 +3005,7 @@ button, .pill {
       <button class="treasure-map-hit" type="button" onclick="openTreasureMapFromMini(event)" aria-label="打開藏寶地圖｜通往他的路"></button>
     <button class="radio-audio-hit radio-audio-play" type="button" onclick="playLetterAudio()" aria-label="播放留言音檔"><span>▶</span></button>
     <button class="radio-audio-hit radio-audio-stop" type="button" onclick="stopLetterAudio()" aria-label="停止留言音檔"><span>■</span></button>
-    <audio id="letterAudio" preload="none" data-src="assets/audio/aming-message.mp3" data-v63-bound="1"></audio>
+    <audio id="letterAudio" preload="metadata" src="assets/audio/aming-message.mp3" data-v63-bound="1"></audio>
     <div class="mini-weather-status" id="miniWeatherStatus">你那邊的天氣：套用：⛈️ 雷雨・31.4°C・風速 11 km/h</div>
     <section class="frame-letter-card" aria-label="FRAME 下方留言">
       <div class="frame-letter-text">親愛的阿明<br>
@@ -3040,7 +3036,7 @@ button, .pill {
   </div>
   <div class="scroller" id="scroller">
     <div class="stage weather-fallback" id="stage" data-weather-default-reason="before-showMiniWorld" data-weather-key="storm">
-      <img class="stage-world-img" id="stageWorldImg" src="assets/images/weather/day-sunny.webp" alt="富宜路街道世界｜☀️ 炎熱晴天｜保留底圖備援" loading="lazy" decoding="async" fetchpriority="low">
+      <img class="stage-world-img" id="stageWorldImg" src="assets/images/weather/day-sunny.webp" alt="富宜路街道世界｜☀️ 炎熱晴天｜保留底圖備援">
       <div class="world-weather" id="worldWeather" style="display: none;"></div>
       <div class="hotspot h-photo" data-label="華光相館｜你和我們的時光" onclick="openPage('photo')"></div>
       <div class="hotspot h-video" data-label="新時代影音館｜影片" onclick="openPage('video')"></div>
@@ -3053,7 +3049,7 @@ button, .pill {
   <div class="hint"><div class="hint-inner"><span>← →</span><div>左右滑這條街<small>點招牌或建築，進入對應的時光。</small></div></div></div>
 </div>
 
-<audio id="themeAudio" preload="none" loop="" data-src="assets/audio/dear-ang-theme.mp3"></audio>
+<audio id="themeAudio" preload="metadata" loop="" src="assets/audio/dear-ang-theme.mp3"></audio>
 
 <div class="visitor-identity-modal hidden" id="visitorIdentityModal" onclick="visitorModalBackdropClose(event)">
   <div class="visitor-identity-card" onclick="event.stopPropagation()">
@@ -3119,7 +3115,7 @@ button, .pill {
           <div class="photo-wheel-foot"></div>
           <div class="photo-wheel-hub"><span>♥</span><small>我們的</small><strong>回憶</strong></div>
           <div class="photo-wheel-boarding"></div>
-          <div id="photoWheelCabins" data-real-photo-bound="1"><button type="button" class="photo-wheel-cabin active gondola-img-mode v65-gondola gondola-green gondola-blue" data-i="0" data-gondola-color="blue" data-gondola-skinned="1" style="transform: translate(0px, 210.8px) scale(1.22); opacity: 1; filter: blur(0px) brightness(1.13); z-index: 66;"><img class="gondola-img gondola-base" src="https://pub-a5bb8e437f004bb8aecca934db50299f.r2.dev/Ferris%20Wheel/Gondola/blue/without_door.png" alt="相簿 1 車廂本體" data-v64-fallback-bound="1" data-try-index="0" loading="lazy" decoding="async" fetchpriority="low"><img class="gondola-img gondola-door close left" src="https://pub-a5bb8e437f004bb8aecca934db50299f.r2.dev/Ferris%20Wheel/Gondola/blue/close_left_door.png" alt="" data-v64-fallback-bound="1" data-try-index="0" loading="lazy" decoding="async" fetchpriority="low"><img class="gondola-img gondola-door close right" src="https://pub-a5bb8e437f004bb8aecca934db50299f.r2.dev/Ferris%20Wheel/Gondola/blue/close_right_door.png" alt="" data-v64-fallback-bound="1" data-try-index="0" loading="lazy" decoding="async" fetchpriority="low"><img class="gondola-img gondola-door open left" src="https://pub-a5bb8e437f004bb8aecca934db50299f.r2.dev/Ferris%20Wheel/Gondola/blue/open_left_door.png" alt="" data-v64-fallback-bound="1" data-try-index="0" loading="lazy" decoding="async" fetchpriority="low"><img class="gondola-img gondola-door open right" src="https://pub-a5bb8e437f004bb8aecca934db50299f.r2.dev/Ferris%20Wheel/Gondola/blue/open_right_door.png" alt="" data-v64-fallback-bound="1" data-try-index="0" loading="lazy" decoding="async" fetchpriority="low"><span class="gondola-title">相簿 1</span><span class="gondola-hotspot-note">點開相片</span></button><button type="button" class="photo-wheel-cabin gondola-img-mode v65-gondola gondola-blue gondola-green" data-i="1" data-gondola-color="green" data-gondola-skinned="1" style="transform: translate(-149.058109px, 149.058109px) scale(0.896569); opacity: 0.677279; filter: blur(0.392893px) brightness(0.86); z-index: 27;"><img class="gondola-img gondola-base" src="https://pub-a5bb8e437f004bb8aecca934db50299f.r2.dev/Ferris%20Wheel/Gondola/green/without_door.png" alt="相簿 2 車廂本體" data-v64-fallback-bound="1" data-try-index="0" loading="lazy" decoding="async" fetchpriority="low"><img class="gondola-img gondola-door close left" src="https://pub-a5bb8e437f004bb8aecca934db50299f.r2.dev/Ferris%20Wheel/Gondola/green/close_left_door.png" alt="" data-v64-fallback-bound="1" data-try-index="0" loading="lazy" decoding="async" fetchpriority="low"><img class="gondola-img gondola-door close right" src="https://pub-a5bb8e437f004bb8aecca934db50299f.r2.dev/Ferris%20Wheel/Gondola/green/close_right_door.png" alt="" data-v64-fallback-bound="1" data-try-index="0" loading="lazy" decoding="async" fetchpriority="low"><img class="gondola-img gondola-door open left" src="https://pub-a5bb8e437f004bb8aecca934db50299f.r2.dev/Ferris%20Wheel/Gondola/green/open_left_door.png" alt="" data-v64-fallback-bound="1" data-try-index="0" loading="lazy" decoding="async" fetchpriority="low"><img class="gondola-img gondola-door open right" src="https://pub-a5bb8e437f004bb8aecca934db50299f.r2.dev/Ferris%20Wheel/Gondola/green/open_right_door.png" alt="" data-v64-fallback-bound="1" data-try-index="0" loading="lazy" decoding="async" fetchpriority="low"><span class="gondola-title">相簿 2</span><span class="gondola-hotspot-note">點開相片</span></button><button type="button" class="photo-wheel-cabin gondola-img-mode v65-gondola gondola-green gondola-blue" data-i="2" data-gondola-color="blue" data-gondola-skinned="1" style="transform: translate(-210.8px, 0px) scale(0.84); opacity: 0.55; filter: blur(1.1px) brightness(0.86); z-index: 20;"><img class="gondola-img gondola-base" src="https://pub-a5bb8e437f004bb8aecca934db50299f.r2.dev/Ferris%20Wheel/Gondola/blue/without_door.png" alt="相簿 3 車廂本體" data-v64-fallback-bound="1" data-try-index="0" loading="lazy" decoding="async" fetchpriority="low"><img class="gondola-img gondola-door close left" src="https://pub-a5bb8e437f004bb8aecca934db50299f.r2.dev/Ferris%20Wheel/Gondola/blue/close_left_door.png" alt="" data-v64-fallback-bound="1" data-try-index="0" loading="lazy" decoding="async" fetchpriority="low"><img class="gondola-img gondola-door close right" src="https://pub-a5bb8e437f004bb8aecca934db50299f.r2.dev/Ferris%20Wheel/Gondola/blue/close_right_door.png" alt="" data-v64-fallback-bound="1" data-try-index="0" loading="lazy" decoding="async" fetchpriority="low"><img class="gondola-img gondola-door open left" src="https://pub-a5bb8e437f004bb8aecca934db50299f.r2.dev/Ferris%20Wheel/Gondola/blue/open_left_door.png" alt="" data-v64-fallback-bound="1" data-try-index="0" loading="lazy" decoding="async" fetchpriority="low"><img class="gondola-img gondola-door open right" src="https://pub-a5bb8e437f004bb8aecca934db50299f.r2.dev/Ferris%20Wheel/Gondola/blue/open_right_door.png" alt="" data-v64-fallback-bound="1" data-try-index="0" loading="lazy" decoding="async" fetchpriority="low"><span class="gondola-title">相簿 3</span><span class="gondola-hotspot-note">點開相片</span></button><button type="button" class="photo-wheel-cabin gondola-img-mode v65-gondola gondola-blue gondola-green" data-i="3" data-gondola-color="green" data-gondola-skinned="1" style="transform: translate(-149.058109px, -149.058109px) scale(0.783431); opacity: 0.422721; filter: blur(1.807107px) brightness(0.86); z-index: 13;"><img class="gondola-img gondola-base" src="https://pub-a5bb8e437f004bb8aecca934db50299f.r2.dev/Ferris%20Wheel/Gondola/green/without_door.png" alt="相簿 4 車廂本體" data-v64-fallback-bound="1" data-try-index="0" loading="lazy" decoding="async" fetchpriority="low"><img class="gondola-img gondola-door close left" src="https://pub-a5bb8e437f004bb8aecca934db50299f.r2.dev/Ferris%20Wheel/Gondola/green/close_left_door.png" alt="" data-v64-fallback-bound="1" data-try-index="0" loading="lazy" decoding="async" fetchpriority="low"><img class="gondola-img gondola-door close right" src="https://pub-a5bb8e437f004bb8aecca934db50299f.r2.dev/Ferris%20Wheel/Gondola/green/close_right_door.png" alt="" data-v64-fallback-bound="1" data-try-index="0" loading="lazy" decoding="async" fetchpriority="low"><img class="gondola-img gondola-door open left" src="https://pub-a5bb8e437f004bb8aecca934db50299f.r2.dev/Ferris%20Wheel/Gondola/green/open_left_door.png" alt="" data-v64-fallback-bound="1" data-try-index="0" loading="lazy" decoding="async" fetchpriority="low"><img class="gondola-img gondola-door open right" src="https://pub-a5bb8e437f004bb8aecca934db50299f.r2.dev/Ferris%20Wheel/Gondola/green/open_right_door.png" alt="" data-v64-fallback-bound="1" data-try-index="0" loading="lazy" decoding="async" fetchpriority="low"><span class="gondola-title">相簿 4</span><span class="gondola-hotspot-note">點開相片</span></button><button type="button" class="photo-wheel-cabin gondola-img-mode v65-gondola gondola-green gondola-blue" data-i="4" data-gondola-color="blue" data-gondola-skinned="1" style="transform: translate(0px, -210.8px) scale(0.76); opacity: 0.37; filter: blur(2.1px) brightness(0.86); z-index: 10;"><img class="gondola-img gondola-base" src="https://pub-a5bb8e437f004bb8aecca934db50299f.r2.dev/Ferris%20Wheel/Gondola/blue/without_door.png" alt="相簿 5 車廂本體" data-v64-fallback-bound="1" data-try-index="0" loading="lazy" decoding="async" fetchpriority="low"><img class="gondola-img gondola-door close left" src="https://pub-a5bb8e437f004bb8aecca934db50299f.r2.dev/Ferris%20Wheel/Gondola/blue/close_left_door.png" alt="" data-v64-fallback-bound="1" data-try-index="0" loading="lazy" decoding="async" fetchpriority="low"><img class="gondola-img gondola-door close right" src="https://pub-a5bb8e437f004bb8aecca934db50299f.r2.dev/Ferris%20Wheel/Gondola/blue/close_right_door.png" alt="" data-v64-fallback-bound="1" data-try-index="0" loading="lazy" decoding="async" fetchpriority="low"><img class="gondola-img gondola-door open left" src="https://pub-a5bb8e437f004bb8aecca934db50299f.r2.dev/Ferris%20Wheel/Gondola/blue/open_left_door.png" alt="" data-v64-fallback-bound="1" data-try-index="0" loading="lazy" decoding="async" fetchpriority="low"><img class="gondola-img gondola-door open right" src="https://pub-a5bb8e437f004bb8aecca934db50299f.r2.dev/Ferris%20Wheel/Gondola/blue/open_right_door.png" alt="" data-v64-fallback-bound="1" data-try-index="0" loading="lazy" decoding="async" fetchpriority="low"><span class="gondola-title">相簿 5</span><span class="gondola-hotspot-note">點開相片</span></button><button type="button" class="photo-wheel-cabin gondola-img-mode v65-gondola gondola-blue gondola-green" data-i="5" data-gondola-color="green" data-gondola-skinned="1" style="transform: translate(149.058109px, -149.058109px) scale(0.783431); opacity: 0.422721; filter: blur(1.807107px) brightness(0.86); z-index: 13;"><img class="gondola-img gondola-base" src="https://pub-a5bb8e437f004bb8aecca934db50299f.r2.dev/Ferris%20Wheel/Gondola/green/without_door.png" alt="相簿 6 車廂本體" data-v64-fallback-bound="1" data-try-index="0" loading="lazy" decoding="async" fetchpriority="low"><img class="gondola-img gondola-door close left" src="https://pub-a5bb8e437f004bb8aecca934db50299f.r2.dev/Ferris%20Wheel/Gondola/green/close_left_door.png" alt="" data-v64-fallback-bound="1" data-try-index="0" loading="lazy" decoding="async" fetchpriority="low"><img class="gondola-img gondola-door close right" src="https://pub-a5bb8e437f004bb8aecca934db50299f.r2.dev/Ferris%20Wheel/Gondola/green/close_right_door.png" alt="" data-v64-fallback-bound="1" data-try-index="0" loading="lazy" decoding="async" fetchpriority="low"><img class="gondola-img gondola-door open left" src="https://pub-a5bb8e437f004bb8aecca934db50299f.r2.dev/Ferris%20Wheel/Gondola/green/open_left_door.png" alt="" data-v64-fallback-bound="1" data-try-index="0" loading="lazy" decoding="async" fetchpriority="low"><img class="gondola-img gondola-door open right" src="https://pub-a5bb8e437f004bb8aecca934db50299f.r2.dev/Ferris%20Wheel/Gondola/green/open_right_door.png" alt="" data-v64-fallback-bound="1" data-try-index="0" loading="lazy" decoding="async" fetchpriority="low"><span class="gondola-title">相簿 6</span><span class="gondola-hotspot-note">點開相片</span></button><button type="button" class="photo-wheel-cabin gondola-img-mode v65-gondola gondola-green gondola-blue" data-i="6" data-gondola-color="blue" data-gondola-skinned="1" style="transform: translate(210.8px, 0px) scale(0.84); opacity: 0.55; filter: blur(1.1px) brightness(0.86); z-index: 20;"><img class="gondola-img gondola-base" src="https://pub-a5bb8e437f004bb8aecca934db50299f.r2.dev/Ferris%20Wheel/Gondola/blue/without_door.png" alt="相簿 7 車廂本體" data-v64-fallback-bound="1" data-try-index="0" loading="lazy" decoding="async" fetchpriority="low"><img class="gondola-img gondola-door close left" src="https://pub-a5bb8e437f004bb8aecca934db50299f.r2.dev/Ferris%20Wheel/Gondola/blue/close_left_door.png" alt="" data-v64-fallback-bound="1" data-try-index="0" loading="lazy" decoding="async" fetchpriority="low"><img class="gondola-img gondola-door close right" src="https://pub-a5bb8e437f004bb8aecca934db50299f.r2.dev/Ferris%20Wheel/Gondola/blue/close_right_door.png" alt="" data-v64-fallback-bound="1" data-try-index="0" loading="lazy" decoding="async" fetchpriority="low"><img class="gondola-img gondola-door open left" src="https://pub-a5bb8e437f004bb8aecca934db50299f.r2.dev/Ferris%20Wheel/Gondola/blue/open_left_door.png" alt="" data-v64-fallback-bound="1" data-try-index="0" loading="lazy" decoding="async" fetchpriority="low"><img class="gondola-img gondola-door open right" src="https://pub-a5bb8e437f004bb8aecca934db50299f.r2.dev/Ferris%20Wheel/Gondola/blue/open_right_door.png" alt="" data-v64-fallback-bound="1" data-try-index="0" loading="lazy" decoding="async" fetchpriority="low"><span class="gondola-title">相簿 7</span><span class="gondola-hotspot-note">點開相片</span></button><button type="button" class="photo-wheel-cabin gondola-img-mode v65-gondola gondola-blue gondola-green" data-i="7" data-gondola-color="green" data-gondola-skinned="1" style="transform: translate(149.058109px, 149.058109px) scale(0.896569); opacity: 0.677279; filter: blur(0.392893px) brightness(0.86); z-index: 27;"><img class="gondola-img gondola-base" src="https://pub-a5bb8e437f004bb8aecca934db50299f.r2.dev/Ferris%20Wheel/Gondola/green/without_door.png" alt="相簿 8 車廂本體" data-v64-fallback-bound="1" data-try-index="0" loading="lazy" decoding="async" fetchpriority="low"><img class="gondola-img gondola-door close left" src="https://pub-a5bb8e437f004bb8aecca934db50299f.r2.dev/Ferris%20Wheel/Gondola/green/close_left_door.png" alt="" data-v64-fallback-bound="1" data-try-index="0" loading="lazy" decoding="async" fetchpriority="low"><img class="gondola-img gondola-door close right" src="https://pub-a5bb8e437f004bb8aecca934db50299f.r2.dev/Ferris%20Wheel/Gondola/green/close_right_door.png" alt="" data-v64-fallback-bound="1" data-try-index="0" loading="lazy" decoding="async" fetchpriority="low"><img class="gondola-img gondola-door open left" src="https://pub-a5bb8e437f004bb8aecca934db50299f.r2.dev/Ferris%20Wheel/Gondola/green/open_left_door.png" alt="" data-v64-fallback-bound="1" data-try-index="0" loading="lazy" decoding="async" fetchpriority="low"><img class="gondola-img gondola-door open right" src="https://pub-a5bb8e437f004bb8aecca934db50299f.r2.dev/Ferris%20Wheel/Gondola/green/open_right_door.png" alt="" data-v64-fallback-bound="1" data-try-index="0" loading="lazy" decoding="async" fetchpriority="low"><span class="gondola-title">相簿 8</span><span class="gondola-hotspot-note">點開相片</span></button></div>
+          <div id="photoWheelCabins" data-real-photo-bound="1"><button type="button" class="photo-wheel-cabin active gondola-img-mode v65-gondola gondola-green gondola-blue" data-i="0" data-gondola-color="blue" data-gondola-skinned="1" style="transform: translate(0px, 210.8px) scale(1.22); opacity: 1; filter: blur(0px) brightness(1.13); z-index: 66;"><img class="gondola-img gondola-base" src="https://pub-a5bb8e437f004bb8aecca934db50299f.r2.dev/Ferris%20Wheel/Gondola/blue/without_door.png" alt="相簿 1 車廂本體" data-v64-fallback-bound="1" data-try-index="0"><img class="gondola-img gondola-door close left" src="https://pub-a5bb8e437f004bb8aecca934db50299f.r2.dev/Ferris%20Wheel/Gondola/blue/close_left_door.png" alt="" data-v64-fallback-bound="1" data-try-index="0"><img class="gondola-img gondola-door close right" src="https://pub-a5bb8e437f004bb8aecca934db50299f.r2.dev/Ferris%20Wheel/Gondola/blue/close_right_door.png" alt="" data-v64-fallback-bound="1" data-try-index="0"><img class="gondola-img gondola-door open left" src="https://pub-a5bb8e437f004bb8aecca934db50299f.r2.dev/Ferris%20Wheel/Gondola/blue/open_left_door.png" alt="" data-v64-fallback-bound="1" data-try-index="0"><img class="gondola-img gondola-door open right" src="https://pub-a5bb8e437f004bb8aecca934db50299f.r2.dev/Ferris%20Wheel/Gondola/blue/open_right_door.png" alt="" data-v64-fallback-bound="1" data-try-index="0"><span class="gondola-title">相簿 1</span><span class="gondola-hotspot-note">點開相片</span></button><button type="button" class="photo-wheel-cabin gondola-img-mode v65-gondola gondola-blue gondola-green" data-i="1" data-gondola-color="green" data-gondola-skinned="1" style="transform: translate(-149.058109px, 149.058109px) scale(0.896569); opacity: 0.677279; filter: blur(0.392893px) brightness(0.86); z-index: 27;"><img class="gondola-img gondola-base" src="https://pub-a5bb8e437f004bb8aecca934db50299f.r2.dev/Ferris%20Wheel/Gondola/green/without_door.png" alt="相簿 2 車廂本體" data-v64-fallback-bound="1" data-try-index="0"><img class="gondola-img gondola-door close left" src="https://pub-a5bb8e437f004bb8aecca934db50299f.r2.dev/Ferris%20Wheel/Gondola/green/close_left_door.png" alt="" data-v64-fallback-bound="1" data-try-index="0"><img class="gondola-img gondola-door close right" src="https://pub-a5bb8e437f004bb8aecca934db50299f.r2.dev/Ferris%20Wheel/Gondola/green/close_right_door.png" alt="" data-v64-fallback-bound="1" data-try-index="0"><img class="gondola-img gondola-door open left" src="https://pub-a5bb8e437f004bb8aecca934db50299f.r2.dev/Ferris%20Wheel/Gondola/green/open_left_door.png" alt="" data-v64-fallback-bound="1" data-try-index="0"><img class="gondola-img gondola-door open right" src="https://pub-a5bb8e437f004bb8aecca934db50299f.r2.dev/Ferris%20Wheel/Gondola/green/open_right_door.png" alt="" data-v64-fallback-bound="1" data-try-index="0"><span class="gondola-title">相簿 2</span><span class="gondola-hotspot-note">點開相片</span></button><button type="button" class="photo-wheel-cabin gondola-img-mode v65-gondola gondola-green gondola-blue" data-i="2" data-gondola-color="blue" data-gondola-skinned="1" style="transform: translate(-210.8px, 0px) scale(0.84); opacity: 0.55; filter: blur(1.1px) brightness(0.86); z-index: 20;"><img class="gondola-img gondola-base" src="https://pub-a5bb8e437f004bb8aecca934db50299f.r2.dev/Ferris%20Wheel/Gondola/blue/without_door.png" alt="相簿 3 車廂本體" data-v64-fallback-bound="1" data-try-index="0"><img class="gondola-img gondola-door close left" src="https://pub-a5bb8e437f004bb8aecca934db50299f.r2.dev/Ferris%20Wheel/Gondola/blue/close_left_door.png" alt="" data-v64-fallback-bound="1" data-try-index="0"><img class="gondola-img gondola-door close right" src="https://pub-a5bb8e437f004bb8aecca934db50299f.r2.dev/Ferris%20Wheel/Gondola/blue/close_right_door.png" alt="" data-v64-fallback-bound="1" data-try-index="0"><img class="gondola-img gondola-door open left" src="https://pub-a5bb8e437f004bb8aecca934db50299f.r2.dev/Ferris%20Wheel/Gondola/blue/open_left_door.png" alt="" data-v64-fallback-bound="1" data-try-index="0"><img class="gondola-img gondola-door open right" src="https://pub-a5bb8e437f004bb8aecca934db50299f.r2.dev/Ferris%20Wheel/Gondola/blue/open_right_door.png" alt="" data-v64-fallback-bound="1" data-try-index="0"><span class="gondola-title">相簿 3</span><span class="gondola-hotspot-note">點開相片</span></button><button type="button" class="photo-wheel-cabin gondola-img-mode v65-gondola gondola-blue gondola-green" data-i="3" data-gondola-color="green" data-gondola-skinned="1" style="transform: translate(-149.058109px, -149.058109px) scale(0.783431); opacity: 0.422721; filter: blur(1.807107px) brightness(0.86); z-index: 13;"><img class="gondola-img gondola-base" src="https://pub-a5bb8e437f004bb8aecca934db50299f.r2.dev/Ferris%20Wheel/Gondola/green/without_door.png" alt="相簿 4 車廂本體" data-v64-fallback-bound="1" data-try-index="0"><img class="gondola-img gondola-door close left" src="https://pub-a5bb8e437f004bb8aecca934db50299f.r2.dev/Ferris%20Wheel/Gondola/green/close_left_door.png" alt="" data-v64-fallback-bound="1" data-try-index="0"><img class="gondola-img gondola-door close right" src="https://pub-a5bb8e437f004bb8aecca934db50299f.r2.dev/Ferris%20Wheel/Gondola/green/close_right_door.png" alt="" data-v64-fallback-bound="1" data-try-index="0"><img class="gondola-img gondola-door open left" src="https://pub-a5bb8e437f004bb8aecca934db50299f.r2.dev/Ferris%20Wheel/Gondola/green/open_left_door.png" alt="" data-v64-fallback-bound="1" data-try-index="0"><img class="gondola-img gondola-door open right" src="https://pub-a5bb8e437f004bb8aecca934db50299f.r2.dev/Ferris%20Wheel/Gondola/green/open_right_door.png" alt="" data-v64-fallback-bound="1" data-try-index="0"><span class="gondola-title">相簿 4</span><span class="gondola-hotspot-note">點開相片</span></button><button type="button" class="photo-wheel-cabin gondola-img-mode v65-gondola gondola-green gondola-blue" data-i="4" data-gondola-color="blue" data-gondola-skinned="1" style="transform: translate(0px, -210.8px) scale(0.76); opacity: 0.37; filter: blur(2.1px) brightness(0.86); z-index: 10;"><img class="gondola-img gondola-base" src="https://pub-a5bb8e437f004bb8aecca934db50299f.r2.dev/Ferris%20Wheel/Gondola/blue/without_door.png" alt="相簿 5 車廂本體" data-v64-fallback-bound="1" data-try-index="0"><img class="gondola-img gondola-door close left" src="https://pub-a5bb8e437f004bb8aecca934db50299f.r2.dev/Ferris%20Wheel/Gondola/blue/close_left_door.png" alt="" data-v64-fallback-bound="1" data-try-index="0"><img class="gondola-img gondola-door close right" src="https://pub-a5bb8e437f004bb8aecca934db50299f.r2.dev/Ferris%20Wheel/Gondola/blue/close_right_door.png" alt="" data-v64-fallback-bound="1" data-try-index="0"><img class="gondola-img gondola-door open left" src="https://pub-a5bb8e437f004bb8aecca934db50299f.r2.dev/Ferris%20Wheel/Gondola/blue/open_left_door.png" alt="" data-v64-fallback-bound="1" data-try-index="0"><img class="gondola-img gondola-door open right" src="https://pub-a5bb8e437f004bb8aecca934db50299f.r2.dev/Ferris%20Wheel/Gondola/blue/open_right_door.png" alt="" data-v64-fallback-bound="1" data-try-index="0"><span class="gondola-title">相簿 5</span><span class="gondola-hotspot-note">點開相片</span></button><button type="button" class="photo-wheel-cabin gondola-img-mode v65-gondola gondola-blue gondola-green" data-i="5" data-gondola-color="green" data-gondola-skinned="1" style="transform: translate(149.058109px, -149.058109px) scale(0.783431); opacity: 0.422721; filter: blur(1.807107px) brightness(0.86); z-index: 13;"><img class="gondola-img gondola-base" src="https://pub-a5bb8e437f004bb8aecca934db50299f.r2.dev/Ferris%20Wheel/Gondola/green/without_door.png" alt="相簿 6 車廂本體" data-v64-fallback-bound="1" data-try-index="0"><img class="gondola-img gondola-door close left" src="https://pub-a5bb8e437f004bb8aecca934db50299f.r2.dev/Ferris%20Wheel/Gondola/green/close_left_door.png" alt="" data-v64-fallback-bound="1" data-try-index="0"><img class="gondola-img gondola-door close right" src="https://pub-a5bb8e437f004bb8aecca934db50299f.r2.dev/Ferris%20Wheel/Gondola/green/close_right_door.png" alt="" data-v64-fallback-bound="1" data-try-index="0"><img class="gondola-img gondola-door open left" src="https://pub-a5bb8e437f004bb8aecca934db50299f.r2.dev/Ferris%20Wheel/Gondola/green/open_left_door.png" alt="" data-v64-fallback-bound="1" data-try-index="0"><img class="gondola-img gondola-door open right" src="https://pub-a5bb8e437f004bb8aecca934db50299f.r2.dev/Ferris%20Wheel/Gondola/green/open_right_door.png" alt="" data-v64-fallback-bound="1" data-try-index="0"><span class="gondola-title">相簿 6</span><span class="gondola-hotspot-note">點開相片</span></button><button type="button" class="photo-wheel-cabin gondola-img-mode v65-gondola gondola-green gondola-blue" data-i="6" data-gondola-color="blue" data-gondola-skinned="1" style="transform: translate(210.8px, 0px) scale(0.84); opacity: 0.55; filter: blur(1.1px) brightness(0.86); z-index: 20;"><img class="gondola-img gondola-base" src="https://pub-a5bb8e437f004bb8aecca934db50299f.r2.dev/Ferris%20Wheel/Gondola/blue/without_door.png" alt="相簿 7 車廂本體" data-v64-fallback-bound="1" data-try-index="0"><img class="gondola-img gondola-door close left" src="https://pub-a5bb8e437f004bb8aecca934db50299f.r2.dev/Ferris%20Wheel/Gondola/blue/close_left_door.png" alt="" data-v64-fallback-bound="1" data-try-index="0"><img class="gondola-img gondola-door close right" src="https://pub-a5bb8e437f004bb8aecca934db50299f.r2.dev/Ferris%20Wheel/Gondola/blue/close_right_door.png" alt="" data-v64-fallback-bound="1" data-try-index="0"><img class="gondola-img gondola-door open left" src="https://pub-a5bb8e437f004bb8aecca934db50299f.r2.dev/Ferris%20Wheel/Gondola/blue/open_left_door.png" alt="" data-v64-fallback-bound="1" data-try-index="0"><img class="gondola-img gondola-door open right" src="https://pub-a5bb8e437f004bb8aecca934db50299f.r2.dev/Ferris%20Wheel/Gondola/blue/open_right_door.png" alt="" data-v64-fallback-bound="1" data-try-index="0"><span class="gondola-title">相簿 7</span><span class="gondola-hotspot-note">點開相片</span></button><button type="button" class="photo-wheel-cabin gondola-img-mode v65-gondola gondola-blue gondola-green" data-i="7" data-gondola-color="green" data-gondola-skinned="1" style="transform: translate(149.058109px, 149.058109px) scale(0.896569); opacity: 0.677279; filter: blur(0.392893px) brightness(0.86); z-index: 27;"><img class="gondola-img gondola-base" src="https://pub-a5bb8e437f004bb8aecca934db50299f.r2.dev/Ferris%20Wheel/Gondola/green/without_door.png" alt="相簿 8 車廂本體" data-v64-fallback-bound="1" data-try-index="0"><img class="gondola-img gondola-door close left" src="https://pub-a5bb8e437f004bb8aecca934db50299f.r2.dev/Ferris%20Wheel/Gondola/green/close_left_door.png" alt="" data-v64-fallback-bound="1" data-try-index="0"><img class="gondola-img gondola-door close right" src="https://pub-a5bb8e437f004bb8aecca934db50299f.r2.dev/Ferris%20Wheel/Gondola/green/close_right_door.png" alt="" data-v64-fallback-bound="1" data-try-index="0"><img class="gondola-img gondola-door open left" src="https://pub-a5bb8e437f004bb8aecca934db50299f.r2.dev/Ferris%20Wheel/Gondola/green/open_left_door.png" alt="" data-v64-fallback-bound="1" data-try-index="0"><img class="gondola-img gondola-door open right" src="https://pub-a5bb8e437f004bb8aecca934db50299f.r2.dev/Ferris%20Wheel/Gondola/green/open_right_door.png" alt="" data-v64-fallback-bound="1" data-try-index="0"><span class="gondola-title">相簿 8</span><span class="gondola-hotspot-note">點開相片</span></button></div>
         </div>
         <div class="photo-wheel-controls">
           <button type="button" class="photo-wheel-ctrl" id="photoWheelPrev" aria-label="上一個相簿">‹</button>
@@ -3173,7 +3169,7 @@ button, .pill {
 <section class="page" id="page-video">
   <div class="page-head"><button class="back" onclick="closePage()">← 回到街上</button><b>新時代影音館｜忘不掉的動態氣息</b></div>
   <div class="page-body">
-    <div class="hero-card"><img src="assets/images/memory-world.webp" alt="新時代影音館" loading="lazy" decoding="async" fetchpriority="low"><div class="hero-text"><h1>影音館</h1><p></p></div></div>
+    <div class="hero-card"><img src="assets/images/memory-world.webp" alt="新時代影音館"><div class="hero-text"><h1>影音館</h1><p></p></div></div>
     <div class="section folder-hint"><h2></h2><div class="story">02_影音館<br></div></div>
     <div class="section"><h2>影片</h2><div class="video-grid" id="videoGrid"><div class="empty">影片載入中…</div></div></div>
   </div>
@@ -3183,7 +3179,7 @@ button, .pill {
   <div class="page-head"><button class="back" onclick="closePage()">← 回到街上</button><b>中間公寓｜哥 記得常回家看看
 </b></div>
   <div class="page-body">
-    <div class="hero-card"><img src="assets/images/memory-world.webp" alt="中間公寓" loading="lazy" decoding="async" fetchpriority="low"><div class="hero-text"><h1>你家</h1><p>想起你，你的樣貌，你的體溫，和你的臉龐。</p></div></div>
+    <div class="hero-card"><img src="assets/images/memory-world.webp" alt="中間公寓"><div class="hero-text"><h1>你家</h1><p>想起你，你的樣貌，你的體溫，和你的臉龐。</p></div></div>
     <div class="section folder-hint"><h2></h2><div class="story">03_你的家<br></div></div>
     <div class="section"><h2>他個人的照片</h2><div id="homePhotoGrid" class="album-mount"><div class="empty">載入中…</div></div></div>
   </div>
@@ -3196,7 +3192,7 @@ button, .pill {
       <div class="ktv-tv ktv-tv-machine">
         <div class="ktv-tv-top">金嗓卡拉OK</div>
         <div class="ktv-stage-wrap">
-          <img src="assets/images/ktv-stage.webp" alt="卡拉OK電視、麥克風與音響" loading="lazy" decoding="async" fetchpriority="low">
+          <img src="assets/images/ktv-stage.webp" alt="卡拉OK電視、麥克風與音響">
           <div class="ktv-screen" id="ktvScreen">
             <video id="ktvVideo" controls="" playsinline="" preload="none"></video>
             <div class="ktv-audio-visual" id="ktvAudioVisual">
@@ -3220,7 +3216,7 @@ button, .pill {
           <h2>遙控器</h2>
           <div class="ktv-display"><span id="ktvDisplay">---</span><small id="ktvSelectedText">尚未選歌</small></div>
           <div class="ktv-remote-photo-wrap" aria-label="卡拉OK遙控器">
-            <img src="assets/images/ktv-remote.webp" alt="卡拉OK遙控器" loading="lazy" decoding="async" fetchpriority="low">
+            <img src="assets/images/ktv-remote.webp" alt="卡拉OK遙控器">
             <button class="ktv-img-hotspot side" style="left:16.7%;top:11.0%" onclick="ktvRemoteHint('設定功能暫不使用')" aria-label="設定"></button>
             <button class="ktv-img-hotspot side" style="left:16.7%;top:20.8%" onclick="document.getElementById('ktvSongbook')?.scrollIntoView({behavior:'smooth',block:'center'})" aria-label="菜單"></button>
             <button class="ktv-img-hotspot side" style="left:16.7%;top:30.6%" onclick="ktvEnter()" aria-label="已點"></button>
@@ -3264,7 +3260,7 @@ button, .pill {
 <section class="page" id="page-food">
   <div class="page-head"><button class="back" onclick="closePage()">← 回到街上</button><b>美而美早餐店｜口味很像的我們。</b></div>
   <div class="page-body">
-    <div class="hero-card"><img src="assets/images/memory-world.webp" alt="美而美早餐店" loading="lazy" decoding="async" fetchpriority="low"><div class="hero-text"><h1>食物記憶</h1><p>一起吃過的、他喜歡吃的、他推薦你吃的，都由 Google Drive 分類讀取。</p></div></div>
+    <div class="hero-card"><img src="assets/images/memory-world.webp" alt="美而美早餐店"><div class="hero-text"><h1>食物記憶</h1><p>一起吃過的、他喜歡吃的、他推薦你吃的，都由 Google Drive 分類讀取。</p></div></div>
     <div class="section folder-hint"><h2></h2><div class="story">05_美而美早餐店<br></div></div>
     <div class="section"><h2>照片</h2><div id="foodPhotoGrid" class="grid"><div class="empty">食物照片載入中…</div></div></div>
   </div>
@@ -3273,7 +3269,7 @@ button, .pill {
 <section class="page" id="page-nav" data-weather="⛈️ 雷雨">
   <div class="page-head"><button class="back" onclick="closePage()">← 回到街上</button><b>公路局｜通往他的路</b></div>
   <div class="route-map-app" id="routeMapApp" aria-label="通往他的路｜藏寶圖">
-    <img class="route-map-bg" src="assets/images/treasure_map_bg.webp" alt="藏寶圖背景" onerror="this.onerror=null;this.src='assets/images/treasure_map_bg.webp'" loading="lazy" decoding="async" fetchpriority="low">
+    <img class="route-map-bg" src="assets/images/treasure_map_bg.webp" alt="藏寶圖背景" onerror="this.onerror=null;this.src='assets/images/treasure_map_bg.webp'">
     <svg class="route-svg" viewBox="0 0 2160 3840" preserveAspectRatio="none" aria-hidden="true">
       <path id="routeMapPath" class="route-base" d="M 760 1565 C 560 1240, 430 870, 420 500 C 760 420, 1220 390, 1680 440 C 1640 700, 1585 950, 1510 1140 C 1530 1510, 1545 1860, 1540 2250 C 1450 2680, 1365 3070, 1295 3420"></path>
       <path id="routeMapDone" class="route-done" d="M 760 1565 C 560 1240, 430 870, 420 500 C 760 420, 1220 390, 1680 440 C 1640 700, 1585 950, 1510 1140 C 1530 1510, 1545 1860, 1540 2250 C 1450 2680, 1365 3070, 1295 3420"></path>
@@ -3294,7 +3290,7 @@ button, .pill {
 <div class="lightbox" id="lightbox" onclick="if(event.target.id==='lightbox')closeLightbox()" ontouchstart="lbTouchStart(event)" ontouchend="lbTouchEnd(event)">
   <button class="lb-close" onclick="closeLightbox()">關閉</button>
   <button class="lb-nav lb-prev" onclick="moveLightbox(-1);event.stopPropagation()">‹</button>
-  <img id="lbImg" alt="放大照片" loading="lazy" decoding="async" fetchpriority="low">
+  <img id="lbImg" alt="放大照片">
   <button class="lb-nav lb-next" onclick="moveLightbox(1);event.stopPropagation()">›</button>
   <div class="lb-caption" id="lbCaption"></div>
 </div>
@@ -3306,10 +3302,9 @@ let lyricsEnabled=true;
 let lastLyricIndex=-1;
 let lastAudioTime=0;
 const ROOT_LYRIC_FILES={
-  // 正式檔放在 assets/lyrics；根目錄同層檔保留為第二順位備援。
-  lrc:['assets/lyrics/給安格.lrc','./給安格.lrc'],
-  srt:['assets/lyrics/給安格.srt','./給安格.srt'],
-  embedded:['assets/lyrics/lyrics_embedded.js.txt','./lyrics_embedded.js.txt']
+  lrc:'./給安格.lrc',
+  srt:'./給安格.srt',
+  embedded:'./lyrics_embedded.js.txt'
 };
 function parseTimeToSeconds(s){
   if(!s)return 0;
@@ -3351,39 +3346,25 @@ async function fetchTextFile(url){
   return await r.text();
 }
 async function loadLyricsFromRootFiles(){
-  async function tryFiles(files, parser, label){
-    for(const url of files){
-      try{
-        const raw=await fetchTextFile(url);
-        const parsed=parser(raw);
-        if(parsed && parsed.length){
-          LYRIC_LINES=parsed;
-          return label+'｜'+url;
-        }
-      }catch(e){}
+  // 你的歌詞檔就在 DearANG 根目錄，不搬家、不改名：給安格.lrc / 給安格.srt / lyrics_embedded.js.txt
+  try{
+    const lrc=await fetchTextFile(ROOT_LYRIC_FILES.lrc);
+    const parsed=parseLrc(lrc);
+    if(parsed.length){LYRIC_LINES=parsed;return '給安格.lrc';}
+  }catch(e){}
+  try{
+    const srt=await fetchTextFile(ROOT_LYRIC_FILES.srt);
+    const parsed=parseSrt(srt);
+    if(parsed.length){LYRIC_LINES=parsed;return '給安格.srt';}
+  }catch(e){}
+  try{
+    const txt=await fetchTextFile(ROOT_LYRIC_FILES.embedded);
+    const m=txt.match(/LYRIC_LINES\s*=\s*(\[[\s\S]*?\]);/);
+    if(m){
+      const parsed=Function('return '+m[1])();
+      if(Array.isArray(parsed)&&parsed.length){LYRIC_LINES=parsed;return 'lyrics_embedded.js.txt';}
     }
-    return '';
-  }
-
-  const lrcSource=await tryFiles(ROOT_LYRIC_FILES.lrc,parseLrc,'LRC');
-  if(lrcSource)return lrcSource;
-
-  const srtSource=await tryFiles(ROOT_LYRIC_FILES.srt,parseSrt,'SRT');
-  if(srtSource)return srtSource;
-
-  for(const url of ROOT_LYRIC_FILES.embedded){
-    try{
-      const txt=await fetchTextFile(url);
-      const m=txt.match(/LYRIC_LINES\s*=\s*(\[[\s\S]*?\]);/);
-      if(m){
-        const parsed=Function('return '+m[1])();
-        if(Array.isArray(parsed)&&parsed.length){
-          LYRIC_LINES=parsed;
-          return '內嵌歌詞｜'+url;
-        }
-      }
-    }catch(e){}
-  }
+  }catch(e){}
   return 'index.html 內建備援歌詞';
 }
 
@@ -3597,7 +3578,7 @@ function renderOpeningPhotoDraw(){
     if(p){
       const sources=driveImageCandidates(p);
       sources.slice(0,2).forEach(preloadImage);
-      html+=`<div class="opening-photo-slot" data-no="${String(i+1).padStart(2,'0')}"><img ${imgAttrs(p,`alt="個人照 ${i+1}"`)} loading="lazy" decoding="async" fetchpriority="low"></div>`;
+      html+=`<div class="opening-photo-slot" data-no="${String(i+1).padStart(2,'0')}"><img ${imgAttrs(p,`alt="個人照 ${i+1}"`)}></div>`;
     }else{
       html+=`<div class="opening-photo-slot" data-no="${String(i+1).padStart(2,'0')}"><div class="opening-photo-placeholder">等待<br>個人照</div></div>`;
     }
@@ -3608,9 +3589,10 @@ function primeThemeBeforeCountdown(){
   const a=document.getElementById('themeAudio');
   if(!a)return;
   setupLyricDanmaku();
-  if(!a.getAttribute('src')){
-    const deferred=a.getAttribute('data-src') || CONFIG.LOCAL_THEME || CONFIG.GITHUB_THEME_AUDIO || (DATA.theme&&DATA.theme.streamUrl) || '';
-    if(deferred){a.src=deferred;try{a.load();}catch(e){}}
+  if(!a.src){
+    if(CONFIG.LOCAL_THEME)a.src=CONFIG.LOCAL_THEME;
+    else if(CONFIG.GITHUB_THEME_AUDIO)a.src=CONFIG.GITHUB_THEME_AUDIO;
+    else if(DATA.theme&&DATA.theme.streamUrl)a.src=DATA.theme.streamUrl;
   }
   try{
     const oldVol=a.volume || 1;
@@ -4231,7 +4213,7 @@ function setupAlbumRitualLock(){
   });
 }
 
-window.addEventListener('load',()=>{centerWorld();setupExperienceLayer();setupPersonNameHotspots();renderMiniWeatherButtons();setupLyricDanmaku();bindOpeningSkipButton();restoreEnteredViewIfNeeded();if(typeof window.__DEAR_ANG_BOOT_CRITICAL_QUEUE__==='function')window.__DEAR_ANG_BOOT_CRITICAL_QUEUE__();});
+window.addEventListener('load',()=>{centerWorld();setupExperienceLayer();setupPersonNameHotspots();setupMiniFrameVideo();preloadStaticAssets();renderMiniWeatherButtons();setMemoryWeather(memoryWeatherKey);loadLyricsFromRootFiles().finally(()=>setupLyricDanmaku());loadData();setupWeather();renderFood();renderMaps();setupAlbumRitualLock();bindOpeningSkipButton();restoreEnteredViewIfNeeded();});
 function enterWorld(){
   const gate=document.getElementById('gate');
   if(gate){gate.classList.remove('hidden');gate.classList.add('out');}
@@ -4239,7 +4221,6 @@ function enterWorld(){
 }
 function centerWorld(){const sc=document.getElementById('scroller');setTimeout(()=>{sc.scrollLeft=(sc.scrollWidth-sc.clientWidth)/2;},60)}
 function openPage(id){
-  if(typeof window.__DEAR_ANG_LOAD_NON_CRITICAL_NOW__==='function')window.__DEAR_ANG_LOAD_NON_CRITICAL_NOW__();
   playUiSound('open');
   if(typeof sendPrivateVisitLog==='function')sendPrivateVisitLog('page_'+id);
   const page=document.getElementById('page-'+id);
@@ -4408,7 +4389,7 @@ function driveImageCandidates(p){
 function imgAttrs(p,extra){
   const sources=driveImageCandidates(p);
   const first=sources[0]||'';
-  return `src="${esc(first)}" loading="lazy" decoding="async" fetchpriority="low" data-img-index="0" data-img-sources='${attr(JSON.stringify(sources))}' onerror="nextImageSource(this)" ${extra||''}`;
+  return `src="${esc(first)}" data-img-index="0" data-img-sources='${attr(JSON.stringify(sources))}' onerror="nextImageSource(this)" ${extra||''}`;
 }
 function nextImageSource(img){
   try{
@@ -4428,14 +4409,14 @@ function albumCarouselHtml(folders,area){
       const items=(f.items||[]).slice(0,240);
       ALBUM_STORE[albumId]={label:f.label||'相簿',path:f.path||'',items:items,index:0};
       const cover=items[0]||{};
-      const thumbs=items.slice(0,18).map((p,ti)=>`<button class="album-thumb ${ti===0?'active':''}" id="thumb-${albumId}-${ti}" onclick="setAlbumPhoto('${albumId}',${ti});event.stopPropagation()"><img ${imgAttrs(p)} loading="lazy" decoding="async" fetchpriority="low"></button>`).join('');
+      const thumbs=items.slice(0,18).map((p,ti)=>`<button class="album-thumb ${ti===0?'active':''}" id="thumb-${albumId}-${ti}" onclick="setAlbumPhoto('${albumId}',${ti});event.stopPropagation()"><img ${imgAttrs(p)}></button>`).join('');
       return `<article class="album-card" data-album-id="${esc(albumId)}" ontouchstart="albumTouchStart(event)" ontouchend="albumTouchEnd(event)">
-        <div class="album-cover" onclick="expandAlbum('${albumId}')"><img ${imgAttrs(cover)} loading="lazy" decoding="async" fetchpriority="low"><div class="album-cover-text"><b>${esc(f.label||'相簿')}</b><small>${items.length} 張照片｜往上滑展開</small></div></div>
+        <div class="album-cover" onclick="expandAlbum('${albumId}')"><img ${imgAttrs(cover)}><div class="album-cover-text"><b>${esc(f.label||'相簿')}</b><small>${items.length} 張照片｜往上滑展開</small></div></div>
         <div class="album-summary"><div class="album-path">${esc(f.path||'主資料夾')}</div><div class="album-ritual-hint">往下滑收合後，才能左右滑到下一本</div></div>
         <div class="album-detail">
           <div class="album-slide">
             <button class="album-slide-btn prev" onclick="nextAlbumPhoto('${albumId}',-1);event.stopPropagation()">‹</button>
-            <img id="album-img-${albumId}" ${imgAttrs(cover)} onclick="openCurrentAlbumPhoto('${albumId}')" loading="lazy" decoding="async" fetchpriority="low">
+            <img id="album-img-${albumId}" ${imgAttrs(cover)} onclick="openCurrentAlbumPhoto('${albumId}')">
             <button class="album-slide-btn next" onclick="nextAlbumPhoto('${albumId}',1);event.stopPropagation()">›</button>
             <div class="album-counter"><span id="album-name-${albumId}">${esc(cover.name||'')}</span><span id="album-count-${albumId}">1 / ${items.length}</span></div>
           </div>
@@ -4750,29 +4731,6 @@ function refreshDataNoReload(){
     if(btn){btn.classList.remove('refreshing');btn.disabled=false;}
   });
 }
-function returnMiniWorldToGate(){
-  const gate=document.getElementById('gate');
-  const overlay=document.getElementById('openingCountdown');
-  const mini=document.getElementById('miniWorld');
-  const world=document.getElementById('world');
-  const opening=document.getElementById('openingCountdownVideo');
-  const miniVideo=document.getElementById('miniFrameVideo');
-  const theme=document.getElementById('themeAudio');
-
-  if(mini)mini.classList.add('hidden');
-  if(world)world.classList.add('hidden','hint-muted');
-  if(overlay)overlay.classList.remove('show','done');
-  if(gate)gate.classList.remove('out','hidden');
-
-  window.__DEAR_ANG_ALLOW_MINI_FRAME_PLAY__=false;
-  try{if(miniVideo)miniVideo.pause();}catch(e){}
-  try{if(opening){opening.pause();opening.currentTime=0;}}catch(e){}
-  try{if(theme){theme.pause();theme.currentTime=0;}}catch(e){}
-  try{musicWanted=false;}catch(e){}
-  try{openingCountdownActive=false;openingCountdownFinishing=false;}catch(e){}
-  try{clearLyricLayer();lastLyricIndex=-1;lastAudioTime=0;}catch(e){}
-  toast('回到開始頁');
-}
 function smartBack(){
   const lb=document.getElementById('lightbox');
   if(lb&&lb.classList.contains('show')){closeLightbox();return;}
@@ -4780,29 +4738,15 @@ function smartBack(){
   if(visitor&&!visitor.classList.contains('hidden')){visitor.classList.add('hidden');return;}
   const openPages=[...document.querySelectorAll('.page.show')];
   if(openPages.length){closePage();return;}
-
-  const gate=document.getElementById('gate');
   const mini=document.getElementById('miniWorld');
-  const miniIsVisible=!!(mini&&!mini.classList.contains('hidden'));
-  const gateIsVisible=!!(gate&&!gate.classList.contains('hidden')&&!gate.classList.contains('out'));
-
-  // v75：Mini World 的返回只回 Gate，不直接重播 Opening。
-  if(miniIsVisible){returnMiniWorldToGate();return;}
-
-  // 主街返回上一層仍然回 Mini World。
-  if(!gateIsVisible){showMiniWorld();toast('回到小世界');return;}
-
-  // 已在 Gate，不做任何自動播放。
-  toast('已在開始頁');
+  if(mini&&mini.classList.contains('hidden')){showMiniWorld();toast('回到小世界');return;}
+  toast('重播開場');
+  startOpeningMemoryCountdown();
 }
 function playLetterAudio(){
   const a=document.getElementById('letterAudio');
   const play=document.querySelector('.radio-audio-play');
   if(!a){toast('音檔播放器尚未建立',1);return;}
-  if(!a.getAttribute('src')){
-    const deferred=a.getAttribute('data-src')||'assets/audio/aming-message.mp3';
-    if(deferred){a.src=deferred;try{a.load();}catch(e){}}
-  }
   if(!a.getAttribute('src')){toast('請先放入 assets/audio/aming-message.mp3',1);return;}
   a.play().then(()=>{if(play)play.classList.add('playing');}).catch(()=>toast('音檔尚未放入或被瀏覽器擋住',1));
 }
@@ -5551,11 +5495,11 @@ function compactMiniWeatherText(){
       btn.dataset.gondolaColor=color;
       btn.classList.add('gondola-img-mode','gondola-'+colorClass);
       btn.innerHTML=
-        '<img class="gondola-img gondola-base" src="'+file(color,'without_door.png')+'" alt="'+esc(title)+' 車廂本體" loading="lazy" decoding="async" fetchpriority="low">'+
-        '<img class="gondola-img gondola-door close left" src="'+file(color,'close_left_door.png')+'" alt="" loading="lazy" decoding="async" fetchpriority="low">'+
-        '<img class="gondola-img gondola-door close right" src="'+file(color,'close_right_door.png')+'" alt="" loading="lazy" decoding="async" fetchpriority="low">'+
-        '<img class="gondola-img gondola-door open left" src="'+file(color,'open_left_door.png')+'" alt="" loading="lazy" decoding="async" fetchpriority="low">'+
-        '<img class="gondola-img gondola-door open right" src="'+file(color,'open_right_door.png')+'" alt="" loading="lazy" decoding="async" fetchpriority="low">'+
+        '<img class="gondola-img gondola-base" src="'+file(color,'without_door.png')+'" alt="'+esc(title)+' 車廂本體">'+
+        '<img class="gondola-img gondola-door close left" src="'+file(color,'close_left_door.png')+'" alt="">'+
+        '<img class="gondola-img gondola-door close right" src="'+file(color,'close_right_door.png')+'" alt="">'+
+        '<img class="gondola-img gondola-door open left" src="'+file(color,'open_left_door.png')+'" alt="">'+
+        '<img class="gondola-img gondola-door open right" src="'+file(color,'open_right_door.png')+'" alt="">'+
         '<span class="gondola-title">'+esc(title)+'</span>'+
         '<span class="gondola-hotspot-note">點開相片</span>';
     });
@@ -5827,9 +5771,9 @@ function compactMiniWeatherText(){
       btn.dataset.gondolaColor=color;
       btn.dataset.gondolaSkinned='v65';
       btn.innerHTML=
-        '<img class="gondola-img gondola-base" src="'+url(color,'without_door.png')+'" alt="'+esc(title)+' 車廂本體" loading="lazy" decoding="async" fetchpriority="low">'+
-        '<img class="gondola-img gondola-door-single close" src="'+url(color,'close_door.png')+'" alt="'+esc(title)+' 關門" loading="lazy" decoding="async" fetchpriority="low">'+
-        '<img class="gondola-img gondola-door-single open" src="'+url(color,'open_door.png')+'" alt="'+esc(title)+' 開門" loading="lazy" decoding="async" fetchpriority="low">'+
+        '<img class="gondola-img gondola-base" src="'+url(color,'without_door.png')+'" alt="'+esc(title)+' 車廂本體">'+
+        '<img class="gondola-img gondola-door-single close" src="'+url(color,'close_door.png')+'" alt="'+esc(title)+' 關門">'+
+        '<img class="gondola-img gondola-door-single open" src="'+url(color,'open_door.png')+'" alt="'+esc(title)+' 開門">'+
         '<span class="gondola-title">'+esc(title)+'</span>'+
         '<span class="gondola-hotspot-note">點開相片</span>';
 
@@ -5976,7 +5920,7 @@ function compactMiniWeatherText(){
   };
 
   function boot(){
-    // v74：Gate 階段不抓 Mini World；由 critical preload queue 接手。
+    setMiniFrameVideoByWeather(currentMiniWeatherKey());
   }
 
   if(document.readyState==='loading'){
@@ -6071,7 +6015,7 @@ function compactMiniWeatherText(){
   };
 
   function boot(){
-    // v74：Gate 階段不抓 Mini World；由 critical preload queue 接手。
+    window.setMiniFrameVideoByWeatherReal(getWeatherKey());
   }
   if(document.readyState==='loading'){
     document.addEventListener('DOMContentLoaded',()=>setTimeout(boot,120));
@@ -6106,16 +6050,10 @@ function compactMiniWeatherText(){
     urls.add(location.href.split('#')[0]);
 
     [
-      // 1. 開場影片最優先
-      'assets/videos/opening-countdown.mp4',
-      // 2. 開場可播放後需要的主題曲與歌詞
       'assets/audio/dear-ang-theme.mp3',
-      'assets/lyrics/給安格.lrc',
-      'assets/lyrics/給安格.srt',
-      'assets/lyrics/lyrics_embedded.js.txt',
-      // 3. Mini World 與其他素材
-      'assets/videos/mini-frame.mp4',
       'assets/audio/aming-message.mp3',
+      'assets/videos/opening-countdown.mp4',
+      'assets/videos/mini-frame.mp4',
       'assets/videos/weather-mini/01-night-rain.mp4',
       'assets/videos/weather-mini/02-deep-night-rain.mp4',
       'assets/videos/weather-mini/03-cloudy.mp4',
@@ -6133,9 +6071,9 @@ function compactMiniWeatherText(){
       'assets/images/ktv-remote.webp',
       'assets/images/weather/day-sunny.webp',
       'treasure_map_bg.webp',
-      './給安格.lrc',
-      './給安格.srt',
-      './lyrics_embedded.js.txt'
+      '給安格.lrc',
+      '給安格.srt',
+      'lyrics_embedded.js.txt'
     ].forEach(u=>urls.add(absUrl(u)));
 
     document.querySelectorAll('img[src],video[src],audio[src],source[src],iframe[src]').forEach(el=>{
@@ -6256,12 +6194,9 @@ function compactMiniWeatherText(){
       video.muted=true;
       video.loop=true;
       video.setAttribute('playsinline','');
-      video.preload='auto';
       video.load();
-      if(window.__DEAR_ANG_ALLOW_MINI_FRAME_PLAY__){
-        var p=video.play();
-        if(p&&p.catch)p.catch(function(){});
-      }
+      var p=video.play();
+      if(p&&p.catch)p.catch(function(){});
     }catch(e){
       console.warn('[DearANG] default frame weather video failed:',e);
     }
@@ -6305,9 +6240,15 @@ function compactMiniWeatherText(){
     }
   };
 
-  // v74：預設天氣影片延後到 Opening 已可播放後再抓。
+  window.applyDefaultWeatherBeforeReady('early');
 
-  // v74：DOMContentLoaded 不再搶抓 Mini World 素材。
+  if(document.readyState==='loading'){
+    document.addEventListener('DOMContentLoaded',function(){
+      window.applyDefaultWeatherBeforeReady('dom-ready');
+    },{once:true});
+  }else{
+    setTimeout(function(){window.applyDefaultWeatherBeforeReady('dom-ready');},0);
+  }
 
   var oldShowMiniWorld=window.showMiniWorld;
   if(typeof oldShowMiniWorld==='function' && !oldShowMiniWorld.__weatherDefaultWrapped){
@@ -6404,7 +6345,7 @@ function compactMiniWeatherText(){
       v.loop=true;
       v.playsInline=true;
       v.setAttribute('playsinline','');
-      v.preload=(canPlayMiniFrame()||window.__DEAR_ANG_PRELOAD_MINI_FRAME__)?'auto':'none';
+      v.preload=canPlayMiniFrame()?'auto':'metadata';
     }catch(e){}
   }
   function playMiniVideoIfAllowed(v){
@@ -6424,11 +6365,6 @@ function compactMiniWeatherText(){
   window.setMiniFrameVideoByWeatherReal=function(key){
     const v=document.getElementById('miniFrameVideo');
     if(!v)return;
-    // v75：舊版 DOMContentLoaded/load 監聽器可能會提早呼叫；Stage 2 前禁止設定 src/load。
-    if(!canPlayMiniFrame() && !window.__DEAR_ANG_PRELOAD_MINI_FRAME__){
-      try{v.pause();v.preload='none';}catch(e){}
-      return;
-    }
     key=normalizeMiniKey(key||currentMiniKey());
     const src=MINI_REAL[key]||MINI_REAL.sunny;
     prepareMiniVideo(v);
@@ -6447,7 +6383,6 @@ function compactMiniWeatherText(){
   };
 
   window.setupMiniFrameVideo=function(){
-    if(!canPlayMiniFrame() && !window.__DEAR_ANG_PRELOAD_MINI_FRAME__)return;
     window.setMiniFrameVideoByWeatherReal(currentMiniKey());
   };
   try{setupMiniFrameVideo=window.setupMiniFrameVideo;}catch(e){}
@@ -6508,7 +6443,7 @@ function compactMiniWeatherText(){
     if(mini)mini.classList.add('hidden');
     window.__DEAR_ANG_ALLOW_MINI_FRAME_PLAY__=false;
     const mv=document.getElementById('miniFrameVideo');
-    if(mv){try{mv.pause();mv.preload=window.__DEAR_ANG_PRELOAD_MINI_FRAME__?'auto':'none';}catch(e){}}
+    if(mv){try{mv.pause();mv.preload='metadata';}catch(e){}}
   }
   window.restoreEnteredViewIfNeeded=resetToGate;
   try{restoreEnteredViewIfNeeded=window.restoreEnteredViewIfNeeded;}catch(e){}
@@ -6520,7 +6455,7 @@ function compactMiniWeatherText(){
     openingCountdownFinishing=false;
     bindOpeningSkipButton();
     playUiSound('open');
-    // v75：Gate 點擊後先讓 Opening 取得播放頻寬；主題曲由關鍵佇列在 Opening ready/playing 後載入。
+    primeThemeBeforeCountdown();
 
     const gate=document.getElementById('gate');
     const overlay=document.getElementById('openingCountdown');
@@ -6676,339 +6611,4 @@ function compactMiniWeatherText(){
   }
 })();
 </script>
-
-<script>
-/* ===== v74 critical preload queue：Gate 只搶 Opening；Opening ready 後才抓音樂、歌詞、天氣與 Mini Frame ===== */
-(function(){
-  if(window.__DEAR_ANG_V74_CRITICAL_QUEUE__)return;
-  window.__DEAR_ANG_V74_CRITICAL_QUEUE__=true;
-
-  const OPENING_SRC='assets/videos/opening-countdown.mp4';
-  const THEME_SRC='assets/audio/dear-ang-theme.mp3';
-  const DEFAULT_DAY='sunny';
-  const DEFAULT_NIGHT='night';
-  let stage2Started=false;
-  let nonCriticalStarted=false;
-  let openingReady=false;
-
-  function isNight(){const h=new Date().getHours();return h<6||h>=18;}
-  function fallbackKey(){return isNight()?DEFAULT_NIGHT:DEFAULT_DAY;}
-  function byId(id){return document.getElementById(id);}
-
-  function setStatus(msg){
-    const el=byId('assetPreloadStatus');
-    if(!el)return;
-    el.textContent=msg;
-    el.classList.add('show');
-    clearTimeout(setStatus._t);
-    setStatus._t=setTimeout(()=>el.classList.remove('show'),1100);
-  }
-
-  function openingBufferedEnough(video){
-    try{
-      if(!video || !Number.isFinite(video.duration) || video.duration<=0 || !video.buffered.length)return false;
-      return video.buffered.end(video.buffered.length-1)>=video.duration-.3;
-    }catch(e){return false;}
-  }
-
-  function ensureThemePreload(){
-    const audio=byId('themeAudio');
-    if(!audio)return Promise.resolve(false);
-    if(!audio.getAttribute('src'))audio.src=audio.getAttribute('data-src')||THEME_SRC;
-    audio.preload='auto';
-    try{audio.load();}catch(e){}
-    return new Promise(resolve=>{
-      if(audio.readyState>=2)return resolve(true);
-      let done=false;
-      const finish=ok=>{if(done)return;done=true;clearTimeout(timer);audio.removeEventListener('canplay',onReady);audio.removeEventListener('error',onError);resolve(ok);};
-      const onReady=()=>finish(true), onError=()=>finish(false);
-      const timer=setTimeout(()=>finish(audio.readyState>=1),7000);
-      audio.addEventListener('canplay',onReady,{once:true});
-      audio.addEventListener('error',onError,{once:true});
-    });
-  }
-
-  function preloadMiniForKey(key){
-    window.__DEAR_ANG_PRELOAD_MINI_FRAME__=true;
-    try{
-      if(typeof window.setMiniFrameVideoByWeatherReal==='function')window.setMiniFrameVideoByWeatherReal(key||fallbackKey());
-    }catch(e){}
-    const v=byId('miniFrameVideo');
-    if(v){
-      try{
-        const poster=v.getAttribute('data-poster');
-        if(poster && !v.getAttribute('poster'))v.setAttribute('poster',poster);
-        v.preload='auto';v.muted=true;v.loop=true;v.pause();v.load();
-      }catch(e){}
-    }
-  }
-
-  function beginStage2(reason){
-    if(stage2Started)return;
-    stage2Started=true;
-    window.__DEAR_ANG_CRITICAL_STAGE2_STARTED__=true;
-    window.__DEAR_ANG_PRELOAD_MINI_FRAME__=true;
-    setStatus('開場已準備，正在載入主題曲、歌詞與 Mini World…');
-
-    // 先放時間備援，確保即時天氣失敗時 Mini World 仍有影片。
-    const firstKey=fallbackKey();
-    try{
-      if(typeof setMemoryWeather==='function')setMemoryWeather(firstKey,null,'critical-fallback');
-      else if(typeof memoryWeatherKey!=='undefined')memoryWeatherKey=firstKey;
-    }catch(e){}
-    preloadMiniForKey(firstKey);
-
-    ensureThemePreload();
-    try{
-      Promise.resolve(loadLyricsFromRootFiles()).finally(()=>setupLyricDanmaku());
-    }catch(e){try{setupLyricDanmaku();}catch(_) {}}
-
-    // 即時天氣與備援並行：有結果就改抓對應影片；失敗時保留上面的日/夜預設。
-    try{
-      Promise.resolve(refreshAutoWeather(false)).finally(()=>{
-        let key=firstKey;
-        try{if(typeof memoryWeatherKey!=='undefined'&&memoryWeatherKey)key=memoryWeatherKey;}catch(e){}
-        preloadMiniForKey(key);
-      });
-    }catch(e){preloadMiniForKey(firstKey);}
-  }
-
-  function bootOpeningOnly(){
-    const video=byId('openingCountdownVideo');
-    if(!video)return;
-    video.preload='auto';
-    video.setAttribute('fetchpriority','high');
-    video.setAttribute('playsinline','');
-    video.setAttribute('webkit-playsinline','');
-    if(!video.getAttribute('src'))video.src=OPENING_SRC;
-
-    const ready=()=>{
-      if(openingReady)return;
-      openingReady=true;
-      window.__DEAR_ANG_OPENING_READY__=true;
-      beginStage2('opening-ready');
-    };
-    const check=()=>{
-      if(video.readyState>=4 || openingBufferedEnough(video))ready();
-    };
-    video.addEventListener('canplaythrough',ready,{once:true});
-    video.addEventListener('progress',check);
-    video.addEventListener('loadedmetadata',check);
-    try{video.load();}catch(e){}
-    check();
-  }
-
-  function loadNonCriticalNow(){
-    if(nonCriticalStarted)return;
-    nonCriticalStarted=true;
-    window.__DEAR_ANG_NON_CRITICAL_STARTED__=true;
-    const run=()=>{
-      try{preloadStaticAssets();}catch(e){}
-      try{renderFood();}catch(e){}
-      try{renderMaps();}catch(e){}
-      try{setupAlbumRitualLock();}catch(e){}
-      try{loadData();}catch(e){}
-    };
-    if('requestIdleCallback' in window)requestIdleCallback(run,{timeout:1800});
-    else setTimeout(run,700);
-  }
-
-  window.__DEAR_ANG_BOOT_CRITICAL_QUEUE__=bootOpeningOnly;
-  window.__DEAR_ANG_LOAD_NON_CRITICAL_NOW__=loadNonCriticalNow;
-
-  // Opening 開始播放後，即使 canplaythrough 沒有觸發，也立刻利用這 10 秒載入第二階段。
-  const oldStart=window.startOpeningMemoryCountdown;
-  window.startOpeningMemoryCountdown=function(){
-    const video=byId('openingCountdownVideo');
-    if(video){video.addEventListener('playing',()=>beginStage2('opening-playing'),{once:true});}
-    const result=typeof oldStart==='function'?oldStart.apply(this,arguments):undefined;
-    if(video && video.readyState>=3)setTimeout(()=>beginStage2('opening-start-ready'),0);
-    return result;
-  };
-  try{startOpeningMemoryCountdown=window.startOpeningMemoryCountdown;}catch(e){}
-
-  const oldFinish=window.finishOpeningMemoryCountdown;
-  window.finishOpeningMemoryCountdown=function(){
-    beginStage2('opening-finish-fallback');
-    return typeof oldFinish==='function'?oldFinish.apply(this,arguments):undefined;
-  };
-  try{finishOpeningMemoryCountdown=window.finishOpeningMemoryCountdown;}catch(e){}
-
-  const oldShow=window.showMiniWorld;
-  window.showMiniWorld=function(){
-    const result=typeof oldShow==='function'?oldShow.apply(this,arguments):undefined;
-    setTimeout(loadNonCriticalNow,650);
-    return result;
-  };
-  try{showMiniWorld=window.showMiniWorld;}catch(e){}
-
-  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',bootOpeningOnly,{once:true});
-  else bootOpeningOnly();
-})();
-</script>
-
-
-
-<script>
-/* ===== v76 strict-view-state-lock：Opening 播放期間 Gate 絕不回彈；Mini 返回只到 Gate ===== */
-(function(){
-  if(window.__DEAR_ANG_V76_VIEW_STATE_LOCK__)return;
-  window.__DEAR_ANG_V76_VIEW_STATE_LOCK__=true;
-
-  var STATE={BOOT:'boot',GATE:'gate',OPENING:'opening',FINISHING:'finishing',MINI:'mini',WORLD:'world'};
-  var currentState=STATE.GATE;
-  var enforcing=false;
-  var enforceQueued=false;
-
-  function byId(id){return document.getElementById(id);}
-  function state(){return window.__DEAR_ANG_VIEW_STATE__||currentState;}
-  function setState(next){
-    currentState=next;
-    window.__DEAR_ANG_VIEW_STATE__=next;
-    try{document.documentElement.setAttribute('data-dearang-view',next);}catch(e){}
-  }
-  function add(el,name){if(el&&!el.classList.contains(name))el.classList.add(name);}
-  function remove(el,name){if(el&&el.classList.contains(name))el.classList.remove(name);}
-
-  var lockStyle=document.createElement('style');
-  lockStyle.id='dearang-v76-state-style';
-  lockStyle.textContent=''
-    +'html[data-dearang-view="gate"] #gate{display:flex!important;opacity:1!important;pointer-events:auto!important;transform:none!important}'
-    +'html[data-dearang-view="gate"] #openingCountdown,html[data-dearang-view="gate"] #miniWorld{display:none!important}'
-    +'html[data-dearang-view="opening"] #gate,html[data-dearang-view="finishing"] #gate,html[data-dearang-view="mini"] #gate,html[data-dearang-view="world"] #gate{display:none!important;opacity:0!important;pointer-events:none!important}'
-    +'html[data-dearang-view="opening"] #openingCountdown{display:flex!important;opacity:1!important;pointer-events:auto!important}'
-    +'html[data-dearang-view="mini"] #openingCountdown,html[data-dearang-view="world"] #openingCountdown{display:none!important;pointer-events:none!important}'
-    +'html[data-dearang-view="mini"] #miniWorld{display:block!important}';
-  document.head.appendChild(lockStyle);
-
-  function enforceNow(){
-    if(enforcing)return;
-    enforcing=true;
-    try{
-      var s=state();
-      var gate=byId('gate');
-      var overlay=byId('openingCountdown');
-      var mini=byId('miniWorld');
-      var world=byId('world');
-
-      if(s===STATE.GATE){
-        remove(gate,'out');remove(gate,'hidden');
-        remove(overlay,'show');remove(overlay,'done');
-        add(mini,'hidden');remove(mini,'zooming');
-        add(world,'hidden');add(world,'hint-muted');
-      }else if(s===STATE.OPENING){
-        add(gate,'out');add(gate,'hidden');
-        remove(overlay,'done');add(overlay,'show');
-        add(mini,'hidden');remove(mini,'zooming');
-        add(world,'hidden');add(world,'hint-muted');
-      }else if(s===STATE.FINISHING){
-        add(gate,'out');add(gate,'hidden');
-        add(mini,'hidden');
-      }else if(s===STATE.MINI){
-        add(gate,'out');add(gate,'hidden');
-        remove(overlay,'show');remove(overlay,'done');
-        remove(mini,'hidden');remove(mini,'zooming');
-        remove(world,'hidden');
-      }else if(s===STATE.WORLD){
-        add(gate,'out');add(gate,'hidden');
-        remove(overlay,'show');remove(overlay,'done');
-        remove(world,'hidden');remove(world,'hint-muted');
-      }
-    }catch(e){}
-    enforcing=false;
-  }
-  function queueEnforce(){
-    if(enforceQueued)return;
-    enforceQueued=true;
-    Promise.resolve().then(function(){enforceQueued=false;enforceNow();});
-  }
-
-  setState(STATE.GATE);
-  enforceNow();
-
-  var oldRestore=window.restoreEnteredViewIfNeeded;
-  window.restoreEnteredViewIfNeeded=function(){
-    var s=state();
-    if(s===STATE.OPENING||s===STATE.FINISHING||s===STATE.MINI||s===STATE.WORLD){
-      queueEnforce();
-      return false;
-    }
-    setState(STATE.GATE);
-    var result=typeof oldRestore==='function'?oldRestore.apply(this,arguments):undefined;
-    enforceNow();
-    return result;
-  };
-  try{restoreEnteredViewIfNeeded=window.restoreEnteredViewIfNeeded;}catch(e){}
-
-  var oldStart=window.startOpeningMemoryCountdown;
-  window.startOpeningMemoryCountdown=function(){
-    if(state()===STATE.OPENING||state()===STATE.FINISHING)return;
-    setState(STATE.OPENING);
-    enforceNow();
-    var result;
-    try{result=typeof oldStart==='function'?oldStart.apply(this,arguments):undefined;}
-    finally{enforceNow();}
-    return result;
-  };
-  try{startOpeningMemoryCountdown=window.startOpeningMemoryCountdown;}catch(e){}
-
-  var oldFinish=window.finishOpeningMemoryCountdown;
-  window.finishOpeningMemoryCountdown=function(){
-    var s=state();
-    var overlay=byId('openingCountdown');
-    if(s!==STATE.OPENING&&s!==STATE.FINISHING&&!(overlay&&overlay.classList.contains('show')))return;
-    setState(STATE.FINISHING);
-    enforceNow();
-    var result=typeof oldFinish==='function'?oldFinish.apply(this,arguments):undefined;
-    setTimeout(function(){
-      if(state()===STATE.FINISHING){setState(STATE.MINI);enforceNow();}
-    },260);
-    return result;
-  };
-  try{finishOpeningMemoryCountdown=window.finishOpeningMemoryCountdown;}catch(e){}
-
-  var oldShowMini=window.showMiniWorld;
-  window.showMiniWorld=function(){
-    // Gate 狀態下，不接受任何延遲初始化偷偷把 Mini World 打開。
-    if(state()===STATE.GATE)return false;
-    var result=typeof oldShowMini==='function'?oldShowMini.apply(this,arguments):undefined;
-    setState(STATE.MINI);
-    enforceNow();
-    return result;
-  };
-  try{showMiniWorld=window.showMiniWorld;}catch(e){}
-
-  var oldEnterMain=window.enterMainWorld;
-  window.enterMainWorld=function(){
-    if(state()!==STATE.MINI)return false;
-    setState(STATE.WORLD);
-    var result=typeof oldEnterMain==='function'?oldEnterMain.apply(this,arguments):undefined;
-    queueEnforce();
-    return result;
-  };
-  try{enterMainWorld=window.enterMainWorld;}catch(e){}
-
-  var oldReturnGate=window.returnMiniWorldToGate;
-  window.returnMiniWorldToGate=function(){
-    setState(STATE.GATE);
-    var result=typeof oldReturnGate==='function'?oldReturnGate.apply(this,arguments):undefined;
-    enforceNow();
-    return result;
-  };
-  try{returnMiniWorldToGate=window.returnMiniWorldToGate;}catch(e){}
-
-  // 監看舊版程式對 class 的延遲修改；Opening 期間即使舊 load 初始化執行，也不會閃回 Gate。
-  try{
-    var observer=new MutationObserver(function(){queueEnforce();});
-    ['gate','openingCountdown','miniWorld','world'].forEach(function(id){
-      var el=byId(id);if(el)observer.observe(el,{attributes:true,attributeFilter:['class','style']});
-    });
-  }catch(e){}
-
-  document.addEventListener('DOMContentLoaded',queueEnforce,{once:true});
-  window.addEventListener('load',function(){setTimeout(queueEnforce,0);},{once:true});
-  window.addEventListener('pageshow',queueEnforce);
-})();
-</script>
-
 </body></html>
