@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 <html lang="zh-Hant"><head>
 <meta charset="UTF-8">
+<script id="dearang-first-lock-boot">
+document.documentElement.classList.add("dearang-first-lock-pending");
+setTimeout(function(){
+  document.documentElement.classList.remove("dearang-first-lock-pending");
+},12000);
+</script>
 <!-- DearANG GitHub Pages safe deploy build 20260707 -->
 <base href="./">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
@@ -13,6 +19,7 @@
 
 <!-- DearANG focused fix: lyrics binding/path + mini-frame weather video 20260706 -->
 <!-- DearANG smart-lock strict flow corrected 20260706 -->
+<!-- DearANG split smart-lock flow: first code → Gate → second code → Opening 20260707 -->
 <title>摯愛｜Dear ANG </title>
 <style>
 :root{
@@ -6592,6 +6599,11 @@ function openTreasureMapFromStreet(event){
 </script>
 
 <style id="dearang-smart-lock-style">
+html.dearang-first-lock-pending #gate{
+  visibility:hidden!important;
+  pointer-events:none!important;
+}
+
 html.dearang-before-mini #miniWorld,
 html.dearang-before-mini #world,
 html.dearang-before-mini #lyricDanmakuLayer{
@@ -7086,14 +7098,14 @@ html.dearang-before-mini #angSmartLockGate{
         if(color)key.classList.add(color);
       }
 
-      await wait(260);
+      await wait(95);
 
       if(key){
         key.classList.remove('active');
         if(!color)key.classList.remove('green','blue');
       }
 
-      await wait(70);
+      await wait(25);
     }
   }
 
@@ -7367,8 +7379,35 @@ html.dearang-before-mini #angSmartLockGate{
     startOpeningPlayback();
   }
 
-  async function runSmartLock(){
-    if(running)return;
+  var firstLockFinished=false;
+
+  function showLockOverlay(){
+    if(!overlay)return;
+
+    overlay.classList.remove('leaving');
+    overlay.classList.add('show');
+    overlay.setAttribute('aria-hidden','false');
+
+    requestAnimationFrame(function(){
+      requestAnimationFrame(function(){
+        overlay.classList.add('visible');
+      });
+    });
+  }
+
+  async function hideLockOverlay(){
+    if(!overlay)return;
+
+    overlay.classList.add('leaving');
+    await wait(280);
+
+    overlay.classList.remove('show','visible','leaving');
+    overlay.setAttribute('aria-hidden','true');
+  }
+
+  async function runFirstLockThenGate(){
+    if(running||firstLockFinished)return;
+
     running=true;
     openingFinished=false;
     openingStarted=false;
@@ -7378,52 +7417,102 @@ html.dearang-before-mini #angSmartLockGate{
     pauseEverythingExceptOpening();
     prepareOnlyOpeningVideo();
 
-    if(overlay){
-      overlay.classList.add('show');
-      overlay.setAttribute('aria-hidden','false');
+    clearKeys();
 
-      requestAnimationFrame(function(){
-        requestAnimationFrame(function(){
-          overlay.classList.add('visible');
-        });
-      });
+    if(device){
+      device.classList.remove(
+        'state-green',
+        'state-blue',
+        'angle-45',
+        'angle-90'
+      );
     }
 
-    clearKeys();
-    if(device)device.classList.remove('state-green','state-blue','angle-45','angle-90');
     if(unlockIcon)unlockIcon.classList.remove('show');
 
-    setStatus('正在驗證第一道記憶');
-    await wait(420);
+    showLockOverlay();
+
+    setStatus('第一組密碼');
+    await wait(160);
 
     await flashCode(FIRST_CODE,'');
 
     colorAll('green');
-    if(device)device.classList.add('state-green');
-    setStatus('第一道記憶通過','green');
 
-    await wait(520);
+    if(device)device.classList.add('state-green');
+
+    setStatus('第一道記憶通過','green');
+    await wait(210);
 
     if(device)device.classList.add('angle-45');
-    setStatus('門把轉至 45°','green');
 
-    await wait(1300);
+    setStatus('門把轉至 45°','green');
+    await wait(540);
+
+    await hideLockOverlay();
+
+    firstLockFinished=true;
+    running=false;
+    S.phase='gate';
+
+    document.documentElement.classList.remove(
+      'dearang-first-lock-pending'
+    );
+
+    var gate=document.getElementById('gate');
+
+    if(gate){
+      gate.classList.remove('hidden','out');
+      gate.style.visibility='';
+      gate.style.pointerEvents='';
+    }
+  }
+
+  async function runSecondLockThenOpening(){
+    if(running)return;
+
+    if(!firstLockFinished){
+      await runFirstLockThenGate();
+      return;
+    }
+
+    running=true;
+    S.phase='lock';
+
+    pauseEverythingExceptOpening();
+    prepareOnlyOpeningVideo();
+
+    var gate=document.getElementById('gate');
+    if(gate)gate.classList.add('out');
+
+    showLockOverlay();
 
     clearKeys();
+    colorAll('green');
+
+    if(device){
+      device.classList.remove('state-blue','angle-90');
+      device.classList.add('state-green','angle-45');
+    }
+
+    if(unlockIcon)unlockIcon.classList.remove('show');
+
+    setStatus('第二組密碼','blue');
+    await wait(220);
+
+    clearKeys();
+
     if(device){
       device.classList.remove('state-green');
       device.classList.add('state-blue');
     }
-
-    setStatus('正在驗證第二道記憶','blue');
-    await wait(400);
 
     await flashCode(SECOND_CODE,'blue');
 
     colorAll('blue');
     setStatus('第二道記憶通過','blue');
 
-    await wait(520);
+    await wait(210);
 
     if(device){
       device.classList.remove('angle-45');
@@ -7431,13 +7520,13 @@ html.dearang-before-mini #angSmartLockGate{
     }
 
     setStatus('門把轉至 90°','blue');
-
-    await wait(1250);
+    await wait(620);
 
     if(unlockIcon)unlockIcon.classList.add('show');
-    setStatus('已解鎖','blue');
 
-    await wait(720);
+    setStatus('已解鎖','blue');
+    await wait(330);
+
     await enterStrictOpening();
   }
 
@@ -7544,17 +7633,28 @@ html.dearang-before-mini #angSmartLockGate{
   }
 
   window.finishOpeningMemoryCountdown=finishStrictOpening;
-  window.startOpeningMemoryCountdown=runSmartLock;
-  window.enterWorld=runSmartLock;
 
   /*
-    同頁重播開場時，也必須重新經過智慧門鎖，
-    不允許主題曲或 Mini World 搶先。
+    原 Gate 的「踏上想你的旅程」按鈕：
+    只播放第二組密碼，完成後才進 Opening。
   */
+  window.startOpeningMemoryCountdown=runSecondLockThenOpening;
+  window.enterWorld=runSecondLockThenOpening;
+
   window.DearAngSmartLockGate={
-    start:runSmartLock,
+    startFirst:runFirstLockThenGate,
+    startSecond:runSecondLockThenOpening,
+    start:runSecondLockThenOpening,
     finishOpening:finishStrictOpening
   };
+
+  /*
+    網頁一打開先播放第一組密碼，
+    第一組完成後才顯示原本 Gate。
+  */
+  setTimeout(function(){
+    runFirstLockThenGate();
+  },80);
 })();
 </script>
 
