@@ -6903,11 +6903,20 @@ function compactMiniWeatherText(){
     try{startTheme();}catch(e){}
     if(overlay){
       overlay.classList.remove('loading','video-ready','playing');
-      overlay.classList.add('done');
-      requestAnimationFrame(function(){overlay.classList.remove('show','done');});
+      overlay.classList.remove('show','done');
+      overlay.style.display='none';
+      overlay.style.opacity='0';
+      overlay.style.pointerEvents='none';
     }
     if(gate)gate.classList.add('out','hidden');
     try{window.showMiniWorld();}catch(e){}
+    var mini=document.getElementById('miniWorld');
+    if(mini){
+      mini.classList.remove('hidden','zooming');
+      mini.style.display='';
+      mini.style.opacity='';
+      mini.style.pointerEvents='';
+    }
     try{openingCountdownActive=false;}catch(e){}
   };
   window.startOpeningMemoryCountdown=function(){
@@ -6915,13 +6924,22 @@ function compactMiniWeatherText(){
     try{openingCountdownActive=true;}catch(e){}
     try{playUiSound('open');primeThemeBeforeCountdown();}catch(e){}
     var gate=document.getElementById('gate'),overlay=document.getElementById('openingCountdown'),video=document.getElementById('openingCountdownVideo');
-    if(overlay){overlay.classList.remove('done','video-ready','playing');overlay.classList.add('show','loading');}
+    if(overlay){
+      overlay.style.display='';
+      overlay.style.opacity='';
+      overlay.style.pointerEvents='';
+      overlay.classList.remove('done','video-ready','playing');
+      overlay.classList.add('show','loading');
+    }
     try{clearTimeout(openingCountdownTimer);openingCountdownTimer=null;}catch(e){}
     if(!video){setTimeout(function(){window.finishOpeningMemoryCountdown();},600);return;}
 
-    var finished=false,started=false,loadTimer=null,safetyTimer=null;
+    var finished=false,started=false,loadTimer=null,safetyTimer=null,hardTimer=null,playHardTimer=null;
+    var OPENING_TOTAL_MAX_MS=18000;
+    var OPENING_PLAY_MAX_MS=15400;
+    var OPENING_MAX_VIDEO_SECONDS=14.9;
     function cleanup(){
-      clearTimeout(loadTimer);clearTimeout(safetyTimer);
+      clearTimeout(loadTimer);clearTimeout(safetyTimer);clearTimeout(hardTimer);clearTimeout(playHardTimer);
       try{clearTimeout(openingCountdownTimer);openingCountdownTimer=null;}catch(e){}
       ['loadeddata','canplay','playing','timeupdate','ended','error'].forEach(function(t){video.removeEventListener(t,handlers[t]);});
       window.__openingV75Cleanup=null;
@@ -6945,11 +6963,15 @@ function compactMiniWeatherText(){
       playing:function(){
         started=true;reveal();if(overlay){overlay.classList.remove('loading');overlay.classList.add('playing');}
         clearTimeout(loadTimer);
-        var dur=Number(video.duration);safetyTimer=setTimeout(finishOnce,isFinite(dur)&&dur>0?Math.min(60000,(dur+5)*1000):45000);
+        clearTimeout(playHardTimer);
+        playHardTimer=setTimeout(finishOnce,OPENING_PLAY_MAX_MS);
+        var dur=Number(video.duration);
+        safetyTimer=setTimeout(finishOnce,isFinite(dur)&&dur>0?Math.min(OPENING_PLAY_MAX_MS,(dur+.35)*1000):OPENING_PLAY_MAX_MS);
       },
       timeupdate:function(){
         var dur=Number(video.duration);
         if(isFinite(dur)&&dur>0&&dur-video.currentTime<=.22)finishOnce();
+        if(Number(video.currentTime)>=OPENING_MAX_VIDEO_SECONDS)finishOnce();
       },
       ended:finishOnce,
       error:finishOnce
@@ -6957,6 +6979,7 @@ function compactMiniWeatherText(){
     Object.keys(handlers).forEach(function(t){video.addEventListener(t,handlers[t]);});
     window.__openingV75Cleanup=cleanup;
     loadTimer=setTimeout(function(){if(!started)finishOnce();},8000);
+    hardTimer=setTimeout(finishOnce,OPENING_TOTAL_MAX_MS);
     try{video.pause();video.currentTime=0;video.src='assets/videos/opening-countdown.mp4';video.load();tryPlay(false);}catch(e){finishOnce();}
   };
 
