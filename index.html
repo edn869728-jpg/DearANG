@@ -1,66 +1,8 @@
 <!DOCTYPE html>
 <html lang="zh-Hant"><head>
-
-<script id="dearang-strict-opening-early">
-(function(){
-  if(window.__DEARANG_STRICT_BOOT__)return;
-
-  var mediaProto=window.HTMLMediaElement&&HTMLMediaElement.prototype;
-  var state=window.__DEARANG_STRICT_BOOT__={
-    phase:'gate',
-    allowBackgroundLoad:false,
-    nativePlay:mediaProto&&mediaProto.play,
-    nativeLoad:mediaProto&&mediaProto.load
-  };
-
-  document.documentElement.classList.add('dearang-before-mini');
-
-  if(!mediaProto)return;
-
-  mediaProto.play=function(){
-    var phase=state.phase||'gate';
-    var opening=this&&this.id==='openingCountdownVideo';
-    var priming=opening&&this.dataset&&this.dataset.smartPrime==='1';
-
-    if((phase==='gate'||phase==='lock')&&!priming){
-      return Promise.resolve();
-    }
-
-    if(phase==='opening'&&!opening){
-      return Promise.resolve();
-    }
-
-    return state.nativePlay.apply(this,arguments);
-  };
-
-  mediaProto.load=function(){
-    var phase=state.phase||'gate';
-    var opening=this&&this.id==='openingCountdownVideo';
-    var allowedBackground=
-      phase==='opening'&&
-      state.allowBackgroundLoad&&
-      this&&
-      (this.id==='themeAudio'||this.id==='miniFrameVideo');
-
-    if((phase==='gate'||phase==='lock')&&!opening){
-      if(this&&this.dataset)this.dataset.strictLoadQueued='1';
-      return;
-    }
-
-    if(phase==='opening'&&!opening&&!allowedBackground){
-      if(this&&this.dataset)this.dataset.strictLoadQueued='1';
-      return;
-    }
-
-    return state.nativeLoad.apply(this,arguments);
-  };
-})();
-</script>
-
-
-
 <meta charset="UTF-8">
-<base href="/DearANG/">
+<!-- DearANG GitHub Pages safe deploy build 20260707 -->
+<base href="./">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 
 
@@ -70,7 +12,7 @@
 
 
 <!-- DearANG focused fix: lyrics binding/path + mini-frame weather video 20260706 -->
-<!-- DearANG smart-lock strict opening corrected 20260706 -->
+<!-- DearANG smart-lock strict flow corrected 20260706 -->
 <title>摯愛｜Dear ANG </title>
 <style>
 :root{
