@@ -1,6 +1,8 @@
+<!DOCTYPE html>
 <html lang="zh-Hant"><head>
 <meta charset="UTF-8">
-<base href="/DearANG/">
+<!-- DearANG GitHub Pages safe deploy build 20260707 -->
+<base href="./">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 
 
@@ -10,6 +12,10 @@
 
 
 <!-- DearANG focused fix: lyrics binding/path + mini-frame weather video 20260706 -->
+<!-- DearANG smart-lock strict flow corrected 20260706 -->
+<!-- DearANG split smart-lock flow: first code → Gate → second code → Opening 20260707 -->
+<!-- DearANG fixed-rate password animation 80ms per key 20260707 -->
+<!-- DearANG balanced password speed 210ms per key 20260707 -->
 <title>摯愛｜Dear ANG </title>
 <style>
 :root{
@@ -3247,25 +3253,131 @@ body[data-dearang-view="street"] #stage .hotspot{
   #page-nav .route-landmark-pop{width:clamp(138px,42vw,210px)!important;}
 }
 </style>
+
+<style id="dearang-route-code-gate-style">
+/* 路口載入頁：只保留路口、跳動數字與底部進度 */
+.route-code-gate{
+  position:fixed!important;
+  inset:0!important;
+  z-index:150!important;
+  display:block!important;
+  padding:0!important;
+  overflow:hidden!important;
+  text-align:initial!important;
+  background:
+    linear-gradient(180deg,rgba(0,0,0,.04),rgba(0,0,0,.14)),
+    url("assets/images/memory-world.webp") center center/cover no-repeat!important;
+  transition:opacity .55s ease,transform .55s ease!important;
+}
+.route-code-gate.out{
+  opacity:0!important;
+  pointer-events:none!important;
+  transform:scale(1.018)!important;
+}
+.route-code-digit{
+  position:absolute;
+  z-index:2;
+  left:50%;
+  top:42%;
+  transform:translate(-50%,-50%) scale(.72);
+  opacity:0;
+  color:#fff7e9;
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  font-size:clamp(52px,12vw,126px);
+  font-weight:900;
+  line-height:1;
+  letter-spacing:.02em;
+  text-shadow:
+    0 0 7px rgba(255,255,255,.98),
+    0 0 22px rgba(255,216,154,.92),
+    0 8px 34px rgba(0,0,0,.82);
+  filter:drop-shadow(0 8px 18px rgba(0,0,0,.42));
+  pointer-events:none;
+  user-select:none;
+}
+.route-code-digit.flash{
+  animation:routeCodeFlash .30s cubic-bezier(.16,.8,.3,1) both;
+}
+@keyframes routeCodeFlash{
+  0%{opacity:0;transform:translate(-50%,-50%) scale(.58);filter:blur(7px) drop-shadow(0 8px 18px rgba(0,0,0,.42))}
+  24%{opacity:1;transform:translate(-50%,-50%) scale(1.08);filter:blur(0) drop-shadow(0 8px 18px rgba(0,0,0,.42))}
+  72%{opacity:1;transform:translate(-50%,-50%) scale(1)}
+  100%{opacity:0;transform:translate(-50%,-50%) scale(.94)}
+}
+.route-code-progress{
+  position:absolute;
+  z-index:4;
+  left:max(18px,env(safe-area-inset-left));
+  right:max(18px,env(safe-area-inset-right));
+  bottom:max(18px,calc(12px + env(safe-area-inset-bottom)));
+  height:4px;
+  overflow:hidden;
+  border-radius:999px;
+  background:rgba(255,255,255,.22);
+  box-shadow:0 2px 14px rgba(0,0,0,.38);
+  pointer-events:none;
+}
+.route-code-progress span{
+  display:block;
+  width:0%;
+  height:100%;
+  border-radius:inherit;
+  background:rgba(255,248,228,.96);
+  box-shadow:0 0 14px rgba(255,216,154,.9);
+  transition:width .28s cubic-bezier(.2,.7,.2,1);
+}
+.route-code-enter{
+  position:absolute;
+  z-index:5;
+  left:50%;
+  bottom:max(42px,calc(38px + env(safe-area-inset-bottom)));
+  transform:translate(-50%,18px);
+  min-width:min(78vw,320px);
+  min-height:52px;
+  padding:12px 24px;
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none;
+  border:1px solid rgba(255,255,255,.42);
+  background:rgba(18,13,10,.46);
+  color:#fff7e9;
+  box-shadow:0 16px 40px rgba(0,0,0,.34);
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
+  transition:opacity .45s ease,transform .45s ease,visibility 0s linear .45s;
+}
+.route-code-enter.ready{
+  opacity:1;
+  visibility:visible;
+  pointer-events:auto;
+  transform:translate(-50%,0);
+  transition:opacity .45s ease,transform .45s ease,visibility 0s;
+}
+@media(max-width:560px){
+  .route-code-gate{
+    background-position:center center!important;
+  }
+  .route-code-digit{
+    font-size:clamp(58px,20vw,104px);
+  }
+  .route-code-enter{
+    min-width:min(82vw,320px);
+  }
+}
+@media(prefers-reduced-motion:reduce){
+  .route-code-digit.flash{animation-duration:.01ms}
+  .route-code-progress span,.route-code-enter,.route-code-gate{transition-duration:.01ms!important}
+}
+</style>
+
 </head>
 <body>
 <div class="lyric-danmaku-layer" id="lyricDanmakuLayer" aria-hidden="true"></div>
-<div class="gate" id="gate">
-  <div class="gate-card">
-    <div class="kicker">DEAR ANG MEMORY WORLD</div>
-    <div class="gate-title" aria-label="想見你標題">
-      <span>想見你.</span>
-      <span class="i1">想見你..</span>
-      <span class="i2">想見你了….</span>
-    </div>
-    <div class="gate-song-credit" aria-label="主題曲資訊">
-      <div class="credit-kicker">Theme Song</div>
-      <div class="credit-title">【 給安格 • Dear ANG 】</div>
-      <div class="credit-meta-line"><span>作詞 : Enden Mi</span><i>|</i><span>作曲 : Enden Mi</span></div>
-    </div>
-    <p class="gate-lead">這裡是你和我們的時光。一棟房子，一段曾經。</p>
-    <button onclick="enterWorld()">踏上想你的旅程</button>
-    <div class="tiny" style="margin-top:14px">!!!!! 提醒 : 情緒較為敏感者，請先準備好衛生紙。 !!!!!</div>
+<div class="gate route-code-gate" id="gate" aria-label="通往回憶的路口">
+  <div class="route-code-digit" id="routeCodeDigit" aria-hidden="true"></div>
+  <button class="route-code-enter" id="routeCodeEnter" type="button" onclick="enterWorld()">踏上想你的旅程</button>
+  <div class="route-code-progress" aria-hidden="true">
+    <span id="routeCodeProgressBar"></span>
   </div>
 </div>
 
@@ -3281,13 +3393,13 @@ body[data-dearang-view="street"] #stage .hotspot{
     <div class="opening-number" id="openingNumber">10</div>
     <div class="opening-photo-draw" id="openingPhotoDraw"></div>
     <div class="opening-start-note" id="openingStartNote">0 秒開始播放</div>
-    <button class="opening-video-skip" type="button" onclick="finishOpeningMemoryCountdown()">跳過倒數</button>
+    <button class="opening-video-skip" type="button" onclick="finishOpeningMemoryCountdown()">Heaven</button>
   </div>
 </div>
 
 <div class="mini-world hidden" id="miniWorld" aria-label="CRT電視小世界">
   <div class="mini-crt-scene">
-<video class="mini-crt-frame" id="miniFrameVideo" autoplay muted loop playsinline webkit-playsinline preload="auto" poster="assets/images/mini-frame-poster.webp" aria-label="木框天氣影片"></video>
+<video class="mini-crt-frame" id="miniFrameVideo" muted loop playsinline webkit-playsinline preload="none" poster="assets/images/mini-frame-poster.webp" aria-label="木框天氣影片"></video>
     <div class="mini-crt-screen" aria-label="木框透明入口區">
       <button class="mini-world-enter-hotspot" type="button" onclick="enterMainWorld()" aria-label="進入富宜路街道"></button>
       <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" class="mini-world-bg" id="miniWorldBg" alt="木框裡的Q版小世界｜☀️ 炎熱晴天｜保留底圖備援">
@@ -3298,7 +3410,7 @@ body[data-dearang-view="street"] #stage .hotspot{
       <button class="treasure-map-hit" type="button" onclick="openTreasureMapFromMini(event)" aria-label="打開藏寶地圖｜通往他的路"></button>
     <button class="radio-audio-hit radio-audio-play" type="button" onclick="playLetterAudio()" aria-label="播放留言音檔"><span>▶</span></button>
     <button class="radio-audio-hit radio-audio-stop" type="button" onclick="stopLetterAudio()" aria-label="停止留言音檔"><span>■</span></button>
-    <audio id="letterAudio" preload="metadata" src="assets/audio/aming-message.mp3"></audio>
+    <audio id="letterAudio" preload="none" src="assets/audio/aming-message.mp3"></audio>
     <div class="mini-weather-status" id="miniWeatherStatus">你那邊的天氣：套用：⛈️ 雷雨・31.4°C・風速 11 km/h</div>
     <section class="frame-letter-card" aria-label="FRAME 下方留言">
       <div class="frame-letter-text">親愛的阿明<br>
@@ -3342,7 +3454,7 @@ body[data-dearang-view="street"] #stage .hotspot{
   <div class="hint"><div class="hint-inner"><span>← →</span><div>左右滑這條街<small>點招牌或建築，進入對應的時光。</small></div></div></div>
 </div>
 
-<audio id="themeAudio" preload="metadata" loop="" src="assets/audio/dear-ang-theme.mp3"></audio>
+<audio id="themeAudio" preload="none" loop="" src="assets/audio/dear-ang-theme.mp3"></audio>
 
 <div class="visitor-identity-modal hidden" id="visitorIdentityModal" onclick="visitorModalBackdropClose(event)">
   <div class="visitor-identity-card" onclick="event.stopPropagation()">
@@ -3853,6 +3965,7 @@ let DATA={photos:[],photoGroups:[],songs:[],memories:[],comments:[],theme:null};
 let musicWanted=false;
 
 let openingCountdownActive=false;
+let openingPlaybackCompleted=false;
 let openingCountdownTimer=null;
 let openingCountdownSeconds=10;
 
@@ -3918,20 +4031,13 @@ function primeThemeBeforeCountdown(){
     else if(CONFIG.GITHUB_THEME_AUDIO)a.src=CONFIG.GITHUB_THEME_AUDIO;
     else if(DATA.theme&&DATA.theme.streamUrl)a.src=DATA.theme.streamUrl;
   }
+  // Opening 期間只預載，不以靜音播放解鎖，避免歌曲搶在影片前面發聲。
   try{
-    const oldVol=a.volume || 1;
-    a.volume=0;
-    const p=a.play();
-    if(p&&p.then){
-      p.then(()=>{
-        setTimeout(()=>{
-          try{a.pause();a.currentTime=0;}catch(e){}
-          a.volume=oldVol;
-        },120);
-      }).catch(()=>{a.volume=oldVol;});
-    }else{
-      setTimeout(()=>{try{a.pause();a.currentTime=0;}catch(e){}a.volume=oldVol;},120);
-    }
+    a.pause();
+    a.currentTime=0;
+    a.volume=1;
+    a.preload='auto';
+    a.load();
   }catch(e){}
 }
 
@@ -4446,7 +4552,7 @@ function closePage(){
 }
 function toast(msg,bad){const t=document.getElementById('toast');t.textContent=msg;t.style.background=bad?'#963232':'#5b3f2f';t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2300)}
 function api(p){return new Promise((res,rej)=>{let cb='cb'+Date.now()+Math.floor(Math.random()*9e4),u=new URL(CONFIG.GAS_API_URL);Object.keys(p).forEach(k=>u.searchParams.set(k,p[k]));u.searchParams.set('callback',cb);u.searchParams.set('_ts',Date.now());let sc=document.createElement('script'),tm=setTimeout(()=>done(rej,new Error('讀取逾時')),16000);window[cb]=x=>done(res,x);function done(f,v){clearTimeout(tm);delete window[cb];sc.remove();f(v)}sc.onerror=()=>done(rej,new Error('讀取失敗'));sc.src=u;document.head.appendChild(sc)})}
-function loadData(){return api({action:'getMemorialData'}).then(r=>{if(!r.ok)throw Error(r.error||'讀取失敗');DATA=r;DATA.photos=orderPhotos(DATA.photos||flatGroups(DATA.photoGroups||[]));renderDynamic();setupAlbumRitualLock();preloadFirstDriveAssets();if(typeof refreshRouteLandmark==='function')refreshRouteLandmark();if(openingCountdownActive)renderOpeningPhotoDraw();startTheme();return r;}).catch(e=>{renderDynamic();toast('雲端資料讀取失敗，先顯示本機內容',1);return null;})}
+function loadData(){return api({action:'getMemorialData'}).then(r=>{if(!r.ok)throw Error(r.error||'讀取失敗');DATA=r;DATA.photos=orderPhotos(DATA.photos||flatGroups(DATA.photoGroups||[]));renderDynamic();setupAlbumRitualLock();preloadFirstDriveAssets();if(typeof refreshRouteLandmark==='function')refreshRouteLandmark();if(openingCountdownActive)renderOpeningPhotoDraw();return r;}).catch(e=>{renderDynamic();toast('雲端資料讀取失敗，先顯示本機內容',1);return null;})}
 function detectAreaKey(text){
   text=String(text||'');
   const areas={
@@ -4856,9 +4962,10 @@ function lbTouchEnd(e){const t=e.changedTouches&&e.changedTouches[0];if(!t)retur
 document.addEventListener('keydown',e=>{const lb=document.getElementById('lightbox');if(!lb||!lb.classList.contains('show'))return;if(e.key==='ArrowLeft')moveLightbox(-1);if(e.key==='ArrowRight')moveLightbox(1);if(e.key==='Escape')closeLightbox();});
 function startTheme(){
   const a=document.getElementById('themeAudio');
+  if(!a)return;
   setupLyricDanmaku();
   // 主題曲固定優先使用 GitHub Pages 本機檔：assets/audio/dear-ang-theme.mp3
-  // Google Drive 的 00_主題曲只當備份，不再優先蓋掉 GitHub 音樂。
+  // Google Drive / Webhook 的 00_主題曲只當備份，不得在 Opening 結束前播放。
   if(!a.src){
     if(CONFIG.LOCAL_THEME){
       a.src=CONFIG.LOCAL_THEME;
@@ -4868,6 +4975,16 @@ function startTheme(){
       a.src=DATA.theme.streamUrl;
     }
   }
+
+  const overlay=document.getElementById('openingCountdown');
+  const openingStillRunning=!openingPlaybackCompleted || openingCountdownActive ||
+    !!(overlay && overlay.classList.contains('show'));
+  if(openingStillRunning){
+    // 即使資料提早載入、返回鍵或其他函式誤呼叫，也只能保持停止。
+    try{a.pause();a.currentTime=0;}catch(e){}
+    return;
+  }
+
   if(musicWanted){
     if(!a.src && CONFIG.LOCAL_THEME){a.src=CONFIG.LOCAL_THEME;}
     if(!a.src){toast('主題曲路徑不存在');return;}
@@ -6096,10 +6213,6 @@ function openTreasureMapFromStreet(event){
     var gate=document.getElementById('gate');
     try{clearTimeout(openingCountdownTimer);openingCountdownTimer=null;}catch(e){}
     if(video){try{video.pause();video.currentTime=0;}catch(e){}}
-    try{musicWanted=true;}catch(e){}
-    var a=document.getElementById('themeAudio');
-    if(a)a.volume=1;
-    try{startTheme();}catch(e){}
     if(overlay){
       overlay.classList.remove('loading','video-ready','playing');
       overlay.classList.remove('show','done');
@@ -6116,11 +6229,21 @@ function openTreasureMapFromStreet(event){
       mini.style.opacity='';
       mini.style.pointerEvents='';
     }
-    try{openingCountdownActive=false;}catch(e){}
+
+    // 先正式結束 Opening，再允許歌曲開始，避免 Webhook / loadData 提早搶播。
+    try{openingCountdownActive=false;openingPlaybackCompleted=true;}catch(e){}
+    window.__dearAngOpeningFinished=true;
+    try{musicWanted=true;}catch(e){}
+    var a=document.getElementById('themeAudio');
+    if(a)a.volume=1;
+    setTimeout(function(){try{startTheme();}catch(e){}},0);
   };
   window.startOpeningMemoryCountdown=function(){
     if(typeof openingCountdownActive!=='undefined'&&openingCountdownActive)return;
-    try{openingCountdownActive=true;}catch(e){}
+    try{openingCountdownActive=true;openingPlaybackCompleted=false;}catch(e){}
+    window.__dearAngOpeningFinished=false;
+    var theme=document.getElementById('themeAudio');
+    if(theme){try{theme.pause();theme.currentTime=0;theme.volume=1;}catch(e){}}
     try{playUiSound('open');primeThemeBeforeCountdown();}catch(e){}
     var gate=document.getElementById('gate'),overlay=document.getElementById('openingCountdown'),video=document.getElementById('openingCountdownVideo');
     if(overlay){
@@ -6576,4 +6699,81 @@ function openTreasureMapFromStreet(event){
   window.addEventListener('load',boot,{once:true});
 })();
 </script>
+
+
+
+
+<script id="dearang-route-code-gate-flow">
+(function(){
+  if(window.__DEARANG_ROUTE_CODE_GATE__)return;
+  window.__DEARANG_ROUTE_CODE_GATE__=true;
+
+  var CODE='1989060320260309';
+  var STEP_MS=330;
+  var started=false;
+
+  function start(){
+    if(started)return;
+    started=true;
+
+    var gate=document.getElementById('gate');
+    var digit=document.getElementById('routeCodeDigit');
+    var bar=document.getElementById('routeCodeProgressBar');
+    var enter=document.getElementById('routeCodeEnter');
+    if(!gate||!digit||!bar||!enter)return;
+
+    gate.classList.remove('out','hidden');
+    enter.classList.remove('ready');
+    bar.style.width='0%';
+
+    var index=0;
+    var lastX=50;
+    var lastY=42;
+
+    function next(){
+      if(index>=CODE.length){
+        digit.classList.remove('flash');
+        bar.style.width='100%';
+        window.setTimeout(function(){
+          enter.classList.add('ready');
+          try{enter.focus({preventScroll:true});}catch(e){}
+        },360);
+        return;
+      }
+
+      var x,y,attempt=0;
+      do{
+        x=12+Math.random()*76;
+        y=12+Math.random()*60;
+        attempt++;
+      }while(attempt<8 && Math.hypot(x-lastX,y-lastY)<18);
+
+      lastX=x;
+      lastY=y;
+
+      digit.style.left=x.toFixed(1)+'%';
+      digit.style.top=y.toFixed(1)+'%';
+      digit.style.fontSize=(58+Math.random()*54).toFixed(0)+'px';
+      digit.textContent=CODE.charAt(index);
+
+      digit.classList.remove('flash');
+      void digit.offsetWidth;
+      digit.classList.add('flash');
+
+      index++;
+      bar.style.width=((index/CODE.length)*100).toFixed(2)+'%';
+      window.setTimeout(next,STEP_MS);
+    }
+
+    window.setTimeout(next,240);
+  }
+
+  if(document.readyState==='loading'){
+    document.addEventListener('DOMContentLoaded',start,{once:true});
+  }else{
+    start();
+  }
+})();
+</script>
+
 </body></html>
