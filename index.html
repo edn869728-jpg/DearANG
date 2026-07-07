@@ -24,7 +24,7 @@ a{color:inherit}.hidden{display:none!important}.empty{padding:18px;border:1px da
 .world{height:100dvh;display:flex;flex-direction:column;background:linear-gradient(180deg,#100f0f,#050506)}.topbar{height:58px;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 14px calc(10px + env(safe-area-inset-top));z-index:92;background:linear-gradient(180deg,rgba(0,0,0,.64),rgba(0,0,0,.12));position:fixed;top:0;left:0;right:0;pointer-events:none}.topbar>*{pointer-events:auto}.brand{font-size:16px;font-weight:1000;letter-spacing:.08em}.brand small{display:block;font-size:10px;color:#ffd89a;letter-spacing:.22em}.top-actions{display:flex;gap:6px}.icon-btn{width:40px;height:40px;padding:0;display:grid;place-items:center;background:rgba(0,0,0,.38);border:1px solid var(--line);box-shadow:none;backdrop-filter:blur(12px)}.scroller{height:100dvh;overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;scroll-behavior:smooth}.stage{position:relative;height:100dvh;min-width:1480px;width:235vw;max-width:2200px;margin:0 auto;background:linear-gradient(180deg,#bcdef0 0%,#ffe0a6 45%,#bd7e48 70%,#5b3826 100%);overflow:hidden}.stage-world-img{position:absolute;inset:0;width:100%;height:100%;object-fit:fill;object-position:center;z-index:0;pointer-events:none}.world-weather{display:none}.hotspot{position:absolute;border-radius:10px;z-index:8;cursor:pointer;background:rgba(255,216,154,0)}.hotspot:before{content:attr(data-label);position:absolute;left:50%;bottom:100%;transform:translateX(-50%) translateY(-8px);white-space:nowrap;font-size:12px;font-weight:1000;letter-spacing:.08em;padding:7px 10px;border-radius:999px;background:rgba(0,0,0,.58);border:1px solid rgba(255,255,255,.18);backdrop-filter:blur(8px);opacity:0;transition:.18s}.hotspot:active:before,.hotspot:hover:before{opacity:1}.h-photo{left:12%;top:24%;width:14%;height:47%}.h-video{left:26%;top:24%;width:14%;height:47%}.h-home{left:40%;top:24%;width:17%;height:47%}.h-music{left:57%;top:24%;width:15%;height:47%}.h-food{left:72%;top:24%;width:11%;height:47%}.h-nav{left:83%;top:24%;width:12%;height:47%}.hint{position:fixed;left:14px;right:14px;bottom:calc(14px + env(safe-area-inset-bottom));z-index:4;display:flex;justify-content:center;pointer-events:none}.hint-inner{max-width:520px;width:100%;border:1px solid rgba(255,255,255,.17);background:rgba(0,0,0,.43);backdrop-filter:blur(16px);border-radius:22px;padding:10px 13px;display:flex;align-items:center;gap:10px;font-weight:900}.hint-inner span{color:#ffd89a}.hint-inner small{display:block;color:rgba(255,255,255,.72);font-size:12px;line-height:1.45}
 @media(min-width:760px){.stage{min-width:1916px;width:1916px;height:821px;margin-top:70px;border-radius:58px;box-shadow:var(--shadow)}.world{align-items:center;justify-content:center}.scroller{display:flex;align-items:center}.grid{grid-template-columns:repeat(5,1fr)}}@media(max-width:560px){.stage{height:100dvh;min-width:1280px;width:300vw}.topbar{height:64px}.hint-inner{font-size:13px}.brand{font-size:15px}}
 /* Mini world v59 */
-.mini-world{position:fixed;inset:0;z-index:47;display:block;overflow:auto;-webkit-overflow-scrolling:touch;padding:calc(58px + env(safe-area-inset-top)) 0 calc(22px + env(safe-area-inset-bottom));text-align:center;background:#050403;color:#fff7e8;transition:opacity .45s ease,filter .45s ease}.mini-world.zooming{opacity:0;filter:brightness(1.45) blur(5px);pointer-events:none}.mini-crt-scene{position:relative;width:100vw;max-width:100vw;height:auto;aspect-ratio:1080/2880;margin:0 auto;overflow:hidden;filter:drop-shadow(0 30px 70px rgba(0,0,0,.62))}.mini-crt-frame{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;background:#000 url("assets/images/mini-frame-poster.png") center/cover no-repeat;pointer-events:none}.mini-crt-screen{position:absolute;left:6.4815%;top:22.6736%;width:87.9630%;height:18.6111%;border:0;padding:0;margin:0;border-radius:.4%;overflow:hidden;background:#000;cursor:pointer;z-index:2;color:inherit}.mini-world-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:saturate(1.02) contrast(1.04)}.mini-screen-shine{position:absolute;inset:0;z-index:3;pointer-events:none;background:linear-gradient(115deg,rgba(255,255,255,.14),transparent 33%,rgba(255,255,255,.05) 54%,transparent 70%);mix-blend-mode:screen}.mini-screen-hint{position:absolute;left:50%;bottom:8px;transform:translateX(-50%);z-index:4;white-space:nowrap;padding:6px 10px;border-radius:999px;background:rgba(0,0,0,.58);border:1px solid rgba(255,255,255,.16);color:#ffd89a;font-size:12px;font-weight:1000;backdrop-filter:blur(8px)}.mini-world-weather{display:none}.mini-weather-status{position:absolute;z-index:6;left:5.5556%;top:41.8056%;width:55.0926%;height:2.2569%;color:#fff7d6;background:rgba(38,23,8,.38);border:1px solid rgba(255,216,154,.46);border-radius:14px;padding:5px 8px;text-align:left;font-size:clamp(10.5px,2.35vw,14.5px);line-height:1.22;font-weight:1000;text-shadow:0 0 7px rgba(255,216,154,.95),0 2px 4px rgba(0,0,0,.92);overflow:hidden;white-space:nowrap;text-overflow:ellipsis}.frame-letter-card{position:absolute;z-index:5;left:20.9259%;top:52.3611%;width:67.5926%;height:41.9444%;padding:22px 26px;overflow:hidden;background:transparent;color:#4b2b16;text-align:left}.frame-letter-text{width:100%;height:100%;overflow:hidden;color:#4b2b16;font-size:clamp(13px,3.5vw,18px);line-height:1.48;font-weight:720;letter-spacing:0;text-align:justify;text-shadow:0 1px 0 rgba(255,247,220,.36)}.treasure-map-hit{position:absolute;z-index:10;left:72.5%;top:57.8%;width:27.5%;height:13.8%;min-height:0;padding:0;margin:0;border:0;border-radius:18px;background:rgba(255,216,154,0);box-shadow:none;cursor:pointer;-webkit-tap-highlight-color:transparent;touch-action:manipulation}.treasure-map-hit:active{background:rgba(255,216,154,.14);box-shadow:0 0 0 3px rgba(255,216,154,.12)}.radio-audio-hit{position:absolute;z-index:9;top:50.3472%;width:5.5556%;height:1.9097%;min-height:0;padding:0;margin:0;border-radius:50%;display:grid;place-items:center;background:rgba(255,244,214,.12);border:1px solid rgba(68,38,18,.18);box-shadow:none;color:#251307;cursor:pointer}.radio-audio-play{left:65.5556%}.radio-audio-stop{left:74.7222%}.radio-audio-hit span{display:block;font-size:clamp(13px,3.8vw,23px);line-height:1;font-weight:1000}.radio-audio-hit.playing{background:rgba(255,216,154,.28);box-shadow:0 0 0 3px rgba(255,216,154,.14)}
+.mini-world{position:fixed;inset:0;z-index:47;display:block;overflow:auto;-webkit-overflow-scrolling:touch;padding:calc(58px + env(safe-area-inset-top)) 0 calc(22px + env(safe-area-inset-bottom));text-align:center;background:#050403;color:#fff7e8;transition:opacity .45s ease,filter .45s ease}.mini-world.zooming{opacity:0;filter:brightness(1.45) blur(5px);pointer-events:none}.mini-crt-scene{position:relative;width:100vw;max-width:100vw;height:auto;aspect-ratio:1080/2880;margin:0 auto;overflow:hidden;filter:drop-shadow(0 30px 70px rgba(0,0,0,.62))}.mini-crt-frame{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;background:#000 url("assets/images/mini-frame-poster.png") center/cover no-repeat;pointer-events:none}.mini-crt-screen{position:absolute;left:6.4815%;top:22.6736%;width:87.9630%;height:18.6111%;border:0;padding:0;margin:0;border-radius:.4%;overflow:hidden;background:#000;cursor:pointer;z-index:2;color:inherit}.mini-world-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:saturate(1.02) contrast(1.04)}.mini-screen-shine{position:absolute;inset:0;z-index:3;pointer-events:none;background:linear-gradient(115deg,rgba(255,255,255,.14),transparent 33%,rgba(255,255,255,.05) 54%,transparent 70%);mix-blend-mode:screen}.mini-screen-hint{position:absolute;left:50%;bottom:8px;transform:translateX(-50%);z-index:4;white-space:nowrap;padding:6px 10px;border-radius:999px;background:rgba(0,0,0,.58);border:1px solid rgba(255,255,255,.16);color:#ffd89a;font-size:12px;font-weight:1000;backdrop-filter:blur(8px)}.mini-world-weather{display:none}.mini-weather-status{position:absolute;z-index:6;left:5.5556%;top:41.8056%;width:55.0926%;height:2.2569%;color:#fff7d6;background:rgba(38,23,8,.38);border:1px solid rgba(255,216,154,.46);border-radius:14px;padding:5px 8px;text-align:left;font-size:clamp(10.5px,2.35vw,14.5px);line-height:1.22;font-weight:1000;text-shadow:0 0 7px rgba(255,216,154,.95),0 2px 4px rgba(0,0,0,.92);overflow:hidden;white-space:nowrap;text-overflow:ellipsis}.frame-letter-card{position:absolute;z-index:5;left:14%;top:52.3611%;width:74%;height:48%;padding:16px 24px;overflow:hidden;background:transparent;color:#4b2b16;text-align:left}.frame-letter-text{width:100%;height:100%;overflow:hidden;color:#4b2b16;font-size:clamp(11px,3.5vw,18px);line-height:1;font-weight:900;letter-spacing:0;text-align:justify;text-shadow:1 2px 0 rgba(255,247,220,.36)}.treasure-map-hit{position:absolute;z-index:10;left:72.5%;top:57.8%;width:27.5%;height:13.8%;min-height:0;padding:0;margin:0;border:0;border-radius:18px;background:rgba(255,216,154,0);box-shadow:none;cursor:pointer;-webkit-tap-highlight-color:transparent;touch-action:manipulation}.treasure-map-hit:active{background:rgba(255,216,154,.14);box-shadow:0 0 0 3px rgba(255,216,154,.12)}.radio-audio-hit{position:absolute;z-index:9;top:50.3472%;width:5.5556%;height:1.9097%;min-height:0;padding:0;margin:0;border-radius:50%;display:grid;place-items:center;background:rgba(255,244,214,.12);border:1px solid rgba(68,38,18,.18);box-shadow:none;color:#251307;cursor:pointer}.radio-audio-play{left:65.5556%}.radio-audio-stop{left:74.7222%}.radio-audio-hit span{display:block;font-size:clamp(13px,3.8vw,23px);line-height:1;font-weight:1000}.radio-audio-hit.playing{background:rgba(255,216,154,.28);box-shadow:0 0 0 3px rgba(255,216,154,.14)}
 /* Pages */
 .page{position:fixed;inset:0;z-index:20;display:none;background:linear-gradient(180deg,#15110f,#050506);overflow:auto;-webkit-overflow-scrolling:touch;color:var(--ink);padding-top:calc(68px + env(safe-area-inset-top))}.page.show{display:block;animation:pageFadeIn .32s cubic-bezier(.22,1,.36,1) both}@keyframes pageFadeIn{from{opacity:0;transform:translateY(10px) scale(.992);filter:blur(2px)}to{opacity:1;transform:none;filter:none}}.page-head{position:fixed;top:calc(58px + env(safe-area-inset-top));left:0;right:0;min-height:48px;z-index:91;padding:10px 14px;background:linear-gradient(180deg,rgba(0,0,0,.86),rgba(0,0,0,.46));backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,.08);display:flex;align-items:center;justify-content:space-between;gap:10px}.back{background:rgba(255,255,255,.11);border:1px solid var(--line);box-shadow:none}.page-body{width:100vw;max-width:none;margin:auto;padding:14px 0 calc(86px + env(safe-area-inset-bottom))}.hero-card{position:relative;overflow:hidden;min-height:310px;background:#171717;border:1px solid rgba(255,255,255,.12);box-shadow:var(--shadow);margin:0 0 14px}.hero-card img{width:100%;height:100%;min-height:310px;object-fit:cover;display:block}.hero-card:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.05),rgba(0,0,0,.70))}.hero-text{position:absolute;left:18px;right:18px;bottom:18px;z-index:2;text-shadow:0 3px 20px rgba(0,0,0,.55)}.hero-text h1{font-size:clamp(30px,8vw,56px);margin:0 0 8px;line-height:1.15}.section{border:1px solid rgba(255,255,255,.12);background:rgba(255,248,239,.07);padding:16px;margin:14px 0;backdrop-filter:blur(12px)}.section h2{margin:0 0 8px;font-size:23px}.story{white-space:pre-line;color:rgba(255,255,255,.84);line-height:1.75;font-size:16px}.toolbar{display:flex;gap:9px;flex-wrap:wrap;margin-top:12px}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}.photo{border-radius:12px;overflow:hidden;background:#222;border:1px solid rgba(255,255,255,.09);cursor:pointer}.photo img{width:100%;aspect-ratio:1;object-fit:cover;display:block}.video-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,220px),1fr));gap:10px}.vcard{border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.07);border-radius:18px;padding:9px}.vcard video,.vcard audio{width:100%;background:#000;border-radius:12px}.vcard video{aspect-ratio:16/9;object-fit:contain}.vcard h3{font-size:14px;line-height:1.45;margin:8px 3px 3px}.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom));z-index:170;transform:translateX(-50%) translateY(16px);opacity:0;background:#5b3f2f;color:white;border-radius:999px;padding:11px 16px;font-weight:1000;transition:.2s;max-width:92vw;text-align:center}.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 /* KTV */
@@ -33,25 +33,1273 @@ a{color:inherit}.hidden{display:none!important}.empty{padding:18px;border:1px da
 #page-nav{--dear-topbar-h:58px;--route-head-h:94px;--route-scale:1;--route-pan-x:0px;--route-pan-y:0px;padding-top:0!important;overflow:hidden;background:#050403;color:#382414}.route-page-head{position:fixed;top:calc(var(--dear-topbar-h) + env(safe-area-inset-top));left:0;right:0;height:var(--route-head-h);min-height:var(--route-head-h);z-index:120;padding:12px 14px;background:linear-gradient(180deg,rgba(86,65,42,.96),rgba(117,98,66,.88));border-bottom:1px solid rgba(255,244,210,.28);box-shadow:0 12px 26px rgba(0,0,0,.22);color:#fff2cb}.route-map-app{--route-safe-bottom:env(safe-area-inset-bottom,0px);position:fixed;left:0;right:0;top:calc(58px + env(safe-area-inset-top) + var(--route-head-h));bottom:0;width:100vw;height:auto;background:radial-gradient(circle at 50% 22%,rgba(255,228,150,.26),transparent 34%),linear-gradient(180deg,#5d3a1d,#d9b56d 38%,#8b5628 100%);overflow:hidden;touch-action:pan-y;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans TC",sans-serif;color:#382414}@media(min-width:760px){.route-map-app{width:min(100vw,540px);left:50%;right:auto;transform:translateX(-50%)}}.route-map-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:fill;object-position:center;user-select:none;-webkit-user-drag:none;pointer-events:none}.route-svg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible}.route-map-bg,.route-svg,#routeSpots{transform-origin:0 0;transform:translate3d(var(--route-pan-x),var(--route-pan-y),0) scale(var(--route-scale));transition:transform 900ms cubic-bezier(.22,1,.36,1);will-change:transform}.route-base{fill:none;stroke:rgba(83,49,18,.52);stroke-width:28;stroke-linecap:round;stroke-linejoin:round}.route-done{fill:none;stroke:rgba(255,198,48,.88);stroke-width:23;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 0 8px rgba(255,214,80,.75)) drop-shadow(0 0 18px rgba(255,177,45,.35))}.route-hot{fill:none;stroke:#fff36d;stroke-width:13;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 0 10px rgba(255,255,180,.95)) drop-shadow(0 0 24px rgba(255,197,54,.65)) drop-shadow(0 0 36px rgba(255,130,25,.32))}.route-halo{fill:rgba(255,230,94,.28);animation:routeHalo 1.8s infinite ease-in-out}.route-ring{fill:rgba(255,184,34,.52);stroke:rgba(255,255,255,1);stroke-width:8;animation:routeRing 1.2s infinite ease-in-out}.route-core{fill:#fffde0;filter:drop-shadow(0 0 12px #fff) drop-shadow(0 0 28px #ffd55a)}@keyframes routeHalo{0%,100%{r:44;opacity:.23}50%{r:72;opacity:.07}}@keyframes routeRing{0%,100%{r:22}50%{r:31}}#routeSpots{position:absolute;inset:0;z-index:8;pointer-events:none}.route-spot{position:absolute;width:110px;height:110px;border-radius:999px;transform:translate(-50%,-50%) scale(.82);z-index:6;pointer-events:auto;background:rgba(255,222,104,.04);border:1px solid rgba(255,222,104,0);opacity:.35;padding:0;box-shadow:none;transition:transform .55s ease,opacity .55s ease,box-shadow .55s ease,border-color .55s ease}.route-spot.active{opacity:1;transform:translate(-50%,-50%) scale(1);border-color:rgba(255,232,128,.58);box-shadow:0 0 0 12px rgba(255,226,109,.10),0 0 52px rgba(255,210,82,.60);animation:routeFloat 2.4s infinite ease-in-out}@keyframes routeFloat{0%,100%{filter:brightness(1)}50%{filter:brightness(1.18)}}.route-title-pill{position:absolute;left:50%;top:14px;transform:translateX(-50%);z-index:12;padding:7px 13px;border-radius:999px;background:rgba(35,21,10,.32);color:#fff2cb;backdrop-filter:blur(6px);font-size:12px;font-weight:900;letter-spacing:.06em;white-space:nowrap}.route-story-card{position:absolute;z-index:20;left:7%;top:66%;width:min(56vw,270px);max-width:calc(100vw - 32px);min-height:92px;max-height:29svh;border-radius:18px;padding:12px;background:rgba(255,244,210,.78);border:1px solid rgba(255,255,255,.35);backdrop-filter:blur(10px);box-shadow:0 18px 54px rgba(18,10,5,.28);opacity:1;transform:translate3d(0,-50%,0) scale(1);transition:transform .72s cubic-bezier(.22,1,.36,1),opacity .52s ease,background .42s ease,box-shadow .42s ease,max-height .42s ease;overflow:hidden;pointer-events:auto;will-change:transform,opacity}.route-story-card.switching{opacity:.55;transform:translate3d(-16px,-50%,0) scale(.985)}.route-story-card.open{width:min(88vw,360px);max-height:58svh}.route-story-top{display:flex;align-items:center;gap:10px;min-height:32px;cursor:pointer}.route-num{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;flex:0 0 34px;background:#4d2c16;color:#fff4ce;font-weight:950}.route-story-title{margin:0;font-size:16px;line-height:1.15;letter-spacing:.02em;color:#382414}.route-tag{margin:3px 0 0;color:#806244;font-size:10px;font-weight:800}.route-body{margin-top:10px;max-height:calc(29svh - 88px);overflow:auto;padding-right:2px;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;touch-action:pan-y}.route-story-card.open .route-body{max-height:calc(58svh - 78px)}.route-body p{margin:0 0 8px;font-size:12px;line-height:1.55;font-weight:650;color:#4f3928}.route-body .em{font-weight:950;color:#2d1b10}.route-nav-buttons{position:absolute;z-index:25;right:10px;top:18px;display:flex;flex-direction:column;gap:8px;opacity:.92}.route-nav-buttons button{width:38px;height:38px;border-radius:999px;background:rgba(255,244,210,.42);backdrop-filter:blur(6px);color:#3b2413;font-size:18px;font-weight:950;box-shadow:0 8px 20px rgba(0,0,0,.16);padding:0}.route-dots{position:absolute;left:50%;bottom:calc(8px + var(--route-safe-bottom));transform:translateX(-50%);z-index:24;display:flex;gap:5px;pointer-events:none;opacity:.72}.route-dots span{width:6px;height:6px;border-radius:999px;background:rgba(70,43,21,.36);transition:.25s}.route-dots span.on{width:22px;background:#ffb12d}.route-hint{position:absolute;left:50%;bottom:calc(12px + var(--route-safe-bottom));transform:translateX(-50%);z-index:18;color:#fff4d4;background:rgba(36,21,10,.25);padding:5px 10px;border-radius:999px;font-size:11px;font-weight:800;backdrop-filter:blur(6px);white-space:nowrap}.route-hint.hide{opacity:0}
 /* Lightbox */
 .lightbox{position:fixed;inset:0;z-index:60;background:rgba(0,0,0,.90);display:none;align-items:center;justify-content:center;padding:14px}.lightbox.show{display:flex}.lightbox img{max-width:100%;max-height:84dvh;object-fit:contain;border-radius:18px}.lb-close{position:absolute;top:calc(14px + env(safe-area-inset-top));right:14px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.2);box-shadow:none}
+/* ===== 歌詞彈幕：主題曲播放時會從右往左飄過 ===== */
+.lyric-danmaku-layer{position:fixed;inset:0;z-index:95;pointer-events:none;overflow:hidden}
+.lyric-danmaku{position:absolute;right:-90vw;max-width:88vw;white-space:nowrap;padding:8px 14px;border-radius:999px;color:#fff7e8;background:rgba(68,42,28,.46);border:1px solid rgba(255,255,255,.18);box-shadow:0 12px 28px rgba(45,25,12,.24);backdrop-filter:blur(8px);font-weight:900;text-shadow:0 2px 8px rgba(0,0,0,.30);animation:lyricFly var(--flyDur,10s) linear forwards}.lyric-danmaku.soft{color:#5a3d2f;background:rgba(255,248,239,.78);border-color:rgba(90,61,45,.14);text-shadow:none}@keyframes lyricFly{from{transform:translateX(0);opacity:0}8%{opacity:1}92%{opacity:1}to{transform:translateX(calc(-100vw - 120%));opacity:0}}.lyric-toggle.on{background:linear-gradient(135deg,var(--gold),#b98034);color:#fff}.lyric-toggle.off{background:rgba(255,255,255,.11);color:#fff}@media(max-width:760px){.lyric-danmaku{font-size:14px;padding:7px 12px;max-width:92vw}}
+#miniWorld .mini-world-enter-hotspot{
+  position:absolute!important;
+  top:23%!important;
+  left:7%!important;
+  right:5%!important;
+  z-index:18!important;
+  display:block!important;
+  width:87%!important;
+  height:19%!important;
+  padding:0!important;
+  margin:0!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  pointer-events:auto!important;
+  cursor:pointer!important;
+}
+#miniWorld .radio-audio-hit{
+  position:absolute!important;
+  top:calc(1401 / 2880 * 100%)!important;
+  height:calc((1466 - 1401) / 2880 * 100%)!important;
+  min-height:0!important;
+  padding:0!important;
+  margin:0!important;
+  transform:none!important;
+  z-index:220!important;
+  pointer-events:auto!important;
+}
+#miniWorld .radio-audio-play{
+  left:calc(312 / 1080 * 100%)!important;
+  width:calc((375 - 312) / 1080 * 100%)!important;
+}
+#miniWorld .radio-audio-stop{
+  left:calc(412 / 1080 * 100%)!important;
+  width:calc((478 - 412) / 1080 * 100%)!important;/* Treasure Map：橫幅獨立在上方，地圖從橫幅下方開始。 */
+#page-nav{--route-global-top:58px;--route-banner-height:70px;padding:0!important;overflow:hidden!important;}
+#page-nav.show{padding:0!important;}
+#page-nav.show>.page-head{display:none!important;}
+#page-nav .route-top-banner{
+  position:absolute;left:0;right:0;top:var(--route-global-top);height:var(--route-banner-height);z-index:94;
+  display:grid;grid-template-columns:46px minmax(0,1fr) 46px;align-items:center;gap:9px;padding:8px 12px;
+  color:#fff2cb;background:
+    linear-gradient(90deg,rgba(60,35,16,.98),rgba(128,77,32,.96) 48%,rgba(60,35,16,.98)),
+    url("assets/images/treasure_map_bg.webp") center 18%/cover no-repeat;
+  border-bottom:2px solid rgba(255,222,150,.52);box-shadow:0 8px 24px rgba(0,0,0,.36);overflow:hidden;
+}
+#page-nav .route-top-banner::after{content:"";position:absolute;inset:5px;border:1px solid rgba(255,232,178,.25);pointer-events:none;}
+#page-nav .route-banner-back{position:relative;z-index:2;width:40px;height:40px;padding:0!important;display:grid;place-items:center;background:rgba(255,245,212,.15)!important;border:1px solid rgba(255,238,194,.30)!important;box-shadow:none!important;font-size:23px!important;}
+#page-nav .route-banner-copy{position:relative;z-index:2;text-align:center;line-height:1.2;min-width:0;}
+#page-nav .route-banner-copy strong{display:block;font-family:"Noto Serif TC",serif;font-size:clamp(16px,4.5vw,24px);letter-spacing:.08em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+#page-nav .route-banner-copy small{display:block;margin-top:4px;color:rgba(255,241,205,.72);font-size:10px;font-weight:900;letter-spacing:.18em;}
+#page-nav .route-banner-mark{position:relative;z-index:2;justify-self:end;color:#4a2b15;background:#f3d38c;border-radius:8px;padding:4px 5px;font-size:9px;font-weight:1000;letter-spacing:.08em;transform:rotate(4deg);}
+#page-nav .route-map-app{top:calc(var(--route-global-top) + var(--route-banner-height))!important;bottom:0!important;left:0!important;right:0!important;height:auto!important;min-height:0!important;transform:none!important;}
+#page-nav .route-title-pill{display:none!important;}
+@media(min-width:760px){
+  #page-nav .route-top-banner{left:50%!important;right:auto!important;width:min(100vw,540px)!important;transform:translateX(-50%)!important;}
+  #page-nav .route-map-app{left:50%!important;right:auto!important;width:min(100vw,540px)!important;transform:translateX(-50%)!important;}
+}
+@media(max-width:760px){#page-nav{--route-global-top:64px;--route-banner-height:72px;}}
+}
+
+/* ===== 互動層單一化：隱藏頁面絕對不能接收點擊 ===== */
+.page:not(.show),
+.page:not(.show) *,
+.page.closing,
+.page.closing *{
+  pointer-events:none!important;
+  visibility:hidden!important;
+}
+.page.show:not(.closing){
+  pointer-events:auto!important;
+  visibility:visible!important;
+}
+#miniWorld.hidden,
+#miniWorld.hidden *,
+#miniWorld.zooming,
+#miniWorld.zooming *{
+  pointer-events:none!important;
+}
+#miniWorld.hidden{
+  display:none!important;
+  visibility:hidden!important;
+}
+body:not([data-dearang-view="mini"]) #miniWorld .radio-audio-hit,
+body:not([data-dearang-view="mini"]) #miniWorld .mini-world-enter-hotspot{
+  pointer-events:none!important;
+}
+body[data-dearang-view="mini"] #miniWorld:not(.hidden):not(.zooming) .radio-audio-hit,
+body[data-dearang-view="mini"] #miniWorld:not(.hidden):not(.zooming) .mini-world-enter-hotspot{
+  pointer-events:auto!important;
+}
+.visitor-identity-modal.hidden,
+.visitor-identity-modal.hidden *,
+.ferris-construction.hidden,
+.ferris-construction.hidden *,
+.lightbox:not(.show),
+.lightbox:not(.show) *,
+.opening-countdown:not(.show),
+.opening-countdown:not(.show) *{
+  pointer-events:none!important;
+  visibility:hidden!important;
+}
+body[data-dearang-view="page"] #stage,
+body[data-dearang-view="page"] #stage *,
+body[data-dearang-view="mini"] #stage,
+body[data-dearang-view="mini"] #stage *,
+body[data-dearang-view="opening"] #stage,
+body[data-dearang-view="opening"] #stage *,
+body[data-dearang-view="gate"] #stage,
+body[data-dearang-view="gate"] #stage *{
+  pointer-events:none!important;
+}
+body[data-dearang-view="street"] #stage,
+body[data-dearang-view="street"] #stage .hotspot{
+  pointer-events:auto!important;
+}
 </style>
 </head>
 <body>
-<div class="gate" id="gate"><div class="gate-card"><div class="kicker">DEAR ANG MEMORY WORLD</div><div class="gate-title"><span>想見你.</span><span class="i1">想見你..</span><span class="i2">想見你了….</span></div><div class="gate-song-credit"><div class="credit-kicker">Theme Song</div><div class="credit-title">【 給安格 • Dear ANG 】</div><div class="credit-meta-line"><span>作詞 : Enden Mi</span><i>|</i><span>作曲 : Enden Mi</span></div></div><p class="gate-lead">這裡是你和我們的時光。一棟房子，一段曾經。</p><button onclick="enterWorld()">踏上想你的旅程</button><div class="tiny" style="margin-top:14px">!!!!! 提醒 : 情緒較為敏感者，請先準備好衛生紙。 !!!!!</div></div></div>
-<div class="opening-countdown" id="openingCountdown"><video class="opening-countdown-video" id="openingCountdownVideo" src="assets/videos/opening-countdown.mp4" playsinline preload="auto"></video><div class="opening-video-caption">回憶倒流中 請留意眼淚回流</div><button class="opening-video-skip" type="button" onclick="finishOpeningMemoryCountdown()">跳過倒數</button></div>
-<div class="mini-world hidden" id="miniWorld"><div class="mini-crt-scene"><video class="mini-crt-frame" id="miniFrameVideo" src="assets/videos/mini-frame.mp4" autoplay muted loop playsinline preload="auto" poster="assets/images/mini-frame-poster.png"></video><button class="mini-crt-screen" type="button" onclick="enterMainWorld()" aria-label="點擊小世界進入富宜路街道"><img src="assets/images/memory-world.webp" class="mini-world-bg" id="miniWorldBg" alt="木框裡的Q版小世界" onerror="this.style.display='none'"><div class="mini-screen-shine"></div><div class="mini-screen-hint">回到你成長的街道</div></button><button class="treasure-map-hit" type="button" onclick="openTreasureMapFromMini(event)" aria-label="打開藏寶地圖"></button><button class="radio-audio-hit radio-audio-play" type="button" onclick="playLetterAudio()" aria-label="播放留言音檔"><span>▶</span></button><button class="radio-audio-hit radio-audio-stop" type="button" onclick="stopLetterAudio()" aria-label="停止留言音檔"><span>■</span></button><audio id="letterAudio" preload="metadata" src="assets/audio/aming-message.mp3"></audio><div class="mini-weather-status" id="miniWeatherStatus">你那邊的天氣：讀取中・--°C・風速 -- km/h</div><section class="frame-letter-card"><div class="frame-letter-text">親愛的阿明<br>沒想到你就這樣離開了，連一句再見都沒說，即使夏日將至，我還是不願接受，不敢相信。<br><br>於是我把對你的思念，放在這個網站裡，想安撫愛你的人，和你牽掛的人，包括我自己。<br><br>因為太難以置信了，所以很多話，隨著時間，才慢慢累積，謝謝你來找過我不只一次，也在我需要時給我勇氣，我是真的都有感覺到，不管當下，或事後看照片/影片時都有，就像那次看完你，載阿姨回家路上，我們一直在聽你過往錄音唱的歌，阿姨下車走回家的當下，我很不捨，於是偷偷拍下她的背影，後來發現有開到 Live Photo，發現拍那張照片的當下，你正唱著:｢我的心有多痛。」這期間也寫了一首想念你的歌。<br><br>如果可以，那些你該盡的責，那些你來不及做的，我願幫你分擔一點，希望你別嫌棄。<br><br>這網頁我要送給格媽，格妹，我自己，和姊夫，我會好好跟姊夫相處的，也會多關心他，你就放心自在的飛吧，我們會永遠愛你，Always Remember Us This Way。</div></section></div></div>
-<div class="world" id="world"><div class="topbar"><div class="brand"><small>DEAR ANG</small>你和我們的時光</div><div class="top-actions"><button class="icon-btn" onclick="toggleMusic()" id="musicBtn">♫</button><button class="icon-btn" onclick="refreshDataNoReload()" id="dataRefreshBtn">↻</button><button class="icon-btn" onclick="toggleViewZoom()" id="zoomBtn">🔍</button><button class="icon-btn" onclick="smartBack()" id="backBtn">🔙</button></div></div><div class="scroller" id="scroller"><div class="stage" id="stage"><img class="stage-world-img" id="stageWorldImg" src="assets/images/weather/day-sunny.png" alt="富宜路街道世界" onerror="this.style.display='none'"><div class="hotspot h-photo" data-label="華光相館｜你和我們的時光" onclick="openPage('photo')"></div><div class="hotspot h-video" data-label="新時代影音館｜影片" onclick="openPage('video')"></div><div class="hotspot h-home" data-label="富宜路86號｜你唯一的避風港" onclick="openPage('home')"></div><div class="hotspot h-music" data-label="金嗓卡拉OK｜最想和你一起" onclick="openPage('music')"></div><div class="hotspot h-food" data-label="美而美早餐店｜一起吃過的東西" onclick="openPage('food')"></div><div class="hotspot h-nav" data-label="公路局｜想你的時候" onclick="openTreasureMapFromStreet(event)"></div></div></div><div class="hint"><div class="hint-inner"><span>← →</span><div>左右滑這條街<small>點招牌或建築，進入對應的時光。</small></div></div></div></div>
-<audio id="themeAudio" preload="metadata" loop src="assets/audio/dear-ang-theme.mp3"></audio>
-<section class="page" id="page-photo"><div class="page-head"><button class="back" onclick="closePage()">← 回到街上</button><b>華光相館｜你的形 和你的影</b></div><div class="page-body"><div class="hero-card"><img src="assets/images/memory-world.webp" onerror="this.style.display='none'"><div class="hero-text"><h1>你和我們的時光</h1></div></div><div class="section"><h2>照片</h2><div id="photoGrid" class="grid"><div class="empty">照片載入中…</div></div></div></div></section>
-<section class="page" id="page-video"><div class="page-head"><button class="back" onclick="closePage()">← 回到街上</button><b>新時代影音館｜忘不掉的動態氣息</b></div><div class="page-body"><div class="section"><h2>影片</h2><div class="video-grid" id="videoGrid"><div class="empty">影片載入中…</div></div></div></div></section>
-<section class="page" id="page-home"><div class="page-head"><button class="back" onclick="closePage()">← 回到街上</button><b>中間公寓｜哥 記得常回家看看</b></div><div class="page-body"><div class="section"><h2>他個人的照片</h2><div id="homePhotoGrid" class="grid"><div class="empty">載入中…</div></div></div></div></section>
-<section class="page" id="page-music"><div class="page-head"><button class="back" onclick="closePage()">← 回到街上</button><b>金嗓卡拉OK｜還是要一起唱吧</b></div><div class="page-body"><div class="ktv-machine"><div class="ktv-tv"><div class="ktv-tv-top">金嗓卡拉OK</div><div class="ktv-stage-wrap"><img src="assets/images/ktv-stage.webp" alt="卡拉OK電視、麥克風與音響" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'ktv-stage-fallback',textContent:'金嗓卡拉 OK'}))"><div class="ktv-screen" id="ktvScreen"><video id="ktvVideo" controls playsinline preload="none"></video><div class="ktv-audio-visual" id="ktvAudioVisual"><div class="ktv-note">♫</div><b id="ktvAudioTitle">請從歌本點歌，或用遙控輸入歌號</b></div><audio id="ktvAudio" controls preload="none"></audio><div class="ktv-osd" id="ktvOsd">請輸入歌號 → 按「輸入」或直接點歌本播放</div></div></div></div><div class="ktv-body"><div class="section ktv-songbook"><h2>歌本</h2><div id="ktvSongbook"><div class="empty">歌曲載入中…</div></div></div><div class="section ktv-remote"><h2>遙控器</h2><div class="ktv-display"><span id="ktvDisplay">-----</span><small id="ktvSelectedText">尚未選歌</small></div><div class="ktv-remote-photo-wrap"><img src="assets/images/ktv-remote.png" alt="卡拉OK遙控器" onerror="this.style.display='none';this.parentElement.style.aspectRatio='3/5';this.parentElement.style.background='linear-gradient(180deg,#2b2b2f,#08080a)';"><button class="ktv-img-hotspot round" style="left:38.2%;top:10.7%" onclick="ktvPress('1')"></button><button class="ktv-img-hotspot round" style="left:60.5%;top:10.7%" onclick="ktvPress('2')"></button><button class="ktv-img-hotspot round" style="left:79.6%;top:10.7%" onclick="ktvPress('3')"></button><button class="ktv-img-hotspot round" style="left:38.5%;top:20.4%" onclick="ktvPress('4')"></button><button class="ktv-img-hotspot round" style="left:60.5%;top:20.4%" onclick="ktvPress('5')"></button><button class="ktv-img-hotspot round" style="left:79.6%;top:20.4%" onclick="ktvPress('6')"></button><button class="ktv-img-hotspot round" style="left:38.5%;top:30.2%" onclick="ktvPress('7')"></button><button class="ktv-img-hotspot round" style="left:60.7%;top:30.2%" onclick="ktvPress('8')"></button><button class="ktv-img-hotspot round" style="left:79.6%;top:30.2%" onclick="ktvPress('9')"></button><button class="ktv-img-hotspot round" style="left:40.6%;top:40.5%" onclick="ktvClear()"></button><button class="ktv-img-hotspot round" style="left:60.9%;top:40.5%" onclick="ktvPress('0')"></button><button class="ktv-img-hotspot round" style="left:79.7%;top:40.5%" onclick="ktvEnter(true)"></button><button class="ktv-img-hotspot square" style="left:79.8%;top:52.2%" onclick="ktvTogglePlayPause()"></button><button class="ktv-img-hotspot square" style="left:60.4%;top:61.9%" onclick="ktvReplay()"></button><button class="ktv-img-hotspot square" style="left:79.8%;top:61.9%" onclick="ktvPrev()"></button><button class="ktv-img-hotspot round" style="left:79.8%;top:74.0%" onclick="ktvNext()"></button><button class="ktv-img-hotspot round" style="left:60.4%;top:86.1%" onclick="ktvVolume(0.1)"></button><button class="ktv-img-hotspot round" style="left:79.8%;top:86.1%" onclick="ktvVolume(-0.1)"></button></div><div class="ktv-remote-caption">輸入歌號 → 按「輸入」。歌本列也可以直接點選播放。</div></div></div></div></div></section>
-<section class="page" id="page-food"><div class="page-head"><button class="back" onclick="closePage()">← 回到街上</button><b>美而美早餐店｜口味很像的我們</b></div><div class="page-body"><div class="section"><h2>照片</h2><div id="foodPhotoGrid" class="grid"><div class="empty">食物照片載入中…</div></div></div></div></section>
-<section class="page" id="page-nav"><div class="page-head route-page-head"><button class="back" onclick="closePage()">← 回到街上</button><b>公路局｜當我想見你的時候。</b></div><div class="route-map-app" id="routeMapApp"><img class="route-map-bg" src="treasure_map_bg.png" alt="藏寶圖背景" onerror="this.onerror=null;this.src='assets/images/treasure_map_bg.png';this.onerror=function(){this.style.display='none'}"><svg class="route-svg" viewBox="0 0 2160 3840" preserveAspectRatio="none"><path id="routeMapPath" class="route-base" d="M 760 1565 C 560 1240, 430 870, 420 500 C 760 420, 1220 390, 1680 440 C 1640 700, 1585 950, 1510 1140 C 1530 1510, 1545 1860, 1540 2250 C 1450 2680, 1365 3070, 1295 3420"/><path id="routeMapDone" class="route-done" d="M 760 1565 C 560 1240, 430 870, 420 500 C 760 420, 1220 390, 1680 440 C 1640 700, 1585 950, 1510 1140 C 1530 1510, 1545 1860, 1540 2250 C 1450 2680, 1365 3070, 1295 3420"/><path id="routeMapHot" class="route-hot" d="M 760 1565 C 560 1240, 430 870, 420 500 C 760 420, 1220 390, 1680 440 C 1640 700, 1585 950, 1510 1140 C 1530 1510, 1545 1860, 1540 2250 C 1450 2680, 1365 3070, 1295 3420"/><g id="routeMapLight"><circle class="route-halo" r="44" cx="0" cy="0"/><circle class="route-ring" r="24" cx="0" cy="0"/><circle class="route-core" r="12" cx="0" cy="0"/></g></svg><div class="route-title-pill" id="routeTitlePill">通往他的路｜當我想見你的時候</div><div class="route-nav-buttons"><button id="routePrev" type="button">↑</button><button id="routeNext" type="button">↓</button></div><div id="routeSpots"></div><article class="route-story-card" id="routeCard"><div class="route-story-top" id="routeCardTop"><div class="route-num" id="routeNum">1</div><div><h2 class="route-story-title" id="routeStoryTitle"></h2><div class="route-tag" id="routeStoryTag"></div></div></div><div class="route-body" id="routeStoryBody"></div></article><div class="route-hint" id="routeHint">點卡片展開全文</div><div class="route-dots" id="routeDots"></div></div></section>
-<div class="lightbox" id="lightbox" onclick="if(event.target.id==='lightbox')closeLightbox()"><button class="lb-close" onclick="closeLightbox()">關閉</button><img id="lbImg" alt="放大照片"></div><div class="toast" id="toast">完成</div>
+<div class="lyric-danmaku-layer" id="lyricDanmakuLayer" aria-hidden="true"></div>
+<div class="gate" id="gate">
+  <div class="gate-card">
+    <div class="kicker">DEAR ANG MEMORY WORLD</div>
+    <div class="gate-title" aria-label="想見你標題">
+      <span>想見你.</span>
+      <span class="i1">想見你..</span>
+      <span class="i2">想見你了….</span>
+    </div>
+    <div class="gate-song-credit" aria-label="主題曲資訊">
+      <div class="credit-kicker">Theme Song</div>
+      <div class="credit-title">【 給安格 • Dear ANG 】</div>
+      <div class="credit-meta-line"><span>作詞 : Enden Mi</span><i>|</i><span>作曲 : Enden Mi</span></div>
+    </div>
+    <p class="gate-lead">這裡是你和我們的時光。一棟房子，一段曾經。</p>
+    <button onclick="enterWorld()">踏上想你的旅程</button>
+    <div class="tiny" style="margin-top:14px">!!!!! 提醒 : 情緒較為敏感者，請先準備好衛生紙。 !!!!!</div>
+  </div>
+</div>
+
+<div class="asset-preload-status" id="assetPreloadStatus">準備通往回憶…</div>
+<div class="opening-countdown" id="openingCountdown" aria-live="polite">
+  <div class="opening-countdown-card">
+    <video class="opening-countdown-video" id="openingCountdownVideo" src="assets/videos/opening-countdown.mp4" poster="assets/images/memory-world.webp" playsinline webkit-playsinline preload="auto"></video>
+    <div class="opening-video-loader" id="openingVideoLoader" aria-live="polite">影片準備中…</div>
+    <div class="opening-video-caption">回憶倒流中 請留意眼淚回流</div>
+    <div class="credit-kicker">OPENING COUNTDOWN</div>
+    <div class="opening-countdown-title">倒數</div>
+    <div class="opening-countdown-sub">影片裡已有秒數。播放完後主題曲開始。</div>
+    <div class="opening-number" id="openingNumber">10</div>
+    <div class="opening-photo-draw" id="openingPhotoDraw"></div>
+    <div class="opening-start-note" id="openingStartNote">0 秒開始播放</div>
+    <button class="opening-video-skip" type="button" onclick="finishOpeningMemoryCountdown()">跳過倒數</button>
+  </div>
+</div>
+
+<div class="mini-world hidden" id="miniWorld" aria-label="CRT電視小世界">
+  <div class="mini-crt-scene">
+<video class="mini-crt-frame" id="miniFrameVideo" src="mini-world-frame.mp4" autoplay muted loop playsinline webkit-playsinline preload="auto" poster="mini-world-frame.mp4"  aria-label="木框天氣影片"></video>
+      <button class="mini-world-enter-hotspot" type="button" onclick="enterMainWorld()" aria-label="進入富宜路街道"></button>
+      <div class="mini-screen-shine"></div>
+      <div class="mini-screen-hint">回到你成長的街道</div>
+      <button class="treasure-map-hit" type="button" onclick="openTreasureMapFromMini(event)" aria-label="打開藏寶地圖｜通往他的路"></button>
+    <button class="radio-audio-hit radio-audio-play" type="button" onclick="playLetterAudio()" aria-label="播放留言音檔"><span>▶</span></button>
+    <button class="radio-audio-hit radio-audio-stop" type="button" onclick="stopLetterAudio()" aria-label="停止留言音檔"><span>■</span></button>
+    <audio id="letterAudio" preload="metadata" src="assets/audio/aming-message.mp3"></audio>
+    <div class="mini-weather-status" id="miniWeatherStatus">你那邊的天氣：套用：⛈️ 雷雨・31.4°C・風速 11 km/h</div>
+    <section class="frame-letter-card" aria-label="FRAME 下方留言">
+      <div class="frame-letter-text">親愛的阿明<br>
+沒想到你就這樣離開了，連一句再見都沒說，即使夏日將至，我還是不願接受，不敢相信。<br><br>
+於是我把對你的思念，放在這個網站裡，想安撫愛你的人，和你牽掛的人，包括我自己。<br><br>
+因為太難以置信了，所以很多話，隨著時間，才慢慢累積，謝謝你來找過我不只一次，也在我需要時給我勇氣，我是真的都有感覺到，不管當下，或事後看照片/影片時都有，就像那次看完你，載阿姨回家路上，我們一直在聽你過往錄音唱的歌，阿姨下車走回家的當下，我很不捨，於是偷偷拍下她的背影，後來發現有開到 Live Photo，發現拍那張照片的當下，你正唱著:｢我的心有多痛。」這期間也寫了一首想念你的歌。<br><br>
+如果可以，那些你該盡的責，那些你來不及做的，我願幫你分擔一點，希望你別嫌棄。<br><br>
+這網頁我要送給格媽，格妹，我自己，和姊夫，我會好好跟姊夫相處的，也會多關心他，你就放心自在的飛吧，我們會永遠愛你，Always Remember Us This Way。</div>
+    </section>
+  </div>
+  <div>
+    <div></div>
+  </div>
+</div>
+
+
+<div class="world" id="world" aria-label="你和我們的時光世界">
+  <div class="topbar">
+    <div class="brand"><small>DEAR ANG</small>你和我們的時光</div>
+    <div class="top-actions">
+      <button class="icon-btn" onclick="toggleMusic()" id="musicBtn" title="音樂開關" aria-label="音樂開關">♫</button>
+      <button class="icon-btn lyric-toggle on" onclick="toggleLyrics()" id="lyricBtn" title="歌詞開關" aria-label="歌詞開關">詞</button>
+      <button class="icon-btn" onclick="refreshDataNoReload()" id="dataRefreshBtn" title="重新整理資料（不刷新頁面）" aria-label="重新整理資料，不刷新頁面">↻</button>
+      <button class="icon-btn cache-btn" onclick="refreshDearAngCache()" id="cacheRefreshBtn" title="更新快取" aria-label="更新快取">存</button>
+      <button class="icon-btn" onclick="toggleViewZoom()" id="zoomBtn" title="放大 / 還原" aria-label="放大鏡">🔍</button>
+      <button class="icon-btn" onclick="smartBack()" id="backBtn" title="返回 / 回上層 / 重播開場" aria-label="返回鍵">🔙</button>
+    </div>
+  </div>
+  <div class="scroller" id="scroller">
+    <div class="stage" id="stage">
+      <img class="stage-world-img" id="stageWorldImg" src="assets/images/weather/day-sunny.webp" alt="富宜路街道世界｜☀️ 炎熱晴天｜保留底圖備援">
+      <div class="world-weather" id="worldWeather" style="display: none;"></div>
+      <div class="hotspot h-photo" data-label="相館摩天輪｜建構中" onclick="openFerrisConstruction(event)"></div>
+      <div class="hotspot h-video" data-label="新時代影音館｜影片" onclick="openPage('video')"></div>
+      <div class="hotspot h-home" data-label="富宜路86號｜你唯一的避風港" onclick="openPage('home')"></div>
+      <div class="hotspot h-music" data-label="金嗓卡拉OK｜最想和你一起" onclick="openPage('music')"></div>
+      <div class="hotspot h-food" data-label="美而美早餐店｜一起吃過的東西" onclick="openPage('food')"></div>
+      <div class="hotspot h-nav" data-label="公路局｜想你的時候" onclick="openTreasureMapFromStreet(event)"></div>
+    </div>
+  </div>
+  <div class="hint"><div class="hint-inner"><span>← →</span><div>左右滑這條街<small>點招牌或建築，進入對應的時光。</small></div></div></div>
+</div>
+
+<audio id="themeAudio" preload="metadata" loop="" src="assets/audio/dear-ang-theme.mp3"></audio>
+
+<div class="visitor-identity-modal hidden" id="visitorIdentityModal" onclick="visitorModalBackdropClose(event)">
+  <div class="visitor-identity-card" onclick="event.stopPropagation()">
+    <button type="button" class="visitor-identity-close" onclick="skipVisitorIdentity()" aria-label="關閉訪客登記">×</button>
+    <div class="visitor-identity-kicker">DEAR ANG</div>
+    <h2>願意讓我們知道你是誰嗎？</h2>
+    <p>
+      不用登入，也不用密碼。<br>
+      這些資料不會公開顯示，只是讓 Enden 知道，
+      你曾經來看過他。
+    </p>
+
+    <input id="visitorNameInput" type="text" placeholder="你是誰？例如：Lisa / 小藍 / 同學 / 朋友">
+
+    <select id="visitorCityInput" onchange="updateVisitorDistrictOptions()">
+      <option value="">你大概在哪個城市？</option>
+      <option value="台中市">台中市</option>
+      <option value="南投縣">南投縣</option>
+      <option value="彰化縣">彰化縣</option>
+      <option value="台北市">台北市</option>
+      <option value="新北市">新北市</option>
+      <option value="桃園市">桃園市</option>
+      <option value="高雄市">高雄市</option>
+      <option value="其他">其他</option>
+    </select>
+
+    <select id="visitorDistrictInput" disabled="">
+      <option value="">先選城市，再選區域</option>
+    </select>
+
+    <textarea id="visitorNoteInput" placeholder="想留一句話也可以，不填也沒關係"></textarea>
+
+    <div class="visitor-identity-actions">
+      <button type="button" onclick="saveVisitorIdentity()">送出並關閉</button>
+      <button type="button" class="soft" onclick="skipVisitorIdentity()">先不要</button>
+    </div>
+
+    <div class="visitor-identity-small">
+      這張卡片可以上下滑；右上 ×、背景、或「先不要」都可以關閉。
+    </div>
+  </div>
+</div>
+
+
+<!-- 華光相館｜照片 -->
+<section class="page photo-wheel-page" id="page-photo">
+  <div class="page-head"><button class="back" onclick="closePage()">← 回到街上</button><b>華光相館｜回憶摩天輪相簿</b></div>
+  <div class="page-body">
+    <section class="photo-wheel-wrap" aria-label="華光相館回憶摩天輪">
+      <header class="photo-wheel-head">
+        <h1 class="photo-wheel-title">回憶摩天輪</h1>
+        <div class="photo-wheel-sub">珍藏回憶・永遠在心</div>
+        <div class="photo-wheel-hint"><span></span><span>☝</span></div>
+      </header>
+      <article class="photo-wheel-info">
+        <div class="photo-wheel-polaroid"><div class="photo-wheel-pic" id="photoWheelPic" style="background: radial-gradient(circle at 72% 20%, rgba(255, 250, 190, 0.9) 0px, rgba(255, 250, 190, 0.9) 10%, transparent 11%), linear-gradient(rgb(99, 198, 185), rgb(34, 75, 87) 55%, rgb(22, 13, 18));"></div></div>
+        <h2><span class="photo-wheel-icon" id="photoWheelIcon">📷</span><span id="photoWheelTitle">愛的旅程</span><span>♡</span></h2>
+        <p id="photoWheelText">記錄我們一起走過的每個重要時刻，<br>從相遇、相戀到共同築起的未來。<br>每一張照片，都是愛的證明。</p>
+      </article>
+
+      <section class="section photo-wheel-hidden-grid" aria-hidden="true">
+        <h2>照片</h2>
+        <div id="photoGrid" class="album-mount"><div class="empty">照片載入中…</div></div>
+      </section>
+   <!-- 新時代影音館｜影片 -->
+<section class="page" id="page-video">
+  <div class="page-head"><button class="back" onclick="closePage()">← 回到街上</button><b>新時代影音館｜忘不掉的動態氣息</b></div>
+  <div class="page-body">
+    <div class="hero-card"><img src="assets/images/memory-world.webp" alt="新時代影音館"><div class="hero-text"><h1>影音館</h1><p></p></div></div>
+    <div class="section folder-hint"><h2></h2><div class="story">02_影音館<br></div></div>
+    <div class="section"><h2>影片</h2><div class="video-grid" id="videoGrid"><div class="empty">影片載入中…</div></div></div>
+  </div>
+</section>
+<!-- 中間公寓｜你家 -->
+<section class="page" id="page-home">
+  <div class="page-head"><button class="back" onclick="closePage()">← 回到街上</button><b>中間公寓｜哥 記得常回家看看
+</b></div>
+  <div class="page-body">
+    <div class="hero-card"><img src="assets/images/memory-world.webp" alt="中間公寓"><div class="hero-text"><h1>你家</h1><p>想起你，你的樣貌，你的體溫，和你的臉龐。</p></div></div>
+    <div class="section folder-hint"><h2></h2><div class="story">03_你的家<br></div></div>
+    <div class="section"><h2>他個人的照片</h2><div id="homePhotoGrid" class="album-mount"><div class="empty">載入中…</div></div></div>
+  </div>
+</section>
+<!-- 金嗓卡拉OK｜音樂 -->
+<section class="page" id="page-music">
+  <div class="page-head"><button class="back" onclick="closePage()">← 回到街上</button><b>金嗓卡拉OK｜還是要一起唱吧</b></div>
+  <div class="page-body">
+    <div class="ktv-machine">
+      <div class="ktv-tv ktv-tv-machine">
+        <div class="ktv-tv-top">金嗓卡拉OK</div>
+        <div class="ktv-stage-wrap">
+          <img src="assets/images/ktv-stage.webp" alt="卡拉OK電視、麥克風與音響">
+          <div class="ktv-screen" id="ktvScreen">
+            <video id="ktvVideo" controls="" playsinline="" preload="none"></video>
+            <div class="ktv-audio-visual" id="ktvAudioVisual">
+              <div class="ktv-note">♫</div>
+              <b id="ktvAudioTitle">請從歌本點編號，或用遙控輸入歌號</b>
+            </div>
+            <audio id="ktvAudio" controls="" preload="none"></audio>
+            <div class="ktv-osd" id="ktvOsd">請用遙控輸入歌號 → 按「輸入」→ 再按「開始」</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ktv-body">
+        <div class="section ktv-songbook">
+          <h2>歌本</h2>
+          <div id="ktvSongbook"><div class="empty">歌曲載入中…</div></div>
+          <div class="ktv-folder-note"></div>
+        </div>
+
+        <div class="section ktv-remote">
+          <h2>遙控器</h2>
+          <div class="ktv-display"><span id="ktvDisplay">---</span><small id="ktvSelectedText">尚未選歌</small></div>
+          <div class="ktv-remote-photo-wrap" aria-label="卡拉OK遙控器">
+            <img src="assets/images/ktv-remote.webp" alt="卡拉OK遙控器">
+            <button class="ktv-img-hotspot side" style="left:16.7%;top:11.0%" onclick="ktvRemoteHint('設定功能暫不使用')" aria-label="設定"></button>
+            <button class="ktv-img-hotspot side" style="left:16.7%;top:20.8%" onclick="document.getElementById('ktvSongbook')?.scrollIntoView({behavior:'smooth',block:'center'})" aria-label="菜單"></button>
+            <button class="ktv-img-hotspot side" style="left:16.7%;top:30.6%" onclick="ktvEnter()" aria-label="已點"></button>
+            <button class="ktv-img-hotspot side" style="left:16.7%;top:40.3%" onclick="ktvStop()" aria-label="停止"></button>
+            <button class="ktv-img-hotspot round" style="left:38.2%;top:10.7%" onclick="ktvPress('1')" aria-label="1"></button>
+            <button class="ktv-img-hotspot round" style="left:60.5%;top:10.7%" onclick="ktvPress('2')" aria-label="2"></button>
+            <button class="ktv-img-hotspot round" style="left:79.6%;top:10.7%" onclick="ktvPress('3')" aria-label="3"></button>
+            <button class="ktv-img-hotspot round" style="left:38.5%;top:20.4%" onclick="ktvPress('4')" aria-label="4"></button>
+            <button class="ktv-img-hotspot round" style="left:60.5%;top:20.4%" onclick="ktvPress('5')" aria-label="5"></button>
+            <button class="ktv-img-hotspot round" style="left:79.6%;top:20.4%" onclick="ktvPress('6')" aria-label="6"></button>
+            <button class="ktv-img-hotspot round" style="left:38.5%;top:30.2%" onclick="ktvPress('7')" aria-label="7"></button>
+            <button class="ktv-img-hotspot round" style="left:60.7%;top:30.2%" onclick="ktvPress('8')" aria-label="8"></button>
+            <button class="ktv-img-hotspot round" style="left:79.6%;top:30.2%" onclick="ktvPress('9')" aria-label="9"></button>
+            <button class="ktv-img-hotspot round" style="left:40.6%;top:40.5%" onclick="ktvClear()" aria-label="取消"></button>
+            <button class="ktv-img-hotspot round" style="left:60.9%;top:40.5%" onclick="ktvPress('0')" aria-label="0"></button>
+            <button class="ktv-img-hotspot round" style="left:79.7%;top:40.5%" onclick="ktvEnter()" aria-label="輸入"></button>
+            <button class="ktv-img-hotspot square" style="left:17.0%;top:52.2%" onclick="ktvRemoteHint('伴唱功能暫不使用')" aria-label="伴唱"></button>
+            <button class="ktv-img-hotspot square" style="left:40.7%;top:52.2%" onclick="ktvRemoteHint('男調功能暫不使用')" aria-label="男調"></button>
+            <button class="ktv-img-hotspot square" style="left:60.4%;top:52.2%" onclick="ktvRemoteHint('插歌功能暫不使用')" aria-label="插歌"></button>
+            <button class="ktv-img-hotspot square" style="left:79.8%;top:52.2%" onclick="ktvTogglePlayPause()" aria-label="播放暫停"></button>
+            <button class="ktv-img-hotspot square" style="left:17.0%;top:61.9%" onclick="ktvRemoteHint('刪歌功能暫不使用')" aria-label="刪歌"></button>
+            <button class="ktv-img-hotspot square" style="left:40.7%;top:61.9%" onclick="ktvRemoteHint('女調功能暫不使用')" aria-label="女調"></button>
+            <button class="ktv-img-hotspot square" style="left:60.4%;top:61.9%" onclick="ktvReplay()" aria-label="重播"></button>
+            <button class="ktv-img-hotspot square" style="left:79.8%;top:61.9%" onclick="ktvPrev()" aria-label="上一首"></button>
+            <button class="ktv-img-hotspot round" style="left:17.0%;top:74.0%" onclick="ktvRemoteHint('快進功能暫不使用')" aria-label="快進"></button>
+            <button class="ktv-img-hotspot round" style="left:40.7%;top:74.0%" onclick="ktvRemoteHint('共調功能暫不使用')" aria-label="共調"></button>
+            <button class="ktv-img-hotspot round" style="left:60.4%;top:74.0%" onclick="ktvRemoteHint('多左鼠功能暫不使用')" aria-label="多左鼠"></button>
+            <button class="ktv-img-hotspot round" style="left:79.8%;top:74.0%" onclick="ktvNext()" aria-label="下一首"></button>
+            <button class="ktv-img-hotspot round" style="left:17.0%;top:86.1%" onclick="ktvRemoteHint('快進倒退功能暫不使用')" aria-label="快進倒退"></button>
+            <button class="ktv-img-hotspot round" style="left:40.7%;top:86.1%" onclick="ktvRemoteHint('快退功能暫不使用')" aria-label="快退"></button>
+            <button class="ktv-img-hotspot round" style="left:60.4%;top:86.1%" onclick="ktvVolume(0.1)" aria-label="音量加"></button>
+            <button class="ktv-img-hotspot round" style="left:79.8%;top:86.1%" onclick="ktvVolume(-0.1)" aria-label="音量減"></button>
+          </div>
+          <div class="ktv-remote-caption">照這支遙控操作：輸入歌號 → 按「輸入」→ 按「開始」播放。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- 美而美早餐店｜食物 -->
+<section class="page" id="page-food">
+  <div class="page-head"><button class="back" onclick="closePage()">← 回到街上</button><b>美而美早餐店｜口味很像的我們。</b></div>
+  <div class="page-body">
+    <div class="hero-card"><img src="assets/images/memory-world.webp" alt="美而美早餐店"><div class="hero-text"><h1>食物記憶</h1><p>一起吃過的、他喜歡吃的、他推薦你吃的，都由 Google Drive 分類讀取。</p></div></div>
+    <div class="section folder-hint"><h2></h2><div class="story">05_美而美早餐店<br></div></div>
+    <div class="section"><h2>照片</h2><div id="foodPhotoGrid" class="grid"><div class="empty">食物照片載入中…</div></div></div>
+  </div>
+</section>
+<!-- 公路局｜導航 -->
+<section class="page" id="page-nav" data-weather="⛈️ 雷雨">
+  <div class="page-head"><button class="back" onclick="closePage()">← 回到街上</button><b>公路局｜通往他的路</b></div>
+  <header class="route-top-banner" aria-label="公路局藏寶圖橫幅">
+    <button class="route-banner-back" type="button" onclick="closePage()" aria-label="回到街上">←</button>
+    <div class="route-banner-copy"><strong>公路局｜通往他的路</strong><small>當我想見你的時候</small></div>
+    <span class="route-banner-mark" aria-hidden="true">MAP</span>
+  </header>
+  <div class="route-map-app" id="routeMapApp" aria-label="通往他的路｜藏寶圖">
+    <img class="route-map-bg" src="assets/images/treasure_map_bg.webp" alt="藏寶圖背景" onerror="this.onerror=null;this.src='assets/images/treasure_map_bg.png'">
+    <svg class="route-svg" viewBox="0 0 2160 3840" preserveAspectRatio="none" aria-hidden="true">
+      <path id="routeMapPath" class="route-base" d="M 760 1565 C 560 1240, 430 870, 420 500 C 760 420, 1220 390, 1680 440 C 1640 700, 1585 950, 1510 1140 C 1530 1510, 1545 1860, 1540 2250 C 1450 2680, 1365 3070, 1295 3420"></path>
+      <path id="routeMapDone" class="route-done" d="M 760 1565 C 560 1240, 430 870, 420 500 C 760 420, 1220 390, 1680 440 C 1640 700, 1585 950, 1510 1140 C 1530 1510, 1545 1860, 1540 2250 C 1450 2680, 1365 3070, 1295 3420"></path>
+      <path id="routeMapHot" class="route-hot" d="M 760 1565 C 560 1240, 430 870, 420 500 C 760 420, 1220 390, 1680 440 C 1640 700, 1585 950, 1510 1140 C 1530 1510, 1545 1860, 1540 2250 C 1450 2680, 1365 3070, 1295 3420"></path>
+      <g id="routeMapLight"><circle class="route-halo" r="44" cx="0" cy="0"></circle><circle class="route-ring" r="24" cx="0" cy="0"></circle><circle class="route-core" r="12" cx="0" cy="0"></circle></g>
+    </svg>
+    <div class="route-title-pill" id="routeTitlePill">通往他的路｜當我想見你的時候</div>
+    <div class="route-nav-buttons"><button id="routePrev" type="button" aria-label="上一站">↑</button><button id="routeNext" type="button" aria-label="下一站">↓</button></div>
+    <div id="routeSpots"></div>
+    <article class="route-story-card" id="routeCard">
+      <div class="route-story-top" id="routeCardTop"><div class="route-num" id="routeNum">1</div><div><h2 class="route-story-title" id="routeStoryTitle"></h2><div class="route-tag" id="routeStoryTag"></div></div></div>
+      <div class="route-body" id="routeStoryBody"></div>
+    </article>
+    <div class="route-hint" id="routeHint">點卡片展開全文</div>
+    <div class="route-dots" id="routeDots"></div>
+  </div>
+</section>
+<div class="ferris-construction hidden" id="ferrisConstruction" role="dialog" aria-modal="true" aria-labelledby="ferrisConstructionTitle" onclick="if(event.target===this)closeFerrisConstruction()">
+  <button class="ferris-build-close" type="button" onclick="closeFerrisConstruction()" aria-label="關閉">×</button>
+  <div class="ferris-build-card">
+    <div class="ferris-build-kicker">DEAR ANG PHOTO GALLERY</div>
+    <svg class="ferris-build-svg" viewBox="0 0 420 480" role="img" aria-label="摩天輪建構中">
+      <defs>
+        <linearGradient id="ferrisGold" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff1bd"/><stop offset=".48" stop-color="#e4a34d"/><stop offset="1" stop-color="#8a4b20"/></linearGradient>
+        <filter id="ferrisGlow"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+      </defs>
+      <g class="ferris-build-rotor" transform-origin="210px 205px">
+        <circle cx="210" cy="205" r="154" fill="none" stroke="url(#ferrisGold)" stroke-width="8" filter="url(#ferrisGlow)"/>
+        <circle cx="210" cy="205" r="132" fill="none" stroke="#ffd98a" stroke-width="2" opacity=".72"/>
+        <g stroke="#e8b468" stroke-width="3" opacity=".86">
+          <line x1="210" y1="205" x2="210" y2="51"/><line x1="210" y1="205" x2="287" y2="72"/>
+          <line x1="210" y1="205" x2="343" y2="128"/><line x1="210" y1="205" x2="364" y2="205"/>
+          <line x1="210" y1="205" x2="343" y2="282"/><line x1="210" y1="205" x2="287" y2="338"/>
+          <line x1="210" y1="205" x2="210" y2="359"/><line x1="210" y1="205" x2="133" y2="338"/>
+          <line x1="210" y1="205" x2="77" y2="282"/><line x1="210" y1="205" x2="56" y2="205"/>
+          <line x1="210" y1="205" x2="77" y2="128"/><line x1="210" y1="205" x2="133" y2="72"/>
+        </g>
+        <g fill="#f2bd69" stroke="#fff0bb" stroke-width="2">
+          <rect x="194" y="31" width="32" height="28" rx="9"/><rect x="273" y="52" width="32" height="28" rx="9"/>
+          <rect x="332" y="111" width="32" height="28" rx="9"/><rect x="348" y="191" width="32" height="28" rx="9"/>
+          <rect x="332" y="271" width="32" height="28" rx="9"/><rect x="273" y="330" width="32" height="28" rx="9"/>
+          <rect x="194" y="351" width="32" height="28" rx="9"/><rect x="115" y="330" width="32" height="28" rx="9"/>
+          <rect x="56" y="271" width="32" height="28" rx="9"/><rect x="40" y="191" width="32" height="28" rx="9"/>
+          <rect x="56" y="111" width="32" height="28" rx="9"/><rect x="115" y="52" width="32" height="28" rx="9"/>
+        </g>
+        <circle cx="210" cy="205" r="25" fill="#5d351d" stroke="#ffd98a" stroke-width="7"/>
+      </g>
+      <path d="M210 230 L135 432 M210 230 L285 432" fill="none" stroke="url(#ferrisGold)" stroke-width="12" stroke-linecap="round"/>
+      <path d="M105 432 H315" stroke="#ffd98a" stroke-width="12" stroke-linecap="round"/>
+    </svg>
+    <h2 id="ferrisConstructionTitle">相館摩天輪</h2>
+    <div class="ferris-build-status">建構中</div>
+    <p>照片車廂與進站動畫正在整理，完成後再正式開放。</p>
+  </div>
+</div>
+
+<div class="lightbox" id="lightbox" onclick="if(event.target.id==='lightbox')closeLightbox()" ontouchstart="lbTouchStart(event)" ontouchend="lbTouchEnd(event)">
+  <button class="lb-close" onclick="closeLightbox()">關閉</button>
+  <button class="lb-nav lb-prev" onclick="moveLightbox(-1);event.stopPropagation()">‹</button>
+  <img id="lbImg" alt="放大照片">
+  <button class="lb-nav lb-next" onclick="moveLightbox(1);event.stopPropagation()">›</button>
+  <div class="lb-caption" id="lbCaption"></div>
+</div>
+<div class="toast" id="toast">完成</div>
+
 <script>
-const CONFIG={APP_VERSION:'20260626_full_v62',GAS_API_URL:'https://script.google.com/macros/s/AKfycbzrduB_eXPk6OpqnGPXjNBNQCeUyarzAfki4IL-X_JIVQr7RS9sN5ayyvA2OEaXDXzv/exec'};
-let DATA={photos:[],photoGroups:[],songs:[],memories:[],comments:[],theme:null};let musicWanted=false;
-function esc(s){return String(s||'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
+
+let lyricsEnabled=true;
+let lastLyricIndex=-1;
+let lastAudioTime=0;
+let lastLyricSpawnAt=0;
+let lyricSpawnTimes={};
+let lyricLaneIndex=0;
+const ROOT_LYRIC_FILES={
+  lrc:['assets/lyrics/給安格.lrc','./給安格.lrc'],
+  srt:['assets/lyrics/給安格.srt','./給安格.srt'],
+  embedded:['assets/lyrics/lyrics_embedded.js.txt','./lyrics_embedded.js.txt']
+};
+function parseTimeToSeconds(s){
+  if(!s)return 0;
+  s=String(s).trim();
+  const p=s.split(':').map(x=>x.replace(',','.'));
+  if(p.length===2)return Number(p[0])*60+Number(p[1]);
+  if(p.length===3)return Number(p[0])*3600+Number(p[1])*60+Number(p[2]);
+  return Number(s)||0;
+}
+function parseLrc(text){
+  const rows=[];
+  String(text||'').split(/\r?\n/).forEach(line=>{
+    const tags=[...line.matchAll(/\[(\d{1,2}:\d{2}(?:[\.:]\d{1,3})?)\]/g)].map(m=>m[1]);
+    const words=line.replace(/\[[^\]]+\]/g,'').trim();
+    if(!tags.length||!words)return;
+    tags.forEach(t=>rows.push({time:parseTimeToSeconds(t),text:words}));
+  });
+  rows.sort((a,b)=>a.time-b.time);
+  return rows.map((r,i)=>({time:r.time,end:rows[i+1]?Math.max(rows[i+1].time-.05,r.time+1):r.time+6,text:r.text}));
+}
+function parseSrt(text){
+  const rows=[];
+  const blocks=String(text||'').replace(/\r/g,'').split(/\n\s*\n/);
+  blocks.forEach(block=>{
+    const lines=block.split('\n').filter(Boolean);
+    const timeLine=lines.find(x=>x.includes('-->'));
+    if(!timeLine)return;
+    const parts=timeLine.split('-->').map(x=>x.trim());
+    const textLines=lines.slice(lines.indexOf(timeLine)+1).map(x=>x.trim()).filter(Boolean);
+    const words=textLines.join(' / ').trim();
+    if(!words)return;
+    rows.push({time:parseTimeToSeconds(parts[0]),end:parseTimeToSeconds(parts[1]),text:words});
+  });
+  return rows;
+}
+async function fetchTextFile(url){
+  const r=await fetch(url,{cache:'default'});
+  if(!r.ok)throw new Error(url+' 讀取失敗');
+  return await r.text();
+}
+async function fetchFirstTextFile(urls){
+  let lastError=null;
+  for(const url of (Array.isArray(urls)?urls:[urls])){
+    try{return {url,text:await fetchTextFile(url)};}
+    catch(e){lastError=e;}
+  }
+  throw lastError||new Error('歌詞檔讀取失敗');
+}
+async function loadLyricsFromRootFiles(){
+  // 優先讀 assets/lyrics，與 index.html 同層的舊檔保留為備援。
+  try{
+    const file=await fetchFirstTextFile(ROOT_LYRIC_FILES.lrc);
+    const parsed=parseLrc(file.text);
+    if(parsed.length){LYRIC_LINES=parsed;return file.url;}
+  }catch(e){}
+  try{
+    const file=await fetchFirstTextFile(ROOT_LYRIC_FILES.srt);
+    const parsed=parseSrt(file.text);
+    if(parsed.length){LYRIC_LINES=parsed;return file.url;}
+  }catch(e){}
+  try{
+    const file=await fetchFirstTextFile(ROOT_LYRIC_FILES.embedded);
+    const m=file.text.match(/LYRIC_LINES\s*=\s*(\[[\s\S]*?\]);/);
+    if(m){
+      const parsed=Function('return '+m[1])();
+      if(Array.isArray(parsed)&&parsed.length){LYRIC_LINES=parsed;return file.url;}
+    }
+  }catch(e){}
+  return 'index.html 內建備援歌詞';
+}
+
+let LYRIC_LINES = [
+  { time: 6.33, end: 17.62, text: "主題曲:給安格 Dear ANG" },
+  { time: 17.72, end: 27.47, text: "作詞:Enden 作曲:Enden" },
+  { time: 27.57, end: 30.46, text: "這個世界最殘酷的事情" },
+  { time: 30.56, end: 34.82, text: "總在無意之中" },
+  { time: 34.92, end: 37.21, text: "悄悄把身邊的人" },
+  { time: 37.31, end: 41.38, text: "一個一個帶走" },
+  { time: 41.48, end: 43.94, text: "我們總以為" },
+  { time: 44.04, end: 48.49, text: "還有很多時間" },
+  { time: 48.59, end: 50.8, text: "說好以後再見" },
+  { time: 50.9, end: 54.66, text: "說好下次再去" },
+  { time: 54.76, end: 57.7, text: "可當我回頭" },
+  { time: 57.8, end: 61.13, text: "時間早已沉默" },
+  { time: 61.23, end: 64.11, text: "那些沒說出口的話" },
+  { time: 64.21, end: 68.62, text: "停在昨天以後" },
+  { time: 68.72, end: 71.24, text: "原來這個世界沒有如果" },
+  { time: 71.34, end: 75.18, text: "發生了就是結果" },
+  { time: 75.28, end: 78.19, text: "那些來不及說的再見" },
+  { time: 78.29, end: 82.46, text: "變成一生的沉默" },
+  { time: 82.56, end: 85.68, text: "我不知道你聽不聽得到" },
+  { time: 85.78, end: 89.06, text: "我真的很想你" },
+  { time: 89.16, end: 91.71, text: "我永遠是你弟弟" },
+  { time: 91.81, end: 97.42, text: "你永遠是我哥" },
+  { time: 97.52, end: 100.33, text: "一年多以前的那個夜晚" },
+  { time: 100.43, end: 104.34, text: "高速公路燈閃過" },
+  { time: 104.44, end: 107.39, text: "我們笑著說如果誰先走" },
+  { time: 107.49, end: 110.44, text: "一定要打給對方" },
+  { time: 110.54, end: 112.38, text: "就算要下葬之前" },
+  { time: 112.48, end: 117.13, text: "也要從棺材爬出來說" },
+  { time: 117.23, end: 119.43, text: "兄弟我要走了" },
+  { time: 119.53, end: 124.15, text: "別讓我最後一個人走" },
+  { time: 124.25, end: 125.43, text: "可最後卻是" },
+  { time: 125.53, end: 127.47, text: "別人告訴我" },
+  { time: 127.57, end: 130.21, text: "為什麼我連最後一面" },
+  { time: 130.31, end: 134.72, text: "都來不及見你" },
+  { time: 134.82, end: 137.4, text: "原來這個世界沒有如果" },
+  { time: 137.5, end: 141.63, text: "發生了就是結果" },
+  { time: 141.73, end: 144.28, text: "那些還沒說完的故事" },
+  { time: 144.38, end: 148.42, text: "停在那一刻" },
+  { time: 148.52, end: 151.62, text: "我不知道你聽不聽得到" },
+  { time: 151.72, end: 154.85, text: "我真的很想你" },
+  { time: 154.95, end: 158.08, text: "就算沒有血緣" },
+  { time: 158.18, end: 162.36, text: "你永遠是我哥" },
+  { time: 162.46, end: 164.62, text: "你可不可以" },
+  { time: 164.72, end: 169.15, text: "到我夢裡說說話" },
+  { time: 169.25, end: 171.64, text: "告訴我到底怎麼了" },
+  { time: 171.74, end: 176.67, text: "告訴我你還好嗎" },
+  { time: 176.77, end: 179.95, text: "如果真的有人害你" },
+  { time: 180.05, end: 183.19, text: "如果你還沒說完" },
+  { time: 183.29, end: 185.71, text: "至少讓我知道" },
+  { time: 185.81, end: 193.56, text: "你不是一個人走" },
+  { time: 193.66, end: 196.51, text: "原來這個世界沒有如果" },
+  { time: 196.61, end: 200.75, text: "只剩回憶陪著我" },
+  { time: 200.85, end: 203.43, text: "那些一起走過的日子" },
+  { time: 203.53, end: 207.74, text: "一輩子不會走" },
+  { time: 207.84, end: 211.05, text: "如果你真的聽得到" },
+  { time: 211.15, end: 214.15, text: "就來我夢裡吧" },
+  { time: 214.25, end: 218.07, text: "再叫我一聲弟弟" },
+  { time: 218.17, end: 221.59, text: "再說一次" },
+  { time: 221.69, end: 223.47, text: "兄弟" },
+  { time: 223.57, end: 257.35, text: "我走了" },
+  { time: 257.45, end: 263.45, text: "兄弟.." }
+];
+const LYRIC_OFFSET_SECONDS = 8;
+function setupLyricDanmaku(){
+  const audio=document.getElementById('themeAudio');
+  if(!audio || audio.dataset.lyricBound==='1')return;
+  audio.dataset.lyricBound='1';
+  const tick=()=>{
+    if(!lyricsEnabled)return;
+    const t=audio.currentTime + LYRIC_OFFSET_SECONDS;
+    if(audio.currentTime < lastAudioTime-1){lastLyricIndex=-1;lyricSpawnTimes={};}
+    lastAudioTime=audio.currentTime;
+    const now=Date.now();
+    for(let i=0;i<LYRIC_LINES.length;i++){
+      const line=LYRIC_LINES[i];
+      const active=t>=line.time && t<(line.end||line.time+4);
+      if(active){
+        const key=String(i);
+        const last=lyricSpawnTimes[key]||0;
+        const isNewLine=i!==lastLyricIndex;
+        const shouldRepeat=now-last>2400;
+        if(!isNewLine && !shouldRepeat)break;
+        lastLyricIndex=i;
+        lyricSpawnTimes[key]=now;
+        spawnLyric(line.text);
+        break;
+      }
+    }
+  };
+  audio.addEventListener('timeupdate',tick);
+  audio.addEventListener('play',tick);
+  audio.addEventListener('playing',tick);
+  setInterval(()=>{if(!audio.paused&&!audio.ended)tick();},900);
+  audio.addEventListener('seeked',()=>{lastLyricIndex=-1;lyricSpawnTimes={};});
+  audio.addEventListener('ended',()=>{lastLyricIndex=-1;lyricSpawnTimes={};});
+}
+function spawnLyric(text){
+  const layer=document.getElementById('lyricDanmakuLayer');
+  if(!layer || !text)return;
+  const live=[...layer.querySelectorAll('.lyric-danmaku')];
+  if(live.length>=10 && live[0]&&live[0].parentNode)live[0].parentNode.removeChild(live[0]);
+  const el=document.createElement('div');
+  el.className='lyric-danmaku'+(Math.random()>.55?' soft':'');
+  el.textContent=text;
+  const lanes=[12,20,28,36,44,52,60,68,76];
+  const lane=lanes[lyricLaneIndex++%lanes.length]+(Math.random()*2.6-1.3);
+  el.style.top=Math.max(8,Math.min(80,lane)).toFixed(1)+'vh';
+  el.style.setProperty('--flyDur',(9+Math.random()*4).toFixed(1)+'s');
+  layer.appendChild(el);
+  lastLyricSpawnAt=Date.now();
+  setTimeout(()=>{if(el.parentNode)el.parentNode.removeChild(el)},15000);
+}
+function clearLyricLayer(){
+  const layer=document.getElementById('lyricDanmakuLayer');
+  if(layer)layer.innerHTML='';
+}
+function toggleLyrics(){
+  lyricsEnabled=!lyricsEnabled;
+  const btn=document.getElementById('lyricBtn');
+  if(btn){btn.textContent=lyricsEnabled?'詞':'詞';btn.classList.toggle('on',lyricsEnabled);btn.classList.toggle('off',!lyricsEnabled);}
+  if(!lyricsEnabled){clearLyricLayer();toast('歌詞彈幕已關閉');}
+  else{lastLyricIndex=-1;lyricSpawnTimes={};toast('歌詞彈幕已開啟');}
+}
+function testLyricDanmaku(){spawnLyric('想見你. 想見你.. 想見你了….');}
+
+const CONFIG={LOCAL_THEME:'assets/audio/dear-ang-theme.mp3',
+  GAS_API_URL:'https://script.google.com/macros/s/AKfycbzrduB_eXPk6OpqnGPXjNBNQCeUyarzAfki4IL-X_JIVQr7RS9sN5ayyvA2OEaXDXzv/exec',
+  GITHUB_THEME_AUDIO:''
+};
+const PLACE_POINTS=[
+  {id:1,title:'等你出來的小門',lat:24.1670447,lng:120.6550652},
+  {id:2,title:'第一次陪你搬家',lat:24.1820553,lng:120.5887194},
+  {id:3,title:'搬來當鄰居',lat:24.2158341,lng:120.633206},
+  {id:4,title:'搬到大雅',lat:24.1790991,lng:120.6668274},
+  {id:5,title:'磁鐵',lat:24.143955,lng:120.71775},
+  {id:6,title:'第六棵樹',lat:24.11397,lng:120.7823878}
+];
+let DATA={photos:[],photoGroups:[],songs:[],memories:[],comments:[],theme:null};
+let musicWanted=false;
+
+let openingCountdownActive=false;
+let openingCountdownTimer=null;
+let openingCountdownSeconds=10;
+
+function shuffleOpening(arr){
+  arr=(arr||[]).slice();
+  for(let i=arr.length-1;i>0;i--){
+    const j=Math.floor(Math.random()*(i+1));
+    [arr[i],arr[j]]=[arr[j],arr[i]];
+  }
+  return arr;
+}
+function openingPersonalPhotos(){
+  let pool=[];
+  try{
+    const folders=collectAreaFolders('home','image',[]);
+    folders.forEach(f=>pool.push(...(f.items||[])));
+  }catch(e){}
+  if(!pool.length){
+    pool=(DATA.photos||[]).filter(p=>{
+      const text=[p.rootKey,p.folderPath,p.path,p.name].join(' ');
+      return detectAreaKey(text)==='home';
+    });
+  }
+  if(!pool.length){
+    pool=(DATA.photos||[]).filter(p=>{
+      const k=String(p.kind||'').toLowerCase();
+      const m=String(p.mimeType||'').toLowerCase();
+      return k==='image'||m.indexOf('image/')===0;
+    });
+  }
+  const seen={};
+  pool=pool.filter(p=>{
+    const key=p.id||p.url||p.thumbnailUrl||p.name;
+    if(!key||seen[key])return false;
+    seen[key]=1;
+    return true;
+  });
+  return shuffleOpening(pool).slice(0,11);
+}
+function renderOpeningPhotoDraw(){
+  const box=document.getElementById('openingPhotoDraw');
+  if(!box)return;
+  const photos=openingPersonalPhotos();
+  let html='';
+  for(let i=0;i<11;i++){
+    const p=photos[i];
+    if(p){
+      const sources=driveImageCandidates(p);
+      sources.slice(0,2).forEach(preloadImage);
+      html+=`<div class="opening-photo-slot" data-no="${String(i+1).padStart(2,'0')}"><img ${imgAttrs(p,`alt="個人照 ${i+1}"`)}></div>`;
+    }else{
+      html+=`<div class="opening-photo-slot" data-no="${String(i+1).padStart(2,'0')}"><div class="opening-photo-placeholder">等待<br>個人照</div></div>`;
+    }
+  }
+  box.innerHTML=html;
+}
+function primeThemeBeforeCountdown(){
+  const a=document.getElementById('themeAudio');
+  if(!a)return;
+  setupLyricDanmaku();
+  if(!a.src){
+    if(CONFIG.LOCAL_THEME)a.src=CONFIG.LOCAL_THEME;
+    else if(CONFIG.GITHUB_THEME_AUDIO)a.src=CONFIG.GITHUB_THEME_AUDIO;
+    else if(DATA.theme&&DATA.theme.streamUrl)a.src=DATA.theme.streamUrl;
+  }
+  try{
+    const oldVol=a.volume || 1;
+    a.volume=0;
+    const p=a.play();
+    if(p&&p.then){
+      p.then(()=>{
+        setTimeout(()=>{
+          try{a.pause();a.currentTime=0;}catch(e){}
+          a.volume=oldVol;
+        },120);
+      }).catch(()=>{a.volume=oldVol;});
+    }else{
+      setTimeout(()=>{try{a.pause();a.currentTime=0;}catch(e){}a.volume=oldVol;},120);
+    }
+  }catch(e){}
+}
+
+
+
+
+let uiAudioCtx=null;
+let hintHidden=false;
+const CAPSULE_AREAS={
+  photo:'華光相館｜你和我們的時光',
+  video:'新時代影音館｜影片',
+  home:'中間公寓｜他家',
+  music:'金嗓卡拉OK｜他唱的歌',
+  food:'美而美早餐店｜食物記憶',
+  nav:'公路局｜通往他的路'
+};
+function setupExperienceLayer(){
+  const sc=document.getElementById('scroller');
+  const world=document.getElementById('world');
+  if(sc&&world){
+    const hide=()=>{if(hintHidden)return;hintHidden=true;world.classList.add('hint-muted')};
+    sc.addEventListener('scroll',hide,{passive:true,once:true});
+    sc.addEventListener('touchstart',hide,{passive:true,once:true});
+    sc.addEventListener('wheel',hide,{passive:true,once:true});
+  }
+  document.addEventListener('click',()=>initUiAudio(),{once:true});
+  document.addEventListener('touchstart',()=>initUiAudio(),{once:true,passive:true});
+}
+function initUiAudio(){
+  try{
+    const C=window.AudioContext||window.webkitAudioContext;
+    if(!C)return;
+    if(!uiAudioCtx)uiAudioCtx=new C();
+    if(uiAudioCtx.state==='suspended')uiAudioCtx.resume();
+  }catch(e){}
+}
+function playUiSound(type){
+  try{
+    initUiAudio();
+    if(!uiAudioCtx)return;
+    const now=uiAudioCtx.currentTime;
+    const osc=uiAudioCtx.createOscillator();
+    const gain=uiAudioCtx.createGain();
+    osc.type='sine';
+    if(type==='open'){osc.frequency.setValueAtTime(392,now);osc.frequency.exponentialRampToValueAtTime(660,now+.11);}
+    else if(type==='close'){osc.frequency.setValueAtTime(330,now);osc.frequency.exponentialRampToValueAtTime(220,now+.10);}
+    else if(type==='slide'){osc.frequency.setValueAtTime(520,now);osc.frequency.exponentialRampToValueAtTime(430,now+.08);}
+    else{osc.frequency.setValueAtTime(460,now);}
+    gain.gain.setValueAtTime(0.0001,now);
+    gain.gain.exponentialRampToValueAtTime(type==='slide'?0.018:0.026,now+.012);
+    gain.gain.exponentialRampToValueAtTime(0.0001,now+.12);
+    osc.connect(gain);gain.connect(uiAudioCtx.destination);
+    osc.start(now);osc.stop(now+.14);
+  }catch(e){}
+}
+function showPreloadStatus(msg){
+  const el=document.getElementById('assetPreloadStatus');
+  if(!el)return;
+  el.textContent=msg||'正在準備回憶…';
+  el.classList.add('show');
+  clearTimeout(showPreloadStatus._t);
+  showPreloadStatus._t=setTimeout(()=>el.classList.remove('show'),1200);
+}
+function preloadImage(src){
+  if(!src)return;
+  const img=new Image();
+  img.decoding='async';
+  img.src=src;
+}
+function preloadStaticAssets(){
+  ['assets/images/memory-world.webp','assets/images/ktv-remote.webp','assets/images/sixth_tree.webp'].forEach(preloadImage);
+}
+function preloadFirstDriveAssets(){
+  const first=(DATA.photos||[]).slice(0,8);
+  first.forEach(p=>driveImageCandidates(p).slice(0,2).forEach(preloadImage));
+}
+function preloadAreaAssets(id){
+  showPreloadStatus('正在準備 '+(CAPSULE_AREAS[id]||'這一區')+'…');
+  try{
+    let area=id==='nav'?'road':id;
+    if(id==='photo'||id==='home'||id==='food'||id==='nav'){
+      const folders=collectAreaFolders(area,'image',[]);
+      folders.slice(0,3).forEach(f=>(f.items||[]).slice(0,2).forEach(p=>driveImageCandidates(p).slice(0,2).forEach(preloadImage)));
+    }
+  }catch(e){}
+}
+function capsulePrefix(id){return '[CAPSULE:'+id+'] ';}
+function capsuleMessages(id){
+  const pre=capsulePrefix(id);
+  return (DATA.comments||[]).filter(c=>String(c.message||'').indexOf(pre)===0).map(c=>Object.assign({},c,{message:String(c.message||'').slice(pre.length)}));
+}
+function renderMemoryCapsule(id){
+  const page=document.getElementById('page-'+id);
+  if(!page)return;
+  const body=page.querySelector('.page-body');
+  if(!body)return;
+  let box=page.querySelector('.memory-capsule');
+  if(!box){
+    box=document.createElement('section');
+    box.className='memory-capsule';
+    box.innerHTML=`<h2>時光膠囊</h2>
+      <p class="capsule-note">這裡只放這一區的留言。不會自動亂寫故事，內容由你和好友自己留下。</p>
+      <div class="capsule-list" id="capsule-list-${id}"></div>
+      <div class="capsule-form">
+        <input id="capsule-name-${id}" placeholder="名字，可留空">
+        <textarea id="capsule-text-${id}" placeholder="寫下這一區想留下的話"></textarea>
+        <button onclick="submitMemoryCapsule('${id}')">留下這段回憶</button>
+      </div>`;
+    body.appendChild(box);
+  }
+  const list=box.querySelector('#capsule-list-'+id);
+  const msgs=capsuleMessages(id);
+  list.innerHTML=msgs.length?msgs.map(m=>`<div class="capsule-msg"><b>${esc(m.name||'匿名')}</b>${esc(m.message||'')}</div>`).join(''):`<div class="empty">這一區還沒有留言。</div>`;
+}
+function submitMemoryCapsule(id){
+  const name=(document.getElementById('capsule-name-'+id)||{}).value||'匿名';
+  const input=document.getElementById('capsule-text-'+id);
+  const text=input?input.value.trim():'';
+  if(!text){toast('先寫一點內容',1);return}
+  playUiSound('open');
+  api({action:'addComment',name:name,message:capsulePrefix(id)+text}).then(r=>{
+    if(!r.ok)throw Error(r.error||'留言失敗');
+    DATA.comments=r.comments||DATA.comments||[];
+    if(input)input.value='';
+    renderMemoryCapsule(id);
+    toast('已留下');
+  }).catch(e=>toast(e.message||'留言失敗',1));
+}
+
+
+
+const MEMORY_WEATHERS=[
+  {key:'sunny',label:'☀️ 晴天',chip:'☀️',bg:'assets/images/weather/day-sunny.webp',fx:''},
+  {key:'hot',label:'☀️ 炎熱',chip:'☀️',bg:'assets/images/weather/day-hot.webp',fx:'heat'},
+  {key:'cloudy',label:'⛅ 多雲',chip:'⛅',bg:'assets/images/weather/day-cloudy.webp',fx:''},
+  {key:'overcast',label:'☁️ 陰天',chip:'☁️',bg:'assets/images/weather/day-overcast.webp',fx:''},
+  {key:'rain',label:'🌧️ 雨天',chip:'🌧️',bg:'assets/images/weather/day-rain.webp',fx:'rain'},
+  {key:'storm',label:'⛈️ 暴雨',chip:'⛈️',bg:'assets/images/weather/day-storm.webp',fx:'storm'},
+  {key:'fog',label:'🌫️ 霧',chip:'🌫️',bg:'assets/images/weather/day-fog.webp',fx:'fog'},
+  {key:'haze',label:'😷 霾',chip:'😷',bg:'assets/images/weather/day-haze.webp',fx:'haze'},
+  {key:'night',label:'🌙 夜晚',chip:'🌙',bg:'assets/images/weather/night-clear.webp',fx:'night'},
+  {key:'nightRain',label:'🌧️ 夜雨',chip:'🌧️',bg:'assets/images/weather/night-rain.webp',fx:'rain night'},
+  {key:'snow',label:'❄️ 下雪',chip:'❄️',bg:'assets/images/weather/night-storm.webp',fx:'snow haze'}
+];
+const AUTO_WEATHER_POINT={lat:24.113978,lng:120.782379};
+let memoryWeatherKey=timeBasedWeatherKey();
+let autoWeatherSource='time';
+let autoWeatherTimer=null;
+function memoryWeatherByKey(key){return MEMORY_WEATHERS.find(w=>w.key===key)||MEMORY_WEATHERS[0];}
+function taipeiParts(){
+  try{
+    const parts=new Intl.DateTimeFormat('en-US',{timeZone:'Asia/Taipei',hour:'2-digit',minute:'2-digit',hour12:false}).formatToParts(new Date());
+    const get=t=>Number((parts.find(p=>p.type===t)||{}).value);
+    return {hour:get('hour'),minute:get('minute')};
+  }catch(e){return {hour:new Date().getHours(),minute:new Date().getMinutes()};}
+}
+function taipeiNow(){
+  const p=taipeiParts();
+  const d=new Date();
+  d.setHours(isFinite(p.hour)?p.hour:d.getHours(),isFinite(p.minute)?p.minute:d.getMinutes(),0,0);
+  return d;
+}
+function timeBasedWeatherKey(){
+  const h=taipeiParts().hour;
+  if(h>=5 && h<11)return 'sunny';
+  if(h>=11 && h<16)return 'hot';
+  if(h>=16 && h<18)return 'cloudy';
+  return 'nightRain';
+}
+function timeBasedWeatherText(){
+  const p=taipeiParts();
+  const h=p.hour;
+  const hh=String(isFinite(p.hour)?p.hour:0).padStart(2,'0');
+  const mm=String(isFinite(p.minute)?p.minute:0).padStart(2,'0');
+  if(h>=5 && h<11)return `即時天氣暫時讀取不到，台灣時間 ${hh}:${mm}，先保留早上晴天備援`;
+  if(h>=11 && h<16)return `即時天氣暫時讀取不到，台灣時間 ${hh}:${mm}，先保留白天炎熱備援`;
+  if(h>=16 && h<18)return `即時天氣暫時讀取不到，台灣時間 ${hh}:${mm}，先保留傍晚多雲備援`;
+  return `即時天氣暫時讀取不到，台灣時間 ${hh}:${mm}，先保留夜雨備援`;
+}
+function renderMiniWeatherButtons(){
+  const box=document.getElementById('miniWeatherButtons');
+  if(!box)return;
+  box.innerHTML=MEMORY_WEATHERS.map(w=>`<button type="button" data-weather="${w.key}" onclick="setMemoryWeather('${w.key}',event,'manual')">${w.label}</button>`).join('');
+}
+function setMiniWeatherStatus(text){
+  const el=document.getElementById('miniWeatherStatus');
+  if(el)el.textContent=text||'';
+}
+function resolveAssetUrl(path){
+  const clean=String(path||'').split('?')[0];
+  const here=location.href.split('#')[0].replace(/[^\/]*$/,'');
+  return [
+    clean,
+    here+clean,
+    clean.replace(/^assets\//,'/DearANG/assets/'),
+    clean.replace(/^assets\/images\/weather\//,'assets/images/'),
+    clean.replace(/^assets\/images\/weather\//,'images/weather/'),
+    clean.replace(/^assets\/images\/weather\//,'weather/')
+  ].filter((v,i,a)=>v&&a.indexOf(v)===i);
+}
+function testImageCandidates(urls){
+  return new Promise((resolve,reject)=>{
+    let i=0;
+    const next=()=>{
+      if(i>=urls.length){reject(new Error('weather image not found'));return;}
+      const url=urls[i++];
+      const img=new Image();
+      img.onload=()=>resolve(url);
+      img.onerror=next;
+      img.src=url;
+    };
+    next();
+  });
+}
+function applyWeatherFallbackVisual(w){
+  const stage=document.getElementById('stage');
+  const screen=document.querySelector('.mini-crt-screen');
+  const stageImg=document.getElementById('stageWorldImg');
+  const fallbackSrc='assets/images/memory-world.webp';
+
+  [stage,screen].forEach(el=>{
+    if(el){
+      el.classList.add('stage-weather-fallback','weather-fallback');
+      el.dataset.weatherKey=w.key;
+    }
+  });
+  if(stage)stage.dataset.weatherKey=w.key;
+  if(screen)screen.dataset.weatherKey=w.key;
+
+  // v54：圖檔缺失時不再 remove src，不讓木框變空白；至少保留同一張街景底圖。
+  if(stageImg){
+    if(!stageImg.getAttribute('src'))stageImg.src=fallbackSrc;
+    stageImg.alt='富宜路街道世界｜'+w.label+'｜保留底圖備援';
+  }
+  if(miniBg){
+    if(!miniBg.getAttribute('src'))miniBg.src=fallbackSrc;
+    miniBg.alt='木框裡的Q版小世界｜'+w.label+'｜保留底圖備援';
+  }
+}
+function applyWeatherImageVisual(w){
+  const urls=resolveAssetUrl(w.bg);
+  const stage=document.getElementById('stage');
+  const screen=document.querySelector('.mini-crt-screen');
+  const stageImg=document.getElementById('stageWorldImg');
+  const miniBg=document.getElementById('miniWorldBg');
+  if(stage)stage.dataset.weatherKey=w.key;
+  if(screen)screen.dataset.weatherKey=w.key;
+  return testImageCandidates(urls).then(url=>{
+    [stage,screen].forEach(el=>{if(el){el.classList.remove('stage-weather-fallback','weather-fallback');el.dataset.weatherKey=w.key;}});
+    if(stageImg){stageImg.src=url;stageImg.alt='富宜路街道世界｜'+w.label;}
+    if(miniBg){miniBg.src=url;miniBg.alt='木框裡的Q版小世界｜'+w.label;}
+    return true;
+  }).catch(()=>{
+    applyWeatherFallbackVisual(w);
+    setMiniWeatherStatus((document.getElementById('miniWeatherStatus')?.textContent||'')+'｜天氣圖檔缺檔，已保留底圖並套用夜雨效果');
+    return false;
+  });
+}
+function setMemoryWeather(key,ev,source){
+  if(ev){ev.stopPropagation();}
+  const w=memoryWeatherByKey(key);
+  memoryWeatherKey=w.key;
+  autoWeatherSource=source||autoWeatherSource||'manual';
+  applyWeatherImageVisual(w);
+  const chip=document.getElementById('weatherChip');
+  if(chip)chip.textContent=w.chip;
+  const miniFx=document.getElementById('miniWorldWeather');
+  const worldFx=document.getElementById('worldWeather');
+  if(miniFx)miniFx.className='mini-world-weather '+(w.fx||'');
+  if(worldFx)worldFx.className='world-weather '+(w.fx||'');
+  document.querySelectorAll('#miniWeatherButtons button').forEach(b=>b.classList.toggle('active',b.dataset.weather===w.key));
+}
+function setAutoMemoryWeather(key,msg){
+  setMemoryWeather(key,null,'auto');
+  setMiniWeatherStatus(msg||('已依即時天氣套用：'+memoryWeatherByKey(key).label));
+}
+function applyTimeWeatherFallback(){
+  const key=timeBasedWeatherKey();
+  setMemoryWeather(key,null,'time');
+  setMiniWeatherStatus(timeBasedWeatherText());
+}
+function weatherKeyFromOpenMeteo(c){
+  const code=Number(c.weather_code||0);
+  const isDay=Number(c.is_day)===1;
+  const temp=Number(c.temperature_2m);
+  const wind=Number(c.wind_speed_10m);
+  const rain=(Number(c.rain)||0)+(Number(c.showers)||0)+(Number(c.precipitation)||0);
+
+  // v54：晚上不要再拿白天陰天圖。夜間一律用 night-rain；避免 night + overcast 變灰/空白。
+  if(!isDay)return 'nightRain';
+
+  if(code>=95 || wind>=55)return 'storm';
+  if(code>=71 && code<=77)return 'snow';
+  if(code===45 || code===48)return 'fog';
+  if(rain>0 || (code>=51&&code<=67) || (code>=80&&code<=82))return 'rain';
+  if(code===3)return 'overcast';
+  if(code===2)return 'cloudy';
+  if(isFinite(temp) && temp>=32)return 'hot';
+  return 'sunny';
+}
+function weatherTextFromKey(key,c){
+  const w=memoryWeatherByKey(key);
+  const temp=Number(c.temperature_2m);
+  const wind=Number(c.wind_speed_10m);
+  const code=Number(c.weather_code||0);
+  return `已依 24.113978, 120.782379 即時天氣套用：${w.label}｜${isFinite(temp)?temp.toFixed(1):'--'}°C｜風速 ${isFinite(wind)?wind.toFixed(0):'--'} km/h｜代碼 ${code}`;
+}
+function refreshAutoWeather(showToast){
+  const label=document.getElementById('weatherLabel');
+  const page=document.getElementById('page-nav');
+  if(showToast)toast('正在重新讀取天氣…');
+  setMiniWeatherStatus('正在讀取 24.113978, 120.782379 即時天氣…');
+  const ctrl=new AbortController();
+  const timeout=setTimeout(()=>ctrl.abort(),6500);
+  const {lat,lng}=AUTO_WEATHER_POINT;
+  return fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lng}&current=temperature_2m,weather_code,is_day,wind_speed_10m,precipitation,rain,showers&timezone=Asia%2FTaipei`,{cache:'no-store',signal:ctrl.signal})
+    .then(r=>{if(!r.ok)throw new Error('weather fetch failed');return r.json();})
+    .then(d=>{
+      clearTimeout(timeout);
+      const c=d.current||{};
+      const key=weatherKeyFromOpenMeteo(c);
+      const msg=weatherTextFromKey(key,c);
+      setAutoMemoryWeather(key,msg);
+      if(label)label.textContent=msg.replace('已依 24.113978, 120.782379 即時天氣套用：','長眠地現在：');
+      if(page)page.dataset.weather=memoryWeatherByKey(key).label;
+      if(showToast)toast('天氣已更新');
+    })
+    .catch(()=>{
+      clearTimeout(timeout);
+      applyTimeWeatherFallback();
+      const msg=timeBasedWeatherText();
+      if(label)label.textContent=msg;
+      if(showToast)toast('天氣讀取不到，先用台灣時間備援',1);
+    });
+}
+function cycleMemoryWeather(){refreshAutoWeather(true);}
+function showMiniWorld(){
+  renderMiniWeatherButtons();
+  setMemoryWeather(memoryWeatherKey);
+  setupMiniFrameVideo();
+  const mini=document.getElementById('miniWorld');
+  if(mini){mini.classList.remove('hidden','zooming');}
+  const frameVideo=document.getElementById('miniFrameVideo');
+  if(frameVideo){
+    try{frameVideo.muted=true;frameVideo.loop=true;frameVideo.play().catch(()=>{});}catch(e){}
+  }
+}
+function enterMainWorld(){
+  const mini=document.getElementById('miniWorld');
+  if(mini){
+    mini.classList.add('zooming');
+    setTimeout(()=>{mini.classList.add('hidden');mini.classList.remove('zooming');centerWorld();askVisitorAfterEnterWorld();},620);
+  }else{
+    centerWorld();
+    askVisitorAfterEnterWorld();
+  }
+}
+
+
+
+
+function toggleViewZoom(){
+  const on = document.body.classList.toggle('view-zoom-2x');
+  const btn = document.getElementById('zoomBtn');
+  if(btn){
+    btn.textContent = on ? '🔎' : '🔍';
+    btn.title = on ? '還原寬度' : '放大成 2 倍寬';
+  }
+  try{
+    if(on){
+      const mini=document.getElementById('miniWorld');
+      if(mini && !mini.classList.contains('hidden')){
+        mini.scrollLeft = Math.max(0, (mini.scrollWidth - mini.clientWidth) / 2);
+      }else{
+        const sc=document.querySelector('.scroller');
+        if(sc) sc.scrollLeft = Math.max(0, (sc.scrollWidth - sc.clientWidth) / 2);
+      }
+    }
+  }catch(e){}
+  toast(on ? '已放大成 2 倍寬' : '已還原寬度');
+}
+(function preventPinchZoom(){
+  window.addEventListener('gesturestart', e=>e.preventDefault(), {passive:false});
+  window.addEventListener('gesturechange', e=>e.preventDefault(), {passive:false});
+  window.addEventListener('gestureend', e=>e.preventDefault(), {passive:false});
+  let lastTouchEnd=0;
+  document.addEventListener('touchend', function(e){
+    const now=Date.now();
+    if(now-lastTouchEnd<=300)e.preventDefault();
+    lastTouchEnd=now;
+  }, {passive:false});
+  document.addEventListener('touchmove', function(e){
+    if(e.touches && e.touches.length>1)e.preventDefault();
+  }, {passive:false});
+})();
+
+
+
+
+
+function addAlbumRitualHints(){
+  document.querySelectorAll('.album-card').forEach(card=>{
+    if(!card.querySelector('.album-ritual-hint')){
+      const target=card.querySelector('.album-summary')||card;
+      const hint=document.createElement('div');
+      hint.className='album-ritual-hint';
+      hint.textContent='往下滑收合後，才能左右滑到下一本';
+      target.appendChild(hint);
+    }
+  });
+}
+
+function setupAlbumRitualLock(){
+  addAlbumRitualHints();
+  document.querySelectorAll('.album-carousel').forEach(carousel=>{
+    if(carousel.dataset.ritualReady)return;
+    carousel.dataset.ritualReady='1';
+
+    let sx=0, sy=0, activeCard=null, moved=false;
+
+    const lockToCard=(card)=>{
+      if(!card || !carousel)return;
+      carousel.classList.add('album-locked');
+      requestAnimationFrame(()=>{
+        try{ carousel.scrollTo({left:card.offsetLeft-14, behavior:'smooth'}); }catch(e){ carousel.scrollLeft=card.offsetLeft-14; }
+      });
+    };
+
+    const unlock=()=>{
+      carousel.classList.remove('album-locked');
+    };
+
+    carousel.addEventListener('touchstart',e=>{
+      const t=e.touches&&e.touches[0];
+      if(!t)return;
+      sx=t.clientX; sy=t.clientY; moved=false;
+      activeCard=e.target.closest('.album-card');
+    },{passive:true});
+
+    carousel.addEventListener('touchmove',e=>{
+      const t=e.touches&&e.touches[0];
+      if(!t || !activeCard)return;
+      const dx=t.clientX-sx;
+      const dy=t.clientY-sy;
+      if(Math.abs(dx)+Math.abs(dy)<10)return;
+      moved=true;
+
+      // 展開後，左右滑直接阻止，保持儀式感：只能先往下收合
+      if(activeCard.classList.contains('expanded')){
+        if(Math.abs(dx)>Math.abs(dy)){
+          e.preventDefault();
+          lockToCard(activeCard);
+          return;
+        }
+        // 往下滑收合
+        if(dy>42 && Math.abs(dy)>Math.abs(dx)*1.15){
+          activeCard.classList.remove('expanded');
+          unlock();
+          toast('已收合相簿，可以左右滑了');
+          e.preventDefault();
+          return;
+        }
+      }else{
+        // 未展開時，往上滑打開
+        if(dy<-42 && Math.abs(dy)>Math.abs(dx)*1.15){
+          document.querySelectorAll('.album-card.expanded').forEach(c=>c.classList.remove('expanded'));
+          activeCard.classList.add('expanded');
+          lockToCard(activeCard);
+          toast('相簿已打開，往下滑收合後才能左右滑');
+          e.preventDefault();
+          return;
+        }
+      }
+    },{passive:false});
+
+    carousel.addEventListener('click',e=>{
+      const card=e.target.closest('.album-card');
+      if(!card || e.target.closest('.album-slide-btn,.album-thumb,.album-slide,img'))return;
+      if(!moved && !card.classList.contains('expanded')){
+        document.querySelectorAll('.album-card.expanded').forEach(c=>c.classList.remove('expanded'));
+        card.classList.add('expanded');
+        lockToCard(card);
+        toast('相簿已打開，往下滑收合後才能左右滑');
+      }
+    });
+  });
+}
+
+window.addEventListener('load',()=>{centerWorld();setupExperienceLayer();setupPersonNameHotspots();setupMiniFrameVideo();preloadStaticAssets();renderMiniWeatherButtons();setMemoryWeather(memoryWeatherKey);loadLyricsFromRootFiles().finally(()=>setupLyricDanmaku());loadData();setupWeather();renderFood();renderMaps();setupAlbumRitualLock();});
+function enterWorld(){startOpeningMemoryCountdown()}
+function centerWorld(){const sc=document.getElementById('scroller');setTimeout(()=>{sc.scrollLeft=(sc.scrollWidth-sc.clientWidth)/2;},60)}
+function openPage(id){
+  playUiSound('open');
+  if(typeof sendPrivateVisitLog==='function')sendPrivateVisitLog('page_'+id);
+  const page=document.getElementById('page-'+id);
+  if(!page)return;
+  page.classList.remove('closing');
+  page.classList.add('show');
+  document.body.style.overflow='hidden';
+  if(id==='nav' && typeof initRouteMapPage==='function')setTimeout(()=>initRouteMapPage(),30);
+  renderMemoryCapsule(id);
+  preloadAreaAssets(id);
+}
+function closePage(){
+  playUiSound('close');
+  document.querySelectorAll('.page.show').forEach(p=>{
+    p.classList.add('closing');
+    setTimeout(()=>{p.classList.remove('show','closing')},180);
+  });
+  document.body.style.overflow='hidden';
+}
 function toast(msg,bad){const t=document.getElementById('toast');t.textContent=msg;t.style.background=bad?'#963232':'#5b3f2f';t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2300)}
 function enterWorld(){startOpeningMemoryCountdown()}
 function startOpeningMemoryCountdown(){const gate=document.getElementById('gate'), overlay=document.getElementById('openingCountdown'), video=document.getElementById('openingCountdownVideo');if(gate)gate.classList.add('out');if(video&&video.getAttribute('src')){if(overlay)overlay.classList.add('show');try{video.currentTime=0;video.muted=false;video.volume=1;video.onended=finishOpeningMemoryCountdown;video.play().catch(()=>{finishOpeningMemoryCountdown()});}catch(e){finishOpeningMemoryCountdown()}}else{finishOpeningMemoryCountdown()}}
@@ -71,36 +1319,1733 @@ try{document.getElementById('letterAudio')?.addEventListener('ended',()=>documen
 function openTreasureMapFromMini(e){if(e){e.preventDefault();e.stopPropagation()}stopLetterAudio();document.getElementById('miniWorld')?.classList.add('hidden');openPage('nav')}
 function openTreasureMapFromStreet(e){if(e){e.preventDefault();e.stopPropagation()}openPage('nav')}
 function api(p){return new Promise((res,rej)=>{let cb='cb'+Date.now()+Math.floor(Math.random()*9e4),u=new URL(CONFIG.GAS_API_URL);Object.keys(p).forEach(k=>u.searchParams.set(k,p[k]));u.searchParams.set('callback',cb);u.searchParams.set('_ts',Date.now());let sc=document.createElement('script'),tm=setTimeout(()=>done(rej,new Error('讀取逾時')),16000);window[cb]=x=>done(res,x);function done(f,v){clearTimeout(tm);delete window[cb];sc.remove();f(v)}sc.onerror=()=>done(rej,new Error('讀取失敗'));sc.src=u;document.head.appendChild(sc)})}
-function refreshDataNoReload(){toast('正在重新整理資料…');return loadData().then(()=>toast('資料已重新整理')).catch(()=>toast('資料讀取失敗',1))}
-function loadData(){return api({action:'getMemorialData'}).then(r=>{if(!r.ok)throw Error(r.error||'讀取失敗');DATA=r;DATA.photos=DATA.photos||flatGroups(DATA.photoGroups||[]);renderDynamic();return r}).catch(e=>{renderDynamic();toast('雲端資料讀取失敗，先顯示本機內容',1)})}
-function getRawChildFolders(g){let out=[];['children','folders','subfolders','subFolders','childFolders','folderGroups'].forEach(k=>{if(Array.isArray(g&&g[k]))out.push(...g[k])});return out}function getRawItems(g){let out=[];['items','files','photos','videos','audios','childrenFiles'].forEach(k=>{if(Array.isArray(g&&g[k]))out.push(...g[k])});return out}
-function flatGroups(groups){let out=[];(function walk(gs){(gs||[]).forEach(g=>{getRawItems(g).forEach(i=>out.push(i));walk(getRawChildFolders(g))})})(groups);return out}
-function detectAreaKey(text){text=String(text||'');const areas={photo:['01_你和我們的時光','你和我們的時光','華光','相館'],video:['02_影音館','影音館','影片','新時代'],home:['03_你的家','你的家','你家','他的家','他家','個人'],music:['04_金嗓卡拉OK','金嗓','卡拉OK','你唱的歌','他唱的歌'],food:['05_美而美早餐店','美而美','早餐','食物'],road:['06_通往他的路','通往他的路','公路局','第六棵樹']};for(const k in areas){if(areas[k].some(x=>text.includes(x)))return k}return ''}
-function normalizeDriveGroups(groups){const out=[];function walk(g,path='',root=''){if(!g)return;const name=String(g.name||g.title||g.folderName||'未命名資料夾');const p=String(g.path||g.folderPath||g.fullPath||'')||(path?path+'/'+name:name);const r=root||detectAreaKey(p)||detectAreaKey(name);const items=getRawItems(g).map(it=>Object.assign({},it,{_folderName:name,_folderPath:p,_rootKey:r}));out.push({name,path:p,rootKey:r,items});getRawChildFolders(g).forEach(ch=>walk(ch,p,r))}(groups||[]).forEach(g=>walk(g));return out}
-function mediaKindOf(it){const mt=String(it.mimeType||it.type||'').toLowerCase(),kind=String(it.kind||'').toLowerCase(),name=String(it.name||it.filename||'').toLowerCase();if(mt.startsWith('image/')||kind==='image'||/\.(jpg|jpeg|png|gif|webp|avif|heic)$/i.test(name))return 'image';if(mt.startsWith('audio/')||kind==='audio'||/\.(mp3|wav|m4a|aac|ogg|flac)$/i.test(name))return 'audio';if(mt.startsWith('video/')||kind==='video'||/\.(mp4|mov|m4v|webm)$/i.test(name))return 'video';if(it.thumbnailUrl&&!it.streamUrl)return 'image';if(it.streamUrl)return 'video';return 'file'}
-function collectAreaItems(area,kind){let items=[];normalizeDriveGroups(DATA.photoGroups||[]).forEach(g=>{const root=g.rootKey||detectAreaKey(g.path)||detectAreaKey(g.name);if(root===area)items.push(...(g.items||[]))});if(!items.length){if(area==='photo')items=DATA.photos||[];if(area==='video')items=DATA.memories||[];if(area==='music')items=DATA.songs||[]}return items.filter(it=>{const k=mediaKindOf(it);if(kind==='image')return k==='image';if(kind==='video')return k==='video';if(kind==='audioVideo')return k==='audio'||k==='video';return true})}
-function driveImageSrc(p){const id=p&&p.id?encodeURIComponent(p.id):'';return p.thumbnailUrl||p.url||(id?`https://drive.google.com/thumbnail?id=${id}&sz=w1600`:'')||p.streamUrl||''}
-function renderPhotoGrid(id,items){const box=document.getElementById(id);if(!box)return;if(!items.length){box.innerHTML='<div class="empty">目前沒有資料。</div>';return}box.innerHTML=items.slice(0,120).map((p,i)=>`<div class="photo" onclick="openLightbox('${esc(driveImageSrc(p))}')"><img src="${esc(driveImageSrc(p))}" loading="lazy" onerror="this.parentElement.style.display='none'"></div>`).join('')}
-function renderVideoGrid(id,items){const box=document.getElementById(id);if(!box)return;if(!items.length){box.innerHTML='<div class="empty">目前沒有影片。</div>';return}box.innerHTML=items.map(v=>`<div class="vcard"><video controls playsinline preload="none" poster="${esc(v.thumbnailUrl||'')}"><source src="${esc(v.streamUrl||v.url||'')}" type="${esc(v.mimeType||'video/mp4')}"></video><h3>${esc(v.name||'')}</h3></div>`).join('')}
-function renderDynamic(){renderPhotoGrid('photoGrid',collectAreaItems('photo','image'));renderPhotoGrid('homePhotoGrid',collectAreaItems('home','image'));renderPhotoGrid('foodPhotoGrid',collectAreaItems('food','image'));renderVideoGrid('videoGrid',collectAreaItems('video','video'));renderKtvSongs()}
-function openLightbox(src){const lb=document.getElementById('lightbox'),img=document.getElementById('lbImg');if(!src)return;img.src=src;lb.classList.add('show')}function closeLightbox(){document.getElementById('lightbox').classList.remove('show');document.getElementById('lbImg').src=''}
-/* KTV numbers */
-let KTV_SONGS=[],ktvInput='',ktvSelectedIndex=-1;
-const KTV_CUSTOM_CODES={'阿拉斯加海灣':'79327','一愛難求':'59652','以後別做朋友':'58355'};
-function ktvPadNo(i){return String(i+1).padStart(5,'0')}
-function ktvCustomNo(item,i){const rawName=String(item?.name||''),cleanName=rawName.replace(/\.[^/.]+$/,'').replace(/\s+/g,'').replace(/[・.．。＿_\-—]/g,'');for(const title in KTV_CUSTOM_CODES){const cleanTitle=String(title).replace(/\s+/g,'').replace(/[・.．。＿_\-—]/g,'');if(cleanName.includes(cleanTitle))return String(KTV_CUSTOM_CODES[title]).padStart(5,'0')}return ktvPadNo(i)}
-function fallbackKtvItems(){return ['以後別做朋友.mp4','別再想見我.mp4','我們到底算什麼.MP4','刻在我心底的名字.mp4','阿拉斯加海灣.MP4','突然好想你.mp4','消愁.MP4','都沒差.mp4','給我一個理由忘記.mp4','愛的路上只有我和你.MP4','摯友.MP4','一念一生.MP4','一愛難求.MP4'].map(name=>({name,kind:'video'}))}
-function renderKtvSongs(){const box=document.getElementById('ktvSongbook');if(!box)return;let songs=collectAreaItems('music','audioVideo');if(!songs.length)songs=fallbackKtvItems();KTV_SONGS=songs.map((s,i)=>Object.assign({},s,{ktvNo:ktvCustomNo(s,i)}));ktvInput='';ktvSelectedIndex=-1;ktvUpdateDisplay();box.innerHTML='<div class="ktv-list">'+KTV_SONGS.map((s,i)=>`<div class="ktv-row" id="ktv-row-${i}" onclick="ktvSelectedIndex=${i};ktvInput='${s.ktvNo}';ktvUpdateDisplay();ktvStart();"><div class="ktv-num">${s.ktvNo}</div><div class="ktv-title"><b>${esc((s.name||'未命名').replace(/\.[^/.]+$/,''))}</b><small>${esc(s._folderPath||s.ktvPath||'04_金嗓卡拉OK')}</small></div><div class="ktv-kind">${mediaKindOf(s)==='audio'?'音檔':'影片'}</div></div>`).join('')+'</div>';ktvSetOsd('歌本已載入 '+KTV_SONGS.length+' 首｜點歌本可直接播放')}
-function ktvSetOsd(text){const el=document.getElementById('ktvOsd');if(el)el.textContent=text||''}function ktvUpdateDisplay(){const d=document.getElementById('ktvDisplay'),s=document.getElementById('ktvSelectedText');if(d)d.textContent=ktvInput?ktvInput.padStart(5,'0'):'-----';if(s)s.textContent=ktvSelectedIndex>=0&&KTV_SONGS[ktvSelectedIndex]?KTV_SONGS[ktvSelectedIndex].ktvNo+'｜'+(KTV_SONGS[ktvSelectedIndex].name||''):'尚未選歌';document.querySelectorAll('.ktv-row').forEach(x=>x.classList.remove('active'));if(ktvSelectedIndex>=0)document.getElementById('ktv-row-'+ktvSelectedIndex)?.classList.add('active')}
-function ktvPress(n){if(ktvInput.length>=5)ktvInput='';ktvInput=(ktvInput+n).replace(/\D/g,'').slice(0,5);ktvSelectedIndex=-1;ktvUpdateDisplay();ktvSetOsd('已輸入歌號 '+ktvInput.padStart(5,'0')+'，請按「輸入」')}function ktvClear(){ktvInput='';ktvSelectedIndex=-1;ktvUpdateDisplay();ktvSetOsd('已清除')}
-function ktvEnter(autoStart){if(!KTV_SONGS.length)return;const no=(ktvInput||'').replace(/\D/g,'').padStart(5,'0');const idx=KTV_SONGS.findIndex(x=>x.ktvNo===no);if(idx<0){ktvSelectedIndex=-1;ktvUpdateDisplay();ktvSetOsd('找不到歌號 '+no);return}ktvSelectedIndex=idx;ktvInput=no;ktvUpdateDisplay();document.getElementById('ktv-row-'+idx)?.scrollIntoView({behavior:'smooth',block:'nearest'});if(autoStart)ktvStart();else ktvSetOsd('已選擇 '+no+'｜按播放或直接點歌本')}
-function ktvMediaSrc(item){let src=item.streamUrl||item.url||'';if(!src&&item.id)src='https://drive.google.com/uc?export=download&id='+encodeURIComponent(item.id);return src}
-function ktvStart(){if(ktvSelectedIndex<0)ktvEnter(false);if(ktvSelectedIndex<0||!KTV_SONGS[ktvSelectedIndex])return;const item=KTV_SONGS[ktvSelectedIndex],src=ktvMediaSrc(item),video=document.getElementById('ktvVideo'),audio=document.getElementById('ktvAudio'),visual=document.getElementById('ktvAudioVisual'),title=document.getElementById('ktvAudioTitle'),theme=document.getElementById('themeAudio');if(theme)theme.pause();if(video){video.pause();video.removeAttribute('src');video.style.display='none';video.load()}if(audio){audio.pause();audio.removeAttribute('src');audio.style.display='none';audio.load()}if(title)title.textContent=item.name||'他唱的歌';if(!src){if(visual)visual.style.display='grid';ktvSetOsd('這首目前沒有檔案來源');return}const kind=mediaKindOf(item);if(kind==='audio'){if(visual)visual.style.display='grid';audio.src=src;audio.style.display='block';audio.play().catch(()=>ktvSetOsd('手機擋住音訊，請再按一次播放鍵'))}else{if(visual)visual.style.display='none';video.src=src;video.style.display='block';video.play().then(()=>ktvSetOsd('正在播放 '+item.ktvNo+'｜'+(item.name||''))).catch(()=>ktvSetOsd('瀏覽器擋住自動播放，請按一次播放鍵'))}}
-function ktvCurrentPlayer(){const video=document.getElementById('ktvVideo'),audio=document.getElementById('ktvAudio');if(video&&video.style.display==='block')return video;if(audio&&audio.style.display==='block')return audio;return null}function ktvTogglePlayPause(){const p=ktvCurrentPlayer();if(p&&p.src){if(p.paused)p.play().catch(()=>{});else p.pause();return}ktvStart()}function ktvReplay(){const p=ktvCurrentPlayer();if(p){try{p.currentTime=0}catch(e){}p.play().catch(()=>{})}else ktvStart()}function ktvPrev(){if(!KTV_SONGS.length)return;ktvSelectedIndex=ktvSelectedIndex>0?ktvSelectedIndex-1:KTV_SONGS.length-1;ktvInput=KTV_SONGS[ktvSelectedIndex].ktvNo;ktvUpdateDisplay();ktvStart()}function ktvNext(){if(!KTV_SONGS.length)return;ktvSelectedIndex=ktvSelectedIndex>=0?(ktvSelectedIndex+1)%KTV_SONGS.length:0;ktvInput=KTV_SONGS[ktvSelectedIndex].ktvNo;ktvUpdateDisplay();ktvStart()}function ktvVolume(delta){const p=ktvCurrentPlayer();if(!p){ktvSetOsd('尚未播放');return}p.volume=Math.max(0,Math.min(1,(p.volume||1)+delta));ktvSetOsd('音量 '+Math.round(p.volume*100)+'%')}
-/* Route map */
-(function(){const routeStations=[{n:1,title:'等你出來的小門',tag:'每次一起出去前，我都在這裡等你。',t:0,x:760,y:1565,body:['我們每次要一起出去的時候，我都會在停機車的地方入口那個小門等你。','這裡不是什麼特別大的地方，可是對我來說，它就是一個很熟悉的等待位置。','<span class="em">有些地方會被記住，不是因為它多漂亮，而是因為那裡裝著太多「每一次要見面前」的感覺。</span>']},{n:2,title:'住得很近的那段日子',tag:'住得很近，動不動就往樓下跑。',t:.20,x:420,y:500,body:['我住在這一面的 7 樓，你住在我背面的 2 樓。','那時候我們動不動就是往下跑，跑去找你聊天、吃飯，或者等你上班，或一起回家。']},{n:3,title:'搬到大雅',tag:'很多誤會的開始，也是彼此最深刻關愛的地方。',t:.40,x:1680,y:440,body:['搬到大雅，是很多誤會開始的地方，但也是最深刻關愛彼此的地方。','更深的其實是，就算有誤會、有碰撞、有難過，彼此還是在意，還是關心。']},{n:4,title:'你搬到最頂樓之後',tag:'表面分開，心裡卻還是像磁鐵一樣靠近。',t:.58,x:1510,y:1140,body:['從大雅搬離之後，表面上是吵架了、分開了，可是內心底就像兩顆磁鐵一樣。','後來你搬到這棟最頂樓，每次我都是站在這個角度等你丟鑰匙下來，然後再坐電梯上去。😂']},{n:5,title:'你的老家',tag:'回憶會停下來的地方。',t:.78,x:1540,y:2250,body:['這裡是你的老家。對別人來說，可能只是一個地址。','可是對我來說，這裡是很多回憶會停下來的地方。']},{n:6,title:'最後一站／第六棵樹',tag:'最安靜、最捨不得，也最放不下的地方。',t:1,x:1295,y:3420,body:['這裡是最後一站。走到這裡的時候，很多情緒都會安靜下來。','<span class="em">因為不管前面怎麼走，最後還是會走到這裡。</span>']}];let state=null;function ease(t){return t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2}function focus(i){const app=document.getElementById('routeMapApp'),s=routeStations[i]||routeStations[0];if(!app)return;const w=app.clientWidth||window.innerWidth,h=app.clientHeight||window.innerHeight,scale=w<=520?1.62:1.42,targetX=w*.50,targetY=h*.42,stationX=s.x/2160*w,stationY=s.y/3840*h;app.style.setProperty('--route-scale',scale);app.style.setProperty('--route-pan-x',(targetX-stationX*scale)+'px');app.style.setProperty('--route-pan-y',(targetY-stationY*scale)+'px')}function setProgress(t){if(!state)return;state.currentT=t;const l=state.total*t,p=state.path.getPointAtLength(l);state.light.setAttribute('transform',`translate(${p.x} ${p.y})`);state.done.style.strokeDashoffset=state.total-l;state.hot.style.strokeDashoffset=state.total-l-60}function render(i){if(!state)return;const s=routeStations[i];state.card.classList.remove('switching');state.num.textContent=s.n;state.title.textContent=s.title;state.tag.textContent=s.tag;state.body.innerHTML=s.body.map(x=>`<p>${x}</p>`).join('');state.body.scrollTop=0;state.spotEls.forEach((el,k)=>el.classList.toggle('active',k===i));state.dotEls.forEach((el,k)=>el.classList.toggle('on',k===i));focus(i)}function animateTo(targetT,cb){if(!state)return;cancelAnimationFrame(state.anim);const start=state.currentT,diff=targetT-start,t0=performance.now(),dur=Math.max(900,Math.abs(diff)*2700);function step(now){let p=Math.min(1,(now-t0)/dur);setProgress(start+diff*ease(p));if(p<1&&state)state.anim=requestAnimationFrame(step);else cb&&cb()}state.anim=requestAnimationFrame(step)}function go(i){if(!state)return;state.idx=Math.max(0,Math.min(routeStations.length-1,i));state.card.classList.add('switching');focus(state.idx);animateTo(routeStations[state.idx].t,()=>render(state.idx))}window.initRouteMapPage=function(){const root=document.getElementById('routeMapApp');if(!root)return;if(state){setTimeout(()=>{focus(state.idx);setProgress(state.currentT||0)},40);return}const path=document.getElementById('routeMapPath'),done=document.getElementById('routeMapDone'),hot=document.getElementById('routeMapHot'),light=document.getElementById('routeMapLight'),spots=document.getElementById('routeSpots'),dots=document.getElementById('routeDots'),card=document.getElementById('routeCard'),num=document.getElementById('routeNum'),title=document.getElementById('routeStoryTitle'),tag=document.getElementById('routeStoryTag'),body=document.getElementById('routeStoryBody');spots.innerHTML='';dots.innerHTML='';routeStations.forEach((s,i)=>{let b=document.createElement('button');b.type='button';b.className='route-spot';b.style.left=(s.x/2160*100)+'%';b.style.top=(s.y/3840*100)+'%';b.onclick=()=>go(i);spots.appendChild(b);dots.appendChild(document.createElement('span'))});const total=path.getTotalLength();done.style.strokeDasharray=total;hot.style.strokeDasharray='120 '+total;state={root,path,done,hot,light,spots,dots,card,num,title,tag,body,total,idx:0,anim:null,currentT:0,spotEls:[...spots.querySelectorAll('.route-spot')],dotEls:[...dots.querySelectorAll('span')]};document.getElementById('routePrev').onclick=()=>go(state.idx-1);document.getElementById('routeNext').onclick=()=>go(state.idx+1);document.getElementById('routeCardTop').onclick=()=>card.classList.toggle('open');root.addEventListener('wheel',e=>{e.preventDefault();go(state.idx+(e.deltaY>0?1:-1))},{passive:false});let sy=0,sx=0;root.addEventListener('touchstart',e=>{sy=e.touches[0].clientY;sx=e.touches[0].clientX},{passive:true});root.addEventListener('touchend',e=>{let dy=e.changedTouches[0].clientY-sy,dx=e.changedTouches[0].clientX-sx;if(Math.abs(dy)>48&&Math.abs(dy)>Math.abs(dx)*1.25)go(state.idx+(dy<0?1:-1))},{passive:true});setProgress(0);render(0)}})();
-function setupWeather(){const el=document.getElementById('miniWeatherStatus');const h=new Date().getHours();const status=(h>=18||h<6)?'夜晚':'晴天';if(el)el.textContent=`你那邊的天氣：${status}・--°C・風速 -- km/h`}
-window.addEventListener('load',()=>{centerWorld();setupWeather();loadData();});
+function loadData(){return api({action:'getMemorialData'}).then(r=>{if(!r.ok)throw Error(r.error||'讀取失敗');DATA=r;DATA.photos=orderPhotos(DATA.photos||flatGroups(DATA.photoGroups||[]));renderDynamic();setupAlbumRitualLock();preloadFirstDriveAssets();if(openingCountdownActive)renderOpeningPhotoDraw();startTheme();return r;}).catch(e=>{renderDynamic();toast('雲端資料讀取失敗，先顯示本機內容',1);return null;})}
+function detectAreaKey(text){
+  text=String(text||'');
+  const areas={
+    photo:['01_你和我們的時光','01_有你的時光','你和我們的時光','有你的時光','華光','相館'],
+    video:['02_影音館','影音館','影片','新時代'],
+    home:['03_你的家','03_他的家','你的家','你家','他的家','他家','個人','中間公寓'],
+    music:['04_金嗓卡拉OK','金嗓','卡拉OK','你唱的歌','他唱的歌'],
+    food:['05_美而美早餐店','美而美','早餐','食物','飲食','吃過','喜歡吃','推薦'],
+    road:['06_通往他的路','通往他的路','想你的時候','公路局','第六棵樹','長眠地','導航'],
+    friend:['07_好友投稿','好友投稿','投稿']
+  };
+  for(const key of Object.keys(areas)){
+    if(areas[key].some(k=>text.includes(k)))return key;
+  }
+  return '';
+}
+function getRawChildFolders(g){
+  const out=[];
+  ['children','folders','subfolders','subFolders','childFolders','folderGroups'].forEach(k=>{
+    const v=g&&g[k];
+    if(Array.isArray(v))out.push(...v);
+  });
+  return out;
+}
+function getRawItems(g){
+  const out=[];
+  ['items','files','photos','videos','audios','childrenFiles'].forEach(k=>{
+    const v=g&&g[k];
+    if(Array.isArray(v))out.push(...v);
+  });
+  return out;
+}
+function normalizeDriveGroups(groups){
+  const out=[];
+  function walk(g,parentPath='',parentRoot=''){
+    if(!g)return;
+    const name=String(g.name||g.title||g.folderName||g.displayName||'未命名資料夾');
+    const rawPath=String(g.path||g.folderPath||g.fullPath||g.relativePath||'');
+    const path=rawPath || (parentPath?parentPath+'/'+name:name);
+    const root=parentRoot || detectAreaKey(path) || detectAreaKey(name);
+    const items=getRawItems(g).map(it=>Object.assign({},it,{_folderName:name,_folderPath:path,_rootKey:root}));
+    out.push({name,path,rootKey:root,items,parentPath});
+    getRawChildFolders(g).forEach(ch=>walk(ch,path,root));
+  }
+  (groups||[]).forEach(g=>walk(g));
+  return out;
+}
+function flatGroups(groups){
+  let out=[];
+  normalizeDriveGroups(groups).forEach(g=>(g.items||[]).forEach(i=>out.push(i)));
+  return out;
+}
+function orderPhotos(p){const mains=['IMG_4130.jpg','IMG_2818.JPG'].map(x=>x.toLowerCase());let used=new Set(),out=[];mains.forEach(n=>{let i=p.findIndex((x,j)=>!used.has(j)&&String(x.name).toLowerCase()==n);if(i>=0){out.push(p[i]);used.add(i)}});return out.concat(p.filter((_,i)=>!used.has(i)))}
+function esc(s){return String(s||'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
+function mediaKindOf(it){
+  const mt=String(it.mimeType||it.type||'').toLowerCase();
+  const kind=String(it.kind||'').toLowerCase();
+  const name=String(it.name||it.filename||'').toLowerCase();
+  if(mt.startsWith('image/')||kind==='image'||/\.(jpg|jpeg|webp|gif|webp|avif|heic)$/i.test(name))return 'image';
+  if(mt.startsWith('audio/')||kind==='audio'||/\.(mp3|wav|m4a|aac|ogg|flac)$/i.test(name))return 'audio';
+  if(mt.startsWith('video/')||kind==='video'||/\.(mp4|mov|m4v|webm)$/i.test(name))return 'video';
+  if(it.thumbnailUrl && !it.streamUrl)return 'image';
+  if(it.streamUrl)return 'video';
+  return 'file';
+}
+function matchMediaKind(it,kind){
+  const k=mediaKindOf(it);
+  if(kind==='image')return k==='image';
+  if(kind==='video')return k==='video';
+  if(kind==='audio')return k==='audio';
+  if(kind==='audioVideo')return k==='audio'||k==='video';
+  return true;
+}
+function cleanFolderLabel(path,area){
+  let p=String(path||'').replace(/^\/+|\/+$/g,'');
+  const rootMap={photo:'01_你和我們的時光',video:'02_影音館',home:'03_你的家',music:'04_金嗓卡拉OK',food:'05_美而美早餐店',road:'06_通往他的路',friend:'07_好友投稿'};
+  const root=rootMap[area]||'';
+  if(p===root)return '主資料夾';
+  if(root && p.startsWith(root+'/'))p=p.slice(root.length+1);
+  return p||'主資料夾';
+}
+function collectAreaFolders(area,kind,fallbackItems){
+  const normalized=normalizeDriveGroups(DATA.photoGroups||[]);
+  const buckets=new Map();
+  normalized.forEach(g=>{
+    let root=g.rootKey || detectAreaKey(g.path) || detectAreaKey(g.name);
+    if(root!==area)return;
+    const items=(g.items||[]).filter(it=>matchMediaKind(it,kind));
+    if(!items.length)return;
+    const label=cleanFolderLabel(g.path,area);
+    const key=g.path||label;
+    if(!buckets.has(key))buckets.set(key,{label,path:g.path,items:[]});
+    buckets.get(key).items.push(...items);
+  });
+  let arr=[...buckets.values()].filter(x=>x.items.length);
+  if(!arr.length && Array.isArray(fallbackItems) && fallbackItems.length){
+    arr=[{label:'主資料夾',path:'',items:fallbackItems.filter(it=>matchMediaKind(it,kind))}].filter(x=>x.items.length);
+  }
+  return arr;
+}
+let ALBUM_STORE={};
+let albumTouchY=0, albumTouchX=0;
+function attr(s){return esc(s).replace(/&#039;/g,'&#39;')}
+function uniqueList(arr){const seen={};return (arr||[]).filter(x=>{x=String(x||'').trim();if(!x||seen[x])return false;seen[x]=1;return true;})}
+function driveImageCandidates(p){
+  p=p||{};
+  const id=p.id?encodeURIComponent(p.id):'';
+  return uniqueList([
+    p.thumbnailUrl,
+    p.url,
+    id?`https://drive.google.com/thumbnail?id=${id}&sz=w1600`:'',
+    id?`https://lh3.googleusercontent.com/d/${id}=w1600`:'',
+    id?`https://drive.google.com/uc?export=view&id=${id}`:'',
+    p.streamUrl
+  ]);
+}
+function imgAttrs(p,extra){
+  const sources=driveImageCandidates(p);
+  const first=sources[0]||'';
+  return `src="${esc(first)}" data-img-index="0" data-img-sources='${attr(JSON.stringify(sources))}' onerror="nextImageSource(this)" ${extra||''}`;
+}
+function nextImageSource(img){
+  try{
+    const sources=JSON.parse(img.dataset.imgSources||'[]');
+    let idx=Number(img.dataset.imgIndex||0)+1;
+    if(idx<sources.length){img.dataset.imgIndex=String(idx);img.src=sources[idx];return;}
+  }catch(e){}
+  const wrap=img.closest('.album-slide,.album-cover,.photo,.album-thumb');
+  if(wrap){wrap.innerHTML='<div class="img-fail">這張預覽讀不到，點開或換下一張試試</div>';}
+}
+function albumCarouselHtml(folders,area){
+  const clean=(folders||[]).filter(f=>(f.items||[]).length);
+  if(!clean.length)return '<div class="empty">目前沒有照片。</div>';
+  return `<div class="album-carousel-shell"><div class="album-carousel-hint">← 左右滑卡片｜往上滑展開照片 →</div><div class="album-carousel">`+
+    clean.map((f,i)=>{
+      const albumId='album_'+area+'_'+i+'_'+String(f.path||f.label||'').replace(/[^a-zA-Z0-9_\u4e00-\u9fa5]/g,'_').slice(0,24);
+      const items=(f.items||[]).slice(0,240);
+      ALBUM_STORE[albumId]={label:f.label||'相簿',path:f.path||'',items:items,index:0};
+      const cover=items[0]||{};
+      const thumbs=items.slice(0,18).map((p,ti)=>`<button class="album-thumb ${ti===0?'active':''}" id="thumb-${albumId}-${ti}" onclick="setAlbumPhoto('${albumId}',${ti});event.stopPropagation()"><img ${imgAttrs(p)}></button>`).join('');
+      return `<article class="album-card" data-album-id="${esc(albumId)}" ontouchstart="albumTouchStart(event)" ontouchend="albumTouchEnd(event)">
+        <div class="album-cover" onclick="expandAlbum('${albumId}')"><img ${imgAttrs(cover)}><div class="album-cover-text"><b>${esc(f.label||'相簿')}</b><small>${items.length} 張照片｜往上滑展開</small></div></div>
+        <div class="album-summary"><div class="album-path">${esc(f.path||'主資料夾')}</div><div class="album-ritual-hint">往下滑收合後，才能左右滑到下一本</div></div>
+        <div class="album-detail">
+          <div class="album-slide">
+            <button class="album-slide-btn prev" onclick="nextAlbumPhoto('${albumId}',-1);event.stopPropagation()">‹</button>
+            <img id="album-img-${albumId}" ${imgAttrs(cover)} onclick="openCurrentAlbumPhoto('${albumId}')">
+            <button class="album-slide-btn next" onclick="nextAlbumPhoto('${albumId}',1);event.stopPropagation()">›</button>
+            <div class="album-counter"><span id="album-name-${albumId}">${esc(cover.name||'')}</span><span id="album-count-${albumId}">1 / ${items.length}</span></div>
+          </div>
+          <div class="album-thumbs">${thumbs}</div>
+        </div>
+      </article>`;
+    }).join('')+
+  `</div></div>`;
+}
+function photoGridHtml(items){
+  const f=[{label:'照片',path:'',items:(items||[])}];
+  return albumCarouselHtml(f,'legacy');
+}
+function expandAlbum(albumId){
+  const card=document.querySelector(`[data-album-id="${albumId}"]`);
+  if(card){card.classList.add('expanded');card.scrollIntoView({behavior:'smooth',block:'nearest',inline:'center'});}
+  renderAlbumSlide(albumId);
+}
+function albumTouchStart(e){const t=e.touches&&e.touches[0];if(!t)return;albumTouchY=t.clientY;albumTouchX=t.clientX;}
+function albumTouchEnd(e){const t=e.changedTouches&&e.changedTouches[0];if(!t)return;const dy=albumTouchY-t.clientY,dx=Math.abs(albumTouchX-t.clientX);if(dy>34&&dy>dx){const card=e.currentTarget;expandAlbum(card.dataset.albumId);}}
+function setAlbumPhoto(albumId,index){
+  const album=ALBUM_STORE[albumId];if(!album||!album.items.length)return;
+  album.index=(index+album.items.length)%album.items.length;
+  renderAlbumSlide(albumId);
+}
+function nextAlbumPhoto(albumId,delta){playUiSound('slide');const album=ALBUM_STORE[albumId];if(!album)return;setAlbumPhoto(albumId,(album.index||0)+delta);}
+function setImgToItem(img,p){
+  if(!img)return;
+  const sources=driveImageCandidates(p);
+  img.dataset.imgSources=JSON.stringify(sources);
+  img.dataset.imgIndex='0';
+  img.src=sources[0]||'';
+}
+function renderAlbumSlide(albumId){
+  const album=ALBUM_STORE[albumId];if(!album||!album.items.length)return;
+  const index=album.index||0,p=album.items[index];
+  setImgToItem(document.getElementById('album-img-'+albumId),p);
+  const name=document.getElementById('album-name-'+albumId);if(name)name.textContent=p.name||'';
+  const count=document.getElementById('album-count-'+albumId);if(count)count.textContent=(index+1)+' / '+album.items.length;
+  document.querySelectorAll(`[id^="thumb-${albumId}-"]`).forEach(x=>x.classList.remove('active'));
+  const th=document.getElementById('thumb-'+albumId+'-'+index);if(th)th.classList.add('active');
+}
+function openCurrentAlbumPhoto(albumId){const album=ALBUM_STORE[albumId];if(!album)return;openAlbumLightbox(albumId,album.index||0);}
+function openAlbumLightbox(albumId,index){const album=ALBUM_STORE[albumId];if(!album)return;LIGHTBOX_ITEMS=album.items||[];LIGHTBOX_INDEX=index||0;updateLightbox();document.getElementById('lightbox').classList.add('show');}
+function mediaListHtml(list){
+  return `<div class="video-grid">`+list.map(v=>{
+    const k=mediaKindOf(v);
+    if(k==='audio')return `<div class="vcard"><audio controls preload="none" src="${esc(v.streamUrl||v.url||'')}"></audio><h3>${esc(v.name||'')}</h3>${v.webViewUrl?`<a href="${esc(v.webViewUrl)}" target="_blank" rel="noopener">另開</a>`:''}</div>`;
+    return `<div class="vcard"><video controls playsinline preload="none" poster="${esc(v.thumbnailUrl||'')}"><source src="${esc(v.streamUrl||v.url||'')}" type="${esc(v.mimeType||'video/mp4')}"></video><h3>${esc(v.name||'')}</h3>${v.webViewUrl?`<a href="${esc(v.webViewUrl)}" target="_blank" rel="noopener">另開</a>`:''}</div>`;
+  }).join('')+'</div>';
+}
+function renderFolderedMedia(id,area,kind,emptyMsg,fallbackItems){
+  const box=document.getElementById(id);
+  if(!box)return;
+  const folders=collectAreaFolders(area,kind,fallbackItems);
+  if(!folders.length){box.innerHTML='<div class="empty">'+(emptyMsg||'目前沒有資料。請確認 Google Drive 分類資料夾。')+'</div>';return;}
+  if(kind==='image'){
+    // 照片區改成輪轉卡片，不再用小圖格；每個 Drive 子資料夾就是一本相簿卡片。
+    box.innerHTML=albumCarouselHtml(folders,area);
+    return;
+  }
+  box.innerHTML=folders.map(f=>{
+    const body=mediaListHtml(f.items);
+    const path=f.path?`<div class="folder-path">${esc(f.path)}</div>`:'';
+    return `<div class="folder-block"><h3><span>${esc(f.label)}</span><small>${f.items.length} 個檔案</small></h3>${path}${body}</div>`;
+  }).join('');
+}
+
+
+/* ===== 金嗓卡拉OK｜歌本 + 遙控器 ===== */
+let KTV_SONGS=[];
+let ktvInput='';
+let ktvSelectedIndex=-1;
+function ktvPadNo(i){return String(i+1).padStart(3,'0');}
+function renderKtvSongs(){
+  const box=document.getElementById('ktvSongbook');
+  if(!box)return;
+  const folders=collectAreaFolders('music','audioVideo',DATA.songs||[]);
+  let songs=[];
+  folders.forEach(f=>{
+    (f.items||[]).forEach(it=>{
+      songs.push(Object.assign({},it,{ktvFolder:f.label||'',ktvPath:f.path||''}));
+    });
+  });
+  KTV_SONGS=songs.map((s,i)=>Object.assign({},s,{ktvNo:ktvPadNo(i)}));
+  ktvInput='';
+  ktvSelectedIndex=-1;
+  ktvUpdateDisplay();
+  if(!KTV_SONGS.length){
+    box.innerHTML='<div class="empty">目前沒有歌曲。請把他唱的歌放在 Google Drive「04_金嗓卡拉OK」及子資料夾。</div>';
+    ktvSetOsd('歌本目前沒有歌曲');
+    return;
+  }
+  box.innerHTML='<div class="ktv-list">'+KTV_SONGS.map((s,i)=>{
+    const kind=mediaKindOf(s)==='video'?'影片':'音檔';
+    const folder=s.ktvPath||s.ktvFolder||'04_金嗓卡拉OK';
+    return `<div class="ktv-row" id="ktv-row-${i}" onclick="ktvSelectNo('${s.ktvNo}')">
+      <div class="ktv-num">${s.ktvNo}</div>
+      <div class="ktv-title"><b>${esc(s.name||'未命名')}</b><small>${esc(folder)}</small></div>
+      <div class="ktv-kind">${kind}</div>
+    </div>`;
+  }).join('')+'</div>';
+  ktvSetOsd('歌本已載入 '+KTV_SONGS.length+' 首｜請輸入編號');
+}
+function ktvSetOsd(text){const el=document.getElementById('ktvOsd');if(el)el.textContent=text||'';}
+function ktvUpdateDisplay(){
+  const d=document.getElementById('ktvDisplay');
+  const s=document.getElementById('ktvSelectedText');
+  if(d)d.textContent=ktvInput?ktvInput.padStart(3,'0'):'---';
+  if(s){
+    if(ktvSelectedIndex>=0&&KTV_SONGS[ktvSelectedIndex])s.textContent=KTV_SONGS[ktvSelectedIndex].ktvNo+'｜'+(KTV_SONGS[ktvSelectedIndex].name||'');
+    else s.textContent='尚未選歌';
+  }
+  document.querySelectorAll('.ktv-row').forEach(x=>x.classList.remove('active'));
+  if(ktvSelectedIndex>=0){const row=document.getElementById('ktv-row-'+ktvSelectedIndex);if(row)row.classList.add('active');}
+}
+function ktvPress(n){
+  if(ktvInput.length>=3)ktvInput='';
+  ktvInput=(ktvInput+n).replace(/\D/g,'').slice(0,3);
+  ktvSelectedIndex=-1;
+  ktvUpdateDisplay();
+  ktvSetOsd('已輸入歌號 '+ktvInput.padStart(3,'0')+'，請按「輸入」');
+}
+function ktvBackspace(){ktvInput=ktvInput.slice(0,-1);ktvSelectedIndex=-1;ktvUpdateDisplay();}
+function ktvClear(){ktvInput='';ktvSelectedIndex=-1;ktvUpdateDisplay();ktvSetOsd('已清除，請重新輸入歌號');}
+function ktvSelectNo(no){ktvInput=String(no||'').replace(/\D/g,'').slice(0,3);ktvEnter();}
+function ktvEnter(){
+  if(!KTV_SONGS.length){ktvSetOsd('歌本目前沒有歌曲');return;}
+  const no=(ktvInput||'').replace(/\D/g,'').padStart(3,'0');
+  const idx=KTV_SONGS.findIndex(x=>x.ktvNo===no);
+  if(idx<0){ktvSelectedIndex=-1;ktvUpdateDisplay();ktvSetOsd('找不到歌號 '+no+'，請重新輸入');return;}
+  ktvSelectedIndex=idx;
+  ktvInput=no;
+  ktvUpdateDisplay();
+  const row=document.getElementById('ktv-row-'+idx);if(row)row.scrollIntoView({behavior:'smooth',block:'nearest'});
+  ktvSetOsd('已選擇 '+no+'｜請按「開始播放」');
+}
+
+function extractDriveIdFromUrl(url){
+  url=String(url||'');
+  let m=url.match(/\/d\/([a-zA-Z0-9_-]{10,})/); if(m)return m[1];
+  m=url.match(/[?&]id=([a-zA-Z0-9_-]{10,})/); if(m)return m[1];
+  m=url.match(/\/uc\?[^#]*id=([a-zA-Z0-9_-]{10,})/); if(m)return m[1];
+  return '';
+}
+function ktvDrivePreviewUrl(item,src){
+  const id=(item&&item.id)||extractDriveIdFromUrl(src)||extractDriveIdFromUrl(item&&item.url)||extractDriveIdFromUrl(item&&item.streamUrl);
+  return id?`https://drive.google.com/file/d/${encodeURIComponent(id)}/preview`:'';
+}
+function ktvEnsureDriveFrame(){
+  const screen=document.getElementById('ktvScreen');
+  if(!screen)return null;
+  let f=document.getElementById('ktvDriveFrame');
+  if(!f){
+    f=document.createElement('iframe');
+    f.id='ktvDriveFrame';
+    f.className='ktv-drive-frame';
+    f.setAttribute('allow','autoplay; fullscreen; encrypted-media; picture-in-picture');
+    f.setAttribute('allowfullscreen','true');
+    f.setAttribute('referrerpolicy','no-referrer-when-downgrade');
+    screen.appendChild(f);
+  }
+  return f;
+}
+function ktvHideDriveFrame(){
+  const f=document.getElementById('ktvDriveFrame');
+  if(f){f.removeAttribute('src');f.style.display='none';}
+}
+
+function ktvStart(){
+  if(ktvSelectedIndex<0)ktvEnter();
+  if(ktvSelectedIndex<0||!KTV_SONGS[ktvSelectedIndex])return;
+  const item=KTV_SONGS[ktvSelectedIndex];
+  const src=item.streamUrl||item.url||'';
+  if(!src&&!item.id){ktvSetOsd('這首沒有可播放網址');return;}
+  const theme=document.getElementById('themeAudio');if(theme)theme.pause();
+  const video=document.getElementById('ktvVideo');
+  const audio=document.getElementById('ktvAudio');
+  const frame=ktvEnsureDriveFrame();
+  const visual=document.getElementById('ktvAudioVisual');
+  const title=document.getElementById('ktvAudioTitle');
+  if(frame){frame.removeAttribute('src');frame.style.display='none';}
+  if(video){video.pause();video.removeAttribute('src');video.style.display='none';video.load();}
+  if(audio){audio.pause();audio.removeAttribute('src');audio.style.display='none';audio.load();}
+  if(title)title.textContent=item.name||'他唱的歌';
+  const kind=mediaKindOf(item);
+  ktvSetOsd('正在播放 '+item.ktvNo+'｜'+(item.name||''));
+  if(kind==='video'){
+    if(visual)visual.style.display='none';
+    const preview=ktvDrivePreviewUrl(item,src);
+    if(preview&&frame){
+      frame.src=preview;
+      frame.style.display='block';
+      ktvSetOsd('用 Google Drive 預覽播放｜'+(item.name||''));
+    }else if(video){
+      video.src=src;video.style.display='block';
+      video.play().catch(()=>ktvSetOsd('請再按一次螢幕播放'));
+    }
+  }else{
+    if(visual)visual.style.display='grid';
+    if(audio){audio.src=src;audio.style.display='block';audio.play().catch(()=>ktvSetOsd('請再按一次開始或音訊播放鍵'));}
+  }
+}
+
+function ktvRemoteHint(text){ktvSetOsd(text||'這個按鍵暫不使用');}
+function ktvCurrentPlayer(){
+  const video=document.getElementById('ktvVideo');
+  const audio=document.getElementById('ktvAudio');
+  if(video&&video.style.display==='block')return video;
+  if(audio&&audio.style.display==='block')return audio;
+  return null;
+}
+function ktvStop(){ktvHideDriveFrame();const p=ktvCurrentPlayer();if(p){p.pause();try{p.currentTime=0;}catch(e){}}ktvSetOsd('已停止');}
+function ktvTogglePlayPause(){const f=document.getElementById('ktvDriveFrame');if(f&&f.style.display==='block'){ktvSetOsd('Google Drive 預覽播放器請直接點螢幕內控制');return;}const p=ktvCurrentPlayer();if(p&&p.src){if(p.paused){p.play().catch(()=>ktvSetOsd('請再按一次播放'));ktvSetOsd('繼續播放');}else{p.pause();ktvSetOsd('已暫停');}return;}ktvStart();}
+function ktvReplay(){const f=document.getElementById('ktvDriveFrame');if(f&&f.style.display==='block'&&f.src){const old=f.src;f.removeAttribute('src');setTimeout(()=>{f.src=old;},80);ktvSetOsd('重新載入 Drive 預覽');return;}const p=ktvCurrentPlayer();if(p){try{p.currentTime=0;}catch(e){}p.play().catch(()=>ktvSetOsd('請再按一次重播'));ktvSetOsd('重新播放');}else ktvStart();}
+function ktvPrev(){if(!KTV_SONGS.length)return;ktvSelectedIndex=ktvSelectedIndex>0?ktvSelectedIndex-1:KTV_SONGS.length-1;ktvInput=KTV_SONGS[ktvSelectedIndex].ktvNo;ktvUpdateDisplay();ktvStart();}
+function ktvNext(){if(!KTV_SONGS.length)return;ktvSelectedIndex=ktvSelectedIndex>=0?(ktvSelectedIndex+1)%KTV_SONGS.length:0;ktvInput=KTV_SONGS[ktvSelectedIndex].ktvNo;ktvUpdateDisplay();ktvStart();}
+function ktvVolume(delta){const p=ktvCurrentPlayer();if(!p){ktvSetOsd('尚未播放，無法調整音量');return;}p.volume=Math.max(0,Math.min(1,(p.volume||1)+delta));ktvSetOsd('音量 '+Math.round(p.volume*100)+'%');}
+
+function renderDynamic(){
+  renderFolderedMedia('photoGrid','photo','image','請在 Google Drive 建立「01_你和我們的時光」，底下可再分子資料夾。',DATA.photos||[]);
+  renderFolderedMedia('homePhotoGrid','home','image','這裡只讀「03_他的家」及其子資料夾。');
+  renderFolderedMedia('foodPhotoGrid','food','image','請在 Google Drive 建立「05_美而美早餐店」，底下可再分子資料夾。');
+  renderFolderedMedia('roadPhotoGrid','road','image','請在 Google Drive 建立「06_通往他的路」，底下可再分子資料夾。');
+  renderFolderedMedia('videoGrid','video','video','請把影片放在 Google Drive「02_影音館」及其子資料夾。',DATA.memories||[]);
+  renderKtvSongs();
+}
+function renderPhotos(id,items,emptyMsg){let box=document.getElementById(id);items=items||[];if(!box)return;if(!items.length){box.innerHTML='<div class="empty">'+(emptyMsg||'目前沒有資料。請確認 Google Drive 分類資料夾。')+'</div>';return}box.innerHTML=photoGridHtml(items)}
+function renderVideos(id,list,empty){let box=document.getElementById(id);if(!box)return;list=list||[];if(!list.length){box.innerHTML='<div class="empty">'+empty+'</div>';return}box.innerHTML=mediaListHtml(list)}
+let LIGHTBOX_ITEMS=[];
+let LIGHTBOX_INDEX=0;
+let lbStartX=0;
+function openLightbox(src){
+  if(!src)return;
+  LIGHTBOX_ITEMS=[{name:'',thumbnailUrl:src,url:src,streamUrl:src}];
+  LIGHTBOX_INDEX=0;
+  updateLightbox();
+  document.getElementById('lightbox').classList.add('show');
+}
+function updateLightbox(){
+  const p=LIGHTBOX_ITEMS[LIGHTBOX_INDEX];
+  if(!p)return;
+  setImgToItem(document.getElementById('lbImg'),p);
+  const cap=document.getElementById('lbCaption');
+  if(cap)cap.textContent=(LIGHTBOX_INDEX+1)+' / '+LIGHTBOX_ITEMS.length+(p.name?'｜'+p.name:'');
+}
+function moveLightbox(delta){
+  if(!LIGHTBOX_ITEMS.length)return;
+  LIGHTBOX_INDEX=(LIGHTBOX_INDEX+delta+LIGHTBOX_ITEMS.length)%LIGHTBOX_ITEMS.length;
+  updateLightbox();
+}
+function closeLightbox(){
+  document.getElementById('lightbox').classList.remove('show');
+  document.getElementById('lbImg').src='';
+  const cap=document.getElementById('lbCaption');if(cap)cap.textContent='';
+  LIGHTBOX_ITEMS=[];LIGHTBOX_INDEX=0;
+}
+function lbTouchStart(e){const t=e.touches&&e.touches[0];if(t)lbStartX=t.clientX;}
+function lbTouchEnd(e){const t=e.changedTouches&&e.changedTouches[0];if(!t)return;const dx=t.clientX-lbStartX;if(Math.abs(dx)>42)moveLightbox(dx>0?-1:1);}
+document.addEventListener('keydown',e=>{const lb=document.getElementById('lightbox');if(!lb||!lb.classList.contains('show'))return;if(e.key==='ArrowLeft')moveLightbox(-1);if(e.key==='ArrowRight')moveLightbox(1);if(e.key==='Escape')closeLightbox();});
+function startTheme(){
+  const a=document.getElementById('themeAudio');
+  setupLyricDanmaku();
+  // 主題曲固定優先使用 GitHub Pages 本機檔：assets/audio/dear-ang-theme.mp3
+  // Google Drive 的 00_主題曲只當備份，不再優先蓋掉 GitHub 音樂。
+  if(!a.src){
+    if(CONFIG.LOCAL_THEME){
+      a.src=CONFIG.LOCAL_THEME;
+    }else if(CONFIG.GITHUB_THEME_AUDIO){
+      a.src=CONFIG.GITHUB_THEME_AUDIO;
+    }else if(DATA.theme&&DATA.theme.streamUrl){
+      a.src=DATA.theme.streamUrl;
+    }
+  }
+  if(musicWanted){
+    if(!a.src && CONFIG.LOCAL_THEME){a.src=CONFIG.LOCAL_THEME;}
+    if(!a.src){toast('主題曲路徑不存在');return;}
+    a.play().catch(()=>toast('手機瀏覽器擋住音樂，請再按一次 ♫'));
+  }
+}
+function toggleMusic(){
+  const a=document.getElementById('themeAudio');
+  const btn=document.getElementById('musicBtn');
+  if(!a)return;
+  if(a.paused){
+    musicWanted=true;
+    startTheme();
+    if(btn){btn.textContent='♫';btn.classList.add('on');btn.title='音樂開啟中';}
+  }else{
+    musicWanted=false;
+    a.pause();
+    if(btn){btn.textContent='♪';btn.classList.remove('on');btn.title='音樂已關閉';}
+    toast('音樂已關閉');
+  }
+}
+function refreshDataNoReload(){
+  const btn=document.getElementById('dataRefreshBtn');
+  if(btn){btn.classList.add('refreshing');btn.disabled=true;}
+  toast('正在重新整理資料（不刷新頁面）…');
+  const tasks=[
+    loadData(),
+    refreshAutoWeather(false),
+    loadLyricsFromRootFiles().then(()=>setupLyricDanmaku()).catch(()=>null)
+  ];
+  return Promise.allSettled(tasks).then(()=>{
+    renderDynamic();
+    renderFood();
+    renderMaps();
+    if(document.getElementById('page-nav')?.classList.contains('show') && typeof initRouteMapPage==='function')initRouteMapPage();
+    toast('資料已重新整理（未刷新頁面）');
+  }).catch(()=>toast('部分資料讀取失敗，頁面未刷新',1)).finally(()=>{
+    if(btn){btn.classList.remove('refreshing');btn.disabled=false;}
+  });
+}
+function smartBack(){
+  const lb=document.getElementById('lightbox');
+  if(lb&&lb.classList.contains('show')){closeLightbox();return;}
+  const visitor=document.getElementById('visitorIdentityModal');
+  if(visitor&&!visitor.classList.contains('hidden')){visitor.classList.add('hidden');return;}
+  const openPages=[...document.querySelectorAll('.page.show')];
+  if(openPages.length){closePage();return;}
+  const mini=document.getElementById('miniWorld');
+  if(mini&&mini.classList.contains('hidden')){showMiniWorld();toast('回到小世界');return;}
+  toast('重播開場');
+  startOpeningMemoryCountdown();
+}
+
+
+try{const _letterAudio=document.getElementById('letterAudio');if(_letterAudio){_letterAudio.addEventListener('ended',()=>{const play=document.querySelector('.radio-audio-play');if(play)play.classList.remove('playing');});}}catch(e){}
+
+function setupBuildingHotspotNames(){
+  document.querySelectorAll('#stage .hotspot').forEach(el=>{
+    if(el.dataset.buildingReady)return;
+    el.dataset.buildingReady='1';
+    const show=()=>{el.classList.add('show-name');clearTimeout(el._nameTimer);el._nameTimer=setTimeout(()=>el.classList.remove('show-name'),1400);};
+    el.addEventListener('touchstart',show,{passive:true});
+    el.addEventListener('click',show);
+  });
+}
+
+function setupPersonNameHotspots(){
+  document.querySelectorAll('.person-tag-hotspot').forEach(el=>{
+    if(el.dataset.ready)return;
+    el.dataset.ready='1';
+    const show=()=>{el.classList.add('show-name');clearTimeout(el._nameTimer);el._nameTimer=setTimeout(()=>el.classList.remove('show-name'),1600);};
+    el.addEventListener('touchstart',show,{passive:true});
+    el.addEventListener('click',show);
+  });
+}
+
+
+function renderFood(){}
+function renderMaps(){
+  const box=document.getElementById('mapList');
+  if(!box)return;
+  box.innerHTML=PLACE_POINTS.map(p=>{
+    let q=`${p.lat},${p.lng}`;
+    return `<div class="map-row"><b>${p.id}｜${p.title}</b><span>${q}</span><div class="toolbar"><a class="pill soft" href="https://www.google.com/maps?q=${q}" target="_blank" rel="noopener">打開地圖</a><a class="pill soft" href="https://www.google.com/maps?q=${q}&layer=c" target="_blank" rel="noopener">開街景</a></div></div>`;
+  }).join('')+`<div class="map-row"><b>導航到第六棵樹</b><span>從你現在的位置出發</span><div class="toolbar"><a class="pill" href="https://www.google.com/maps/dir/?api=1&destination=24.11397,120.7823878&travelmode=driving" target="_blank" rel="noopener">開始導航</a></div></div>`;
+}
+function setupWeather(){
+  setMiniWeatherStatus('正在讀取長眠地即時天氣…');
+  refreshAutoWeather(false);
+  if(autoWeatherTimer)clearInterval(autoWeatherTimer);
+  autoWeatherTimer=setInterval(()=>refreshAutoWeather(false),10*60*1000);
+}
+
+
+const GEO_WORKER_URL = window.DEARANG_GEO_WORKER_URL || ''; 
+// 要自動預填城市時，先部署 geo-worker.js，再把網址填到 window.DEARANG_GEO_WORKER_URL 或直接填在這裡。
+
+const VISITOR_DISTRICTS={
+  '台中市':['中區','東區','西區','南區','北區','西屯區','南屯區','北屯區','太平區','大里區','霧峰區','烏日區','豐原區','后里區','石岡區','東勢區','和平區','新社區','潭子區','大雅區','神岡區','大肚區','沙鹿區','龍井區','梧棲區','清水區','大甲區','外埔區','大安區'],
+  '南投縣':['南投市','草屯鎮','埔里鎮','魚池鄉','仁愛鄉','國姓鄉','水里鄉','名間鄉','集集鎮','竹山鎮','鹿谷鄉','信義鄉','中寮鄉'],
+  '彰化縣':['彰化市','員林市','鹿港鎮','和美鎮','溪湖鎮','田中鎮','北斗鎮','二林鎮','花壇鄉','秀水鄉','大村鄉','埔心鄉','永靖鄉','社頭鄉','其他'],
+  '台北市':['中正區','大同區','中山區','松山區','大安區','萬華區','信義區','士林區','北投區','內湖區','南港區','文山區'],
+  '新北市':['板橋區','新莊區','中和區','永和區','土城區','樹林區','三重區','蘆洲區','汐止區','淡水區','林口區','新店區','其他'],
+  '桃園市':['桃園區','中壢區','平鎮區','八德區','楊梅區','蘆竹區','大溪區','龍潭區','龜山區','大園區','其他'],
+  '高雄市':['新興區','前金區','苓雅區','鹽埕區','鼓山區','左營區','三民區','前鎮區','小港區','鳳山區','岡山區','楠梓區','其他'],
+  '其他':['其他']
+};
+
+function updateVisitorDistrictOptions(){
+  const city=document.getElementById('visitorCityInput')?.value || '';
+  const districtSelect=document.getElementById('visitorDistrictInput');
+  if(!districtSelect)return;
+  districtSelect.innerHTML='';
+  if(!city){
+    districtSelect.disabled=true;
+    districtSelect.innerHTML='<option value="">先選城市，再選區域</option>';
+    return;
+  }
+  const districts=VISITOR_DISTRICTS[city] || ['其他'];
+  districtSelect.disabled=false;
+  districtSelect.innerHTML='<option value="">選擇區域，可不填</option>';
+  districts.forEach(d=>{
+    const opt=document.createElement('option');
+    opt.value=d;
+    opt.textContent=d;
+    districtSelect.appendChild(opt);
+  });
+}
+
+function getDearAngDeviceId(){
+  const key='dear_ang_private_device_id_v1';
+  let id='';
+  try{id=localStorage.getItem(key) || '';}catch(e){}
+  if(!id){
+    id='DA-' + Date.now().toString(36) + '-' + Math.random().toString(36).slice(2,8).toUpperCase();
+    try{localStorage.setItem(key,id);}catch(e){}
+  }
+  return id;
+}
+
+function getSavedVisitorIdentity(){
+  try{return JSON.parse(localStorage.getItem('dear_ang_visitor_identity_v1') || 'null');}
+  catch(e){return null;}
+}
+
+function normalizeTaiwanCityName(name){
+  const s=String(name || '').toLowerCase();
+  if(s.includes('taichung') || s.includes('台中')) return '台中市';
+  if(s.includes('nantou') || s.includes('南投')) return '南投縣';
+  if(s.includes('changhua') || s.includes('彰化')) return '彰化縣';
+  if(s.includes('new taipei') || s.includes('新北')) return '新北市';
+  if(s.includes('taipei') || s.includes('台北')) return '台北市';
+  if(s.includes('taoyuan') || s.includes('桃園')) return '桃園市';
+  if(s.includes('kaohsiung') || s.includes('高雄')) return '高雄市';
+  return '';
+}
+
+async function autoPrefillVisitorCity(){
+  const citySelect=document.getElementById('visitorCityInput');
+  if(!citySelect || citySelect.value)return;
+  if(!GEO_WORKER_URL)return;
+  try{
+    const r=await fetch(GEO_WORKER_URL,{cache:'no-store'});
+    const geo=await r.json();
+    const city=normalizeTaiwanCityName(geo.city || geo.region || geo.timezone || '');
+    if(city){citySelect.value=city;updateVisitorDistrictOptions();}
+  }catch(e){}
+}
+
+function showVisitorIdentityPrompt(){
+  const saved=getSavedVisitorIdentity();
+  if(saved && saved.name)return;
+  const modal=document.getElementById('visitorIdentityModal');
+  if(modal)modal.classList.remove('hidden');
+  setTimeout(autoPrefillVisitorCity,300);
+}
+
+function closeVisitorIdentityModal(){
+  const modal=document.getElementById('visitorIdentityModal');
+  if(modal)modal.classList.add('hidden');
+}
+
+function visitorModalBackdropClose(ev){
+  if(ev && ev.target && ev.target.id==='visitorIdentityModal')skipVisitorIdentity();
+}
+
+document.addEventListener('keydown',ev=>{
+  if(ev.key==='Escape'){
+    const modal=document.getElementById('visitorIdentityModal');
+    if(modal && !modal.classList.contains('hidden'))skipVisitorIdentity();
+  }
+});
+
+function safeSetVisitorIdentity(data){
+  try{localStorage.setItem('dear_ang_visitor_identity_v1',JSON.stringify(data));return true;}
+  catch(e){return false;}
+}
+
+function skipVisitorIdentity(){
+  closeVisitorIdentityModal();
+  try{sendPrivateVisitLog('identity_skipped',{identityStatus:'skipped'});}catch(e){}
+}
+
+function saveVisitorIdentity(){
+  const rawName=(document.getElementById('visitorNameInput')?.value || '').trim();
+  const name=rawName || '匿名訪客';
+  const city=(document.getElementById('visitorCityInput')?.value || '').trim();
+  const district=(document.getElementById('visitorDistrictInput')?.value || '').trim();
+  const note=(document.getElementById('visitorNoteInput')?.value || '').trim();
+  const data={name,city,district,note,savedAt:new Date().toISOString()};
+  closeVisitorIdentityModal();
+  safeSetVisitorIdentity(data);
+  try{sendPrivateVisitLog('identity_saved',{identityStatus:'saved',visitorName:name,visitorCity:city,visitorDistrict:district,visitorNote:note});}catch(e){}
+  try{toast('訪客登記已送出');}catch(e){}
+}
+
+let dearAngVisitCountThisSession=null;
+function getVisitCount(){
+  if(dearAngVisitCountThisSession!==null)return dearAngVisitCountThisSession;
+  const key='dear_ang_visit_count_v1';
+  let n=1;
+  try{
+    n=Number(localStorage.getItem(key)||'0') + 1;
+    localStorage.setItem(key,String(n));
+  }catch(e){
+    n=1;
+  }
+  dearAngVisitCountThisSession=n;
+  return n;
+}
+
+function sendPrivateVisitLog(pageName, extra){
+  try{
+    if(!window.CONFIG || !CONFIG.GAS_API_URL)return;
+    extra=extra || {};
+    const identity=getSavedVisitorIdentity();
+    const payload={
+      action:'privateVisitLog',
+      deviceId:getDearAngDeviceId(),
+      visitCount:getVisitCount(),
+      page:pageName || location.pathname,
+      title:document.title || '',
+      visitorName:identity?.name || '',
+      visitorCity:identity?.city || '',
+      visitorDistrict:identity?.district || '',
+      visitorNote:identity?.note || '',
+      userAgent:navigator.userAgent || '',
+      language:navigator.language || '',
+      timezone:Intl.DateTimeFormat().resolvedOptions().timeZone || '',
+      screen:window.screen ? `${screen.width}x${screen.height}` : '',
+      referrer:document.referrer || '',
+      url:location.href,
+      time:new Date().toISOString()
+    };
+    Object.assign(payload,extra);
+    const url=CONFIG.GAS_API_URL
+      + '?action=privateVisitLog'
+      + '&data=' + encodeURIComponent(JSON.stringify(payload));
+    const img=new Image();
+    img.src=url;
+  }catch(e){}
+}
+
+function askVisitorAfterEnterWorld(){setTimeout(showVisitorIdentityPrompt,800);}
+
+document.addEventListener('DOMContentLoaded',()=>{sendPrivateVisitLog('enter_site');});
+
+
+
+
+
+function forceInitTreasureRouteMap(){
+  try{
+    if(typeof initRouteMapPage==='function')initRouteMapPage();
+    setTimeout(()=>{try{if(typeof initRouteMapPage==='function')initRouteMapPage();}catch(e){}},120);
+  }catch(e){}
+}
+function openTreasureMapFromMini(event){
+  if(event){event.preventDefault();event.stopPropagation();}
+  try{stopLetterAudio&&stopLetterAudio();}catch(e){}
+  document.body.classList.remove('view-zoom-2x');
+  const mini=document.getElementById('miniWorld');
+  if(mini){mini.classList.add('hidden');mini.classList.remove('zooming');}
+  const world=document.getElementById('world');
+  if(world)world.classList.remove('hidden','hint-muted');
+  openPage('nav');
+  forceInitTreasureRouteMap();
+  try{toast('已打開藏寶地圖');}catch(e){}
+}
+function openTreasureMapFromStreet(event){
+  if(event){event.preventDefault();event.stopPropagation();}
+  openPage('nav');
+  forceInitTreasureRouteMap();
+}
+
+
+(function(){
+  const routeStations=[
+    {n:1,title:'等你出來的小門',tag:'每次一起出去前，我都在這裡等你。',t:0,x:760,y:1565,body:['我們每次要一起出去的時候，我都會在停機車的地方入口那個小門等你。','這裡不是什麼特別大的地方，可是對我來說，它就是一個很熟悉的等待位置。','因為每次要見面、要一起出門、要一起去哪裡，我都會先站在那裡等你出現。','<span class="em">有些地方會被記住，不是因為它多漂亮，而是因為那裡裝著太多「每一次要見面前」的感覺。</span>']},
+    {n:2,title:'住得很近的那段日子',tag:'住得很近，動不動就往樓下跑。',t:.20,x:420,y:500,body:['我住在這一面的 7 樓，你住在我背面的 2 樓。','那時候我們動不動就是往下跑，跑去找你聊天、吃飯，或者等你上班，或一起回家。','我們那時候在同一間公司上班，所以很多時候根本也不是有什麼特別的大事，就是很自然地想找你。','有時候根本沒什麼事，但就是習慣膩在一起。那種靠近，不用特別約，不用特別講，就已經變成生活的一部分了。']},
+    {n:3,title:'搬到大雅',tag:'很多誤會的開始，也是彼此最深刻關愛的地方。',t:.40,x:1680,y:440,body:['搬到大雅，是很多誤會開始的地方，但也是最深刻關愛彼此的地方。','那裡不是只有爭執、拉扯、情緒，也不只是表面上那些說不清楚的誤會。','更深的其實是，就算有誤會、有碰撞、有難過，彼此還是在意，還是關心，還是把對方放在心裡。','因為在那裡，我也更清楚地感覺到，我們不是不在乎，反而是太在乎了。']},
+    {n:4,title:'你搬到最頂樓之後',tag:'表面分開，心裡卻還是像磁鐵一樣靠近。',t:.58,x:1510,y:1140,body:['從大雅搬離之後，表面上是吵架了、分開了，可是內心底就像兩顆磁鐵一樣，不管到哪裡，都還是會被彼此吸過去。','後來你搬到這棟最頂樓，每次我都是站在這個角度等你丟鑰匙下來，然後再坐電梯上去。😂','經歷過了很多事情，你還是一樣對我好。','重點是圍爐聚餐，你一定不會少問我。不管怎麼樣，你都還是會想到我，還是會留我的位置。']},
+    {n:5,title:'你的老家',tag:'回憶會停下來的地方。',t:.78,x:1540,y:2250,body:['這裡是你的老家。對別人來說，可能只是一個地址、一間房子、某一條街。','可是對我來說，這裡是很多回憶會停下來的地方。','好像只要走到這附近，就會覺得你還在。好像你只是等等會出來，或者還像以前一樣，會在門口出現，會叫我，會和我說話。','這裡像是很多回憶會回到原點的地方。不管前面經過多少事，最後想到你，還是會想到這裡。']},
+    {n:6,title:'最後一站／第六棵樹',tag:'最安靜、最捨不得，也最放不下的地方。',t:1,x:1295,y:3420,body:['這裡是最後一站。走到這裡的時候，很多情緒都會安靜下來。','如果前面的每一站，有的是等待、有的是陪伴、有的是誤會、有的是靠近，那這裡比較像是把所有想念都放下來，靜靜陪你待一下的地方。','這不是普通的地標，而是我心裡怎麼也不可能真的略過的地方。','<span class="em">因為不管前面怎麼走，最後還是會走到這裡。</span>']}
+  ];
+  let state=null;
+  function routeEscHtml(s){return String(s||'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));}
+  function ease(t){return t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2}
+  function inCard(e){return !!(e.target&&e.target.closest&&e.target.closest('#page-nav .route-story-card'))}
+  function routePad(n){return String(n).padStart(2,'0')}
+  function routeLandmarkCandidates(n){
+    const p=routePad(n);
+    const bases=[`landmark-${p}`,`station-${p}`,`route-${p}`,`spot-${p}`,p];
+    const exts=['webp','png','jpg','jpeg','gif'];
+    const out=[`assets/images/map_photo/${Number(n)}.webp`,`assets/images/map_photo/${Number(n)}.png`];
+    bases.forEach(b=>exts.forEach(ext=>out.push(`assets/images/route/${b}.${ext}`)));
+    return out;
+  }
+  function showRouteLandmark(s){
+    if(!state||!state.pop)return;
+    const pop=state.pop,img=state.popImg,label=state.popLabel;
+    pop.classList.remove('show','missing');
+    pop.setAttribute('aria-hidden','true');
+    pop.style.left=(s.x/2160*100)+'%';
+    pop.style.top=(s.y/3840*100)+'%';
+    if(label)label.textContent=s.n+'｜'+s.title;
+    let cands=routeLandmarkCandidates(s.n), idx=0;
+    if(img){
+      img.alt=s.title||'';
+      img.onerror=()=>{
+        idx++;
+        if(idx<cands.length){ img.src=cands[idx]; }
+        else{ pop.classList.add('missing'); img.removeAttribute('src'); }
+      };
+      img.src=cands[idx];
+    }
+    clearTimeout(state.popTimer);
+    state.popTimer=setTimeout(()=>{
+      if(!state)return;
+      pop.classList.add('show');
+      pop.setAttribute('aria-hidden','false');
+    },90);
+  }
+  function pageVisible(){const p=document.getElementById('page-nav');return !!(p&&p.classList.contains('show'))}
+  function setProgress(t){
+    if(!state)return;
+    state.currentT=t;
+    const l=state.total*t;
+    const p=state.path.getPointAtLength(l);
+    state.light.setAttribute('transform',`translate(${p.x} ${p.y})`);
+    state.done.style.strokeDashoffset=state.total-l;
+    state.hot.style.strokeDashoffset=state.total-l-60;
+  }
+  function render(i){
+    if(!state)return;
+    const s=routeStations[i];
+    state.card.classList.remove('switching','justChanged');
+    state.num.textContent=s.n;
+    state.title.textContent=s.title;
+    state.tag.textContent=s.tag;
+    state.body.innerHTML=s.body.map(x=>`<p>${x}</p>`).join('');
+    state.body.scrollTop=0;
+    state.spotEls.forEach((el,k)=>el.classList.toggle('active',k===i));
+    state.dotEls.forEach((el,k)=>el.classList.toggle('on',k===i));
+    requestAnimationFrame(()=>{
+      state.card.classList.add('show','justChanged');
+      setTimeout(()=>state&&state.card.classList.remove('justChanged'),560);
+    });
+    showRouteLandmark(s);
+    state.hint.classList.remove('hide');
+    state.titlePill.classList.add('dim');
+    clearTimeout(state.autoHide);
+    state.autoHide=setTimeout(()=>{if(state&&!state.open){state.card.classList.remove('show');state.hint.classList.add('hide');state.titlePill.classList.remove('dim')}},4200);
+  }
+  function animateTo(targetT,cb){
+    if(!state)return;
+    cancelAnimationFrame(state.anim);
+    const start=state.currentT,diff=targetT-start,t0=performance.now(),dur=Math.max(1050,Math.abs(diff)*3200);
+    function step(now){
+      let p=Math.min(1,(now-t0)/dur);
+      setProgress(start+diff*ease(p));
+      if(p<1&&state)state.anim=requestAnimationFrame(step);else cb&&cb();
+    }
+    state.anim=requestAnimationFrame(step);
+  }
+  function go(i){
+    if(!state)return;
+    const nextIdx=Math.max(0,Math.min(routeStations.length-1,i));
+    if(nextIdx===state.idx&&state.card.classList.contains('show'))return;
+    state.idx=nextIdx;
+    state.open=false;
+    clearTimeout(state.autoHide);
+    state.card.classList.remove('open','justChanged');
+    state.card.classList.add('show','switching');
+    animateTo(routeStations[state.idx].t,()=>render(state.idx));
+    if(typeof playUiSound==='function')playUiSound('slide');
+  }
+  window.initRouteMapPage=function(){
+    const root=document.getElementById('routeMapApp');
+    if(!root)return;
+    if(state){setTimeout(()=>setProgress(state.currentT||0),40);return;}
+    const path=document.getElementById('routeMapPath'),done=document.getElementById('routeMapDone'),hot=document.getElementById('routeMapHot'),light=document.getElementById('routeMapLight');
+    const spots=document.getElementById('routeSpots'),dots=document.getElementById('routeDots');
+    const card=document.getElementById('routeCard'),num=document.getElementById('routeNum'),title=document.getElementById('routeStoryTitle'),tag=document.getElementById('routeStoryTag'),body=document.getElementById('routeStoryBody'),hint=document.getElementById('routeHint'),titlePill=document.getElementById('routeTitlePill');
+    if(!path||!done||!hot||!light||!spots||!dots||!card)return;
+    spots.innerHTML='';dots.innerHTML='';
+    routeStations.forEach((s,i)=>{
+      let b=document.createElement('button');
+      b.type='button';
+      b.className='route-spot';
+      b.style.left=(s.x/2160*100)+'%';
+      b.style.top=(s.y/3840*100)+'%';
+      b.setAttribute('aria-label',s.n+'｜'+s.title);
+      b.onclick=()=>go(i);
+      spots.appendChild(b);
+      dots.appendChild(document.createElement('span'));
+    });
+    const total=path.getTotalLength();
+    done.style.strokeDasharray=total;
+    hot.style.strokeDasharray='120 '+total;
+    let pop=root.querySelector('.route-landmark-pop');
+    if(!pop){
+      pop=document.createElement('div');
+      pop.className='route-landmark-pop';
+      pop.setAttribute('aria-hidden','true');
+      pop.innerHTML='<img alt=""><span class="route-landmark-label"></span>';
+      root.appendChild(pop);
+    }
+    state={root,path,done,hot,light,spots,dots,card,num,title,tag,body,hint,titlePill,total,idx:0,anim:null,autoHide:null,open:false,currentT:0,lock:false,sy:0,sx:0,touchOnCard:false,spotEls:[...spots.querySelectorAll('.route-spot')],dotEls:[...dots.querySelectorAll('span')],pop,popImg:pop.querySelector('img'),popLabel:pop.querySelector('.route-landmark-label'),popTimer:null};
+    document.getElementById('routePrev').onclick=()=>go(state.idx-1);
+    document.getElementById('routeNext').onclick=()=>go(state.idx+1);
+    document.getElementById('routeCardTop').onclick=()=>{state.open=!state.open;state.card.classList.toggle('open',state.open);state.card.classList.add('show');state.hint.classList.toggle('hide',state.open)};
+    ['wheel','touchstart','touchmove','touchend'].forEach(type=>{body.addEventListener(type,e=>e.stopPropagation(),{passive:true})});
+    root.addEventListener('wheel',e=>{if(!pageVisible()||inCard(e))return;e.preventDefault();if(state.lock)return;state.lock=true;go(state.idx+(e.deltaY>0?1:-1));setTimeout(()=>{if(state)state.lock=false},920)},{passive:false});
+    root.addEventListener('touchstart',e=>{state.touchOnCard=inCard(e);if(state.touchOnCard)return;state.sy=e.touches[0].clientY;state.sx=e.touches[0].clientX},{passive:true});
+    root.addEventListener('touchend',e=>{if(state.touchOnCard){state.touchOnCard=false;return}let dy=e.changedTouches[0].clientY-state.sy,dx=e.changedTouches[0].clientX-state.sx;if(Math.abs(dy)>48&&Math.abs(dy)>Math.abs(dx)*1.25)go(state.idx+(dy<0?1:-1))},{passive:true});
+    document.addEventListener('keydown',e=>{if(!pageVisible()||!state)return;if(['ArrowDown','PageDown',' '].includes(e.key)){e.preventDefault();go(state.idx+1)} if(['ArrowUp','PageUp'].includes(e.key)){e.preventDefault();go(state.idx-1)}});
+    setProgress(0);
+    render(0);
+  };
+})();
+
+
+
+
+
+
+
+
+
+
+
+
 </script>
-</body>
-</html>
+
+<script>
+
+(function(){
+  const albums=[
+    {title:'愛的旅程',short:'愛的旅程',icon:'📷',tone:['#63c6b9','#224b57'],text:['記錄我們一起走過的每個重要時刻，','從相遇、相戀到共同築起的未來。','每一張照片，都是愛的證明。']},
+    {title:'童年時光',short:'童年時光',icon:'🌸',tone:['#ff9db6','#7d394a'],text:['有些笑容，是時間也帶不走的光。','把那些天真、可愛、還沒有長大的瞬間，','一格一格收進摩天輪裡。']},
+    {title:'家庭聚會',short:'家庭聚會',icon:'🏠',tone:['#ffcb69','#8b5221'],text:['家人坐在一起的畫面，永遠最溫暖。','那些吃飯、聊天、拍照、團聚的時刻，','都是回憶裡最亮的燈。']},
+    {title:'旅行記憶',short:'旅行記憶',icon:'🧳',tone:['#b98cff','#4a386f'],text:['一起走過的路，不只是地圖上的距離。','每一次出發、等待、抵達和回頭看，','都變成心裡不會消失的風景。']},
+    {title:'知心好友',short:'知心好友',icon:'🤍',tone:['#87d986','#275d35'],text:['有些朋友不是常常說想念，','而是只要想起來，就會覺得心裡很滿。','謝謝你們也把他放在心上。']},
+    {title:'寵物日記',short:'寵物日記',icon:'🐾',tone:['#70c9ff','#234d69'],text:['那些陪伴過日常的小生命，','也一起走進了我們的回憶裡。','牠們的眼神和靠近，都很珍貴。']},
+    {title:'思念長輩',short:'思念長輩',icon:'🕯️',tone:['#f0a85a','#6d351c'],text:['有些愛不會因為時間變遠。','想念會慢慢沉下來，變成溫柔的光。','我們用照片，把那份牽掛留下。']},
+    {title:'成長足跡',short:'成長足跡',icon:'🎓',tone:['#6aa7ff','#273f78'],text:['每一個階段都值得被記住。','那些努力、改變、跌倒又站起來的時候，','都讓今天的我們更靠近心裡的自己。']}
+  ];
+  let cur=0,inited=false,paused=false,timer=null,autoTimer=null,startX=0;
+  function qs(id){return document.getElementById(id)}
+  function esc(s){return String(s||'').replace(/[&<>]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[m]))}
+  function say(s){
+    const t=qs('photoWheelToast');
+    if(!t)return;
+    t.textContent=s;
+    t.classList.add('show');
+    clearTimeout(say.t);
+    say.t=setTimeout(()=>t.classList.remove('show'),1300);
+  }
+  function pause(){
+    paused=true;
+    clearTimeout(timer);
+    timer=setTimeout(()=>paused=false,5200);
+  }
+  function build(){
+    if(inited)return;
+    const spokes=qs('photoWheelSpokes');
+    const cabins=qs('photoWheelCabins');
+    if(!spokes||!cabins)return;
+    for(let i=0;i<20;i++){
+      const e=document.createElement('i');
+      e.style.transform='rotate('+(i*18)+'deg)';
+      spokes.appendChild(e);
+    }
+    albums.forEach((a,i)=>{
+      const b=document.createElement('button');
+      b.type='button';
+      b.className='photo-wheel-cabin';
+      b.dataset.i=i;
+      b.innerHTML='<div class="photo-wheel-cabin-photo" style="background:linear-gradient(135deg,'+a.tone[0]+','+a.tone[1]+')">'+esc(a.short)+'</div><div class="photo-wheel-cabin-label">'+esc(a.short)+' ♡</div>';
+      b.addEventListener('click',()=>{
+        if(i!==cur){
+          cur=i;
+          pause();
+          render();
+          say('');
+        }else{
+          openAlbum(i);
+        }
+      });
+      cabins.appendChild(b);
+    });
+    const next=qs('photoWheelNext'),prev=qs('photoWheelPrev'),stage=qs('photoWheelStage'),modal=qs('photoWheelModal'),close=qs('photoWheelClose');
+    if(next)next.onclick=()=>{cur=(cur+1)%albums.length;pause();render();};
+    if(prev)prev.onclick=()=>{cur=(cur-1+albums.length)%albums.length;pause();render();};
+    if(stage){
+      stage.addEventListener('touchstart',e=>{startX=e.touches[0].clientX;},{passive:true});
+      stage.addEventListener('touchend',e=>{
+        const d=e.changedTouches[0].clientX-startX;
+        if(Math.abs(d)>42){
+          cur=(cur+(d<0?1:-1)+albums.length)%albums.length;
+          pause();
+          render();
+        }
+      },{passive:true});
+    }
+    if(close)close.onclick=()=>modal&&modal.classList.remove('open');
+    if(modal)modal.onclick=e=>{if(e.target===modal)modal.classList.remove('open');};
+    window.addEventListener('resize',render);
+    autoTimer=setInterval(()=>{if(!paused && qs('page-photo')?.classList.contains('show')){cur=(cur+1)%albums.length;render();}},3600);
+    inited=true;
+    render();
+  }
+  function render(){
+    const stage=qs('photoWheelStage');
+    const bs=[...document.querySelectorAll('#photoWheelCabins .photo-wheel-cabin')];
+    if(!stage||!bs.length)return;
+    const total=bs.length;
+    const w=stage.getBoundingClientRect().width || 620;
+    const r=w*.34;
+    bs.forEach((b,i)=>{
+      const a=albums[i];
+      const off=i-cur;
+      const ang=(off/total)*Math.PI*2+Math.PI/2;
+      const x=Math.cos(ang)*r;
+      const y=Math.sin(ang)*r;
+      const front=Math.sin(ang);
+      const active=i===cur;
+      const scale=active?1.22:Math.max(.72,.84+front*.08);
+      const op=active?1:Math.max(.32,.55+front*.18);
+      const blur=active?0:Math.max(0,1.1-front);
+      b.classList.toggle('active',active);
+      b.style.transform='translate('+x+'px,'+y+'px) scale('+scale+')';
+      b.style.opacity=op;
+      b.style.filter='blur('+blur+'px) brightness('+(active?1.13:.86)+')';
+      b.style.zIndex=active?66:Math.round(20+front*10);
+    });
+    const a=albums[cur];
+    const title=qs('photoWheelTitle'),icon=qs('photoWheelIcon'),text=qs('photoWheelText'),pic=qs('photoWheelPic');
+    if(title)title.textContent=a.title;
+    if(icon)icon.textContent=a.icon;
+    if(text)text.innerHTML=a.text.map(esc).join('<br>');
+    if(pic)pic.style.background='radial-gradient(circle at 72% 20%,rgba(255,250,190,.9) 0 10%,transparent 11%),linear-gradient(180deg,'+a.tone[0]+','+a.tone[1]+' 55%,#160d12)';
+  }
+  function openAlbum(i){
+    const a=albums[i];
+    const modal=qs('photoWheelModal'),mt=qs('photoWheelModalTitle'),md=qs('photoWheelModalDesc'),grid=qs('photoWheelGrid');
+    if(!modal||!grid)return;
+    if(mt)mt.textContent=a.title;
+    if(md)md.textContent=a.text.join('');
+    grid.innerHTML='';
+    for(let n=0;n<6;n++){
+      const tile=document.createElement('div');
+      tile.className='photo-wheel-tile';
+      tile.style.background='linear-gradient(135deg,'+a.tone[0]+','+a.tone[1]+')';
+      tile.textContent=a.short+' '+(n+1);
+      grid.appendChild(tile);
+    }
+    modal.classList.add('open');
+    pause();
+  }
+  window.initPhotoWheel=function(){
+    build();
+    setTimeout(render,40);
+    setTimeout(render,260);
+  };
+  const oldOpenPage=window.openPage;
+  if(typeof oldOpenPage==='function' && !oldOpenPage.__photoWheelWrapped){
+    const wrapped=function(id){
+      const result=oldOpenPage.apply(this,arguments);
+      if(id==='photo')window.initPhotoWheel();
+      return result;
+    };
+    wrapped.__photoWheelWrapped=true;
+    window.openPage=wrapped;
+  }
+  if(document.readyState==='loading'){
+    document.addEventListener('DOMContentLoaded',build);
+  }else{
+    build();
+  }
+})();
+</script>
+
+
+<script>
+
+(function(){
+  const GONDOLA_BASE='https://pub-a5bb8e437f004bb8aecca934db50299f.r2.dev/Ferris%20Wheel/Gondola';
+  const COLORS=['blue','green'];
+
+  function esc(s){
+    return String(s||'').replace(/[&<>"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]));
+  }
+  function file(color,name){
+    return GONDOLA_BASE+'/'+encodeURIComponent(color)+'/'+name;
+  }
+  function titleFromCabin(btn,index){
+    const label=btn.querySelector('.photo-wheel-cabin-label');
+    let t=(label&&label.textContent||'').replace('♡','').replace('｜開門','').trim();
+    return t || ('相簿 '+(index+1));
+  }
+  function skinPhotoWheelGondolas(){
+    const cabins=[...document.querySelectorAll('#photoWheelCabins .photo-wheel-cabin')];
+    if(!cabins.length)return;
+    cabins.forEach((btn,i)=>{
+      if(btn.dataset.gondolaSkinned==='1')return;
+      const color=COLORS[i%COLORS.length];
+      const title=titleFromCabin(btn,i);
+      btn.dataset.gondolaSkinned='1';
+      btn.dataset.gondolaColor=color;
+      btn.classList.add('gondola-img-mode','gondola-'+color);
+      btn.innerHTML=
+        '<img class="gondola-img gondola-base" src="'+file(color,'without_door.png')+'" alt="'+esc(title)+' 車廂本體">'+
+        '<img class="gondola-img gondola-door close left" src="'+file(color,'close_left_door.png')+'" alt="">'+
+        '<img class="gondola-img gondola-door close right" src="'+file(color,'close_right_door.png')+'" alt="">'+
+        '<img class="gondola-img gondola-door open left" src="'+file(color,'open_left_door.png')+'" alt="">'+
+        '<img class="gondola-img gondola-door open right" src="'+file(color,'open_right_door.png')+'" alt="">'+
+        '<span class="gondola-title">'+esc(title)+'</span>'+
+        '<span class="gondola-hotspot-note">點開相片</span>';
+    });
+  }
+
+  function ensurePhotoGridInModal(){
+    const modal=document.getElementById('photoWheelModal');
+    const grid=document.getElementById('photoWheelGrid');
+    const title=document.getElementById('photoWheelModalTitle');
+    const desc=document.getElementById('photoWheelModalDesc');
+    const photoGrid=document.getElementById('photoGrid');
+    if(!modal||!grid)return false;
+
+    if(title)title.textContent='華光相館｜照片相簿';
+    if(desc)desc.textContent='這裡直接接回原本 Google Drive 相片區，不再是假相簿。';
+
+    grid.classList.add('real-photo-grid');
+    grid.innerHTML='';
+
+    if(photoGrid){
+      photoGrid.style.display='block';
+      photoGrid.removeAttribute('aria-hidden');
+      grid.appendChild(photoGrid);
+    }else{
+      grid.innerHTML='<div class="empty">照片區還沒載入，請稍等資料讀取。</div>';
+    }
+
+    modal.classList.add('open');
+    return true;
+  }
+
+  function interceptActiveCabinClick(){
+    const box=document.getElementById('photoWheelCabins');
+    if(!box || box.dataset.realPhotoBound==='1')return;
+    box.dataset.realPhotoBound='1';
+    box.addEventListener('click',function(e){
+      const cabin=e.target.closest('.photo-wheel-cabin');
+      if(!cabin)return;
+      if(!cabin.classList.contains('active'))return;
+      e.preventDefault();
+      e.stopPropagation();
+      if(e.stopImmediatePropagation)e.stopImmediatePropagation();
+      ensurePhotoGridInModal();
+    },true);
+  }
+
+  function patch(){
+    try{ if(typeof window.initPhotoWheel==='function')window.initPhotoWheel(); }catch(e){}
+    skinPhotoWheelGondolas();
+    interceptActiveCabinClick();
+  }
+
+  const oldInit=window.initPhotoWheel;
+  if(typeof oldInit==='function' && !oldInit.__gondolaR2Wrapped){
+    window.initPhotoWheel=function(){
+      const r=oldInit.apply(this,arguments);
+      setTimeout(patch,30);
+      setTimeout(patch,320);
+      return r;
+    };
+    window.initPhotoWheel.__gondolaR2Wrapped=true;
+  }
+
+  if(document.readyState==='loading'){
+    document.addEventListener('DOMContentLoaded',()=>setTimeout(patch,80));
+  }else{
+    setTimeout(patch,80);
+  }
+  window.addEventListener('load',()=>setTimeout(patch,300));
+})();
+</script>
+
+
+<script>
+
+(function(){
+  const LEFT_DATE={y:2026,m:3,d:9};
+
+  function getThemeAudio(){
+    return document.getElementById('themeAudio');
+  }
+  function getLetterAudio(){
+    return document.getElementById('letterAudio');
+  }
+  function duckTheme(){
+    const t=getThemeAudio();
+    if(!t)return;
+    if(!t.dataset.beforeLetterVolume)t.dataset.beforeLetterVolume=String(isFinite(t.volume)?t.volume:1);
+    try{ t.volume=Math.min(Number(t.volume)||1,0.16); }catch(e){}
+  }
+  function restoreTheme(){
+    const t=getThemeAudio();
+    if(!t)return;
+    const old=t.dataset.beforeLetterVolume;
+    try{ t.volume=old==null?1:Math.max(0,Math.min(1,Number(old)||1)); }catch(e){}
+    delete t.dataset.beforeLetterVolume;
+  }
+
+  window.playLetterAudio=function(){
+    const a=getLetterAudio();
+    const play=document.querySelector('.radio-audio-play');
+    if(!a){ if(typeof toast==='function')toast('音檔播放器尚未建立',1); return; }
+    if(!a.getAttribute('src')){ if(typeof toast==='function')toast('請先放入 assets/audio/aming-message.mp3',1); return; }
+    duckTheme();
+    a.play().then(()=>{
+      if(play)play.classList.add('playing');
+    }).catch(()=>{
+      restoreTheme();
+      if(typeof toast==='function')toast('音檔尚未放入或被瀏覽器擋住',1);
+    });
+  };
+
+  window.stopLetterAudio=function(){
+    const a=getLetterAudio();
+    const play=document.querySelector('.radio-audio-play');
+    if(a){
+      try{a.pause();a.currentTime=0;}catch(e){}
+    }
+    if(play)play.classList.remove('playing');
+    restoreTheme();
+  };
+
+  function bindLetterEnd(){
+    const a=getLetterAudio();
+    if(!a||a.dataset.v63Bound==='1')return;
+    a.dataset.v63Bound='1';
+    a.addEventListener('ended',()=>{
+      const play=document.querySelector('.radio-audio-play');
+      if(play)play.classList.remove('playing');
+      restoreTheme();
+    });
+  }
+   function taipeiYMD(){
+    const parts=new Intl.DateTimeFormat('en-CA',{
+      timeZone:'Asia/Taipei',
+      year:'numeric',
+      month:'2-digit',
+      day:'2-digit'
+    }).formatToParts(new Date()).reduce((a,p)=>{a[p.type]=p.value;return a;},{});
+    return {y:Number(parts.year),m:Number(parts.month),d:Number(parts.day)};
+  }
+  function daysSinceInclusive(){
+    const now=taipeiYMD();
+    const start=Date.UTC(LEFT_DATE.y,LEFT_DATE.m-1,LEFT_DATE.d);
+    const today=Date.UTC(now.y,now.m-1,now.d);
+    return Math.max(1,Math.floor((today-start)/86400000)+1);
+  }
+  function renderDepartureCounter(){
+    let el=document.getElementById('departureDayCounter');
+    if(!el){
+      el=document.createElement('div');
+      el.id='departureDayCounter';
+      el.className='departure-day-counter';
+      document.body.appendChild(el);
+    }
+    el.innerHTML='今天是你離開的第 '+daysSinceInclusive()+' 天<small>2026.03.09</small>';
+  }
+
+  if(document.readyState==='loading'){
+    document.addEventListener('DOMContentLoaded',()=>{bindLetterEnd();renderDepartureCounter();});
+  }else{
+    bindLetterEnd();
+    renderDepartureCounter();
+  }
+  window.addEventListener('load',()=>{bindLetterEnd();renderDepartureCounter();
+/* KTV：依實際播放器顯示狀態切掉黑色遮罩。 */
+  function syncKtvMediaState(){
+    var screen=document.getElementById('ktvScreen');
+    if(!screen)return;
+    var video=document.getElementById('ktvVideo');
+    var frame=document.getElementById('ktvDriveFrame');
+    var videoOn=!!(video && video.style.display==='block' && (video.currentSrc || video.getAttribute('src')));
+    var frameOn=!!(frame && frame.style.display==='block' && frame.getAttribute('src'));
+    screen.classList.toggle('media-active',videoOn||frameOn);
+  }
+  function bindKtvObserver(){
+    var screen=document.getElementById('ktvScreen');
+    if(!screen||screen.dataset.v75Observe==='1')return;
+    screen.dataset.v75Observe='1';
+    new MutationObserver(function(){syncKtvMediaState();}).observe(screen,{subtree:true,childList:true,attributes:true,attributeFilter:['style','src']});
+    ['play','playing','pause','ended','error'].forEach(function(type){screen.addEventListener(type,function(){setTimeout(syncKtvMediaState,0);},true);});
+    syncKtvMediaState();
+  }
+  var oldKtvStart=window.ktvStart;
+  if(typeof oldKtvStart==='function')window.ktvStart=function(){var r=oldKtvStart.apply(this,arguments);setTimeout(syncKtvMediaState,0);return r;};
+  var oldKtvStop=window.ktvStop;
+  if(typeof oldKtvStop==='function')window.ktvStop=function(){var r=oldKtvStop.apply(this,arguments);setTimeout(syncKtvMediaState,0);return r;};
+
+  /* Mini World：先依台灣日夜立即選預設影片；只有真實天氣成功後才切換。 */
+  var WEATHER_MINI={
+    nightRain:'assets/videos/weather-mini/01-night-rain.mp4',
+    deepNightRain:'assets/videos/weather-mini/02-deep-night-rain.mp4',
+    cloudy:'assets/videos/weather-mini/03-cloudy.mp4',
+    overcast:'assets/videos/weather-mini/04-overcast.mp4',
+    sunny:'assets/videos/weather-mini/05-sunny.mp4',
+    fog:'assets/videos/weather-mini/06-fog.mp4',
+    storm:'assets/videos/weather-mini/07-thunderstorm.mp4',
+    thunderstorm:'assets/videos/weather-mini/07-thunderstorm.mp4',
+    nightShower:'assets/videos/weather-mini/08-night-shower.mp4',
+    hot:'assets/videos/weather-mini/09-hot-sunny.mp4',
+    rain:'assets/videos/weather-mini/10-day-rain.mp4',
+    dayRain:'assets/videos/weather-mini/10-day-rain.mp4',
+    night:'assets/videos/weather-mini/11-clear-night.mp4',
+    clearNight:'assets/videos/weather-mini/11-clear-night.mp4'
+  };
+  function taipeiHourV75(){
+    try{
+      var ps=new Intl.DateTimeFormat('en-US',{timeZone:'Asia/Taipei',hour:'2-digit',hour12:false}).formatToParts(new Date());
+      return Number((ps.find(function(p){return p.type==='hour';})||{}).value);
+    }catch(e){return new Date().getHours();}
+  }
+  function defaultMiniKey(){var h=taipeiHourV75();return h>=6&&h<18?'sunny':'night';}
+  function normalizeMiniKey(key){
+    key=String(key||'').trim();
+    if(WEATHER_MINI[key])return key;
+    if(/deep.*night.*rain|深夜.*雨/i.test(key))return 'deepNightRain';
+    if(/night.*shower|夜.*陣雨/i.test(key))return 'nightShower';
+    if(/night.*rain|夜雨/i.test(key))return 'nightRain';
+    if(/thunder|storm|雷|暴|豪|颱/i.test(key))return 'storm';
+    if(/rain|shower|雨/i.test(key))return 'rain';
+    if(/fog|霧/i.test(key))return 'fog';
+    if(/overcast|陰/i.test(key))return 'overcast';
+    if(/cloud|雲/i.test(key))return 'cloudy';
+    if(/hot|熱/i.test(key))return 'hot';
+    if(/night|夜/i.test(key))return 'night';
+    return 'sunny';
+  }
+  function playMiniSource(key,force){
+    var v=document.getElementById('miniFrameVideo');
+    if(!v)return;
+    key=normalizeMiniKey(key||defaultMiniKey());
+    var primary=WEATHER_MINI[key]||WEATHER_MINI[defaultMiniKey()];
+    var fallback=WEATHER_MINI[defaultMiniKey()];
+    var candidates=[primary,fallback,'assets/videos/mini-frame.mp4'].filter(function(x,i,a){return x&&a.indexOf(x)===i;});
+    var idx=0;
+    function loadAt(i){
+      if(i>=candidates.length){v.classList.add('frame-failed');return;}
+      idx=i;
+      v.onerror=function(){loadAt(idx+1);};
+      var src=candidates[i];
+      if(force || v.getAttribute('src')!==src){
+        try{v.pause();}catch(e){}
+        v.src=src;
+        try{v.load();}catch(e){}
+      }
+      try{
+        v.muted=true;v.loop=true;v.autoplay=true;v.preload='auto';
+        v.setAttribute('playsinline','');v.setAttribute('webkit-playsinline','');
+        var p=v.play();if(p&&p.catch)p.catch(function(){});
+      }catch(e){}
+    }
+    v.dataset.weatherFrameKey=key;
+    loadAt(0);
+  }
+  window.setupMiniFrameVideo=function(forceReload){
+    var v=document.getElementById('miniFrameVideo');
+    var key=(v&&v.dataset.realWeatherReady==='1')?normalizeMiniKey(v.dataset.realWeatherKey):defaultMiniKey();
+    playMiniSource(key,!!forceReload);
+  };
+  var realSwitchPermitUntil=0;
+  window.setMiniFrameVideoByWeatherReal=function(key){
+    var v=document.getElementById('miniFrameVideo');
+    /* 舊版 wrapper 會在每次 setMemoryWeather 後延遲呼叫這裡；
+       只有真實天氣成功或手動指定時才准切換，否則維持日夜預設。 */
+    if(Date.now()>realSwitchPermitUntil){
+      if(!(v&&v.dataset.realWeatherReady==='1'))playMiniSource(defaultMiniKey(),false);
+      return;
+    }
+    if(v){v.dataset.realWeatherReady='1';v.dataset.realWeatherKey=normalizeMiniKey(key);}
+    playMiniSource(key,true);
+  };
+  var oldSetMemoryWeather=window.setMemoryWeather;
+  if(typeof oldSetMemoryWeather==='function'){
+    window.setMemoryWeather=function(key,ev,source){
+      var realSource=source==='auto'||source==='manual';
+      realSwitchPermitUntil=realSource?Date.now()+1200:0;
+      var r=oldSetMemoryWeather.apply(this,arguments);
+      var v=document.getElementById('miniFrameVideo');
+      if(realSource){
+        if(v){v.dataset.realWeatherReady='1';v.dataset.realWeatherKey=normalizeMiniKey(key);}
+        playMiniSource(key,true);
+      }else if(!(v&&v.dataset.realWeatherReady==='1')){
+        playMiniSource(defaultMiniKey(),false);
+      }
+      return r;
+    };
+  }
+
+/* 修正舊版「晚上全部當夜雨」：晴夜用 11-clear-night，真的下雨才用夜雨。 */
+  window.weatherKeyFromOpenMeteo=function(c){
+    c=c||{};
+    var code=Number(c.weather_code||0),isDay=Number(c.is_day)===1,temp=Number(c.temperature_2m),wind=Number(c.wind_speed_10m);
+    var rain=(Number(c.rain)||0)+(Number(c.showers)||0)+(Number(c.precipitation)||0);
+    var storm=code>=95||wind>=55;
+    var rainy=rain>0||(code>=51&&code<=67)||(code>=80&&code<=82);
+    if(!isDay){if(storm)return 'storm';if(rainy)return 'nightRain';return 'night';}
+    if(storm)return 'storm';
+    if(code>=71&&code<=77)return 'snow';
+    if(code===45||code===48)return 'fog';
+    if(rainy)return 'rain';
+    if(code===3)return 'overcast';
+    if(code===2)return 'cloudy';
+    if(isFinite(temp)&&temp>=32)return 'hot';
+    return 'sunny';
+  };
+});
+})();
+</script>
+<script>
+(function(){
+  if(window.__DEARANG_V76_STREET_WEATHER_SYNC__)return;
+  window.__DEARANG_V76_STREET_WEATHER_SYNC__=true;
+
+  function normalizeStreetWeatherKey(key){
+    key=String(key||'').trim();
+    if(/deep.*night.*rain|night.*rain|夜雨/i.test(key))return 'nightRain';
+    if(/night|clear.*night|夜/i.test(key))return 'night';
+    if(/thunder|storm|雷|暴|豪|颱/i.test(key))return 'storm';
+    if(/rain|shower|雨/i.test(key))return 'rain';
+    if(/fog|霧/i.test(key))return 'fog';
+    if(/haze|霾/i.test(key))return 'haze';
+    if(/overcast|陰/i.test(key))return 'overcast';
+    if(/cloud|雲/i.test(key))return 'cloudy';
+    if(/hot|熱/i.test(key))return 'hot';
+    if(/snow|雪/i.test(key))return 'snow';
+    return key||'sunny';
+  }
+
+  function getStreetWeather(){
+    var key='sunny';
+    try{if(typeof memoryWeatherKey!=='undefined'&&memoryWeatherKey)key=memoryWeatherKey;}catch(e){}
+    key=normalizeStreetWeatherKey(key);
+    try{
+      if(typeof memoryWeatherByKey==='function')return memoryWeatherByKey(key);
+    }catch(e){}
+    return {key:key,label:key,bg:'assets/images/weather/day-sunny.webp',fx:''};
+  }
+
+  function setImgWithFallback(img,src){
+    if(!img||!src)return;
+    if((img.getAttribute('src')||'')===src)return;
+    var test=new Image();
+    test.onload=function(){img.src=src;};
+    test.onerror=function(){
+      img.src='assets/images/memory-world.webp';
+      var stage=document.getElementById('stage');
+      if(stage)stage.classList.add('stage-weather-fallback');
+    };
+    test.src=src;
+  }
+
+  window.syncStreetWeatherFromMemory=function(){
+    var w=getStreetWeather();
+    var stage=document.getElementById('stage');
+    var img=document.getElementById('stageWorldImg');
+    var fx=document.getElementById('worldWeather');
+    if(stage){
+      stage.dataset.weatherKey=w.key;
+      stage.classList.remove('stage-weather-fallback');
+      stage.dataset.weatherSynced='v76';
+    }
+    if(img){
+      setImgWithFallback(img,w.bg);
+      img.alt='富宜路街道世界｜'+(w.label||w.key);
+      img.style.opacity='1';
+    }
+    if(fx){
+      fx.className='world-weather '+(w.fx||'');
+      fx.style.display=w.fx?'':'none';
+    }
+  };
+
+  var oldSet=window.setMemoryWeather;
+  if(typeof oldSet==='function'&&!oldSet.__v76StreetWeatherWrapped){
+    window.setMemoryWeather=function(key,ev,source){
+      var r=oldSet.apply(this,arguments);
+      try{memoryWeatherKey=normalizeStreetWeatherKey(key||memoryWeatherKey);}catch(e){}
+      setTimeout(window.syncStreetWeatherFromMemory,0);
+      setTimeout(window.syncStreetWeatherFromMemory,160);
+      return r;
+    };
+    window.setMemoryWeather.__v76StreetWeatherWrapped=true;
+  }
+
+
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',function(){setTimeout(window.syncStreetWeatherFromMemory,300);},{once:true});
+  else setTimeout(window.syncStreetWeatherFromMemory,300);
+  window.addEventListener('load',function(){setTimeout(window.syncStreetWeatherFromMemory,500);});
+})()
+;
+
+/* ===== 互動與返回單一控制器：只允許目前畫面接收點擊 ===== */
+(function(){
+  if(window.__DEARANG_INTERACTION_ISOLATION__)return;
+  window.__DEARANG_INTERACTION_ISOLATION__=true;
+
+  function isVisible(el){
+    if(!el)return false;
+    if(el.classList.contains('hidden'))return false;
+    var s=getComputedStyle(el);
+    return s.display!=='none' && s.visibility!=='hidden';
+  }
+
+  function currentView(){
+    var opening=document.getElementById('openingCountdown');
+    var gate=document.getElementById('gate');
+    var page=document.querySelector('.page.show:not(.closing)');
+    var mini=document.getElementById('miniWorld');
+    if(opening && opening.classList.contains('show'))return 'opening';
+    if(gate && !gate.classList.contains('hidden') && !gate.classList.contains('out') && isVisible(gate))return 'gate';
+    if(page)return 'page';
+    if(mini && !mini.classList.contains('hidden') && !mini.classList.contains('zooming') && isVisible(mini))return 'mini';
+    return 'street';
+  }
+
+  window.syncDearAngInteractionState=function(){
+    var view=currentView();
+    document.body.setAttribute('data-dearang-view',view);
+
+    document.querySelectorAll('.page').forEach(function(p){
+      var active=p.classList.contains('show')&&!p.classList.contains('closing');
+      p.setAttribute('aria-hidden',active?'false':'true');
+      if(!active){p.style.pointerEvents='none';}
+      else{p.style.pointerEvents='auto';}
+    });
+
+    var mini=document.getElementById('miniWorld');
+    if(mini){
+      var miniOn=view==='mini';
+      mini.setAttribute('aria-hidden',miniOn?'false':'true');
+      mini.style.pointerEvents=miniOn?'auto':'none';
+    }
+
+    var stage=document.getElementById('stage');
+    if(stage)stage.style.pointerEvents=view==='street'?'auto':'none';
+    return view;
+  };
+
+  function stopPageMedia(){
+    document.querySelectorAll('.page video,.page audio').forEach(function(m){
+      try{m.pause();}catch(e){}
+    });
+    try{if(typeof ktvStop==='function')ktvStop();}catch(e){}
+    try{if(typeof ktvHideDriveFrame==='function')ktvHideDriveFrame();}catch(e){}
+  }
+
+  function closePhotoWheelModal(){
+    var modal=document.getElementById('photoWheelModal');
+    if(modal&&modal.classList.contains('open')){
+      modal.classList.remove('open');
+      return true;
+    }
+    return false;
+  }
+
+  window.openPage=function(id){
+    var page=document.getElementById('page-'+id);
+    if(!page)return;
+    try{playUiSound('open');}catch(e){}
+    try{if(typeof sendPrivateVisitLog==='function')sendPrivateVisitLog('page_'+id);}catch(e){}
+
+    document.querySelectorAll('.page').forEach(function(p){
+      p.classList.remove('show','closing');
+      p.style.pointerEvents='none';
+    });
+    var mini=document.getElementById('miniWorld');
+    if(mini){mini.classList.add('hidden');mini.classList.remove('zooming');mini.style.pointerEvents='none';}
+    page.classList.add('show');
+    page.classList.remove('closing');
+    page.style.pointerEvents='auto';
+    page.scrollTop=0;
+    document.body.style.overflow='hidden';
+
+    try{renderMemoryCapsule(id);}catch(e){}
+    try{preloadAreaAssets(id);}catch(e){}
+    if(id==='photo')try{if(typeof initPhotoWheel==='function')setTimeout(initPhotoWheel,20);}catch(e){}
+    if(id==='nav')try{if(typeof initRouteMapPage==='function')setTimeout(initRouteMapPage,30);}catch(e){}
+    window.syncDearAngInteractionState();
+  };
+
+  window.closePage=function(){
+    try{playUiSound('close');}catch(e){}
+    stopPageMedia();
+    closePhotoWheelModal();
+    document.querySelectorAll('.page').forEach(function(p){
+      p.classList.remove('show','closing');
+      p.style.pointerEvents='none';
+      p.setAttribute('aria-hidden','true');
+    });
+    var ferris=document.getElementById('ferrisConstruction');
+    if(ferris)ferris.classList.add('hidden');
+    var visitor=document.getElementById('visitorIdentityModal');
+    if(visitor)visitor.classList.add('hidden');
+    var mini=document.getElementById('miniWorld');
+    if(mini){mini.classList.add('hidden');mini.classList.remove('zooming');mini.style.pointerEvents='none';}
+    var world=document.getElementById('world');
+    if(world){world.classList.remove('hidden');world.style.pointerEvents='';}
+    var scroller=document.getElementById('scroller');
+    if(scroller){scroller.style.pointerEvents='auto';scroller.style.overflowX='auto';scroller.style.overflowY='hidden';}
+    document.body.style.overflow='hidden';
+    document.body.classList.remove('modal-open','page-open','route-lock');
+    try{if(typeof syncStreetWeatherFromMemory==='function')syncStreetWeatherFromMemory();}catch(e){}
+    try{if(typeof startTheme==='function')startTheme();}catch(e){}
+    window.syncDearAngInteractionState();
+  };
+
+  window.enterMainWorld=function(){
+    var mini=document.getElementById('miniWorld');
+    if(!mini){window.syncDearAngInteractionState();return;}
+    mini.classList.add('zooming');
+    mini.style.pointerEvents='none';
+    window.syncDearAngInteractionState();
+    setTimeout(function(){
+      mini.classList.add('hidden');
+      mini.classList.remove('zooming');
+      mini.style.pointerEvents='none';
+      try{centerWorld();}catch(e){}
+      try{askVisitorAfterEnterWorld();}catch(e){}
+      window.syncDearAngInteractionState();
+    },620);
+  };
+
+  var originalShowMiniWorld=window.showMiniWorld;
+  window.showMiniWorld=function(){
+    document.querySelectorAll('.page').forEach(function(p){p.classList.remove('show','closing');p.style.pointerEvents='none';});
+    var r;
+    try{if(typeof originalShowMiniWorld==='function')r=originalShowMiniWorld.apply(this,arguments);}catch(e){}
+    var mini=document.getElementById('miniWorld');
+    if(mini){mini.classList.remove('hidden','zooming');mini.style.pointerEvents='auto';}
+    setTimeout(window.syncDearAngInteractionState,0);
+    return r;
+  };
+
+  window.smartBack=function(){
+    var lb=document.getElementById('lightbox');
+    if(lb&&lb.classList.contains('show')){try{closeLightbox();}catch(e){}window.syncDearAngInteractionState();return;}
+    if(closePhotoWheelModal()){window.syncDearAngInteractionState();return;}
+    var ferris=document.getElementById('ferrisConstruction');
+    if(ferris&&!ferris.classList.contains('hidden')){try{closeFerrisConstruction();}catch(e){ferris.classList.add('hidden');}window.syncDearAngInteractionState();return;}
+    var visitor=document.getElementById('visitorIdentityModal');
+    if(visitor&&!visitor.classList.contains('hidden')){visitor.classList.add('hidden');window.syncDearAngInteractionState();return;}
+    if(document.querySelector('.page.show')){window.closePage();return;}
+    var mini=document.getElementById('miniWorld');
+    if(mini&&!mini.classList.contains('hidden')){
+      try{stopLetterAudio();}catch(e){}
+      try{toast('重播開場');}catch(e){}
+      try{startOpeningMemoryCountdown();}catch(e){}
+      setTimeout(window.syncDearAngInteractionState,0);
+      return;
+    }
+    window.showMiniWorld();
+    try{toast('回到小世界');}catch(e){}
+  };
+
+  function pageFolderUrl(path){
+    try{
+      var href=location.href.split('#')[0].split('?')[0];
+      return new URL(path,href.replace(/[^/]*$/,'')).href;
+    }catch(e){return path;}
+  }
+  function baseUrl(path){try{return new URL(path,document.baseURI||location.href).href;}catch(e){return path;}}
+  function unique(list){var seen={};return list.filter(function(x){x=String(x||'');if(!x||seen[x])return false;seen[x]=1;return true;});}
+  function letterCandidates(){
+    var audio=document.getElementById('letterAudio');
+    return unique([
+      audio&&audio.getAttribute('src'),
+      pageFolderUrl('assets/audio/aming-message.mp3'),
+      baseUrl('assets/audio/aming-message.mp3'),
+      pageFolderUrl('aming-message.mp3'),
+      baseUrl('aming-message.mp3'),
+      pageFolderUrl('assets/audio/aming.mp3'),
+      baseUrl('assets/audio/aming.mp3'),
+      pageFolderUrl('assets/audio/阿明留言.mp3'),
+      baseUrl('assets/audio/阿明留言.mp3')
+    ]);
+  }
+  function themeAudio(){return document.getElementById('themeAudio');}
+  function duckThemeFinal(){
+    var t=themeAudio();if(!t)return;
+    if(t.dataset.beforeLetterVolume==null)t.dataset.beforeLetterVolume=String(isFinite(t.volume)?t.volume:1);
+    try{t.volume=.12;}catch(e){}
+  }
+  function restoreThemeFinal(){
+    var t=themeAudio();if(!t)return;
+    var old=t.dataset.beforeLetterVolume;
+    try{t.volume=old==null?1:Math.max(0,Math.min(1,Number(old)||1));}catch(e){}
+    delete t.dataset.beforeLetterVolume;
+  }
+  function markRadioPlaying(on){
+    var b=document.querySelector('#miniWorld .radio-audio-play');
+    if(b)b.classList.toggle('playing',!!on);
+  }
+
+  window.playLetterAudio=function(){
+    if(window.syncDearAngInteractionState()!=='mini')return;
+    var a=document.getElementById('letterAudio');
+    if(!a){try{toast('找不到 Radio 音檔播放器',1);}catch(e){}return;}
+    var list=letterCandidates(),index=0,done=false,timer=null;
+    duckThemeFinal();
+    markRadioPlaying(false);
+
+    function cleanupAttempt(){clearTimeout(timer);a.oncanplay=null;a.onloadeddata=null;a.onerror=null;}
+    function failAll(){cleanupAttempt();restoreThemeFinal();markRadioPlaying(false);try{toast('Radio 音檔讀不到，請確認 assets/audio/aming-message.mp3',1);}catch(e){}}
+    function actuallyPlay(){
+      if(done)return;
+      var p;
+      try{a.volume=1;p=a.play();}catch(e){p=null;}
+      if(p&&p.then){
+        p.then(function(){done=true;cleanupAttempt();markRadioPlaying(true);}).catch(function(){tryNext();});
+      }else if(!a.paused){done=true;cleanupAttempt();markRadioPlaying(true);}
+      else tryNext();
+    }
+    function tryNext(){
+      if(done)return;
+      cleanupAttempt();
+      if(index>=list.length){failAll();return;}
+      var src=list[index++];
+      a.onerror=tryNext;
+      try{
+        a.pause();
+        a.src=src;
+        a.load();
+        var immediate=a.play();
+        if(immediate&&immediate.then){
+          immediate.then(function(){done=true;cleanupAttempt();markRadioPlaying(true);}).catch(function(err){
+            if(done)return;
+            if(err&&err.name==='NotAllowedError'){
+              cleanupAttempt();restoreThemeFinal();markRadioPlaying(false);
+              try{toast('請再按一次 Radio 播放鍵',1);}catch(e){}
+            }else{
+              tryNext();
+            }
+          });
+        }else if(!a.paused){done=true;cleanupAttempt();markRadioPlaying(true);}
+      }catch(e){tryNext();return;}
+      timer=setTimeout(function(){if(!done)tryNext();},3200);
+    }
+    tryNext();
+  };
+
+  window.stopLetterAudio=function(){
+    var a=document.getElementById('letterAudio');
+    if(a){try{a.pause();a.currentTime=0;}catch(e){}}
+    markRadioPlaying(false);
+    restoreThemeFinal();
+  };
+
+  function bindLetterAudioFinal(){
+    var a=document.getElementById('letterAudio');
+    if(!a||a.dataset.interactionBound==='1')return;
+    a.dataset.interactionBound='1';
+    ['ended','pause','error'].forEach(function(type){
+      a.addEventListener(type,function(){
+        if(type!=='pause'||a.currentTime===0||a.ended){markRadioPlaying(false);restoreThemeFinal();}
+      });
+    });
+  }
+
+  function boot(){
+    bindLetterAudioFinal();
+    window.syncDearAngInteractionState();
+    var targets=[document.getElementById('gate'),document.getElementById('openingCountdown'),document.getElementById('miniWorld')].concat(Array.from(document.querySelectorAll('.page,.lightbox,.visitor-identity-modal,.ferris-construction'))).filter(Boolean);
+    var ob=new MutationObserver(function(){window.syncDearAngInteractionState();});
+    targets.forEach(function(el){ob.observe(el,{attributes:true,attributeFilter:['class']});});
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot,{once:true});else boot();
+  window.addEventListener('load',boot,{once:true});
+})();
+</script>
+</body></html> is not defined 按鈕無反應問題)
