@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#050506">
 <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate, max-age=0">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
 <title>摯愛｜Dear ANG</title>
 <style>
 html,body{margin:0;width:100%;height:100%;background:#050506;color:#fff7e8;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans TC",sans-serif}
@@ -12,25 +14,17 @@ body{display:grid;place-items:center;text-align:center}.loading{font-weight:900;
 </style>
 </head>
 <body>
-<div class="loading" id="bootStatus">正在進入回憶…</div>
+<div class="loading" id="bootStatus">正在切回 v126…</div>
 <script>
-(async function(){
-  const status=document.getElementById('bootStatus');
-  const sourceUrl='./index-v126-original.html?v=20260711-mini-ghost-fix-5';
+(function(){
+  var target='./index-v126-original.html?v=20260711-v126-direct';
   try{
-    const response=await fetch(sourceUrl,{cache:'no-store'});
-    if(!response.ok)throw new Error('主頁讀取失敗：'+response.status);
-    let html=await response.text();
-    const patch='<script src="./assets/js/dearang-opening-end-lock.js?v=20260711-5">'+'<'+'/script>';
-    if(html.includes('</body>'))html=html.replace('</body>',patch+'</body>');
-    else html+=patch;
-    document.open();
-    document.write(html);
-    document.close();
+    window.location.replace(target);
   }catch(error){
-    console.error('[DearANG opening fix]',error);
+    console.error('[DearANG v126 direct]',error);
+    var status=document.getElementById('bootStatus');
     status.className='error';
-    status.innerHTML='頁面載入失敗，請重新整理一次。<br><a href="'+sourceUrl+'">直接開啟保留版</a>';
+    status.innerHTML='v126 開啟失敗。<br><a href="'+target+'">直接開啟 v126</a>';
   }
 })();
 </script>
