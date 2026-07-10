@@ -16,12 +16,12 @@ body{display:grid;place-items:center;text-align:center}.loading{font-weight:900;
 <script>
 (async function(){
   const status=document.getElementById('bootStatus');
-  const sourceUrl='./index-v126-original.html?v=20260711-opening-direct-4';
+  const sourceUrl='./index-v126-original.html?v=20260711-mini-ghost-fix-5';
   try{
     const response=await fetch(sourceUrl,{cache:'no-store'});
     if(!response.ok)throw new Error('主頁讀取失敗：'+response.status);
     let html=await response.text();
-    const patch='<script src="./assets/js/dearang-opening-end-lock.js?v=20260711-4">'+'<'+'/script>';
+    const patch='<script src="./assets/js/dearang-opening-end-lock.js?v=20260711-5">'+'<'+'/script>';
     if(html.includes('</body>'))html=html.replace('</body>',patch+'</body>');
     else html+=patch;
     document.open();
