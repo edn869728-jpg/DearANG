@@ -14,17 +14,25 @@ body{display:grid;place-items:center;text-align:center}.loading{font-weight:900;
 </style>
 </head>
 <body>
-<div class="loading" id="bootStatus">正在切回 v126…</div>
+<div class="loading" id="bootStatus">正在進入回憶…</div>
 <script>
-(function(){
-  var target='./index-v126-original.html?v=20260711-v126-direct';
+(async function(){
+  const status=document.getElementById('bootStatus');
+  const sourceUrl='./index-v126-original.html?v=20260711-same-page-1';
   try{
-    window.location.replace(target);
+    const response=await fetch(sourceUrl,{cache:'no-store'});
+    if(!response.ok)throw new Error('主頁讀取失敗：'+response.status);
+    let html=await response.text();
+    const patch='<script src="./assets/js/dearang-v126-same-page-flow.js?v=20260711-1">'+'<'+'/script>';
+    if(html.includes('</body>'))html=html.replace('</body>',patch+'</body>');
+    else html+=patch;
+    document.open();
+    document.write(html);
+    document.close();
   }catch(error){
-    console.error('[DearANG v126 direct]',error);
-    var status=document.getElementById('bootStatus');
+    console.error('[DearANG v126 same-page]',error);
     status.className='error';
-    status.innerHTML='v126 開啟失敗。<br><a href="'+target+'">直接開啟 v126</a>';
+    status.innerHTML='頁面載入失敗，請重新整理一次。<br><a href="'+sourceUrl+'">直接開啟 v126</a>';
   }
 })();
 </script>
