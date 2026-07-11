@@ -1,59 +1,103 @@
-<!DOCTYPE html>
-<html lang="zh-Hant">
-<head>
+﻿<html lang="zh-Hant"><head>
 <meta charset="UTF-8">
-<base href="./">
+<base href="/DearANG/">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate, max-age=0">
-<title>摯愛｜Dear ANG</title>
+<!-- v70-cache：已取消 HTML 強制不快取；WebView / 瀏覽器可正常使用快取 -->
+<!-- DearANG v16 KTV stage forced 20260620 -->
+<!-- DearANG v21 opening countdown video 20260620 -->
+<!-- DearANG v33 Real Frame Weather World Crop 20260623 -->
+<!-- DearANG v47 based on index(53): calibrated building/person hotspots no cover crop 20260625 -->
+<!-- DearANG v48 KTV Drive preview + page top spacing + invisible building hotspots 20260625 -->
+<!-- DearANG v56 mini-frame 11 weather videos + KTV left + map title fix 20260627 -->
+<title>摯愛｜Dear ANG </title>
 <style>
 :root{
-  --bg:#050506;--ink:#fff7e8;--muted:rgba(255,247,232,.72);--line:rgba(255,255,255,.14);
-  --gold:#d6a85d;--brown:#5b3f2f;--shadow:0 24px 70px rgba(0,0,0,.42);
+  --bg:#0b0b0d;
+  --panel:rgba(16,16,18,.92);
+  --panel2:rgba(255,248,239,.92);
+  --ink:#f7f0e6;
+  --muted:rgba(247,240,230,.68);
+  --line:rgba(255,255,255,.14);
+  --gold:#d6a85d;
+  --brown:#5b3f2f;
+  --shadow:0 24px 70px rgba(0,0,0,.38);
 }
 *{box-sizing:border-box;min-width:0}
-html,body{margin:0;width:100%;height:100%;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Serif TC","Noto Sans TC",serif;overflow:hidden;overscroll-behavior:none}
-button,input,textarea,select{font:inherit}button{border:0;border-radius:999px;padding:10px 15px;font-weight:950;cursor:pointer;background:linear-gradient(135deg,var(--gold),#b98034);color:white;box-shadow:0 12px 26px rgba(160,106,48,.26)}
-button.soft,.pill.soft{background:rgba(255,255,255,.10);border:1px solid var(--line);box-shadow:none;color:var(--ink)}
-a{color:inherit}.hidden{display:none!important}.empty{padding:18px;border:1px dashed rgba(255,255,255,.20);border-radius:18px;color:rgba(255,255,255,.62);text-align:center;line-height:1.7}.pill{display:inline-flex;align-items:center;gap:7px;border-radius:999px;padding:9px 12px;text-decoration:none;font-weight:950;background:linear-gradient(135deg,var(--gold),#b98034);color:white}
-/* Gate */
-.gate{position:fixed;inset:0;z-index:150;display:flex;align-items:center;justify-content:center;text-align:left;padding:24px;background:radial-gradient(circle at 50% 28%,rgba(214,168,93,.22),transparent 26%),linear-gradient(180deg,#14100d,#050506);transition:.55s ease}.gate.out{opacity:0;pointer-events:none;transform:scale(1.02)}.gate-card{width:min(680px,100%);border:1px solid var(--line);background:rgba(255,248,239,.08);border-radius:30px;padding:34px 22px;backdrop-filter:blur(18px);box-shadow:var(--shadow)}.kicker{letter-spacing:.24em;color:#ffd89a;font-weight:950;font-size:12px;margin-bottom:10px}.gate-title{width:max-content;max-width:100%;margin:12px 0 10px;text-align:left;display:block;line-height:1.35;font-size:clamp(34px,10vw,58px);font-weight:1000;letter-spacing:.03em;text-shadow:0 4px 24px rgba(0,0,0,.55)}.gate-title span{display:block}.gate-title .i1{padding-left:.62em}.gate-title .i2{padding-left:1.24em}.gate-song-credit{margin:18px auto 22px;max-width:520px;border:1px solid rgba(255,216,154,.25);background:linear-gradient(180deg,rgba(214,168,93,.13),rgba(255,248,239,.055));border-radius:22px;padding:14px 16px;text-align:left}.credit-kicker{color:#ffd89a;font-size:12px;font-weight:1000;letter-spacing:.18em}.credit-title{text-align:center;color:#fff7e8;font-size:20px;line-height:1.35;font-weight:1000;margin:7px 0}.credit-meta-line{display:flex;align-items:center;justify-content:space-evenly;gap:14px;white-space:nowrap;color:rgba(255,248,239,.88);font-size:13px;font-weight:950}.gate-lead,.tiny{text-align:center;color:var(--muted);line-height:1.8}.gate button{display:block;margin:auto}
-/* Opening */
-.opening-countdown{position:fixed;inset:0;z-index:160;display:none;background:#000;opacity:0;transition:.26s ease}.opening-countdown.show{display:block;opacity:1}.opening-countdown.done{opacity:0;pointer-events:none}.opening-countdown-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;background:#000}.opening-video-caption{position:absolute;left:14px;right:14px;top:calc(14px + env(safe-area-inset-top));z-index:3;text-align:center;color:rgba(255,248,239,.72);font-size:12px;font-weight:900;letter-spacing:.08em;text-shadow:0 2px 10px rgba(0,0,0,.7)}.opening-video-skip{position:absolute;right:14px;bottom:calc(16px + env(safe-area-inset-bottom));z-index:4;background:rgba(0,0,0,.42)!important;border:1px solid rgba(255,255,255,.18)!important;box-shadow:none;font-size:13px}
-/* Topbar + main street */
-.world{height:100dvh;display:flex;flex-direction:column;background:linear-gradient(180deg,#100f0f,#050506)}.topbar{height:58px;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 14px calc(10px + env(safe-area-inset-top));z-index:92;background:linear-gradient(180deg,rgba(0,0,0,.64),rgba(0,0,0,.12));position:fixed;top:0;left:0;right:0;pointer-events:none}.topbar>*{pointer-events:auto}.brand{font-size:16px;font-weight:1000;letter-spacing:.08em}.brand small{display:block;font-size:10px;color:#ffd89a;letter-spacing:.22em}.top-actions{display:flex;gap:6px}.icon-btn{width:40px;height:40px;padding:0;display:grid;place-items:center;background:rgba(0,0,0,.38);border:1px solid var(--line);box-shadow:none;backdrop-filter:blur(12px)}.scroller{height:100dvh;overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;scroll-behavior:smooth}.stage{position:relative;height:100dvh;min-width:1480px;width:235vw;max-width:2200px;margin:0 auto;background:linear-gradient(180deg,#bcdef0 0%,#ffe0a6 45%,#bd7e48 70%,#5b3826 100%);overflow:hidden}.stage-world-img{position:absolute;inset:0;width:100%;height:100%;object-fit:fill;object-position:center;z-index:0;pointer-events:none}.world-weather{display:none}.hotspot{position:absolute;border-radius:10px;z-index:8;cursor:pointer;background:rgba(255,216,154,0)}.hotspot:before{content:attr(data-label);position:absolute;left:50%;bottom:100%;transform:translateX(-50%) translateY(-8px);white-space:nowrap;font-size:12px;font-weight:1000;letter-spacing:.08em;padding:7px 10px;border-radius:999px;background:rgba(0,0,0,.58);border:1px solid rgba(255,255,255,.18);backdrop-filter:blur(8px);opacity:0;transition:.18s}.hotspot:active:before,.hotspot:hover:before{opacity:1}.h-photo{left:12%;top:24%;width:14%;height:47%}.h-video{left:26%;top:24%;width:14%;height:47%}.h-home{left:40%;top:24%;width:17%;height:47%}.h-music{left:57%;top:24%;width:15%;height:47%}.h-food{left:72%;top:24%;width:11%;height:47%}.h-nav{left:83%;top:24%;width:12%;height:47%}.hint{position:fixed;left:14px;right:14px;bottom:calc(14px + env(safe-area-inset-bottom));z-index:4;display:flex;justify-content:center;pointer-events:none}.hint-inner{max-width:520px;width:100%;border:1px solid rgba(255,255,255,.17);background:rgba(0,0,0,.43);backdrop-filter:blur(16px);border-radius:22px;padding:10px 13px;display:flex;align-items:center;gap:10px;font-weight:900}.hint-inner span{color:#ffd89a}.hint-inner small{display:block;color:rgba(255,255,255,.72);font-size:12px;line-height:1.45}
-@media(min-width:760px){.stage{min-width:1916px;width:1916px;height:821px;margin-top:70px;border-radius:58px;box-shadow:var(--shadow)}.world{align-items:center;justify-content:center}.scroller{display:flex;align-items:center}.grid{grid-template-columns:repeat(5,1fr)}}@media(max-width:560px){.stage{height:100dvh;min-width:1280px;width:300vw}.topbar{height:64px}.hint-inner{font-size:13px}.brand{font-size:15px}}
-/* Mini world v59 */
-.mini-world{position:fixed;inset:0;z-index:47;display:block;overflow:auto;-webkit-overflow-scrolling:touch;padding:calc(58px + env(safe-area-inset-top)) 0 calc(22px + env(safe-area-inset-bottom));text-align:center;background:#050403;color:#fff7e8;transition:opacity .45s ease,filter .45s ease}.mini-world.zooming{opacity:0;filter:brightness(1.45) blur(5px);pointer-events:none}.mini-crt-scene{position:relative;width:100vw;max-width:100vw;height:auto;aspect-ratio:1080/2880;margin:0 auto;overflow:hidden;filter:drop-shadow(0 30px 70px rgba(0,0,0,.62))}.mini-crt-frame{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;background:#000 url("assets/images/mini-frame-poster.png") center/cover no-repeat;pointer-events:none}.mini-crt-screen{position:absolute;left:6.4815%;top:22.6736%;width:87.9630%;height:18.6111%;border:0;padding:0;margin:0;border-radius:.4%;overflow:hidden;background:#000;cursor:pointer;z-index:2;color:inherit}.mini-world-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:saturate(1.02) contrast(1.04)}.mini-screen-shine{position:absolute;inset:0;z-index:3;pointer-events:none;background:linear-gradient(115deg,rgba(255,255,255,.14),transparent 33%,rgba(255,255,255,.05) 54%,transparent 70%);mix-blend-mode:screen}.mini-screen-hint{position:absolute;left:50%;bottom:8px;transform:translateX(-50%);z-index:4;white-space:nowrap;padding:6px 10px;border-radius:999px;background:rgba(0,0,0,.58);border:1px solid rgba(255,255,255,.16);color:#ffd89a;font-size:12px;font-weight:1000;backdrop-filter:blur(8px)}.mini-world-weather{display:none} .mini-weather-status{position:absolute;z-index:6;left:6%; top: 300px;;width:68%;height:1.8%;color:#fff7d6;background:rgba(38,23,8,.38);border:1px solid rgba(255,216,154,.46);border-radius:14px;padding:5px 8px;text-align:left;font-size:clamp(10.5px,2.35vw,14.5px);line-height:1.22;font-weight:1000;text-shadow:0 0 7px rgba(255,216,154,.95),0 2px 4px rgba(0,0,0,.92);overflow:hidden;white-space:nowrap;text-overflow:ellipsis}.frame-letter-card{position:absolute;z-index:5;left:14%;top:52.3611%;width:74%;height:48%;padding:16px 24px;overflow:hidden;background:transparent;color:#4b2b16;text-align:left}.frame-letter-text{width:100%;height:100%;overflow:hidden;color:#4b2b16;font-size:clamp(9px,3.5vw,18px);line-height:1;font-weight:900;letter-spacing:0;text-align:justify;text-shadow:1 2px 0 rgba(255,247,220,.36)}.treasure-map-hit{position:absolute;z-index:10;left:72.5%;top:57.8%;width:27.5%;height:13.8%;min-height:0;padding:0;margin:0;border:0;border-radius:18px;background:rgba(255,216,154,0);box-shadow:none;cursor:pointer;-webkit-tap-highlight-color:transparent;touch-action:manipulation}.treasure-map-hit:active{background:rgba(255,216,154,.14);box-shadow:0 0 0 3px rgba(255,216,154,.12)}.radio-audio-hit{position:absolute;z-index:9;top:50.3472%;width:5.5556%;height:1.9097%;min-height:0;padding:0;margin:0;border-radius:50%;display:grid;place-items:center;background:rgba(255,244,214,.12);border:1px solid rgba(68,38,18,.18);box-shadow:none;color:#251307;cursor:pointer}.radio-audio-play{left:65.5556%}.radio-audio-stop{left:74.7222%}.radio-audio-hit span{display:block;font-size:clamp(13px,3.8vw,23px);line-height:1;font-weight:1000}.radio-audio-hit.playing{background:rgba(255,216,154,.28);box-shadow:0 0 0 3px rgba(255,216,154,.14)}
-/* Pages */
-.page{position:fixed;inset:0;z-index:20;display:none;background:linear-gradient(180deg,#15110f,#050506);overflow:auto;-webkit-overflow-scrolling:touch;color:var(--ink);padding-top:calc(68px + env(safe-area-inset-top))}.page.show{display:block;animation:pageFadeIn .32s cubic-bezier(.22,1,.36,1) both}@keyframes pageFadeIn{from{opacity:0;transform:translateY(10px) scale(.992);filter:blur(2px)}to{opacity:1;transform:none;filter:none}}.page-head{position:fixed;top:calc(58px + env(safe-area-inset-top));left:0;right:0;min-height:48px;z-index:91;padding:10px 14px;background:linear-gradient(180deg,rgba(0,0,0,.86),rgba(0,0,0,.46));backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,.08);display:flex;align-items:center;justify-content:space-between;gap:10px}.back{background:rgba(255,255,255,.11);border:1px solid var(--line);box-shadow:none}.page-body{width:100vw;max-width:none;margin:auto;padding:14px 0 calc(86px + env(safe-area-inset-bottom))}.hero-card{position:relative;overflow:hidden;min-height:310px;background:#171717;border:1px solid rgba(255,255,255,.12);box-shadow:var(--shadow);margin:0 0 14px}.hero-card img{width:100%;height:100%;min-height:310px;object-fit:cover;display:block}.hero-card:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.05),rgba(0,0,0,.70))}.hero-text{position:absolute;left:18px;right:18px;bottom:18px;z-index:2;text-shadow:0 3px 20px rgba(0,0,0,.55)}.hero-text h1{font-size:clamp(30px,8vw,56px);margin:0 0 8px;line-height:1.15}.section{border:1px solid rgba(255,255,255,.12);background:rgba(255,248,239,.07);padding:16px;margin:14px 0;backdrop-filter:blur(12px)}.section h2{margin:0 0 8px;font-size:23px}.story{white-space:pre-line;color:rgba(255,255,255,.84);line-height:1.75;font-size:16px}.toolbar{display:flex;gap:9px;flex-wrap:wrap;margin-top:12px}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}.photo{border-radius:12px;overflow:hidden;background:#222;border:1px solid rgba(255,255,255,.09);cursor:pointer}.photo img{width:100%;aspect-ratio:1;object-fit:cover;display:block}.video-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,220px),1fr));gap:10px}.vcard{border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.07);border-radius:18px;padding:9px}.vcard video,.vcard audio{width:100%;background:#000;border-radius:12px}.vcard video{aspect-ratio:16/9;object-fit:contain}.vcard h3{font-size:14px;line-height:1.45;margin:8px 3px 3px}.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom));z-index:170;transform:translateX(-50%) translateY(16px);opacity:0;background:#5b3f2f;color:white;border-radius:999px;padding:11px 16px;font-weight:1000;transition:.2s;max-width:92vw;text-align:center}.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
-/* KTV */
-#page-music .page-body{width:100vw;max-width:none;padding-left:0;padding-right:0;overflow-x:hidden}#page-music .ktv-machine{width:100vw;max-width:none;overflow:hidden;display:grid;gap:14px}.ktv-tv-top{text-align:center;color:#ffd89a;font-weight:1000;letter-spacing:.16em;font-size:12px;margin:0 0 10px}.ktv-stage-wrap{position:relative;width:108vw;max-width:none;margin-left:auto;margin-right:-2vw;border-radius:18px;overflow:visible;filter:drop-shadow(0 24px 54px rgba(0,0,0,.52));transform-origin:top right}.ktv-stage-wrap>img{display:block;width:100%;height:auto;min-height:330px;object-fit:contain;user-select:none;-webkit-user-drag:none}.ktv-stage-fallback{display:grid;place-items:center;width:100%;aspect-ratio:1.05;background:radial-gradient(circle at 50% 18%,#57422f,transparent 42%),linear-gradient(180deg,#1d1714,#050506);border:1px solid rgba(255,216,154,.2);border-radius:24px;color:#ffd89a;font-size:28px;font-weight:1000}.ktv-screen{position:absolute;left:11.8%;top:3.55%;width:76.6%;height:28.8%;border:0;border-radius:2.8%;background:#050505;box-shadow:inset 0 0 22px rgba(0,0,0,.65);overflow:hidden}.ktv-screen video{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#000;display:none;z-index:2}.ktv-audio-visual{position:absolute;inset:0;z-index:2;display:grid;place-items:center;text-align:center;gap:6px;padding:10px;background:radial-gradient(circle at 50% 35%,rgba(214,168,93,.18),transparent 35%),linear-gradient(180deg,rgba(0,0,0,.18),rgba(0,0,0,.42));color:#fff}.ktv-note{width:48px;height:48px;border-radius:50%;display:grid;place-items:center;background:rgba(214,168,93,.18);border:1px solid rgba(255,216,154,.25);font-size:27px;color:#ffd89a}.ktv-audio-visual b{font-size:13px;line-height:1.38;max-width:90%}.ktv-screen audio{position:absolute;left:6px;right:6px;bottom:5px;width:calc(100% - 12px);height:28px;z-index:4;display:none}.ktv-osd{position:absolute;left:10px;right:10px;top:8px;z-index:6;display:flex;align-items:center;justify-content:center;min-height:28px;border-radius:999px;background:rgba(0,0,0,.48);border:1px solid rgba(255,255,255,.16);backdrop-filter:blur(8px);color:#fff;font-weight:1000;font-size:12px;text-align:center;padding:4px 8px;text-shadow:0 2px 10px rgba(0,0,0,.55);pointer-events:none}.ktv-body{width:100vw;padding:0 0 calc(80px + env(safe-area-inset-bottom));display:grid;grid-template-columns:minmax(0,1.25fr) minmax(260px,.75fr);gap:14px;align-items:start}.ktv-songbook,.ktv-remote{margin-left:0;margin-right:0;border-radius:28px 28px 0 0}.ktv-songbook h2,.ktv-remote h2{display:flex;align-items:center;justify-content:space-between;gap:8px}.ktv-songbook h2:after{content:"他唱的歌";font-size:12px;color:#ffd89a;border:1px solid rgba(255,216,154,.22);border-radius:999px;padding:5px 9px;background:rgba(214,168,93,.10)}.ktv-list{display:grid;gap:8px;max-height:52vh;overflow:auto;padding-right:2px;scrollbar-width:none}.ktv-row{display:grid;grid-template-columns:88px minmax(0,1fr) auto;gap:10px;align-items:center;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.06);border-radius:16px;padding:9px 10px;cursor:pointer;transition:.18s}.ktv-row.active,.ktv-row:active{border-color:rgba(255,216,154,.66);background:rgba(214,168,93,.14)}.ktv-num{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;width:76px;min-width:76px;font-size:18px;font-weight:1000;color:#ffd89a;letter-spacing:.02em;text-align:center;border-radius:12px;background:rgba(0,0,0,.28);padding:9px 4px;border:1px solid rgba(255,216,154,.14)}.ktv-title b{display:block;font-size:15px;line-height:1.35;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.ktv-title small{display:block;margin-top:3px;color:rgba(255,255,255,.58);font-weight:800;font-size:12px;line-height:1.35;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.ktv-kind{font-size:12px;font-weight:1000;color:#fff;border-radius:999px;background:rgba(255,255,255,.11);border:1px solid rgba(255,255,255,.12);padding:6px 8px}.ktv-display{border:1px solid rgba(255,216,154,.22);background:#070707;border-radius:18px;padding:12px;text-align:center;margin-bottom:12px;box-shadow:inset 0 0 20px rgba(0,0,0,.7)}.ktv-display span{display:block;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:30px;line-height:1;color:#ffd89a;font-weight:1000;letter-spacing:.04em}.ktv-display small{display:block;margin-top:8px;color:rgba(255,255,255,.64);font-weight:900;line-height:1.45;min-height:18px}.ktv-remote-photo-wrap{position:relative;width:min(100%,360px);margin:12px auto 0;border-radius:24px;overflow:hidden;background:#111;box-shadow:0 18px 46px rgba(0,0,0,.42);touch-action:manipulation}.ktv-remote-photo-wrap img{display:block;width:100%;height:auto;user-select:none;-webkit-user-drag:none}.ktv-img-hotspot{position:absolute;transform:translate(-50%,-50%);border:0;background:rgba(255,255,255,0);box-shadow:none!important;padding:0!important;margin:0!important;min-height:0!important;z-index:3;cursor:pointer}.ktv-img-hotspot.round{width:13.8%;height:9.2%;border-radius:50%}.ktv-img-hotspot.square{width:15.2%;height:7.8%;border-radius:16%}.ktv-img-hotspot.side{width:16.5%;height:8.2%;border-radius:22%}.ktv-img-hotspot:active{background:rgba(255,255,255,.20);outline:2px solid rgba(255,216,154,.72)}.ktv-remote-caption{margin:9px 4px 0;color:rgba(255,255,255,.62);font-size:12px;line-height:1.55;text-align:center;font-weight:900}@media(max-width:760px){.ktv-stage-wrap{width:112vw;margin-right:-3vw}.ktv-body{grid-template-columns:1fr}.ktv-list{max-height:none}.ktv-row{grid-template-columns:82px minmax(0,1fr) auto}.ktv-num{width:72px;min-width:72px;font-size:17px}.ktv-remote-photo-wrap{width:min(100%,330px)}}
-/* Route map v60 */
-#page-nav{--dear-topbar-h:58px;--route-head-h:94px;--route-scale:1;--route-pan-x:0px;--route-pan-y:0px;padding-top:0!important;overflow:hidden;background:#050403;color:#382414}.route-page-head{position:fixed;top:calc(var(--dear-topbar-h) + env(safe-area-inset-top));left:0;right:0;height:var(--route-head-h);min-height:var(--route-head-h);z-index:120;padding:12px 14px;background:linear-gradient(180deg,rgba(86,65,42,.96),rgba(117,98,66,.88));border-bottom:1px solid rgba(255,244,210,.28);box-shadow:0 12px 26px rgba(0,0,0,.22);color:#fff2cb}.route-map-app{--route-safe-bottom:env(safe-area-inset-bottom,0px);position:fixed;left:0;right:0;top:calc(58px + env(safe-area-inset-top) + var(--route-head-h));bottom:0;width:100vw;height:auto;background:radial-gradient(circle at 50% 22%,rgba(255,228,150,.26),transparent 34%),linear-gradient(180deg,#5d3a1d,#d9b56d 38%,#8b5628 100%);overflow:hidden;touch-action:pan-y;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans TC",sans-serif;color:#382414}@media(min-width:760px){.route-map-app{width:min(100vw,540px);left:50%;right:auto;transform:translateX(-50%)}}.route-map-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:fill;object-position:center;user-select:none;-webkit-user-drag:none;pointer-events:none}.route-svg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible}.route-map-bg,.route-svg,#routeSpots{transform-origin:0 0;transform:translate3d(var(--route-pan-x),var(--route-pan-y),0) scale(var(--route-scale));transition:transform 900ms cubic-bezier(.22,1,.36,1);will-change:transform}.route-base{fill:none;stroke:rgba(83,49,18,.52);stroke-width:28;stroke-linecap:round;stroke-linejoin:round}.route-done{fill:none;stroke:rgba(255,198,48,.88);stroke-width:23;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 0 8px rgba(255,214,80,.75)) drop-shadow(0 0 18px rgba(255,177,45,.35))}.route-hot{fill:none;stroke:#fff36d;stroke-width:13;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 0 10px rgba(255,255,180,.95)) drop-shadow(0 0 24px rgba(255,197,54,.65)) drop-shadow(0 0 36px rgba(255,130,25,.32))}.route-halo{fill:rgba(255,230,94,.28);animation:routeHalo 1.8s infinite ease-in-out}.route-ring{fill:rgba(255,184,34,.52);stroke:rgba(255,255,255,1);stroke-width:8;animation:routeRing 1.2s infinite ease-in-out}.route-core{fill:#fffde0;filter:drop-shadow(0 0 12px #fff) drop-shadow(0 0 28px #ffd55a)}@keyframes routeHalo{0%,100%{r:44;opacity:.23}50%{r:72;opacity:.07}}@keyframes routeRing{0%,100%{r:22}50%{r:31}}#routeSpots{position:absolute;inset:0;z-index:8;pointer-events:none}.route-spot{position:absolute;width:110px;height:110px;border-radius:999px;transform:translate(-50%,-50%) scale(.82);z-index:6;pointer-events:auto;background:rgba(255,222,104,.04);border:1px solid rgba(255,222,104,0);opacity:.35;padding:0;box-shadow:none;transition:transform .55s ease,opacity .55s ease,box-shadow .55s ease,border-color .55s ease}.route-spot.active{opacity:1;transform:translate(-50%,-50%) scale(1);border-color:rgba(255,232,128,.58);box-shadow:0 0 0 12px rgba(255,226,109,.10),0 0 52px rgba(255,210,82,.60);animation:routeFloat 2.4s infinite ease-in-out}@keyframes routeFloat{0%,100%{filter:brightness(1)}50%{filter:brightness(1.18)}}.route-title-pill{position:absolute;left:50%;top:14px;transform:translateX(-50%);z-index:12;padding:7px 13px;border-radius:999px;background:rgba(35,21,10,.32);color:#fff2cb;backdrop-filter:blur(6px);font-size:12px;font-weight:900;letter-spacing:.06em;white-space:nowrap}.route-story-card{position:absolute;z-index:20;left:7%;top:66%;width:min(56vw,270px);max-width:calc(100vw - 32px);min-height:92px;max-height:29svh;border-radius:18px;padding:12px;background:rgba(255,244,210,.78);border:1px solid rgba(255,255,255,.35);backdrop-filter:blur(10px);box-shadow:0 18px 54px rgba(18,10,5,.28);opacity:1;transform:translate3d(0,-50%,0) scale(1);transition:transform .72s cubic-bezier(.22,1,.36,1),opacity .52s ease,background .42s ease,box-shadow .42s ease,max-height .42s ease;overflow:hidden;pointer-events:auto;will-change:transform,opacity}.route-story-card.switching{opacity:.55;transform:translate3d(-16px,-50%,0) scale(.985)}.route-story-card.open{width:min(88vw,360px);max-height:58svh}.route-story-top{display:flex;align-items:center;gap:10px;min-height:32px;cursor:pointer}.route-num{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;flex:0 0 34px;background:#4d2c16;color:#fff4ce;font-weight:950}.route-story-title{margin:0;font-size:16px;line-height:1.15;letter-spacing:.02em;color:#382414}.route-tag{margin:3px 0 0;color:#806244;font-size:10px;font-weight:800}.route-body{margin-top:10px;max-height:calc(29svh - 88px);overflow:auto;padding-right:2px;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;touch-action:pan-y}.route-story-card.open .route-body{max-height:calc(58svh - 78px)}.route-body p{margin:0 0 8px;font-size:12px;line-height:1.55;font-weight:650;color:#4f3928}.route-body .em{font-weight:950;color:#2d1b10}.route-nav-buttons{position:absolute;z-index:25;right:10px;top:18px;display:flex;flex-direction:column;gap:8px;opacity:.92}.route-nav-buttons button{width:38px;height:38px;border-radius:999px;background:rgba(255,244,210,.42);backdrop-filter:blur(6px);color:#3b2413;font-size:18px;font-weight:950;box-shadow:0 8px 20px rgba(0,0,0,.16);padding:0}.route-dots{position:absolute;left:50%;bottom:calc(8px + var(--route-safe-bottom));transform:translateX(-50%);z-index:24;display:flex;gap:5px;pointer-events:none;opacity:.72}.route-dots span{width:6px;height:6px;border-radius:999px;background:rgba(70,43,21,.36);transition:.25s}.route-dots span.on{width:22px;background:#ffb12d}.route-hint{position:absolute;left:50%;bottom:calc(12px + var(--route-safe-bottom));transform:translateX(-50%);z-index:18;color:#fff4d4;background:rgba(36,21,10,.25);padding:5px 10px;border-radius:999px;font-size:11px;font-weight:800;backdrop-filter:blur(6px);white-space:nowrap}.route-hint.hide{opacity:0}
+html,body{margin:0;width:100%;min-height:100%;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Serif TC","Noto Sans TC",serif;overflow:hidden}
+button,input,textarea,select{font:inherit}
+button{border:0;border-radius:999px;padding:10px 15px;font-weight:900;cursor:pointer;background:linear-gradient(135deg,var(--gold),#b98034);color:white;box-shadow:0 12px 26px rgba(160,106,48,.26)}
+button.soft,.pill.soft{background:rgba(255,255,255,.10);border:1px solid var(--line);color:var(--ink);box-shadow:none;backdrop-filter:blur(10px)}
+a{color:inherit}
+.hidden{display:none!important}
+
+/* ===== Gate ===== */
+.gate{position:fixed;inset:0;z-index:50;display:flex;align-items:center;justify-content:center;text-align:center;padding:24px;background:radial-gradient(circle at 50% 28%,rgba(214,168,93,.22),transparent 26%),linear-gradient(180deg,#14100d,#050506);transition:.55s ease}
+.gate.out{opacity:0;pointer-events:none;transform:scale(1.02)}
+.gate-card{width:min(680px,100%);border:1px solid var(--line);background:rgba(255,248,239,.08);border-radius:30px;padding:34px 22px;backdrop-filter:blur(18px);box-shadow:var(--shadow)}
+.kicker{letter-spacing:.24em;color:#ffd89a;font-weight:900;font-size:12px;margin-bottom:10px}.gate-title{font-size:clamp(32px,8vw,62px);line-height:1.35;font-weight:1000;margin:12px 0;text-shadow:0 4px 24px rgba(0,0,0,.55)}
+.gate-title span{display:block}.gate-title .i1{padding-left:.9em}.gate-title .i2{padding-left:1.8em}.gate-lead{color:var(--muted);line-height:1.9;margin:16px auto 22px;max-width:520px}.tiny{font-size:12px;color:rgba(247,240,230,.54);line-height:1.6}
+
+/* ===== World ===== */
+.world{height:100svh;display:flex;flex-direction:column;background:linear-gradient(180deg,#100f0f,#050506)}
+.topbar{height:58px;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 14px calc(10px + env(safe-area-inset-top));z-index:3;background:linear-gradient(180deg,rgba(0,0,0,.64),rgba(0,0,0,.12));position:fixed;top:0;left:0;right:0;pointer-events:none}.topbar>*{pointer-events:auto}.brand{font-size:17px;font-weight:1000;letter-spacing:.08em}.brand small{display:block;font-size:10px;font-weight:900;color:#ffd89a;letter-spacing:.22em}.top-actions{display:flex;gap:7px}.icon-btn{width:40px;height:40px;padding:0;display:grid;place-items:center;background:rgba(0,0,0,.38);border:1px solid var(--line);box-shadow:none;backdrop-filter:blur(12px)}
+.scroller{height:100%;overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;scroll-behavior:smooth;padding-top:0}.stage{position:relative;height:100svh;min-width:1480px;width:235vw;max-width:2200px;background:url("assets/images/memory-world.webp") center/100% 100% no-repeat;margin:auto}.stage:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.02),rgba(0,0,0,.04) 58%,rgba(0,0,0,.22));pointer-events:none}.hotspot{position:absolute;border-radius:22px;z-index:2;cursor:pointer;transition:.18s}.hotspot:before{content:attr(data-label);position:absolute;left:50%;bottom:100%;transform:translateX(-50%) translateY(-8px);white-space:nowrap;font-size:12px;font-weight:1000;letter-spacing:.08em;padding:7px 10px;border-radius:999px;background:rgba(0,0,0,.58);border:1px solid rgba(255,255,255,.18);backdrop-filter:blur(8px);color:#fff;opacity:.0;transition:.18s}.hotspot:after{content:"";position:absolute;inset:0;border:2px solid rgba(255,216,154,.0);border-radius:inherit;background:rgba(255,216,154,.0);transition:.18s}.hotspot:active:after,.hotspot:hover:after{border-color:rgba(255,216,154,.68);background:rgba(255,216,154,.10)}.hotspot:active:before,.hotspot:hover:before{opacity:1}
+.h-photo{left:2.8%;top:16%;width:20.2%;height:68%}.h-video{left:23.1%;top:15%;width:17.8%;height:67%}.h-home{left:40.7%;top:13%;width:18.0%;height:70%}.h-music{left:58.5%;top:12%;width:17.9%;height:72%}.h-food{left:74.0%;top:13%;width:14.3%;height:70%}.h-nav{left:88.0%;top:14%;width:10.2%;height:68%}
+.hint{position:fixed;left:14px;right:14px;bottom:calc(14px + env(safe-area-inset-bottom));z-index:4;display:flex;justify-content:center;pointer-events:none}.hint-inner{max-width:520px;width:100%;border:1px solid rgba(255,255,255,.17);background:rgba(0,0,0,.43);backdrop-filter:blur(16px);border-radius:22px;padding:10px 13px;display:flex;align-items:center;gap:10px;box-shadow:0 16px 40px rgba(0,0,0,.28);font-weight:900}.hint-inner span{color:#ffd89a}.hint-inner small{display:block;color:rgba(255,255,255,.72);font-size:12px;font-weight:800;line-height:1.45}
+
+/* ===== Modal pages ===== */
+.page{position:fixed;inset:0;z-index:20;display:none;background:linear-gradient(180deg,#15110f,#050506);overflow:auto;-webkit-overflow-scrolling:touch;color:var(--ink)}.page.show{display:block}.page-head{position:sticky;top:0;z-index:5;padding:calc(10px + env(safe-area-inset-top)) 14px 10px;background:linear-gradient(180deg,rgba(0,0,0,.86),rgba(0,0,0,.46));backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,.08);display:flex;align-items:center;justify-content:space-between;gap:10px}.back{background:rgba(255,255,255,.11);border:1px solid var(--line);box-shadow:none}.page-body{max-width:980px;margin:auto;padding:14px 14px 70px}.hero-card{position:relative;border-radius:28px;overflow:hidden;min-height:310px;background:#171717;border:1px solid rgba(255,255,255,.12);box-shadow:var(--shadow);margin-bottom:14px}.hero-card img{width:100%;height:100%;min-height:310px;object-fit:cover;display:block}.hero-card:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.05),rgba(0,0,0,.70))}.hero-text{position:absolute;left:18px;right:18px;bottom:18px;z-index:2;text-shadow:0 3px 20px rgba(0,0,0,.55)}.hero-text h1{font-size:clamp(30px,8vw,56px);margin:0 0 8px;line-height:1.15}.hero-text p{margin:0;color:rgba(255,255,255,.82);font-weight:900;line-height:1.7}.section{border:1px solid rgba(255,255,255,.12);background:rgba(255,248,239,.07);border-radius:24px;padding:16px;margin:14px 0;backdrop-filter:blur(12px)}.section h2{margin:0 0 8px;font-size:23px}.story{white-space:pre-line;color:rgba(255,255,255,.84);line-height:2;font-size:15px}.toolbar{display:flex;gap:9px;flex-wrap:wrap;margin-top:12px}.pill{display:inline-flex;align-items:center;gap:7px;border-radius:999px;padding:9px 12px;text-decoration:none;font-weight:1000;background:linear-gradient(135deg,var(--gold),#b98034);color:#fff}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}.photo{border-radius:12px;overflow:hidden;background:#222;position:relative;border:1px solid rgba(255,255,255,.09);cursor:pointer}.photo img{width:100%;aspect-ratio:1;object-fit:cover;display:block}.photo b{position:absolute;left:0;right:0;bottom:0;padding:18px 7px 6px;background:linear-gradient(180deg,transparent,rgba(0,0,0,.66));font-size:11px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.video-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,220px),1fr));gap:10px}.vcard{border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.07);border-radius:18px;padding:9px}.vcard video{width:100%;aspect-ratio:16/9;object-fit:contain;background:#000;border-radius:12px}.vcard audio{width:100%}.vcard h3{font-size:14px;line-height:1.45;margin:8px 3px 3px}.vcard a{display:inline-flex;margin:6px 5px 0 0;text-decoration:none;border-radius:999px;padding:7px 9px;font-size:12px;font-weight:900;color:#fff;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.12)}.empty{padding:20px;border:1px dashed rgba(255,255,255,.2);border-radius:18px;color:rgba(255,255,255,.6);text-align:center;line-height:1.7}.food-list{display:grid;gap:10px}.food-item{border:1px solid rgba(255,255,255,.12);border-radius:18px;background:rgba(255,255,255,.07);padding:13px}.food-item b{display:block;margin-bottom:4px;color:#ffd89a}.map-list{display:grid;gap:10px}.map-row{border:1px solid rgba(255,255,255,.12);border-radius:18px;background:rgba(255,255,255,.07);padding:13px;display:grid;gap:8px}.map-row b{color:#ffd89a}.weather-box{display:grid;grid-template-columns:1fr;gap:10px}.weather-card{border:1px solid rgba(255,255,255,.12);border-radius:20px;background:rgba(0,0,0,.30);padding:14px;font-weight:1000;line-height:1.7}.rain-layer{position:absolute;inset:0;pointer-events:none;opacity:0}.page[data-weather*="雨"] .rain-layer{opacity:.75;background:repeating-linear-gradient(110deg,rgba(255,255,255,0) 0 8px,rgba(255,255,255,.28) 9px 10px,rgba(255,255,255,0) 11px 18px);animation:rain .42s linear infinite}@keyframes rain{from{background-position:0 0}to{background-position:-80px 160px}}
+
+
+.folder-block{border:1px solid rgba(255,255,255,.10);background:rgba(255,255,255,.045);border-radius:20px;padding:12px;margin:12px 0}.folder-block h3{margin:0 0 10px;font-size:17px;line-height:1.45;color:#ffd89a;display:flex;align-items:center;justify-content:space-between;gap:10px}.folder-block h3 small{font-size:12px;color:rgba(255,255,255,.58);font-weight:900}.folder-path{font-size:12px;color:rgba(255,255,255,.55);line-height:1.6;margin:-4px 0 10px;word-break:break-all}.subfolder-note{font-size:13px;color:rgba(255,255,255,.64);line-height:1.8;margin-top:8px}
+
 /* Lightbox */
-.lightbox{position:fixed;inset:0;z-index:60;background:rgba(0,0,0,.90);display:none;align-items:center;justify-content:center;padding:14px}.lightbox.show{display:flex}.lightbox img{max-width:100%;max-height:84dvh;object-fit:contain;border-radius:18px}.lb-close{position:absolute;top:calc(14px + env(safe-area-inset-top));right:14px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.2);box-shadow:none}
+.lightbox{position:fixed;inset:0;z-index:60;background:rgba(0,0,0,.90);display:none;align-items:center;justify-content:center;padding:14px}.lightbox.show{display:flex}.lightbox img{max-width:100%;max-height:84svh;object-fit:contain;border-radius:18px}.lb-close{position:absolute;top:calc(14px + env(safe-area-inset-top));right:14px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.2);box-shadow:none}
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom));z-index:70;transform:translateX(-50%) translateY(16px);opacity:0;background:#5b3f2f;color:white;border-radius:999px;padding:11px 16px;font-weight:1000;transition:.2s}.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+@media(min-width:760px){.stage{min-width:1916px;width:1916px;height:821px;margin-top:70px;border-radius:58px;overflow:hidden;box-shadow:var(--shadow)}.world{align-items:center;justify-content:center}.scroller{display:flex;align-items:center}.grid{grid-template-columns:repeat(5,1fr)}}
+@media(max-width:560px){.stage{height:100svh;min-width:1280px;width:300vw;background-size:100% 100%;background-position:center}.grid{grid-template-columns:repeat(3,1fr)}.hero-card{min-height:330px}.hero-card img{min-height:330px}.topbar{height:64px}.hint-inner{font-size:13px}.brand{font-size:15px}}
+
 /* ===== 歌詞彈幕：主題曲播放時會從右往左飄過 ===== */
 .lyric-danmaku-layer{position:fixed;inset:0;z-index:95;pointer-events:none;overflow:hidden}
 .lyric-danmaku{position:absolute;right:-90vw;max-width:88vw;white-space:nowrap;padding:8px 14px;border-radius:999px;color:#fff7e8;background:rgba(68,42,28,.46);border:1px solid rgba(255,255,255,.18);box-shadow:0 12px 28px rgba(45,25,12,.24);backdrop-filter:blur(8px);font-weight:900;text-shadow:0 2px 8px rgba(0,0,0,.30);animation:lyricFly var(--flyDur,10s) linear forwards}.lyric-danmaku.soft{color:#5a3d2f;background:rgba(255,248,239,.78);border-color:rgba(90,61,45,.14);text-shadow:none}@keyframes lyricFly{from{transform:translateX(0);opacity:0}8%{opacity:1}92%{opacity:1}to{transform:translateX(calc(-100vw - 120%));opacity:0}}.lyric-toggle.on{background:linear-gradient(135deg,var(--gold),#b98034);color:#fff}.lyric-toggle.off{background:rgba(255,255,255,.11);color:#fff}@media(max-width:760px){.lyric-danmaku{font-size:14px;padding:7px 12px;max-width:92vw}}
-#miniWorld .mini-world-enter-hotspot{
-  position:absolute!important;
-  top:23%!important;
-  left:7%!important;
-  right:5%!important;
-  z-index:18!important;
-  display:block!important;
-  width:87%!important;
-  height:19%!important;
-  padding:0!important;
-  margin:0!important;
-  border:0!important;
-  border-radius:0!important;
-  background:transparent!important;
-  box-shadow:none!important;
-  pointer-events:auto!important;
-  cursor:pointer!important;
-}
+
+
+
+/* ===== V10 相簿輪轉卡片：像入口方案卡一樣橫向輪播，往上滑展開照片 ===== */
+.album-carousel-shell{position:relative;margin:6px -4px 0;padding:4px 0 10px;}
+.album-carousel-hint{display:flex;align-items:center;justify-content:center;gap:8px;color:rgba(255,216,154,.86);font-size:13px;font-weight:1000;letter-spacing:.04em;margin:2px 0 8px;}
+.album-carousel{display:flex;gap:14px;overflow-x:auto;overflow-y:visible;scroll-snap-type:x mandatory;scroll-padding-left:18px;scroll-padding-right:18px;padding:8px 18px 18px;-webkit-overflow-scrolling:touch;scrollbar-width:none;overscroll-behavior-x:contain;}
+.album-carousel::-webkit-scrollbar{display:none;}
+.album-card{flex:0 0 min(86vw,360px);scroll-snap-align:center;border:1px solid rgba(255,255,255,.13);background:linear-gradient(180deg,rgba(255,248,239,.105),rgba(255,248,239,.055));border-radius:30px;overflow:hidden;box-shadow:0 18px 46px rgba(0,0,0,.28);backdrop-filter:blur(14px);transform:translateZ(0);}
+.album-cover{position:relative;height:260px;background:#1e1e22;overflow:hidden;cursor:pointer;}
+.album-cover img{width:100%;height:100%;object-fit:cover;display:block;filter:saturate(1.03) contrast(1.02);}
+.album-cover:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.03),rgba(0,0,0,.62));pointer-events:none;}
+.album-cover-text{position:absolute;left:14px;right:14px;bottom:13px;z-index:2;text-shadow:0 3px 16px rgba(0,0,0,.60);}
+.album-cover-text b{display:block;font-size:23px;line-height:1.22;margin-bottom:6px;}
+.album-cover-text small{display:block;color:rgba(255,255,255,.78);font-weight:900;line-height:1.5;}
+.album-summary{padding:13px 14px 15px;display:grid;gap:8px;}
+.album-path{color:rgba(255,255,255,.58);font-size:12px;line-height:1.45;word-break:break-all;}
+.album-open{width:100%;min-height:46px;border-radius:16px;background:rgba(255,255,255,.11);border:1px solid rgba(255,255,255,.14);box-shadow:none;}
+.album-detail{max-height:0;opacity:0;overflow:hidden;transition:max-height .46s cubic-bezier(.22,1,.36,1),opacity .26s ease,padding .26s ease;padding:0 14px;}
+.album-card.expanded .album-detail{max-height:760px;opacity:1;padding:0 14px 16px;}
+.album-slide{position:relative;border-radius:22px;overflow:hidden;background:#111;border:1px solid rgba(255,255,255,.12);}
+.album-slide img{width:100%;aspect-ratio:1/1;object-fit:cover;display:block;cursor:pointer;}
+.album-slide-btn{position:absolute;top:50%;transform:translateY(-50%);width:42px;height:42px;border-radius:999px;padding:0;display:grid;place-items:center;background:rgba(0,0,0,.46);border:1px solid rgba(255,255,255,.2);box-shadow:none;font-size:26px;line-height:1;z-index:2;}
+.album-slide-btn.prev{left:9px;}.album-slide-btn.next{right:9px;}
+.album-counter{position:absolute;left:10px;right:10px;bottom:10px;z-index:2;display:flex;justify-content:space-between;gap:8px;align-items:center;color:#fff;font-weight:1000;font-size:12px;text-shadow:0 2px 10px rgba(0,0,0,.65);}
+.album-counter span{padding:6px 9px;border-radius:999px;background:rgba(0,0,0,.50);border:1px solid rgba(255,255,255,.16);backdrop-filter:blur(8px);max-width:72%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.album-thumbs{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding:9px 1px 0;-webkit-overflow-scrolling:touch;}
+.album-thumbs::-webkit-scrollbar{display:none;}
+.album-thumb{flex:0 0 48px;width:48px;height:48px;border-radius:12px;overflow:hidden;border:2px solid rgba(255,255,255,.10);background:#222;padding:0;box-shadow:none;}
+.album-thumb.active{border-color:#ffd89a;}
+.album-thumb img{width:100%;height:100%;object-fit:cover;display:block;}
+.img-fail{display:grid;place-items:center;min-height:180px;color:rgba(255,255,255,.6);padding:18px;text-align:center;line-height:1.6;background:rgba(255,255,255,.06);}
+.lightbox{touch-action:none;}
+.lightbox .lb-nav{position:absolute;top:50%;transform:translateY(-50%);width:46px;height:54px;border-radius:18px;padding:0;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.20);box-shadow:none;font-size:32px;z-index:2;}
+.lightbox .lb-prev{left:12px;}.lightbox .lb-next{right:12px;}
+.lb-caption{position:absolute;left:14px;right:14px;bottom:calc(16px + env(safe-area-inset-bottom));text-align:center;color:white;font-weight:900;text-shadow:0 2px 12px rgba(0,0,0,.7);line-height:1.5;pointer-events:none;}
+@media(max-width:760px){.album-card{flex-basis:86vw}.album-cover{height:245px}.album-cover-text b{font-size:21px}.album-carousel{padding-left:14px;padding-right:14px;scroll-padding-left:14px;scroll-padding-right:14px}.lightbox .lb-nav{width:42px;height:50px}.lb-caption{font-size:13px}}
+
 
 
 /* ===== 金嗓卡拉OK｜電視螢幕 + 歌本 + 遙控器 ===== */
@@ -508,44 +552,398 @@ a{color:inherit}.hidden{display:none!important}.empty{padding:18px;border:1px da
   .gate-song-credit{margin:16px auto 20px;padding:13px 14px}
   .gate-song-credit .credit-title{font-size:18px}
 }
-#miniWorld .radio-audio-hit{
+
+
+/* ===== v20 開始按鈕後：抽 11 張個人照＋10 秒倒數，0 秒播放 ===== */
+.opening-countdown{
+  position:fixed;
+  inset:0;
+  z-index:58;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:18px;
+  background:
+    radial-gradient(circle at 50% 22%,rgba(214,168,93,.24),transparent 30%),
+    linear-gradient(180deg,rgba(12,9,7,.96),rgba(0,0,0,.98));
+  color:#fff7e8;
+  opacity:0;
+  transition:.26s ease;
+}
+.opening-countdown.show{
+  display:flex;
+  opacity:1;
+}
+.opening-countdown.done{
+  opacity:0;
+  pointer-events:none;
+}
+.opening-countdown-card{
+  width:min(760px,100%);
+  max-height:96svh;
+  overflow:auto;
+  border:1px solid rgba(255,216,154,.24);
+  background:rgba(255,248,239,.075);
+  border-radius:30px;
+  padding:20px 16px;
+  box-shadow:0 28px 80px rgba(0,0,0,.46);
+  backdrop-filter:blur(18px);
+  text-align:center;
+}
+.opening-countdown .credit-kicker{
+  color:#ffd89a;
+  font-size:12px;
+  font-weight:1000;
+  letter-spacing:.2em;
+}
+.opening-countdown-title{
+  font-size:clamp(24px,7vw,44px);
+  line-height:1.25;
+  font-weight:1000;
+  margin:8px 0 8px;
+}
+.opening-countdown-sub{
+  color:rgba(255,248,239,.72);
+  font-weight:900;
+  line-height:1.7;
+  font-size:14px;
+}
+.opening-number{
+  width:92px;
+  height:92px;
+  margin:16px auto 14px;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  color:#fff;
+  background:radial-gradient(circle at 35% 30%,#ffd89a,#b98034 58%,#5b3f2f);
+  border:1px solid rgba(255,255,255,.22);
+  box-shadow:0 20px 44px rgba(185,128,52,.28),inset 0 1px 0 rgba(255,255,255,.36);
+  font-size:42px;
+  font-weight:1000;
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+}
+.opening-number.zero{
+  animation:pulseStart .55s ease both;
+}
+@keyframes pulseStart{
+  0%{transform:scale(1)}
+  50%{transform:scale(1.13);filter:brightness(1.18)}
+  100%{transform:scale(1)}
+}
+.opening-photo-draw{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:9px;
+  margin:16px auto 0;
+}
+.opening-photo-slot{
+  position:relative;
+  aspect-ratio:3/4;
+  overflow:hidden;
+  border-radius:18px;
+  background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.13);
+  box-shadow:0 14px 28px rgba(0,0,0,.20);
+}
+.opening-photo-slot:nth-child(11){
+  grid-column:2 / span 2;
+  aspect-ratio:16/9;
+}
+.opening-photo-slot img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+  filter:saturate(1.05) contrast(1.03) sepia(.05);
+}
+.opening-photo-slot:after{
+  content:attr(data-no);
+  position:absolute;
+  left:7px;
+  top:7px;
+  min-width:25px;
+  height:25px;
+  border-radius:999px;
+  display:grid;
+  place-items:center;
+  background:rgba(0,0,0,.48);
+  border:1px solid rgba(255,255,255,.16);
+  color:#ffd89a;
+  font-size:12px;
+  font-weight:1000;
+}
+.opening-photo-placeholder{
+  height:100%;
+  display:grid;
+  place-items:center;
+  padding:10px;
+  color:rgba(255,248,239,.50);
+  font-weight:900;
+  line-height:1.5;
+}
+.opening-start-note{
+  margin-top:12px;
+  color:#ffd89a;
+  font-size:13px;
+  font-weight:1000;
+  letter-spacing:.04em;
+}
+@media(max-width:560px){
+  .opening-countdown{padding:10px}
+  .opening-countdown-card{border-radius:26px;padding:18px 12px}
+  .opening-photo-draw{grid-template-columns:repeat(3,1fr);gap:7px}
+  .opening-photo-slot{border-radius:14px}
+  .opening-photo-slot:nth-child(11){grid-column:auto;aspect-ratio:3/4}
+  .opening-number{width:82px;height:82px;font-size:38px;margin:13px auto}
+}
+
+
+/* ===== v21 開場倒數影片：影片本身已有秒數，不再疊加數字 ===== */
+.opening-countdown{
+  padding:0!important;
+  background:#000!important;
+}
+.opening-countdown-card{
+  width:100%!important;
+  height:100svh!important;
+  max-height:none!important;
+  border:0!important;
+  border-radius:0!important;
+  padding:0!important;
+  background:#000!important;
+  box-shadow:none!important;
+  display:grid!important;
+  place-items:center!important;
+  overflow:hidden!important;
+}
+.opening-countdown-video{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  background:#000;
+  z-index:1;
+}
+.opening-countdown-card>.credit-kicker,
+.opening-countdown-title,
+.opening-countdown-sub,
+.opening-number,
+.opening-photo-draw,
+.opening-start-note{
+  display:none!important;
+}
+.opening-video-skip{
+  position:absolute;
+  right:14px;
+  bottom:calc(16px + env(safe-area-inset-bottom));
+  z-index:4;
+  background:rgba(0,0,0,.42)!important;
+  border:1px solid rgba(255,255,255,.18)!important;
+  backdrop-filter:blur(12px);
+  box-shadow:none!important;
+  font-size:13px;
+  padding:10px 13px;
+}
+.opening-video-caption{
+  position:absolute;
+  left:14px;
+  right:14px;
+  top:calc(14px + env(safe-area-inset-top));
+  z-index:3;
+  text-align:center;
+  color:rgba(255,248,239,.72);
+  font-size:12px;
+  font-weight:900;
+  letter-spacing:.08em;
+  text-shadow:0 2px 10px rgba(0,0,0,.7);
+  pointer-events:none;
+}
+
+
+
+/* ===== v33 真正木框小世界＋天氣圖同步：開場影片後先到木框，再點中間世界進主街 ===== */
+.mini-world{
+  position:fixed;
+  inset:0;
+  z-index:47;
+  display:grid;
+  place-items:center;
+  overflow:hidden;
+  background:
+    radial-gradient(circle at 50% 18%,rgba(214,168,93,.20),transparent 28%),
+    linear-gradient(180deg,#1a120d,#050506 58%,#020203);
+  color:#fff7e8;
+  opacity:1;
+  transform:scale(1);
+  transition:opacity .45s ease, transform .8s cubic-bezier(.22,1,.36,1), filter .45s ease;
+}
+.mini-world.hidden{display:none!important;}
+.mini-world.zooming{opacity:0;filter:brightness(1.45) blur(5px);pointer-events:none;}
+.mini-world.zooming .mini-crt-scene{transform:scale(2.38) translateY(-10%);}
+.mini-crt-scene{
+  position:relative;
+  width:min(92vw,560px);
+  max-height:92svh;
+  aspect-ratio:1080/1920;
+  filter:drop-shadow(0 30px 70px rgba(0,0,0,.62));
+  transform:scale(1);
+  transition:transform .8s cubic-bezier(.22,1,.36,1);
+  z-index:1;
+}
+.mini-crt-frame{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;user-select:none;-webkit-user-drag:none;pointer-events:none;}
+.mini-crt-screen{
+  position:absolute;
+  left:4.1%;top:34.55%;width:91.8%;height:28.65%;
+  border:0;padding:0;margin:0;border-radius:0.8%;overflow:hidden;
+  background:#000;box-shadow:inset 0 0 32px rgba(0,0,0,.75),0 0 0 2px rgba(255,255,255,.08);
+  cursor:pointer;z-index:2;display:block;color:inherit;
+}
+.mini-crt-screen:active{filter:brightness(1.12)}
+.mini-world-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:saturate(1.02) contrast(1.04);}
+.mini-world-weather{
+  position:absolute;inset:0;pointer-events:none;z-index:2;opacity:.0;mix-blend-mode:screen;
+}
+.mini-screen-shine{position:absolute;inset:0;z-index:3;pointer-events:none;background:linear-gradient(115deg,rgba(255,255,255,.14),transparent 33%,rgba(255,255,255,.05) 54%,transparent 70%);mix-blend-mode:screen;}
+.mini-screen-hint{position:absolute;left:50%;bottom:8px;transform:translateX(-50%);z-index:4;white-space:nowrap;padding:6px 10px;border-radius:999px;background:rgba(0,0,0,.58);border:1px solid rgba(255,255,255,.16);color:#ffd89a;font-size:12px;font-weight:1000;backdrop-filter:blur(8px);}
+.mini-crt-label{position:absolute;left:50%;bottom:9%;transform:translateX(-50%);z-index:3;white-space:nowrap;padding:8px 13px;border-radius:999px;background:rgba(0,0,0,.42);border:1px solid rgba(255,216,154,.20);color:#ffd89a;font-weight:1000;font-size:13px;letter-spacing:.08em;backdrop-filter:blur(10px);}
+.mini-world-weather.rain,
+.world-weather.rain{opacity:.78;background:repeating-linear-gradient(112deg,rgba(255,255,255,0) 0 10px,rgba(255,255,255,.28) 11px 12px,rgba(255,255,255,0) 13px 22px);animation:v29Rain .42s linear infinite;}
+.mini-world-weather.fog,
+.world-weather.fog{opacity:.7;background:radial-gradient(circle at 30% 50%,rgba(240,244,240,.55),transparent 38%),linear-gradient(180deg,rgba(220,224,218,.38),rgba(218,218,208,.22));backdrop-filter:blur(2px);mix-blend-mode:normal;}
+.mini-world-weather.haze,
+.world-weather.haze{opacity:.62;background:linear-gradient(180deg,rgba(190,170,120,.36),rgba(122,115,96,.28));backdrop-filter:blur(1.5px);mix-blend-mode:normal;}
+.mini-world-weather.night,
+.world-weather.night{opacity:.55;background:linear-gradient(180deg,rgba(0,18,60,.58),rgba(0,0,0,.28));mix-blend-mode:multiply;}
+.mini-world-weather.heat,
+.world-weather.heat{opacity:.32;background:linear-gradient(180deg,rgba(255,219,85,.42),rgba(255,124,20,.20));animation:v29Heat 2.3s ease-in-out infinite alternate;}
+.mini-world-weather.storm,
+.world-weather.storm{opacity:.9;background:repeating-linear-gradient(112deg,rgba(255,255,255,0) 0 7px,rgba(255,255,255,.34) 8px 9px,rgba(255,255,255,0) 10px 16px),linear-gradient(180deg,rgba(0,20,48,.35),rgba(0,0,0,.25));animation:v29Rain .26s linear infinite;mix-blend-mode:normal;}
+.mini-world-weather.storm:after,.world-weather.storm:after{content:"";position:absolute;inset:0;background:rgba(255,255,255,.0);animation:v29Lightning 5.8s infinite;}
+@keyframes v29Rain{from{background-position:0 0}to{background-position:-90px 180px}}
+@keyframes v29Heat{from{filter:blur(0)}to{filter:blur(1.4px)}}
+@keyframes v29Lightning{0%,92%,100%{background:rgba(255,255,255,0)}93%{background:rgba(255,255,255,.72)}94%{background:rgba(255,255,255,0)}95%{background:rgba(255,255,255,.35)}96%{background:rgba(255,255,255,0)}}
+.mini-world-panel{
+  position:absolute;
+  left:50%;
+  bottom:calc(16px + env(safe-area-inset-bottom));
+  transform:translateX(-50%);
+  z-index:4;
+  width:min(92vw,720px);
+  display:grid;
+  gap:10px;
+  justify-items:center;
+  text-align:center;
+  pointer-events:none;
+}
+.mini-world-tip{
+  pointer-events:auto;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  border-radius:999px;
+  padding:10px 16px;
+  background:rgba(0,0,0,.54);
+  border:1px solid rgba(255,255,255,.16);
+  backdrop-filter:blur(14px);
+  color:#ffd89a;
+  font-weight:1000;
+  box-shadow:0 14px 36px rgba(0,0,0,.34);
+}
+.mini-weather-buttons{
+  pointer-events:auto;
+  display:flex;
+  gap:7px;
+  flex-wrap:wrap;
+  justify-content:center;
+  max-width:680px;
+}
+.mini-weather-buttons button{
+  min-height:34px;
+  padding:7px 10px;
+  font-size:12px;
+  background:rgba(255,255,255,.12);
+  border:1px solid rgba(255,255,255,.14);
+  box-shadow:none;
+  backdrop-filter:blur(10px);
+}
+.mini-weather-buttons button.active{background:linear-gradient(135deg,var(--gold),#b98034);}
+.mini-weather-status{pointer-events:none;color:rgba(255,248,239,.76);font-size:12px;font-weight:900;line-height:1.5;text-shadow:0 2px 12px rgba(0,0,0,.55);background:rgba(0,0,0,.28);border:1px solid rgba(255,255,255,.10);border-radius:999px;padding:6px 10px;backdrop-filter:blur(10px);}
+.stage{background-image:var(--memory-world-bg, url("assets/images/memory-world.webp"))!important;}
+.world-weather{position:absolute;inset:0;z-index:1;pointer-events:none;opacity:0;border-radius:inherit;overflow:hidden;}
+.stage .hotspot{z-index:3;}
+.weather-chip{
+  min-width:40px;height:40px;padding:0 10px;border-radius:999px;display:inline-grid;place-items:center;
+  background:rgba(0,0,0,.38);border:1px solid var(--line);box-shadow:none;backdrop-filter:blur(12px);font-size:18px;
+}
+@media(max-width:760px){
+  .mini-world-bg{object-fit:cover;object-position:center;}
+  .mini-world-panel{bottom:calc(14px + env(safe-area-inset-bottom));}
+  .mini-weather-buttons{max-height:86px;overflow:auto;scrollbar-width:none;}
+  .mini-weather-buttons::-webkit-scrollbar{display:none;}
+}
+
+
+/* ===== v37：從 index(45) 補回 v36 功能：直式木框影片、主街新圖切割、免密碼訪客名片 ===== */
+.mini-crt-scene{
+  position:relative!important;
+  width:min(100vw, calc(100svh * 1080 / 1920), 560px)!important;
+  height:min(100svh, calc(100vw * 1920 / 1080))!important;
+  max-height:none!important;
+  aspect-ratio:1080/1920!important;
+  margin:auto!important;
+  overflow:hidden!important;
+}
+.mini-crt-frame{
   position:absolute!important;
-  top:calc(1401 / 2880 * 100%)!important;
-  height:calc((1466 - 1401) / 2880 * 100%)!important;
-  min-height:0!important;
+  inset:0!important;
+  width:100%!important;
+  height:100%!important;
+  object-fit:cover!important;
+  background:#000!important;
+}
+.mini-crt-screen{
+  left:4.6296%!important;
+  top:34.7396%!important;
+  width:90.3704%!important;
+  height:28.8021%!important;
+  border-radius:.8%!important;
+}
+.stage{
+  background:none!important;
+  overflow:hidden!important;
+}
+.stage-world-img{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center;
+  z-index:0;
+  user-select:none;
+  -webkit-user-drag:none;
+  pointer-events:none;
+}
+.stage .world-weather{z-index:1;}
+.stage .hotspot{
+  z-index:3!important;
+  border:0!important;
+  background:transparent!important;
   padding:0!important;
   margin:0!important;
-  transform:none!important;
-  z-index:220!important;
-  pointer-events:auto!important;
+  box-shadow:none!important;
 }
-#miniWorld .radio-audio-play{
-  left:calc(312 / 1080 * 100%)!important;
-  width:calc((375 - 312) / 1080 * 100%)!important;
-}
-#miniWorld .radio-audio-stop{
-  left:calc(412 / 1080 * 100%)!important;
-  width:calc((478 - 412) / 1080 * 100%)!important;
-}
-/* Treasure Map：橫幅獨立在上方，地圖從橫幅下方開始。 */
-#page-nav{--route-global-top:58px;--route-banner-height:70px;padding:0!important;overflow:hidden!important;}
-#page-nav.show{padding:0!important;}
-#page-nav.show>.page-head{display:none!important;}
-#page-nav .route-top-banner{
-  position:absolute;left:0;right:0;top:var(--route-global-top);height:var(--route-banner-height);z-index:94;
-  display:grid;grid-template-columns:46px minmax(0,1fr) 46px;align-items:center;gap:9px;padding:8px 12px;
-  color:#fff2cb;background:
-    linear-gradient(90deg,rgba(60,35,16,.98),rgba(128,77,32,.96) 48%,rgba(60,35,16,.98)),
-    url("assets/images/treasure_map_bg.webp") center 18%/cover no-repeat;
-  border-bottom:2px solid rgba(255,222,150,.52);box-shadow:0 8px 24px rgba(0,0,0,.36);overflow:hidden;
-}
-#page-nav .route-top-banner::after{content:"";position:absolute;inset:5px;border:1px solid rgba(255,232,178,.25);pointer-events:none;}
-#page-nav .route-banner-back{position:relative;z-index:2;width:40px;height:40px;padding:0!important;display:grid;place-items:center;background:rgba(255,245,212,.15)!important;border:1px solid rgba(255,238,194,.30)!important;box-shadow:none!important;font-size:23px!important;}
-#page-nav .route-banner-copy{position:relative;z-index:2;text-align:center;line-height:1.2;min-width:0;}
-#page-nav .route-banner-copy strong{display:block;font-family:"Noto Serif TC",serif;font-size:clamp(16px,4.5vw,24px);letter-spacing:.08em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-#page-nav .route-banner-copy small{display:block;margin-top:4px;color:rgba(255,241,205,.72);font-size:10px;font-weight:900;letter-spacing:.18em;}
-#page-nav .route-banner-mark{position:relative;z-index:2;justify-self:end;color:#4a2b15;background:#f3d38c;border-radius:8px;padding:4px 5px;font-size:9px;font-weight:1000;letter-spacing:.08em;transform:rotate(4deg);}
-#page-nav .route-map-app{top:calc(var(--route-global-top) + var(--route-banner-height))!important;bottom:0!important;left:0!important;right:0!important;height:auto!important;min-height:0!important;transform:none!important;}.visitor-identity-modal{
+/* 直接照新天氣圖切，不再沿用舊圖背景切法 */
+.h-photo{left:2.7%!important;top:12.6%!important;width:20.6%!important;height:71.0%!important;}
+.h-video{left:23.4%!important;top:12.4%!important;width:17.8%!important;height:71.0%!important;}
+.h-home {left:41.2%!important;top:11.8%!important;width:17.9%!important;height:72.4%!important;}
+.h-music{left:59.2%!important;top:11.4%!important;width:17.8%!important;height:72.8%!important;}
+.h-food {left:77.0%!important;top:12.1%!important;width:11.2%!important;height:71.8%!important;}
+.h-nav  {left:88.3%!important;top:12.2%!important;width:9.8%!important;height:71.5%!important;}
+.visitor-identity-modal{
   position:fixed;
   inset:0;
   z-index:120;
@@ -760,69 +1158,1078 @@ a{color:inherit}.hidden{display:none!important}.empty{padding:18px;border:1px da
   #page-nav .route-tag{font-size:8px}
 }
 
-#page-nav .route-title-pill{display:none!important;}
-@media(min-width:760px){
-  #page-nav .route-top-banner{left:50%!important;right:auto!important;width:min(100vw,540px)!important;transform:translateX(-50%)!important;}
-  #page-nav .route-map-app{left:50%!important;right:auto!important;width:min(100vw,540px)!important;transform:translateX(-50%)!important;}
+
+/* ===== v43：以 index(53) 為參考，保留 mini-frame 影片讀取方式 + 1080×2880 紙張留言版 ===== */
+.gate-card{text-align:left!important;}
+.gate-title{width:max-content!important;max-width:100%!important;margin:12px auto 10px!important;text-align:left!important;display:grid!important;gap:.08em!important;line-height:1.22!important;}
+.gate-title span,.gate-title .i1,.gate-title .i2{padding-left:0!important;display:block!important;}
+.gate-song-credit{text-align:left!important;}
+.gate-song-credit .credit-kicker{text-align:left!important;}
+.gate-song-credit .credit-title{text-align:center!important;letter-spacing:.04em;}
+.gate-song-credit .credit-meta-line{display:flex;align-items:center;justify-content:space-evenly;gap:14px;white-space:nowrap;color:rgba(255,248,239,.88);font-size:13px;font-weight:950;letter-spacing:.03em;}
+.gate-song-credit .credit-meta-line span{flex:1;text-align:center;}.gate-song-credit .credit-meta-line i{font-style:normal;color:rgba(255,216,154,.72);font-weight:1000;}
+.gate-lead,.gate .tiny{text-align:center;}.gate button{display:block;margin-left:auto;margin-right:auto;}.gate{z-index:150!important;}.opening-countdown{z-index:160!important;}.world .topbar{z-index:92!important;}.top-actions{gap:6px!important;}.top-actions .icon-btn{width:40px;height:40px;position:relative;}#dataRefreshBtn.refreshing{animation:v43Spin .8s linear infinite;background:rgba(214,168,93,.34)!important;}@keyframes v43Spin{to{transform:rotate(360deg)}}
+.mini-crt-label,.mini-world-tip,.mini-screen-hint,#miniWeatherButtons{display:none!important;}
+.mini-world{display:block!important;overflow:auto!important;-webkit-overflow-scrolling:touch!important;padding:calc(58px + env(safe-area-inset-top)) 0 calc(22px + env(safe-area-inset-bottom))!important;text-align:center!important;background:#050403!important;}
+.mini-crt-scene{position:relative!important;width:min(96vw,560px)!important;height:auto!important;aspect-ratio:1080/2880!important;max-height:none!important;margin:0 auto!important;overflow:hidden!important;border-radius:0!important;filter:drop-shadow(0 30px 70px rgba(0,0,0,.62))!important;}
+.mini-crt-frame{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;object-fit:cover!important;background:#000 url("assets/images/mini-frame.webp") center/cover no-repeat!important;}
+.mini-crt-frame.frame-failed{opacity:.22!important;filter:sepia(.4) brightness(.7)!important;}
+/* 小世界木箱內圖片：x 75–1020 / y 653–1185（以 1080×2880 換算） */
+.mini-crt-screen{left:6.9444%!important;top:22.6736%!important;width:87.5000%!important;height:18.4722%!important;border-radius:.8%!important;}
+.mini-world-panel{display:block!important;position:static!important;width:0!important;height:0!important;margin:0!important;padding:0!important;overflow:hidden!important;}
+/* 天氣資訊：x 60–655 / y 1204–1269 */
+.mini-weather-status{position:absolute!important;z-index:6!important;left:5.5556%!important;top:41.8056%!important;width:55.0926%!important;height:2.2569%!important;color:rgba(76,43,22,.82)!important;background:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;padding:0!important;text-align:left!important;font-size:clamp(7px,1.08vw + .13rem,12px)!important;line-height:1.28!important;font-weight:900!important;text-shadow:0 1px 0 rgba(255,247,220,.48)!important;pointer-events:none!important;backdrop-filter:none!important;overflow:hidden!important;}
+/* 給阿明的話：H 1750 up（從 y=1750 開始往下） */
+.frame-letter-card{position:absolute!important;z-index:5!important;left:22.7778%!important;top:58.7639%!important;width:59.5370%!important;height:35.4861%!important;margin:0!important;padding:0!important;overflow:hidden!important;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;backdrop-filter:none!important;color:#4b2b16!important;text-align:left!important;}
+.frame-letter-text{width:100%!important;height:100%!important;overflow:hidden!important;color:#4b2b16!important;font-size:clamp(12px,21.22vw + .16rem,13px)!important;line-height:1.56!important;font-weight:760!important;letter-spacing:.01em!important;text-shadow:0 1px 0 rgba(255,247,220,.36)!important;font-family:"Noto Serif TC","Noto Sans TC",serif!important;}
+/* radio 座標：播放 x708–768/y1450–1505；停止 x807–867/y1450–1505 */
+.radio-audio-hit{position:absolute!important;z-index:9!important;top:50.3472%!important;width:5.5556%!important;height:1.9097%!important;min-height:0!important;padding:0!important;margin:0!important;border-radius:50%!important;display:grid!important;place-items:center!important;background:rgba(255,244,214,.12)!important;border:1px solid rgba(68,38,18,.18)!important;box-shadow:none!important;color:#251307!important;text-shadow:0 1px 0 rgba(255,248,220,.35)!important;cursor:pointer!important;backdrop-filter:none!important;}
+.radio-audio-play{left:65.5556%!important;}.radio-audio-stop{left:74.7222%!important;}
+.radio-audio-hit span{display:block!important;font-size:clamp(13px,3.8vw,23px)!important;line-height:1!important;font-weight:1000!important;transform:translateY(-2%);} .radio-audio-stop span{font-size:clamp(12px,3.3vw,21px)!important;}
+.radio-audio-hit:active,.radio-audio-hit.playing{background:rgba(255,216,154,.28)!important;box-shadow:0 0 0 3px rgba(255,216,154,.14)!important;}
+.person-tag-hotspot{position:absolute;z-index:4;width:5.8%;height:12%;border-radius:999px;transform:translate(-50%,-50%);cursor:pointer;outline:none;background:rgba(255,216,154,0);border:1px solid rgba(255,216,154,0);transition:.18s ease;}
+.person-tag-hotspot::before{content:attr(data-name);position:absolute;left:50%;bottom:100%;transform:translateX(-50%) translateY(-8px);white-space:nowrap;padding:7px 11px;border-radius:999px;background:rgba(0,0,0,.64);border:1px solid rgba(255,216,154,.25);color:#ffd89a;font-size:12px;font-weight:1000;letter-spacing:.05em;opacity:0;pointer-events:none;backdrop-filter:blur(10px);box-shadow:0 12px 28px rgba(0,0,0,.26);}
+.person-tag-hotspot:hover,.person-tag-hotspot:focus,.person-tag-hotspot.show-name{background:rgba(255,216,154,.08);border-color:rgba(255,216,154,.45);}.person-tag-hotspot:hover::before,.person-tag-hotspot:focus::before,.person-tag-hotspot.show-name::before{opacity:1;}
+.person-1{left:43.8%;top:63.5%;}.person-2{left:48.9%;top:63.2%;}.person-3{left:13.5%;top:68.2%;}.person-4{left:90.5%;top:67.5%;width:8.4%;}
+@media(max-width:560px){.gate-title{margin-left:auto!important;margin-right:auto!important;font-size:clamp(34px,10vw,54px)!important}.gate-song-credit .credit-meta-line{gap:8px;font-size:12px}.mini-crt-scene{width:96vw!important}.frame-letter-text{font-size:clamp(12px,8vw,12px)!important;line-height:1.48!important}.mini-weather-status{font-size:clamp(6.5px,1.75vw,8.6px)!important}.radio-audio-hit span{font-size:clamp(12px,4.1vw,20px)!important;}}
+
+
+/* ===== v45：小世界/主街共用同一個天氣狀態；圖片缺檔也不空白 ===== */
+#stage.stage-weather-fallback,
+.mini-crt-screen.weather-fallback{
+  background-size:cover!important;
+  background-position:center!important;
+  background-repeat:no-repeat!important;
 }
-@media(max-width:760px){#page-nav{--route-global-top:64px;--route-banner-height:72px;}}
+#stage.stage-weather-fallback[data-weather-key="sunny"],
+.mini-crt-screen.weather-fallback[data-weather-key="sunny"]{background-image:linear-gradient(180deg,#8fc7ef 0%,#f8dd97 38%,#c89755 62%,#5a3925 100%)!important;}
+#stage.stage-weather-fallback[data-weather-key="hot"],
+.mini-crt-screen.weather-fallback[data-weather-key="hot"]{background-image:linear-gradient(180deg,#f9d271 0%,#ee8b32 40%,#b46a3c 68%,#4b2b1c 100%)!important;}
+#stage.stage-weather-fallback[data-weather-key="cloudy"],
+.mini-crt-screen.weather-fallback[data-weather-key="cloudy"]{background-image:linear-gradient(180deg,#b8c1c5 0%,#d7c6a0 45%,#8f7354 70%,#403024 100%)!important;}
+#stage.stage-weather-fallback[data-weather-key="overcast"],
+.mini-crt-screen.weather-fallback[data-weather-key="overcast"]{background-image:linear-gradient(180deg,#7f8586 0%,#b1aaa1 44%,#77624e 72%,#292521 100%)!important;}
+#stage.stage-weather-fallback[data-weather-key="rain"],
+.mini-crt-screen.weather-fallback[data-weather-key="rain"]{background-image:linear-gradient(180deg,#596f82 0%,#6d6a61 45%,#4c3e35 72%,#18191b 100%)!important;}
+#stage.stage-weather-fallback[data-weather-key="storm"],
+.mini-crt-screen.weather-fallback[data-weather-key="storm"]{background-image:linear-gradient(180deg,#1a2536 0%,#39404a 45%,#2c2927 75%,#070708 100%)!important;}
+#stage.stage-weather-fallback[data-weather-key="fog"],
+.mini-crt-screen.weather-fallback[data-weather-key="fog"]{background-image:linear-gradient(180deg,#d4d7d1 0%,#c4c0b4 48%,#8b8172 76%,#4a4038 100%)!important;}
+#stage.stage-weather-fallback[data-weather-key="haze"],
+.mini-crt-screen.weather-fallback[data-weather-key="haze"]{background-image:linear-gradient(180deg,#c8ae74 0%,#a28a5e 48%,#6b5844 76%,#2f2a24 100%)!important;}
+#stage.stage-weather-fallback[data-weather-key="night"],
+#stage.stage-weather-fallback[data-weather-key="nightRain"],
+.mini-crt-screen.weather-fallback[data-weather-key="night"],
+.mini-crt-screen.weather-fallback[data-weather-key="nightRain"]{background-image:linear-gradient(180deg,#081432 0%,#121a2d 43%,#1f2027 70%,#050506 100%)!important;}
+#stage.stage-weather-fallback[data-weather-key="snow"],
+.mini-crt-screen.weather-fallback[data-weather-key="snow"]{background-image:linear-gradient(180deg,#dce7ee 0%,#b9c7cc 45%,#8e9290 74%,#343838 100%)!important;}
+#stage.stage-weather-fallback .stage-world-img,
+.mini-crt-screen.weather-fallback .mini-world-bg{opacity:0!important;}
+#stage:not(.stage-weather-fallback) .stage-world-img,
+.mini-crt-screen:not(.weather-fallback) .mini-world-bg{opacity:1!important;}
+
+
+/* ===== v46：主街進去後仍保留分建築物按鈕 ===== */
+#stage{position:relative!important;}
+#stage .stage-world-img{z-index:0!important;pointer-events:none!important;}
+#stage .world-weather{z-index:1!important;pointer-events:none!important;}
+#stage .person-tag-hotspot{z-index:4!important;pointer-events:auto!important;}
+#stage .hotspot{z-index:8!important;pointer-events:auto!important;background:rgba(255,216,154,0)!important;border:0!important;}
+#stage .hotspot::after{pointer-events:none!important;}
+#stage .hotspot::before{z-index:9!important;}
+#stage .hotspot:active::after,#stage .hotspot:hover::after{border-color:rgba(255,216,154,.68)!important;background:rgba(255,216,154,.10)!important;}
+
+
+/* ===== v47：修正主街房子 / 人物按鈕歪掉 =====
+   重點：主街圖改成 fill，不再 cover 裁切；按鈕座標直接對齊圖片百分比。 */
+.stage-world-img{
+  object-fit:fill!important;
+  object-position:center!important;
+}
+#stage .hotspot{
+  z-index:8!important;
+  pointer-events:auto!important;
+  border-radius:10px!important;
+  background:rgba(255,216,154,0)!important;
+}
+#stage .hotspot::after{
+  border-radius:inherit!important;
+}
+/* 六棟建築物：依目前主街圖實際位置重新校正 */
+#stage .h-photo{left:12%!important;top:24%!important;width:14%!important;height:47%!important;}
+#stage .h-video{left:26%!important;top:24%!important;width:14%!important;height:47%!important;}
+#stage .h-home {left:40%!important;top:24%!important;width:17%!important;height:47%!important;}
+#stage .h-music{left:57%!important;top:24%!important;width:15%!important;height:47%!important;}
+#stage .h-food {left:72%!important;top:24%!important;width:11%!important;height:47%!important;}
+#stage .h-nav  {left:83%!important;top:24%!important;width:12%!important;height:47%!important;}
+/* 人物熱區改成左到右的小圈，不再用舊座標 */
+#stage .person-tag-hotspot{
+  z-index:9!important;
+  pointer-events:auto!important;
+  width:4.6%!important;
+  height:10.5%!important;
+  border-radius:999px!important;
+}
+#stage .person-1{left:18.4%!important;top:76.0%!important;}
+#stage .person-2{left:43.5%!important;top:76.2%!important;}
+#stage .person-3{left:49.0%!important;top:76.2%!important;}
+#stage .person-4{left:84.5%!important;top:76.0%!important;width:6.5%!important;}
+/* 手機觸控時顯示得明顯一點，但不擋到開頁 */
+#stage .hotspot:active::after,
+#stage .hotspot:hover::after{
+  border-color:rgba(255,216,154,.78)!important;
+  background:rgba(255,216,154,.08)!important;
+}
+#stage .person-tag-hotspot:active,
+#stage .person-tag-hotspot:hover,
+#stage .person-tag-hotspot.show-name{
+  background:rgba(255,216,154,.10)!important;
+  border-color:rgba(255,216,154,.58)!important;
 }
 
-/* ===== 互動層單一化：隱藏頁面絕對不能接收點擊 ===== */
-.page:not(.show),
-.page:not(.show) *,
-.page.closing,
-.page.closing *{
-  pointer-events:none!important;
-  visibility:hidden!important;
+
+/* ===== v48：修正截圖問題：頁面不被右上列壓住、主街按鈕透明、KTV 改 Drive Preview 避免 ORB ===== */
+.page.show{
+  padding-top:calc(68px + env(safe-area-inset-top))!important;
 }
-.page.show:not(.closing){
-  pointer-events:auto!important;
-  visibility:visible!important;
+.page.show .page-head{
+  position:fixed!important;
+  top:calc(58px + env(safe-area-inset-top))!important;
+  left:0!important;
+  right:0!important;
+  min-height:48px!important;
+  z-index:91!important;
 }
-#miniWorld.hidden,
-#miniWorld.hidden *,
-#miniWorld.zooming,
-#miniWorld.zooming *{
-  pointer-events:none!important;
+.page.show .page-body{
+  padding-top:14px!important;
 }
-#miniWorld.hidden{
+#page-nav.show{
+  padding-top:calc(58px + env(safe-area-inset-top))!important;
+}
+#page-nav.show .page-head{
+  top:calc(58px + env(safe-area-inset-top))!important;
+}
+#page-nav .route-map-app{
+  height:calc(100svh - 58px - env(safe-area-inset-top))!important;
+}
+/* 主街房子按鈕保留可點，但不要再顯示巨大透明框；只在滑鼠裝置 hover 或短按顯示名稱 */
+#stage .hotspot::after{
+  border-color:transparent!important;
+  background:transparent!important;
+}
+#stage .hotspot:active::after{
+  border-color:transparent!important;
+  background:transparent!important;
+}
+@media(hover:hover){
+  #stage .hotspot:hover::after{
+    border-color:rgba(255,216,154,.55)!important;
+    background:rgba(255,216,154,.05)!important;
+  }
+}
+#stage .hotspot:active::before,
+#stage .hotspot.show-name::before,
+#stage .hotspot:hover::before{
+  opacity:1!important;
+}
+/* KTV Drive preview iframe */
+.ktv-drive-frame{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  border:0;
+  display:none;
+  z-index:3;
+  background:#000;
+}
+#page-music .ktv-osd{
+  pointer-events:none;
+}
+
+
+/* ===== v49：訪客登記修正｜可送出、可關閉、可滑動，不再卡死 APP ===== */
+.visitor-identity-modal{
+  z-index:9999!important;
+  display:flex!important;
+  align-items:flex-start!important;
+  justify-content:center!important;
+  overflow-y:auto!important;
+  overflow-x:hidden!important;
+  -webkit-overflow-scrolling:touch!important;
+  overscroll-behavior:contain!important;
+  touch-action:pan-y!important;
+  padding:calc(18px + env(safe-area-inset-top)) 14px calc(22px + env(safe-area-inset-bottom))!important;
+}
+.visitor-identity-modal.hidden{display:none!important;}
+.visitor-identity-card{
+  position:relative!important;
+  max-height:none!important;
+  overflow:visible!important;
+  margin:auto 0!important;
+  touch-action:pan-y!important;
+}
+.visitor-identity-close{
+  position:absolute!important;
+  top:10px!important;
+  right:10px!important;
+  z-index:3!important;
+  width:38px!important;
+  height:38px!important;
+  padding:0!important;
+  display:grid!important;
+  place-items:center!important;
+  border-radius:999px!important;
+  background:rgba(255,255,255,.10)!important;
+  border:1px solid rgba(255,255,255,.16)!important;
+  box-shadow:none!important;
+  color:#fff7e8!important;
+  font-size:20px!important;
+  line-height:1!important;
+}
+.visitor-identity-actions{position:sticky!important;bottom:0!important;padding-top:10px!important;background:linear-gradient(180deg,rgba(18,13,10,0),rgba(18,13,10,.94) 32%,rgba(18,13,10,.98))!important;z-index:2!important;}
+.visitor-identity-card input,
+.visitor-identity-card select,
+.visitor-identity-card textarea{font-size:16px!important;}
+@media(max-height:760px), (max-width:520px){
+  .visitor-identity-modal{align-items:flex-start!important;padding-top:calc(10px + env(safe-area-inset-top))!important;}
+  .visitor-identity-card{width:min(94vw,460px)!important;max-height:calc(100svh - 24px - env(safe-area-inset-top) - env(safe-area-inset-bottom))!important;overflow-y:auto!important;-webkit-overflow-scrolling:touch!important;padding:20px 16px 16px!important;}
+  .visitor-identity-card h2{font-size:22px!important;padding-right:36px!important;}
+  .visitor-identity-card p{font-size:13px!important;line-height:1.65!important;margin-bottom:10px!important;}
+  .visitor-identity-actions{flex-direction:column!important;gap:8px!important;}
+  .visitor-identity-actions button{min-height:44px!important;}
+  .visitor-identity-small{font-size:11px!important;}
+}
+
+
+
+/* ===== v50 手機寬邊更貼齊 ===== */
+.mini-world{padding-left:0!important;padding-right:0!important;}
+.mini-crt-scene{width:min(100vw,620px)!important;max-width:100vw!important;margin-left:auto!important;margin-right:auto!important;}
+@media(max-width:760px){.mini-crt-scene{width:100vw!important;max-width:100vw!important;}}
+
+
+
+/* ===== v51：邊界貼齊 + 放大鏡 2 倍寬，不用手勢縮放 ===== */
+html,body{
+  overscroll-behavior:none!important;
+  touch-action:pan-x pan-y!important;
+}
+
+/* 橫向滑動的地方：貼滿上下邊，不留上下空白 */
+.world,
+.world .scroller{
+  height:100dvh!important;
+  min-height:100dvh!important;
+  padding-top:0!important;
+  padding-bottom:0!important;
+}
+.world .stage{
+  margin-top:0!important;
+  margin-bottom:0!important;
+  height:100dvh!important;
+  min-height:100dvh!important;
+  border-radius:0!important;
+}
+
+/* 直向滑動的地方：貼滿左右邊，不留左右邊距 */
+.page,
+.page.show,
+.page-body,
+.page-body>.section,
+.page-body>.hero-card{
+  max-width:none!important;
+}
+.page-body{
+  width:100vw!important;
+  padding-left:0!important;
+  padding-right:0!important;
+}
+.page-body>.section,
+.page-body>.hero-card{
+  margin-left:0!important;
+  margin-right:0!important;
+  border-left:0!important;
+  border-right:0!important;
+  border-radius:0!important;
+}
+
+/* 小世界是直向滑動：左右貼邊 */
+.mini-world{
+  padding-left:0!important;
+  padding-right:0!important;
+}
+.mini-crt-scene{
+  width:100vw!important;
+  max-width:100vw!important;
+  margin-left:0!important;
+  margin-right:0!important;
+}
+
+/* 放大鏡按下後：目前畫面寬度變 2 倍，靠滑動看，不靠手勢縮放 */
+body.view-zoom-2x .mini-world .mini-crt-scene{
+  width:200vw!important;
+  max-width:200vw!important;
+}
+body.view-zoom-2x .world .stage{
+  width:470vw!important;
+  max-width:none!important;
+  min-width:2960px!important;
+}
+body.view-zoom-2x .page-body{
+  width:200vw!important;
+  max-width:200vw!important;
+}
+body.view-zoom-2x #zoomBtn{
+  background:linear-gradient(135deg,var(--gold),#b98034)!important;
+  color:#fff!important;
+  box-shadow:0 0 0 3px rgba(214,168,93,.22)!important;
+}
+#zoomBtn{
+  font-size:18px!important;
+}
+
+/* 手機上確保貼齊 */
+@media(max-width:760px){
+  .world .stage{
+    margin:0!important;
+    height:100dvh!important;
+    min-height:100dvh!important;
+  }
+  .page-body{
+    width:100vw!important;
+  }
+  body.view-zoom-2x .page-body{
+    width:200vw!important;
+  }
+}
+
+
+
+/* ===== v52：木框下面天氣字放大 + 亮色發光 ===== */
+.mini-weather-status{
+  color:#fff4c9!important;
+  background:rgba(38,23,8,.38)!important;
+  border:1px solid rgba(255,216,154,.46)!important;
+  border-radius:14px!important;
+  box-shadow:
+    0 0 16px rgba(255,216,154,.18),
+    inset 0 0 12px rgba(255,248,220,.08)!important;
+  padding:5px 8px!important;
+  font-size:clamp(11px,1.45vw + .24rem,18px)!important;
+  line-height:1.22!important;
+  font-weight:1000!important;
+  letter-spacing:.02em!important;
+  text-shadow:
+    0 0 8px rgba(255,216,154,.92),
+    0 2px 4px rgba(0,0,0,.88)!important;
+  overflow:hidden!important;
+  backdrop-filter:blur(5px)!important;
+}
+
+/* 手機版再亮一點、可讀性高一點 */
+@media(max-width:760px){
+  .mini-weather-status{
+    font-size:clamp(10.5px,2.35vw,14.5px)!important;
+    line-height:1.22!important;
+    color:#fff7d6!important;
+    text-shadow:
+      0 0 7px rgba(255,216,154,.95),
+      0 2px 4px rgba(0,0,0,.92)!important;
+  }
+}
+
+
+
+/* ===== v53：相簿儀式感｜移除打開按鈕，展開後鎖左右滑 ===== */
+.album-open{
   display:none!important;
+}
+.album-card{
+  touch-action:pan-y!important;
+}
+.album-card:not(.expanded){
+  cursor:pointer;
+}
+.album-card.expanded{
+  cursor:default;
+}
+.album-carousel.album-locked{
+  overflow-x:hidden!important;
+  scroll-snap-type:none!important;
+  touch-action:pan-y!important;
+}
+.album-carousel.album-locked .album-card{
+  flex-basis:calc(100vw - 28px)!important;
+}
+.album-card.expanded .album-summary{
+  padding-bottom:10px!important;
+}
+.album-card.expanded .album-detail{
+  touch-action:pan-y!important;
+}
+.album-ritual-hint{
+  display:none;
+  margin:8px 14px 12px;
+  padding:8px 11px;
+  border-radius:999px;
+  background:rgba(0,0,0,.32);
+  border:1px solid rgba(255,216,154,.18);
+  color:rgba(255,248,220,.78);
+  font-size:12px;
+  font-weight:1000;
+  text-align:center;
+}
+.album-card.expanded .album-ritual-hint{
+  display:block;
+}
+
+
+
+/* ===== v54：夜間固定 night-rain，小世界不再因缺圖變空白 ===== */
+#stage.stage-weather-fallback .stage-world-img,
+.mini-crt-screen.weather-fallback .mini-world-bg{
+  opacity:1!important;
+  filter:saturate(1.02) contrast(1.03) brightness(.72)!important;
+}
+#stage.stage-weather-fallback[data-weather-key="nightRain"] .stage-world-img,
+.mini-crt-screen.weather-fallback[data-weather-key="nightRain"] .mini-world-bg{
+  filter:saturate(1.08) contrast(1.08) brightness(.55) sepia(.06)!important;
+}
+#stage.stage-weather-fallback[data-weather-key="nightRain"]::before,
+.mini-crt-screen.weather-fallback[data-weather-key="nightRain"]::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:2;
+  pointer-events:none;
+  background:
+    repeating-linear-gradient(112deg,rgba(255,255,255,0) 0 10px,rgba(255,255,255,.25) 11px 12px,rgba(255,255,255,0) 13px 22px),
+    linear-gradient(180deg,rgba(2,12,34,.44),rgba(0,0,0,.20));
+  animation:v29Rain .42s linear infinite;
+  mix-blend-mode:screen;
+}
+.mini-crt-screen.weather-fallback[data-weather-key="nightRain"] .mini-world-weather{
+  opacity:.75!important;
+}
+
+
+
+/* ===== v55：天氣行短版，避免內容太多 ===== */
+.mini-weather-status{
+  white-space:nowrap!important;
+  text-overflow:ellipsis!important;
+}
+
+
+/* ===== v56 開場標題：三行靠左，慢慢往右形成梯形 ===== */
+.gate-card{
+  text-align:left!important;
+}
+.gate-title{
+  width:max-content!important;
+  max-width:100%!important;
+  margin:12px 0 10px!important;
+  text-align:left!important;
+  display:block!important;
+  line-height:1.35!important;
+  font-size:clamp(32px,8vw,62px)!important;
+  font-weight:1000!important;
+  letter-spacing:.03em!important;
+  text-shadow:0 4px 24px rgba(0,0,0,.55)!important;
+}
+.gate-title span{
+  display:block!important;
+  margin:0!important;
+  padding-left:0!important;
+}
+.gate-title .i1{
+  padding-left:.65em!important;
+}
+.gate-title .i2{
+  padding-left:1.3em!important;
+}
+@media(max-width:560px){
+  .gate-title{
+    margin-left:0!important;
+    margin-right:auto!important;
+    font-size:clamp(34px,10vw,54px)!important;
+  }
+  .gate-title .i1{
+    padding-left:.62em!important;
+  }
+  .gate-title .i2{
+    padding-left:1.24em!important;
+  }
+}
+
+
+/* ===== 整體文字平均放大 ===== */
+body{
+  font-size: 18px !important;
+  line-height: 1.75 !important;
+}
+
+/* 一般段落、按鈕、卡片文字同步偏大 */
+p,
+button,
+.card,
+.card p,
+.section,
+.section p,
+.memory,
+.memory p,
+.story,
+.story p,
+.note,
+.note p{
+  font-size: 1.08em !important;
+  line-height: 1.75 !important;
+}
+
+/* ===== Letter text 加粗加大 ===== */
+.letter-text,
+.letterText,
+.letter text,
+#letter-text{
+  font-size: clamp(22px, 4.6vw, 34px) !important;
+  line-height: 1.85 !important;
+  font-weight: 800 !important;
+  letter-spacing: .04em !important;
+}
+
+/* Letter 裡面的段落也一起吃到 */
+.letter-text p,
+.letterText p,
+#letter-text p{
+  font-size: inherit !important;
+  line-height: inherit !important;
+  font-weight: inherit !important;
+}
+
+/* 手機版再稍微放大，但不要爆版 */
+@media (max-width: 768px){
+  body{
+    font-size: 18px !important;
+  }
+
+  .letter-text,
+  .letterText,
+  #letter-text{
+    font-size: clamp(23px, 5.4vw, 32px) !important;
+  }
+}
+
+
+
+
+/* ===== v49 字體整體放大＋FRAME Letter text 真正加粗加大 20260626 ===== */
+html,
+/* ===== 整體文字密集排版設定 ===== */
+body {
+  font-size: 16px !important;
+  line-height: 1.45 !important; /* 大幅縮小行距 (原本為 1.75 或 1.8) */
+  letter-spacing: -0.02em !important; /* 微調縮小字與字之間的距離 */
+}
+
+p, .story, .note, .capsule-msg, .route-body p {
+  font-size: 1.05em !important;
+  line-height: 1.45 !important; /* 縮小段落行距 */
+  letter-spacing: -0.01em !important; 
+  text-align: justify !important; /* 強制左右對齊，消除右側參差不齊的空白，視覺更密集 */
+}
+
+button, .pill {
+  font-size: 1.05em !important;
+}
+
+/* 針對「給阿明的信」等主要文字區塊調整 */
+/* 針對「給阿明的信」等主要文字區塊調整 (字體微調縮小、保持密集) */
+.letter-text, .frame-letter-text {
+  font-size: clamp(14px, 3.5vw, 19px) !important; /* 縮小基準值與最大值 */
+  line-height: 1.5 !important; 
+  font-weight: 700 !important;
+  letter-spacing: 0em !important; 
+  text-align: justify !important;
+}
+
+@media (max-width: 768px) {
+  .letter-text, .frame-letter-text {
+    font-size: clamp(13px, 4vw, 16px) !important; /* 手機版字體進一步微調縮小 */
+  }
+}
+
+/* ===== v56：修正小世界藏寶地圖入口 =====
+   小世界裡左下方那張斜放的藏寶圖是影片/圖片的一部分，
+   本來沒有真正可點擊區，所以按了不會進公路局。 */
+.treasure-map-hit{
+  position:absolute!important;
+  z-index:8!important;
+  left:9.2%!important;
+  top:43.8%!important;
+  width:52.8%!important;
+  height:15.8%!important;
+  min-height:0!important;
+  padding:0!important;
+  margin:0!important;
+  border:0!important;
+  border-radius:14px!important;
+  background:rgba(255,216,154,0)!important;
+  box-shadow:none!important;
+  cursor:pointer!important;
+  -webkit-tap-highlight-color:transparent!important;
+  touch-action:manipulation!important;
+}
+.treasure-map-hit:active{
+  background:rgba(255,216,154,.13)!important;
+  box-shadow:0 0 0 3px rgba(255,216,154,.12)!important;
+}
+#page-nav .route-map-app{
+  background:
+    radial-gradient(circle at 50% 22%,rgba(255,228,150,.26),transparent 34%),
+    linear-gradient(180deg,#5d3a1d,#d9b56d 38%,#8b5628 100%)!important;
+}
+
+
+
+/* ===== v56 修正：KTV STAGE 左邊貼邊、地圖標題不再誤用影音館 ===== */
+#page-music .ktv-stage-wrap{
+  margin-left:0!important;
+  margin-right:auto!important;
+  transform:none!important;
+}
+#page-music .ktv-tv-top{
+  justify-content:flex-start!important;
+  padding-left:4px!important;
+}
+@media(max-width:760px){
+  #page-music .page-body{
+    padding-left:0!important;
+    padding-right:0!important;
+  }
+  #page-music .ktv-machine,
+  #page-music .ktv-tv.ktv-tv-machine{
+    margin-left:0!important;
+    padding-left:0!important;
+  }
+  #page-music .ktv-stage-wrap{
+    width:min(100vw,560px)!important;
+    max-width:none!important;
+    border-radius:0 18px 18px 0!important;
+  }
+}
+
+
+/* ===== v57 移除每個內頁上方標題列：拿掉「回到街上／頁面標題」那條 ===== */
+.page-head{
+  display:none!important;
+}
+.page-body{
+  padding-top:calc(14px + env(safe-area-inset-top))!important;
+}
+#page-nav .page-head{
+  display:none!important;
+}
+#page-nav .route-map-app{
+  padding-top:0!important;
+}
+
+
+/* ===== v58 公路局地圖避開上方主工具列：粉紅框那排不再疊到地圖 ===== */
+#page-nav{
+  padding-top:calc(76px + env(safe-area-inset-top))!important;
+  background:#050403!important;
+}
+#page-nav .route-map-app{
+  height:calc(100svh - 76px - env(safe-area-inset-top))!important;
+  min-height:calc(100svh - 76px - env(safe-area-inset-top))!important;
+  padding-top:0!important;
+}
+#page-nav .route-map-canvas,
+#page-nav .route-map-stage,
+#page-nav .route-map-scroll,
+#page-nav .route-map-viewport{
+  max-height:calc(100svh - 76px - env(safe-area-inset-top))!important;
+}
+@media(max-width:760px){
+  #page-nav{
+    padding-top:calc(72px + env(safe-area-inset-top))!important;
+  }
+  #page-nav .route-map-app{
+    height:calc(100svh - 72px - env(safe-area-inset-top))!important;
+    min-height:calc(100svh - 72px - env(safe-area-inset-top))!important;
+  }
+  #page-nav .route-map-canvas,
+  #page-nav .route-map-stage,
+  #page-nav .route-map-scroll,
+  #page-nav .route-map-viewport{
+    max-height:calc(100svh - 72px - env(safe-area-inset-top))!important;
+  }
+}
+
+
+/* ===== v59 木框小世界改成 HOTSPOT：圖片只做底圖，點擊層獨立 ===== */
+.mini-world-hotspot{
+  position:absolute!important;
+  inset:0!important;
+  z-index:5!important;
+  display:block!important;
+  width:100%!important;
+  height:100%!important;
+  padding:0!important;
+  margin:0!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  cursor:pointer!important;
+}
+.mini-world-hotspot:active{
+  background:rgba(255,216,154,.10)!important;
+}
+.mini-world-bg{
+  pointer-events:none!important;
+}
+
+
+/* ===== v60 小世界頁：拿掉木框內小世界，改透明，但保留 HOTSPOT 可點 ===== */
+.mini-crt-screen{
+  background:transparent!important;
+  box-shadow:none!important;
+}
+.mini-world-bg{
+  opacity:0!important;
+  visibility:hidden!important;
+  pointer-events:none!important;
+}
+.mini-world-weather,
+.mini-screen-shine,
+.mini-screen-hint{
+  display:none!important;
+}
+.mini-world-hotspot{
+  background:transparent!important;
+}
+.mini-world-hotspot:active{
+  background:rgba(255,216,154,.08)!important;
+}
+
+
+/* ===== v61 小世界頁：移除假天氣顯示與切換 ===== */
+#miniWorld .mini-world-weather,
+#miniWorld .world-weather,
+#miniWorld .mini-weather-status,
+#miniWorld .mini-weather-buttons,
+#miniWorld .mini-world-panel,
+#miniWorldWeather,
+#miniWeatherStatus,
+#miniWeatherButtons{
+  display:none!important;
+  opacity:0!important;
+  visibility:hidden!important;
+  pointer-events:none!important;
+}
+#miniWorld .mini-crt-screen::before,
+#miniWorld .mini-crt-screen::after{
+  display:none!important;
+}
+#miniWorld .mini-crt-screen{
+  background:transparent!important;
+}
+
+
+/* ===== v63 小世界頁只保留錄音/停止；信件字體加粗密集；底部離開天數 ===== */
+
+/* 修正小世界頁可點擊區：只留錄音與停止錄音，避免誤點上方跳藏寶圖或進主街 */
+#miniWorld .mini-crt-screen,
+#miniWorld .mini-world-hotspot,
+#miniWorld .treasure-map-hit,
+#miniWorld .mini-weather-buttons,
+#miniWorld .mini-world-panel{
+  pointer-events:none!important;
+}
+#miniWorld .treasure-map-hit,
+#miniWorld .mini-world-hotspot{
+  display:none!important;
+}
+#miniWorld .radio-audio-hit{
+  pointer-events:auto!important;
+  z-index:120!important;
+}
+
+/* 錄音按鈕鎖回原本標記座標：播放 x708–768/y1450–1505；停止 x807–867/y1450–1505 */
+#miniWorld .radio-audio-hit{
+  position:absolute!important;
+  top:50.3472%!important;
+  width:5.5556%!important;
+  height:1.9097%!important;
+  min-height:0!important;
+  padding:0!important;
+  margin:0!important;
+  transform:none!important;
+}
+#miniWorld .radio-audio-play{left:65.5556%!important;}
+#miniWorld .radio-audio-stop{left:74.7222%!important;}
+
+/* 信件文字：不改大小，只加粗、收密一點，給長輩看仍清楚 */
+#miniWorld .frame-letter-text{
+  font-weight:950!important;
+  line-height:1.38!important;
+  letter-spacing:-0.012em!important;
+  word-spacing:-0.04em!important;
+}
+
+/* 底部離開天數 */
+.departure-day-counter{
+  position:fixed;
+  right:12px;
+  bottom:calc(12px + env(safe-area-inset-bottom));
+  z-index:140;
+  max-width:min(72vw,360px);
+  padding:9px 12px;
+  border-radius:999px;
+  background:rgba(0,0,0,.48);
+  border:1px solid rgba(255,216,154,.26);
+  color:#ffe8b8;
+  font-size:12px;
+  line-height:1.35;
+  font-weight:1000;
+  letter-spacing:.04em;
+  text-align:center;
+  box-shadow:0 12px 32px rgba(0,0,0,.32);
+  backdrop-filter:blur(12px);
+  text-shadow:0 2px 10px rgba(0,0,0,.45);
+  pointer-events:none;
+}
+.departure-day-counter small{
+  color:rgba(255,248,226,.68);
+  font-size:10px;
+  font-weight:900;
+  margin-left:6px;
+}
+@media(max-width:560px){
+  .departure-day-counter{
+    right:8px;
+    bottom:calc(8px + env(safe-area-inset-bottom));
+    font-size:11px;
+    padding:8px 10px;
+  }
+}
+
+
+/* ===== v64 小世界入口改成透明按鈕；摩天輪破圖時不顯示破圖 icon ===== */
+
+/* 小世界頁：中間進主街的區域用透明按鈕，不再用照片當入口 */
+#miniWorld .mini-crt-screen{
+  pointer-events:auto!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+#miniWorld .mini-world-bg{
+  display:none!important;
+  opacity:0!important;
   visibility:hidden!important;
 }
-body:not([data-dearang-view="mini"]) #miniWorld .radio-audio-hit,
-body:not([data-dearang-view="mini"]) #miniWorld .mini-world-enter-hotspot{
-  pointer-events:none!important;
-}
-body[data-dearang-view="mini"] #miniWorld:not(.hidden):not(.zooming) .radio-audio-hit,
-body[data-dearang-view="mini"] #miniWorld:not(.hidden):not(.zooming) .mini-world-enter-hotspot{
+#miniWorld .mini-world-enter-hotspot{
+  position:absolute!important;
+  inset:0!important;
+  z-index:18!important;
+  display:block!important;
+  width:100%!important;
+  height:100%!important;
+  padding:0!important;
+  margin:0!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
   pointer-events:auto!important;
+  cursor:pointer!important;
 }
-.visitor-identity-modal.hidden,
-.visitor-identity-modal.hidden *,
-.ferris-construction.hidden,
-.ferris-construction.hidden *,
-.lightbox:not(.show),
-.lightbox:not(.show) *,
-.opening-countdown:not(.show),
-.opening-countdown:not(.show) *{
+#miniWorld .mini-world-enter-hotspot:active{
+  background:rgba(255,216,154,.08)!important;
+}
+
+/* 上方藏寶圖入口仍然關閉，避免誤點 */
+#miniWorld .treasure-map-hit{
+  display:none!important;
   pointer-events:none!important;
+}
+
+/* 錄音/停止錄音保留可點，而且層級最高 */
+#miniWorld .radio-audio-hit{
+  pointer-events:auto!important;
+  z-index:160!important;
+}
+
+/* R2 車廂圖如果本機讀不到，不出破圖 icon，改用溫和佔位 */
+.photo-wheel-cabin.gondola-img-mode.gondola-fallback{
+  border:1px solid rgba(255,216,154,.44)!important;
+  border-radius:28px!important;
+  background:
+    radial-gradient(circle at 50% 22%,rgba(255,235,170,.34),transparent 30%),
+    linear-gradient(180deg,rgba(97,75,58,.95),rgba(27,17,14,.95))!important;
+  box-shadow:0 18px 42px rgba(0,0,0,.42),0 0 30px rgba(255,216,140,.20)!important;
+  overflow:hidden!important;
+}
+.photo-wheel-cabin.gondola-img-mode.gondola-fallback:before{
+  content:"";
+  display:block!important;
+  position:absolute;
+  left:18%;
+  right:18%;
+  top:18%;
+  bottom:30%;
+  border-radius:20px 20px 10px 10px;
+  background:linear-gradient(180deg,rgba(255,245,210,.46),rgba(120,190,205,.20));
+  border:1px solid rgba(255,255,255,.22);
+}
+.photo-wheel-cabin.gondola-img-mode.gondola-fallback .gondola-img{
+  display:none!important;
+}
+.photo-wheel-cabin.gondola-img-mode.gondola-fallback .gondola-title{
+  bottom:18px!important;
+}
+
+
+/* ===== v66 MiniWorld Frame：只讓 frame 影片依天氣換背景，中間入口透明 ===== */
+#miniWorld .mini-crt-frame{
+  display:block!important;
+  opacity:1!important;
+  visibility:visible!important;
+  object-fit:cover!important;
+  background:#000!important;
+}
+#miniWorld .mini-crt-screen{
+  background:transparent!important;
+}
+#miniWorld .mini-world-bg,
+#miniWorld .mini-world-weather,
+#miniWorldWeather,
+#miniWorld .mini-screen-shine,
+#miniWorld .mini-screen-hint{
+  display:none!important;
+  opacity:0!important;
   visibility:hidden!important;
 }
-body[data-dearang-view="page"] #stage,
-body[data-dearang-view="page"] #stage *,
-body[data-dearang-view="mini"] #stage,
-body[data-dearang-view="mini"] #stage *,
-body[data-dearang-view="opening"] #stage,
-body[data-dearang-view="opening"] #stage *,
-body[data-dearang-view="gate"] #stage,
-body[data-dearang-view="gate"] #stage *{
-  pointer-events:none!important;
-}
-body[data-dearang-view="street"] #stage,
-body[data-dearang-view="street"] #stage .hotspot{
+
+
+/* ===== v67 錄音播放／停止按鈕往左移到接近中間 ===== */
+/* 以 1080x1920 木框比例定位：播放約 x=520，停止約 x=620 */
+#miniWorld .radio-audio-hit{
+  top:50.3472%!important;
+  width:5.5556%!important;
+  height:1.9097%!important;
+  min-height:0!important;
+  padding:0!important;
+  margin:0!important;
+  transform:none!important;
+  z-index:180!important;
   pointer-events:auto!important;
 }
+#miniWorld .radio-audio-play{
+  left:48.15%!important;
+}
+#miniWorld .radio-audio-stop{
+  left:57.41%!important;
+}
+
+
+/* ===== v68 移除摩天輪多餘提示字；修正 weather-mini 實際檔名 ===== */
+.photo-wheel-tip,
+.photo-wheel-wheel-hint,
+.photo-wheel-stage-hint,
+.photo-wheel-boarding-label{
+  display:none!important;
+}
+.photo-wheel-boarding:before,
+.boarding:before{
+  content:""!important;
+  display:none!important;
+}
+.photo-wheel-head p,
+.wheelHead p{
+  display:none!important;
+}
+.photo-wheel-toast,
+#photoWheelToast{
+  display:none!important;
+}
+
+
+/* ===== v69-radio-only：收音機播放／停止按鈕精準對齊 1080×2880 =====
+   播放：X312–375 / Y1401–1466
+   停止：X412–478 / Y1401–1466
+   只修 radio 按鈕，不動 opening 流程。 */
+#miniWorld .radio-audio-hit{
+  position:absolute!important;
+  top:calc(1401 / 2880 * 100%)!important;
+  height:calc((1466 - 1401) / 2880 * 100%)!important;
+  min-height:0!important;
+  padding:0!important;
+  margin:0!important;
+  transform:none!important;
+  z-index:220!important;
+  pointer-events:auto!important;
+}
+#miniWorld .radio-audio-play{
+  left:calc(312 / 1080 * 100%)!important;
+  width:calc((375 - 312) / 1080 * 100%)!important;
+}
+#miniWorld .radio-audio-stop{
+  left:calc(412 / 1080 * 100%)!important;
+  width:calc((478 - 412) / 1080 * 100%)!important;
+}
+
+
+/* ===== v70-cache：取消強制不快取 + 新增更新快取按鈕 ===== */
+.cache-btn{font-size:14px!important;letter-spacing:.02em!important}
+.cache-btn.updating{
+  animation:v70CacheSpin .85s linear infinite;
+  background:rgba(214,168,93,.34)!important;
+  color:#fff!important;
+}
+.cache-btn.done{
+  background:linear-gradient(135deg,var(--gold),#b98034)!important;
+  color:#fff!important;
+  box-shadow:0 0 0 3px rgba(214,168,93,.22)!important;
+}
+@keyframes v70CacheSpin{to{transform:rotate(360deg)}}
+
+
+/* ===== v71-weather-default：拿掉假天氣動畫，只保留真實 frame / street 圖影片 ===== */
+.rain-layer,
+.world-weather,
+.mini-world-weather,
+#worldWeather,
+#miniWorldWeather{
+  display:none!important;
+  opacity:0!important;
+  visibility:hidden!important;
+  pointer-events:none!important;
+  animation:none!important;
+  background:none!important;
+  backdrop-filter:none!important;
+  mix-blend-mode:normal!important;
+}
+#stage.stage-weather-fallback::before,
+#stage.stage-weather-fallback::after,
+.mini-crt-screen.weather-fallback::before,
+.mini-crt-screen.weather-fallback::after{
+  content:none!important;
+  display:none!important;
+  opacity:0!important;
+  animation:none!important;
+  background:none!important;
+}
+#stage .stage-world-img{opacity:1!important;}
+#miniWorld .mini-crt-frame{
+  display:block!important;
+  opacity:1!important;
+  visibility:visible!important;
+  background:#000!important;
+}
+
 </style>
 </head>
 <body>
@@ -849,8 +2256,7 @@ body[data-dearang-view="street"] #stage .hotspot{
 <div class="asset-preload-status" id="assetPreloadStatus">準備通往回憶…</div>
 <div class="opening-countdown" id="openingCountdown" aria-live="polite">
   <div class="opening-countdown-card">
-    <video class="opening-countdown-video" id="openingCountdownVideo" src="assets/videos/opening-countdown.mp4" poster="assets/images/memory-world.webp" playsinline webkit-playsinline preload="auto"></video>
-    <div class="opening-video-loader" id="openingVideoLoader" aria-live="polite">影片準備中…</div>
+    <video class="opening-countdown-video" id="openingCountdownVideo" src="assets/videos/opening-countdown.mp4" playsinline preload="auto"></video>
     <div class="opening-video-caption">回憶倒流中 請留意眼淚回流</div>
     <div class="credit-kicker">OPENING COUNTDOWN</div>
     <div class="opening-countdown-title">倒數</div>
@@ -864,13 +2270,18 @@ body[data-dearang-view="street"] #stage .hotspot{
 
 <div class="mini-world hidden" id="miniWorld" aria-label="CRT電視小世界">
   <div class="mini-crt-scene">
-<video class="mini-crt-frame" id="miniFrameVideo" src="mini-world-frame.mp4" autoplay muted loop playsinline webkit-playsinline preload="auto" poster="mini-world-frame.mp4"  aria-label="木框天氣影片"></video>
+<video class="mini-crt-frame" id="miniFrameVideo" src="assets/videos/mini-frame.mp4" autoplay muted loop playsinline preload="auto" poster="assets/images/mini-frame-poster.webp" aria-label="木框影片"></video>
+    <div class="mini-crt-screen" aria-label="木框透明入口區">
       <button class="mini-world-enter-hotspot" type="button" onclick="enterMainWorld()" aria-label="進入富宜路街道"></button>
+      <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" class="mini-world-bg" id="miniWorldBg" alt="木框裡的Q版小世界｜☀️ 炎熱晴天｜保留底圖備援">
+      <div class="mini-world-weather" id="miniWorldWeather" style="display: none;"></div>
       <div class="mini-screen-shine"></div>
+      <div class="mini-screen-hint">回到你成長的街道</div>
+    </div>
       <button class="treasure-map-hit" type="button" onclick="openTreasureMapFromMini(event)" aria-label="打開藏寶地圖｜通往他的路"></button>
     <button class="radio-audio-hit radio-audio-play" type="button" onclick="playLetterAudio()" aria-label="播放留言音檔"><span>▶</span></button>
     <button class="radio-audio-hit radio-audio-stop" type="button" onclick="stopLetterAudio()" aria-label="停止留言音檔"><span>■</span></button>
-    <audio id="letterAudio" preload="metadata" src="assets/audio/aming-message.mp3"></audio>
+    <audio id="letterAudio" preload="metadata" src="assets/audio/aming-message.mp3" data-v63-bound="1"></audio>
     <div class="mini-weather-status" id="miniWeatherStatus">你那邊的天氣：套用：⛈️ 雷雨・31.4°C・風速 11 km/h</div>
     <section class="frame-letter-card" aria-label="FRAME 下方留言">
       <div class="frame-letter-text">親愛的阿明<br>
@@ -881,8 +2292,8 @@ body[data-dearang-view="street"] #stage .hotspot{
 這網頁我要送給格媽，格妹，我自己，和姊夫，我會好好跟姊夫相處的，也會多關心他，你就放心自在的飛吧，我們會永遠愛你，Always Remember Us This Way。</div>
     </section>
   </div>
-  <div>
-    <div></div>
+  <div class="mini-world-panel" aria-hidden="true">
+    <div class="mini-weather-buttons" id="miniWeatherButtons" aria-label="天氣切換"><button type="button" data-weather="nightRain" onclick="setMemoryWeather('nightRain',event,'manual')">🌧️ 夜雨</button><button type="button" data-weather="deepNightRain" onclick="setMemoryWeather('deepNightRain',event,'manual')">🌧️ 深夜雨</button><button type="button" data-weather="cloudy" onclick="setMemoryWeather('cloudy',event,'manual')">⛅ 多雲</button><button type="button" data-weather="overcast" onclick="setMemoryWeather('overcast',event,'manual')">☁️ 陰天</button><button type="button" data-weather="sunny" onclick="setMemoryWeather('sunny',event,'manual')">☀️ 晴天</button><button type="button" data-weather="fog" onclick="setMemoryWeather('fog',event,'manual')">🌫️ 濃霧</button><button type="button" data-weather="storm" onclick="setMemoryWeather('storm',event,'manual')" class="active">⛈️ 雷雨</button><button type="button" data-weather="nightShower" onclick="setMemoryWeather('nightShower',event,'manual')">🌧️ 夜間陣雨</button><button type="button" data-weather="hot" onclick="setMemoryWeather('hot',event,'manual')">☀️ 炎熱晴天</button><button type="button" data-weather="rain" onclick="setMemoryWeather('rain',event,'manual')">🌧️ 白天降雨</button><button type="button" data-weather="night" onclick="setMemoryWeather('night',event,'manual')">🌙 晴朗夜晚</button></div>
   </div>
 </div>
 
@@ -903,7 +2314,7 @@ body[data-dearang-view="street"] #stage .hotspot{
     <div class="stage" id="stage">
       <img class="stage-world-img" id="stageWorldImg" src="assets/images/weather/day-sunny.webp" alt="富宜路街道世界｜☀️ 炎熱晴天｜保留底圖備援">
       <div class="world-weather" id="worldWeather" style="display: none;"></div>
-      <div class="hotspot h-photo" data-label="相館摩天輪｜建構中" onclick="openFerrisConstruction(event)"></div>
+      <div class="hotspot h-photo" data-label="華光相館｜你和我們的時光" onclick="location.href='gallery-wheel.html'"></div>
       <div class="hotspot h-video" data-label="新時代影音館｜影片" onclick="openPage('video')"></div>
       <div class="hotspot h-home" data-label="富宜路86號｜你唯一的避風港" onclick="openPage('home')"></div>
       <div class="hotspot h-music" data-label="金嗓卡拉OK｜最想和你一起" onclick="openPage('music')"></div>
@@ -914,7 +2325,7 @@ body[data-dearang-view="street"] #stage .hotspot{
   <div class="hint"><div class="hint-inner"><span>← →</span><div>左右滑這條街<small>點招牌或建築，進入對應的時光。</small></div></div></div>
 </div>
 
-<audio id="themeAudio" preload="metadata" loop="" src="assets/audio/dear-ang-theme.mp3"></audio>
+<audio id="themeAudio" preload="metadata" loop="" data-lyric-bound="1" src="assets/audio/dear-ang-theme.mp3"></audio>
 
 <div class="visitor-identity-modal hidden" id="visitorIdentityModal" onclick="visitorModalBackdropClose(event)">
   <div class="visitor-identity-card" onclick="event.stopPropagation()">
@@ -959,27 +2370,8 @@ body[data-dearang-view="street"] #stage .hotspot{
 </div>
 
 
-<!-- 華光相館｜照片 -->
-<section class="page photo-wheel-page" id="page-photo">
-  <div class="page-head"><button class="back" onclick="closePage()">← 回到街上</button><b>華光相館｜回憶摩天輪相簿</b></div>
-  <div class="page-body">
-    <section class="photo-wheel-wrap" aria-label="華光相館回憶摩天輪">
-      <header class="photo-wheel-head">
-        <h1 class="photo-wheel-title">回憶摩天輪</h1>
-        <div class="photo-wheel-sub">珍藏回憶・永遠在心</div>
-        <div class="photo-wheel-hint"><span></span><span>☝</span></div>
-      </header>
-      <article class="photo-wheel-info">
-        <div class="photo-wheel-polaroid"><div class="photo-wheel-pic" id="photoWheelPic" style="background: radial-gradient(circle at 72% 20%, rgba(255, 250, 190, 0.9) 0px, rgba(255, 250, 190, 0.9) 10%, transparent 11%), linear-gradient(rgb(99, 198, 185), rgb(34, 75, 87) 55%, rgb(22, 13, 18));"></div></div>
-        <h2><span class="photo-wheel-icon" id="photoWheelIcon">📷</span><span id="photoWheelTitle">愛的旅程</span><span>♡</span></h2>
-        <p id="photoWheelText">記錄我們一起走過的每個重要時刻，<br>從相遇、相戀到共同築起的未來。<br>每一張照片，都是愛的證明。</p>
-      </article>
-
-      <section class="section photo-wheel-hidden-grid" aria-hidden="true">
-        <h2>照片</h2>
-        <div id="photoGrid" class="album-mount"><div class="empty">照片載入中…</div></div>
-      </section>
-   <!-- 新時代影音館｜影片 -->
+<!-- 華光相館已分檔：主街相館入口改為 gallery-wheel.html，內嵌 page-photo 已移除 -->
+<!-- 新時代影音館｜影片 -->
 <section class="page" id="page-video">
   <div class="page-head"><button class="back" onclick="closePage()">← 回到街上</button><b>新時代影音館｜忘不掉的動態氣息</b></div>
   <div class="page-body">
@@ -1082,13 +2474,8 @@ body[data-dearang-view="street"] #stage .hotspot{
 <!-- 公路局｜導航 -->
 <section class="page" id="page-nav" data-weather="⛈️ 雷雨">
   <div class="page-head"><button class="back" onclick="closePage()">← 回到街上</button><b>公路局｜通往他的路</b></div>
-  <header class="route-top-banner" aria-label="公路局藏寶圖橫幅">
-    <button class="route-banner-back" type="button" onclick="closePage()" aria-label="回到街上">←</button>
-    <div class="route-banner-copy"><strong>公路局｜通往他的路</strong><small>當我想見你的時候</small></div>
-    <span class="route-banner-mark" aria-hidden="true">MAP</span>
-  </header>
   <div class="route-map-app" id="routeMapApp" aria-label="通往他的路｜藏寶圖">
-    <img class="route-map-bg" src="assets/images/treasure_map_bg.webp" alt="藏寶圖背景" onerror="this.onerror=null;this.src='assets/images/treasure_map_bg.png'">
+    <img class="route-map-bg" src="assets/images/treasure_map_bg.webp" alt="藏寶圖背景" onerror="this.onerror=null;this.src='assets/images/treasure_map_bg.webp'">
     <svg class="route-svg" viewBox="0 0 2160 3840" preserveAspectRatio="none" aria-hidden="true">
       <path id="routeMapPath" class="route-base" d="M 760 1565 C 560 1240, 430 870, 420 500 C 760 420, 1220 390, 1680 440 C 1640 700, 1585 950, 1510 1140 C 1530 1510, 1545 1860, 1540 2250 C 1450 2680, 1365 3070, 1295 3420"></path>
       <path id="routeMapDone" class="route-done" d="M 760 1565 C 560 1240, 430 870, 420 500 C 760 420, 1220 390, 1680 440 C 1640 700, 1585 950, 1510 1140 C 1530 1510, 1545 1860, 1540 2250 C 1450 2680, 1365 3070, 1295 3420"></path>
@@ -1106,45 +2493,6 @@ body[data-dearang-view="street"] #stage .hotspot{
     <div class="route-dots" id="routeDots"></div>
   </div>
 </section>
-<div class="ferris-construction hidden" id="ferrisConstruction" role="dialog" aria-modal="true" aria-labelledby="ferrisConstructionTitle" onclick="if(event.target===this)closeFerrisConstruction()">
-  <button class="ferris-build-close" type="button" onclick="closeFerrisConstruction()" aria-label="關閉">×</button>
-  <div class="ferris-build-card">
-    <div class="ferris-build-kicker">DEAR ANG PHOTO GALLERY</div>
-    <svg class="ferris-build-svg" viewBox="0 0 420 480" role="img" aria-label="摩天輪建構中">
-      <defs>
-        <linearGradient id="ferrisGold" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff1bd"/><stop offset=".48" stop-color="#e4a34d"/><stop offset="1" stop-color="#8a4b20"/></linearGradient>
-        <filter id="ferrisGlow"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-      </defs>
-      <g class="ferris-build-rotor" transform-origin="210px 205px">
-        <circle cx="210" cy="205" r="154" fill="none" stroke="url(#ferrisGold)" stroke-width="8" filter="url(#ferrisGlow)"/>
-        <circle cx="210" cy="205" r="132" fill="none" stroke="#ffd98a" stroke-width="2" opacity=".72"/>
-        <g stroke="#e8b468" stroke-width="3" opacity=".86">
-          <line x1="210" y1="205" x2="210" y2="51"/><line x1="210" y1="205" x2="287" y2="72"/>
-          <line x1="210" y1="205" x2="343" y2="128"/><line x1="210" y1="205" x2="364" y2="205"/>
-          <line x1="210" y1="205" x2="343" y2="282"/><line x1="210" y1="205" x2="287" y2="338"/>
-          <line x1="210" y1="205" x2="210" y2="359"/><line x1="210" y1="205" x2="133" y2="338"/>
-          <line x1="210" y1="205" x2="77" y2="282"/><line x1="210" y1="205" x2="56" y2="205"/>
-          <line x1="210" y1="205" x2="77" y2="128"/><line x1="210" y1="205" x2="133" y2="72"/>
-        </g>
-        <g fill="#f2bd69" stroke="#fff0bb" stroke-width="2">
-          <rect x="194" y="31" width="32" height="28" rx="9"/><rect x="273" y="52" width="32" height="28" rx="9"/>
-          <rect x="332" y="111" width="32" height="28" rx="9"/><rect x="348" y="191" width="32" height="28" rx="9"/>
-          <rect x="332" y="271" width="32" height="28" rx="9"/><rect x="273" y="330" width="32" height="28" rx="9"/>
-          <rect x="194" y="351" width="32" height="28" rx="9"/><rect x="115" y="330" width="32" height="28" rx="9"/>
-          <rect x="56" y="271" width="32" height="28" rx="9"/><rect x="40" y="191" width="32" height="28" rx="9"/>
-          <rect x="56" y="111" width="32" height="28" rx="9"/><rect x="115" y="52" width="32" height="28" rx="9"/>
-        </g>
-        <circle cx="210" cy="205" r="25" fill="#5d351d" stroke="#ffd98a" stroke-width="7"/>
-      </g>
-      <path d="M210 230 L135 432 M210 230 L285 432" fill="none" stroke="url(#ferrisGold)" stroke-width="12" stroke-linecap="round"/>
-      <path d="M105 432 H315" stroke="#ffd98a" stroke-width="12" stroke-linecap="round"/>
-    </svg>
-    <h2 id="ferrisConstructionTitle">相館摩天輪</h2>
-    <div class="ferris-build-status">建構中</div>
-    <p>照片車廂與進站動畫正在整理，完成後再正式開放。</p>
-  </div>
-</div>
-
 <div class="lightbox" id="lightbox" onclick="if(event.target.id==='lightbox')closeLightbox()" ontouchstart="lbTouchStart(event)" ontouchend="lbTouchEnd(event)">
   <button class="lb-close" onclick="closeLightbox()">關閉</button>
   <button class="lb-nav lb-prev" onclick="moveLightbox(-1);event.stopPropagation()">‹</button>
@@ -1159,13 +2507,10 @@ body[data-dearang-view="street"] #stage .hotspot{
 let lyricsEnabled=true;
 let lastLyricIndex=-1;
 let lastAudioTime=0;
-let lastLyricSpawnAt=0;
-let lyricSpawnTimes={};
-let lyricLaneIndex=0;
 const ROOT_LYRIC_FILES={
-  lrc:['assets/lyrics/給安格.lrc','./給安格.lrc'],
-  srt:['assets/lyrics/給安格.srt','./給安格.srt'],
-  embedded:['assets/lyrics/lyrics_embedded.js.txt','./lyrics_embedded.js.txt']
+  lrc:'./給安格.lrc',
+  srt:'./給安格.srt',
+  embedded:'./lyrics_embedded.js.txt'
 };
 function parseTimeToSeconds(s){
   if(!s)return 0;
@@ -1206,32 +2551,24 @@ async function fetchTextFile(url){
   if(!r.ok)throw new Error(url+' 讀取失敗');
   return await r.text();
 }
-async function fetchFirstTextFile(urls){
-  let lastError=null;
-  for(const url of (Array.isArray(urls)?urls:[urls])){
-    try{return {url,text:await fetchTextFile(url)};}
-    catch(e){lastError=e;}
-  }
-  throw lastError||new Error('歌詞檔讀取失敗');
-}
 async function loadLyricsFromRootFiles(){
-  // 優先讀 assets/lyrics，與 index.html 同層的舊檔保留為備援。
+  // 你的歌詞檔就在 DearANG 根目錄，不搬家、不改名：給安格.lrc / 給安格.srt / lyrics_embedded.js.txt
   try{
-    const file=await fetchFirstTextFile(ROOT_LYRIC_FILES.lrc);
-    const parsed=parseLrc(file.text);
-    if(parsed.length){LYRIC_LINES=parsed;return file.url;}
+    const lrc=await fetchTextFile(ROOT_LYRIC_FILES.lrc);
+    const parsed=parseLrc(lrc);
+    if(parsed.length){LYRIC_LINES=parsed;return '給安格.lrc';}
   }catch(e){}
   try{
-    const file=await fetchFirstTextFile(ROOT_LYRIC_FILES.srt);
-    const parsed=parseSrt(file.text);
-    if(parsed.length){LYRIC_LINES=parsed;return file.url;}
+    const srt=await fetchTextFile(ROOT_LYRIC_FILES.srt);
+    const parsed=parseSrt(srt);
+    if(parsed.length){LYRIC_LINES=parsed;return '給安格.srt';}
   }catch(e){}
   try{
-    const file=await fetchFirstTextFile(ROOT_LYRIC_FILES.embedded);
-    const m=file.text.match(/LYRIC_LINES\s*=\s*(\[[\s\S]*?\]);/);
+    const txt=await fetchTextFile(ROOT_LYRIC_FILES.embedded);
+    const m=txt.match(/LYRIC_LINES\s*=\s*(\[[\s\S]*?\]);/);
     if(m){
       const parsed=Function('return '+m[1])();
-      if(Array.isArray(parsed)&&parsed.length){LYRIC_LINES=parsed;return file.url;}
+      if(Array.isArray(parsed)&&parsed.length){LYRIC_LINES=parsed;return 'lyrics_embedded.js.txt';}
     }
   }catch(e){}
   return 'index.html 內建備援歌詞';
@@ -1300,54 +2637,37 @@ let LYRIC_LINES = [
   { time: 223.57, end: 257.35, text: "我走了" },
   { time: 257.45, end: 263.45, text: "兄弟.." }
 ];
-const LYRIC_OFFSET_SECONDS = 8;
+const LYRIC_OFFSET_SECONDS = 8; // 歌詞固定提前 20 秒
 function setupLyricDanmaku(){
   const audio=document.getElementById('themeAudio');
   if(!audio || audio.dataset.lyricBound==='1')return;
   audio.dataset.lyricBound='1';
-  const tick=()=>{
+  audio.addEventListener('timeupdate',()=>{
     if(!lyricsEnabled)return;
     const t=audio.currentTime + LYRIC_OFFSET_SECONDS;
-    if(audio.currentTime < lastAudioTime-1){lastLyricIndex=-1;lyricSpawnTimes={};}
+    if(audio.currentTime < lastAudioTime-1){lastLyricIndex=-1;clearLyricLayer();}
     lastAudioTime=audio.currentTime;
-    const now=Date.now();
     for(let i=0;i<LYRIC_LINES.length;i++){
       const line=LYRIC_LINES[i];
-      const active=t>=line.time && t<(line.end||line.time+4);
-      if(active){
-        const key=String(i);
-        const last=lyricSpawnTimes[key]||0;
-        const isNewLine=i!==lastLyricIndex;
-        const shouldRepeat=now-last>2400;
-        if(!isNewLine && !shouldRepeat)break;
+      if(i!==lastLyricIndex && t>=line.time && t<(line.end||line.time+4)){
         lastLyricIndex=i;
-        lyricSpawnTimes[key]=now;
         spawnLyric(line.text);
         break;
       }
     }
-  };
-  audio.addEventListener('timeupdate',tick);
-  audio.addEventListener('play',tick);
-  audio.addEventListener('playing',tick);
-  setInterval(()=>{if(!audio.paused&&!audio.ended)tick();},900);
-  audio.addEventListener('seeked',()=>{lastLyricIndex=-1;lyricSpawnTimes={};});
-  audio.addEventListener('ended',()=>{lastLyricIndex=-1;lyricSpawnTimes={};});
+  });
+  audio.addEventListener('seeked',()=>{lastLyricIndex=-1;clearLyricLayer();});
+  audio.addEventListener('ended',()=>{lastLyricIndex=-1;clearLyricLayer();});
 }
 function spawnLyric(text){
   const layer=document.getElementById('lyricDanmakuLayer');
   if(!layer || !text)return;
-  const live=[...layer.querySelectorAll('.lyric-danmaku')];
-  if(live.length>=10 && live[0]&&live[0].parentNode)live[0].parentNode.removeChild(live[0]);
   const el=document.createElement('div');
   el.className='lyric-danmaku'+(Math.random()>.55?' soft':'');
   el.textContent=text;
-  const lanes=[12,20,28,36,44,52,60,68,76];
-  const lane=lanes[lyricLaneIndex++%lanes.length]+(Math.random()*2.6-1.3);
-  el.style.top=Math.max(8,Math.min(80,lane)).toFixed(1)+'vh';
+  el.style.top=(12+Math.random()*66).toFixed(1)+'vh';
   el.style.setProperty('--flyDur',(9+Math.random()*4).toFixed(1)+'s');
   layer.appendChild(el);
-  lastLyricSpawnAt=Date.now();
   setTimeout(()=>{if(el.parentNode)el.parentNode.removeChild(el)},15000);
 }
 function clearLyricLayer(){
@@ -1359,11 +2679,12 @@ function toggleLyrics(){
   const btn=document.getElementById('lyricBtn');
   if(btn){btn.textContent=lyricsEnabled?'詞':'詞';btn.classList.toggle('on',lyricsEnabled);btn.classList.toggle('off',!lyricsEnabled);}
   if(!lyricsEnabled){clearLyricLayer();toast('歌詞彈幕已關閉');}
-  else{lastLyricIndex=-1;lyricSpawnTimes={};toast('歌詞彈幕已開啟');}
+  else{lastLyricIndex=-1;toast('歌詞彈幕已開啟');}
 }
 function testLyricDanmaku(){spawnLyric('想見你. 想見你.. 想見你了….');}
 
 const CONFIG={LOCAL_THEME:'assets/audio/dear-ang-theme.mp3',
+  APP_VERSION:'20260620_memory_world_v21_opening_countdown_video_lyrics20',
   GAS_API_URL:'https://script.google.com/macros/s/AKfycbzrduB_eXPk6OpqnGPXjNBNQCeUyarzAfki4IL-X_JIVQr7RS9sN5ayyvA2OEaXDXzv/exec',
   GITHUB_THEME_AUDIO:''
 };
@@ -1460,8 +2781,75 @@ function primeThemeBeforeCountdown(){
     }
   }catch(e){}
 }
+function startOpeningMemoryCountdown(){
+  if(openingCountdownActive)return;
+  openingCountdownActive=true;
+  playUiSound('open');
+  primeThemeBeforeCountdown();
 
+  const gate=document.getElementById('gate');
+  const overlay=document.getElementById('openingCountdown');
+  const video=document.getElementById('openingCountdownVideo');
+  if(gate)gate.classList.add('out');
+  if(overlay){overlay.classList.remove('done');overlay.classList.add('show');}
 
+  clearInterval(openingCountdownTimer);
+  if(video){
+    try{
+      video.currentTime=0;
+      video.muted=false;
+      video.volume=1;
+    }catch(e){}
+    const cleanupCountdown = ()=>{
+      if(openingCountdownTimer){clearTimeout(openingCountdownTimer);openingCountdownTimer=null;}
+      video.removeEventListener('ended', onVideoEnded);
+      video.removeEventListener('error', onVideoError);
+    };
+    const onVideoEnded = ()=>{
+      cleanupCountdown();
+      finishOpeningMemoryCountdown();
+    };
+    const onVideoError = ()=>{
+      cleanupCountdown();
+      finishOpeningMemoryCountdown();
+    };
+    video.addEventListener('ended', onVideoEnded, {once:true});
+    video.addEventListener('error', onVideoError, {once:true});
+    openingCountdownTimer=setTimeout(()=>{
+      cleanupCountdown();
+      finishOpeningMemoryCountdown();
+    },12000);
+    const p=video.play();
+    if(p&&p.catch){
+      p.catch(()=>{
+        // 若手機擋住影片音訊，改靜音播放倒數；主題曲仍會在結束後播放
+        try{video.muted=true;video.play().catch(()=>{});}catch(e){}
+      });
+    }
+    if(video.error){
+      cleanupCountdown();
+      finishOpeningMemoryCountdown();
+    }
+  }else{
+    openingCountdownTimer=setTimeout(()=>finishOpeningMemoryCountdown(),10000);
+  }
+}
+function finishOpeningMemoryCountdown(){
+  const overlay=document.getElementById('openingCountdown');
+  const video=document.getElementById('openingCountdownVideo');
+  if(video){try{video.pause();video.currentTime=0;}catch(e){}}
+  const gate=document.getElementById('gate');
+  musicWanted=true;
+  const a=document.getElementById('themeAudio');
+  if(a)a.volume=1;
+  startTheme();
+  setTimeout(()=>{
+    if(overlay){overlay.classList.add('done');setTimeout(()=>overlay.classList.remove('show','done'),360);}
+    if(gate)gate.classList.add('hidden');
+    showMiniWorld();
+    openingCountdownActive=false;
+  },260);
+}
 
 
 let uiAudioCtx=null;
@@ -1646,16 +3034,18 @@ function setMiniWeatherStatus(text){
   const el=document.getElementById('miniWeatherStatus');
   if(el)el.textContent=text||'';
 }
-function resolveAssetUrl(path){
+function resolveAssetUrl(path,version){
   const clean=String(path||'').split('?')[0];
+  const stamp=''+(version||'20260625-v48');
+  const q=''+encodeURIComponent(stamp);
   const here=location.href.split('#')[0].replace(/[^\/]*$/,'');
   return [
-    clean,
-    here+clean,
-    clean.replace(/^assets\//,'/DearANG/assets/'),
-    clean.replace(/^assets\/images\/weather\//,'assets/images/'),
-    clean.replace(/^assets\/images\/weather\//,'images/weather/'),
-    clean.replace(/^assets\/images\/weather\//,'weather/')
+    clean+q,
+    here+clean+q,
+    clean.replace(/^assets\//,'/DearANG/assets/')+q,
+    clean.replace(/^assets\/images\/weather\//,'assets/images/')+q,
+    clean.replace(/^assets\/images\/weather\//,'images/weather/')+q,
+    clean.replace(/^assets\/images\/weather\//,'weather/')+q
   ].filter((v,i,a)=>v&&a.indexOf(v)===i);
 }
 function testImageCandidates(urls){
@@ -1676,6 +3066,7 @@ function applyWeatherFallbackVisual(w){
   const stage=document.getElementById('stage');
   const screen=document.querySelector('.mini-crt-screen');
   const stageImg=document.getElementById('stageWorldImg');
+  const miniBg=document.getElementById('miniWorldBg');
   const fallbackSrc='assets/images/memory-world.webp';
 
   [stage,screen].forEach(el=>{
@@ -1698,7 +3089,8 @@ function applyWeatherFallbackVisual(w){
   }
 }
 function applyWeatherImageVisual(w){
-  const urls=resolveAssetUrl(w.bg);
+  const version='20260625-v48';
+  const urls=resolveAssetUrl(w.bg,version);
   const stage=document.getElementById('stage');
   const screen=document.querySelector('.mini-crt-screen');
   const stageImg=document.getElementById('stageWorldImg');
@@ -1818,7 +3210,7 @@ function enterMainWorld(){
 
 
 
-
+/* ===== v51 放大鏡：只用按鈕 2 倍寬，禁用雙指縮放 ===== */
 function toggleViewZoom(){
   const on = document.body.classList.toggle('view-zoom-2x');
   const btn = document.getElementById('zoomBtn');
@@ -1856,7 +3248,7 @@ function toggleViewZoom(){
 
 
 
-
+/* ===== v53 相簿儀式感：往上展開後，必須往下收合，才可左右滑 ===== */
 
 function addAlbumRitualHints(){
   document.querySelectorAll('.album-card').forEach(card=>{
@@ -1970,24 +3362,7 @@ function closePage(){
   document.body.style.overflow='hidden';
 }
 function toast(msg,bad){const t=document.getElementById('toast');t.textContent=msg;t.style.background=bad?'#963232':'#5b3f2f';t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2300)}
-function enterWorld(){startOpeningMemoryCountdown()}
-function startOpeningMemoryCountdown(){const gate=document.getElementById('gate'), overlay=document.getElementById('openingCountdown'), video=document.getElementById('openingCountdownVideo');if(gate)gate.classList.add('out');if(video&&video.getAttribute('src')){if(overlay)overlay.classList.add('show');try{video.currentTime=0;video.muted=false;video.volume=1;video.onended=finishOpeningMemoryCountdown;video.play().catch(()=>{finishOpeningMemoryCountdown()});}catch(e){finishOpeningMemoryCountdown()}}else{finishOpeningMemoryCountdown()}}
-function finishOpeningMemoryCountdown(){const overlay=document.getElementById('openingCountdown'),video=document.getElementById('openingCountdownVideo'),gate=document.getElementById('gate');try{video&&video.pause()}catch(e){};if(overlay){overlay.classList.add('done');setTimeout(()=>overlay.classList.remove('show','done'),360)}if(gate)gate.classList.add('hidden');musicWanted=true;startTheme();showMiniWorld()}
-function showMiniWorld(){const mini=document.getElementById('miniWorld');if(mini)mini.classList.remove('hidden','zooming');const v=document.getElementById('miniFrameVideo');if(v){try{v.muted=true;v.loop=true;v.play().catch(()=>{})}catch(e){}}}
-function enterMainWorld(){const mini=document.getElementById('miniWorld');if(mini){mini.classList.add('zooming');setTimeout(()=>{mini.classList.add('hidden');mini.classList.remove('zooming');centerWorld()},620)}else centerWorld()}
-function centerWorld(){const sc=document.getElementById('scroller');setTimeout(()=>{if(sc)sc.scrollLeft=(sc.scrollWidth-sc.clientWidth)/2},60)}
-function openPage(id){const p=document.getElementById('page-'+id);if(!p)return;p.classList.add('show');document.body.style.overflow='hidden';if(id==='nav')setTimeout(()=>initRouteMapPage(),30);if(id==='music')setTimeout(renderKtvSongs,30)}
-function closePage(){document.querySelectorAll('.page.show').forEach(p=>p.classList.remove('show'));document.body.style.overflow='hidden'}
-function smartBack(){const lb=document.getElementById('lightbox');if(lb&&lb.classList.contains('show')){closeLightbox();return}if(document.querySelector('.page.show')){closePage();return}const mini=document.getElementById('miniWorld');if(mini&&mini.classList.contains('hidden')){showMiniWorld();toast('回到小世界');return}toast('重播開場');startOpeningMemoryCountdown()}
-function toggleViewZoom(){const on=document.body.classList.toggle('view-zoom-2x');toast(on?'已放大':'已還原')}
-function startTheme(){const a=document.getElementById('themeAudio');if(!a)return;if(musicWanted&&a.src){a.play().catch(()=>{})}}
-function toggleMusic(){const a=document.getElementById('themeAudio');if(!a)return;if(a.paused){musicWanted=true;startTheme();}else{musicWanted=false;a.pause();toast('音樂已關閉')}}
-function playLetterAudio(){const a=document.getElementById('letterAudio'),b=document.querySelector('.radio-audio-play');if(!a)return;a.play().then(()=>b&&b.classList.add('playing')).catch(()=>toast('音檔尚未放入或被瀏覽器擋住',1))}
-function stopLetterAudio(){const a=document.getElementById('letterAudio'),b=document.querySelector('.radio-audio-play');if(a){try{a.pause();a.currentTime=0}catch(e){}}if(b)b.classList.remove('playing')}
-try{document.getElementById('letterAudio')?.addEventListener('ended',()=>document.querySelector('.radio-audio-play')?.classList.remove('playing'))}catch(e){}
-function openTreasureMapFromMini(e){if(e){e.preventDefault();e.stopPropagation()}stopLetterAudio();document.getElementById('miniWorld')?.classList.add('hidden');openPage('nav')}
-function openTreasureMapFromStreet(e){if(e){e.preventDefault();e.stopPropagation()}openPage('nav')}
-function api(p){return new Promise((res,rej)=>{let cb='cb'+Date.now()+Math.floor(Math.random()*9e4),u=new URL(CONFIG.GAS_API_URL);Object.keys(p).forEach(k=>u.searchParams.set(k,p[k]));u.searchParams.set('callback',cb);u.searchParams.set('_ts',Date.now());let sc=document.createElement('script'),tm=setTimeout(()=>done(rej,new Error('讀取逾時')),16000);window[cb]=x=>done(res,x);function done(f,v){clearTimeout(tm);delete window[cb];sc.remove();f(v)}sc.onerror=()=>done(rej,new Error('讀取失敗'));sc.src=u;document.head.appendChild(sc)})}
+function api(p){return new Promise((res,rej)=>{let cb='cb'+Date.now()+Math.floor(Math.random()*9e4),u=new URL(CONFIG.GAS_API_URL);Object.keys(p).forEach(k=>u.searchParams.set(k,p[k]));u.searchParams.set('callback',cb);u.searchParams.set('_ts',Date.now());u.searchParams.set('v',CONFIG.APP_VERSION);let sc=document.createElement('script'),tm=setTimeout(()=>done(rej,new Error('讀取逾時')),16000);window[cb]=x=>done(res,x);function done(f,v){clearTimeout(tm);delete window[cb];sc.remove();f(v)}sc.onerror=()=>done(rej,new Error('讀取失敗'));sc.src=u;document.head.appendChild(sc)})}
 function loadData(){return api({action:'getMemorialData'}).then(r=>{if(!r.ok)throw Error(r.error||'讀取失敗');DATA=r;DATA.photos=orderPhotos(DATA.photos||flatGroups(DATA.photoGroups||[]));renderDynamic();setupAlbumRitualLock();preloadFirstDriveAssets();if(openingCountdownActive)renderOpeningPhotoDraw();startTheme();return r;}).catch(e=>{renderDynamic();toast('雲端資料讀取失敗，先顯示本機內容',1);return null;})}
 function detectAreaKey(text){
   text=String(text||'');
@@ -2462,8 +3837,19 @@ function smartBack(){
   toast('重播開場');
   startOpeningMemoryCountdown();
 }
-
-
+function playLetterAudio(){
+  const a=document.getElementById('letterAudio');
+  const play=document.querySelector('.radio-audio-play');
+  if(!a){toast('音檔播放器尚未建立',1);return;}
+  if(!a.getAttribute('src')){toast('請先放入 assets/audio/aming-message.mp3',1);return;}
+  a.play().then(()=>{if(play)play.classList.add('playing');}).catch(()=>toast('音檔尚未放入或被瀏覽器擋住',1));
+}
+function stopLetterAudio(){
+  const a=document.getElementById('letterAudio');
+  const play=document.querySelector('.radio-audio-play');
+  if(a){try{a.pause();a.currentTime=0;}catch(e){}}
+  if(play)play.classList.remove('playing');
+}
 try{const _letterAudio=document.getElementById('letterAudio');if(_letterAudio){_letterAudio.addEventListener('ended',()=>{const play=document.querySelector('.radio-audio-play');if(play)play.classList.remove('playing');});}}catch(e){}
 
 function setupBuildingHotspotNames(){
@@ -2485,7 +3871,34 @@ function setupPersonNameHotspots(){
     el.addEventListener('click',show);
   });
 }
-
+function setupMiniFrameVideo(){
+  const v=document.getElementById('miniFrameVideo');
+  if(!v)return;
+  const stamp='';
+  const here=location.href.split('#')[0].replace(/[^\/]*$/,'');
+  const candidates=[
+    here+'assets/videos/mini-frame.mp4'+stamp,
+    'assets/videos/mini-frame.mp4'+stamp,
+    here+'mini-frame.mp4'+stamp,
+    'mini-frame.mp4'+stamp,
+    '/DearANG/assets/videos/mini-frame.mp4'+stamp,
+    'assets/video/mini-frame.mp4'+stamp,
+    'videos/mini-frame.mp4'+stamp
+  ];
+  let idx=0;
+  const tryNext=()=>{
+    if(idx>=candidates.length){v.classList.add('frame-failed');console.warn('mini-frame.mp4 讀取不到：請把影片放在 assets/videos/mini-frame.mp4');return;}
+    const next=candidates[idx++];
+    if(v.dataset.srcTried===next){tryNext();return;}
+    v.dataset.srcTried=next;
+    v.src=next;
+    v.load();
+    try{v.muted=true;v.loop=true;const p=v.play();if(p&&p.catch)p.catch(()=>{});}catch(e){}
+  };
+  v.addEventListener('error',tryNext);
+  v.addEventListener('loadeddata',()=>{v.classList.remove('frame-failed');});
+  if(!v.currentSrc)tryNext();
+}
 
 function renderFood(){}
 function renderMaps(){
@@ -2503,7 +3916,7 @@ function setupWeather(){
   autoWeatherTimer=setInterval(()=>refreshAutoWeather(false),10*60*1000);
 }
 
-
+/* ===== v37：免密碼訪客名片＋私人訪客紀錄 ===== */
 const GEO_WORKER_URL = window.DEARANG_GEO_WORKER_URL || ''; 
 // 要自動預填城市時，先部署 geo-worker.js，再把網址填到 window.DEARANG_GEO_WORKER_URL 或直接填在這裡。
 
@@ -2620,10 +4033,10 @@ function saveVisitorIdentity(){
   const district=(document.getElementById('visitorDistrictInput')?.value || '').trim();
   const note=(document.getElementById('visitorNoteInput')?.value || '').trim();
   const data={name,city,district,note,savedAt:new Date().toISOString()};
-  localStorage.setItem('dear_ang_visitor_identity_v1',JSON.stringify(data));
-  sendPrivateVisitLog('identity_saved',{identityStatus:'saved',visitorName:name,visitorCity:city,visitorDistrict:district,visitorNote:note});
-  const modal=document.getElementById('visitorIdentityModal');
-  if(modal)modal.classList.add('hidden');
+  closeVisitorIdentityModal();
+  safeSetVisitorIdentity(data);
+  try{sendPrivateVisitLog('identity_saved',{identityStatus:'saved',visitorName:name,visitorCity:city,visitorDistrict:district,visitorNote:note});}catch(e){}
+  try{toast('訪客登記已送出');}catch(e){}
 }
 
 let dearAngVisitCountThisSession=null;
@@ -2667,8 +4080,7 @@ function sendPrivateVisitLog(pageName, extra){
     Object.assign(payload,extra);
     const url=CONFIG.GAS_API_URL
       + '?action=privateVisitLog'
-      + '&data=' + encodeURIComponent(JSON.stringify(payload))
-      + '&_=' + Date.now();
+      + '&data=' + encodeURIComponent(JSON.stringify(payload));
     const img=new Image();
     img.src=url;
   }catch(e){}
@@ -2681,7 +4093,7 @@ document.addEventListener('DOMContentLoaded',()=>{sendPrivateVisitLog('enter_sit
 
 
 
-
+/* ===== v56：藏寶地圖入口保險開啟 ===== */
 function forceInitTreasureRouteMap(){
   try{
     if(typeof initRouteMapPage==='function')initRouteMapPage();
@@ -2706,7 +4118,7 @@ function openTreasureMapFromStreet(event){
   forceInitTreasureRouteMap();
 }
 
-
+/* ===== v38 公路局單檔內嵌藏寶圖控制 ===== */
 (function(){
   const routeStations=[
     {n:1,title:'等你出來的小門',tag:'每次一起出去前，我都在這裡等你。',t:0,x:760,y:1565,body:['我們每次要一起出去的時候，我都會在停機車的地方入口那個小門等你。','這裡不是什麼特別大的地方，可是對我來說，它就是一個很熟悉的等待位置。','因為每次要見面、要一起出門、要一起去哪裡，我都會先站在那裡等你出現。','<span class="em">有些地方會被記住，不是因為它多漂亮，而是因為那裡裝著太多「每一次要見面前」的感覺。</span>']},
@@ -2720,40 +4132,6 @@ function openTreasureMapFromStreet(event){
   function routeEscHtml(s){return String(s||'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));}
   function ease(t){return t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2}
   function inCard(e){return !!(e.target&&e.target.closest&&e.target.closest('#page-nav .route-story-card'))}
-  function routePad(n){return String(n).padStart(2,'0')}
-  function routeLandmarkCandidates(n){
-    const p=routePad(n);
-    const bases=[`landmark-${p}`,`station-${p}`,`route-${p}`,`spot-${p}`,p];
-    const exts=['webp','png','jpg','jpeg','gif'];
-    const out=[`assets/images/map_photo/${Number(n)}.webp`,`assets/images/map_photo/${Number(n)}.png`];
-    bases.forEach(b=>exts.forEach(ext=>out.push(`assets/images/route/${b}.${ext}`)));
-    return out;
-  }
-  function showRouteLandmark(s){
-    if(!state||!state.pop)return;
-    const pop=state.pop,img=state.popImg,label=state.popLabel;
-    pop.classList.remove('show','missing');
-    pop.setAttribute('aria-hidden','true');
-    pop.style.left=(s.x/2160*100)+'%';
-    pop.style.top=(s.y/3840*100)+'%';
-    if(label)label.textContent=s.n+'｜'+s.title;
-    let cands=routeLandmarkCandidates(s.n), idx=0;
-    if(img){
-      img.alt=s.title||'';
-      img.onerror=()=>{
-        idx++;
-        if(idx<cands.length){ img.src=cands[idx]; }
-        else{ pop.classList.add('missing'); img.removeAttribute('src'); }
-      };
-      img.src=cands[idx];
-    }
-    clearTimeout(state.popTimer);
-    state.popTimer=setTimeout(()=>{
-      if(!state)return;
-      pop.classList.add('show');
-      pop.setAttribute('aria-hidden','false');
-    },90);
-  }
   function pageVisible(){const p=document.getElementById('page-nav');return !!(p&&p.classList.contains('show'))}
   function setProgress(t){
     if(!state)return;
@@ -2779,7 +4157,6 @@ function openTreasureMapFromStreet(event){
       state.card.classList.add('show','justChanged');
       setTimeout(()=>state&&state.card.classList.remove('justChanged'),560);
     });
-    showRouteLandmark(s);
     state.hint.classList.remove('hide');
     state.titlePill.classList.add('dim');
     clearTimeout(state.autoHide);
@@ -2831,15 +4208,7 @@ function openTreasureMapFromStreet(event){
     const total=path.getTotalLength();
     done.style.strokeDasharray=total;
     hot.style.strokeDasharray='120 '+total;
-    let pop=root.querySelector('.route-landmark-pop');
-    if(!pop){
-      pop=document.createElement('div');
-      pop.className='route-landmark-pop';
-      pop.setAttribute('aria-hidden','true');
-      pop.innerHTML='<img alt=""><span class="route-landmark-label"></span>';
-      root.appendChild(pop);
-    }
-    state={root,path,done,hot,light,spots,dots,card,num,title,tag,body,hint,titlePill,total,idx:0,anim:null,autoHide:null,open:false,currentT:0,lock:false,sy:0,sx:0,touchOnCard:false,spotEls:[...spots.querySelectorAll('.route-spot')],dotEls:[...dots.querySelectorAll('span')],pop,popImg:pop.querySelector('img'),popLabel:pop.querySelector('.route-landmark-label'),popTimer:null};
+    state={root,path,done,hot,light,spots,dots,card,num,title,tag,body,hint,titlePill,total,idx:0,anim:null,autoHide:null,open:false,currentT:0,lock:false,sy:0,sx:0,touchOnCard:false,spotEls:[...spots.querySelectorAll('.route-spot')],dotEls:[...dots.querySelectorAll('span')]};
     document.getElementById('routePrev').onclick=()=>go(state.idx-1);
     document.getElementById('routeNext').onclick=()=>go(state.idx+1);
     document.getElementById('routeCardTop').onclick=()=>{state.open=!state.open;state.card.classList.toggle('open',state.open);state.card.classList.add('show');state.hint.classList.toggle('hide',state.open)};
@@ -2855,275 +4224,193 @@ function openTreasureMapFromStreet(event){
 
 
 
+/* ===== v55：木框天氣文字強制簡短，只顯示狀態、溫度、風速 ===== */
+function compactMiniWeatherText(){
+  const el=document.getElementById('miniWeatherStatus');
+  if(!el)return;
+  let txt=(el.textContent||'').trim();
+  if(!txt)return;
+  if(txt.includes('你那邊的天氣：'))return;
+
+  const statusMatch=txt.match(/(?:使用：|天氣[:：]?\s*)([^，,｜|。；;]+)|([☀️🌤️☁️🌧️⛈️🌫️🌙❄️][^，,｜|。；;]*)/);
+  const tempMatch=txt.match(/(-?\d+(?:\.\d+)?)\s*°?C/);
+  const windMatch=txt.match(/風速\s*([0-9.]+)\s*(?:km\/h|公里|m\/s)?/i);
+  const status=(statusMatch&&(statusMatch[1]||statusMatch[2])||'讀取中').replace(/^使用[:：]?/,'').trim();
+  const temp=tempMatch?`${tempMatch[1]}°C`:'--°C';
+  const wind=windMatch?`${windMatch[1]} km/h`:'-- km/h';
+  el.textContent=`你那邊的天氣：${status}・${temp}・風速 ${wind}`;
+}
+(function observeMiniWeatherText(){
+  const run=()=>compactMiniWeatherText();
+  window.addEventListener('load',()=>setTimeout(run,500));
+  setInterval(run,1800);
+})();
 
 
 
-
-
-
-
-
-
-</script>
-
-<script>
-
+/* ===== v56：mini-frame 分成 11 個天氣影片 + 公路局標題固定 ===== */
 (function(){
-  const albums=[
-    {title:'愛的旅程',short:'愛的旅程',icon:'📷',tone:['#63c6b9','#224b57'],text:['記錄我們一起走過的每個重要時刻，','從相遇、相戀到共同築起的未來。','每一張照片，都是愛的證明。']},
-    {title:'童年時光',short:'童年時光',icon:'🌸',tone:['#ff9db6','#7d394a'],text:['有些笑容，是時間也帶不走的光。','把那些天真、可愛、還沒有長大的瞬間，','一格一格收進摩天輪裡。']},
-    {title:'家庭聚會',short:'家庭聚會',icon:'🏠',tone:['#ffcb69','#8b5221'],text:['家人坐在一起的畫面，永遠最溫暖。','那些吃飯、聊天、拍照、團聚的時刻，','都是回憶裡最亮的燈。']},
-    {title:'旅行記憶',short:'旅行記憶',icon:'🧳',tone:['#b98cff','#4a386f'],text:['一起走過的路，不只是地圖上的距離。','每一次出發、等待、抵達和回頭看，','都變成心裡不會消失的風景。']},
-    {title:'知心好友',short:'知心好友',icon:'🤍',tone:['#87d986','#275d35'],text:['有些朋友不是常常說想念，','而是只要想起來，就會覺得心裡很滿。','謝謝你們也把他放在心上。']},
-    {title:'寵物日記',short:'寵物日記',icon:'🐾',tone:['#70c9ff','#234d69'],text:['那些陪伴過日常的小生命，','也一起走進了我們的回憶裡。','牠們的眼神和靠近，都很珍貴。']},
-    {title:'思念長輩',short:'思念長輩',icon:'🕯️',tone:['#f0a85a','#6d351c'],text:['有些愛不會因為時間變遠。','想念會慢慢沉下來，變成溫柔的光。','我們用照片，把那份牽掛留下。']},
-    {title:'成長足跡',short:'成長足跡',icon:'🎓',tone:['#6aa7ff','#273f78'],text:['每一個階段都值得被記住。','那些努力、改變、跌倒又站起來的時候，','都讓今天的我們更靠近心裡的自己。']}
+  const MINI_FRAME_STAMP='20260627-v56';
+  const WEATHER_VIDEO_LIST=[
+    {key:'nightRain',label:'🌧️ 夜雨',chip:'🌧️',bg:'assets/images/weather/night-rain.webp',fx:'rain night',miniVideo:'assets/videos/weather-mini/01-night-rain.mp4'},
+    {key:'deepNightRain',label:'🌧️ 深夜雨',chip:'🌧️',bg:'assets/images/weather/night-rain.webp',fx:'storm night',miniVideo:'assets/videos/weather-mini/02-deep-night-rain.mp4'},
+    {key:'cloudy',label:'⛅ 多雲',chip:'⛅',bg:'assets/images/weather/day-cloudy.webp',fx:'',miniVideo:'assets/videos/weather-mini/03-cloudy.mp4'},
+    {key:'overcast',label:'☁️ 陰天',chip:'☁️',bg:'assets/images/weather/day-overcast.webp',fx:'',miniVideo:'assets/videos/weather-mini/04-overcast.mp4'},
+    {key:'sunny',label:'☀️ 晴天',chip:'☀️',bg:'assets/images/weather/day-sunny.webp',fx:'',miniVideo:'assets/videos/weather-mini/05-sunny.mp4'},
+    {key:'fog',label:'🌫️ 濃霧',chip:'🌫️',bg:'assets/images/weather/day-fog.webp',fx:'fog',miniVideo:'assets/videos/weather-mini/06-fog.mp4'},
+    {key:'storm',label:'⛈️ 雷雨',chip:'⛈️',bg:'assets/images/weather/day-storm.webp',fx:'storm',miniVideo:'assets/videos/weather-mini/07-thunderstorm.mp4'},
+    {key:'nightShower',label:'🌧️ 夜間陣雨',chip:'🌧️',bg:'assets/images/weather/night-rain.webp',fx:'rain night',miniVideo:'assets/videos/weather-mini/08-night-shower.mp4'},
+    {key:'hot',label:'☀️ 炎熱晴天',chip:'☀️',bg:'assets/images/weather/day-hot.webp',fx:'heat',miniVideo:'assets/videos/weather-mini/09-hot-sunny.mp4'},
+    {key:'rain',label:'🌧️ 白天降雨',chip:'🌧️',bg:'assets/images/weather/day-rain.webp',fx:'rain',miniVideo:'assets/videos/weather-mini/10-day-rain.mp4'},
+    {key:'night',label:'🌙 晴朗夜晚',chip:'🌙',bg:'assets/images/weather/night-clear.webp',fx:'night',miniVideo:'assets/videos/weather-mini/11-clear-night.mp4'}
   ];
-  let cur=0,inited=false,paused=false,timer=null,autoTimer=null,startX=0;
-  function qs(id){return document.getElementById(id)}
-  function esc(s){return String(s||'').replace(/[&<>]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[m]))}
-  function say(s){
-    const t=qs('photoWheelToast');
-    if(!t)return;
-    t.textContent=s;
-    t.classList.add('show');
-    clearTimeout(say.t);
-    say.t=setTimeout(()=>t.classList.remove('show'),1300);
-  }
-  function pause(){
-    paused=true;
-    clearTimeout(timer);
-    timer=setTimeout(()=>paused=false,5200);
-  }
-  function build(){
-    if(inited)return;
-    const spokes=qs('photoWheelSpokes');
-    const cabins=qs('photoWheelCabins');
-    if(!spokes||!cabins)return;
-    for(let i=0;i<20;i++){
-      const e=document.createElement('i');
-      e.style.transform='rotate('+(i*18)+'deg)';
-      spokes.appendChild(e);
+
+  try{
+    if(Array.isArray(MEMORY_WEATHERS)){
+      MEMORY_WEATHERS.splice(0, MEMORY_WEATHERS.length, ...WEATHER_VIDEO_LIST);
     }
-    albums.forEach((a,i)=>{
-      const b=document.createElement('button');
-      b.type='button';
-      b.className='photo-wheel-cabin';
-      b.dataset.i=i;
-      b.innerHTML='<div class="photo-wheel-cabin-photo" style="background:linear-gradient(135deg,'+a.tone[0]+','+a.tone[1]+')">'+esc(a.short)+'</div><div class="photo-wheel-cabin-label">'+esc(a.short)+' ♡</div>';
-      b.addEventListener('click',()=>{
-        if(i!==cur){
-          cur=i;
-          pause();
-          render();
-          say('');
-        }else{
-          openAlbum(i);
-        }
-      });
-      cabins.appendChild(b);
-    });
-    const next=qs('photoWheelNext'),prev=qs('photoWheelPrev'),stage=qs('photoWheelStage'),modal=qs('photoWheelModal'),close=qs('photoWheelClose');
-    if(next)next.onclick=()=>{cur=(cur+1)%albums.length;pause();render();};
-    if(prev)prev.onclick=()=>{cur=(cur-1+albums.length)%albums.length;pause();render();};
-    if(stage){
-      stage.addEventListener('touchstart',e=>{startX=e.touches[0].clientX;},{passive:true});
-      stage.addEventListener('touchend',e=>{
-        const d=e.changedTouches[0].clientX-startX;
-        if(Math.abs(d)>42){
-          cur=(cur+(d<0?1:-1)+albums.length)%albums.length;
-          pause();
-          render();
-        }
-      },{passive:true});
+  }catch(e){}
+
+  function miniVideoCandidates(path){
+    const clean=String(path||'assets/videos/mini-frame.mp4').split('?')[0];
+    const stamp=''+MINI_FRAME_STAMP;
+    const q=''+encodeURIComponent(stamp);
+    const here=location.href.split('#')[0].replace(/[^\/]*$/,'');
+    return [
+      clean+q,
+      here+clean+q,
+      clean.replace(/^assets\//,'/DearANG/assets/')+q,
+      clean.replace(/^assets\/videos\/weather-mini\//,'weather-mini/')+q,
+      clean.replace(/^assets\/videos\/weather-mini\//,'assets/video/weather-mini/')+q,
+      'assets/videos/mini-frame.mp4'+q,
+      here+'assets/videos/mini-frame.mp4'+q,
+      'mini-frame.mp4'+q
+    ].filter((v,i,a)=>v&&a.indexOf(v)===i);
+  }
+
+  function applyMiniFrameWeatherVideo(w){
+    const v=document.getElementById('miniFrameVideo');
+    if(!v)return;
+    const videoPath=(w&&w.miniVideo)||'assets/videos/mini-frame.mp4';
+    if(v.dataset.weatherVideoBase===videoPath && v.dataset.weatherVideoReady==='1')return;
+
+    const candidates=miniVideoCandidates(videoPath);
+    let idx=0;
+    v.dataset.weatherVideoBase=videoPath;
+    v.dataset.weatherVideoReady='0';
+
+    const tryNext=()=>{
+      if(v.dataset.weatherVideoBase!==videoPath)return;
+      if(idx>=candidates.length){
+        v.classList.add('frame-failed');
+        console.warn('mini-frame 天氣影片讀取不到，請確認 assets/videos/weather-mini/ 內有 11 支影片：', videoPath);
+        return;
+      }
+      const next=candidates[idx++];
+      v.onerror=tryNext;
+      v.onloadeddata=()=>{
+        v.classList.remove('frame-failed');
+        v.dataset.weatherVideoReady='1';
+      };
+      v.src=next;
+      v.load();
+      try{
+        v.muted=true;
+        v.loop=true;
+        v.setAttribute('playsinline','');
+        const p=v.play();
+        if(p&&p.catch)p.catch(()=>{});
+      }catch(e){}
+    };
+    tryNext();
+  }
+
+  const originalSetMemoryWeather=typeof setMemoryWeather==='function'?setMemoryWeather:null;
+  if(originalSetMemoryWeather){
+    setMemoryWeather=function(key,ev,source){
+      originalSetMemoryWeather(key,ev,source);
+      try{applyMiniFrameWeatherVideo(memoryWeatherByKey(key));}catch(e){}
+    };
+  }
+
+  setupMiniFrameVideo=function(){
+    try{applyMiniFrameWeatherVideo(memoryWeatherByKey(memoryWeatherKey));}catch(e){
+      const v=document.getElementById('miniFrameVideo');
+      if(v){
+        v.src='assets/videos/mini-frame.mp4' + '' + encodeURIComponent(MINI_FRAME_STAMP);
+        v.load();
+        try{v.muted=true;v.loop=true;v.play().catch(()=>{});}catch(err){}
+      }
     }
-    if(close)close.onclick=()=>modal&&modal.classList.remove('open');
-    if(modal)modal.onclick=e=>{if(e.target===modal)modal.classList.remove('open');};
-    window.addEventListener('resize',render);
-    autoTimer=setInterval(()=>{if(!paused && qs('page-photo')?.classList.contains('show')){cur=(cur+1)%albums.length;render();}},3600);
-    inited=true;
-    render();
-  }
-  function render(){
-    const stage=qs('photoWheelStage');
-    const bs=[...document.querySelectorAll('#photoWheelCabins .photo-wheel-cabin')];
-    if(!stage||!bs.length)return;
-    const total=bs.length;
-    const w=stage.getBoundingClientRect().width || 620;
-    const r=w*.34;
-    bs.forEach((b,i)=>{
-      const a=albums[i];
-      const off=i-cur;
-      const ang=(off/total)*Math.PI*2+Math.PI/2;
-      const x=Math.cos(ang)*r;
-      const y=Math.sin(ang)*r;
-      const front=Math.sin(ang);
-      const active=i===cur;
-      const scale=active?1.22:Math.max(.72,.84+front*.08);
-      const op=active?1:Math.max(.32,.55+front*.18);
-      const blur=active?0:Math.max(0,1.1-front);
-      b.classList.toggle('active',active);
-      b.style.transform='translate('+x+'px,'+y+'px) scale('+scale+')';
-      b.style.opacity=op;
-      b.style.filter='blur('+blur+'px) brightness('+(active?1.13:.86)+')';
-      b.style.zIndex=active?66:Math.round(20+front*10);
-    });
-    const a=albums[cur];
-    const title=qs('photoWheelTitle'),icon=qs('photoWheelIcon'),text=qs('photoWheelText'),pic=qs('photoWheelPic');
-    if(title)title.textContent=a.title;
-    if(icon)icon.textContent=a.icon;
-    if(text)text.innerHTML=a.text.map(esc).join('<br>');
-    if(pic)pic.style.background='radial-gradient(circle at 72% 20%,rgba(255,250,190,.9) 0 10%,transparent 11%),linear-gradient(180deg,'+a.tone[0]+','+a.tone[1]+' 55%,#160d12)';
-  }
-  function openAlbum(i){
-    const a=albums[i];
-    const modal=qs('photoWheelModal'),mt=qs('photoWheelModalTitle'),md=qs('photoWheelModalDesc'),grid=qs('photoWheelGrid');
-    if(!modal||!grid)return;
-    if(mt)mt.textContent=a.title;
-    if(md)md.textContent=a.text.join('');
-    grid.innerHTML='';
-    for(let n=0;n<6;n++){
-      const tile=document.createElement('div');
-      tile.className='photo-wheel-tile';
-      tile.style.background='linear-gradient(135deg,'+a.tone[0]+','+a.tone[1]+')';
-      tile.textContent=a.short+' '+(n+1);
-      grid.appendChild(tile);
-    }
-    modal.classList.add('open');
-    pause();
-  }
-  window.initPhotoWheel=function(){
-    build();
-    setTimeout(render,40);
-    setTimeout(render,260);
   };
-  const oldOpenPage=window.openPage;
-  if(typeof oldOpenPage==='function' && !oldOpenPage.__photoWheelWrapped){
-    const wrapped=function(id){
-      const result=oldOpenPage.apply(this,arguments);
-      if(id==='photo')window.initPhotoWheel();
-      return result;
-    };
-    wrapped.__photoWheelWrapped=true;
-    window.openPage=wrapped;
-  }
-  if(document.readyState==='loading'){
-    document.addEventListener('DOMContentLoaded',build);
-  }else{
-    build();
-  }
-})();
-</script>
 
+  timeBasedWeatherKey=function(){
+    const h=taipeiParts().hour;
+    if(h>=5 && h<11)return 'sunny';
+    if(h>=11 && h<16)return 'hot';
+    if(h>=16 && h<18)return 'cloudy';
+    if(h>=18 && h<22)return 'night';
+    return 'nightRain';
+  };
 
-<script>
+  timeBasedWeatherText=function(){
+    const p=taipeiParts();
+    const h=p.hour;
+    const hh=String(isFinite(p.hour)?p.hour:0).padStart(2,'0');
+    const mm=String(isFinite(p.minute)?p.minute:0).padStart(2,'0');
+    if(h>=5 && h<11)return `你那邊的天氣：晴天・--°C・風速 -- km/h`;
+    if(h>=11 && h<16)return `你那邊的天氣：炎熱晴天・--°C・風速 -- km/h`;
+    if(h>=16 && h<18)return `你那邊的天氣：多雲・--°C・風速 -- km/h`;
+    if(h>=18 && h<22)return `你那邊的天氣：晴朗夜晚・--°C・風速 -- km/h`;
+    return `你那邊的天氣：夜雨・--°C・風速 -- km/h`;
+  };
 
-(function(){
-  const GONDOLA_BASE='https://pub-a5bb8e437f004bb8aecca934db50299f.r2.dev/Ferris%20Wheel/Gondola';
-  const COLORS=['blue','green'];
+  weatherKeyFromOpenMeteo=function(c){
+    const code=Number(c.weather_code||0);
+    const isDay=Number(c.is_day)===1;
+    const temp=Number(c.temperature_2m);
+    const wind=Number(c.wind_speed_10m);
+    const rain=(Number(c.rain)||0)+(Number(c.showers)||0)+(Number(c.precipitation)||0);
 
-  function esc(s){
-    return String(s||'').replace(/[&<>"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]));
-  }
-  function file(color,name){
-    return GONDOLA_BASE+'/'+encodeURIComponent(color)+'/'+name;
-  }
-  function titleFromCabin(btn,index){
-    const label=btn.querySelector('.photo-wheel-cabin-label');
-    let t=(label&&label.textContent||'').replace('♡','').replace('｜開門','').trim();
-    return t || ('相簿 '+(index+1));
-  }
-  function skinPhotoWheelGondolas(){
-    const cabins=[...document.querySelectorAll('#photoWheelCabins .photo-wheel-cabin')];
-    if(!cabins.length)return;
-    cabins.forEach((btn,i)=>{
-      if(btn.dataset.gondolaSkinned==='1')return;
-      const color=COLORS[i%COLORS.length];
-      const title=titleFromCabin(btn,i);
-      btn.dataset.gondolaSkinned='1';
-      btn.dataset.gondolaColor=color;
-      btn.classList.add('gondola-img-mode','gondola-'+color);
-      btn.innerHTML=
-        '<img class="gondola-img gondola-base" src="'+file(color,'without_door.png')+'" alt="'+esc(title)+' 車廂本體">'+
-        '<img class="gondola-img gondola-door close left" src="'+file(color,'close_left_door.png')+'" alt="">'+
-        '<img class="gondola-img gondola-door close right" src="'+file(color,'close_right_door.png')+'" alt="">'+
-        '<img class="gondola-img gondola-door open left" src="'+file(color,'open_left_door.png')+'" alt="">'+
-        '<img class="gondola-img gondola-door open right" src="'+file(color,'open_right_door.png')+'" alt="">'+
-        '<span class="gondola-title">'+esc(title)+'</span>'+
-        '<span class="gondola-hotspot-note">點開相片</span>';
-    });
-  }
-
-  function ensurePhotoGridInModal(){
-    const modal=document.getElementById('photoWheelModal');
-    const grid=document.getElementById('photoWheelGrid');
-    const title=document.getElementById('photoWheelModalTitle');
-    const desc=document.getElementById('photoWheelModalDesc');
-    const photoGrid=document.getElementById('photoGrid');
-    if(!modal||!grid)return false;
-
-    if(title)title.textContent='華光相館｜照片相簿';
-    if(desc)desc.textContent='這裡直接接回原本 Google Drive 相片區，不再是假相簿。';
-
-    grid.classList.add('real-photo-grid');
-    grid.innerHTML='';
-
-    if(photoGrid){
-      photoGrid.style.display='block';
-      photoGrid.removeAttribute('aria-hidden');
-      grid.appendChild(photoGrid);
-    }else{
-      grid.innerHTML='<div class="empty">照片區還沒載入，請稍等資料讀取。</div>';
+    if(!isDay){
+      if(code>=95 || wind>=55 || rain>=3 || code===65 || code===67 || code===82)return 'deepNightRain';
+      if(rain>0 || (code>=51&&code<=67) || (code>=80&&code<=81))return 'nightShower';
+      return 'night';
     }
 
-    modal.classList.add('open');
-    return true;
+    if(code>=95 || wind>=55)return 'storm';
+    if(code===45 || code===48)return 'fog';
+    if(rain>0 || (code>=51&&code<=67) || (code>=80&&code<=82))return 'rain';
+    if(code===3)return 'overcast';
+    if(code===2)return 'cloudy';
+    if(isFinite(temp) && temp>=32)return 'hot';
+    return 'sunny';
+  };
+
+  function fixDearAngPageTitles(){
+    const navTitle=document.querySelector('#page-nav .page-head b');
+    if(navTitle)navTitle.textContent='公路局｜通往他的路';
+    const videoTitle=document.querySelector('#page-video .page-head b');
+    if(videoTitle)videoTitle.textContent='新時代影音館｜忘不掉的動態氣息';
   }
 
-  function interceptActiveCabinClick(){
-    const box=document.getElementById('photoWheelCabins');
-    if(!box || box.dataset.realPhotoBound==='1')return;
-    box.dataset.realPhotoBound='1';
-    box.addEventListener('click',function(e){
-      const cabin=e.target.closest('.photo-wheel-cabin');
-      if(!cabin)return;
-      if(!cabin.classList.contains('active'))return;
-      e.preventDefault();
-      e.stopPropagation();
-      if(e.stopImmediatePropagation)e.stopImmediatePropagation();
-      ensurePhotoGridInModal();
-    },true);
-  }
-
-  function patch(){
-    try{ if(typeof window.initPhotoWheel==='function')window.initPhotoWheel(); }catch(e){}
-    skinPhotoWheelGondolas();
-    interceptActiveCabinClick();
-  }
-
-  const oldInit=window.initPhotoWheel;
-  if(typeof oldInit==='function' && !oldInit.__gondolaR2Wrapped){
-    window.initPhotoWheel=function(){
-      const r=oldInit.apply(this,arguments);
-      setTimeout(patch,30);
-      setTimeout(patch,320);
-      return r;
-    };
-    window.initPhotoWheel.__gondolaR2Wrapped=true;
-  }
-
-  if(document.readyState==='loading'){
-    document.addEventListener('DOMContentLoaded',()=>setTimeout(patch,80));
-  }else{
-    setTimeout(patch,80);
-  }
-  window.addEventListener('load',()=>setTimeout(patch,300));
+  document.addEventListener('DOMContentLoaded',()=>{
+    fixDearAngPageTitles();
+    renderMiniWeatherButtons();
+    setupMiniFrameVideo();
+  });
+  window.addEventListener('load',()=>{
+    fixDearAngPageTitles();
+    setupMiniFrameVideo();
+    try{setMemoryWeather(memoryWeatherKey,null,autoWeatherSource||'time');}catch(e){}
+  });
 })();
+
+
 </script>
 
-
 <script>
-
+/* ===== v63 錄音播放時主題曲自動小聲；停止/播完恢復；計算離開第幾天 ===== */
 (function(){
   const LEFT_DATE={y:2026,m:3,d:9};
 
@@ -3181,7 +4468,8 @@ function openTreasureMapFromStreet(event){
       restoreTheme();
     });
   }
-   function taipeiYMD(){
+
+  function taipeiYMD(){
     const parts=new Intl.DateTimeFormat('en-CA',{
       timeZone:'Asia/Taipei',
       year:'numeric',
@@ -3213,32 +4501,135 @@ function openTreasureMapFromStreet(event){
     bindLetterEnd();
     renderDepartureCounter();
   }
-  window.addEventListener('load',()=>{bindLetterEnd();renderDepartureCounter();
-/* KTV：依實際播放器顯示狀態切掉黑色遮罩。 */
-  function syncKtvMediaState(){
-    var screen=document.getElementById('ktvScreen');
-    if(!screen)return;
-    var video=document.getElementById('ktvVideo');
-    var frame=document.getElementById('ktvDriveFrame');
-    var videoOn=!!(video && video.style.display==='block' && (video.currentSrc || video.getAttribute('src')));
-    var frameOn=!!(frame && frame.style.display==='block' && frame.getAttribute('src'));
-    screen.classList.toggle('media-active',videoOn||frameOn);
-  }
-  function bindKtvObserver(){
-    var screen=document.getElementById('ktvScreen');
-    if(!screen||screen.dataset.v75Observe==='1')return;
-    screen.dataset.v75Observe='1';
-    new MutationObserver(function(){syncKtvMediaState();}).observe(screen,{subtree:true,childList:true,attributes:true,attributeFilter:['style','src']});
-    ['play','playing','pause','ended','error'].forEach(function(type){screen.addEventListener(type,function(){setTimeout(syncKtvMediaState,0);},true);});
-    syncKtvMediaState();
-  }
-  var oldKtvStart=window.ktvStart;
-  if(typeof oldKtvStart==='function')window.ktvStart=function(){var r=oldKtvStart.apply(this,arguments);setTimeout(syncKtvMediaState,0);return r;};
-  var oldKtvStop=window.ktvStop;
-  if(typeof oldKtvStop==='function')window.ktvStop=function(){var r=oldKtvStop.apply(this,arguments);setTimeout(syncKtvMediaState,0);return r;};
+  window.addEventListener('load',()=>{bindLetterEnd();renderDepartureCounter();});
+})();
+</script>
 
-  /* Mini World：先依台灣日夜立即選預設影片；只有真實天氣成功後才切換。 */
-  var WEATHER_MINI={
+
+<script>
+/* ===== v66 MiniWorld Frame 天氣背景：使用 miniFrameVideo 依天氣換不同影片 ===== */
+(function(){
+  const MINI_FRAME_WEATHER_STAMP='20260630_v66_weather_frame';
+
+  const WEATHER_FRAME_VIDEO={
+    sunny:'assets/videos/weather-mini/05-sunny.mp4',
+    hot:'assets/videos/weather-mini/09-hot-sunny.mp4',
+    cloudy:'assets/videos/weather-mini/day-cloudy.mp4',
+    overcast:'assets/videos/weather-mini/day-overcast.mp4',
+    rain:'assets/videos/weather-mini/10-day-rain.mp4',
+    storm:'assets/videos/weather-mini/day-storm.mp4',
+    fog:'assets/videos/weather-mini/day-fog.mp4',
+    haze:'assets/videos/weather-mini/day-haze.mp4',
+    night:'assets/videos/weather-mini/11-clear-night.mp4',
+    nightShower:'assets/videos/weather-mini/01-night-rain.mp4',
+    deepNightRain:'assets/videos/weather-mini/01-night-rain.mp4',
+    nightRain:'assets/videos/weather-mini/01-night-rain.mp4'
+  };
+
+  const FALLBACKS=[
+    'assets/videos/weather-mini/05-sunny.mp4',
+    'assets/videos/mini-frame.mp4'
+  ];
+
+  function normalizeWeatherKey(key){
+    key=String(key||'').trim();
+    if(WEATHER_FRAME_VIDEO[key])return key;
+    if(/storm|thunder|雷|暴|豪|颱/i.test(key))return 'storm';
+    if(/rain|shower|雨/i.test(key))return 'rain';
+    if(/fog|霧/i.test(key))return 'fog';
+    if(/haze|霾/i.test(key))return 'haze';
+    if(/night/i.test(key))return 'night';
+    if(/hot|熱/i.test(key))return 'hot';
+    if(/overcast|陰/i.test(key))return 'overcast';
+    if(/cloud|雲/i.test(key))return 'cloudy';
+    return 'sunny';
+  }
+
+  function currentMiniWeatherKey(){
+    try{
+      if(typeof memoryWeatherKey!=='undefined' && memoryWeatherKey)return normalizeWeatherKey(memoryWeatherKey);
+    }catch(e){}
+    try{
+      if(typeof timeBasedWeatherKey==='function')return normalizeWeatherKey(timeBasedWeatherKey());
+    }catch(e){}
+    return 'sunny';
+  }
+
+  function setMiniFrameVideoByWeather(key){
+    const v=document.getElementById('miniFrameVideo');
+    if(!v)return;
+
+    key=normalizeWeatherKey(key||currentMiniWeatherKey());
+    const primary=WEATHER_FRAME_VIDEO[key]||WEATHER_FRAME_VIDEO.sunny;
+    const candidates=[primary,...FALLBACKS].filter((x,i,a)=>x&&a.indexOf(x)===i);
+    let idx=0;
+
+    function tryNext(){
+      if(idx>=candidates.length)return;
+      const src=candidates[idx++]+(candidates[idx-1].includes('?')?'&':'?')+'v='+MINI_FRAME_WEATHER_STAMP;
+      v.onerror=tryNext;
+      if(v.getAttribute('src')!==src){
+        v.src=src;
+        v.load();
+      }
+      try{
+        v.muted=true;
+        v.loop=true;
+        v.playsInline=true;
+        v.setAttribute('playsinline','');
+        const p=v.play();
+        if(p&&p.catch)p.catch(()=>{});
+      }catch(e){}
+    }
+
+    v.dataset.weatherFrameKey=key;
+    tryNext();
+  }
+
+  const oldApply=window.applyMiniFrameWeatherVideo;
+  window.applyMiniFrameWeatherVideo=function(key){
+    setMiniFrameVideoByWeather(key);
+    if(typeof oldApply==='function'){
+      try{oldApply(key);}catch(e){}
+    }
+  };
+
+  const oldSet=window.setMemoryWeather;
+  if(typeof oldSet==='function' && !oldSet.__v66WeatherFrameWrapped){
+    window.setMemoryWeather=function(key,ev,source){
+      const r=oldSet.apply(this,arguments);
+      setMiniFrameVideoByWeather(key);
+      return r;
+    };
+    window.setMemoryWeather.__v66WeatherFrameWrapped=true;
+  }
+
+  const oldSetup=window.setupMiniFrameVideo;
+  window.setupMiniFrameVideo=function(){
+    setMiniFrameVideoByWeather(currentMiniWeatherKey());
+    if(typeof oldSetup==='function'){
+      try{oldSetup();}catch(e){}
+    }
+  };
+
+  function boot(){
+    setMiniFrameVideoByWeather(currentMiniWeatherKey());
+  }
+
+  if(document.readyState==='loading'){
+    document.addEventListener('DOMContentLoaded',()=>setTimeout(boot,80));
+  }else{
+    setTimeout(boot,80);
+  }
+  window.addEventListener('load',()=>setTimeout(boot,260));
+})();
+</script>
+
+
+<script>
+/* ===== v68 weather-mini 正確檔名：01~11 版本 ===== */
+(function(){
+  const WEATHER_MINI_REAL={
     nightRain:'assets/videos/weather-mini/01-night-rain.mp4',
     deepNightRain:'assets/videos/weather-mini/02-deep-night-rain.mp4',
     cloudy:'assets/videos/weather-mini/03-cloudy.mp4',
@@ -3254,660 +4645,364 @@ function openTreasureMapFromStreet(event){
     night:'assets/videos/weather-mini/11-clear-night.mp4',
     clearNight:'assets/videos/weather-mini/11-clear-night.mp4'
   };
-  function taipeiHourV75(){
-    try{
-      var ps=new Intl.DateTimeFormat('en-US',{timeZone:'Asia/Taipei',hour:'2-digit',hour12:false}).formatToParts(new Date());
-      return Number((ps.find(function(p){return p.type==='hour';})||{}).value);
-    }catch(e){return new Date().getHours();}
-  }
-  function defaultMiniKey(){var h=taipeiHourV75();return h>=6&&h<18?'sunny':'night';}
-  function normalizeMiniKey(key){
+
+  function normalizeMiniWeatherKey(key){
     key=String(key||'').trim();
-    if(WEATHER_MINI[key])return key;
+    if(WEATHER_MINI_REAL[key])return key;
     if(/deep.*night.*rain|深夜.*雨/i.test(key))return 'deepNightRain';
-    if(/night.*shower|夜.*陣雨/i.test(key))return 'nightShower';
     if(/night.*rain|夜雨/i.test(key))return 'nightRain';
+    if(/night.*shower|夜.*陣雨/i.test(key))return 'nightShower';
     if(/thunder|storm|雷|暴|豪|颱/i.test(key))return 'storm';
     if(/rain|shower|雨/i.test(key))return 'rain';
     if(/fog|霧/i.test(key))return 'fog';
     if(/overcast|陰/i.test(key))return 'overcast';
     if(/cloud|雲/i.test(key))return 'cloudy';
     if(/hot|熱/i.test(key))return 'hot';
-    if(/night|夜/i.test(key))return 'night';
+    if(/night|clear.*night|夜/i.test(key))return 'night';
     return 'sunny';
   }
-  function playMiniSource(key,force){
-    var v=document.getElementById('miniFrameVideo');
+
+  function getWeatherKey(){
+    try{
+      if(typeof memoryWeatherKey!=='undefined' && memoryWeatherKey)return normalizeMiniWeatherKey(memoryWeatherKey);
+    }catch(e){}
+    try{
+      if(typeof timeBasedWeatherKey==='function')return normalizeMiniWeatherKey(timeBasedWeatherKey());
+    }catch(e){}
+    return 'sunny';
+  }
+
+  window.setMiniFrameVideoByWeatherReal=function(key){
+    const v=document.getElementById('miniFrameVideo');
     if(!v)return;
-    key=normalizeMiniKey(key||defaultMiniKey());
-    var primary=WEATHER_MINI[key]||WEATHER_MINI[defaultMiniKey()];
-    var fallback=WEATHER_MINI[defaultMiniKey()];
-    var candidates=[primary,fallback,'assets/videos/mini-frame.mp4'].filter(function(x,i,a){return x&&a.indexOf(x)===i;});
-    var idx=0;
-    function loadAt(i){
-      if(i>=candidates.length){v.classList.add('frame-failed');return;}
-      idx=i;
-      v.onerror=function(){loadAt(idx+1);};
-      var src=candidates[i];
-      if(force || v.getAttribute('src')!==src){
-        try{v.pause();}catch(e){}
-        v.src=src;
-        try{v.load();}catch(e){}
-      }
-      try{
-        v.muted=true;v.loop=true;v.autoplay=true;v.preload='auto';
-        v.setAttribute('playsinline','');v.setAttribute('webkit-playsinline','');
-        var p=v.play();if(p&&p.catch)p.catch(function(){});
-      }catch(e){}
+    key=normalizeMiniWeatherKey(key||getWeatherKey());
+    const src=(WEATHER_MINI_REAL[key]||WEATHER_MINI_REAL.sunny)+'';
+    if(v.getAttribute('src')!==src){
+      v.onerror=function(){
+        v.onerror=null;
+        v.src='assets/videos/mini-frame.mp4';
+        try{v.load();v.muted=true;v.loop=true;v.play().catch(()=>{});}catch(e){}
+      };
+      v.src=src;
+      try{v.load();v.muted=true;v.loop=true;v.setAttribute('playsinline','');v.play().catch(()=>{});}catch(e){}
     }
     v.dataset.weatherFrameKey=key;
-    loadAt(0);
-  }
-  window.setupMiniFrameVideo=function(forceReload){
-    var v=document.getElementById('miniFrameVideo');
-    var key=(v&&v.dataset.realWeatherReady==='1')?normalizeMiniKey(v.dataset.realWeatherKey):defaultMiniKey();
-    playMiniSource(key,!!forceReload);
   };
-  var realSwitchPermitUntil=0;
-  window.setMiniFrameVideoByWeatherReal=function(key){
-    var v=document.getElementById('miniFrameVideo');
-    /* 舊版 wrapper 會在每次 setMemoryWeather 後延遲呼叫這裡；
-       只有真實天氣成功或手動指定時才准切換，否則維持日夜預設。 */
-    if(Date.now()>realSwitchPermitUntil){
-      if(!(v&&v.dataset.realWeatherReady==='1'))playMiniSource(defaultMiniKey(),false);
-      return;
-    }
-    if(v){v.dataset.realWeatherReady='1';v.dataset.realWeatherKey=normalizeMiniKey(key);}
-    playMiniSource(key,true);
-  };
-  var oldSetMemoryWeather=window.setMemoryWeather;
-  if(typeof oldSetMemoryWeather==='function'){
+
+  const oldSet=window.setMemoryWeather;
+  if(typeof oldSet==='function' && !oldSet.__v68RealMiniWeatherWrapped){
     window.setMemoryWeather=function(key,ev,source){
-      var realSource=source==='auto'||source==='manual';
-      realSwitchPermitUntil=realSource?Date.now()+1200:0;
-      var r=oldSetMemoryWeather.apply(this,arguments);
-      var v=document.getElementById('miniFrameVideo');
-      if(realSource){
-        if(v){v.dataset.realWeatherReady='1';v.dataset.realWeatherKey=normalizeMiniKey(key);}
-        playMiniSource(key,true);
-      }else if(!(v&&v.dataset.realWeatherReady==='1')){
-        playMiniSource(defaultMiniKey(),false);
-      }
+      const r=oldSet.apply(this,arguments);
+      setTimeout(()=>window.setMiniFrameVideoByWeatherReal(key),30);
       return r;
     };
+    window.setMemoryWeather.__v68RealMiniWeatherWrapped=true;
   }
 
-/* 修正舊版「晚上全部當夜雨」：晴夜用 11-clear-night，真的下雨才用夜雨。 */
-  window.weatherKeyFromOpenMeteo=function(c){
-    c=c||{};
-    var code=Number(c.weather_code||0),isDay=Number(c.is_day)===1,temp=Number(c.temperature_2m),wind=Number(c.wind_speed_10m);
-    var rain=(Number(c.rain)||0)+(Number(c.showers)||0)+(Number(c.precipitation)||0);
-    var storm=code>=95||wind>=55;
-    var rainy=rain>0||(code>=51&&code<=67)||(code>=80&&code<=82);
-    if(!isDay){if(storm)return 'storm';if(rainy)return 'nightRain';return 'night';}
-    if(storm)return 'storm';
-    if(code>=71&&code<=77)return 'snow';
-    if(code===45||code===48)return 'fog';
-    if(rainy)return 'rain';
-    if(code===3)return 'overcast';
-    if(code===2)return 'cloudy';
-    if(isFinite(temp)&&temp>=32)return 'hot';
-    return 'sunny';
-  };
-});
-})();
-</script>
-<script>
-(function(){
-  if(window.__DEARANG_V76_STREET_WEATHER_SYNC__)return;
-  window.__DEARANG_V76_STREET_WEATHER_SYNC__=true;
-
-  function normalizeStreetWeatherKey(key){
-    key=String(key||'').trim();
-    if(/deep.*night.*rain|night.*rain|夜雨/i.test(key))return 'nightRain';
-    if(/night|clear.*night|夜/i.test(key))return 'night';
-    if(/thunder|storm|雷|暴|豪|颱/i.test(key))return 'storm';
-    if(/rain|shower|雨/i.test(key))return 'rain';
-    if(/fog|霧/i.test(key))return 'fog';
-    if(/haze|霾/i.test(key))return 'haze';
-    if(/overcast|陰/i.test(key))return 'overcast';
-    if(/cloud|雲/i.test(key))return 'cloudy';
-    if(/hot|熱/i.test(key))return 'hot';
-    if(/snow|雪/i.test(key))return 'snow';
-    return key||'sunny';
-  }
-
-  function getStreetWeather(){
-    var key='sunny';
-    try{if(typeof memoryWeatherKey!=='undefined'&&memoryWeatherKey)key=memoryWeatherKey;}catch(e){}
-    key=normalizeStreetWeatherKey(key);
-    try{
-      if(typeof memoryWeatherByKey==='function')return memoryWeatherByKey(key);
-    }catch(e){}
-    return {key:key,label:key,bg:'assets/images/weather/day-sunny.webp',fx:''};
-  }
-
-  function setImgWithFallback(img,src){
-    if(!img||!src)return;
-    if((img.getAttribute('src')||'')===src)return;
-    var test=new Image();
-    test.onload=function(){img.src=src;};
-    test.onerror=function(){
-      img.src='assets/images/memory-world.webp';
-      var stage=document.getElementById('stage');
-      if(stage)stage.classList.add('stage-weather-fallback');
-    };
-    test.src=src;
-  }
-
-  window.syncStreetWeatherFromMemory=function(){
-    var w=getStreetWeather();
-    var stage=document.getElementById('stage');
-    var img=document.getElementById('stageWorldImg');
-    var fx=document.getElementById('worldWeather');
-    if(stage){
-      stage.dataset.weatherKey=w.key;
-      stage.classList.remove('stage-weather-fallback');
-      stage.dataset.weatherSynced='v76';
-    }
-    if(img){
-      setImgWithFallback(img,w.bg);
-      img.alt='富宜路街道世界｜'+(w.label||w.key);
-      img.style.opacity='1';
-    }
-    if(fx){
-      fx.className='world-weather '+(w.fx||'');
-      fx.style.display=w.fx?'':'none';
+  const oldSetup=window.setupMiniFrameVideo;
+  window.setupMiniFrameVideo=function(){
+    window.setMiniFrameVideoByWeatherReal(getWeatherKey());
+    if(typeof oldSetup==='function'){
+      try{oldSetup();}catch(e){}
     }
   };
-
-  var oldSet=window.setMemoryWeather;
-  if(typeof oldSet==='function'&&!oldSet.__v76StreetWeatherWrapped){
-    window.setMemoryWeather=function(key,ev,source){
-      var r=oldSet.apply(this,arguments);
-      try{memoryWeatherKey=normalizeStreetWeatherKey(key||memoryWeatherKey);}catch(e){}
-      setTimeout(window.syncStreetWeatherFromMemory,0);
-      setTimeout(window.syncStreetWeatherFromMemory,160);
-      return r;
-    };
-    window.setMemoryWeather.__v76StreetWeatherWrapped=true;
-  }
-
-
-  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',function(){setTimeout(window.syncStreetWeatherFromMemory,300);},{once:true});
-  else setTimeout(window.syncStreetWeatherFromMemory,300);
-  window.addEventListener('load',function(){setTimeout(window.syncStreetWeatherFromMemory,500);});
-})()
-;
-
-/* ===== 互動與返回單一控制器：只允許目前畫面接收點擊 ===== */
-(function(){
-  if(window.__DEARANG_INTERACTION_ISOLATION__)return;
-  window.__DEARANG_INTERACTION_ISOLATION__=true;
-
-  function isVisible(el){
-    if(!el)return false;
-    if(el.classList.contains('hidden'))return false;
-    var s=getComputedStyle(el);
-    return s.display!=='none' && s.visibility!=='hidden';
-  }
-
-  function currentView(){
-    var opening=document.getElementById('openingCountdown');
-    var gate=document.getElementById('gate');
-    var page=document.querySelector('.page.show:not(.closing)');
-    var mini=document.getElementById('miniWorld');
-    if(opening && opening.classList.contains('show'))return 'opening';
-    if(gate && !gate.classList.contains('hidden') && !gate.classList.contains('out') && isVisible(gate))return 'gate';
-    if(page)return 'page';
-    if(mini && !mini.classList.contains('hidden') && !mini.classList.contains('zooming') && isVisible(mini))return 'mini';
-    return 'street';
-  }
-
-  window.syncDearAngInteractionState=function(){
-    var view=currentView();
-    document.body.setAttribute('data-dearang-view',view);
-
-    document.querySelectorAll('.page').forEach(function(p){
-      var active=p.classList.contains('show')&&!p.classList.contains('closing');
-      p.setAttribute('aria-hidden',active?'false':'true');
-      if(!active){p.style.pointerEvents='none';}
-      else{p.style.pointerEvents='auto';}
-    });
-
-    var mini=document.getElementById('miniWorld');
-    if(mini){
-      var miniOn=view==='mini';
-      mini.setAttribute('aria-hidden',miniOn?'false':'true');
-      mini.style.pointerEvents=miniOn?'auto':'none';
-    }
-
-    var stage=document.getElementById('stage');
-    if(stage)stage.style.pointerEvents=view==='street'?'auto':'none';
-    return view;
-  };
-
-  function stopPageMedia(){
-    document.querySelectorAll('.page video,.page audio').forEach(function(m){
-      try{m.pause();}catch(e){}
-    });
-    try{if(typeof ktvStop==='function')ktvStop();}catch(e){}
-    try{if(typeof ktvHideDriveFrame==='function')ktvHideDriveFrame();}catch(e){}
-  }
-
-  function closePhotoWheelModal(){
-    var modal=document.getElementById('photoWheelModal');
-    if(modal&&modal.classList.contains('open')){
-      modal.classList.remove('open');
-      return true;
-    }
-    return false;
-  }
-
-  window.openPage=function(id){
-    var page=document.getElementById('page-'+id);
-    if(!page)return;
-    try{playUiSound('open');}catch(e){}
-    try{if(typeof sendPrivateVisitLog==='function')sendPrivateVisitLog('page_'+id);}catch(e){}
-
-    document.querySelectorAll('.page').forEach(function(p){
-      p.classList.remove('show','closing');
-      p.style.pointerEvents='none';
-    });
-    var mini=document.getElementById('miniWorld');
-    if(mini){mini.classList.add('hidden');mini.classList.remove('zooming');mini.style.pointerEvents='none';}
-    page.classList.add('show');
-    page.classList.remove('closing');
-    page.style.pointerEvents='auto';
-    page.scrollTop=0;
-    document.body.style.overflow='hidden';
-
-    try{renderMemoryCapsule(id);}catch(e){}
-    try{preloadAreaAssets(id);}catch(e){}
-    if(id==='photo')try{if(typeof initPhotoWheel==='function')setTimeout(initPhotoWheel,20);}catch(e){}
-    if(id==='nav')try{if(typeof initRouteMapPage==='function')setTimeout(initRouteMapPage,30);}catch(e){}
-    window.syncDearAngInteractionState();
-  };
-
-  window.closePage=function(){
-    try{playUiSound('close');}catch(e){}
-    stopPageMedia();
-    closePhotoWheelModal();
-    document.querySelectorAll('.page').forEach(function(p){
-      p.classList.remove('show','closing');
-      p.style.pointerEvents='none';
-      p.setAttribute('aria-hidden','true');
-    });
-    var ferris=document.getElementById('ferrisConstruction');
-    if(ferris)ferris.classList.add('hidden');
-    var visitor=document.getElementById('visitorIdentityModal');
-    if(visitor)visitor.classList.add('hidden');
-    var mini=document.getElementById('miniWorld');
-    if(mini){mini.classList.add('hidden');mini.classList.remove('zooming');mini.style.pointerEvents='none';}
-    var world=document.getElementById('world');
-    if(world){world.classList.remove('hidden');world.style.pointerEvents='';}
-    var scroller=document.getElementById('scroller');
-    if(scroller){scroller.style.pointerEvents='auto';scroller.style.overflowX='auto';scroller.style.overflowY='hidden';}
-    document.body.style.overflow='hidden';
-    document.body.classList.remove('modal-open','page-open','route-lock');
-    try{if(typeof syncStreetWeatherFromMemory==='function')syncStreetWeatherFromMemory();}catch(e){}
-    try{if(typeof startTheme==='function')startTheme();}catch(e){}
-    window.syncDearAngInteractionState();
-  };
-
-  window.enterMainWorld=function(){
-    var mini=document.getElementById('miniWorld');
-    if(!mini){window.syncDearAngInteractionState();return;}
-    mini.classList.add('zooming');
-    mini.style.pointerEvents='none';
-    window.syncDearAngInteractionState();
-    setTimeout(function(){
-      mini.classList.add('hidden');
-      mini.classList.remove('zooming');
-      mini.style.pointerEvents='none';
-      try{centerWorld();}catch(e){}
-      try{askVisitorAfterEnterWorld();}catch(e){}
-      window.syncDearAngInteractionState();
-    },620);
-  };
-
-  var originalShowMiniWorld=window.showMiniWorld;
-  window.showMiniWorld=function(){
-    document.querySelectorAll('.page').forEach(function(p){p.classList.remove('show','closing');p.style.pointerEvents='none';});
-    var r;
-    try{if(typeof originalShowMiniWorld==='function')r=originalShowMiniWorld.apply(this,arguments);}catch(e){}
-    var mini=document.getElementById('miniWorld');
-    if(mini){mini.classList.remove('hidden','zooming');mini.style.pointerEvents='auto';}
-    setTimeout(window.syncDearAngInteractionState,0);
-    return r;
-  };
-
-  window.smartBack=function(){
-    var lb=document.getElementById('lightbox');
-    if(lb&&lb.classList.contains('show')){try{closeLightbox();}catch(e){}window.syncDearAngInteractionState();return;}
-    if(closePhotoWheelModal()){window.syncDearAngInteractionState();return;}
-    var ferris=document.getElementById('ferrisConstruction');
-    if(ferris&&!ferris.classList.contains('hidden')){try{closeFerrisConstruction();}catch(e){ferris.classList.add('hidden');}window.syncDearAngInteractionState();return;}
-    var visitor=document.getElementById('visitorIdentityModal');
-    if(visitor&&!visitor.classList.contains('hidden')){visitor.classList.add('hidden');window.syncDearAngInteractionState();return;}
-    if(document.querySelector('.page.show')){window.closePage();return;}
-    var mini=document.getElementById('miniWorld');
-    if(mini&&!mini.classList.contains('hidden')){
-      try{stopLetterAudio();}catch(e){}
-      try{toast('重播開場');}catch(e){}
-      try{startOpeningMemoryCountdown();}catch(e){}
-      setTimeout(window.syncDearAngInteractionState,0);
-      return;
-    }
-    window.showMiniWorld();
-    try{toast('回到小世界');}catch(e){}
-  };
-
-  function pageFolderUrl(path){
-    try{
-      var href=location.href.split('#')[0].split('?')[0];
-      return new URL(path,href.replace(/[^/]*$/,'')).href;
-    }catch(e){return path;}
-  }
-  function baseUrl(path){try{return new URL(path,document.baseURI||location.href).href;}catch(e){return path;}}
-  function unique(list){var seen={};return list.filter(function(x){x=String(x||'');if(!x||seen[x])return false;seen[x]=1;return true;});}
-  function letterCandidates(){
-    var audio=document.getElementById('letterAudio');
-    return unique([
-      audio&&audio.getAttribute('src'),
-      pageFolderUrl('assets/audio/aming-message.mp3'),
-      baseUrl('assets/audio/aming-message.mp3'),
-      pageFolderUrl('aming-message.mp3'),
-      baseUrl('aming-message.mp3'),
-      pageFolderUrl('assets/audio/aming.mp3'),
-      baseUrl('assets/audio/aming.mp3'),
-      pageFolderUrl('assets/audio/阿明留言.mp3'),
-      baseUrl('assets/audio/阿明留言.mp3')
-    ]);
-  }
-  function themeAudio(){return document.getElementById('themeAudio');}
-  function duckThemeFinal(){
-    var t=themeAudio();if(!t)return;
-    if(t.dataset.beforeLetterVolume==null)t.dataset.beforeLetterVolume=String(isFinite(t.volume)?t.volume:1);
-    try{t.volume=.12;}catch(e){}
-  }
-  function restoreThemeFinal(){
-    var t=themeAudio();if(!t)return;
-    var old=t.dataset.beforeLetterVolume;
-    try{t.volume=old==null?1:Math.max(0,Math.min(1,Number(old)||1));}catch(e){}
-    delete t.dataset.beforeLetterVolume;
-  }
-  function markRadioPlaying(on){
-    var b=document.querySelector('#miniWorld .radio-audio-play');
-    if(b)b.classList.toggle('playing',!!on);
-  }
-
-  window.playLetterAudio=function(){
-    if(window.syncDearAngInteractionState()!=='mini')return;
-    var a=document.getElementById('letterAudio');
-    if(!a){try{toast('找不到 Radio 音檔播放器',1);}catch(e){}return;}
-    var list=letterCandidates(),index=0,done=false,timer=null;
-    duckThemeFinal();
-    markRadioPlaying(false);
-
-    function cleanupAttempt(){clearTimeout(timer);a.oncanplay=null;a.onloadeddata=null;a.onerror=null;}
-    function failAll(){cleanupAttempt();restoreThemeFinal();markRadioPlaying(false);try{toast('Radio 音檔讀不到，請確認 assets/audio/aming-message.mp3',1);}catch(e){}}
-    function actuallyPlay(){
-      if(done)return;
-      var p;
-      try{a.volume=1;p=a.play();}catch(e){p=null;}
-      if(p&&p.then){
-        p.then(function(){done=true;cleanupAttempt();markRadioPlaying(true);}).catch(function(){tryNext();});
-      }else if(!a.paused){done=true;cleanupAttempt();markRadioPlaying(true);}
-      else tryNext();
-    }
-    function tryNext(){
-      if(done)return;
-      cleanupAttempt();
-      if(index>=list.length){failAll();return;}
-      var src=list[index++];
-      a.onerror=tryNext;
-      try{
-        a.pause();
-        a.src=src;
-        a.load();
-        var immediate=a.play();
-        if(immediate&&immediate.then){
-          immediate.then(function(){done=true;cleanupAttempt();markRadioPlaying(true);}).catch(function(err){
-            if(done)return;
-            if(err&&err.name==='NotAllowedError'){
-              cleanupAttempt();restoreThemeFinal();markRadioPlaying(false);
-              try{toast('請再按一次 Radio 播放鍵',1);}catch(e){}
-            }else{
-              tryNext();
-            }
-          });
-        }else if(!a.paused){done=true;cleanupAttempt();markRadioPlaying(true);}
-      }catch(e){tryNext();return;}
-      timer=setTimeout(function(){if(!done)tryNext();},3200);
-    }
-    tryNext();
-  };
-
-  window.stopLetterAudio=function(){
-    var a=document.getElementById('letterAudio');
-    if(a){try{a.pause();a.currentTime=0;}catch(e){}}
-    markRadioPlaying(false);
-    restoreThemeFinal();
-  };
-
-  function bindLetterAudioFinal(){
-    var a=document.getElementById('letterAudio');
-    if(!a||a.dataset.interactionBound==='1')return;
-    a.dataset.interactionBound='1';
-    ['ended','pause','error'].forEach(function(type){
-      a.addEventListener(type,function(){
-        if(type!=='pause'||a.currentTime===0||a.ended){markRadioPlaying(false);restoreThemeFinal();}
-      });
-    });
-  }
 
   function boot(){
-    bindLetterAudioFinal();
-    window.syncDearAngInteractionState();
-    var targets=[document.getElementById('gate'),document.getElementById('openingCountdown'),document.getElementById('miniWorld')].concat(Array.from(document.querySelectorAll('.page,.lightbox,.visitor-identity-modal,.ferris-construction'))).filter(Boolean);
-    var ob=new MutationObserver(function(){window.syncDearAngInteractionState();});
-    targets.forEach(function(el){ob.observe(el,{attributes:true,attributeFilter:['class']});});
+    window.setMiniFrameVideoByWeatherReal(getWeatherKey());
   }
-  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot,{once:true});else boot();
-  window.addEventListener('load',boot,{once:true});
-})();
-</script>
-
-<script>
-/* ===== Dear ANG v126 click-wiring repair：只修接線，不動前面畫面 ===== */
-(function(){
-  if(window.__DEARANG_CLICK_WIRING_REPAIR_V126__) return;
-  window.__DEARANG_CLICK_WIRING_REPAIR_V126__ = true;
-
-  function $(id){ return document.getElementById(id); }
-  function stopEvent(e){
-    if(e && e.preventDefault) e.preventDefault();
-    if(e && e.stopPropagation) e.stopPropagation();
-  }
-  function safePlayUiSound(name){
-    try{
-      if(typeof window.playUiSound === 'function') window.playUiSound(name);
-    }catch(_){}
-  }
-  function cleanBlockingLayers(){
-    var gate = $('gate');
-    if(gate && (gate.classList.contains('out') || gate.classList.contains('hidden'))){
-      gate.style.pointerEvents = 'none';
-    }
-    var opening = $('openingCountdown');
-    if(opening && (!opening.classList.contains('show') || opening.classList.contains('done'))){
-      opening.style.pointerEvents = 'none';
-    }else if(opening && opening.classList.contains('show')){
-      opening.style.pointerEvents = 'auto';
-    }
-    var mini = $('miniWorld');
-    if(mini && mini.classList.contains('hidden')){
-      mini.style.pointerEvents = 'none';
-    }else if(mini){
-      mini.style.pointerEvents = 'auto';
-    }
-    document.querySelectorAll('.page:not(.show), .lightbox:not(.show), .visitor-identity-modal.hidden, .ferris-construction.hidden').forEach(function(el){
-      el.style.pointerEvents = 'none';
-    });
-    document.querySelectorAll('.page.show, .lightbox.show, .visitor-identity-modal:not(.hidden), .ferris-construction:not(.hidden)').forEach(function(el){
-      el.style.pointerEvents = 'auto';
-    });
-  }
-
-  var originalOpenPage = window.openPage;
-  window.openPage = function(id){
-    safePlayUiSound('open');
-    cleanBlockingLayers();
-
-    var page = $('page-' + id);
-    if(!page){
-      try{
-        if(typeof originalOpenPage === 'function') return originalOpenPage.apply(this, arguments);
-      }catch(_){}
-      return false;
-    }
-
-    document.querySelectorAll('.page.show').forEach(function(p){
-      if(p !== page) p.classList.remove('show','closing');
-    });
-
-    page.style.pointerEvents = 'auto';
-    page.classList.remove('hidden','closing');
-    page.classList.add('show');
-    document.body.style.overflow = 'hidden';
-
-    try{ if(typeof window.sendPrivateVisitLog === 'function') window.sendPrivateVisitLog('page_' + id); }catch(_){}
-    try{ if(id === 'nav' && typeof window.initRouteMapPage === 'function') setTimeout(window.initRouteMapPage, 30); }catch(_){}
-    try{ if(typeof window.renderMemoryCapsule === 'function') window.renderMemoryCapsule(id); }catch(_){}
-    try{ if(typeof window.preloadAreaAssets === 'function') window.preloadAreaAssets(id); }catch(_){}
-
-    cleanBlockingLayers();
-    return false;
-  };
-
-  window.closePage = function(){
-    safePlayUiSound('close');
-    document.querySelectorAll('.page.show').forEach(function(p){
-      p.classList.add('closing');
-      setTimeout(function(){
-        p.classList.remove('show','closing');
-        p.style.pointerEvents = 'none';
-        cleanBlockingLayers();
-      }, 190);
-    });
-    document.body.style.overflow = 'hidden';
-    cleanBlockingLayers();
-    return false;
-  };
-
-  window.enterMainWorld = function(e){
-    stopEvent(e);
-    var mini = $('miniWorld');
-    if(mini){
-      mini.classList.add('zooming');
-      mini.style.pointerEvents = 'none';
-      setTimeout(function(){
-        mini.classList.add('hidden');
-        mini.classList.remove('zooming');
-        mini.style.pointerEvents = 'none';
-        try{ if(typeof window.centerWorld === 'function') window.centerWorld(); }catch(_){}
-        try{ if(typeof window.askVisitorAfterEnterWorld === 'function') window.askVisitorAfterEnterWorld(); }catch(_){}
-        cleanBlockingLayers();
-      }, 620);
-    }else{
-      try{ if(typeof window.centerWorld === 'function') window.centerWorld(); }catch(_){}
-      try{ if(typeof window.askVisitorAfterEnterWorld === 'function') window.askVisitorAfterEnterWorld(); }catch(_){}
-      cleanBlockingLayers();
-    }
-    return false;
-  };
-
-  window.openTreasureMapFromMini = function(e){
-    stopEvent(e);
-    try{ if(typeof window.stopLetterAudio === 'function') window.stopLetterAudio(); }catch(_){}
-    var mini = $('miniWorld');
-    if(mini){
-      mini.classList.add('hidden');
-      mini.classList.remove('zooming');
-      mini.style.pointerEvents = 'none';
-    }
-    window.openPage('nav');
-    return false;
-  };
-
-  window.openTreasureMapFromStreet = function(e){
-    stopEvent(e);
-    window.openPage('nav');
-    return false;
-  };
-
-  if(typeof window.openFerrisConstruction !== 'function'){
-    window.openFerrisConstruction = function(e){
-      stopEvent(e);
-      var el = $('ferrisConstruction') || document.querySelector('.ferris-construction');
-      if(el){
-        el.classList.remove('hidden');
-        el.style.pointerEvents = 'auto';
-      }
-      return false;
-    };
-  }
-  if(typeof window.closeFerrisConstruction !== 'function'){
-    window.closeFerrisConstruction = function(){
-      var el = $('ferrisConstruction') || document.querySelector('.ferris-construction');
-      if(el){
-        el.classList.add('hidden');
-        el.style.pointerEvents = 'none';
-      }
-      cleanBlockingLayers();
-      return false;
-    };
-  }
-
-  function bindClick(selector, fn){
-    document.querySelectorAll(selector).forEach(function(el){
-      if(el.__dearAngBoundV126) return;
-      el.__dearAngBoundV126 = true;
-      el.addEventListener('click', fn, {passive:false});
-      el.addEventListener('touchend', fn, {passive:false});
-    });
-  }
-
-  function boot(){
-    bindClick('#miniWorld .mini-world-enter-hotspot', window.enterMainWorld);
-    bindClick('#miniWorld .treasure-map-hit', window.openTreasureMapFromMini);
-    bindClick('.h-photo', function(e){ stopEvent(e); window.openPage('photo'); });
-    bindClick('.h-video', function(e){ stopEvent(e); window.openPage('video'); });
-    bindClick('.h-home',  function(e){ stopEvent(e); window.openPage('home'); });
-    bindClick('.h-music', function(e){ stopEvent(e); window.openPage('music'); });
-    bindClick('.h-food',  function(e){ stopEvent(e); window.openPage('food'); });
-    bindClick('.h-nav',   window.openTreasureMapFromStreet);
-    bindClick('.back', function(e){ stopEvent(e); window.closePage(); });
-
-    document.querySelectorAll('.hotspot, #miniWorld button, .page button, .page a').forEach(function(el){
-      el.style.pointerEvents = 'auto';
-      el.style.touchAction = 'manipulation';
-    });
-
-    cleanBlockingLayers();
-    setTimeout(cleanBlockingLayers, 50);
-    setTimeout(cleanBlockingLayers, 350);
-    setTimeout(cleanBlockingLayers, 900);
-  }
-
-  if(document.readyState === 'loading'){
-    document.addEventListener('DOMContentLoaded', boot, {once:true});
+  if(document.readyState==='loading'){
+    document.addEventListener('DOMContentLoaded',()=>setTimeout(boot,120));
   }else{
-    boot();
+    setTimeout(boot,120);
   }
-  window.addEventListener('load', boot, {once:true});
-  window.syncDearAngInteractionState = cleanBlockingLayers;
+  window.addEventListener('load',()=>setTimeout(boot,350));
+})();
+</script>
+
+
+<script>
+/* ===== v70-cache：手動更新並重存快取，不動 opening 流程 ===== */
+(function(){
+  if(window.__DEAR_ANG_CACHE_BUTTON__)return;
+  window.__DEAR_ANG_CACHE_BUTTON__=true;
+
+  function cacheToast(msg){
+    try{
+      if(typeof toast==='function')toast(msg);
+      else console.log(msg);
+    }catch(e){console.log(msg);}
+  }
+
+  function absUrl(path){
+    try{return new URL(path, document.baseURI || location.href).href;}
+    catch(e){return path;}
+  }
+
+  function collectDearAngCacheUrls(){
+    const urls=new Set();
+    urls.add(location.href.split('#')[0]);
+
+    [
+      'assets/audio/dear-ang-theme.mp3',
+      'assets/audio/aming-message.mp3',
+      'assets/videos/opening-countdown.mp4',
+      'assets/videos/mini-frame.mp4',
+      'assets/videos/weather-mini/01-night-rain.mp4',
+      'assets/videos/weather-mini/02-deep-night-rain.mp4',
+      'assets/videos/weather-mini/03-cloudy.mp4',
+      'assets/videos/weather-mini/04-overcast.mp4',
+      'assets/videos/weather-mini/05-sunny.mp4',
+      'assets/videos/weather-mini/06-fog.mp4',
+      'assets/videos/weather-mini/07-thunderstorm.mp4',
+      'assets/videos/weather-mini/08-night-shower.mp4',
+      'assets/videos/weather-mini/09-hot-sunny.mp4',
+      'assets/videos/weather-mini/10-day-rain.mp4',
+      'assets/videos/weather-mini/11-clear-night.mp4',
+      'assets/images/mini-frame.webp',
+      'assets/images/memory-world.webp',
+      'assets/images/ktv-stage.webp',
+      'assets/images/ktv-remote.webp',
+      'assets/images/weather/day-sunny.webp',
+      'treasure_map_bg.webp',
+      '給安格.lrc',
+      '給安格.srt',
+      'lyrics_embedded.js.txt'
+    ].forEach(u=>urls.add(absUrl(u)));
+
+    document.querySelectorAll('img[src],video[src],audio[src],source[src],iframe[src]').forEach(el=>{
+      const src=el.getAttribute('src');
+      if(src && !src.startsWith('data:'))urls.add(absUrl(src));
+    });
+
+    return [...urls].filter(Boolean);
+  }
+
+  window.refreshDearAngCache=async function(){
+    const btn=document.getElementById('cacheRefreshBtn');
+    const version=Date.now();
+    const urls=collectDearAngCacheUrls();
+
+    if(btn){
+      btn.classList.add('updating');
+      btn.classList.remove('done');
+      btn.textContent='…';
+    }
+
+    cacheToast('正在更新快取…');
+    let ok=0, fail=0;
+
+    try{
+      if('caches' in window){
+        try{
+          const keys=await caches.keys();
+          await Promise.all(keys.filter(k=>/^dearang-manual-cache/.test(k)).map(k=>caches.delete(k)));
+        }catch(e){}
+
+        try{
+          const manualCache=await caches.open('dearang-manual-cache-'+version);
+          for(const u of urls){
+            try{
+              const r=await fetch(u,{cache:'reload',credentials:'same-origin'});
+              if(r && r.ok){
+                await manualCache.put(u,r.clone());
+                ok++;
+              }else fail++;
+            }catch(e){fail++;}
+          }
+        }catch(e){
+          for(const u of urls){
+            try{
+              const r=await fetch(u,{cache:'reload',credentials:'same-origin'});
+              if(r && r.ok)ok++; else fail++;
+            }catch(err){fail++;}
+          }
+        }
+      }else{
+        for(const u of urls){
+          try{
+            const r=await fetch(u,{cache:'reload',credentials:'same-origin'});
+            if(r && r.ok)ok++; else fail++;
+          }catch(err){fail++;}
+        }
+      }
+
+      try{
+        localStorage.setItem('dearAngCacheVersion',String(version));
+        localStorage.setItem('dearAngCacheUpdatedAt',new Date().toISOString());
+      }catch(e){}
+
+      cacheToast('快取已更新：成功 '+ok+'，略過 '+fail);
+      if(btn){
+        btn.classList.remove('updating');
+        btn.classList.add('done');
+        btn.textContent='存';
+        setTimeout(()=>btn.classList.remove('done'),1400);
+      }
+    }catch(e){
+      console.warn('[DearANG cache] update failed:',e);
+      cacheToast('快取更新失敗，請稍後再試');
+      if(btn){
+        btn.classList.remove('updating');
+        btn.textContent='存';
+      }
+    }
+  };
+})();
+</script>
+
+
+<script>
+/* ===== v71-weather-default：FRAME / STREET 天氣未讀取完成先用預設，避免卡頓 ===== */
+(function(){
+  if(window.__DEAR_ANG_V71_WEATHER_DEFAULT__)return;
+  window.__DEAR_ANG_V71_WEATHER_DEFAULT__=true;
+
+  var DEFAULT_FRAME_DAY='assets/videos/weather-mini/05-sunny.mp4';
+  var DEFAULT_FRAME_NIGHT='assets/videos/weather-mini/11-clear-night.mp4';
+  var DEFAULT_STREET_DAY='assets/images/weather/day-sunny.webp';
+  var DEFAULT_STREET_NIGHT='assets/images/weather/night-clear.webp';
+
+  function isNightTime(){
+    var h=new Date().getHours();
+    return h<6 || h>=18;
+  }
+  function absAsset(path){
+    try{return new URL(path,document.baseURI||location.href).href;}
+    catch(e){return path;}
+  }
+  function pickDefaultFrameVideo(){
+    return isNightTime()?DEFAULT_FRAME_NIGHT:DEFAULT_FRAME_DAY;
+  }
+  function pickDefaultStreetImage(){
+    return isNightTime()?DEFAULT_STREET_NIGHT:DEFAULT_STREET_DAY;
+  }
+  function safeSetVideoSrc(video,path){
+    if(!video || !path)return;
+    var next=absAsset(path);
+    var current=video.currentSrc || video.src || '';
+    if(current && current.indexOf(path)>-1)return;
+    try{
+      video.pause();
+      video.src=next;
+      video.muted=true;
+      video.loop=true;
+      video.setAttribute('playsinline','');
+      video.load();
+      var p=video.play();
+      if(p&&p.catch)p.catch(function(){});
+    }catch(e){
+      console.warn('[DearANG] default frame weather video failed:',e);
+    }
+  }
+  function safeSetImageSrc(img,path){
+    if(!img || !path)return;
+    var next=absAsset(path);
+    var current=img.currentSrc || img.src || '';
+    if(current && current.indexOf(path)>-1)return;
+    var test=new Image();
+    test.onload=function(){img.src=next;};
+    test.onerror=function(){
+      if(path!==DEFAULT_STREET_DAY)img.src=absAsset(DEFAULT_STREET_DAY);
+    };
+    test.src=next;
+  }
+
+  window.applyDefaultWeatherBeforeReady=function(reason){
+    try{
+      safeSetVideoSrc(document.getElementById('miniFrameVideo'),pickDefaultFrameVideo());
+      safeSetImageSrc(document.getElementById('stageWorldImg'),pickDefaultStreetImage());
+
+      var stage=document.getElementById('stage');
+      if(stage){
+        stage.classList.remove('stage-weather-fallback');
+        stage.dataset.weatherDefaultReason=reason||'before-ready';
+      }
+
+      var screen=document.querySelector('#miniWorld .mini-crt-screen');
+      if(screen){
+        screen.classList.remove('weather-fallback');
+        screen.dataset.weatherDefaultReason=reason||'before-ready';
+      }
+
+      var worldWeather=document.getElementById('worldWeather');
+      var miniWeather=document.getElementById('miniWorldWeather');
+      if(worldWeather){worldWeather.className='world-weather';worldWeather.style.display='none';}
+      if(miniWeather){miniWeather.className='mini-world-weather';miniWeather.style.display='none';}
+    }catch(e){
+      console.warn('[DearANG] apply default weather failed:',e);
+    }
+  };
+
+  window.applyDefaultWeatherBeforeReady('early');
+
+  if(document.readyState==='loading'){
+    document.addEventListener('DOMContentLoaded',function(){
+      window.applyDefaultWeatherBeforeReady('dom-ready');
+    },{once:true});
+  }else{
+    setTimeout(function(){window.applyDefaultWeatherBeforeReady('dom-ready');},0);
+  }
+
+  var oldShowMiniWorld=window.showMiniWorld;
+  if(typeof oldShowMiniWorld==='function' && !oldShowMiniWorld.__weatherDefaultWrapped){
+    window.showMiniWorld=function(){
+      window.applyDefaultWeatherBeforeReady('before-showMiniWorld');
+      var r=oldShowMiniWorld.apply(this,arguments);
+      setTimeout(function(){window.applyDefaultWeatherBeforeReady('after-showMiniWorld');},80);
+      return r;
+    };
+    window.showMiniWorld.__weatherDefaultWrapped=true;
+  }
+
+  var oldSetMemoryWeather=window.setMemoryWeather;
+  if(typeof oldSetMemoryWeather==='function' && !oldSetMemoryWeather.__noFakeWeatherWrapped){
+    window.setMemoryWeather=function(){
+      var r;
+      try{
+        r=oldSetMemoryWeather.apply(this,arguments);
+      }catch(e){
+        console.warn('[DearANG] setMemoryWeather failed, use default:',e);
+        window.applyDefaultWeatherBeforeReady('setMemoryWeather-error');
+        return;
+      }
+      try{
+        var worldWeather=document.getElementById('worldWeather');
+        var miniWeather=document.getElementById('miniWorldWeather');
+        if(worldWeather){worldWeather.className='world-weather';worldWeather.style.display='none';}
+        if(miniWeather){miniWeather.className='mini-world-weather';miniWeather.style.display='none';}
+      }catch(e){}
+      return r;
+    };
+    window.setMemoryWeather.__noFakeWeatherWrapped=true;
+  }
+})();
+</script>
+
+
+<div id="departureDayCounter" class="departure-day-counter">今天是你離開的第 115 天<small>2026.03.09</small></div>
+<script>
+/* ===== v72-restore-gate-opening：強制還原 Gate + Opening 初始狀態 ===== */
+(function(){
+  if(window.__DEAR_ANG_RESTORE_GATE_OPENING__)return;
+  window.__DEAR_ANG_RESTORE_GATE_OPENING__=true;
+  function restoreInitialGateState(){
+    try{
+      if(window.openingCountdownActive)return;
+      var gate=document.getElementById('gate');
+      var opening=document.getElementById('openingCountdown');
+      var mini=document.getElementById('miniWorld');
+      var video=document.getElementById('openingCountdownVideo');
+      if(gate){gate.className='gate';gate.style.display='';gate.style.opacity='';gate.style.pointerEvents='';}
+      if(opening){opening.className='opening-countdown';opening.style.display='';opening.style.opacity='';opening.style.pointerEvents='';}
+      if(mini && !mini.classList.contains('hidden'))mini.classList.add('hidden');
+      if(video){
+        video.setAttribute('src','assets/videos/opening-countdown.mp4');
+        try{video.pause();video.currentTime=0;}catch(e){}
+      }
+    }catch(e){console.warn('[DearANG] restore gate/opening failed:',e);}
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',restoreInitialGateState,{once:true});
+  else restoreInitialGateState();
 })();
 </script>
 
